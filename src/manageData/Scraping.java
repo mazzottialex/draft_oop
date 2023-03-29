@@ -11,22 +11,18 @@ import org.jsoup.select.Elements;
 
 public class Scraping {
 	private String url="https://www.gazzetta.it/calcio/fantanews/statistiche/serie-a-2022-23/";
-	private Document doc;
-	private Elements el;
+	private Document doc;	//html del sito
 	private List<Calciatore> li;
-	
+
 	public Scraping() {
-		
 		li=new ArrayList<>();
-		
 		try {
 			doc=Jsoup.connect(url).get();
 		} catch (IOException e) {
 			throw new RuntimeException(e); 
 		}
 		
-		el=doc.select("tr");
-		for(Element e : el) {
+		for(Element e : doc.select("tr")) {
 			if(e.select("td.field-giocatore").text()!="")
 			li.add(new Calciatore(
 					e.select("td.field-giocatore").text(),
@@ -40,6 +36,18 @@ public class Scraping {
 		}
 	}
 	
+	public List<Calciatore> getLi() {
+		return li;
+	}
+	
+	public Calciatore getCalciatore(int n) {
+		return li.get(n);
+	}
+	
+	public Document getDoc() {
+		return doc;
+	}
+
 	private int ParseInt(String s) {
 		int ret;
 		try {
@@ -61,20 +69,4 @@ public class Scraping {
 		}
 		return ret;
 	}
-	
-	public Calciatore getCalciatori() {
-		return li.get(400);
-	}
-
-
-	
-	public Document getDoc() {
-		return doc;
-	}
-
-
-	public Elements getEl() {
-		return el;
-	}
-
 }
