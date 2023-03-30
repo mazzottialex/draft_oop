@@ -1,6 +1,12 @@
 package manageData;
 
+import java.io.BufferedOutputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,14 +19,45 @@ public class ScrapingImpl implements Scraping{
 	private Document doc;	//html del sito
 	private List<Calciatore> li;
 
-	public ScrapingImpl() {
+	public ScrapingImpl() throws FileNotFoundException, IOException {
 		li=new ArrayList<>();
+		
 		try {
 			doc=Jsoup.connect(url).get();
+			SaveHTML(doc);
 		} catch (IOException e) {
-			throw new RuntimeException(e); 
+			doc=LoadHTML();			
 		}
 		
+		CreateList();
+	}
+	
+	private void SaveHTML(Document doc) throws IOException {
+		try(final OutputStream file = new FileOutputStream("res/backup.txt");
+			final OutputStream bstream = new BufferedOutputStream(file);
+			final DataOutputStream dstream=new DataOutputStream(file);
+				){
+			dstream.writeBytes(doc.html());
+		}
+		
+	}
+	
+	private Document LoadHTML() throws FileNotFoundException, IOException {
+		File file=new File("res/backup.txt");
+		return Jsoup.parse(file);
+	}
+
+	
+
+	public List<Calciatore> getLista() {
+		return li;
+	}
+	
+	public Document getDoc() {
+		return doc;
+	}
+
+	private void CreateList() {
 		for(Element e : doc.select("tr")) {
 			if(e.select("td.field-giocatore").text()!="")
 			li.add(new Calciatore(
@@ -35,14 +72,6 @@ public class ScrapingImpl implements Scraping{
 		}
 	}
 	
-	public List<Calciatore> getLista() {
-		return li;
-	}
-	
-	public Document getDoc() {
-		return doc;
-	}
-
 	private int ParseInt(String s) {
 		int ret;
 		try {

@@ -1,5 +1,7 @@
 package manageData;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,7 +9,7 @@ public class ManageDataImpl implements ManageData{
 
 	private List<Calciatore> li;
 	
-	public ManageDataImpl() {
+	public ManageDataImpl() throws FileNotFoundException, IOException {
 		Scraping sc = new ScrapingImpl();
 		li=sc.getLista();
 	}
