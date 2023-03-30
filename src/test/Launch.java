@@ -1,12 +1,14 @@
 package test;
 
-import manageData.Scraping;
+import manageData.ManageData;
+import manageData.ManageDataImpl;
+
 
 public class Launch {
 
 	public static void main(String[] args) {
-		Scraping doc= new Scraping();
-		System.out.println(doc.getLi().get(20));
+		ManageData manage=new ManageDataImpl();
+		System.out.println(manage.getCalciatore(20));
 
 	}
 
