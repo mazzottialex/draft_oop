@@ -20,6 +20,19 @@ public class Calciatore {
 		this.espulsioni = espulsioni;
 		this.mv = mv;
 	}
+	
+	public String getNominativo() {
+		return nominativo;
+	}
+	
+	public String getRuolo() {
+		return ruolo;
+	}
+
+	public String getSquadra() {
+		return squadra;
+	}
+
 	@Override
 	public String toString() {
 		return "Calciatore [nominativo=" + nominativo + ", ruolo=" + ruolo + ", squadra=" + squadra + ", pg=" + pg

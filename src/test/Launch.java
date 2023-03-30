@@ -8,8 +8,9 @@ public class Launch {
 
 	public static void main(String[] args) {
 		ManageData manage=new ManageDataImpl();
-		System.out.println(manage.getCalciatore(20));
-
+		System.out.println(manage.getListaByRuolo("A"));
+		System.out.println(manage.getCalciatoreByName("De Luca M."));
+		System.out.println(manage.getCalciatoreBySquadra("inter"));
 	}
 
 }

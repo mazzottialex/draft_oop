@@ -12,19 +12,23 @@ public class ManageDataImpl implements ManageData{
 		li=sc.getLista();
 	}
 	
-	public Optional<Calciatore> getCalciatore(int n) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Calciatore> getCalciatoreBySquadra(String squadra) {
+		return li.stream()
+				.filter(c->c.getSquadra().equals(squadra))
+				.toList();
 	}
 
 	public Optional<Calciatore> getCalciatoreByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		return li.stream()
+				.filter(c->c.getNominativo().equals(name))
+				.findFirst();
 	}
 
-	public List<Calciatore> getListaByRuolo(String name) {
-		// TODO Auto-generated method stub
-		return null;
+	//RUOLI: P, D, C, A
+	public List<Calciatore> getListaByRuolo(String ruolo) {
+		return li.stream()
+				.filter(c->c.getRuolo().equals(ruolo))
+				.toList();
 	}
 
 }
