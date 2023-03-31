@@ -58,17 +58,22 @@ public class ScrapingImpl implements Scraping{
 	}
 
 	private void CreateList() {
+		int count=0;
 		for(Element e : doc.select("tr")) {
 			if(e.select("td.field-giocatore").text()!="")
-			li.add(new Calciatore(
-					e.select("td.field-giocatore").text(),
-					e.select("td.field-ruolo").text(),
-					e.select("td.field-sqd").text(),
-					ParseInt(e.select("td.field-pg").text()),
-					ParseInt(e.select("td.field-g").text()),
-					ParseInt(e.select("td.field-am").text()),
-					ParseInt(e.select("td.field-es").text()),
-					ParseFloat(e.select("td.field-mv").text())));
+			{
+				count++;
+				li.add(new Calciatore(
+						count,
+						e.select("td.field-giocatore").text(),
+						e.select("td.field-ruolo").text(),
+						e.select("td.field-sqd").text(),
+						ParseInt(e.select("td.field-pg").text()),
+						ParseInt(e.select("td.field-g").text()),
+						ParseInt(e.select("td.field-am").text()),
+						ParseInt(e.select("td.field-es").text()),
+						ParseFloat(e.select("td.field-mv").text())));
+			}
 		}
 	}
 	

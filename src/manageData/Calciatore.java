@@ -1,6 +1,7 @@
 package manageData;
 
 public class Calciatore {
+	private int id;
 	private String nominativo;
 	private String ruolo;
 	private String squadra;
@@ -9,8 +10,10 @@ public class Calciatore {
 	private int ammonizioni;
 	private int espulsioni;
 	private float mv; //media voti
-	public Calciatore(String nominativo, String ruolo, String squadra, int pg, int gol, int ammonizioni, int espulsioni,
+	
+	public Calciatore(int id, String nominativo, String ruolo, String squadra, int pg, int gol, int ammonizioni, int espulsioni,
 			float mv) {
+		this.id=id;
 		this.nominativo = nominativo;
 		this.ruolo = ruolo;
 		this.squadra = squadra;
@@ -33,11 +36,18 @@ public class Calciatore {
 		return squadra;
 	}
 
+	public int getId() {
+		return id;
+	}
+
 	@Override
 	public String toString() {
-		return "Calciatore [nominativo=" + nominativo + ", ruolo=" + ruolo + ", squadra=" + squadra + ", pg=" + pg
-				+ ", gol=" + gol + ", ammonizioni=" + ammonizioni + ", espulsioni=" + espulsioni + ", mv=" + mv + "]";
+		return "Calciatore [id=" + id + ", nominativo=" + nominativo + ", ruolo=" + ruolo + ", squadra=" + squadra
+				+ ", pg=" + pg + ", gol=" + gol + ", ammonizioni=" + ammonizioni + ", espulsioni=" + espulsioni
+				+ ", mv=" + mv + "]";
 	}
+	
+	
 	
 	
 }
