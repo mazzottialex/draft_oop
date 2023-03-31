@@ -1,5 +1,7 @@
+res/
 bin/ 
 doc/ 
 *.log 
 *.pdf 
 !myImportantFile.pdf 
+/.gitignore
