@@ -2,6 +2,7 @@ package manageData;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -45,6 +46,33 @@ public class ManageDataImpl implements ManageData{
 		}
 		return listaRuolo.stream()
 				.filter(c->posizioni.contains(c.getId()))
+				.toList();
+	}
+
+	public List<Calciatore> getTitolariBySquadraByRuolo(String squadra, String ruolo, Modulo modulo) {
+		List<Calciatore> listaSquadra = getCalciatoreBySquadra(squadra);
+		int n = 0;
+		switch (ruolo) {
+		case "P":
+			n = 1;
+			break;
+		case "D":
+			n = modulo.getNumDif();
+			break;
+		case "C":
+			n = modulo.getNumCen();
+			break;
+		case "A":
+			n = modulo.getNumAtt();
+			break;
+
+		default:
+			break;
+		}
+		return listaSquadra.stream()
+				.filter(c->c.getRuolo().equals(ruolo))
+				.sorted(Comparator.comparingDouble(Calciatore::getMv).reversed())
+				.limit(n)
 				.toList();
 	}
 

@@ -39,6 +39,10 @@ public class Calciatore {
 	public int getId() {
 		return id;
 	}
+	
+	public float getMv() {
+		return mv;
+	}
 
 	@Override
 	public String toString() {
