@@ -34,8 +34,6 @@ public class SquadraAvversaria extends ManageDataImpl{
 		List<Calciatore> liD = getTitolariBySquadraByRuolo(nomeSquadra, "D", modulo);
 		List<Calciatore> liC = getTitolariBySquadraByRuolo(nomeSquadra, "C", modulo);
 		List<Calciatore> liA = getTitolariBySquadraByRuolo(nomeSquadra, "A", modulo);
-		//liP.forEach(i -> titolari.add(i));
-//		titolari.clear();
 		titolari.addAll(liP);
 		titolari.addAll(liD);
 		titolari.addAll(liC);
