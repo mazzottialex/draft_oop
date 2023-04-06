@@ -34,72 +34,16 @@ public class ScrapingImpl implements Scraping{
 	public ScrapingImpl() throws FileNotFoundException, IOException {
 		li=new ArrayList<>();
 		
-		//Nascondere pagine chrome
-		ChromeOptions options=new ChromeOptions();
-		options.addArguments("headless");
-				
-		//Oggetto per creare il collegamento
-		WebDriver driver = new ChromeDriver();
-		driver.get("https://www.kickest.it/it/serie-a/statistiche/giocatori/tabellone?iframe=yes");
-		        
-		//Oggetto per eseguire operazioni sulla pagina
-		JavascriptExecutor js=(JavascriptExecutor) driver;
-		        
-		//Attende che la pagina carichi la tabella
-		WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(20));
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("tr")));
-				
-		Integer last= Integer.parseInt(driver.findElement(By.className("paginationjs-last")).getText());
+		int nThread=5;
 		
+		for(int i=0; i<nThread;i++) {
+			RunnableScraping runnable=new RunnableScraping(i, nThread);
+			Thread thr=new Thread(runnable);
+			thr.start();
+		}
+
 		
-		
-		for (Integer i=1;i<last+1;i++) {
-			js.executeScript("document.querySelector('[data-num=\""+i.toString()+"\"]').click()");
-						
-			for(int j=1;j<driver.findElements(By.tagName("tr")).size();j++) {
-				List<WebElement> riga=driver.findElements(By.tagName("tr"));
-				
-				try(final OutputStream file = new FileOutputStream("res/backup.txt", true);
-						final OutputStream bstream = new BufferedOutputStream(file);
-						final DataOutputStream dstream=new DataOutputStream(file);
-							){
-						dstream.writeBytes(riga.get(j).getText()+"\n");
-						
-					}
-			}
-			
-			
-			/*
-			//System.out.println(driver.findElement(By.tagName("tbody")).getText());
-			 	for(int j=1;j<16;j++) {
-				List<WebElement> riga=driver.findElements(By.tagName("tr")).get(j).findElements(By.tagName("td"));		
-				li.add(new Calciatore(
-						Integer.parseInt(riga.get(0).getText()), //id 
-						riga.get(1).getText(),	//nome
-						riga.get(2).getText().substring(0, 1),	//ruolo
-						riga.get(3).getText(),	//squadra
-						Integer.parseInt(riga.get(7).getText()),	//pg
-						Integer.parseInt(riga.get(9).getText()),	//minuti
-						Integer.parseInt(riga.get(10).getText()),	//gol
-						Integer.parseInt(riga.get(11).getText()),	//tiri
-						Integer.parseInt(riga.get(14).getText()),	//dribling
-						Integer.parseInt(riga.get(15).getText()),	//assist
-						Integer.parseInt(riga.get(16).getText()),	//passaggi
-						Integer.parseInt(riga.get(17).getText()),	//passaggiChiave
-						Integer.parseInt(riga.get(20).getText()),	//ammonizioni
-						Integer.parseInt(riga.get(21).getText()),	//espulsioni
-						Integer.parseInt(riga.get(22).getText()),	//rubati
-						Integer.parseInt(riga.get(23).getText()),	//tackle
-						Integer.parseInt(riga.get(24).getText()),	//cleanSheet
-						Integer.parseInt(riga.get(25).getText())	//parate
-						));
-				System.out.print(j);
-				//System.out.println(driver.findElements(By.tagName("tr")).get(j).findElements(By.tagName("td")).get(0).getText());
-			}
-			*/
-		}	
-		
-		driver.quit();
+		/*
 		
 		try (Scanner sc = new Scanner(new File("res/backup.txt"))) {
 			sc.useDelimiter("\\s+");
