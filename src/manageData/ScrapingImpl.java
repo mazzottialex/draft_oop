@@ -5,11 +5,14 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -48,9 +51,25 @@ public class ScrapingImpl implements Scraping{
 				
 		Integer last= Integer.parseInt(driver.findElement(By.className("paginationjs-last")).getText());
 		
+		
+		
 		for (Integer i=1;i<last+1;i++) {
 			js.executeScript("document.querySelector('[data-num=\""+i.toString()+"\"]').click()");
+						
+			for(int j=1;j<driver.findElements(By.tagName("tr")).size();j++) {
+				List<WebElement> riga=driver.findElements(By.tagName("tr"));
+				
+				try(final OutputStream file = new FileOutputStream("res/backup.txt", true);
+						final OutputStream bstream = new BufferedOutputStream(file);
+						final DataOutputStream dstream=new DataOutputStream(file);
+							){
+						dstream.writeBytes(riga.get(j).getText()+"\n");
+						
+					}
+			}
 			
+			
+			/*
 			//System.out.println(driver.findElement(By.tagName("tbody")).getText());
 			 	for(int j=1;j<16;j++) {
 				List<WebElement> riga=driver.findElements(By.tagName("tr")).get(j).findElements(By.tagName("td"));		
@@ -77,9 +96,39 @@ public class ScrapingImpl implements Scraping{
 				System.out.print(j);
 				//System.out.println(driver.findElements(By.tagName("tr")).get(j).findElements(By.tagName("td")).get(0).getText());
 			}
+			*/
 		}	
 		
 		driver.quit();
+		
+		try (Scanner sc = new Scanner(new File("res/backup.txt"))) {
+			sc.useDelimiter("\\s+");
+			while(sc.hasNext()) {
+				li.add(new Calciatore(
+						Integer.parseInt(sc.next()), //id 
+						"",	//nome
+						sc.next().substring(0, 1),	//ruolo
+						sc.next(),	//squadra
+						Integer.parseInt(sc.next()),	//pg
+						Integer.parseInt(sc.next()),	//minuti
+						Integer.parseInt(sc.next()),	//gol
+						Integer.parseInt(sc.next()),	//tiri
+						Integer.parseInt(sc.next()),	//dribling
+						Integer.parseInt(sc.next()),	//assist
+						Integer.parseInt(sc.next()),	//passaggi
+						Integer.parseInt(sc.next()),	//passaggiChiave
+						Integer.parseInt(sc.next()),	//ammonizioni
+						Integer.parseInt(sc.next()),	//espulsioni
+						Integer.parseInt(sc.next()),	//rubati
+						Integer.parseInt(sc.next()),	//tackle
+						Integer.parseInt(sc.next()),	//cleanSheet
+						Integer.parseInt(sc.next())	//parate
+						));
+				System.out.print(sc.next());
+			}
+			sc.close();
+		}
+		
 		
 		/*
 		
