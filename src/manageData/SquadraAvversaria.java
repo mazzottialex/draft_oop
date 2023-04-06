@@ -10,6 +10,7 @@ public class SquadraAvversaria extends ManageDataImpl{
 	private String nomeSquadra;
 	private Modulo modulo;
 	public List<Calciatore> titolari = new ArrayList<>();
+	public List<Calciatore> riserve = new ArrayList<>();
 	
 	public SquadraAvversaria(int id, String nomeSquadra, Modulo modulo) throws FileNotFoundException, IOException {
 		this.id = id;
@@ -42,7 +43,14 @@ public class SquadraAvversaria extends ManageDataImpl{
 	}
 	
 	public List<Calciatore> getRiserve() {
-		// TODO
-		return null;
+		List<Calciatore> liP = getRiserveBySquadraByRuolo(nomeSquadra, "P", modulo);
+		List<Calciatore> liD = getRiserveBySquadraByRuolo(nomeSquadra, "D", modulo);
+		List<Calciatore> liC = getRiserveBySquadraByRuolo(nomeSquadra, "C", modulo);
+		List<Calciatore> liA = getRiserveBySquadraByRuolo(nomeSquadra, "A", modulo);
+		riserve.addAll(liP);
+		riserve.addAll(liD);
+		riserve.addAll(liC);
+		riserve.addAll(liA);
+		return riserve;
 	}
 }

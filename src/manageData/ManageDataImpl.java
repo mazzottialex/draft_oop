@@ -75,6 +75,23 @@ public class ManageDataImpl implements ManageData{
 				.limit(n)
 				.toList();
 	}
+	
+	public List<Calciatore> getRiserveBySquadraByRuolo(String squadra, String ruolo, Modulo modulo) {
+		List<Calciatore> listaSquadra = getCalciatoreBySquadra(squadra);
+		List<Calciatore> listaTitolari = getTitolariBySquadraByRuolo(squadra, ruolo, modulo);
+		listaSquadra.removeAll(listaTitolari);
+		int n = 0;
+		if (ruolo == "P") {
+			n = 1;
+		} else {
+			n = 2;
+		}
+		return listaSquadra.stream()
+				.filter(c->c.getRuolo().equals(ruolo))
+				.sorted(Comparator.comparingDouble(Calciatore::getMv).reversed())
+				.limit(n)
+				.toList();
+	}
 
 
 
