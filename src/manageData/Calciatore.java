@@ -6,24 +6,43 @@ public class Calciatore {
 	private String ruolo;
 	private String squadra;
 	private int pg; //partite giocate
+	private int minuti;
 	private int gol;
+	private int tiri;
+	private int dribling;
+	private int assist;
+	private int passaggi;
+	private int passaggiChiave;
 	private int ammonizioni;
 	private int espulsioni;
-	private float mv; //media voti
-	
-	public Calciatore(int id, String nominativo, String ruolo, String squadra, int pg, int gol, int ammonizioni, int espulsioni,
-			float mv) {
-		this.id=id;
+	private int rubati;
+	private int tackle;
+	private int cleanSheet;
+	private int parate;
+
+	public Calciatore(int id, String nominativo, String ruolo, String squadra, int pg, int minuti, int gol, int tiri,
+			int dribling, int assist, int passaggi, int passaggiChiave, int ammonizioni, int espulsioni, int rubati,
+			int tackle, int cleanSheet, int parate) {
+		this.id = id;
 		this.nominativo = nominativo;
 		this.ruolo = ruolo;
 		this.squadra = squadra;
 		this.pg = pg;
+		this.minuti = minuti;
 		this.gol = gol;
+		this.tiri = tiri;
+		this.dribling = dribling;
+		this.assist = assist;
+		this.passaggi = passaggi;
+		this.passaggiChiave = passaggiChiave;
 		this.ammonizioni = ammonizioni;
 		this.espulsioni = espulsioni;
-		this.mv = mv;
+		this.rubati = rubati;
+		this.tackle = tackle;
+		this.cleanSheet = cleanSheet;
+		this.parate = parate;
 	}
-	
+
 	public String getNominativo() {
 		return nominativo;
 	}
@@ -39,15 +58,5 @@ public class Calciatore {
 	public int getId() {
 		return id;
 	}
-
-	@Override
-	public String toString() {
-		return "Calciatore [id=" + id + ", nominativo=" + nominativo + ", ruolo=" + ruolo + ", squadra=" + squadra
-				+ ", pg=" + pg + ", gol=" + gol + ", ammonizioni=" + ammonizioni + ", espulsioni=" + espulsioni
-				+ ", mv=" + mv + "]";
-	}
-	
-	
-	
 	
 }

@@ -8,4 +8,5 @@ public interface ManageData {
 	public Optional<Calciatore> getCalciatoreByName(String name);
 	public List<Calciatore> getListaByRuolo(String name);
 	public List<Calciatore> getRandomByRuolo(String name, int n);
+	public List<Calciatore> getLi();
 }

@@ -23,6 +23,11 @@ public class ManageDataImpl implements ManageData{
 				.toList();
 	}
 
+	@Override
+	public List<Calciatore> getLi() {
+		return li;
+	}
+
 	public Optional<Calciatore> getCalciatoreByName(String name) {
 		return li.stream()
 				.filter(c->c.getNominativo().equals(name))
@@ -47,6 +52,8 @@ public class ManageDataImpl implements ManageData{
 				.filter(c->posizioni.contains(c.getId()))
 				.toList();
 	}
+
+	
 
 
 
