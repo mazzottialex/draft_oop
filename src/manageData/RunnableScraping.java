@@ -33,7 +33,7 @@ public class RunnableScraping implements Runnable{
 				options.addArguments("headless");
 						
 				//Oggetto per creare il collegamento
-				WebDriver driver = new ChromeDriver();
+				WebDriver driver = new ChromeDriver(options);
 				driver.get("https://www.kickest.it/it/serie-a/statistiche/giocatori/tabellone?iframe=yes");
 				        
 				//Oggetto per eseguire operazioni sulla pagina

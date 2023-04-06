@@ -34,13 +34,25 @@ public class ScrapingImpl implements Scraping{
 	public ScrapingImpl() throws FileNotFoundException, IOException {
 		li=new ArrayList<>();
 		
-		int nThread=5;
+		int nThread=9;
 		
+		List<Thread> liThr=new ArrayList<>();
 		for(int i=0; i<nThread;i++) {
 			RunnableScraping runnable=new RunnableScraping(i, nThread);
 			Thread thr=new Thread(runnable);
+			liThr.add(thr);
 			thr.start();
 		}
+		
+		liThr.forEach(thr-> {
+			try {
+				thr.join();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		});
+		
 
 		
 		/*
