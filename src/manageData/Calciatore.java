@@ -49,6 +49,7 @@ public class Calciatore {
 		return "Calciatore [id=" + id + ", nominativo=" + nominativo + ", ruolo=" + ruolo + ", squadra=" + squadra
 				+ ", pg=" + pg + ", gol=" + gol + ", ammonizioni=" + ammonizioni + ", espulsioni=" + espulsioni
 				+ ", mv=" + mv + "]";
+//		return nominativo + ", ruolo = " + ruolo + " | ";
 	}
 	
 	
