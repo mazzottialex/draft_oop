@@ -42,7 +42,7 @@ public class ScrapingImpl implements Scraping{
 	public ScrapingImpl() throws FileNotFoundException, IOException, ClassNotFoundException {
 		li=new ArrayList<>();
 		
-		int nThread=7;
+		int nThread=9;
 		
 		List<Pair<RunnableScraping, Thread>> liThr=new ArrayList<>();
 		for(int i=0; i<nThread;i++) {
@@ -63,7 +63,7 @@ public class ScrapingImpl implements Scraping{
 		
 		SaveHTML();
 		
-		System.out.println(LoadHTML().toString());
+		li=LoadHTML();
 	}
 	
 	private void SaveHTML() throws IOException {
@@ -71,19 +71,20 @@ public class ScrapingImpl implements Scraping{
 			final OutputStream bstream = new BufferedOutputStream(file);
 			final ObjectOutputStream ostream=new ObjectOutputStream(file);
 				){
-			ostream.writeObject(li.get(0));
+			ostream.writeObject(li);
 			ostream.close();
 		}
 		
 	}
 	
-	private Calciatore LoadHTML() throws IOException, ClassNotFoundException {
-		Calciatore c;
+	@SuppressWarnings("unchecked")
+	private List<Calciatore> LoadHTML() throws IOException, ClassNotFoundException {
+		List<Calciatore> c;
 		try(final InputStream file = new FileInputStream("res/backup.txt");
 			final InputStream bstream = new BufferedInputStream(file);
 			final ObjectInputStream ostream=new ObjectInputStream(file);
 					){
-				c=(Calciatore)ostream.readObject();
+				c=(List<Calciatore>)ostream.readObject();
 				ostream.close();
 			}
 		return c;

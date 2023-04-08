@@ -43,7 +43,7 @@ public class RunnableScraping implements Runnable{
 				JavascriptExecutor js=(JavascriptExecutor) driver;
 				        
 				//Attende che la pagina carichi la tabella
-				WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(30));
+				WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(40)); //aspetta 40 sec per caricare la tabella
 				wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("tr")));
 						
 				int last= Integer.parseInt(driver.findElement(By.className("paginationjs-last")).getText());
@@ -54,7 +54,6 @@ public class RunnableScraping implements Runnable{
 				if(pagine*(myId+1)<last)
 					last=pagine*(myId+1);
 				
-				//	for (Integer i=1;i<last+1;i++) {
 				for (Integer i=1;i<last+1;i++) {
 					js.executeScript("document.querySelector('[data-num=\""+i.toString()+"\"]').click()");
 					
@@ -63,11 +62,12 @@ public class RunnableScraping implements Runnable{
 						System.out.println(myId+"  i:"+ i);
 					
 						WebElement table=driver.findElement(By.tagName("tbody"));
+						int nRighe=table.findElements(By.tagName("tr")).size();
 					//System.out.println(table.findElements(By.tagName("tr")).size());
-					 	for(int j=1;j<table.findElements(By.tagName("tr")).size()+1;j++) {
+					 	for(int j=1;j<nRighe+1;j++) {
 							List<WebElement> riga=driver.findElements(By.tagName("tr")).get(j).findElements(By.tagName("td"));		
 							li.add(new Calciatore(
-								(i-1)*pagine+(j-1), //id Integer.parseInt(riga.get(0).getText())
+								(i-1)*15+(j-1), //id Integer.parseInt(riga.get(0).getText())
 								riga.get(1).getText(),	//nome
 								riga.get(2).getText().substring(0, 1),	//ruolo
 								riga.get(3).getText(),	//squadra
