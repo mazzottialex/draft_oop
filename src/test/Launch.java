@@ -28,5 +28,6 @@ public class Launch {
 		//System.out.println(manage.getRandomByRuolo("A",5));
 		
 		//System.out.println(manage.getLi().get(2));
+		System.out.println(manage.getLi().get(100).toString());
 	}
 }

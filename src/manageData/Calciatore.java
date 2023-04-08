@@ -58,5 +58,14 @@ public class Calciatore {
 	public int getId() {
 		return id;
 	}
+
+	@Override
+	public String toString() {
+		return "Calciatore [id=" + id + ", nominativo=" + nominativo + ", ruolo=" + ruolo + ", squadra=" + squadra
+				+ ", pg=" + pg + ", minuti=" + minuti + ", gol=" + gol + ", tiri=" + tiri + ", dribling=" + dribling
+				+ ", assist=" + assist + ", passaggi=" + passaggi + ", passaggiChiave=" + passaggiChiave
+				+ ", ammonizioni=" + ammonizioni + ", espulsioni=" + espulsioni + ", rubati=" + rubati + ", tackle="
+				+ tackle + ", cleanSheet=" + cleanSheet + ", parate=" + parate + "]";
+	}
 	
 }

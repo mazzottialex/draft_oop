@@ -24,6 +24,9 @@ public class RunnableScraping implements Runnable{
 		this.nThread = nThread;
 	}
 
+	public List<Calciatore> getLi() {
+		return li;
+	}
 
 	public void run() {
 		
@@ -33,7 +36,7 @@ public class RunnableScraping implements Runnable{
 				options.addArguments("headless");
 						
 				//Oggetto per creare il collegamento
-				WebDriver driver = new ChromeDriver(options);
+				WebDriver driver = new ChromeDriver();
 				driver.get("https://www.kickest.it/it/serie-a/statistiche/giocatori/tabellone?iframe=yes");
 				        
 				//Oggetto per eseguire operazioni sulla pagina
@@ -64,7 +67,7 @@ public class RunnableScraping implements Runnable{
 					 	for(int j=1;j<table.findElements(By.tagName("tr")).size()+1;j++) {
 							List<WebElement> riga=driver.findElements(By.tagName("tr")).get(j).findElements(By.tagName("td"));		
 							li.add(new Calciatore(
-								Integer.parseInt(riga.get(0).getText()), //id 
+								(i-1)*pagine+(j-1), //id Integer.parseInt(riga.get(0).getText())
 								riga.get(1).getText(),	//nome
 								riga.get(2).getText().substring(0, 1),	//ruolo
 								riga.get(3).getText(),	//squadra

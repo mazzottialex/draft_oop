@@ -26,6 +26,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import utils.Pair;
+
 public class ScrapingImpl implements Scraping{
 	private String url="https://www.kickest.it/it/serie-a/statistiche/giocatori/tabellone?iframe=yes";
 	private Document doc;	//html del sito
@@ -34,26 +36,26 @@ public class ScrapingImpl implements Scraping{
 	public ScrapingImpl() throws FileNotFoundException, IOException {
 		li=new ArrayList<>();
 		
-		int nThread=9;
+		int nThread=7;
 		
-		List<Thread> liThr=new ArrayList<>();
+		List<Pair<RunnableScraping, Thread>> liThr=new ArrayList<>();
 		for(int i=0; i<nThread;i++) {
 			RunnableScraping runnable=new RunnableScraping(i, nThread);
 			Thread thr=new Thread(runnable);
-			liThr.add(thr);
+			liThr.add(new Pair<>(runnable,thr));
 			thr.start();
 		}
 		
-		liThr.forEach(thr-> {
+		liThr.forEach(el-> {
 			try {
-				thr.join();
+				el.getY().join();
+				li.addAll(el.getX().getLi());
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		});
 		
-
+		
 		
 		/*
 		
@@ -104,6 +106,7 @@ public class ScrapingImpl implements Scraping{
 			final DataOutputStream dstream=new DataOutputStream(file);
 				){
 			dstream.writeBytes(doc.html());
+			
 		}
 		
 	}
