@@ -36,15 +36,20 @@ import utils.Pair;
 
 public class ScrapingImpl implements Scraping{
 	private String url="https://www.kickest.it/it/serie-a/statistiche/giocatori/tabellone?iframe=yes";
-	private Document doc;	//html del sito
 	private List<Calciatore> li;
-
-	public ScrapingImpl() throws FileNotFoundException, IOException, ClassNotFoundException {
+	private final int nThread;
+	
+	public ScrapingImpl(int nThread) throws FileNotFoundException, IOException, ClassNotFoundException {
+	
+		this.nThread=nThread;
 		li=new ArrayList<>();
 		
-		int nThread=9;
-		
+		ManageThreads(); //restituisce nella li tutti i calciatori
+	}
+	
+	private void ManageThreads() {
 		List<Pair<RunnableScraping, Thread>> liThr=new ArrayList<>();
+		
 		for(int i=0; i<nThread;i++) {
 			RunnableScraping runnable=new RunnableScraping(i, nThread);
 			Thread thr=new Thread(runnable);
@@ -60,76 +65,10 @@ public class ScrapingImpl implements Scraping{
 				e.printStackTrace();
 			}
 		});
-		
-		SaveHTML();
-		
-		li=LoadHTML();
 	}
 	
-	private void SaveHTML() throws IOException {
-		try(final OutputStream file = new FileOutputStream("res/backup.txt");
-			final OutputStream bstream = new BufferedOutputStream(file);
-			final ObjectOutputStream ostream=new ObjectOutputStream(file);
-				){
-			ostream.writeObject(li);
-			ostream.close();
-		}
-		
-	}
 	
-	@SuppressWarnings("unchecked")
-	private List<Calciatore> LoadHTML() throws IOException, ClassNotFoundException {
-		List<Calciatore> c;
-		try(final InputStream file = new FileInputStream("res/backup.txt");
-			final InputStream bstream = new BufferedInputStream(file);
-			final ObjectInputStream ostream=new ObjectInputStream(file);
-					){
-				c=(List<Calciatore>)ostream.readObject();
-				ostream.close();
-			}
-		return c;
-	}
-
-	
-
 	public List<Calciatore> getLista() {
 		return li;
-	}
-	
-	public Document getDoc() {
-		return doc;
-	}
-
-	private void CreateList() {
-		int count=0;
-		for(Element e : doc.select("tr")) {
-			if(e.select("td.field-giocatore").text()!="")
-			{
-				count++;
-				
-			}
-		}
-	}
-	
-	private int ParseInt(String s) {
-		int ret;
-		try {
-			ret=Integer.parseInt(s);
-		}
-		catch(Exception e) {
-			ret=0;
-		}
-		return ret;
-	}
-	
-	private float ParseFloat(String s) {
-		float ret;
-		try {
-			ret=Float.parseFloat(s);
-		}
-		catch(Exception e) {
-			ret=(float) 0.0;
-		}
-		return ret;
 	}
 }

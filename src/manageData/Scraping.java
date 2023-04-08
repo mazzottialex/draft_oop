@@ -5,5 +5,4 @@ import org.jsoup.nodes.Document;
 
 public interface Scraping{
 	public List<Calciatore> getLista();
-	public Document getDoc();
 }

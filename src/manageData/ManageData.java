@@ -1,12 +1,11 @@
 package manageData;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 public interface ManageData {
-	public List<Calciatore> getCalciatoreBySquadra(String name);
-	public Optional<Calciatore> getCalciatoreByName(String name);
-	public List<Calciatore> getListaByRuolo(String name);
-	public List<Calciatore> getRandomByRuolo(String name, int n);
+	public void LoadData() throws FileNotFoundException, ClassNotFoundException, IOException;
+	public void UploadData() throws FileNotFoundException, ClassNotFoundException, IOException;
 	public List<Calciatore> getLi();
 }
