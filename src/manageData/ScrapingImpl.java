@@ -1,14 +1,20 @@
 package manageData;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +39,7 @@ public class ScrapingImpl implements Scraping{
 	private Document doc;	//html del sito
 	private List<Calciatore> li;
 
-	public ScrapingImpl() throws FileNotFoundException, IOException {
+	public ScrapingImpl() throws FileNotFoundException, IOException, ClassNotFoundException {
 		li=new ArrayList<>();
 		
 		int nThread=7;
@@ -55,65 +61,32 @@ public class ScrapingImpl implements Scraping{
 			}
 		});
 		
+		SaveHTML();
 		
-		
-		/*
-		
-		try (Scanner sc = new Scanner(new File("res/backup.txt"))) {
-			sc.useDelimiter("\\s+");
-			while(sc.hasNext()) {
-				li.add(new Calciatore(
-						Integer.parseInt(sc.next()), //id 
-						"",	//nome
-						sc.next().substring(0, 1),	//ruolo
-						sc.next(),	//squadra
-						Integer.parseInt(sc.next()),	//pg
-						Integer.parseInt(sc.next()),	//minuti
-						Integer.parseInt(sc.next()),	//gol
-						Integer.parseInt(sc.next()),	//tiri
-						Integer.parseInt(sc.next()),	//dribling
-						Integer.parseInt(sc.next()),	//assist
-						Integer.parseInt(sc.next()),	//passaggi
-						Integer.parseInt(sc.next()),	//passaggiChiave
-						Integer.parseInt(sc.next()),	//ammonizioni
-						Integer.parseInt(sc.next()),	//espulsioni
-						Integer.parseInt(sc.next()),	//rubati
-						Integer.parseInt(sc.next()),	//tackle
-						Integer.parseInt(sc.next()),	//cleanSheet
-						Integer.parseInt(sc.next())	//parate
-						));
-				System.out.print(sc.next());
-			}
-			sc.close();
-		}
-		
-		
-		/*
-		
-		try {
-			doc=Jsoup.connect(url).get();
-			SaveHTML(doc);
-		} catch (IOException e) {
-			doc=LoadHTML();			
-		}
-		
-		CreateList();*/
+		System.out.println(LoadHTML().toString());
 	}
 	
-	private void SaveHTML(Document doc) throws IOException {
+	private void SaveHTML() throws IOException {
 		try(final OutputStream file = new FileOutputStream("res/backup.txt");
 			final OutputStream bstream = new BufferedOutputStream(file);
-			final DataOutputStream dstream=new DataOutputStream(file);
+			final ObjectOutputStream ostream=new ObjectOutputStream(file);
 				){
-			dstream.writeBytes(doc.html());
-			
+			ostream.writeObject(li.get(0));
+			ostream.close();
 		}
 		
 	}
 	
-	private Document LoadHTML() throws FileNotFoundException, IOException {
-		File file=new File("res/backup.txt");
-		return Jsoup.parse(file);
+	private Calciatore LoadHTML() throws IOException, ClassNotFoundException {
+		Calciatore c;
+		try(final InputStream file = new FileInputStream("res/backup.txt");
+			final InputStream bstream = new BufferedInputStream(file);
+			final ObjectInputStream ostream=new ObjectInputStream(file);
+					){
+				c=(Calciatore)ostream.readObject();
+				ostream.close();
+			}
+		return c;
 	}
 
 	

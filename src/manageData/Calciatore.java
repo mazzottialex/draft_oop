@@ -1,6 +1,10 @@
 package manageData;
 
-public class Calciatore {
+import java.io.Serializable;
+
+public class Calciatore implements Serializable{
+
+	private static final long serialVersionUID = -557391519003956401L;
 	private int id;
 	private String nominativo;
 	private String ruolo;

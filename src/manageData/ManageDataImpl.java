@@ -12,7 +12,7 @@ public class ManageDataImpl implements ManageData{
 
 	private List<Calciatore> li;
 	
-	public ManageDataImpl() throws FileNotFoundException, IOException {
+	public ManageDataImpl() throws FileNotFoundException, IOException, ClassNotFoundException {
 		Scraping sc = new ScrapingImpl();
 		li=sc.getLista();
 	}
