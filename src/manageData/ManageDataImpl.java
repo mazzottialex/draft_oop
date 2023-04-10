@@ -2,40 +2,36 @@ package manageData;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+<<<<<<< HEAD
 import java.util.Comparator;
 import java.util.HashSet;
+=======
+import java.util.ArrayList;
+>>>>>>> TestSelenium
 import java.util.List;
-import java.util.Optional;
-import java.util.Random;
-import java.util.Set;
 
 public class ManageDataImpl implements ManageData{
-
 	private List<Calciatore> li;
+	private LogicsFile logFile;
 	
-	public ManageDataImpl() throws FileNotFoundException, IOException {
-		Scraping sc = new ScrapingImpl();
-		li=sc.getLista();
+	public ManageDataImpl() {
+		li=new ArrayList<>();
+		logFile=new LogicsFileImpl();
 	}
 	
-	public List<Calciatore> getCalciatoreBySquadra(String squadra) {
-		return li.stream()
-				.filter(c->c.getSquadra().equals(squadra))
-				.toList();
+	public List<Calciatore> getLi() {
+		return li;
 	}
-
-	public Optional<Calciatore> getCalciatoreByName(String name) {
-		return li.stream()
-				.filter(c->c.getNominativo().equals(name))
-				.findFirst();
+	
+	public void LoadData() throws FileNotFoundException, ClassNotFoundException, IOException {
+		li=logFile.LoadData();
 	}
-
-	//RUOLI: P, D, C, A
-	public List<Calciatore> getListaByRuolo(String ruolo) {
-		return li.stream()
-				.filter(c->c.getRuolo().equals(ruolo))
-				.toList();
+	public void UploadData() throws FileNotFoundException, ClassNotFoundException, IOException {
+		Scraping scr=new ScrapingImpl(7);
+		li=scr.getLista();
+		logFile.SaveData(li);
 	}
+<<<<<<< HEAD
 
 	public List<Calciatore> getRandomByRuolo(String ruolo, int n) {
 		List<Calciatore> listaRuolo=getListaByRuolo(ruolo);
@@ -95,4 +91,6 @@ public class ManageDataImpl implements ManageData{
 
 
 
+=======
+>>>>>>> TestSelenium
 }

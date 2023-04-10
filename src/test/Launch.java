@@ -2,6 +2,7 @@ package test;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.Duration;
 
 import manageData.ManageData;
 import manageData.ManageDataImpl;
@@ -20,5 +21,4 @@ public class Launch {
 		SquadraAvversaria sqAvv = new SquadraAvversaria(0, "napoli", Modulo.M442);
 		//System.out.println(sqAvv.getRiserve());
 	}
-
 }
