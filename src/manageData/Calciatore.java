@@ -23,6 +23,7 @@ public class Calciatore implements Serializable{
 	private final int tackle;
 	private final int cleanSheet;
 	private final int parate;
+	private final int rating;
 
 	public Calciatore(int id, String nominativo, String ruolo, String squadra, int pg, int minuti, int gol, int tiri,
 			int dribling, int assist, int passaggi, int passaggiChiave, int ammonizioni, int espulsioni, int rubati,
@@ -45,6 +46,7 @@ public class Calciatore implements Serializable{
 		this.tackle = tackle;
 		this.cleanSheet = cleanSheet;
 		this.parate = parate;
+		this.rating=0;
 	}
 
 	public String getNominativo() {
