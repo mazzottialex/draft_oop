@@ -9,4 +9,9 @@ public interface ExtractData {
 	public List<Calciatore> getListaByRuolo(String name);
 	public List<Calciatore> getRandomByRuolo(String name, int n);
 	public List<Calciatore> getLi();
+	public int getTopGol();
+	public int getTopTiri();
+	public int getTopDribling();
+	public int getTopAssist();
+	public int getTopPassChiave();
 }

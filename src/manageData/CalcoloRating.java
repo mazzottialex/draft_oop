@@ -1,5 +1,8 @@
 package manageData;
 
+import utils.Pair;
+import utils.Triple;
+
 public interface CalcoloRating {
-	public int getRating(Calciatore calc);
+	public Pair<Integer, Triple<Integer, Integer, Integer>> getRating(Calciatore calc);
 }

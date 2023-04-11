@@ -53,4 +53,39 @@ public class ExtractDataImpl implements ExtractData{
 				.filter(c->posizioni.contains(c.getId()))
 				.toList();
 	}
+	
+	public int getTopGol() {
+		return li.stream()
+				.map(c->c.getGol())
+				.max((c1,c2)->c1-c2)
+				.orElse(0);
+	}
+	
+	public int getTopTiri() {
+		return li.stream()
+				.map(c->c.getTiri())
+				.max((c1,c2)->c1-c2)
+				.orElse(0);
+	}
+	
+	public int getTopDribling() {
+		return li.stream()
+				.map(c->c.getDribling())
+				.max((c1,c2)->c1-c2)
+				.orElse(0);
+	}
+	
+	public int getTopAssist() {
+		return li.stream()
+				.map(c->c.getAssist())
+				.max((c1,c2)->c1-c2)
+				.orElse(0);
+	}
+	
+	public int getTopPassChiave() {
+		return li.stream()
+				.map(c->c.getPassaggiChiave())
+				.max((c1,c2)->c1-c2)
+				.orElse(0);
+	}
 }
