@@ -14,4 +14,9 @@ public interface ExtractData {
 	public int getTopDribling();
 	public int getTopAssist();
 	public int getTopPassChiave();
+	public int getTopPassaggi();
+	public int getTopRubati();
+	public int getTopTackle();
+	public int getTopCleanSheet();
+	public int getTopMinuti();
 }

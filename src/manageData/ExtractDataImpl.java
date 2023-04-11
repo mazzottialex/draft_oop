@@ -88,4 +88,39 @@ public class ExtractDataImpl implements ExtractData{
 				.max((c1,c2)->c1-c2)
 				.orElse(0);
 	}
+	
+	public int getTopPassaggi() {
+		return li.stream()
+				.map(c->c.getPassaggi())
+				.max((c1,c2)->c1-c2)
+				.orElse(0);
+	}
+
+	public int getTopRubati() {
+		return li.stream()
+				.map(c->c.getRubati())
+				.max((c1,c2)->c1-c2)
+				.orElse(0);
+	}
+	
+	public int getTopTackle() {
+		return li.stream()
+				.map(c->c.getTackle())
+				.max((c1,c2)->c1-c2)
+				.orElse(0);
+	}
+	
+	public int getTopCleanSheet() {
+		return li.stream()
+				.map(c->c.getCleanSheet())
+				.max((c1,c2)->c1-c2)
+				.orElse(0);
+	}
+	
+	public int getTopMinuti() {
+		return li.stream()
+				.map(c->c.getMinuti())
+				.max((c1,c2)->c1-c2)
+				.orElse(0);
+	}
 }
