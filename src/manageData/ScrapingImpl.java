@@ -1,49 +1,24 @@
 package manageData;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.io.Serializable;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import utils.Pair;
 
 public class ScrapingImpl implements Scraping{
-	private String url="https://www.kickest.it/it/serie-a/statistiche/giocatori/tabellone?iframe=yes";
-	private List<Calciatore> li;
+	private List<Calciatore> li=new ArrayList<>();
 	private final int nThread;
 	
 	public ScrapingImpl(int nThread) throws FileNotFoundException, IOException, ClassNotFoundException {
-	
 		this.nThread=nThread;
-		li=new ArrayList<>();
-		
+		ManageThreads(); //restituisce nella li tutti i calciatori
+	}
+	
+	public ScrapingImpl() throws FileNotFoundException, IOException, ClassNotFoundException {
+		this.nThread=7;
 		ManageThreads(); //restituisce nella li tutti i calciatori
 	}
 	

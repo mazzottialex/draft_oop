@@ -29,7 +29,7 @@ public class ManageDataImpl implements ManageData{
 		li=logFile.LoadData();
 	}
 	public void UploadData() throws FileNotFoundException, ClassNotFoundException, IOException {
-		Scraping scr=new ScrapingImpl(7);
+		Scraping scr=new ScrapingImpl();
 		li=scr.getLista();
 		logFile.SaveData(li);
 	}
