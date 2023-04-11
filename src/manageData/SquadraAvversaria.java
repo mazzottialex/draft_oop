@@ -29,7 +29,7 @@ public class SquadraAvversaria extends ManageDataImpl{
 	public Modulo getModulo() {
 		return modulo;
 	}
-	
+	/*
 	public List<Calciatore> getTitolari() {
 		List<Calciatore> liP = getTitolariBySquadraByRuolo(nomeSquadra, "P", modulo);
 		List<Calciatore> liD = getTitolariBySquadraByRuolo(nomeSquadra, "D", modulo);
@@ -53,4 +53,5 @@ public class SquadraAvversaria extends ManageDataImpl{
 		riserve.addAll(liA);
 		return riserve;
 	}
+	*/
 }

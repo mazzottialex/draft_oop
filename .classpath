@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-<<<<<<< HEAD
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-=======
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
->>>>>>> TestSelenium
 	<classpathentry kind="lib" path="lib/jsoup-1.15.4.jar"/>
 	<classpathentry kind="lib" path="lib/selenium-java-4.8.3/lib/guava-31.1-jre.jar"/>
 	<classpathentry kind="lib" path="lib/selenium-java-4.8.3/selenium-api-4.8.3.jar"/>

@@ -53,9 +53,4 @@ public class ExtractDataImpl implements ExtractData{
 				.filter(c->posizioni.contains(c.getId()))
 				.toList();
 	}
-
-	
-
-
-
 }

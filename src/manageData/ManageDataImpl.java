@@ -2,24 +2,15 @@ package manageData;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 import java.util.ArrayList;
->>>>>>> 0bf6f14fc5fde79c109b52fffd5fbdac1b4ca2de
 import java.util.Comparator;
 import java.util.HashSet;
-=======
 import java.util.ArrayList;
->>>>>>> TestSelenium
 import java.util.List;
-<<<<<<< HEAD
-=======
 import java.util.Optional;
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Predicate;
->>>>>>> 0bf6f14fc5fde79c109b52fffd5fbdac1b4ca2de
 
 public class ManageDataImpl implements ManageData{
 	private List<Calciatore> li;
@@ -42,6 +33,7 @@ public class ManageDataImpl implements ManageData{
 		li=scr.getLista();
 		logFile.SaveData(li);
 	}
+	/*
 <<<<<<< HEAD
 
 	public List<Calciatore> getRandomByRuolo(String ruolo, int n) {
@@ -104,7 +96,7 @@ public class ManageDataImpl implements ManageData{
 		}
 		return lista;
 	}
-	
+
 	public List<Calciatore> getRiserveBySquadraByRuolo(String squadra, String ruolo, Modulo modulo) {
 		List<Calciatore> listaSquadra = getCalciatoreBySquadra(squadra);
 		List<Calciatore> lista = new ArrayList<>();
@@ -168,4 +160,5 @@ public class ManageDataImpl implements ManageData{
 
 =======
 >>>>>>> TestSelenium
+*/
 }

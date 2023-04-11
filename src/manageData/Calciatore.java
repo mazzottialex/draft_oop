@@ -63,9 +63,6 @@ public class Calciatore implements Serializable{
 		return id;
 	}
 	
-	public float getMv() {
-		return mv;
-	}
 
 	@Override
 	public String toString() {
