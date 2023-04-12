@@ -1,5 +1,6 @@
-package manageData;
+package rating;
 
+import manageData.Calciatore;
 import utils.Pair;
 import utils.Triple;
 

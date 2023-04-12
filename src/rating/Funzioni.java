@@ -1,4 +1,4 @@
-package manageData;
+package rating;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

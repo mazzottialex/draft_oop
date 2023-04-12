@@ -4,12 +4,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import manageData.Calciatore;
-import manageData.CalcoloRating;
-import manageData.CalcoloRatingImpl;
 import manageData.ExtractData;
 import manageData.ExtractDataImpl;
-
-
+import rating.CalcoloRating;
+import rating.CalcoloRatingImpl;
 
 public class Launch {
 
