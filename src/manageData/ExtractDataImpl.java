@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.Set;
+import java.util.function.Function;
+
+import org.w3c.dom.Attr;
 
 public class ExtractDataImpl implements ExtractData{
 
@@ -14,6 +17,7 @@ public class ExtractDataImpl implements ExtractData{
 	
 	public ExtractDataImpl() throws FileNotFoundException, IOException, ClassNotFoundException {
 		ManageData md=new ManageDataImpl();
+		//md.UploadData();
 		md.LoadData();
 		li=md.getLi();
 	}
@@ -53,4 +57,13 @@ public class ExtractDataImpl implements ExtractData{
 				.filter(c->posizioni.contains(c.getId()))
 				.toList();
 	}
+	
+	public int getTopByAttribute(Function<Calciatore, Integer> attr) {
+		return li.
+				stream()
+				.map(c->attr.apply(c))
+				.max((c1,c2)-> c1-c2)
+				.orElse(0);
+	}
+
 }

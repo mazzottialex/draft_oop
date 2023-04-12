@@ -2,6 +2,9 @@ package manageData;
 
 import java.io.Serializable;
 
+import utils.Pair;
+import utils.Triple;
+
 public class Calciatore implements Serializable{
 
 	private static final long serialVersionUID = -557391519003956401L; //per serializzazione
@@ -23,6 +26,7 @@ public class Calciatore implements Serializable{
 	private final int tackle;
 	private final int cleanSheet;
 	private final int parate;
+	private final Pair<Integer, Triple<Integer, Integer, Integer>> rating;
 
 	public Calciatore(int id, String nominativo, String ruolo, String squadra, int pg, int minuti, int gol, int tiri,
 			int dribling, int assist, int passaggi, int passaggiChiave, int ammonizioni, int espulsioni, int rubati,
@@ -45,8 +49,13 @@ public class Calciatore implements Serializable{
 		this.tackle = tackle;
 		this.cleanSheet = cleanSheet;
 		this.parate = parate;
+		this.rating=null;
 	}
 
+	public int getId() {
+		return id;
+	}
+	
 	public String getNominativo() {
 		return nominativo;
 	}
@@ -59,10 +68,65 @@ public class Calciatore implements Serializable{
 		return squadra;
 	}
 
-	public int getId() {
-		return id;
+	public int getPg() {
+		return pg;
 	}
-	
+
+	public int getMinuti() {
+		return minuti;
+	}
+
+	public int getGol() {
+		return gol;
+	}
+
+	public int getTiri() {
+		return tiri;
+	}
+
+	public int getDribling() {
+		return dribling;
+	}
+
+	public int getAssist() {
+		return assist;
+	}
+
+	public int getPassaggi() {
+		return passaggi;
+	}
+
+	public int getPassaggiChiave() {
+		return passaggiChiave;
+	}
+
+	public int getAmmonizioni() {
+		return ammonizioni;
+	}
+
+	public int getEspulsioni() {
+		return espulsioni;
+	}
+
+	public int getRubati() {
+		return rubati;
+	}
+
+	public int getTackle() {
+		return tackle;
+	}
+
+	public int getCleanSheet() {
+		return cleanSheet;
+	}
+
+	public int getParate() {
+		return parate;
+	}
+
+	public Pair<Integer, Triple<Integer, Integer, Integer>> getRating() {
+		return rating;
+	}
 
 	@Override
 	public String toString() {
