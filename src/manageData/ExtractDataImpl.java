@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.Set;
+import java.util.function.Function;
+
+import org.w3c.dom.Attr;
 
 public class ExtractDataImpl implements ExtractData{
 
@@ -14,6 +17,7 @@ public class ExtractDataImpl implements ExtractData{
 	
 	public ExtractDataImpl() throws FileNotFoundException, IOException, ClassNotFoundException {
 		ManageData md=new ManageDataImpl();
+		//md.UploadData();
 		md.LoadData();
 		li=md.getLi();
 	}
@@ -54,86 +58,12 @@ public class ExtractDataImpl implements ExtractData{
 				.toList();
 	}
 	
-	public int getTopGol() {
-		return li.stream()
-				.map(c->c.getGol())
-				.max((c1,c2)->c1-c2)
-				.orElse(0);
-	}
-	
-	public int getTopTiri() {
-		return li.stream()
-				.map(c->c.getTiri())
-				.max((c1,c2)->c1-c2)
-				.orElse(0);
-	}
-	
-	public int getTopDribling() {
-		return li.stream()
-				.map(c->c.getDribling())
-				.max((c1,c2)->c1-c2)
-				.orElse(0);
-	}
-	
-	public int getTopAssist() {
-		return li.stream()
-				.map(c->c.getAssist())
-				.max((c1,c2)->c1-c2)
-				.orElse(0);
-	}
-	
-	public int getTopPassChiave() {
-		return li.stream()
-				.map(c->c.getPassaggiChiave())
-				.max((c1,c2)->c1-c2)
-				.orElse(0);
-	}
-	
-	public int getTopPassaggi() {
-		return li.stream()
-				.map(c->c.getPassaggi())
-				.max((c1,c2)->c1-c2)
+	public int getTopByAttribute(Function<Calciatore, Integer> attr) {
+		return li.
+				stream()
+				.map(c->attr.apply(c))
+				.max((c1,c2)-> c1-c2)
 				.orElse(0);
 	}
 
-	public int getTopRubati() {
-		return li.stream()
-				.map(c->c.getRubati())
-				.max((c1,c2)->c1-c2)
-				.orElse(0);
-	}
-	
-	public int getTopTackle() {
-		return li.stream()
-				.map(c->c.getTackle())
-				.max((c1,c2)->c1-c2)
-				.orElse(0);
-	}
-	
-	public int getTopCleanSheet() {
-		return li.stream()
-				.map(c->c.getCleanSheet())
-				.max((c1,c2)->c1-c2)
-				.orElse(0);
-	}
-	
-	public int getTopMinuti() {
-		return li.stream()
-				.map(c->c.getMinuti())
-				.max((c1,c2)->c1-c2)
-				.orElse(0);
-	}
-	
-	public int getTopParate() {
-		return li.stream()
-				.map(c->c.getMinuti())
-				.max((c1,c2)->c1-c2)
-				.orElse(0);
-	}
-	
-	public int getCountPortieri() {
-		return (int) li.stream()
-				.filter(c->c.getRuolo().equals(new String("P")))
-				.count();
-	}
 }

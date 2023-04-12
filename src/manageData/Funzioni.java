@@ -19,7 +19,7 @@ public class Funzioni {
 	
 	//parametro a, velocità funzione logaritmica, con a piccolo (es: 0,1) lenta, con a grande (es: 100) veloce
 	public int Logaritmica(int x, int top, int min, int max) { 
-		double a=0.5;
+		double a=0.3;
 		x=n*x/top;
 		return (int) Math.round(((max-min)/Math.log(a*n+1)*Math.log(a*x+1)+min));
 	}

@@ -17,24 +17,24 @@ public class CalcoloRatingImpl implements CalcoloRating {
 	public Pair<Integer, Triple<Integer, Integer, Integer>> getRating(Calciatore calc) {
 		String ruolo=calc.getRuolo();
 		
-		int ratGol=fun.Logaritmica(calc.getGol(), ex.getTopGol(), 50, 100);
-		int ratTiri=fun.Logaritmica(calc.getTiri(), ex.getTopTiri(), 50, 100);
-		int ratDribl=fun.Logaritmica(calc.getDribling(), ex.getTopDribling(), 50, 90);
-		int ratAss=fun.Logaritmica(calc.getAssist(), ex.getTopAssist(), 50, 90);
-		int ratPassChiave=fun.Logaritmica(calc.getPassaggiChiave(), ex.getTopPassChiave(), 50, 90);
+		int ratGol=fun.Logaritmica(calc.getGol(), ex.getTopByAttribute(c->c.getGol()), 50, 100);
+		int ratTiri=fun.Logaritmica(calc.getTiri(), ex.getTopByAttribute(c->c.getTiri()), 50, 100);
+		int ratDribl=fun.Logaritmica(calc.getDribling(), ex.getTopByAttribute(c->c.getDribling()), 50, 90);
+		int ratAss=fun.Logaritmica(calc.getAssist(), ex.getTopByAttribute(c->c.getAssist()), 50, 90);
+		int ratPassChiave=fun.Logaritmica(calc.getPassaggiChiave(), ex.getTopByAttribute(c->c.getPassaggiChiave()), 50, 90);
 		
-		int ratA=(ratAss*2+ratDribl+ratGol*5+ratPassChiave+ratTiri)/10;
+		int ratA=(ratAss*2+ratDribl+ratGol*6+ratPassChiave+ratTiri*2)/12;
 		
-		int ratPassaggi=fun.Logaritmica(calc.getPassaggi(), ex.getTopPassaggi(), 50, 90);
-		int ratRubati=fun.Logaritmica(calc.getRubati(), ex.getTopRubati(), 50, 100);
-		int ratTackle=fun.Logaritmica(calc.getTackle(), ex.getTopTackle(), 50, 100);
-		int ratCS=fun.Logaritmica(calc.getCleanSheet(), ex.getTopCleanSheet(), 50, 80);
+		int ratPassaggi=fun.Logaritmica(calc.getPassaggi(), ex.getTopByAttribute(c->c.getPassaggi()), 50, 95);
+		int ratRubati=fun.Logaritmica(calc.getRubati(), ex.getTopByAttribute(c->c.getRubati()), 50, 95);
+		int ratTackle=fun.Logaritmica(calc.getTackle(), ex.getTopByAttribute(c->c.getTackle()), 50, 95);
+		int ratCS=fun.Logaritmica(calc.getCleanSheet(), ex.getTopByAttribute(c->c.getCleanSheet()), 50, 82);
 		
 		int ratD=(ratPassaggi+ratRubati+ratTackle+ratCS)/4;
 
 		int ratC=(ratA+ratD)/2;
 		
-		int ratMin=fun.Logaritmica(calc.getMinuti(), ex.getTopMinuti(), 50, 95);
+		int ratMin=fun.Logaritmica(calc.getMinuti(), ex.getTopByAttribute(c->c.getMinuti()), 50, 95);
 		
 		int rat=50;
 
@@ -46,12 +46,11 @@ public class CalcoloRatingImpl implements CalcoloRating {
 			rat=(int) Math.ceil(0.1*ratA+0.9*ratD);
 		else if(ruolo.equals("P"))
 		{
-			int ratParate=fun.Logaritmica(calc.getParate(), ex.getCountPortieri(), 50, 86);
-			ratD=(ratParate*2+ratCS)/3;
+			int ratParate=fun.Logaritmica(calc.getParate(), ex.getTopByAttribute(c->c.getParate()), 50, 92);
+			ratD=(ratParate+ratCS)/2;
 			rat=ratD;
 		}
-		Pair<Integer, Triple<Integer, Integer, Integer>> rating= new Pair<Integer, Triple<Integer,Integer,Integer>>((int)(0.8*rat+0.2*ratMin), new Triple<>(ratA, ratC, ratD));
-		return rating;
+		return new Pair<Integer, Triple<Integer,Integer,Integer>>((int)(0.8*rat+0.2*ratMin), new Triple<>(ratA, ratC, ratD));
 	}
 
 }
