@@ -19,4 +19,6 @@ public interface ExtractData {
 	public int getTopTackle();
 	public int getTopCleanSheet();
 	public int getTopMinuti();
+	public int getTopParate();
+	public int getCountPortieri();
 }

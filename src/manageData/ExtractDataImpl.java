@@ -123,4 +123,17 @@ public class ExtractDataImpl implements ExtractData{
 				.max((c1,c2)->c1-c2)
 				.orElse(0);
 	}
+	
+	public int getTopParate() {
+		return li.stream()
+				.map(c->c.getMinuti())
+				.max((c1,c2)->c1-c2)
+				.orElse(0);
+	}
+	
+	public int getCountPortieri() {
+		return (int) li.stream()
+				.filter(c->c.getRuolo().equals(new String("P")))
+				.count();
+	}
 }
