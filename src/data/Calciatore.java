@@ -26,7 +26,7 @@ public class Calciatore implements Serializable{
 	private final int tackle;
 	private final int cleanSheet;
 	private final int parate;
-	private final Pair<Integer, Triple<Integer, Integer, Integer>> rating;
+	private Pair<Integer, Triple<Integer, Integer, Integer>> rating;
 
 	public Calciatore(int id, String nominativo, String ruolo, String squadra, int pg, int minuti, int gol, int tiri,
 			int dribling, int assist, int passaggi, int passaggiChiave, int ammonizioni, int espulsioni, int rubati,
@@ -128,6 +128,9 @@ public class Calciatore implements Serializable{
 		return rating;
 	}
 
+	public void setRating(Pair<Integer, Triple<Integer, Integer, Integer>> rating) {
+		this.rating=rating;
+	}
 	@Override
 	public String toString() {
 		return "Calciatore [id=" + id + ", nominativo=" + nominativo + ", ruolo=" + ruolo + ", squadra=" + squadra

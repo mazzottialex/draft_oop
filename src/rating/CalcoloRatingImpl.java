@@ -1,5 +1,7 @@
 package rating;
 
+import static java.util.stream.Collectors.toList;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
@@ -14,8 +16,11 @@ public class CalcoloRatingImpl implements CalcoloRating {
 
 	private Funzioni fun=new Funzioni();
 	private ExtractData ex;
+	private List<Calciatore> li;
+	
 	public CalcoloRatingImpl(List<Calciatore> li) throws FileNotFoundException, ClassNotFoundException, IOException {
 		ex=new ExtractDataImpl(li);
+		this.li=li;
 	}
 	
 	@Override
@@ -66,4 +71,13 @@ public class CalcoloRatingImpl implements CalcoloRating {
 		return new Pair<Integer, Triple<Integer,Integer,Integer>>(rat, new Triple<>(ratA, ratC, ratD));
 	}
 
+	public List<Calciatore> updateRating(){
+		return li.stream()
+				.map(c -> { c.setRating(this.getRating(c)); return c; })
+				.collect(toList());
+	}
+	
+	public List<Calciatore> getLi(){
+		return li;
+	}
 }
