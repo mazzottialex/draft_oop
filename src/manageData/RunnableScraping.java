@@ -20,7 +20,7 @@ public class RunnableScraping implements Runnable{
 	private List<Calciatore> li=new ArrayList<>();
 	private final String url="https://www.kickest.it/it/serie-a/statistiche/giocatori/tabellone?iframe=yes";
 	
-	public RunnableScraping(int myId, int nThread) {
+	public RunnableScraping(int myId, int nThread, String stagione) {
 		this.myId = myId;
 		this.nThread = nThread;
 	}

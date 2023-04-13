@@ -16,16 +16,18 @@ import java.util.List;
 public class LogicsFileImpl implements LogicsFile{
 	
 	private List<Calciatore> li;
+	private String stagione;
 	
-	public LogicsFileImpl() {
+	public LogicsFileImpl(String stagione) {
 		li=new ArrayList<>();
+		this.stagione=stagione;
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Calciatore> LoadData() throws FileNotFoundException, IOException, ClassNotFoundException {
 		
-		try(final InputStream file = new FileInputStream("res/backup.txt");
+		try(final InputStream file = new FileInputStream("res/backup"+stagione+".txt");
 			final InputStream bstream = new BufferedInputStream(file);
 			final ObjectInputStream ostream=new ObjectInputStream(file);
 					){
@@ -40,7 +42,7 @@ public class LogicsFileImpl implements LogicsFile{
 
 	@Override
 	public Boolean SaveData(List<Calciatore> li) {
-		try(final OutputStream file = new FileOutputStream("res/backup.txt");
+		try(final OutputStream file = new FileOutputStream("res/backup"+stagione+".txt");
 				final OutputStream bstream = new BufferedOutputStream(file);
 				final ObjectOutputStream ostream=new ObjectOutputStream(file);
 					){

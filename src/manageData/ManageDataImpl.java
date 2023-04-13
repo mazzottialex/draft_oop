@@ -16,9 +16,9 @@ public class ManageDataImpl implements ManageData{
 	private List<Calciatore> li;
 	private LogicsFile logFile;
 	
-	public ManageDataImpl() {
+	public ManageDataImpl(String stagione) {
 		li=new ArrayList<>();
-		logFile=new LogicsFileImpl();
+		logFile=new LogicsFileImpl(stagione);
 	}
 	
 	public List<Calciatore> getLi() {

@@ -1,8 +1,5 @@
 package manageData;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,31 +8,39 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import utils.Pair;
 
 public class ScrapingImpl implements Scraping{
 	private List<Calciatore> li=new ArrayList<>();
-	private final int nThread;
-	private final String url="https://www.kickest.it/it/serie-a/statistiche/giocatori/tabellone?iframe=yes";
-
-	public ScrapingImpl(int nThread) throws FileNotFoundException, IOException, ClassNotFoundException {
+	private String url="https://www.kickest.it/it/serie-a/statistiche/giocatori/tabellone?iframe=yes";
+	private int nThread;
+	
+	public ScrapingImpl(){
+		this.nThread=7; //default
+	}
+	
+	public ScrapingImpl(int nThread){
 		this.nThread=nThread;
-		ManageThreads(); //restituisce nella li tutti i calciatori
 	}
 	
-	public ScrapingImpl() throws FileNotFoundException, IOException, ClassNotFoundException {
-		this.nThread=7;
-		//ManageThreads(); //restituisce nella li tutti i calciatori
+	public List<Calciatore> getLista(String stagione) {
+		this.ReadTable(stagione);
+		return li;
 	}
 	
-	private void ManageThreads() {
+	public List<Calciatore> getLista() {
+		String defaultStagione="2022-2023";
+		return this.getLista(defaultStagione);
+	}
+	
+	private void ReadTable(String stagione) {
+		url="https://www.kickest.it/it/serie-a/statistiche/giocatori/tabellone/"+stagione+"?iframe=yes";
+		
 		List<Pair<RunnableScraping, Thread>> liThr=new ArrayList<>();
 		
 		for(int i=0; i<nThread;i++) {
-			RunnableScraping runnable=new RunnableScraping(i, nThread);
+			RunnableScraping runnable=new RunnableScraping(i, nThread,"");
 			Thread thr=new Thread(runnable);
 			liThr.add(new Pair<>(runnable,thr));
 			thr.start();
@@ -50,14 +55,14 @@ public class ScrapingImpl implements Scraping{
 			}
 		});
 	}
-	
+
 	public List<String> getStagioni(){
 		//Nascondere pagine chrome
 		ChromeOptions options=new ChromeOptions();
 		options.addArguments("headless");
 
 		//Oggetto per creare il collegamento
-		WebDriver driver = new ChromeDriver();
+		WebDriver driver = new ChromeDriver(options);
 		driver.get(url);
 
 		//Oggetto per eseguire operazioni sulla pagina
@@ -69,11 +74,11 @@ public class ScrapingImpl implements Scraping{
 		driver.findElement(By.tagName("ul")).findElements(By.tagName("li"))
 											.stream()
 											.map(el->el.getText())
+											.map(str->str.replace("/", "-"))
 											.forEach(el->li.add(el));
 		driver.quit();
 		return li;
 	}
-	public List<Calciatore> getLista() {
-		return li;
-	}
+	
+	
 }
