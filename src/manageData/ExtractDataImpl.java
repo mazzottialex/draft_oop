@@ -15,11 +15,8 @@ public class ExtractDataImpl implements ExtractData{
 
 	private List<Calciatore> li;
 	
-	public ExtractDataImpl() throws FileNotFoundException, IOException, ClassNotFoundException {
-		ManageData md=new ManageDataImpl();
-		//md.UploadData();
-		md.LoadData();
-		li=md.getLi();
+	public ExtractDataImpl(List<Calciatore> li) throws FileNotFoundException, IOException, ClassNotFoundException {
+		this.li=li;
 	}
 	
 	public List<Calciatore> getCalciatoreBySquadra(String squadra) {

@@ -2,6 +2,7 @@ package rating;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 
 import manageData.Calciatore;
 import manageData.ExtractData;
@@ -12,8 +13,10 @@ import utils.Triple;
 public class CalcoloRatingImpl implements CalcoloRating {
 
 	private Funzioni fun=new Funzioni();
-	private ExtractData ex=new ExtractDataImpl();
-	public CalcoloRatingImpl() throws FileNotFoundException, ClassNotFoundException, IOException {}
+	private ExtractData ex;
+	public CalcoloRatingImpl(List<Calciatore> li) throws FileNotFoundException, ClassNotFoundException, IOException {
+		ex=new ExtractDataImpl(li);
+	}
 	
 	@Override
 	public Pair<Integer, Triple<Integer, Integer, Integer>> getRating(Calciatore calc) {

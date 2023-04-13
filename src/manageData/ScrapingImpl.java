@@ -35,12 +35,11 @@ public class ScrapingImpl implements Scraping{
 	}
 	
 	private void ReadTable(String stagione) {
-		url="https://www.kickest.it/it/serie-a/statistiche/giocatori/tabellone/"+stagione+"?iframe=yes";
 		
 		List<Pair<RunnableScraping, Thread>> liThr=new ArrayList<>();
 		
 		for(int i=0; i<nThread;i++) {
-			RunnableScraping runnable=new RunnableScraping(i, nThread,"");
+			RunnableScraping runnable=new RunnableScraping(i, nThread, stagione);
 			Thread thr=new Thread(runnable);
 			liThr.add(new Pair<>(runnable,thr));
 			thr.start();

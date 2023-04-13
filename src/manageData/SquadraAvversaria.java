@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SquadraAvversaria extends ManageDataImpl{
+public class SquadraAvversaria{
 	private int id;
 	private String nomeSquadra;
 	private Modulo modulo;

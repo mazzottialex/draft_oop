@@ -15,10 +15,12 @@ import java.util.function.Predicate;
 public class ManageDataImpl implements ManageData{
 	private List<Calciatore> li;
 	private LogicsFile logFile;
+	private String stagione;
 	
 	public ManageDataImpl(String stagione) {
 		li=new ArrayList<>();
 		logFile=new LogicsFileImpl(stagione);
+		this.stagione=stagione;
 	}
 	
 	public List<Calciatore> getLi() {
@@ -28,9 +30,9 @@ public class ManageDataImpl implements ManageData{
 	public void LoadData() throws FileNotFoundException, ClassNotFoundException, IOException {
 		li=logFile.LoadData();
 	}
-	public void UploadData() throws FileNotFoundException, ClassNotFoundException, IOException {
+	public void DownloadData() throws FileNotFoundException, ClassNotFoundException, IOException {
 		Scraping scr=new ScrapingImpl();
-		li=scr.getLista();
+		li=scr.getLista(this.stagione);
 		logFile.SaveData(li);
 	}
 	/*

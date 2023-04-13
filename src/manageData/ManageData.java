@@ -7,7 +7,7 @@ import java.util.List;
 public interface ManageData {
 	public List<Calciatore> getLi();
 	public void LoadData() throws FileNotFoundException, ClassNotFoundException, IOException;
-	public void UploadData() throws FileNotFoundException, ClassNotFoundException, IOException;
+	public void DownloadData() throws FileNotFoundException, ClassNotFoundException, IOException;
 	/*
 	public List<Calciatore> getCalciatoreBySquadra(String name);
 	public Optional<Calciatore> getCalciatoreByName(String name);

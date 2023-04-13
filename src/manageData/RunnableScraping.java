@@ -18,11 +18,12 @@ public class RunnableScraping implements Runnable{
 	private final int myId;
 	private final int nThread;
 	private List<Calciatore> li=new ArrayList<>();
-	private final String url="https://www.kickest.it/it/serie-a/statistiche/giocatori/tabellone?iframe=yes";
+	private final String url;
 	
 	public RunnableScraping(int myId, int nThread, String stagione) {
 		this.myId = myId;
 		this.nThread = nThread;
+		this.url="https://www.kickest.it/it/serie-a/statistiche/giocatori/tabellone/"+stagione+"?iframe=yes";
 	}
 
 	public List<Calciatore> getLi() {
