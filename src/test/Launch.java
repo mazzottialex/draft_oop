@@ -4,15 +4,15 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
-import manageData.Calciatore;
+import data.Calciatore;
 import manageData.ExtractData;
 import manageData.ExtractDataImpl;
 import manageData.ManageData;
 import manageData.ManageDataImpl;
-import manageData.Scraping;
-import manageData.ScrapingImpl;
 import rating.CalcoloRating;
 import rating.CalcoloRatingImpl;
+import scraping.Scraping;
+import scraping.ScrapingImpl;
 
 public class Launch {
 

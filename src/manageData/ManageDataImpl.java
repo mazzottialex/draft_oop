@@ -12,6 +12,10 @@ import java.util.Random;
 import java.util.Set;
 import java.util.function.Predicate;
 
+import data.Calciatore;
+import scraping.Scraping;
+import scraping.ScrapingImpl;
+
 public class ManageDataImpl implements ManageData{
 	private List<Calciatore> li;
 	private LogicsFile logFile;

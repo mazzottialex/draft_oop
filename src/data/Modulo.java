@@ -1,4 +1,4 @@
-package manageData;
+package data;
 
 public enum Modulo {
 	M343(3, 4, 3),

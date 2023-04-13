@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
-import manageData.Calciatore;
+import data.Calciatore;
 import manageData.ExtractData;
 import manageData.ExtractDataImpl;
 import utils.Pair;

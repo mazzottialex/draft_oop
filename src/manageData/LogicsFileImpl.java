@@ -13,6 +13,8 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import data.Calciatore;
+
 public class LogicsFileImpl implements LogicsFile{
 	
 	private List<Calciatore> li;

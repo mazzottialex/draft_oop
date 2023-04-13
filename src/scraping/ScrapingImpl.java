@@ -1,4 +1,4 @@
-package manageData;
+package scraping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import data.Calciatore;
 import utils.Pair;
 
 public class ScrapingImpl implements Scraping{

@@ -11,6 +11,8 @@ import java.util.function.Function;
 
 import org.w3c.dom.Attr;
 
+import data.Calciatore;
+
 public class ExtractDataImpl implements ExtractData{
 
 	private List<Calciatore> li;
