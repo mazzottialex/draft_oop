@@ -17,13 +17,14 @@ import scraping.ScrapingImpl;
 public class Launch {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
-		ManageData md=new ManageDataImpl("2022-2023");
-		md.LoadData();
+		Scraping sc=new ScrapingImpl();
+		ManageData md=new ManageDataImpl(sc.getStagioni().get(3));
+		System.out.print(sc.getStagioni().get(3));
+		md.DownloadData();
 		List<Calciatore> li=md.getLi();
 		ExtractData ex=new ExtractDataImpl(li);
 		CalcoloRating ra=new CalcoloRatingImpl(li);
 		ex.getLi().stream().sorted((c1,c2)->ra.getRating(c1).getX()-ra.getRating(c2).getX()).forEach(c -> System.out.println(c.getSquadra()+" "+ c.getNominativo()+"     \t RAT:"+ra.getRating(c).getX()+" \t A: "+ra.getRating(c).getY().getX()+" \t C: "+ra.getRating(c).getY().getY()+" \t D: "+ra.getRating(c).getY().getZ()));
-		//Scraping sc=new ScrapingImpl();
-		//System.out.println(sc.getStagioni());
+		
 	}
 }
