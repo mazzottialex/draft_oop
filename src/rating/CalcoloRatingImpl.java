@@ -65,10 +65,17 @@ public class CalcoloRatingImpl implements CalcoloRating {
 		}
 		
 		//varia in base al minutaggio (influsce del 20%)
-		int ratMin=fun.Logaritmica(calc.getMinuti(), ex.getTopByAttribute(c->c.getMinuti()), 50, 95);
+		int ratMin=fun.Logaritmica(calc.getMinuti(), ex.getTopByAttribute(c->c.getMinuti()), 10, 50, 100);
 		rat=(int)(0.8*rat+0.2*ratMin);
 		
 		return new Pair<Integer, Triple<Integer,Integer,Integer>>(rat, new Triple<>(ratA, ratC, ratD));
+	}
+	
+	public Pair<Integer, Integer> getRatingCartellino(Calciatore calc){
+		int percAmmonizioni=fun.Lineare(calc.getAmmonizioni(), ex.getTopByAttribute(c -> c.getAmmonizioni(), c-> c.getMinuti()), 0, 100);
+		int percEspulsioni=fun.Lineare(calc.getEspulsioni(), ex.getTopByAttribute(c -> c.getEspulsioni(), c-> c.getMinuti()), 0, 100);
+
+		return new Pair<Integer, Integer>(percAmmonizioni, percEspulsioni);
 	}
 
 	public List<Calciatore> updateRating(){

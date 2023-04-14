@@ -17,7 +17,7 @@ public class Funzioni {
 		return (max-min)/n*x+min;
 	}
 	
-	//parametro a, velocità funzione logaritmica, con a piccolo (es: 0,1) lenta, con a grande (es: 100) veloce
+	//parametro a, velocitï¿½ funzione logaritmica, con a piccolo (es: 0.1) lenta, con a grande (es: 100) veloce
 	public int Logaritmica(int x, int top, int min, int max) { 
 		double a=0.3;
 		x=n*x/top;

@@ -26,7 +26,8 @@ public class Calciatore implements Serializable{
 	private final int tackle;
 	private final int cleanSheet;
 	private final int parate;
-	private Pair<Integer, Triple<Integer, Integer, Integer>> rating;
+	private Pair<Integer, Integer> ratingCartellino;
+	private Pair<Integer, Triple<Integer, Integer, Integer>> rating; //VAL, A-C-D
 
 	public Calciatore(int id, String nominativo, String ruolo, String squadra, int pg, int minuti, int gol, int tiri,
 			int dribling, int assist, int passaggi, int passaggiChiave, int ammonizioni, int espulsioni, int rubati,
@@ -50,6 +51,7 @@ public class Calciatore implements Serializable{
 		this.cleanSheet = cleanSheet;
 		this.parate = parate;
 		this.rating=null;
+		this.ratingCartellino=null;
 	}
 
 	public int getId() {
@@ -124,20 +126,31 @@ public class Calciatore implements Serializable{
 		return parate;
 	}
 
+	public Pair<Integer, Integer> getRatingCartellino(){
+		return ratingCartellino;
+	}
+	
 	public Pair<Integer, Triple<Integer, Integer, Integer>> getRating() {
 		return rating;
 	}
 
+	public void setRatingCartellino(Pair<Integer, Integer> ratingCartellino) {
+		this.ratingCartellino=ratingCartellino;
+	}
+	
 	public void setRating(Pair<Integer, Triple<Integer, Integer, Integer>> rating) {
 		this.rating=rating;
 	}
+
 	@Override
 	public String toString() {
 		return "Calciatore [id=" + id + ", nominativo=" + nominativo + ", ruolo=" + ruolo + ", squadra=" + squadra
 				+ ", pg=" + pg + ", minuti=" + minuti + ", gol=" + gol + ", tiri=" + tiri + ", dribling=" + dribling
 				+ ", assist=" + assist + ", passaggi=" + passaggi + ", passaggiChiave=" + passaggiChiave
 				+ ", ammonizioni=" + ammonizioni + ", espulsioni=" + espulsioni + ", rubati=" + rubati + ", tackle="
-				+ tackle + ", cleanSheet=" + cleanSheet + ", parate=" + parate + "]";
+				+ tackle + ", cleanSheet=" + cleanSheet + ", parate=" + parate + ", ratingCartellino="
+				+ ratingCartellino + ", rating=" + rating + "]";
 	}
+	
 	
 }

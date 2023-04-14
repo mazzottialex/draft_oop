@@ -9,8 +9,6 @@ import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
 
-import org.w3c.dom.Attr;
-
 import data.Calciatore;
 
 public class ExtractDataImpl implements ExtractData{
@@ -61,6 +59,14 @@ public class ExtractDataImpl implements ExtractData{
 		return li.
 				stream()
 				.map(c->attr.apply(c))
+				.max((c1,c2)-> c1-c2)
+				.orElse(0);
+	}
+	
+	public int getTopByAttribute(Function<Calciatore, Integer> f1, Function<Calciatore, Integer> f2) {
+		return li.
+				stream()
+				.map(c->(f1.apply(c)/f2.apply(c)))
 				.max((c1,c2)-> c1-c2)
 				.orElse(0);
 	}

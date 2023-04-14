@@ -13,4 +13,5 @@ public interface ExtractData {
 	public List<Calciatore> getRandomByRuolo(String name, int n);
 	public List<Calciatore> getLi();
 	public int getTopByAttribute(Function<Calciatore, Integer> attr);
+	public int getTopByAttribute(Function<Calciatore, Integer> f1, Function<Calciatore, Integer> f2);
 }
