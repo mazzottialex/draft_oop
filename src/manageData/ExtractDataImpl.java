@@ -63,10 +63,17 @@ public class ExtractDataImpl implements ExtractData{
 				.orElse(0);
 	}
 	
+	//per ammonizioni e espulsioni
 	public int getTopByAttribute(Function<Calciatore, Integer> f1, Function<Calciatore, Integer> f2) {
 		return li.
 				stream()
-				.map(c->(f1.apply(c)/f2.apply(c)))
+				.map(c->{
+					if(f1.apply(c)!=0 && f2.apply(c)>100) {
+						//System.out.println(f2.apply(c)/f1.apply(c));
+						return f2.apply(c)/f1.apply(c);
+					}
+					else
+						return 10000;})
 				.max((c1,c2)-> c1-c2)
 				.orElse(0);
 	}

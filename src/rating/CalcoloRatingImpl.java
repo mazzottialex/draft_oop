@@ -72,10 +72,19 @@ public class CalcoloRatingImpl implements CalcoloRating {
 	}
 	
 	public Pair<Integer, Integer> getRatingCartellino(Calciatore calc){
-		int percAmmonizioni=fun.Lineare(calc.getAmmonizioni(), ex.getTopByAttribute(c -> c.getAmmonizioni(), c-> c.getMinuti()), 0, 100);
-		int percEspulsioni=fun.Lineare(calc.getEspulsioni(), ex.getTopByAttribute(c -> c.getEspulsioni(), c-> c.getMinuti()), 0, 100);
-
-		return new Pair<Integer, Integer>(percAmmonizioni, percEspulsioni);
+		int ratAmm=0;
+		int ratEsp=0;
+		if(calc.getMinuti()!=0) {
+			ratAmm=calc.getAmmonizioni()*9000/calc.getMinuti();
+			ratAmm= ratAmm<100 ? ratAmm : 100;
+		}
+		if(calc.getMinuti()!=0) {
+			ratEsp=calc.getEspulsioni()*9000/calc.getMinuti();
+			ratEsp= ratEsp<100 ? ratEsp : 100;
+		}
+		ratAmm=fun.Logaritmica(ratAmm, 100, 50, 90); //per percentuale commentare queste due righe
+		ratEsp=fun.Logaritmica(ratEsp, 100, 50, 90);
+		return new Pair<Integer, Integer>(ratAmm, ratEsp);
 	}
 
 	public List<Calciatore> updateRating(){
