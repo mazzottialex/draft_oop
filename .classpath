@@ -89,5 +89,8 @@
 	<classpathentry kind="lib" path="lib/selenium-java-4.8.3/lib/opentelemetry-semconv-1.24.0-alpha.jar"/>
 	<classpathentry kind="lib" path="lib/selenium-java-4.8.3/lib/reactive-streams-1.0.4.jar"/>
 	<classpathentry kind="lib" path="lib/selenium-java-4.8.3/lib/slf4j-api-2.0.7.jar"/>
+	<classpathentry kind="lib" path="lib/jgoodies-forms-1.8.0.jar"/>
+	<classpathentry kind="lib" path="lib/jgoodies-forms-1.8.0-sources.jar"/>
+	<classpathentry kind="lib" path="lib/miglayout15-swing.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
