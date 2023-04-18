@@ -9,6 +9,10 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JList;
+import java.awt.GridLayout;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import java.awt.Color;
 
 public class HomeImpl extends JFrame implements Home   {
 
@@ -40,12 +44,57 @@ public class HomeImpl extends JFrame implements Home   {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
+		contentPane.setLayout(new GridLayout(8, 3, 4, 4));
+		
+		JLabel label_3 = new JLabel("");
+		contentPane.add(label_3);
+		
+		JLabel label_4 = new JLabel("");
+		contentPane.add(label_4);
+		
+		JLabel label_4_1 = new JLabel("");
+		contentPane.add(label_4_1);
+		
+		JLabel label = new JLabel("");
+		contentPane.add(label);
 		
 		JLabel lblDraft = new JLabel("DRAFT");
+		lblDraft.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblDraft.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(lblDraft);
+		
+		JLabel label_3_4 = new JLabel("");
+		contentPane.add(label_3_4);
+		
+		JLabel label_3_3 = new JLabel("");
+		contentPane.add(label_3_3);
+		
+		JLabel label_3_2 = new JLabel("");
+		contentPane.add(label_3_2);
+		
+		JLabel label_3_5 = new JLabel("");
+		contentPane.add(label_3_5);
+		
+		JLabel label_3_1 = new JLabel("");
+		contentPane.add(label_3_1);
 		
 		JButton btnStart = new JButton("INIZIO PARTITA");
 		contentPane.add(btnStart);
+		
+		JLabel label_2_4 = new JLabel("");
+		contentPane.add(label_2_4);
+		
+		JLabel label_2_3 = new JLabel("");
+		contentPane.add(label_2_3);
+		
+		JLabel label_2_2 = new JLabel("");
+		contentPane.add(label_2_2);
+		
+		JLabel label_3_6 = new JLabel("");
+		contentPane.add(label_3_6);
+		
+		JLabel label_1 = new JLabel("");
+		contentPane.add(label_1);
 		
 		JPanel panelSelectioned = new JPanel();
 		contentPane.add(panelSelectioned);
@@ -56,6 +105,12 @@ public class HomeImpl extends JFrame implements Home   {
 		JLabel lblStagione = new JLabel("2022-23");
 		panelSelectioned.add(lblStagione);
 		
+		JLabel label_1_2 = new JLabel("");
+		contentPane.add(label_1_2);
+		
+		JLabel label_1_1 = new JLabel("");
+		contentPane.add(label_1_1);
+		
 		JPanel panelLoad = new JPanel();
 		contentPane.add(panelLoad);
 		
@@ -64,6 +119,12 @@ public class HomeImpl extends JFrame implements Home   {
 		
 		JList listCarica = new JList();
 		panelLoad.add(listCarica);
+		
+		JLabel label_2_1 = new JLabel("");
+		contentPane.add(label_2_1);
+		
+		JLabel label_2 = new JLabel("");
+		contentPane.add(label_2);
 		
 		JPanel panelDownload = new JPanel();
 		contentPane.add(panelDownload);
