@@ -13,6 +13,7 @@ import java.awt.GridLayout;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.Dimension;
 
 public class HomeImpl extends JFrame implements Home   {
 
@@ -38,13 +39,16 @@ public class HomeImpl extends JFrame implements Home   {
 	 * Create the frame.
 	 */
 	public HomeImpl() {
+		setTitle("DRAFT");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 650, 450);
+		setMinimumSize(new Dimension(600,400));
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(217, 232, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		contentPane.setLayout(new GridLayout(8, 3, 4, 4));
+		contentPane.setLayout(new GridLayout(10, 3, 10, 10));
 		
 		JLabel label_3 = new JLabel("");
 		contentPane.add(label_3);
