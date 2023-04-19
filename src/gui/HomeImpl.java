@@ -7,16 +7,28 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+
+import logics.LogicsHome;
+import logics.LogicsHomeImpl;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import javax.swing.ListModel;
 import javax.swing.JList;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.Label;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Color;
@@ -24,17 +36,27 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultListModel;
+
 import java.awt.CardLayout;
 import javax.swing.Icon;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
+import java.awt.BorderLayout;
+import javax.swing.JComboBox;
+
 
 public class HomeImpl extends JFrame implements Home   {
 
 	private JPanel contentPane;
-
+	private final LogicsHome log;
+	private final String stagioneDefault="2022-23";
 	/**
 	 * Create the frame.
 	 */
 	public HomeImpl() {
+		log=new LogicsHomeImpl(stagioneDefault);
 		
 		setTitle("DRAFT");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -90,6 +112,15 @@ public class HomeImpl extends JFrame implements Home   {
 		btnStart.setIcon(img);
 		btnStart.setBackground(getForeground());
 		btnStart.setRolloverEnabled(true);
+		btnStart.addMouseListener(new java.awt.event.MouseAdapter() {
+		    public void mouseEntered(java.awt.event.MouseEvent evt) {
+		        btnStart.setBackground(Color.GREEN);
+		    }
+
+		    public void mouseExited(java.awt.event.MouseEvent evt) {
+		    	btnStart.setBackground(new Color(0, 0, 128));
+		    }
+		});
 		
 		contentPane.add(btnStart);
 		
@@ -115,7 +146,7 @@ public class HomeImpl extends JFrame implements Home   {
 		lblStagioneSelezionata.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
 		panelSelectioned.add(lblStagioneSelezionata);
 		
-		JLabel lblStagione = new JLabel("2022-23");
+		JLabel lblStagione = new JLabel(log.getStagione());
 		lblStagione.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
 		panelSelectioned.add(lblStagione);
 		
@@ -127,13 +158,25 @@ public class HomeImpl extends JFrame implements Home   {
 		
 		JPanel panelLoad = new JPanel();
 		contentPane.add(panelLoad);
+		panelLoad.setLayout(new GridLayout(0, 2, 0, 0));
+				
 		
-		JLabel lblCarica = new JLabel("Carica stagione:");
-		lblCarica.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
-		panelLoad.add(lblCarica);
+		DefaultListModel<String> listModel=new DefaultListModel<>();
+		listModel.addAll(log.getStagioni());
 		
-		JList listCarica = new JList();
-		panelLoad.add(listCarica);
+		JButton btnCarica = new JButton("Carica");
+		btnCarica.setBorderPainted(false);
+		btnCarica.setBackground(getForeground());
+		btnCarica.setRolloverEnabled(true);
+		panelLoad.add(btnCarica);
+		
+		
+		String[] array = log.getStagioni().toArray(new String[log.getStagioni().size()]);
+		JComboBox<String> comboBox = new JComboBox<>(array);
+		panelLoad.add(comboBox);
+		
+		
+		
 		
 		JLabel labelEmpty17 = new JLabel("");
 		contentPane.add(labelEmpty17);
