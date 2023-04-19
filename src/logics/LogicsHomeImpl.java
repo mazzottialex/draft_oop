@@ -69,12 +69,8 @@ public class LogicsHomeImpl implements LogicsHome {
 	@Override
 	public List<Calciatore> getLi() throws FileNotFoundException, ClassNotFoundException, IOException {
 		CalcoloRating rat=new CalcoloRatingImpl(this.li);
-		rat.
-		return null;
+		rat.updateRating();
+		return rat.getLi();
+
 	}
-
-	
-
-	
-	
 }

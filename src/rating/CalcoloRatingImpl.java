@@ -89,7 +89,7 @@ public class CalcoloRatingImpl implements CalcoloRating {
 
 	public List<Calciatore> updateRating(){
 		return li.stream()
-				.map(c -> { c.setRating(this.getRating(c)); return c; })
+				.map(c -> { c.setRating(this.getRating(c));c.setRatingCartellino(this.getRatingCartellino(c)); return c; })
 				.collect(toList());
 	}
 	
