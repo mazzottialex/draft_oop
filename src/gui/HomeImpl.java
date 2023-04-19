@@ -4,7 +4,9 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -12,10 +14,13 @@ import javax.swing.JTextField;
 import javax.swing.JList;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Insets;
 
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
@@ -51,7 +56,7 @@ public class HomeImpl extends JFrame implements Home   {
 		setBounds(100, 100, 500, 700);
 		setMinimumSize(new Dimension(600,700));
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(217, 232, 255));
+		contentPane.setBackground(new Color(0, 0, 128));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
@@ -71,7 +76,7 @@ public class HomeImpl extends JFrame implements Home   {
 		
 		ImageIcon img=new ImageIcon("res/draft.png");
 		Image image = img.getImage(); // transform it 
-		Image newimg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+		Image newimg = image.getScaledInstance(120, 120,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		img = new ImageIcon(newimg);
 		JLabel lblNewLabel_1 = new JLabel(img);
 		contentPane.add(lblNewLabel_1);
@@ -97,13 +102,16 @@ public class HomeImpl extends JFrame implements Home   {
 		contentPane.add(label_3_5);
 		
 		JButton btnStart = new JButton();
-		btnStart.setBackground(Color.tra);
 		img=new ImageIcon("res/start.png");
 		image = img.getImage(); // transform it 
-		newimg = image.getScaledInstance(150, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+		newimg = image.getScaledInstance(200, 200,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		img = new ImageIcon(newimg);
-		
+		btnStart.setBorderPainted(false);
 		btnStart.setIcon(img);
+		btnStart.setBackground(getForeground());
+		btnStart.setRolloverEnabled(true);
+		
+		
 		//btnStart.setPreferredSize(new Dimension(100,10));
 		//btnStart.setMaximumSize(new Dimension(50,20));
 		contentPane.add(btnStart);
@@ -127,9 +135,11 @@ public class HomeImpl extends JFrame implements Home   {
 		contentPane.add(panelSelectioned);
 		
 		JLabel lblStagioneSelezionata = new JLabel("Stagione selezionata:");
+		lblStagioneSelezionata.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
 		panelSelectioned.add(lblStagioneSelezionata);
 		
 		JLabel lblStagione = new JLabel("2022-23");
+		lblStagione.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
 		panelSelectioned.add(lblStagione);
 		
 		JLabel label_1_2 = new JLabel("");
@@ -142,6 +152,7 @@ public class HomeImpl extends JFrame implements Home   {
 		contentPane.add(panelLoad);
 		
 		JLabel lblCarica = new JLabel("Carica stagione:");
+		lblCarica.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
 		panelLoad.add(lblCarica);
 		
 		JList listCarica = new JList();
@@ -157,6 +168,7 @@ public class HomeImpl extends JFrame implements Home   {
 		contentPane.add(panelDownload);
 		
 		JLabel lblAggiorna = new JLabel("Aggiorna stagione:");
+		lblAggiorna.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
 		panelDownload.add(lblAggiorna);
 		
 		JList listAggiorna = new JList();
