@@ -111,7 +111,6 @@ public class HomeImpl extends JFrame implements Home   {
 		btnStart.setBorderPainted(false);
 		btnStart.setIcon(img);
 		btnStart.setBackground(getForeground());
-		btnStart.setRolloverEnabled(true);
 		btnStart.addMouseListener(new java.awt.event.MouseAdapter() {
 		    public void mouseEntered(java.awt.event.MouseEvent evt) {
 		        btnStart.setBackground(Color.GREEN);
@@ -157,14 +156,17 @@ public class HomeImpl extends JFrame implements Home   {
 		contentPane.add(labelEmpty16);
 		
 		JPanel panelLoad = new JPanel();
+		panelLoad.setBackground(new Color(240, 240, 240));
 		contentPane.add(panelLoad);
-		panelLoad.setLayout(new GridLayout(0, 2, 0, 0));
 				
 		
 		DefaultListModel<String> listModel=new DefaultListModel<>();
 		listModel.addAll(log.getStagioni());
+		panelLoad.setLayout(new BoxLayout(panelLoad, BoxLayout.X_AXIS));
 		
 		JButton btnCarica = new JButton("Carica");
+		btnCarica.setHorizontalAlignment(SwingConstants.RIGHT);
+		btnCarica.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
 		btnCarica.setBorderPainted(false);
 		btnCarica.setBackground(getForeground());
 		btnCarica.setRolloverEnabled(true);
@@ -173,6 +175,10 @@ public class HomeImpl extends JFrame implements Home   {
 		
 		String[] array = log.getStagioni().toArray(new String[log.getStagioni().size()]);
 		JComboBox<String> comboBox = new JComboBox<>(array);
+		//comboBox.set
+		comboBox.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+		
+
 		panelLoad.add(comboBox);
 		
 		
