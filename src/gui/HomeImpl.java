@@ -62,44 +62,42 @@ public class HomeImpl extends JFrame implements Home   {
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(10, 3, 10, 10));
 		
-		JLabel label_3_2_1_1 = new JLabel("");
-		contentPane.add(label_3_2_1_1);
+		JLabel labelEmpty1 = new JLabel("");
+		contentPane.add(labelEmpty1);
 		
-		JLabel label_3 = new JLabel("");
-		contentPane.add(label_3);
+		JLabel labelEmpty2 = new JLabel("");
+		contentPane.add(labelEmpty2);
 		
-		JLabel label_4 = new JLabel("");
-		contentPane.add(label_4);
+		JLabel labelEmpty3 = new JLabel("");
+		contentPane.add(labelEmpty3);
 		
-		JLabel label_4_1 = new JLabel("");
-		contentPane.add(label_4_1);
+		JLabel labelEmpty4 = new JLabel("");
+		contentPane.add(labelEmpty4);
 		
-		ImageIcon img=new ImageIcon("res/draft.png");
+		ImageIcon img=new ImageIcon("res/icon.png");
 		Image image = img.getImage(); // transform it 
 		Image newimg = image.getScaledInstance(120, 120,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		img = new ImageIcon(newimg);
-		JLabel lblNewLabel_1 = new JLabel(img);
-		contentPane.add(lblNewLabel_1);
+		JLabel labelIcon = new JLabel(img);
+		contentPane.add(labelIcon);
 		
-		JLabel label = new JLabel("");
-		contentPane.add(label);
+		JLabel labelEmpty5 = new JLabel("");
+		contentPane.add(labelEmpty5);
 		
-		
-		
-		JLabel label_3_4 = new JLabel("");
-		contentPane.add(label_3_4);
+		JLabel labelEmpty6 = new JLabel("");
+		contentPane.add(labelEmpty6);
 		
 		
 		
 		
-		JLabel label_3_2 = new JLabel("");
-		contentPane.add(label_3_2);
+		JLabel labelEmpty7 = new JLabel("");
+		contentPane.add(labelEmpty7);
 		
-		JLabel label_3_2_1 = new JLabel("");
-		contentPane.add(label_3_2_1);
+		JLabel labelEmpty8 = new JLabel("");
+		contentPane.add(labelEmpty8);
 		
-		JLabel label_3_5 = new JLabel("");
-		contentPane.add(label_3_5);
+		JLabel labelEmpty9 = new JLabel("");
+		contentPane.add(labelEmpty9);
 		
 		JButton btnStart = new JButton();
 		img=new ImageIcon("res/start.png");
@@ -111,25 +109,22 @@ public class HomeImpl extends JFrame implements Home   {
 		btnStart.setBackground(getForeground());
 		btnStart.setRolloverEnabled(true);
 		
-		
-		//btnStart.setPreferredSize(new Dimension(100,10));
-		//btnStart.setMaximumSize(new Dimension(50,20));
 		contentPane.add(btnStart);
 		
-		JLabel label_2_4 = new JLabel("");
-		contentPane.add(label_2_4);
+		JLabel labelEmpty10 = new JLabel("");
+		contentPane.add(labelEmpty10);
 		
-		JLabel label_2_3 = new JLabel("");
-		contentPane.add(label_2_3);
+		JLabel labelEmpty11 = new JLabel("");
+		contentPane.add(labelEmpty11);
 		
-		JLabel label_2_2 = new JLabel("");
-		contentPane.add(label_2_2);
+		JLabel labelEmpty12 = new JLabel("");
+		contentPane.add(labelEmpty12);
 		
-		JLabel label_3_6 = new JLabel("");
-		contentPane.add(label_3_6);
+		JLabel labelEmpty13 = new JLabel("");
+		contentPane.add(labelEmpty13);
 		
-		JLabel label_1 = new JLabel("");
-		contentPane.add(label_1);
+		JLabel labelEmpty14 = new JLabel("");
+		contentPane.add(labelEmpty14);
 		
 		JPanel panelSelectioned = new JPanel();
 		contentPane.add(panelSelectioned);
@@ -142,11 +137,11 @@ public class HomeImpl extends JFrame implements Home   {
 		lblStagione.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
 		panelSelectioned.add(lblStagione);
 		
-		JLabel label_1_2 = new JLabel("");
-		contentPane.add(label_1_2);
+		JLabel labelEmpty15 = new JLabel("");
+		contentPane.add(labelEmpty15);
 		
-		JLabel label_1_1 = new JLabel("");
-		contentPane.add(label_1_1);
+		JLabel labelEmpty16 = new JLabel("");
+		contentPane.add(labelEmpty16);
 		
 		JPanel panelLoad = new JPanel();
 		contentPane.add(panelLoad);
@@ -158,11 +153,11 @@ public class HomeImpl extends JFrame implements Home   {
 		JList listCarica = new JList();
 		panelLoad.add(listCarica);
 		
-		JLabel label_2_1 = new JLabel("");
-		contentPane.add(label_2_1);
+		JLabel labelEmpty17 = new JLabel("");
+		contentPane.add(labelEmpty17);
 		
-		JLabel label_2 = new JLabel("");
-		contentPane.add(label_2);
+		JLabel labelEmpty18 = new JLabel("");
+		contentPane.add(labelEmpty18);
 		
 		JPanel panelDownload = new JPanel();
 		contentPane.add(panelDownload);
