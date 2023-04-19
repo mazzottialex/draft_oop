@@ -32,25 +32,10 @@ public class HomeImpl extends JFrame implements Home   {
 	private JPanel contentPane;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					HomeImpl frame = new HomeImpl();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public HomeImpl() {
+		
 		setTitle("DRAFT");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 700);
@@ -86,9 +71,6 @@ public class HomeImpl extends JFrame implements Home   {
 		
 		JLabel labelEmpty6 = new JLabel("");
 		contentPane.add(labelEmpty6);
-		
-		
-		
 		
 		JLabel labelEmpty7 = new JLabel("");
 		contentPane.add(labelEmpty7);
