@@ -1,110 +1,210 @@
 package gui;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Toolkit;
-import java.awt.Color;
-import java.awt.GridLayout;
-import java.awt.GridBagLayout;
-import java.awt.FlowLayout;
-import java.awt.BorderLayout;
+import logics.LogicsHome;
+import logics.LogicsHomeImpl;
+
 import javax.swing.JLabel;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.layout.FormSpecs;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import net.miginfocom.swing.MigLayout;
-import javax.swing.BoxLayout;
-import java.awt.CardLayout;
-import java.awt.GridBagConstraints;
-import java.awt.SystemColor;
-import javax.swing.UIManager;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.SwingConstants;
-import javax.swing.JTextField;
-import javax.swing.JTextArea;
-import java.awt.Canvas;
-import java.awt.Button;
 import java.awt.Font;
-import javax.swing.JTextPane;
-import javax.swing.JList;
+import java.awt.Color;
+import java.awt.Dimension;
+import javax.swing.BoxLayout;
+import javax.swing.JComboBox;
 
-public class HomeImpl extends JFrame {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class HomeImpl extends JFrame implements Home   {
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					HomeImpl frame = new HomeImpl();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	private JPanel contentPane;
+	private final LogicsHome log;
+	private final String stagioneDefault="2022-23";
 	/**
 	 * Create the frame.
 	 */
 	public HomeImpl() {
-		getContentPane().setBackground(new Color(164, 205, 255));
-		setForeground(new Color(255, 0, 0));
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\alexm\\OneDrive\\Desktop\\workspace-prog\\draft_oop\\res\\icon.png"));
-		setTitle("Home");
+		log=new LogicsHomeImpl(stagioneDefault);
+		
+		setTitle("DRAFT");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 550, 408);
-		getContentPane().setLayout(null);
+		setBounds(100, 100, 640, 700);
+		setMinimumSize(new Dimension(640,700));
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color(0, 0, 128));
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(new GridLayout(10, 3, 10, 10));
 		
-		Button btnStart = new Button("INIZIA PARTITA");
-		btnStart.setBounds(207, 118, 100, 22);
-		getContentPane().add(btnStart);
+		JLabel labelEmpty1 = new JLabel("");
+		contentPane.add(labelEmpty1);
 		
-		JTextPane textPane = new JTextPane();
-		textPane.setBounds(251, 212, 62, 20);
-		getContentPane().add(textPane);
+		JLabel labelEmpty2 = new JLabel("");
+		contentPane.add(labelEmpty2);
 		
-		JLabel lblCaricaStagione = new JLabel("Carica stagione:");
-		lblCaricaStagione.setFont(new Font("Serif", Font.PLAIN, 13));
-		lblCaricaStagione.setBounds(115, 258, 100, 22);
-		getContentPane().add(lblCaricaStagione);
+		JLabel labelEmpty3 = new JLabel("");
+		contentPane.add(labelEmpty3);
 		
-		JLabel lblStagioneSelezionata = new JLabel("Stagione selezionata");
-		lblStagioneSelezionata.setFont(new Font("Serif", Font.PLAIN, 13));
-		lblStagioneSelezionata.setBounds(115, 212, 126, 22);
-		getContentPane().add(lblStagioneSelezionata);
+		JLabel labelEmpty4 = new JLabel("");
+		contentPane.add(labelEmpty4);
 		
-		JList listCarica = new JList();
-		listCarica.setBounds(238, 262, 75, 20);
-		getContentPane().add(listCarica);
+		ImageIcon img=new ImageIcon("res/icon.png");
+		Image image = img.getImage(); // transform it 
+		Image newimg = image.getScaledInstance(120, 120,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+		img = new ImageIcon(newimg);
+		JLabel labelIcon = new JLabel(img);
+		contentPane.add(labelIcon);
 		
-		JLabel lblDraft = new JLabel("DRAFT");
-		lblDraft.setFont(new Font("Serif", Font.PLAIN, 18));
-		lblDraft.setBounds(224, 82, 62, 22);
-		getContentPane().add(lblDraft);
+		JLabel labelEmpty5 = new JLabel("");
+		contentPane.add(labelEmpty5);
 		
-		JLabel lblNewLabel_1 = new JLabel("Aggiorna stagione:");
-		lblNewLabel_1.setFont(new Font("Serif", Font.PLAIN, 13));
-		lblNewLabel_1.setBounds(115, 306, 126, 22);
-		getContentPane().add(lblNewLabel_1);
+		JLabel labelEmpty6 = new JLabel("");
+		contentPane.add(labelEmpty6);
 		
-		JList listAggiorna = new JList();
-		listAggiorna.setBounds(238, 310, 75, 20);
-		getContentPane().add(listAggiorna);
+		JLabel labelEmpty7 = new JLabel("");
+		contentPane.add(labelEmpty7);
+		
+		JLabel labelEmpty8 = new JLabel("");
+		contentPane.add(labelEmpty8);
+		
+		JLabel labelEmpty9 = new JLabel("");
+		contentPane.add(labelEmpty9);
+		
+		JButton btnStart = new JButton();
+		img=new ImageIcon("res/start.png");
+		image = img.getImage(); // transform it 
+		newimg = image.getScaledInstance(200, 200,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+		img = new ImageIcon(newimg);
+		btnStart.setBorderPainted(false);
+		btnStart.setIcon(img);
+		btnStart.setBackground(getForeground());
+		btnStart.addMouseListener(new java.awt.event.MouseAdapter() {
+		    public void mouseEntered(java.awt.event.MouseEvent evt) {
+		        btnStart.setBackground(Color.GREEN);
+		    }
+
+		    public void mouseExited(java.awt.event.MouseEvent evt) {
+		    	btnStart.setBackground(new Color(0, 0, 128));
+		    }
+		});
+		
+		contentPane.add(btnStart);
+		
+		JLabel labelEmpty10 = new JLabel("");
+		contentPane.add(labelEmpty10);
+		
+		JLabel labelEmpty11 = new JLabel("");
+		contentPane.add(labelEmpty11);
+		
+		JLabel labelEmpty12 = new JLabel("");
+		contentPane.add(labelEmpty12);
+		
+		JLabel labelEmpty13 = new JLabel("");
+		contentPane.add(labelEmpty13);
+		
+		JLabel labelEmpty14 = new JLabel("");
+		contentPane.add(labelEmpty14);
+		
+		JPanel panelSelectioned = new JPanel();
+		contentPane.add(panelSelectioned);
+		
+		JLabel lblStagioneSelezionata = new JLabel("Stagione selezionata:");
+		lblStagioneSelezionata.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+		panelSelectioned.add(lblStagioneSelezionata);
+		
+		JLabel lblStagione = new JLabel(log.getStagione());
+		lblStagione.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+		panelSelectioned.add(lblStagione);
+		
+		JLabel labelEmpty15 = new JLabel("");
+		contentPane.add(labelEmpty15);
+		
+		JLabel labelEmpty16 = new JLabel("");
+		contentPane.add(labelEmpty16);
+		
+		JPanel panelLoad = new JPanel();
+		panelLoad.setBackground(new Color(240, 240, 240));
+		contentPane.add(panelLoad);
+				
+		panelLoad.setLayout(new BoxLayout(panelLoad, BoxLayout.X_AXIS));
+		
+		JButton btnCarica = new JButton("Carica");
+		btnCarica.setHorizontalAlignment(SwingConstants.RIGHT);
+		btnCarica.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+		btnCarica.setBorderPainted(false);
+		btnCarica.setBackground(getForeground());
+		btnCarica.setRolloverEnabled(true);
+		
+		String[] array = log.getStagioni().toArray(new String[log.getStagioni().size()]);
+		JComboBox<String> comboBoxCarica = new JComboBox<>(array);
+		comboBoxCarica.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+
+		btnCarica.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(log.loadStagione(comboBoxCarica.getItemAt(comboBoxCarica.getSelectedIndex())))
+					lblStagione.setText(log.getStagione());
+				else 
+					JOptionPane.showMessageDialog(null, "Errore nel caricamento");
+			}	
+		});
+		
+		panelLoad.add(btnCarica);
+		panelLoad.add(comboBoxCarica);
+
+		
+		JLabel labelEmpty17 = new JLabel("");
+		contentPane.add(labelEmpty17);
+		
+		JLabel labelEmpty18 = new JLabel("");
+		contentPane.add(labelEmpty18);
+		
+		
+		JPanel panelDownLoad = new JPanel();
+		panelDownLoad.setBackground(new Color(240, 240, 240));
+				
+		panelDownLoad.setLayout(new BoxLayout(panelDownLoad, BoxLayout.X_AXIS));
+		
+		JButton btnAggiorna= new JButton("Aggiorna");
+		btnAggiorna.setHorizontalAlignment(SwingConstants.RIGHT);
+		btnAggiorna.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+		btnAggiorna.setBorderPainted(false);
+		btnAggiorna.setBackground(getForeground());
+		btnAggiorna.setRolloverEnabled(true);
+		panelDownLoad.add(btnAggiorna);
+
+		JComboBox<String> comboBoxAggiorna = new JComboBox<>(array);
+		comboBoxAggiorna.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+
+		btnAggiorna.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Attendere qualche istante");
+				if(log.downloadStagione(comboBoxAggiorna.getItemAt(comboBoxAggiorna.getSelectedIndex()))) {
+					lblStagione.setText(log.getStagione());
+					JOptionPane.showMessageDialog(null, "Caricamento completato");
+
+					
+			}
+				else 
+					JOptionPane.showMessageDialog(null, "Errore nel caricamento");
+			}
+		});
+		
+		panelDownLoad.add(comboBoxAggiorna);
+		contentPane.add(panelDownLoad);
+
 	}
+
 }
