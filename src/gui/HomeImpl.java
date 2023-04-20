@@ -60,8 +60,8 @@ public class HomeImpl extends JFrame implements Home   {
 		
 		setTitle("DRAFT");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 500, 700);
-		setMinimumSize(new Dimension(600,700));
+		setBounds(100, 100, 640, 700);
+		setMinimumSize(new Dimension(640,700));
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 0, 128));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -159,9 +159,6 @@ public class HomeImpl extends JFrame implements Home   {
 		panelLoad.setBackground(new Color(240, 240, 240));
 		contentPane.add(panelLoad);
 				
-		
-		DefaultListModel<String> listModel=new DefaultListModel<>();
-		listModel.addAll(log.getStagioni());
 		panelLoad.setLayout(new BoxLayout(panelLoad, BoxLayout.X_AXIS));
 		
 		JButton btnCarica = new JButton("Carica");
@@ -175,14 +172,10 @@ public class HomeImpl extends JFrame implements Home   {
 		
 		String[] array = log.getStagioni().toArray(new String[log.getStagioni().size()]);
 		JComboBox<String> comboBox = new JComboBox<>(array);
-		//comboBox.set
 		comboBox.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
-		
 
 		panelLoad.add(comboBox);
-		
-		
-		
+
 		
 		JLabel labelEmpty17 = new JLabel("");
 		contentPane.add(labelEmpty17);
@@ -190,15 +183,26 @@ public class HomeImpl extends JFrame implements Home   {
 		JLabel labelEmpty18 = new JLabel("");
 		contentPane.add(labelEmpty18);
 		
-		JPanel panelDownload = new JPanel();
-		contentPane.add(panelDownload);
 		
-		JLabel lblAggiorna = new JLabel("Aggiorna stagione:");
-		lblAggiorna.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
-		panelDownload.add(lblAggiorna);
+		JPanel panelDownLoad = new JPanel();
+		panelDownLoad.setBackground(new Color(240, 240, 240));
+				
+		panelDownLoad.setLayout(new BoxLayout(panelDownLoad, BoxLayout.X_AXIS));
 		
-		JList listAggiorna = new JList();
-		panelDownload.add(listAggiorna);
+		JButton btnAggiorna= new JButton("Aggiorna");
+		btnAggiorna.setHorizontalAlignment(SwingConstants.RIGHT);
+		btnAggiorna.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+		btnAggiorna.setBorderPainted(false);
+		btnAggiorna.setBackground(getForeground());
+		btnAggiorna.setRolloverEnabled(true);
+		panelDownLoad.add(btnAggiorna);
+
+		JComboBox<String> comboBox2 = new JComboBox<>(array);
+		comboBox2.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+
+		panelDownLoad.add(comboBox2);
+		contentPane.add(panelDownLoad);
+
 	}
 
 }
