@@ -17,6 +17,8 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.ListModel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Insets;
@@ -45,6 +47,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import java.awt.BorderLayout;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 
 
 public class HomeImpl extends JFrame implements Home   {
@@ -167,14 +170,23 @@ public class HomeImpl extends JFrame implements Home   {
 		btnCarica.setBorderPainted(false);
 		btnCarica.setBackground(getForeground());
 		btnCarica.setRolloverEnabled(true);
-		panelLoad.add(btnCarica);
-		
 		
 		String[] array = log.getStagioni().toArray(new String[log.getStagioni().size()]);
-		JComboBox<String> comboBox = new JComboBox<>(array);
-		comboBox.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+		JComboBox<String> comboBoxCarica = new JComboBox<>(array);
+		comboBoxCarica.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
 
-		panelLoad.add(comboBox);
+		btnCarica.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(log.loadStagione(comboBoxCarica.getItemAt(comboBoxCarica.getSelectedIndex())))
+					lblStagione.setText(log.getStagione());
+				else 
+					JOptionPane.showMessageDialog(null, "Errore nel caricamento");
+			}	
+		});
+		
+		panelLoad.add(btnCarica);
+		panelLoad.add(comboBoxCarica);
 
 		
 		JLabel labelEmpty17 = new JLabel("");
@@ -197,10 +209,26 @@ public class HomeImpl extends JFrame implements Home   {
 		btnAggiorna.setRolloverEnabled(true);
 		panelDownLoad.add(btnAggiorna);
 
-		JComboBox<String> comboBox2 = new JComboBox<>(array);
-		comboBox2.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+		JComboBox<String> comboBoxAggiorna = new JComboBox<>(array);
+		comboBoxAggiorna.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
 
-		panelDownLoad.add(comboBox2);
+		btnAggiorna.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Attendere qualche istante");
+				if(log.downloadStagione(comboBoxAggiorna.getItemAt(comboBoxAggiorna.getSelectedIndex()))) {
+					lblStagione.setText(log.getStagione());
+					JOptionPane.showMessageDialog(null, "Caricamento completato");
+
+					
+			}
+				else 
+					JOptionPane.showMessageDialog(null, "Errore nel caricamento");
+			}
+		});
+		
+		panelDownLoad.add(comboBoxAggiorna);
 		contentPane.add(panelDownLoad);
 
 	}
