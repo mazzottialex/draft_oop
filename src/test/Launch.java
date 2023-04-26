@@ -9,6 +9,8 @@ import data.Calciatore;
 import data.Modulo;
 import data.SquadraAvversaria;
 import gui.HomeImpl;
+import gui.Partita;
+import gui.PartitaImpl;
 import logics.LogicsHome;
 import logics.LogicsHomeImpl;
 import gui.Home;
@@ -48,6 +50,9 @@ public class Launch {
 //		System.out.println(sa.getNomeTitolari());
 //		System.out.println(sa.getNomeRiserve());
 		System.out.println(sa.getNomeCalciatori());
+		
+		Partita gp = new PartitaImpl();
+		gp.setVisible(true);
 		
 	}
 }
