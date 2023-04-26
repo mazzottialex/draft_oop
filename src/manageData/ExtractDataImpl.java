@@ -88,11 +88,8 @@ public class ExtractDataImpl implements ExtractData{
 	
 	@Override
 	public List<Calciatore> getTitolariBySquadraByRuolo(String squadra, String ruolo, Modulo modulo) {
-		int n = 0;
+		int n = 1;
 		switch (ruolo) {
-		case "P":
-			n = 1;		//provare a cavare questa riga e a mettere n=1 nella dichiarazione di n, tre righe sopra
-			break;
 		case "D":
 			n = modulo.getNumDif();
 			break;
@@ -102,7 +99,7 @@ public class ExtractDataImpl implements ExtractData{
 		case "A":
 			n = modulo.getNumAtt();
 			break;
-		default:
+		default:	//compreso il case "P" perché per il ruolo portiere n=1
 			break;
 		}
 		List<Calciatore> lista = getCalciatoreBySquadra(squadra).stream()
