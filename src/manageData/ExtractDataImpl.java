@@ -18,7 +18,7 @@ import rating.CalcoloRatingImpl;
 public class ExtractDataImpl implements ExtractData{
 
 	private List<Calciatore> li;
-	private CalcoloRating r = new CalcoloRatingImpl(li);
+//	private CalcoloRating r = new CalcoloRatingImpl(li);
 	
 	public ExtractDataImpl(List<Calciatore> li) throws FileNotFoundException, IOException, ClassNotFoundException {
 		this.li=li;
@@ -86,7 +86,8 @@ public class ExtractDataImpl implements ExtractData{
 	public List<Calciatore> getTitolariBySquadraByRuolo(String squadra, String ruolo, Modulo modulo) {
 		List<Calciatore> lista = getCalciatoreBySquadra(squadra).stream()
 				.filter(c -> c.getRuolo().equals(ruolo))
-				.sorted((c1, c2) -> r.getRating(c2).getX() - r.getRating(c1).getX())
+				.sorted((c1, c2) -> c2.getRating().getX() - c1.getRating().getX())
+//				.sorted((c1, c2) -> r.getRating(c2).getX() - r.getRating(c1).getX())
 				.toList();
 		List<Calciatore> listaTitolari = new ArrayList<>();
 		int n = 0;
@@ -124,7 +125,8 @@ public class ExtractDataImpl implements ExtractData{
 	public List<Calciatore> getRiserveBySquadraByRuolo(String squadra, String ruolo, Modulo modulo) {
 		List<Calciatore> lista = getCalciatoreBySquadra(squadra).stream()
 				.filter(c -> c.getRuolo().equals(ruolo))
-				.sorted((c1, c2) -> r.getRating(c2).getX() - r.getRating(c1).getX())
+				.sorted((c1, c2) -> c2.getRating().getX() - c1.getRating().getX())
+//				.sorted((c1, c2) -> r.getRating(c2).getX() - r.getRating(c1).getX())
 				.toList();
 		List<Calciatore> listaRiserve = new ArrayList<>();
 		int n = 2;
