@@ -158,5 +158,25 @@ public class ExtractDataImpl implements ExtractData{
 		lr.addAll(getRiserveBySquadraByRuolo(squadra, "A", modulo));
 		return lr;
 	}
-
+	
+	public List<String> getNomeCalciatori(String squadra) {
+		return getCalciatoreBySquadra(squadra)
+				.stream()
+				.map(c -> c.getNominativo())
+				.toList();
+	}
+	
+	public List<String> getNomeTitolaori(String squadra, Modulo modulo) {
+		return getTitolari(squadra, modulo)
+				.stream()
+				.map(c -> c.getNominativo())
+				.toList();
+	}
+	
+	public List<String> getNomeRiserve(String squadra, Modulo modulo) {
+		return getRiserve(squadra, modulo)
+				.stream()
+				.map(c -> c.getNominativo())
+				.toList();
+	}
 }

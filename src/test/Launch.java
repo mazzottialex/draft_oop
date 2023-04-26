@@ -7,6 +7,7 @@ import java.util.List;
 
 import data.Calciatore;
 import data.Modulo;
+import data.SquadraAvversaria;
 import gui.HomeImpl;
 import logics.LogicsHome;
 import logics.LogicsHomeImpl;
@@ -40,7 +41,13 @@ public class Launch {
 //		Home gui = new HomeImpl();
 //		gui.setVisible(true);
 
-		System.out.println(ex.getTitolariBySquadraByRuolo("NAP", "P", Modulo.M352));
+//		System.out.println(ex.getTitolariBySquadraByRuolo("NAP", "P", Modulo.M352));
 //		System.out.println(ex.getCalciatoreBySquadra("NAP"));
+		
+		SquadraAvversaria sa = new SquadraAvversaria(0, "NAP", Modulo.M433, li);
+//		System.out.println(sa.getNomeTitolari());
+//		System.out.println(sa.getNomeRiserve());
+		System.out.println(sa.getNomeCalciatori());
+		
 	}
 }

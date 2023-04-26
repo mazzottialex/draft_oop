@@ -45,4 +45,27 @@ public class SquadraAvversaria{
 		ExtractData ed = new ExtractDataImpl(li);
 		return ed.getRiserve(nomeSquadra, modulo);
 	}
+	
+	public List<String> getNomeTitolari() throws FileNotFoundException, ClassNotFoundException, IOException {
+		return getTitolari()
+				.stream()
+				.map(c -> c.getNominativo())
+				.toList();
+	}
+	
+	public List<String> getNomeRiserve() throws FileNotFoundException, ClassNotFoundException, IOException {
+		return getRiserve()
+				.stream()
+				.map(c -> c.getNominativo())
+				.toList();
+	}
+	
+	public List<String> getNomeCalciatori() throws FileNotFoundException, ClassNotFoundException, IOException {
+		ExtractData ed = new ExtractDataImpl(li);
+		return ed
+				.getCalciatoreBySquadra(nomeSquadra)
+				.stream()
+				.map(c -> c.getNominativo())
+				.toList();
+	}
 }
