@@ -17,4 +17,6 @@ public interface ExtractData {
 	public int getTopByAttribute(Function<Calciatore, Integer> f1, Function<Calciatore, Integer> f2);
 	public List<Calciatore> getTitolariBySquadraByRuolo(String squadra, String ruolo, Modulo modulo);
 	public List<Calciatore> getRiserveBySquadraByRuolo(String squadra, String ruolo, Modulo modulo);
+	public List<Calciatore> getTitolari(String squadra, Modulo modulo);
+	public List<Calciatore> getRiserve(String squadra, Modulo modulo);
 }

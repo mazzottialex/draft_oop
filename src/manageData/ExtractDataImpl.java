@@ -165,4 +165,24 @@ public class ExtractDataImpl implements ExtractData{
 		return listaRiserve;
 	}
 
+	@Override
+	public List<Calciatore> getTitolari(String squadra, Modulo modulo) {
+		List<Calciatore> lt = new ArrayList<>();
+		lt.addAll(getTitolariBySquadraByRuolo(squadra, "P", modulo));
+		lt.addAll(getTitolariBySquadraByRuolo(squadra, "D", modulo));
+		lt.addAll(getTitolariBySquadraByRuolo(squadra, "C", modulo));
+		lt.addAll(getTitolariBySquadraByRuolo(squadra, "A", modulo));
+		return lt;
+	}
+
+	@Override
+	public List<Calciatore> getRiserve(String squadra, Modulo modulo) {
+		List<Calciatore> lr = new ArrayList<>();
+		lr.addAll(getRiserveBySquadraByRuolo(squadra, "P", modulo));
+		lr.addAll(getRiserveBySquadraByRuolo(squadra, "D", modulo));
+		lr.addAll(getRiserveBySquadraByRuolo(squadra, "C", modulo));
+		lr.addAll(getRiserveBySquadraByRuolo(squadra, "A", modulo));
+		return lr;
+	}
+
 }
