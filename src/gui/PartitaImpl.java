@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -8,6 +9,7 @@ import java.awt.Image;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -77,14 +79,20 @@ public class PartitaImpl extends JFrame implements Partita {
 		jpSq2.add(Box.createVerticalStrut(20));
 		JLabel sq2Label = new JLabel("sq2Label");
 		jpSq2.add(sq2Label);
+		
 		jpButton.setLayout(new BoxLayout(jpButton, BoxLayout.Y_AXIS));
+		//barra avanzamento da aggiungere
+		JButton avvia = new JButton("Avvia");
+		jpButton.add(avvia);
+		JButton subs = new JButton("Sostituzioni");
+		jpButton.add(subs);
+		jpButton.add(subs, BorderLayout.EAST);
+		//panel.add(Label2,BorderLayout.WEST);
 		
 		
 		
-		
-		
-		JLabel labelEmpty1 = new JLabel("uno");
-		contentPane.add(labelEmpty1);		
+//		JLabel labelEmpty1 = new JLabel("uno");
+//		contentPane.add(labelEmpty1);		
 		
 //		JButton btnStart = new JButton();
 //		img=new ImageIcon("res/start.png");
@@ -117,11 +125,11 @@ public class PartitaImpl extends JFrame implements Partita {
 //		lblStagione.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
 //		panelSelectioned.add(lblStagione);
 		
-		JPanel panelLoad = new JPanel();
-		panelLoad.setBackground(new Color(240, 240, 240));
-		contentPane.add(panelLoad);
-				
-		panelLoad.setLayout(new BoxLayout(panelLoad, BoxLayout.X_AXIS));
+//		JPanel panelLoad = new JPanel();
+//		panelLoad.setBackground(new Color(240, 240, 240));
+//		contentPane.add(panelLoad);
+//				
+//		panelLoad.setLayout(new BoxLayout(panelLoad, BoxLayout.X_AXIS));
 		
 //		JButton btnCarica = new JButton("Carica");
 //		btnCarica.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -147,10 +155,10 @@ public class PartitaImpl extends JFrame implements Partita {
 //		panelLoad.add(btnCarica);
 //		panelLoad.add(comboBoxCarica);		
 		
-		JPanel panelDownLoad = new JPanel();
-		panelDownLoad.setBackground(new Color(240, 240, 240));
-				
-		panelDownLoad.setLayout(new BoxLayout(panelDownLoad, BoxLayout.X_AXIS));
+//		JPanel panelDownLoad = new JPanel();
+//		panelDownLoad.setBackground(new Color(240, 240, 240));
+//				
+//		panelDownLoad.setLayout(new BoxLayout(panelDownLoad, BoxLayout.X_AXIS));
 		
 //		JButton btnAggiorna= new JButton("Aggiorna");
 //		btnAggiorna.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -180,7 +188,7 @@ public class PartitaImpl extends JFrame implements Partita {
 //		});
 //		
 //		panelDownLoad.add(comboBoxAggiorna);
-		contentPane.add(panelDownLoad);
+//		contentPane.add(panelDownLoad);
 
 	}
 
