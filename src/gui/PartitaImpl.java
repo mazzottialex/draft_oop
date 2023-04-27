@@ -5,11 +5,14 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import logics.LogicsHome;
@@ -37,41 +40,51 @@ public class PartitaImpl extends JFrame implements Partita {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		contentPane.setLayout(new GridLayout(10, 3, 10, 10));
+		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
+		
+		JPanel jpText = new JPanel();
+		contentPane.add(jpText);
+		JPanel jpButton = new JPanel();
+		contentPane.add(jpButton);
+		
+		jpText.setLayout(new BoxLayout(jpButton, BoxLayout.X_AXIS));
+		JPanel jpSq1 = new JPanel();
+		jpText.add(jpSq1);
+		jpText.add(new JSeparator(SwingConstants.VERTICAL));
+		JPanel jpSq2 = new JPanel();
+		jpText.add(jpSq2);
+		
+		jpSq1.setLayout(new BoxLayout(jpSq1, BoxLayout.Y_AXIS));
+		JLabel sq1 = new JLabel("sq1");
+		jpSq1.add(sq1);
+		jpSq1.add(Box.createVerticalStrut(10));
+		jpSq1.add(new JSeparator(SwingConstants.HORIZONTAL));
+		jpSq1.add(Box.createVerticalStrut(10));
+		JLabel nGolSq1 = new JLabel("nGolsq1");
+		jpSq1.add(nGolSq1);
+		jpSq1.add(Box.createVerticalStrut(20));
+		JLabel sq1Label = new JLabel("sq1Label");
+		jpSq1.add(sq1Label);
+		
+		jpSq2.setLayout(new BoxLayout(jpSq2, BoxLayout.Y_AXIS));
+		JLabel sq2 = new JLabel("sq2");
+		jpSq2.add(sq2);
+		jpSq2.add(Box.createVerticalStrut(10));
+		jpSq2.add(new JSeparator(SwingConstants.HORIZONTAL));
+		jpSq2.add(Box.createVerticalStrut(10));
+		JLabel nGolSq2 = new JLabel("nGolsq2");
+		jpSq2.add(nGolSq2);
+		jpSq2.add(Box.createVerticalStrut(20));
+		JLabel sq2Label = new JLabel("sq2Label");
+		jpSq2.add(sq2Label);
+		jpButton.setLayout(new BoxLayout(jpButton, BoxLayout.Y_AXIS));
+		
+		
+		
+		
 		
 		JLabel labelEmpty1 = new JLabel("uno");
-		contentPane.add(labelEmpty1);
-		
-		JLabel labelEmpty2 = new JLabel("due");
-		contentPane.add(labelEmpty2);
-		
-		JLabel labelEmpty3 = new JLabel("tre");
-		contentPane.add(labelEmpty3);
-		
-		JLabel labelEmpty4 = new JLabel("quattro");
-		contentPane.add(labelEmpty4);
-		/*
-		ImageIcon img=new ImageIcon("res/icon.png");
-		Image image = img.getImage(); // transform it 
-		Image newimg = image.getScaledInstance(120, 120,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-		img = new ImageIcon(newimg);
-		JLabel labelIcon = new JLabel(img);
-		contentPane.add(labelIcon);
-		*/
-		JLabel labelEmpty5 = new JLabel("cinque");
-		contentPane.add(labelEmpty5);
-		
-		JLabel labelEmpty6 = new JLabel("sei");
-		contentPane.add(labelEmpty6);
-		
-		JLabel labelEmpty7 = new JLabel("sette");
-		contentPane.add(labelEmpty7);
-		
-		JLabel labelEmpty8 = new JLabel("otto");
-		contentPane.add(labelEmpty8);
-		
-		JLabel labelEmpty9 = new JLabel("nove");
-		contentPane.add(labelEmpty9);
+		contentPane.add(labelEmpty1);		
 		
 //		JButton btnStart = new JButton();
 //		img=new ImageIcon("res/start.png");
@@ -93,23 +106,8 @@ public class PartitaImpl extends JFrame implements Partita {
 		
 //		contentPane.add(btnStart);
 		
-		JLabel labelEmpty10 = new JLabel("dieci");
-		contentPane.add(labelEmpty10);
-		
-		JLabel labelEmpty11 = new JLabel("undici");
-		contentPane.add(labelEmpty11);
-		
-		JLabel labelEmpty12 = new JLabel("dodici");
-		contentPane.add(labelEmpty12);
-		
-		JLabel labelEmpty13 = new JLabel("tredici");
-		contentPane.add(labelEmpty13);
-		
-		JLabel labelEmpty14 = new JLabel("quattordici");
-		contentPane.add(labelEmpty14);
-		
-		JPanel panelSelectioned = new JPanel();
-		contentPane.add(panelSelectioned);
+//		JPanel panelSelectioned = new JPanel();
+//		contentPane.add(panelSelectioned);
 		
 //		JLabel lblStagioneSelezionata = new JLabel("Stagione selezionata:");
 //		lblStagioneSelezionata.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
@@ -118,12 +116,6 @@ public class PartitaImpl extends JFrame implements Partita {
 //		JLabel lblStagione = new JLabel(log.getStagione());
 //		lblStagione.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
 //		panelSelectioned.add(lblStagione);
-		
-		JLabel labelEmpty15 = new JLabel("quindici");
-		contentPane.add(labelEmpty15);
-		
-		JLabel labelEmpty16 = new JLabel("sedici");
-		contentPane.add(labelEmpty16);
 		
 		JPanel panelLoad = new JPanel();
 		panelLoad.setBackground(new Color(240, 240, 240));
@@ -153,15 +145,7 @@ public class PartitaImpl extends JFrame implements Partita {
 //		});
 //		
 //		panelLoad.add(btnCarica);
-//		panelLoad.add(comboBoxCarica);
-
-		
-		JLabel labelEmpty17 = new JLabel("diciassette");
-		contentPane.add(labelEmpty17);
-		
-		JLabel labelEmpty18 = new JLabel("diciotto");
-		contentPane.add(labelEmpty18);
-		
+//		panelLoad.add(comboBoxCarica);		
 		
 		JPanel panelDownLoad = new JPanel();
 		panelDownLoad.setBackground(new Color(240, 240, 240));
