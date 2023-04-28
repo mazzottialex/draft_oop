@@ -179,7 +179,7 @@ public class HomeImpl extends JFrame implements Home   {
 		
 		JLabel label19 = new JLabel("");
 		JComboBox<String> comboBoxAggiorna = new JComboBox<>(array);
-		if(!log.checkConnection())
+		if(!log.getOnline())
 		{
 			btnAggiorna.setEnabled(false);
 			comboBoxAggiorna.setEnabled(false);

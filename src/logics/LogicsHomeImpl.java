@@ -18,10 +18,12 @@ public class LogicsHomeImpl implements LogicsHome {
 
 	private List<Calciatore> li;
 	private String stagione;
+	private Boolean online;
 	
 	public LogicsHomeImpl(String stagione) { //di default
 		li=new ArrayList<>();
 		this.stagione=stagione;
+		this.online=checkConnection();
 	}
 	
 	@Override
@@ -72,11 +74,9 @@ public class LogicsHomeImpl implements LogicsHome {
 		CalcoloRating rat=new CalcoloRatingImpl(this.li);
 		rat.updateRating();
 		return rat.getLi();
-
 	}
 
-	@Override
-	public Boolean checkConnection() {
+	private Boolean checkConnection() {
 		try {
 			URL url = new URL("http://www.google.com");
 	    	URLConnection connection = url.openConnection();
@@ -85,6 +85,9 @@ public class LogicsHomeImpl implements LogicsHome {
 		}catch(Exception e) {
 	    	return false;
 	    }
-       
+	}
+	
+	public Boolean getOnline() {
+		return this.online;
 	}
 }

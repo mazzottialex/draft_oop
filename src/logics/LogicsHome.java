@@ -13,5 +13,5 @@ public interface LogicsHome {
 	public Boolean loadStagione(String stagione);
 	public Boolean downloadStagione(String stagione);
 	public List<Calciatore> getLi() throws FileNotFoundException, ClassNotFoundException, IOException;
-	public Boolean checkConnection();
+	public Boolean getOnline();
 }

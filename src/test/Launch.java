@@ -31,8 +31,6 @@ public class Launch {
 		Boolean flagGui=true;
 		
 		if(flagGui) {
-			LogicsHome l=new LogicsHomeImpl("2022-23");
-			System.out.println(l.checkConnection().toString());
 			Home gui = new HomeImpl();
 			gui.setVisible(true);
 		}
