@@ -9,4 +9,5 @@ import data.Calciatore;
 public interface LogicsFile {
 	public List<Calciatore> LoadData() throws FileNotFoundException, IOException, ClassNotFoundException;
 	public Boolean SaveData(List<Calciatore> li);
+	public Boolean SaveStagioni(List<String> li);
 }

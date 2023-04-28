@@ -57,4 +57,25 @@ public class LogicsFileImpl implements LogicsFile{
 		return true;
 	}
 	
+	@Override
+	public Boolean SaveStagioni(List<String> li) {
+		try(final OutputStream file = new FileOutputStream("res/backupStagioni.txt");
+				final OutputStream bstream = new BufferedOutputStream(file);
+				final ObjectOutputStream ostream=new ObjectOutputStream(file);
+					){
+				li.forEach(s-> {
+					try {
+						ostream.writeUTF(s);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} );
+				ostream.close();
+			}
+		catch (Exception e) {
+			return false;
+		}
+		return true;
+	}
 }

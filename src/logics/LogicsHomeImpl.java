@@ -41,6 +41,7 @@ public class LogicsHomeImpl implements LogicsHome {
 	public List<String> getStagioni() {
 		if(online) {
 			Scraping sc=new ScrapingImpl();
+			
 			return sc.getStagioni();
 		}
 		else {
