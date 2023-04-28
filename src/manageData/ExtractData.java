@@ -19,4 +19,7 @@ public interface ExtractData {
 	public List<Calciatore> getRiserveBySquadraByRuolo(String squadra, String ruolo, Modulo modulo);
 	public List<Calciatore> getTitolari(String squadra, Modulo modulo);
 	public List<Calciatore> getRiserve(String squadra, Modulo modulo);
+	public List<String> getNomeCalciatori(String squadra);
+	public List<String> getNomeTitolaori(String squadra, Modulo modulo);
+	public List<String> getNomeRiserve(String squadra, Modulo modulo);
 }

@@ -88,49 +88,8 @@ public class ExtractDataImpl implements ExtractData{
 	
 	@Override
 	public List<Calciatore> getTitolariBySquadraByRuolo(String squadra, String ruolo, Modulo modulo) {
-		List<Calciatore> lista = getCalciatoreBySquadra(squadra).stream()
-				.filter(c -> c.getRuolo().equals(ruolo))
-				.sorted((c1, c2) -> c2.getRating().getX() - c1.getRating().getX())
-				.toList();
-		List<Calciatore> listaTitolari = new ArrayList<>();
-		int n = 0;
+		int n = 1;
 		switch (ruolo) {
-		case "P":
-			n = 1;
-			listaTitolari = lista.stream()
-					.limit(n)
-					.toList();
-			break;
-		case "D":
-			n = modulo.getNumDif();
-			listaTitolari = lista.stream()
-					.limit(n)
-					.toList();
-			break;
-		case "C":
-			n = modulo.getNumCen();
-			listaTitolari = lista.stream()
-					.limit(n)
-					.toList();
-			break;
-		case "A":
-			n = modulo.getNumAtt();
-			listaTitolari = lista.stream()
-					.limit(n)
-					.toList();
-			break;
-		default:
-			break;
-		}
-		return listaTitolari;
-	}
-	/*
-	public List<Calciatore> getTitolariBySquadraByRuolo(String squadra, String ruolo, Modulo modulo) {
-		int n = 0;
-		switch (ruolo) {
-		case "P":
-			n = 1;		//provare a cavare questa riga e a mettere n=1 nella dichiarazione di n, tre righe sopra
-			break;
 		case "D":
 			n = modulo.getNumDif();
 			break;
@@ -140,7 +99,7 @@ public class ExtractDataImpl implements ExtractData{
 		case "A":
 			n = modulo.getNumAtt();
 			break;
-		default:
+		default:	//compreso il case "P" perché per il ruolo portiere n=1
 			break;
 		}
 		List<Calciatore> lista = getCalciatoreBySquadra(squadra).stream()
@@ -150,54 +109,8 @@ public class ExtractDataImpl implements ExtractData{
 				.toList();
 		return lista;
 	}
-	*/
 	
 	@Override
-	public List<Calciatore> getRiserveBySquadraByRuolo(String squadra, String ruolo, Modulo modulo) {
-		List<Calciatore> lista = getCalciatoreBySquadra(squadra).stream()
-				.filter(c -> c.getRuolo().equals(ruolo))
-				.sorted((c1, c2) -> c2.getRating().getX() - c1.getRating().getX())
-				.toList();
-		List<Calciatore> listaRiserve = new ArrayList<>();
-		int n = 2;
-		int m = 0;
-		switch (ruolo) {
-		case "P":
-			m = 1;
-			n = 1;
-			listaRiserve = lista.stream()
-					.skip(m)
-					.limit(n)
-					.toList();
-			break;
-		case "D":
-			m = modulo.getNumDif();
-			listaRiserve = lista.stream()
-					.skip(m)
-					.limit(n)
-					.toList();
-			break;
-		case "C":
-			m = modulo.getNumCen();
-			listaRiserve = lista.stream()
-					.skip(m)
-					.limit(n)
-					.toList();
-			break;
-		case "A":
-			m = modulo.getNumAtt();
-			listaRiserve = lista.stream()
-					.skip(m)
-					.limit(n)
-					.toList();
-			break;
-		default:
-			break;
-		}
-		return listaRiserve;
-	}
-	
-	/*
 	public List<Calciatore> getRiserveBySquadraByRuolo(String squadra, String ruolo, Modulo modulo) {
 		int n = 2;
 		int m = 1;
@@ -223,10 +136,8 @@ public class ExtractDataImpl implements ExtractData{
 				.skip(m)
 				.limit(n)
 				.toList();
-		
 		return lista;
 	}
-	 */
 
 	@Override
 	public List<Calciatore> getTitolari(String squadra, Modulo modulo) {
@@ -247,5 +158,25 @@ public class ExtractDataImpl implements ExtractData{
 		lr.addAll(getRiserveBySquadraByRuolo(squadra, "A", modulo));
 		return lr;
 	}
-
+	
+	public List<String> getNomeCalciatori(String squadra) {
+		return getCalciatoreBySquadra(squadra)
+				.stream()
+				.map(c -> c.getNominativo())
+				.toList();
+	}
+	
+	public List<String> getNomeTitolaori(String squadra, Modulo modulo) {
+		return getTitolari(squadra, modulo)
+				.stream()
+				.map(c -> c.getNominativo())
+				.toList();
+	}
+	
+	public List<String> getNomeRiserve(String squadra, Modulo modulo) {
+		return getRiserve(squadra, modulo)
+				.stream()
+				.map(c -> c.getNominativo())
+				.toList();
+	}
 }
