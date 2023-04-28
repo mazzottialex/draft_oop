@@ -9,9 +9,9 @@ import data.Calciatore;
 import data.Modulo;
 
 import data.SquadraAvversaria;
-import gui.HomeImpl;
+import gui.Home;
 import gui.Partita;
-import gui.PartitaImpl;
+import gui.Partita;
 import logics.LogicsHome;
 import logics.LogicsHomeImpl;
 import gui.Home;
@@ -31,7 +31,7 @@ public class Launch {
 		Boolean flagGui=true;
 		
 		if(flagGui) {
-			Home gui = new HomeImpl();
+			Home gui = new Home();
 			gui.setVisible(true);
 		}
 		else {
@@ -49,7 +49,7 @@ public class Launch {
 //				.sorted((c1,c2)->ra.getRating(c1).getX()-ra.getRating(c2).getX())
 //				.forEach(c -> System.out.println(c.getSquadra()+" "+ c.getNominativo()+"     \t RAT:"+ra.getRating(c).getX()+" \t A: "+ra.getRating(c).getY().getX()+" \t C: "+ra.getRating(c).getY().getY()+" \t D: "+ra.getRating(c).getY().getZ()+" \t Amm: "+ra.getRatingCartellino(c).getX()+" \t Esp: "+ra.getRatingCartellino(c).getY()));
 
-//			Home gui = new HomeImpl();
+//			Home gui = new Home();
 //			gui.setVisible(true);
 
 //			System.out.println(ex.getTitolariBySquadraByRuolo("NAP", "P", Modulo.M352));
@@ -60,7 +60,7 @@ public class Launch {
 //			System.out.println(sa.getNomeRiserve());
 			System.out.println(sa.getNomeCalciatori());
 			
-			Partita gp = new PartitaImpl();
+			Partita gp = new Partita();
 			gp.setVisible(true);
 			}
 	}
