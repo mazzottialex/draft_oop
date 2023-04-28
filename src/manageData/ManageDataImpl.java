@@ -34,11 +34,13 @@ public class ManageDataImpl implements ManageData{
 	public void LoadData() throws FileNotFoundException, ClassNotFoundException, IOException {
 		li=logFile.LoadData(stagione);
 	}
-	public void DownloadData() throws FileNotFoundException, ClassNotFoundException, IOException {
+	public Boolean DownloadData() throws FileNotFoundException, ClassNotFoundException, IOException {
 		Scraping scr=new ScrapingImpl();
-		scr.ReadTable(this.stagione);
+		if(!scr.ReadTable(this.stagione))
+			return false;
 		li=scr.getLista();
 		logFile.SaveData(li, stagione);
+		return true;
 	}
 
 }
