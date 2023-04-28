@@ -39,8 +39,13 @@ public class LogicsHomeImpl implements LogicsHome {
 	
 	@Override
 	public List<String> getStagioni() {
-		Scraping sc=new ScrapingImpl();
-		return sc.getStagioni();
+		if(online) {
+			Scraping sc=new ScrapingImpl();
+			return sc.getStagioni();
+		}
+		else {
+			return List.of("2019-2020", "2020-2021", "2021-2022", "2022-2023");
+		}
 	}
 
 	@Override

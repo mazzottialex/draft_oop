@@ -39,22 +39,4 @@ public class ManageDataImpl implements ManageData{
 		li=scr.getLista(this.stagione);
 		logFile.SaveData(li);
 	}
-	/*
-<<<<<<< HEAD
-
-	public List<Calciatore> getRandomByRuolo(String ruolo, int n) {
-		List<Calciatore> listaRuolo=getListaByRuolo(ruolo);
-		Random rnd=new Random();
-		Set<Integer> posizioni=new HashSet<>();
-		for(int i=0;i<n;i++) {
-			posizioni.add(rnd.nextInt(listaRuolo.size()));
-		}
-		return listaRuolo.stream()
-				.filter(c->posizioni.contains(c.getId()))
-				.toList();
-	}
-
-=======
->>>>>>> TestSelenium
-*/
 }
