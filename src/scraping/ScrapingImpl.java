@@ -35,7 +35,7 @@ public class ScrapingImpl implements Scraping{
 		return this.getLista(defaultStagione);
 	}
 	
-	private void ReadTable(String stagione) {
+	private Boolean ReadTable(String stagione) {
 		
 		List<Pair<RunnableScraping, Thread>> liThr=new ArrayList<>();
 		
@@ -54,6 +54,15 @@ public class ScrapingImpl implements Scraping{
 				e.printStackTrace();
 			}
 		});
+		for (Pair<RunnableScraping, Thread> el: liThr) {
+			//el.getY().join();
+			if(!el.getX().check()) {
+				System.out.print("err");
+				return false;
+			}		
+			li.addAll(el.getX().getLi());
+		}
+		return true;
 	}
 
 	public List<String> getStagioni(){
