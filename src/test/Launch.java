@@ -34,6 +34,9 @@ public class Launch {
 		if(flagGui) {
 			Home gui = new Home();
 			gui.setVisible(true);
+			
+			//Partita gp = new PartitaImpl();
+			//gp.setVisible(true);
 		}
 		else {
 //			Scraping sc = new ScrapingImpl();
@@ -61,8 +64,5 @@ public class Launch {
 //			System.out.println(sa.getNomeRiserve());
 			System.out.println(sa.getNomeCalciatori());
 		}
-		
-		Partita gp = new PartitaImpl();
-		gp.setVisible(true);
 	}
 }
