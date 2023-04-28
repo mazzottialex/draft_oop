@@ -36,7 +36,8 @@ public class ManageDataImpl implements ManageData{
 	}
 	public void DownloadData() throws FileNotFoundException, ClassNotFoundException, IOException {
 		Scraping scr=new ScrapingImpl();
-		li=scr.getLista(this.stagione);
+		scr.ReadTable(this.stagione);
+		li=scr.getLista();
 		logFile.SaveData(li, stagione);
 	}
 
