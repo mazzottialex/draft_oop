@@ -39,6 +39,5 @@ public class ManageDataImpl implements ManageData{
 		li=scr.getLista(this.stagione);
 		logFile.SaveData(li);
 	}
-	
-	
+
 }

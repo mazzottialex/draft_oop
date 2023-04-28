@@ -57,8 +57,23 @@ public class LogicsFileImpl implements LogicsFile{
 		return true;
 	}
 	
+	public List<String> loadStagioni(){
+		List<String> ls=new ArrayList<>();
+		try(final InputStream file = new FileInputStream("res/backupStagioni.txt");
+				final InputStream bstream = new BufferedInputStream(file);
+				final ObjectInputStream ostream=new ObjectInputStream(file);
+						){
+					while(ls.add(ostream.readUTF())) {}
+					ostream.close();
+				}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+			return ls;
+	}
+	
 	@Override
-	public Boolean SaveStagioni(List<String> li) {
+	public Boolean SaveStagioni(List<String> li){
 		try(final OutputStream file = new FileOutputStream("res/backupStagioni.txt");
 				final OutputStream bstream = new BufferedOutputStream(file);
 				final ObjectOutputStream ostream=new ObjectOutputStream(file);
@@ -67,7 +82,6 @@ public class LogicsFileImpl implements LogicsFile{
 					try {
 						ostream.writeUTF(s);
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				} );
