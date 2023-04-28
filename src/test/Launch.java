@@ -32,11 +32,11 @@ public class Launch {
 		Boolean flagGui=true;
 		
 		if(flagGui) {
-			Home gui = new Home();
-			gui.setVisible(true);
+//			Home gui = new Home();
+//			gui.setVisible(true);
 			
-			//Partita gp = new PartitaImpl();
-			//gp.setVisible(true);
+			Partita gp = new PartitaImpl();
+			gp.setVisible(true);
 		}
 		else {
 //			Scraping sc = new ScrapingImpl();
