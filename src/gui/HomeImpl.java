@@ -176,6 +176,17 @@ public class HomeImpl extends JFrame implements Home   {
 		panelDownLoad.setLayout(new BoxLayout(panelDownLoad, BoxLayout.X_AXIS));
 		
 		JButton btnAggiorna= new JButton("Aggiorna");
+		
+		JLabel label19 = new JLabel("");
+		JComboBox<String> comboBoxAggiorna = new JComboBox<>(array);
+		if(!log.checkConnection())
+		{
+			btnAggiorna.setEnabled(false);
+			comboBoxAggiorna.setEnabled(false);
+			label19 = new JLabel("Sei offline");
+			label19.setForeground(Color.yellow);
+			label19.setFont(new Font("DejaVu Sans", Font.ITALIC, 12));
+		}
 		btnAggiorna.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnAggiorna.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
 		btnAggiorna.setBorderPainted(false);
@@ -183,7 +194,6 @@ public class HomeImpl extends JFrame implements Home   {
 		btnAggiorna.setRolloverEnabled(true);
 		panelDownLoad.add(btnAggiorna);
 
-		JComboBox<String> comboBoxAggiorna = new JComboBox<>(array);
 		comboBoxAggiorna.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
 
 		btnAggiorna.addActionListener(new ActionListener() {
@@ -194,8 +204,6 @@ public class HomeImpl extends JFrame implements Home   {
 				if(log.downloadStagione(comboBoxAggiorna.getItemAt(comboBoxAggiorna.getSelectedIndex()))) {
 					lblStagione.setText(log.getStagione());
 					JOptionPane.showMessageDialog(null, "Caricamento completato");
-
-					
 			}
 				else 
 					JOptionPane.showMessageDialog(null, "Errore nel caricamento");
@@ -204,7 +212,7 @@ public class HomeImpl extends JFrame implements Home   {
 		
 		panelDownLoad.add(comboBoxAggiorna);
 		contentPane.add(panelDownLoad);
-
+		contentPane.add(label19);
 	}
 
 }
