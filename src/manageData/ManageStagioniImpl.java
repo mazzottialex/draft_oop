@@ -8,7 +8,7 @@ import scraping.ScrapingImpl;
 
 public class ManageStagioniImpl implements ManageStagioni {
 	private Boolean online;
-	private LogicsFile file=new LogicsFileImpl("2020-2021");
+	private LogicsFile file=new LogicsFileImpl();
 	private Scraping s;
 	private List<String> li=new ArrayList<>();
 	

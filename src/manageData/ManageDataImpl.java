@@ -23,7 +23,7 @@ public class ManageDataImpl implements ManageData{
 	
 	public ManageDataImpl(String stagione) {
 		li=new ArrayList<>();
-		logFile=new LogicsFileImpl(stagione);
+		logFile=new LogicsFileImpl();
 		this.stagione=stagione;
 	}
 	
@@ -32,12 +32,12 @@ public class ManageDataImpl implements ManageData{
 	}
 	
 	public void LoadData() throws FileNotFoundException, ClassNotFoundException, IOException {
-		li=logFile.LoadData();
+		li=logFile.LoadData(stagione);
 	}
 	public void DownloadData() throws FileNotFoundException, ClassNotFoundException, IOException {
 		Scraping scr=new ScrapingImpl();
 		li=scr.getLista(this.stagione);
-		logFile.SaveData(li);
+		logFile.SaveData(li, stagione);
 	}
 
 }

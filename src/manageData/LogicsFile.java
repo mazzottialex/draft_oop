@@ -7,8 +7,8 @@ import java.util.List;
 import data.Calciatore;
 
 public interface LogicsFile {
-	public List<Calciatore> LoadData() throws FileNotFoundException, IOException, ClassNotFoundException;
-	public Boolean SaveData(List<Calciatore> li);
+	public List<Calciatore> LoadData(String stagione) throws FileNotFoundException, IOException, ClassNotFoundException;
+	public Boolean SaveData(List<Calciatore> li, String stagione);
 	public List<String> loadStagioni();
 	public Boolean SaveStagioni(List<String> li);
 }
