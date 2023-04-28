@@ -23,7 +23,7 @@ public class ManageDataImpl implements ManageData{
 	
 	public ManageDataImpl(String stagione) {
 		li=new ArrayList<>();
-		logFile=new LogicsFileImpl(stagione);
+		logFile=new LogicsFileImpl();
 		this.stagione=stagione;
 	}
 	
@@ -32,29 +32,15 @@ public class ManageDataImpl implements ManageData{
 	}
 	
 	public void LoadData() throws FileNotFoundException, ClassNotFoundException, IOException {
-		li=logFile.LoadData();
+		li=logFile.LoadData(stagione);
 	}
-	public void DownloadData() throws FileNotFoundException, ClassNotFoundException, IOException {
+	public Boolean DownloadData() throws FileNotFoundException, ClassNotFoundException, IOException {
 		Scraping scr=new ScrapingImpl();
-		li=scr.getLista(this.stagione);
-		logFile.SaveData(li);
-	}
-	/*
-<<<<<<< HEAD
-
-	public List<Calciatore> getRandomByRuolo(String ruolo, int n) {
-		List<Calciatore> listaRuolo=getListaByRuolo(ruolo);
-		Random rnd=new Random();
-		Set<Integer> posizioni=new HashSet<>();
-		for(int i=0;i<n;i++) {
-			posizioni.add(rnd.nextInt(listaRuolo.size()));
-		}
-		return listaRuolo.stream()
-				.filter(c->posizioni.contains(c.getId()))
-				.toList();
+		if(!scr.ReadTable(this.stagione))
+			return false;
+		li=scr.getLista();
+		logFile.SaveData(li, stagione);
+		return true;
 	}
 
-=======
->>>>>>> TestSelenium
-*/
 }
