@@ -39,7 +39,13 @@ public class ScrapingImpl implements Scraping{
 			thr.start();
 		}
 		
+		
 		for (Pair<RunnableScraping, Thread> el: liThr) {
+			try {
+				el.getY().join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			if(!el.getX().check()) {
 				return false;
 			}		

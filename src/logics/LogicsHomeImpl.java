@@ -63,9 +63,11 @@ public class LogicsHomeImpl implements LogicsHome {
 		ManageData md=new ManageDataImpl(stagione);
 		this.stagione=stagione;
 		try {
-			md.DownloadData();
+			if(!md.DownloadData())
+				return false;
 		} catch (ClassNotFoundException | IOException e) {
-			return false;
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		this.li=md.getLi();
 		return true;
