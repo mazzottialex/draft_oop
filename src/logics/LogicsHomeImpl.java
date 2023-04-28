@@ -2,8 +2,15 @@ package logics;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URLConnection;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.net.URL;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import data.Calciatore;
 import manageData.ManageData;
@@ -72,5 +79,18 @@ public class LogicsHomeImpl implements LogicsHome {
 		rat.updateRating();
 		return rat.getLi();
 
+	}
+
+	@Override
+	public Boolean checkConnection() {
+		try {
+			URL url = new URL("http://www.google.com");
+	    	URLConnection connection = url.openConnection();
+	    	connection.connect();
+	    	return true;
+		}catch(Exception e) {
+	    	return false;
+	    }
+       
 	}
 }
