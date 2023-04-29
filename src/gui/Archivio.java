@@ -27,9 +27,7 @@ import manageData.ExtractDataImpl;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 
-public class Archivio extends JFrame {
-
-	private JPanel contentPane;
+public class Archivio extends Base {
 	private JTable table;
 
 	/**
@@ -55,17 +53,9 @@ public class Archivio extends JFrame {
 	 * @throws FileNotFoundException 
 	 */
 	public Archivio() throws FileNotFoundException, ClassNotFoundException, IOException {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
-		setContentPane(contentPane);
 		
 		DefaultTableModel tm= new DefaultTableModel(new String[] {"RUOLO","GIOCATORE","RATING","ATT","CEN","DIF"},0);
-		
-		//JTableHeader header=new JTableHeader();
-		
+				
 		LogicsHome log=new LogicsHomeImpl("2022-2023");
 		log.loadStagione("2020-2021");
 		List<Calciatore> li= log.getLi();

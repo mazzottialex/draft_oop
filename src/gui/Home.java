@@ -19,14 +19,13 @@ import java.awt.event.ActionListener;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Color;
-import java.awt.Dimension;
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 
 
-public class Home extends JFrame{
+public class Home extends Base{
 
-	private JPanel contentPane;
+	
 	private final LogicsHome log;
 	private final String stagioneDefault="2022-23";
 	/**
@@ -35,15 +34,6 @@ public class Home extends JFrame{
 	public Home() {
 		log=new LogicsHomeImpl(stagioneDefault);
 		
-		setTitle("DRAFT");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 640, 700);
-		setMinimumSize(new Dimension(640,700));
-		contentPane = new JPanel();
-		contentPane.setBackground(new Color(0, 0, 128));
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
-		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(10, 3, 10, 10));
 		
 		JLabel labelEmpty1 = new JLabel("");

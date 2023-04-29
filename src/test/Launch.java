@@ -31,8 +31,8 @@ public class Launch {
 		Boolean flagGui=true;
 		
 		if(flagGui) {
-//			Home gui = new Home();
-//			gui.setVisible(true);
+			Home gui = new Home();
+			gui.setVisible(true);
 			
 			//Partita gp = new Partita();
 			//gp.setVisible(true);
