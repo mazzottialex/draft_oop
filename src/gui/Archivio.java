@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
@@ -21,6 +22,8 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import data.Calciatore;
 import logics.LogicsHome;
@@ -59,14 +62,14 @@ public class Archivio extends Base {
 	 */
 	public Archivio() throws FileNotFoundException, ClassNotFoundException, IOException {
 		
-		DefaultTableModel tm= new DefaultTableModel(new String[] {"RUOLO","GIOCATORE","RATING","ATT","CEN","DIF"},0);
+		TableModel tm= new DefaultTableModel(new String[] {"RUOLO","GIOCATORE","RATING","ATT","CEN","DIF"},0);
 				
 		LogicsHome log=new LogicsHomeImpl("2022-2023");
 		log.loadStagione("2020-2021");
 		List<Calciatore> li= log.getLi();
 		ExtractData ex =new ExtractDataImpl(li);
 		li=ex.getListOrdered(c->-c.getRating().getX());
-		li.stream().forEach(c -> tm.addRow(c.toVector()));
+		li.stream().forEach(c -> ((DefaultTableModel) tm).addRow(c.toVector()));
 		
 		
 		
@@ -74,21 +77,18 @@ public class Archivio extends Base {
 		JScrollPane scrollPane=new JScrollPane(table);
 		scrollPane.setPreferredSize(new Dimension(620,610));
 		contentPane.add(scrollPane);
-		table.getTableHeader().addMouseListener(new MouseAdapter() {
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				int col = table.columnAtPoint(e.getPoint());
-		        String name = table.getColumnName(col);
-		        System.out.println("Column index selected " + col + " " + name);
-				
-				
-			}
+		
+		TableRowSorter<TableModel> sorter=new TableRowSorter<TableModel>(tm);
+		sorter.setComparator(0, new Comparator<Object>() {
+		    @Override
+		    public int compare(Object o1, Object o2) {
+		        return 0;
+		    }
 		});
+		table.setRowSorter(sorter);
+		
 		JButton btnNewButton = new JButton("Torna alla home");
 		getContentPane().add(btnNewButton);
-		
-		
 	}
 
 }
