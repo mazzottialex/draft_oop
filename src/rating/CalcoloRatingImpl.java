@@ -53,8 +53,10 @@ public class CalcoloRatingImpl implements CalcoloRating {
 		//per specifico ruolo
 		if(ruolo.equals("A"))
 			rat=(int) Math.ceil(0.9*ratA+0.1*ratD);
-		else if(ruolo.equals("C"))
+		else if(ruolo.equals("C")) {
+			ratC*=1.05;
 			rat=(int) Math.ceil(0.51*ratA+0.51*ratD);
+		}
 		else if(ruolo.equals("D"))
 			rat=(int) Math.ceil(0.1*ratA+0.9*ratD);
 		else if(ruolo.equals("P"))

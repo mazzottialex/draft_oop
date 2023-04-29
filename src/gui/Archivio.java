@@ -65,7 +65,7 @@ public class Archivio extends Base {
 		TableModel tm= new DefaultTableModel(new String[] {"RUOLO","GIOCATORE","RATING","ATT","CEN","DIF"},0);
 				
 		LogicsHome log=new LogicsHomeImpl("2022-2023");
-		log.loadStagione("2020-2021");
+		log.loadStagione("2022-2023");
 		List<Calciatore> li= log.getLi();
 		ExtractData ex =new ExtractDataImpl(li);
 		li=ex.getListOrdered(c->-c.getRating().getX());
