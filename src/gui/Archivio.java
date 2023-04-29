@@ -13,6 +13,7 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,6 +23,7 @@ import logics.LogicsHomeImpl;
 import manageData.ExtractDataImpl;
 
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 
 public class Archivio extends JFrame {
 
@@ -50,7 +52,6 @@ public class Archivio extends JFrame {
 	 * @throws ClassNotFoundException 
 	 * @throws FileNotFoundException 
 	 */
-	@SuppressWarnings("unchecked")
 	public Archivio() throws FileNotFoundException, ClassNotFoundException, IOException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -58,6 +59,11 @@ public class Archivio extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
+		
+		//JTextArea ta=new JTextArea(40,40);
+		
+				
+		
 		
 		table = new JTable(0,5);
 		
@@ -69,8 +75,9 @@ public class Archivio extends JFrame {
 		
 		li.stream().forEach(c -> tm.addRow(c.toVector()));
 		//System.out.print(li.get(2).toString());
-		contentPane.add(table);
-		
+		//contentPane.add(table);
+		JScrollPane scrollPane=new JScrollPane(table);
+		contentPane.add(scrollPane);
 		
 		
 	}
