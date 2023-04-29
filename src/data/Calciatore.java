@@ -1,6 +1,7 @@
 package data;
 
 import java.io.Serializable;
+import java.util.Vector;
 
 import utils.Pair;
 import utils.Triple;
@@ -142,14 +143,14 @@ public class Calciatore implements Serializable{
 		this.rating=rating;
 	}
 
-	@Override
-	public String toString() {
-		return "Calciatore [id=" + id + ", nominativo=" + nominativo + ", ruolo=" + ruolo + ", squadra=" + squadra
-				+ ", pg=" + pg + ", minuti=" + minuti + ", gol=" + gol + ", tiri=" + tiri + ", dribling=" + dribling
-				+ ", assist=" + assist + ", passaggi=" + passaggi + ", passaggiChiave=" + passaggiChiave
-				+ ", ammonizioni=" + ammonizioni + ", espulsioni=" + espulsioni + ", rubati=" + rubati + ", tackle="
-				+ tackle + ", cleanSheet=" + cleanSheet + ", parate=" + parate + ", ratingCartellino="
-				+ ratingCartellino + ", rating=" + rating + "]";
+	
+	public Vector<?> toVector() {
+		Vector<Object> v=new Vector<>();
+		v.add(id);
+		v.add(nominativo);
+		v.add(rating.getX());
+		v.add(gol);
+		return v;
 	}
 	
 	

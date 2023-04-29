@@ -43,7 +43,7 @@ public class Launch {
 			List<Calciatore> li = md.getLi();
 			CalcoloRating r = new CalcoloRatingImpl(li);
 			li = r.updateRating();
-			//ExtractData ex = new ExtractDataImpl(li);
+			ExtractData ex = new ExtractDataImpl(li);
 //			ex.getLi()
 //				.stream()
 //				.sorted((c1,c2)->ra.getRating(c1).getX()-ra.getRating(c2).getX())
@@ -52,16 +52,16 @@ public class Launch {
 //			Home gui = new Home();
 //			gui.setVisible(true);
 
-//			System.out.println(ex.getTitolariBySquadraByRuolo("NAP", "P", Modulo.M352));
+			System.out.println(ex.getTitolariBySquadraByRuolo("NAP", "P", Modulo.M352));
 //			System.out.println(ex.getCalciatoreBySquadra("NAP"));
 			
-			SquadraAvversaria sa = new SquadraAvversaria(0, "NAP", Modulo.M433, li);
+			//SquadraAvversaria sa = new SquadraAvversaria(0, "NAP", Modulo.M433, li);
 //			System.out.println(sa.getNomeTitolari());
 //			System.out.println(sa.getNomeRiserve());
-			System.out.println(sa.getNomeCalciatori());
+			//System.out.println(sa.getNomeCalciatori());
 			
-			Partita gp = new Partita();
-			gp.setVisible(true);
+			//Partita gp = new Partita();
+			//gp.setVisible(true);
 			}
 	}
 }

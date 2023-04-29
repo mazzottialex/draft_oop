@@ -48,7 +48,7 @@ public class SquadraAvversaria{
 	
 	public List<String> getNomeTitolari() throws FileNotFoundException, ClassNotFoundException, IOException {
 		ExtractData ed = new ExtractDataImpl(li);
-		return ed.getNomeTitolaori(nomeSquadra, modulo);
+		return ed.getNomeTitolari(nomeSquadra, modulo);
 	}
 	
 	public List<String> getNomeRiserve() throws FileNotFoundException, ClassNotFoundException, IOException {

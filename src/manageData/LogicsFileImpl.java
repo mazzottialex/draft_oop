@@ -34,6 +34,7 @@ public class LogicsFileImpl implements LogicsFile{
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+		//System.out.print(li.get(0).toString());
 		return li;
 	}
 
