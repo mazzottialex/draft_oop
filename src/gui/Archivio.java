@@ -2,6 +2,9 @@ package gui;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -64,11 +67,24 @@ public class Archivio extends Base {
 		ExtractData ex =new ExtractDataImpl(li);
 		li=ex.getListOrdered(c->-c.getRating().getX());
 		li.stream().forEach(c -> tm.addRow(c.toVector()));
+		
+		
+		
 		table= new JTable(tm);
 		JScrollPane scrollPane=new JScrollPane(table);
 		scrollPane.setPreferredSize(new Dimension(620,610));
 		contentPane.add(scrollPane);
-		
+		table.getTableHeader().addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int col = table.columnAtPoint(e.getPoint());
+		        String name = table.getColumnName(col);
+		        System.out.println("Column index selected " + col + " " + name);
+				
+				
+			}
+		});
 		JButton btnNewButton = new JButton("Torna alla home");
 		getContentPane().add(btnNewButton);
 		
