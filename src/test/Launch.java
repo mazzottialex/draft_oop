@@ -31,8 +31,11 @@ public class Launch {
 		Boolean flagGui=true;
 		
 		if(flagGui) {
-			Home gui = new Home();
-			gui.setVisible(true);
+//			Home gui = new Home();
+//			gui.setVisible(true);
+			
+			//Partita gp = new Partita();
+			//gp.setVisible(true);
 		}
 		else {
 //			Scraping sc = new ScrapingImpl();
@@ -58,10 +61,14 @@ public class Launch {
 			//SquadraAvversaria sa = new SquadraAvversaria(0, "NAP", Modulo.M433, li);
 //			System.out.println(sa.getNomeTitolari());
 //			System.out.println(sa.getNomeRiserve());
+
 			//System.out.println(sa.getNomeCalciatori());
 			
 			//Partita gp = new Partita();
 			//gp.setVisible(true);
 			}
-	}
+
+			//System.out.println(sa.getNomeCalciatori());
+		}
 }
+
