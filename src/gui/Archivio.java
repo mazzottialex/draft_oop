@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 import data.Calciatore;
 import logics.LogicsHome;
@@ -61,9 +62,9 @@ public class Archivio extends JFrame {
 
 		setContentPane(contentPane);
 		
-		table = new JTable(0,5);
+		DefaultTableModel tm= new DefaultTableModel(new String[] {"RUOLO","GIOCATORE","RATING","ATT","CEN","DIF"},0);
 		
-		DefaultTableModel tm= (DefaultTableModel) table.getModel();
+		//JTableHeader header=new JTableHeader();
 		
 		LogicsHome log=new LogicsHomeImpl("2022-2023");
 		log.loadStagione("2020-2021");
@@ -72,7 +73,7 @@ public class Archivio extends JFrame {
 		ExtractData ex =new ExtractDataImpl(li);
 		li=ex.getListOrdered(c->-c.getRating().getX());
 		li.stream().forEach(c -> tm.addRow(c.toVector()));
-
+		table= new JTable(tm);
 		JScrollPane scrollPane=new JScrollPane(table);
 		contentPane.add(scrollPane);
 		
