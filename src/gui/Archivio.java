@@ -20,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
 import data.Calciatore;
 import logics.LogicsHome;
 import logics.LogicsHomeImpl;
+import manageData.ExtractData;
 import manageData.ExtractDataImpl;
 
 import javax.swing.JTable;
@@ -60,22 +61,18 @@ public class Archivio extends JFrame {
 
 		setContentPane(contentPane);
 		
-		//JTextArea ta=new JTextArea(40,40);
-		
-				
-		
-		
 		table = new JTable(0,5);
 		
 		DefaultTableModel tm= (DefaultTableModel) table.getModel();
 		
 		LogicsHome log=new LogicsHomeImpl("2022-2023");
-		log.loadStagione("2022-2023");
+		log.loadStagione("2020-2021");
 		List<Calciatore> li= log.getLi();
 		
+		ExtractData ex =new ExtractDataImpl(li);
+		li=ex.getListOrdered(c->-c.getRating().getX());
 		li.stream().forEach(c -> tm.addRow(c.toVector()));
-		//System.out.print(li.get(2).toString());
-		//contentPane.add(table);
+
 		JScrollPane scrollPane=new JScrollPane(table);
 		contentPane.add(scrollPane);
 		

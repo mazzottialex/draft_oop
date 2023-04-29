@@ -32,14 +32,14 @@ public class CalcoloRatingImpl implements CalcoloRating {
 		int ratTiri=fun.Logaritmica(calc.getTiri(), ex.getTopByAttribute(c->c.getTiri()), 50, 100);
 		int ratDribl=fun.Logaritmica(calc.getDribling(), ex.getTopByAttribute(c->c.getDribling()), 50, 90);
 		int ratAss=fun.Logaritmica(calc.getAssist(), ex.getTopByAttribute(c->c.getAssist()), 50, 90);
-		int ratPassChiave=fun.Logaritmica(calc.getPassaggiChiave(), ex.getTopByAttribute(c->c.getPassaggiChiave()), 50, 90);
+		int ratPassChiave=fun.Logaritmica(calc.getPassaggiChiave(), ex.getTopByAttribute(c->c.getPassaggiChiave()), 50, 100);
 		
-		int ratA=(ratAss*2+ratDribl+ratGol*6+ratPassChiave+ratTiri*2)/12;
+		int ratA=(ratAss*2+ratDribl+ratGol*5+ratPassChiave+ratTiri*2)/11;
 		
 		//per rating D
-		int ratPassaggi=fun.Logaritmica(calc.getPassaggi(), ex.getTopByAttribute(c->c.getPassaggi()), 50, 95);
+		int ratPassaggi=fun.Logaritmica(calc.getPassaggi(), ex.getTopByAttribute(c->c.getPassaggi()), 50, 100);
 		int ratRubati=fun.Logaritmica(calc.getRubati(), ex.getTopByAttribute(c->c.getRubati()), 50, 95);
-		int ratTackle=fun.Logaritmica(calc.getTackle(), ex.getTopByAttribute(c->c.getTackle()), 50, 95);
+		int ratTackle=fun.Logaritmica(calc.getTackle(), ex.getTopByAttribute(c->c.getTackle()), 50, 90);
 		int ratCS=fun.Logaritmica(calc.getCleanSheet(), ex.getTopByAttribute(c->c.getCleanSheet()), 50, 82);
 		
 		int ratD=(ratPassaggi+ratRubati+ratTackle+ratCS)/4;
@@ -54,7 +54,7 @@ public class CalcoloRatingImpl implements CalcoloRating {
 		if(ruolo.equals("A"))
 			rat=(int) Math.ceil(0.9*ratA+0.1*ratD);
 		else if(ruolo.equals("C"))
-			rat=(int) Math.ceil(0.5*ratA+0.5*ratD);
+			rat=(int) Math.ceil(0.51*ratA+0.51*ratD);
 		else if(ruolo.equals("D"))
 			rat=(int) Math.ceil(0.1*ratA+0.9*ratD);
 		else if(ruolo.equals("P"))

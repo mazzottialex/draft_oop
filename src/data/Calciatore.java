@@ -146,10 +146,12 @@ public class Calciatore implements Serializable{
 	
 	public Vector<?> toVector() {
 		Vector<Object> v=new Vector<>();
-		v.add(id);
+		v.add(ruolo);
 		v.add(nominativo);
 		v.add(rating.getX());
-		v.add(gol);
+		v.add(rating.getY().getX());
+		v.add(rating.getY().getY());
+		v.add(rating.getY().getZ());
 		return v;
 	}
 	
