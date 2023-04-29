@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
@@ -26,6 +27,7 @@ import manageData.ExtractDataImpl;
 
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.JButton;
 
 public class Archivio extends Base {
 	private JTable table;
@@ -59,13 +61,16 @@ public class Archivio extends Base {
 		LogicsHome log=new LogicsHomeImpl("2022-2023");
 		log.loadStagione("2020-2021");
 		List<Calciatore> li= log.getLi();
-		
 		ExtractData ex =new ExtractDataImpl(li);
 		li=ex.getListOrdered(c->-c.getRating().getX());
 		li.stream().forEach(c -> tm.addRow(c.toVector()));
 		table= new JTable(tm);
 		JScrollPane scrollPane=new JScrollPane(table);
+		scrollPane.setPreferredSize(new Dimension(620,610));
 		contentPane.add(scrollPane);
+		
+		JButton btnNewButton = new JButton("Torna alla home");
+		getContentPane().add(btnNewButton);
 		
 		
 	}
