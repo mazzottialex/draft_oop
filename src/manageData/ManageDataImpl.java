@@ -23,7 +23,7 @@ public class ManageDataImpl implements ManageData{
 	
 	public ManageDataImpl(String stagione) {
 		li=new ArrayList<>();
-		logFile=new LogicsFileImpl(stagione);
+		logFile=new LogicsFileImpl();
 		this.stagione=stagione;
 	}
 	
@@ -32,139 +32,15 @@ public class ManageDataImpl implements ManageData{
 	}
 	
 	public void LoadData() throws FileNotFoundException, ClassNotFoundException, IOException {
-		li=logFile.LoadData();
+		li=logFile.LoadData(stagione);
 	}
-	public void DownloadData() throws FileNotFoundException, ClassNotFoundException, IOException {
+	public Boolean DownloadData() throws FileNotFoundException, ClassNotFoundException, IOException {
 		Scraping scr=new ScrapingImpl();
-		li=scr.getLista(this.stagione);
-		logFile.SaveData(li);
-	}
-	/*
-<<<<<<< HEAD
-
-	public List<Calciatore> getRandomByRuolo(String ruolo, int n) {
-		List<Calciatore> listaRuolo=getListaByRuolo(ruolo);
-		Random rnd=new Random();
-		Set<Integer> posizioni=new HashSet<>();
-		for(int i=0;i<n;i++) {
-			posizioni.add(rnd.nextInt(listaRuolo.size()));
-		}
-		return listaRuolo.stream()
-				.filter(c->posizioni.contains(c.getId()))
-				.toList();
+		if(!scr.ReadTable(this.stagione))
+			return false;
+		li=scr.getLista();
+		logFile.SaveData(li, stagione);
+		return true;
 	}
 
-	public List<Calciatore> getTitolariBySquadraByRuolo(String squadra, String ruolo, Modulo modulo) {
-		List<Calciatore> listaSquadra = getCalciatoreBySquadra(squadra);
-		List<Calciatore> lista = new ArrayList<>();
-		int n = 0;
-		Predicate<Calciatore> noP = c -> !c.getRuolo().equals("P");
-		Predicate<Calciatore> noD = c -> !c.getRuolo().equals("D");
-		Predicate<Calciatore> noC = c -> !c.getRuolo().equals("C");
-		Predicate<Calciatore> noA = c -> !c.getRuolo().equals("A");
-		Predicate<Calciatore> noTC = c -> !c.getRuolo().equals("T (C)");
-		Predicate<Calciatore> noTA = c -> !c.getRuolo().equals("T (A)");
-		switch (ruolo) {
-		case "P":
-			n = 1;
-			lista = listaSquadra.stream()
-					.filter(c->c.getRuolo().equals(ruolo))
-					.sorted(Comparator.comparingDouble(Calciatore::getMv).reversed())
-					.limit(n)
-					.toList();
-			break;
-		case "D":
-			n = modulo.getNumDif();
-			lista = listaSquadra.stream()
-					.filter(c->c.getRuolo().equals(ruolo))
-					.sorted(Comparator.comparingDouble(Calciatore::getMv).reversed())
-					.limit(n)
-					.toList();
-			break;
-		case "C":
-			n = modulo.getNumCen();
-			lista = listaSquadra.stream()
-					.filter(noP).filter(noD).filter(noA).filter(noTA)
-					.sorted(Comparator.comparingDouble(Calciatore::getMv).reversed())
-					.limit(n)
-					.toList();
-			break;
-		case "A":
-			n = modulo.getNumAtt();
-			lista = listaSquadra.stream()
-					.filter(noP).filter(noD).filter(noC).filter(noTC)
-					.sorted(Comparator.comparingDouble(Calciatore::getMv).reversed())
-					.limit(n)
-					.toList();
-			break;
-		default:
-			break;
-		}
-		return lista;
-	}
-
-	public List<Calciatore> getRiserveBySquadraByRuolo(String squadra, String ruolo, Modulo modulo) {
-		List<Calciatore> listaSquadra = getCalciatoreBySquadra(squadra);
-		List<Calciatore> lista = new ArrayList<>();
-		int n = 0;
-		int m = 0;
-		Predicate<Calciatore> noP = c -> !c.getRuolo().equals("P");
-		Predicate<Calciatore> noD = c -> !c.getRuolo().equals("D");
-		Predicate<Calciatore> noC = c -> !c.getRuolo().equals("C");
-		Predicate<Calciatore> noA = c -> !c.getRuolo().equals("A");
-		Predicate<Calciatore> noTC = c -> !c.getRuolo().equals("T (C)");
-		Predicate<Calciatore> noTA = c -> !c.getRuolo().equals("T (A)");
-		switch (ruolo) {
-		case "P":
-			n = 1;
-			m = 1;
-			lista = listaSquadra.stream()
-					.filter(c->c.getRuolo().equals(ruolo))
-					.sorted(Comparator.comparingDouble(Calciatore::getMv).reversed())
-					.skip(n)
-					.limit(m)
-					.toList();
-			break;
-		case "D":
-			n = modulo.getNumDif();
-			m = 2;
-			lista = listaSquadra.stream()
-					.filter(c->c.getRuolo().equals(ruolo))
-					.sorted(Comparator.comparingDouble(Calciatore::getMv).reversed())
-					.skip(n)
-					.limit(m)
-					.toList();
-			break;
-		case "C":
-			n = modulo.getNumCen();
-			m = 2;
-			lista = listaSquadra.stream()
-					.filter(noP).filter(noD).filter(noA).filter(noTA)
-					.sorted(Comparator.comparingDouble(Calciatore::getMv).reversed())
-					.skip(n)
-					.limit(m)
-					.toList();
-			break;
-		case "A":
-			n = modulo.getNumAtt();
-			m = 2;
-			lista = listaSquadra.stream()
-					.filter(noP).filter(noD).filter(noC).filter(noTC)
-					.sorted(Comparator.comparingDouble(Calciatore::getMv).reversed())
-					.skip(n)
-					.limit(m)
-					.toList();
-			break;
-
-		default:
-			break;
-		}
-		return lista;
-	}
-
-
-
-=======
->>>>>>> TestSelenium
-*/
 }

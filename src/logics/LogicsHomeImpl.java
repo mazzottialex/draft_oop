@@ -2,12 +2,15 @@ package logics;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.net.URL;
 import data.Calciatore;
 import manageData.ManageData;
 import manageData.ManageDataImpl;
+import manageData.ManageStagioni;
+import manageData.ManageStagioniImpl;
 import rating.CalcoloRating;
 import rating.CalcoloRatingImpl;
 import scraping.Scraping;
@@ -17,10 +20,12 @@ public class LogicsHomeImpl implements LogicsHome {
 
 	private List<Calciatore> li;
 	private String stagione;
+	private Boolean online;
 	
 	public LogicsHomeImpl(String stagione) { //di default
 		li=new ArrayList<>();
 		this.stagione=stagione;
+		this.online=checkConnection();
 	}
 	
 	@Override
@@ -36,8 +41,8 @@ public class LogicsHomeImpl implements LogicsHome {
 	
 	@Override
 	public List<String> getStagioni() {
-		Scraping sc=new ScrapingImpl();
-		return sc.getStagioni();
+		ManageStagioni ms=new ManageStagioniImpl(online);
+		return ms.getStagioni();
 	}
 
 	@Override
@@ -58,9 +63,11 @@ public class LogicsHomeImpl implements LogicsHome {
 		ManageData md=new ManageDataImpl(stagione);
 		this.stagione=stagione;
 		try {
-			md.DownloadData();
+			if(!md.DownloadData())
+				return false;
 		} catch (ClassNotFoundException | IOException e) {
-			return false;
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		this.li=md.getLi();
 		return true;
@@ -71,6 +78,20 @@ public class LogicsHomeImpl implements LogicsHome {
 		CalcoloRating rat=new CalcoloRatingImpl(this.li);
 		rat.updateRating();
 		return rat.getLi();
+	}
 
+	private Boolean checkConnection() {
+		try {
+			URL url = new URL("http://www.google.com");
+	    	URLConnection connection = url.openConnection();
+	    	connection.connect();
+	    	return true;
+		}catch(Exception e) {
+	    	return false;
+	    }
+	}
+	
+	public Boolean getOnline() {
+		return this.online;
 	}
 }

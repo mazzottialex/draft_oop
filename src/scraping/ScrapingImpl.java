@@ -25,18 +25,11 @@ public class ScrapingImpl implements Scraping{
 		this.nThread=nThread;
 	}
 	
-	public List<Calciatore> getLista(String stagione) {
-		this.ReadTable(stagione);
+	public List<Calciatore> getLista() {
 		return li;
 	}
 	
-	public List<Calciatore> getLista() {
-		String defaultStagione="2022-2023";
-		return this.getLista(defaultStagione);
-	}
-	
-	private void ReadTable(String stagione) {
-		
+	public Boolean ReadTable(String stagione) {
 		List<Pair<RunnableScraping, Thread>> liThr=new ArrayList<>();
 		
 		for(int i=0; i<nThread;i++) {
@@ -46,16 +39,26 @@ public class ScrapingImpl implements Scraping{
 			thr.start();
 		}
 		
-		liThr.forEach(el-> {
+		
+		for (Pair<RunnableScraping, Thread> el: liThr) {
 			try {
 				el.getY().join();
-				li.addAll(el.getX().getLi());
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-		});
+			if(!el.getX().check()) {
+				return false;
+			}		
+			li.addAll(el.getX().getLi());
+		}
+		return true;
 	}
 
+	public Boolean ReadTable() {
+		String defaultStagione="2022-2023";
+		return this.ReadTable(defaultStagione);
+	}
+	
 	public List<String> getStagioni(){
 		//Nascondere pagine chrome
 		ChromeOptions options=new ChromeOptions();

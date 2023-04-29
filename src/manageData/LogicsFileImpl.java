@@ -17,18 +17,13 @@ import data.Calciatore;
 
 public class LogicsFileImpl implements LogicsFile{
 	
-	private List<Calciatore> li;
-	private String stagione;
-	
-	public LogicsFileImpl(String stagione) {
-		li=new ArrayList<>();
-		this.stagione=stagione;
+	public LogicsFileImpl() {
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Calciatore> LoadData() throws FileNotFoundException, IOException, ClassNotFoundException {
-		
+	public List<Calciatore> LoadData(String stagione) throws FileNotFoundException, IOException, ClassNotFoundException {
+		List<Calciatore> li=new ArrayList<>();
 		try(final InputStream file = new FileInputStream("res/backup"+stagione+".txt");
 			final InputStream bstream = new BufferedInputStream(file);
 			final ObjectInputStream ostream=new ObjectInputStream(file);
@@ -43,7 +38,7 @@ public class LogicsFileImpl implements LogicsFile{
 	}
 
 	@Override
-	public Boolean SaveData(List<Calciatore> li) {
+	public Boolean SaveData(List<Calciatore> li, String stagione) {
 		try(final OutputStream file = new FileOutputStream("res/backup"+stagione+".txt");
 				final OutputStream bstream = new BufferedOutputStream(file);
 				final ObjectOutputStream ostream=new ObjectOutputStream(file);
@@ -57,4 +52,39 @@ public class LogicsFileImpl implements LogicsFile{
 		return true;
 	}
 	
+	public List<String> loadStagioni(){
+		List<String> ls=new ArrayList<>();
+		try(final InputStream file = new FileInputStream("res/backupStagioni.txt");
+				final InputStream bstream = new BufferedInputStream(file);
+				final ObjectInputStream ostream=new ObjectInputStream(file);
+						){
+					while(ls.add(ostream.readUTF())) {}
+					ostream.close();
+				}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+			return ls;
+	}
+	
+	@Override
+	public Boolean SaveStagioni(List<String> li){
+		try(final OutputStream file = new FileOutputStream("res/backupStagioni.txt");
+				final OutputStream bstream = new BufferedOutputStream(file);
+				final ObjectOutputStream ostream=new ObjectOutputStream(file);
+					){
+				li.forEach(s-> {
+					try {
+						ostream.writeUTF(s);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				} );
+				ostream.close();
+			}
+		catch (Exception e) {
+			return false;
+		}
+		return true;
+	}
 }

@@ -5,17 +5,23 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import manageData.ExtractData;
+import manageData.ExtractDataImpl;
+
 public class SquadraAvversaria{
 	private int id;
 	private String nomeSquadra;
 	private Modulo modulo;
 	public List<Calciatore> titolari = new ArrayList<>();
 	public List<Calciatore> riserve = new ArrayList<>();
+	private List<Calciatore> li;
 	
-	public SquadraAvversaria(int id, String nomeSquadra, Modulo modulo) throws FileNotFoundException, IOException {
+	
+	public SquadraAvversaria(int id, String nomeSquadra, Modulo modulo, List<Calciatore> li) throws FileNotFoundException, IOException {
 		this.id = id;
 		this.nomeSquadra = nomeSquadra;
 		this.modulo = modulo;
+		this.li = li;
 	}
 
 	public int getId() {
@@ -29,29 +35,29 @@ public class SquadraAvversaria{
 	public Modulo getModulo() {
 		return modulo;
 	}
-	/*
-	public List<Calciatore> getTitolari() {
-		List<Calciatore> liP = getTitolariBySquadraByRuolo(nomeSquadra, "P", modulo);
-		List<Calciatore> liD = getTitolariBySquadraByRuolo(nomeSquadra, "D", modulo);
-		List<Calciatore> liC = getTitolariBySquadraByRuolo(nomeSquadra, "C", modulo);
-		List<Calciatore> liA = getTitolariBySquadraByRuolo(nomeSquadra, "A", modulo);
-		titolari.addAll(liP);
-		titolari.addAll(liD);
-		titolari.addAll(liC);
-		titolari.addAll(liA);
-		return titolari;
+
+	public List<Calciatore> getTitolari() throws FileNotFoundException, ClassNotFoundException, IOException {
+		ExtractData ed = new ExtractDataImpl(li);
+		return ed.getTitolari(nomeSquadra, modulo);
+	}
+
+	public List<Calciatore> getRiserve() throws FileNotFoundException, ClassNotFoundException, IOException {
+		ExtractData ed = new ExtractDataImpl(li);
+		return ed.getRiserve(nomeSquadra, modulo);
 	}
 	
-	public List<Calciatore> getRiserve() {
-		List<Calciatore> liP = getRiserveBySquadraByRuolo(nomeSquadra, "P", modulo);
-		List<Calciatore> liD = getRiserveBySquadraByRuolo(nomeSquadra, "D", modulo);
-		List<Calciatore> liC = getRiserveBySquadraByRuolo(nomeSquadra, "C", modulo);
-		List<Calciatore> liA = getRiserveBySquadraByRuolo(nomeSquadra, "A", modulo);
-		riserve.addAll(liP);
-		riserve.addAll(liD);
-		riserve.addAll(liC);
-		riserve.addAll(liA);
-		return riserve;
+	public List<String> getNomeTitolari() throws FileNotFoundException, ClassNotFoundException, IOException {
+		ExtractData ed = new ExtractDataImpl(li);
+		return ed.getNomeTitolaori(nomeSquadra, modulo);
 	}
-	*/
+	
+	public List<String> getNomeRiserve() throws FileNotFoundException, ClassNotFoundException, IOException {
+		ExtractData ed = new ExtractDataImpl(li);
+		return ed.getNomeRiserve(nomeSquadra, modulo);
+	}
+	
+	public List<String> getNomeCalciatori() throws FileNotFoundException, ClassNotFoundException, IOException {
+		ExtractData ed = new ExtractDataImpl(li);
+		return ed.getNomeCalciatori(nomeSquadra);
+	}
 }

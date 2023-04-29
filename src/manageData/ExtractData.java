@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 import data.Calciatore;
+import data.Modulo;
 
 public interface ExtractData {
 	public List<Calciatore> getCalciatoreBySquadra(String name);
@@ -14,4 +15,11 @@ public interface ExtractData {
 	public List<Calciatore> getLi();
 	public int getTopByAttribute(Function<Calciatore, Integer> attr);
 	public int getTopByAttribute(Function<Calciatore, Integer> f1, Function<Calciatore, Integer> f2);
+	public List<Calciatore> getTitolariBySquadraByRuolo(String squadra, String ruolo, Modulo modulo);
+	public List<Calciatore> getRiserveBySquadraByRuolo(String squadra, String ruolo, Modulo modulo);
+	public List<Calciatore> getTitolari(String squadra, Modulo modulo);
+	public List<Calciatore> getRiserve(String squadra, Modulo modulo);
+	public List<String> getNomeCalciatori(String squadra);
+	public List<String> getNomeTitolaori(String squadra, Modulo modulo);
+	public List<String> getNomeRiserve(String squadra, Modulo modulo);
 }
