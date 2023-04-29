@@ -77,14 +77,21 @@ public class ExtractDataImpl implements ExtractData{
 				stream()
 				.map(c -> {
 					if(f1.apply(c)!=0 && f2.apply(c)>100) {
-						//System.out.println(f2.apply(c)/f1.apply(c));
 						return f2.apply(c) / f1.apply(c);
 					}
 					else
-						return 10000;})
+						return 100;})
 				.max((c1, c2) -> c1 - c2)
 				.orElse(0);
 	}
+	
+	@Override
+	public List<Calciatore> getListOrdered(Function<Calciatore, Integer> attr){
+		return li.stream()
+				.sorted((c1,c2) -> attr.apply(c1)-attr.apply(c2) )
+				.toList();
+	}
+
 	
 	@Override
 	public List<Calciatore> getTitolariBySquadraByRuolo(String squadra, String ruolo, Modulo modulo) {
@@ -166,7 +173,7 @@ public class ExtractDataImpl implements ExtractData{
 				.toList();
 	}
 	
-	public List<String> getNomeTitolaori(String squadra, Modulo modulo) {
+	public List<String> getNomeTitolari(String squadra, Modulo modulo) {
 		return getTitolari(squadra, modulo)
 				.stream()
 				.map(c -> c.getNominativo())
