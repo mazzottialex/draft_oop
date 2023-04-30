@@ -26,6 +26,8 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import data.Calciatore;
+import logics.LogicsArchivio;
+import logics.LogicsArchivioImpl;
 import logics.LogicsHome;
 import logics.LogicsHomeImpl;
 import manageData.ExtractData;
@@ -36,14 +38,13 @@ import java.awt.FlowLayout;
 public class Archivio extends Base {
 
 	private JTable table;
-	
+	private final LogicsArchivio log=new LogicsArchivioImpl();
 	public Archivio(List<Calciatore> li, String stagione) throws FileNotFoundException, ClassNotFoundException, IOException {
 		
 		TableModel tm= new DefaultTableModel(new String[] {"RUOLO","GIOCATORE","RATING","ATT","CEN","DIF"},0);
-				
+		li=log.liOrdinata(li);	
 		
-		ExtractData ex =new ExtractDataImpl(li);
-		li=ex.getListOrdered(c->-c.getRating().getX());
+		
 		li.stream().forEach(c -> ((DefaultTableModel) tm).addRow(c.toVector()));
 		contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		contentPane.setPreferredSize(new Dimension(450, 640));
