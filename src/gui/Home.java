@@ -231,8 +231,8 @@ public class Home extends Base{
 			
 				try {
 					frame = new Archivio();
-					contentPane.add(frame.getPanel());
-					validate();
+					getContentPane().add(frame.getPanel());
+					revalidate();
 			        repaint();
 			        //setVisible(true);
 					//contentPane.updateUI();
