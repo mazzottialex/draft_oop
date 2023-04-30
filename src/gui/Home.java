@@ -16,9 +16,13 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 
@@ -167,15 +171,15 @@ public class Home extends Base{
 		
 		JButton btnAggiorna= new JButton("Aggiorna");
 		
-		JLabel label19 = new JLabel("");
+		JLabel labelAvviso = new JLabel("");
 		JComboBox<String> comboBoxAggiorna = new JComboBox<>(array);
 		if(!log.getOnline())
 		{
 			btnAggiorna.setEnabled(false);
 			comboBoxAggiorna.setEnabled(false);
-			label19 = new JLabel("Sei offline");
-			label19.setForeground(Color.yellow);
-			label19.setFont(new Font("DejaVu Sans", Font.ITALIC, 12));
+			labelAvviso = new JLabel("Sei offline");
+			labelAvviso.setForeground(Color.yellow);
+			labelAvviso.setFont(new Font("DejaVu Sans", Font.ITALIC, 12));
 		}
 		btnAggiorna.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnAggiorna.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
@@ -202,7 +206,33 @@ public class Home extends Base{
 		
 		panelDownLoad.add(comboBoxAggiorna);
 		contentPane.add(panelDownLoad);
-		contentPane.add(label19);
+		contentPane.add(labelAvviso);
+		
+		JLabel labelEmpty19 = new JLabel("");
+		contentPane.add(labelEmpty19);
+		
+		JButton btnArchivio= new JButton("Vedi archivio");
+
+		btnArchivio.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+		btnArchivio.setBackground(Color.white);
+		btnArchivio.setRolloverEnabled(true);
+		btnArchivio.setSize(new Dimension(5,5));
+		btnArchivio.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Archivio frame;
+				try {
+					frame = new Archivio();
+					frame.setVisible(true);
+				} catch (ClassNotFoundException | IOException e1) {
+					e1.printStackTrace();
+				}
+				
+			}
+		});
+		contentPane.add(btnArchivio);
+		
 	}
 
 }
