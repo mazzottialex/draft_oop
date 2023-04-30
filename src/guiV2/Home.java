@@ -42,7 +42,7 @@ public class Home extends Base {
 		JButton btnStart = new JButton();
 		ImageIcon img=new ImageIcon("res/start.png");
 		Image image = img.getImage(); // transform it 
-		Image newimg = image.getScaledInstance(200, 200,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+		Image newimg = image.getScaledInstance(250, 250,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		img = new ImageIcon(newimg);
 		btnStart.setBorderPainted(false);
 		btnStart.setIcon(img);
@@ -61,11 +61,12 @@ public class Home extends Base {
 		gbc.gridy=0;
 		gbc.ipady=10;
 		gbc.fill=GridBagConstraints.HORIZONTAL;
-		gbc.insets=new Insets(10, 0, 10, 0);
+		gbc.insets=new Insets(100, 0, 80, 0);
 		contentPane.add(btnStart,gbc);
 
 		
 		JPanel panelSelectioned = new JPanel();
+		panelSelectioned.setPreferredSize(new Dimension(70,40));
 		JLabel lblStagioneSelezionata = new JLabel("Stagione selezionata:");
 		lblStagioneSelezionata.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
 		panelSelectioned.add(lblStagioneSelezionata);
@@ -75,6 +76,7 @@ public class Home extends Base {
 		
 		gbc.gridx=0;
 		gbc.gridy=1;
+		gbc.insets=new Insets(8, 0, 8, 0);
 		contentPane.add(panelSelectioned, gbc);
 		
 		
@@ -151,11 +153,11 @@ public class Home extends Base {
 		
 		panelDownLoad.add(comboBoxAggiorna);
 		gbc.gridx=0;
-		gbc.gridy=4;
+		gbc.gridy=3;
 		//gbc.anchor=100;
 		contentPane.add(panelDownLoad,gbc);
 		gbc.gridx=0;
-		gbc.gridy=3;
+		gbc.gridy=4;
 		contentPane.add(labelAvviso,gbc);
 	}
 	
