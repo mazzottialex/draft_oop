@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Comparator;
@@ -66,11 +68,23 @@ public class Archivio extends Base {
 		panel.setLayout(null);
 		
 		JButton btnHome = new JButton("HOME");
-		btnHome.setBounds(0, 8, 69, 23);
+
+		btnHome.setBounds(10, 8, 70, 28);
 		btnHome.setFont(new Font("DejaVu Sans", Font.PLAIN, 12));
 		btnHome.setBackground(Color.white);
 		btnHome.setRolloverEnabled(true);
 		btnHome.setForeground(Color.BLUE);
+		btnHome.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				getContentPane().removeAll();
+				Home home=new Home();
+				getContentPane().add(home.getPanel());
+				validate();
+				contentPane.updateUI();
+			}
+		});
 		panel.add(btnHome);
 		
 		JLabel lblNewLabel = new JLabel("2022-2023");
