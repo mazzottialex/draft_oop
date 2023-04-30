@@ -231,13 +231,18 @@ public class Home extends Base{
 			
 				try {
 					frame = new Archivio();
-					contentPane=frame.getPanel();
+					contentPane.add(frame.getPanel());
+					validate();
+			        repaint();
+			        //setVisible(true);
+					//contentPane.updateUI();
+
 
 				} catch (ClassNotFoundException | IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
+
 			}
 		});
 		contentPane.add(btnArchivio);
