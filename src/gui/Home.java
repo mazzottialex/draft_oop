@@ -1,137 +1,89 @@
 package gui;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
-import javax.swing.border.EmptyBorder;
-import logics.LogicsHome;
-import logics.LogicsHomeImpl;
-
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
-
-import java.awt.GridLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import java.awt.Font;
-import java.awt.Color;
-import java.awt.Dimension;
+import javax.swing.border.EmptyBorder;
+
+import logics.LogicsHome;
+import logics.LogicsHomeImpl;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 
-
-public class Home extends Base{
-
+public class Home extends Base {
 	
 	private final LogicsHome log;
-	private final String stagioneDefault="2022-23";
-
+	private final String stagioneDefault="2022-2023";
 	
-	/**
-	 * Create the frame.
-	 */
 	public Home() {
-
 		log=new LogicsHomeImpl(stagioneDefault);
+		log.loadStagione(stagioneDefault);
 		
-		contentPane.setLayout(new GridLayout(10, 3, 10, 10));
+		GridBagConstraints gbc=new GridBagConstraints();
+		GridBagLayout layout=new GridBagLayout();
 		
-		JLabel labelEmpty1 = new JLabel("");
-		contentPane.add(labelEmpty1);
-		
-		JLabel labelEmpty2 = new JLabel("");
-		contentPane.add(labelEmpty2);
-		
-		JLabel labelEmpty3 = new JLabel("");
-		contentPane.add(labelEmpty3);
-		
-		JLabel labelEmpty4 = new JLabel("");
-		contentPane.add(labelEmpty4);
-		
-		ImageIcon img=new ImageIcon("res/icon.png");
-		Image image = img.getImage(); // transform it 
-		Image newimg = image.getScaledInstance(120, 120,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-		img = new ImageIcon(newimg);
-		JLabel labelIcon = new JLabel(img);
-		contentPane.add(labelIcon);
-		
-		JLabel labelEmpty5 = new JLabel("");
-		contentPane.add(labelEmpty5);
-		
-		JLabel labelEmpty6 = new JLabel("");
-		contentPane.add(labelEmpty6);
-		
-		JLabel labelEmpty7 = new JLabel("");
-		contentPane.add(labelEmpty7);
-		
-		JLabel labelEmpty8 = new JLabel("");
-		contentPane.add(labelEmpty8);
-		
-		JLabel labelEmpty9 = new JLabel("");
-		contentPane.add(labelEmpty9);
+		contentPane.setLayout(layout);
 		
 		JButton btnStart = new JButton();
-		img=new ImageIcon("res/start.png");
-		image = img.getImage(); // transform it 
-		newimg = image.getScaledInstance(200, 200,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+		ImageIcon img=new ImageIcon("res/start.png");
+		Image image = img.getImage(); // transform it 
+		Image newimg = image.getScaledInstance(250, 250,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		img = new ImageIcon(newimg);
 		btnStart.setBorderPainted(false);
 		btnStart.setIcon(img);
 		btnStart.setBackground(getForeground());
+		btnStart.setPreferredSize(new Dimension(150,40));
 		btnStart.addMouseListener(new java.awt.event.MouseAdapter() {
 		    public void mouseEntered(java.awt.event.MouseEvent evt) {
 		        btnStart.setBackground(Color.GREEN);
 		    }
-
 		    public void mouseExited(java.awt.event.MouseEvent evt) {
-		    	btnStart.setBackground(new Color(0, 0, 128));
+		    	btnStart.setBackground(new Color(0, 64, 128));
 		    }
 		});
 		
-		contentPane.add(btnStart);
-		
-		JLabel labelEmpty10 = new JLabel("");
-		contentPane.add(labelEmpty10);
-		
-		JLabel labelEmpty11 = new JLabel("");
-		contentPane.add(labelEmpty11);
-		
-		JLabel labelEmpty12 = new JLabel("");
-		contentPane.add(labelEmpty12);
-		
-		JLabel labelEmpty13 = new JLabel("");
-		contentPane.add(labelEmpty13);
-		
-		JLabel labelEmpty14 = new JLabel("");
-		contentPane.add(labelEmpty14);
+		gbc.gridx=0;
+		gbc.gridy=0;
+		gbc.ipady=10;
+		gbc.fill=GridBagConstraints.HORIZONTAL;
+		gbc.insets=new Insets(140, 0, 80, 0);
+		contentPane.add(btnStart,gbc);
+
 		
 		JPanel panelSelectioned = new JPanel();
-		contentPane.add(panelSelectioned);
-		
+		panelSelectioned.setPreferredSize(new Dimension(70,40));
 		JLabel lblStagioneSelezionata = new JLabel("Stagione selezionata:");
 		lblStagioneSelezionata.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
 		panelSelectioned.add(lblStagioneSelezionata);
-		
 		JLabel lblStagione = new JLabel(log.getStagione());
 		lblStagione.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
 		panelSelectioned.add(lblStagione);
 		
-		JLabel labelEmpty15 = new JLabel("");
-		contentPane.add(labelEmpty15);
+		gbc.gridx=0;
+		gbc.gridy=1;
+		gbc.insets=new Insets(8, 0, 8, 0);
+		contentPane.add(panelSelectioned, gbc);
 		
-		JLabel labelEmpty16 = new JLabel("");
-		contentPane.add(labelEmpty16);
 		
 		JPanel panelLoad = new JPanel();
 		panelLoad.setBackground(new Color(240, 240, 240));
-		contentPane.add(panelLoad);
 				
 		panelLoad.setLayout(new BoxLayout(panelLoad, BoxLayout.X_AXIS));
 		
@@ -155,17 +107,11 @@ public class Home extends Base{
 					JOptionPane.showMessageDialog(null, "Errore nel caricamento");
 			}	
 		});
-		
 		panelLoad.add(btnCarica);
 		panelLoad.add(comboBoxCarica);
-
-		
-		JLabel labelEmpty17 = new JLabel("");
-		contentPane.add(labelEmpty17);
-		
-		JLabel labelEmpty18 = new JLabel("");
-		contentPane.add(labelEmpty18);
-		
+		gbc.gridx=0;
+		gbc.gridy=2;
+		contentPane.add(panelLoad,gbc);
 		
 		JPanel panelDownLoad = new JPanel();
 		panelDownLoad.setBackground(new Color(240, 240, 240));
@@ -208,44 +154,44 @@ public class Home extends Base{
 		});
 		
 		panelDownLoad.add(comboBoxAggiorna);
-		contentPane.add(panelDownLoad);
-		contentPane.add(labelAvviso);
+		gbc.gridx=0;
+		gbc.gridy=3;
+		//gbc.anchor=100;
+		contentPane.add(panelDownLoad,gbc);
+		gbc.gridx=0;
+		gbc.gridy=4;
+		contentPane.add(labelAvviso,gbc);
 		
-		JLabel labelEmpty19 = new JLabel("");
-		contentPane.add(labelEmpty19);
-		
-		JButton btnArchivio= new JButton("Vedi archivio");
-
+		JButton btnArchivio=new JButton("Archivio");
 		btnArchivio.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
-		btnArchivio.setBackground(Color.white);
+		btnArchivio.setBorderPainted(false);
 		btnArchivio.setRolloverEnabled(true);
-		btnArchivio.setSize(new Dimension(5,5));
 		btnArchivio.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				Archivio frame;
-				contentPane.removeAll();
-				contentPane.updateUI();
-			
+				getContentPane().removeAll();
+				Archivio archivio;
 				try {
-					frame = new Archivio();
-					getContentPane().add(frame.getPanel());
-					revalidate();
-			        repaint();
-			        //setVisible(true);
-					//contentPane.updateUI();
-
+					archivio = new Archivio(log.getLi(), log.getStagione());
+					contentPane.add(archivio.getPanel());
 
 				} catch (ClassNotFoundException | IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-
+				validate();
+				contentPane.updateUI();
+				
 			}
 		});
-		contentPane.add(btnArchivio);
+		gbc.gridx=0;
+		gbc.gridy=5;
+		contentPane.add(btnArchivio,gbc);
+	}
+	
+	public JPanel getPanel() {
+		return contentPane;
 	}
 
 }
