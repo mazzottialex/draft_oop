@@ -85,7 +85,7 @@ public class Start extends Base {
 				getContentPane().removeAll();
 				Home home=new Home();
 				getContentPane().add(home.getPanel());
-				validate();
+				//revalidate();
 				contentPane.updateUI();
 				
 			}

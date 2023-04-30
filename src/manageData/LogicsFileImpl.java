@@ -66,7 +66,7 @@ public class LogicsFileImpl implements LogicsFile{
 					ostream.close();
 				}
 			catch (Exception e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 			return ls;
 	}

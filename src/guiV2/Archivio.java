@@ -41,6 +41,7 @@ public class Archivio extends Base {
 		
 		TableModel tm= new DefaultTableModel(new String[] {"RUOLO","GIOCATORE","RATING","ATT","CEN","DIF"},0);
 				
+		
 		ExtractData ex =new ExtractDataImpl(li);
 		li=ex.getListOrdered(c->-c.getRating().getX());
 		li.stream().forEach(c -> ((DefaultTableModel) tm).addRow(c.toVector()));
@@ -64,9 +65,10 @@ public class Archivio extends Base {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				getContentPane().removeAll();
+
 				Home home=new Home();
 				getContentPane().add(home.getPanel());
-				validate();
+				//revalidate();
 				contentPane.updateUI();
 			}
 		});
