@@ -10,6 +10,7 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -159,6 +160,30 @@ public class Home extends Base {
 		gbc.gridx=0;
 		gbc.gridy=4;
 		contentPane.add(labelAvviso,gbc);
+		
+		JButton btnArchivio=new JButton("Archcio");
+		btnArchivio.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				getContentPane().removeAll();
+				Archivio archivio;
+				try {
+					archivio = new Archivio();
+					contentPane.add(archivio.getPanel());
+
+				} catch (ClassNotFoundException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				validate();
+				contentPane.updateUI();
+				
+			}
+		});
+		gbc.gridx=0;
+		gbc.gridy=5;
+		contentPane.add(btnArchivio,gbc);
 	}
 	
 	public JPanel getPanel() {
