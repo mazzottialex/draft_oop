@@ -32,10 +32,13 @@ public class Home extends Base{
 	
 	private final LogicsHome log;
 	private final String stagioneDefault="2022-23";
+
+	
 	/**
 	 * Create the frame.
 	 */
 	public Home() {
+
 		log=new LogicsHomeImpl(stagioneDefault);
 		
 		contentPane.setLayout(new GridLayout(10, 3, 10, 10));
@@ -221,18 +224,23 @@ public class Home extends Base{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 				Archivio frame;
+				contentPane.removeAll();
+				contentPane.updateUI();
+			
 				try {
 					frame = new Archivio();
-					frame.setVisible(true);
+					contentPane=frame.getPanel();
+
 				} catch (ClassNotFoundException | IOException e1) {
+					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				
 			}
 		});
 		contentPane.add(btnArchivio);
-		
 	}
 
 }

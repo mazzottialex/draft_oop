@@ -140,4 +140,7 @@ public class Archivio extends Base {
 		
 	}
 
+	public JPanel getPanel() {
+		return this.contentPane;
+	}
 }
