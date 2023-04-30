@@ -11,6 +11,7 @@ import data.Modulo;
 import data.SquadraAvversaria;
 import gui.Home;
 import gui.Partita;
+import guiV2.Start;
 import gui.Partita;
 import logics.LogicsHome;
 import logics.LogicsHomeImpl;
@@ -31,8 +32,16 @@ public class Launch {
 		Boolean flagGui=true;
 		
 		if(flagGui) {
-			Home gui = new Home();
-			gui.setVisible(true);
+			EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					try {
+						Start frame = new Start();
+						frame.setVisible(true);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
 			
 			//Partita gp = new Partita();
 			//gp.setVisible(true);
