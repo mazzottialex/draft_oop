@@ -30,10 +30,11 @@ import javax.swing.JComboBox;
 public class Home extends Base {
 	
 	private final LogicsHome log;
-	private final String stagioneDefault="2022-23";
+	private final String stagioneDefault="2022-2023";
 	
 	public Home() {
 		log=new LogicsHomeImpl(stagioneDefault);
+		log.loadStagione(stagioneDefault);
 		
 		GridBagConstraints gbc=new GridBagConstraints();
 		GridBagLayout layout=new GridBagLayout();
@@ -62,7 +63,7 @@ public class Home extends Base {
 		gbc.gridy=0;
 		gbc.ipady=10;
 		gbc.fill=GridBagConstraints.HORIZONTAL;
-		gbc.insets=new Insets(100, 0, 80, 0);
+		gbc.insets=new Insets(140, 0, 80, 0);
 		contentPane.add(btnStart,gbc);
 
 		
@@ -161,7 +162,10 @@ public class Home extends Base {
 		gbc.gridy=4;
 		contentPane.add(labelAvviso,gbc);
 		
-		JButton btnArchivio=new JButton("Archcio");
+		JButton btnArchivio=new JButton("Archivio");
+		btnArchivio.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+		btnArchivio.setBorderPainted(false);
+		btnArchivio.setRolloverEnabled(true);
 		btnArchivio.addActionListener(new ActionListener() {
 			
 			@Override
@@ -169,7 +173,7 @@ public class Home extends Base {
 				getContentPane().removeAll();
 				Archivio archivio;
 				try {
-					archivio = new Archivio();
+					archivio = new Archivio(log.getLi(), log.getStagione());
 					contentPane.add(archivio.getPanel());
 
 				} catch (ClassNotFoundException | IOException e1) {

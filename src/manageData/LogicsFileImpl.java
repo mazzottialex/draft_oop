@@ -59,7 +59,10 @@ public class LogicsFileImpl implements LogicsFile{
 				final InputStream bstream = new BufferedInputStream(file);
 				final ObjectInputStream ostream=new ObjectInputStream(file);
 						){
-					while(ls.add(ostream.readUTF())) {}
+			String str;
+					while((str=ostream.readUTF()) != null) {
+						ls.add(str);
+					}
 					ostream.close();
 				}
 			catch (Exception e) {

@@ -37,25 +37,10 @@ public class Archivio extends Base {
 
 	private JTable table;
 	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Archivio frame = new Archivio();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	public Archivio() throws FileNotFoundException, ClassNotFoundException, IOException {
+	public Archivio(List<Calciatore> li, String stagione) throws FileNotFoundException, ClassNotFoundException, IOException {
 		
 		TableModel tm= new DefaultTableModel(new String[] {"RUOLO","GIOCATORE","RATING","ATT","CEN","DIF"},0);
 				
-		LogicsHome log=new LogicsHomeImpl("2022-2023");
-		log.loadStagione("2022-2023");
-		List<Calciatore> li= log.getLi();
 		ExtractData ex =new ExtractDataImpl(li);
 		li=ex.getListOrdered(c->-c.getRating().getX());
 		li.stream().forEach(c -> ((DefaultTableModel) tm).addRow(c.toVector()));

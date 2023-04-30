@@ -41,7 +41,8 @@ public class LogicsHomeImpl implements LogicsHome {
 	
 	@Override
 	public List<String> getStagioni() {
-		ManageStagioni ms=new ManageStagioniImpl(online);
+		//ManageStagioni ms=new ManageStagioniImpl(online);
+		ManageStagioni ms=new ManageStagioniImpl(false);
 		return ms.getStagioni();
 	}
 
