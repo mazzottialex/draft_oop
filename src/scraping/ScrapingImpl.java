@@ -30,17 +30,17 @@ public class ScrapingImpl implements Scraping{
 	}
 	
 	public Boolean ReadTable(String stagione) {
-		List<Pair<RunnableScraping, Thread>> liThr=new ArrayList<>();
+		List<Pair<RunnableScrapingData, Thread>> liThr=new ArrayList<>();
 		
 		for(int i=0; i<nThread;i++) {
-			RunnableScraping runnable=new RunnableScraping(i, nThread, stagione);
+			RunnableScrapingData runnable=new RunnableScrapingData(i, nThread, stagione);
 			Thread thr=new Thread(runnable);
 			liThr.add(new Pair<>(runnable,thr));
 			thr.start();
 		}
 		
 		
-		for (Pair<RunnableScraping, Thread> el: liThr) {
+		for (Pair<RunnableScrapingData, Thread> el: liThr) {
 			try {
 				el.getY().join();
 			} catch (InterruptedException e) {

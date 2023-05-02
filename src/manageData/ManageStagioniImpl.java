@@ -23,6 +23,7 @@ public class ManageStagioniImpl implements ManageStagioni {
 	
 	public Boolean updateStagioni() {
 		if(online) {
+			li=s.getStagioni();
 			file.SaveStagioni(li);
 			return true;
 		}

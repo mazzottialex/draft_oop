@@ -15,7 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import data.Calciatore;
 
-public class RunnableScraping implements Runnable{
+public class RunnableScrapingData implements Runnable{
 	
 	private final int myId;
 	private final int nThread;
@@ -23,7 +23,7 @@ public class RunnableScraping implements Runnable{
 	private final String url;
 	private Boolean flag=true;
 	
-	public RunnableScraping(int myId, int nThread, String stagione) {
+	public RunnableScrapingData(int myId, int nThread, String stagione) {
 		this.myId = myId;
 		this.nThread = nThread;
 		this.url="https://www.kickest.it/it/serie-a/statistiche/giocatori/tabellone/"+stagione+"?iframe=yes";
