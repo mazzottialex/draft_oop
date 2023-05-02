@@ -6,11 +6,17 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import utils.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JTextField;
 
 public class Impostazioni extends Base {
@@ -47,7 +53,7 @@ public class Impostazioni extends Base {
 		lblNomeSquadra.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
 		gbc.gridx=0;
 		gbc.gridy=0;
-		gbc.insets=new Insets(0,5, 0, 5);
+		gbc.insets=new Insets(10, 5, 10, 5);
 		contentPane.add(lblNomeSquadra, gbc);
 		
 		
@@ -56,10 +62,42 @@ public class Impostazioni extends Base {
 		textFieldNomeSquadra.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
 		gbc.gridx=1;
 		gbc.gridy=0;
-		contentPane.add(textFieldNomeSquadra,gbc);
+		contentPane.add(textFieldNomeSquadra, gbc);
+
+		JButton btnAddImg = new JButton("Scegli Stemma");
+		btnAddImg.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+		final JLabel lblImg = new JLabel();
+	    lblImg.setForeground(Color.white);
+	    lblImg.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
 		
-		
+	    
+	    btnAddImg.addActionListener(new ActionListener() {
+	         @Override
+	    	public void actionPerformed(ActionEvent e) {
+	        	 JFileChooser fileChooser = new JFileChooser();
+	        	 fileChooser.addChoosableFileFilter(new ImageFilter());
+	        	 fileChooser.setAcceptAllFileFilterUsed(false);
+
+	        	 int option = fileChooser.showOpenDialog(contentPane);
+	        	 if(option == JFileChooser.APPROVE_OPTION){
+	        		 File file = fileChooser.getSelectedFile();
+	        		 lblImg.setText("File Selected: " + file.getName());
+	        	 }else{
+	        		 lblImg.setText("Open command canceled");
+	             }
+	         }
+	    });
+	      
+	    gbc.gridx=0;
+	    gbc.gridy=1;
+	    contentPane.add(btnAddImg, gbc);
+	    gbc.gridx=1;
+	    gbc.gridy=1;
+	    contentPane.add(lblImg,gbc);
 		
 		add(contentPane);
 	}
 }
+
+
+
