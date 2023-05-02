@@ -18,13 +18,14 @@ public class ManageStagioniImpl implements ManageStagioni {
 	}
 	
 	public List<String> getStagioni() {
+		return li=file.loadStagioni();
+	}
+	
+	public Boolean updateStagioni() {
 		if(online) {
-			li=s.getStagioni();
 			file.SaveStagioni(li);
+			return true;
 		}
-		else {
-			li=file.loadStagioni();
-		}
-		return li;
+		return false;
 	}
 }

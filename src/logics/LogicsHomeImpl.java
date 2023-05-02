@@ -21,11 +21,14 @@ public class LogicsHomeImpl implements LogicsHome {
 	private List<Calciatore> li;
 	private String stagione;
 	private Boolean online;
+	private ManageStagioni ms;
 	
 	public LogicsHomeImpl(String stagione) { //di default
 		li=new ArrayList<>();
 		this.stagione=stagione;
 		this.online=checkConnection();
+		ms=new ManageStagioniImpl(online);
+		ms.updateStagioni();
 	}
 	
 	@Override
@@ -36,13 +39,10 @@ public class LogicsHomeImpl implements LogicsHome {
 	@Override
 	public void setStagione(String stagione) {
 		this.stagione=stagione;
-		
 	}
 	
 	@Override
 	public List<String> getStagioni() {
-		//ManageStagioni ms=new ManageStagioniImpl(online);
-		ManageStagioni ms=new ManageStagioniImpl(false);
 		return ms.getStagioni();
 	}
 
