@@ -60,12 +60,27 @@ public class ScrapingImpl implements Scraping{
 	}
 	
 	public List<String> getStagioni(){
-		RunnableScrapingStagioni runnable=new RunnableScrapingStagioni(url);
-		Thread thread=new Thread(runnable);
-		//thread.start();
-		thread.start();
-		//System.out.println(runnable.getStagioni());
-		return runnable.getStagioni();
+		//Nascondere pagine chrome
+		List<String> stagioni=new ArrayList<>();
+		ChromeOptions options=new ChromeOptions();
+		options.addArguments("headless");
+
+		//Oggetto per creare il collegamento
+		WebDriver driver = new ChromeDriver(options);
+		driver.get(this.url);
+
+		//Oggetto per eseguire operazioni sulla pagina
+		JavascriptExecutor js=(JavascriptExecutor) driver;
+
+		js.executeScript("document.querySelector('[data-id=\"selectPickerSeasons\"]').click()");
+						
+		driver.findElement(By.tagName("ul")).findElements(By.tagName("li"))
+								.stream()
+								.map(el->el.getText())
+								.map(str->str.replace("/", "-"))
+								.forEach(el->stagioni.add(el));
+		driver.quit();
+		return stagioni;
 	}
 	
 	

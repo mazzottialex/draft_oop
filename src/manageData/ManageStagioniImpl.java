@@ -6,7 +6,7 @@ import java.util.List;
 import scraping.Scraping;
 import scraping.ScrapingImpl;
 
-public class ManageStagioniImpl implements ManageStagioni {
+public class ManageStagioniImpl extends Thread implements ManageStagioni {
 	private Boolean online;
 	private LogicsFile file=new LogicsFileImpl();
 	private Scraping s;
@@ -23,10 +23,14 @@ public class ManageStagioniImpl implements ManageStagioni {
 	
 	public Boolean updateStagioni() {
 		if(online) {
-			li=s.getStagioni();
-			file.SaveStagioni(li);
+			this.start();
 			return true;
 		}
 		return false;
+	}
+	
+	public void run() {
+		li=s.getStagioni();
+		file.SaveStagioni(li);
 	}
 }
