@@ -90,10 +90,13 @@ public class Impostazioni extends Base {
 	        		 BufferedImage img = null;
 	        		 try {
 	        		     img = ImageIO.read(file);
-	        		     JLabel lblImg = new JLabel(new ImageIcon(img.getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));
+	        		     JLabel lblImg = new JLabel(new ImageIcon(img.getScaledInstance(80, 80, java.awt.Image.SCALE_SMOOTH)));
+	        		     lblImg.setBorder(new RoundedBorder(Color.BLACK, 10));
+
 	        		     gbc.gridx=1;
 	        			 gbc.gridy=1;
 	        		     contentPane.add(lblImg,gbc);
+	        		     contentPane.updateUI();
 	        		 } catch (Exception e1) {
 	        			 e1.printStackTrace();
 	        		 }
