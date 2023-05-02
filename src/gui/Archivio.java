@@ -45,6 +45,7 @@ public class Archivio extends Base {
 		li=log.liOrdinata(li);	
 		
 		
+		
 		li.stream().forEach(c -> ((DefaultTableModel) tm).addRow(c.toVector()));
 		contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		contentPane.setPreferredSize(new Dimension(450, 640));
@@ -65,12 +66,11 @@ public class Archivio extends Base {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				getContentPane().removeAll();
-
 				Home home=new Home();
-				getContentPane().add(home.getPanel());
-				//revalidate();
-				contentPane.updateUI();
+				contentPane.removeAll();
+				contentPane.add(home.getPanel());
+				contentPane.updateUI();;
+
 			}
 		});
 		panel.add(btnHome);

@@ -23,6 +23,8 @@ import java.awt.event.MouseMotionListener;
 public class Start extends Base {
 
 	public Start() {
+		add(contentPane);
+		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0};
 		gridBagLayout.rowHeights = new int[]{0};
@@ -35,6 +37,8 @@ public class Start extends Base {
 		Image newimg = image.getScaledInstance(120, 120,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		img = new ImageIcon(newimg);
 		JLabel labelIcon = new JLabel(img);
+		
+		
 		
 		labelIcon.addMouseListener(new MouseListener() {
 			
@@ -66,12 +70,11 @@ public class Start extends Base {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				getContentPane().removeAll();
-				Home home=new Home();
-				getContentPane().add(home.getPanel());
-				//revalidate();
-				contentPane.updateUI();
 				
+				Home home=new Home();
+				contentPane.removeAll();
+				contentPane.add(home.getPanel());
+				contentPane.updateUI();
 			}
 		});
 		

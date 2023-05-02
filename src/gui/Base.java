@@ -6,11 +6,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
+import java.awt.Container;
 
 public class Base extends JFrame {
 
 	protected JPanel contentPane;
-
+	
 	public Base() {
 		setTitle("DRAFT");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -20,7 +21,9 @@ public class Base extends JFrame {
 		contentPane.setBackground(new Color(0, 64, 128));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		setContentPane(contentPane);
+		//setContentPane(contentPane);
+		//add(contentPane);
+		//contentPane.updateUI();
 	}
 
 }

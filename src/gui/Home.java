@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -35,6 +36,8 @@ public class Home extends Base {
 	public Home() {
 		log=new LogicsHomeImpl(stagioneDefault);
 		log.loadStagione(stagioneDefault);
+		
+		//add(contentPane);
 		
 		GridBagConstraints gbc=new GridBagConstraints();
 		GridBagLayout layout=new GridBagLayout();
@@ -170,18 +173,18 @@ public class Home extends Base {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				getContentPane().removeAll();
 				Archivio archivio;
 				try {
 					archivio = new Archivio(log.getLi(), log.getStagione());
+					contentPane.removeAll();
 					contentPane.add(archivio.getPanel());
-
+	                contentPane.updateUI();
+	                
 				} catch (ClassNotFoundException | IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				validate();
-				contentPane.updateUI();
+				
 				
 			}
 		});
@@ -191,6 +194,7 @@ public class Home extends Base {
 	}
 	
 	public JPanel getPanel() {
+		contentPane.updateUI();
 		return contentPane;
 	}
 
