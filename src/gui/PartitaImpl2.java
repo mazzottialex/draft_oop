@@ -1,21 +1,15 @@
 package gui;
 
-import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Image;
 import java.awt.Insets;
-import java.awt.Label;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -26,7 +20,6 @@ import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
 
-import java.util.Random;
 
 public class PartitaImpl2 extends JPanel implements ActionListener, PropertyChangeListener{
 
@@ -81,9 +74,7 @@ public class PartitaImpl2 extends JPanel implements ActionListener, PropertyChan
         @Override
         public void done() {	//quando finisce
         	next.setEnabled(true);
-            //setCursor(null); //turn off the wait cursor
-            //taskOutput.append("Done!\n");  //dire che è finito
-        	 JOptionPane.showMessageDialog(null, "Partita finita");
+        	 JOptionPane.showMessageDialog(null, "Partita finita");	//dire che è finito
         }
     }
 	
@@ -115,7 +106,6 @@ public class PartitaImpl2 extends JPanel implements ActionListener, PropertyChan
 		jpPb = new JProgressBar();					//non funziona
 		jpPb.setValue(0);
 		jpPb.setStringPainted(true);
-		
 		
 
         // Put constraints on different buttons
@@ -212,13 +202,7 @@ public class PartitaImpl2 extends JPanel implements ActionListener, PropertyChan
         gbc.gridx = 2;
         gbc.gridy = 5;
         //gbc.weightx = 1;
-        /*panel.*/add(jbSubs, gbc);
-      
-        
-        // add panels into the frame
-//      f.add(panel);
-      	
-      	//fill();
+        /*panel.*/add(southEast, gbc);
 	}
 	
 	/**
@@ -241,7 +225,6 @@ public class PartitaImpl2 extends JPanel implements ActionListener, PropertyChan
         if ("progress" == evt.getPropertyName()) {
             int progress = (Integer) evt.getNewValue();
             jpPb.setValue(progress);
-//            taskOutput.append(String.format("Completed %d%% of task.\n", task.getProgress()));
             val = Math.round(((float)task.getProgress() / 100f) * 90f);
             jpPb.setString(Integer.toString(val));
         } 
@@ -251,19 +234,7 @@ public class PartitaImpl2 extends JPanel implements ActionListener, PropertyChan
      * Create the GUI and show it. As with all GUI code, this must run
      * on the event-dispatching thread.
      */
-    private static void createAndShowGUI() {
-//        //Create and set up the window.
-//        JFrame frame = new JFrame("ProgressBarDemo");
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//
-//        //Create and set up the content pane.
-//        JComponent newContentPane = new ProgressBarDemo();
-//        newContentPane.setOpaque(true); //content panes must be opaque
-//        frame.setContentPane(newContentPane);
-//
-//        //Display the window.
-//        frame.pack();
-//        frame.setVisible(true);
+    public void createAndShowGUI() {
     	
     	//Create and set up the window.
     	JFrame f = new JFrame("SIMULAZIONE -.................... PARTITA");
@@ -285,42 +256,15 @@ public class PartitaImpl2 extends JPanel implements ActionListener, PropertyChan
 		f.pack();
 		f.setVisible(true);
     }
-
-	
-//	public static void fill() {
-//        int i = 0;
-//        try {
-//            while (i <= 100) {
-//                // set text according to the level to which the bar is filled
-//                if (i > 30 && i < 70) {
-//                	jpPb.setString("wait for sometime");
-//                } else if (i > 70 && i < 100) {
-//                	jpPb.setString("almost finished loading");
-//                } else if (i == 100) {
-//                	jpPb.setString("finished loading");
-//                } else {
-//                	jpPb.setString("loading started");
-//            	}
-//                // fill the menu bar
-//                jpPb.setValue(i + 10);
-//                // delay the thread
-//                Thread.sleep(3000);
-//                i += 20;
-//            }
-//        } catch (Exception e) {
-//        	
-//        }
-//    }
     
-    public static void main(String[] args) {
-        //Schedule a job for the event-dispatching thread:
-        //creating and showing this application's GUI.
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                createAndShowGUI();
-            }
-        });
-    }
-
+//    public static void main(String[] args) {
+//        //Schedule a job for the event-dispatching thread:
+//        //creating and showing this application's GUI.
+//        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+//            public void run() {
+//                createAndShowGUI();
+//            }
+//        });
+//    }
 
 }
