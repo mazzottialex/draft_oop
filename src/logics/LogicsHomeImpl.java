@@ -26,9 +26,7 @@ public class LogicsHomeImpl implements LogicsHome {
 	public LogicsHomeImpl(String stagione) { //di default
 		li=new ArrayList<>();
 		this.stagione=stagione;
-		this.online=checkConnection();
-		ms=new ManageStagioniImpl(online);
-		ms.updateStagioni();
+		this.online
 	}
 	
 	@Override
@@ -79,17 +77,6 @@ public class LogicsHomeImpl implements LogicsHome {
 		CalcoloRating rat=new CalcoloRatingImpl(this.li);
 		rat.updateRating();
 		return rat.getLi();
-	}
-
-	private Boolean checkConnection() {
-		try {
-			URL url = new URL("http://www.google.com");
-	    	URLConnection connection = url.openConnection();
-	    	connection.connect();
-	    	return true;
-		}catch(Exception e) {
-	    	return false;
-	    }
 	}
 	
 	public Boolean getOnline() {
