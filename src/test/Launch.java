@@ -28,32 +28,30 @@ public class Launch {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
 
-		Boolean flagGui=true;
+		Boolean flagGui = true;
+		Boolean marto = true;
 		
 		if(flagGui) {
-//			EventQueue.invokeLater(new Runnable() {
-//				public void run() {
-//					try {
-//						Start frame = new Start();
-//						frame.setVisible(true);
-//					} catch (Exception e) {
-//						e.printStackTrace();
-//					}
-//				}
-//			});
-			
-//			Partita gp = new PartitaImpl();
-//			gp.setVisible(true);
-			
-			Partita p = new Partita();
-			javax.swing.SwingUtilities.invokeLater(new Runnable() {
-	            public void run() {
-	                p.createAndShowGUI();
-	            }
-	        });
-			
-		}
-		else {
+			if (!marto) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							Start frame = new Start();
+							frame.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			} else {
+				Partita p = new Partita();
+				javax.swing.SwingUtilities.invokeLater(new Runnable() {
+		            public void run() {
+		                p.createAndShowGUI();
+		            }
+		        });
+			}
+		} else {
 //			Scraping sc = new ScrapingImpl();
 //			ManageData md = new ManageDataImpl(sc.getStagioni().get(3));
 			ManageData md = new ManageDataImpl("2022-2023");
@@ -80,8 +78,6 @@ public class Launch {
 
 			//System.out.println(sa.getNomeCalciatori());
 			
-			//Partita gp = new Partita();
-			//gp.setVisible(true);
 			}
 
 			//System.out.println(sa.getNomeCalciatori());

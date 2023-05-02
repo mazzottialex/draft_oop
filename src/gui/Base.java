@@ -21,7 +21,7 @@ public class Base extends JFrame {
 		contentPane.setBackground(new Color(0, 64, 128));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		//setContentPane(contentPane);
+		setContentPane(contentPane);
 		//add(contentPane);
 		//contentPane.updateUI();
 	}

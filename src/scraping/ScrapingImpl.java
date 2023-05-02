@@ -45,6 +45,7 @@ public class ScrapingImpl implements Scraping{
 				el.getY().join();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
+				return false;
 			}
 			if(!el.getX().check()) {
 				return false;
