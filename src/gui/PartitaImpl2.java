@@ -20,6 +20,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
@@ -27,11 +28,12 @@ import javax.swing.SwingWorker;
 
 import java.util.Random;
 
-public class PartitaImpl2 implements ActionListener, PropertyChangeListener{
+public class PartitaImpl2 extends JPanel implements ActionListener, PropertyChangeListener{
 
-	JFrame f;
-	JPanel panel;
-	static JProgressBar jpPb;
+	private static final long serialVersionUID = 1353924410908490014L;
+	//JFrame f;
+	//JPanel panel;
+	JProgressBar jpPb;
 	JLabel jlNomeSq1;
 	JLabel jlScoreSq1;
 	JLabel jlTabSq1;
@@ -41,6 +43,7 @@ public class PartitaImpl2 implements ActionListener, PropertyChangeListener{
 	JButton startStop;
 	JButton jbSubs;
 	JLabel min;
+	JButton next;
 	
 	private Task task;
 	
@@ -54,17 +57,19 @@ public class PartitaImpl2 implements ActionListener, PropertyChangeListener{
          */
         @Override
         public Void doInBackground() {
-            Random random = new Random();
             int progress = 0;
             //Initialize progress property.
             setProgress(0);
             while (progress < 100) {
                 //Sleep for up to one second.
                 try {
-                    Thread.sleep(random.nextInt(1000));
+                    Thread.sleep(1000);
                 } catch (InterruptedException ignore) {}
-                //Make random progress.
-                progress += random.nextInt(10);
+                if (progress > 0) {
+					jbSubs.setEnabled(true);
+				}
+                //Make progress.
+                progress += 10;
                 setProgress(Math.min(progress, 100));
             }
             return null;
@@ -75,27 +80,18 @@ public class PartitaImpl2 implements ActionListener, PropertyChangeListener{
          */
         @Override
         public void done() {	//quando finisce
-            //Toolkit.getDefaultToolkit().beep();
-            //startButton.setEnabled(true);
-            setCursor(null); //turn off the wait cursor
+        	next.setEnabled(true);
+            //setCursor(null); //turn off the wait cursor
             //taskOutput.append("Done!\n");  //dire che è finito
+        	 JOptionPane.showMessageDialog(null, "Partita finita");
         }
     }
 	
 	public PartitaImpl2() {
-		
-		f = new JFrame();
-		f.setTitle("SIMULAZIONE PARTITA");
-		
-		final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-		final int sw = (int) screen.getWidth();
-		final int sh = (int) screen.getHeight();
-		f.setSize(2 * sw / 3, 2 * sh / 3);
-//		f.setBounds(100, 100, 640, 700);
-//		f.setMinimumSize(new Dimension(640,700));
-		
-		f.setLocationRelativeTo(null);
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// Define the panel to hold the components
+		super(new GridBagLayout());
+		GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
 
 		//define components
 		jlNomeSq1 = new JLabel("sq1", SwingConstants.RIGHT);
@@ -109,86 +105,83 @@ public class PartitaImpl2 implements ActionListener, PropertyChangeListener{
 		jlTabSq2 = new JLabel("sq2Label", SwingConstants.LEFT);
 		jlTabSq2.setVerticalAlignment(SwingConstants.TOP);
 		startStop = new JButton("> / ||");
+		startStop.setActionCommand("start");
+		startStop.addActionListener(this);
 		jbSubs = new JButton("Subs");
+		jbSubs.setEnabled(false);
 		min = new JLabel("Minuto: 0°");
+		next = new JButton("Avanti");
+		next.setEnabled(false);
 		jpPb = new JProgressBar();					//non funziona
 		jpPb.setValue(0);
 		jpPb.setStringPainted(true);
 		
 		
-		
-		// Define the panel to hold the components
-        panel = new JPanel();
-        GridBagLayout layout = new GridBagLayout();
-        panel.setLayout(layout);
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10);
-        
-        
+
         // Put constraints on different buttons
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 0;
 //        gbc.ipadx = 50;
         //gbc.ipady = 10;
-        panel.add(jlNomeSq1, gbc);
+        /*panel.*/add(jlNomeSq1, gbc);
         
         //gbc.fill = GridBagConstraints.VERTICAL;
         gbc.gridx = 1;
         gbc.gridy = 0;
         //gbc.weighty = 1;
         gbc.ipadx = 50;
-        panel.add(new JLabel("vs", SwingConstants.CENTER), gbc);
+        /*panel.*/add(new JLabel("vs", SwingConstants.CENTER), gbc);
         
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 2;
         gbc.gridy = 0;
 //        gbc.ipadx = 50;
         //gbc.ipady = 10;
-        panel.add(jlNomeSq2, gbc);
+        /*panel.*/add(jlNomeSq2, gbc);
                 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 2;
 //        gbc.ipadx = 50;
         //gbc.ipady = 10;
-        panel.add(jlScoreSq1, gbc);
+        /*panel.*/add(jlScoreSq1, gbc);
                 
         //gbc.fill = GridBagConstraints.VERTICAL;
         gbc.gridx = 1;
         gbc.gridy = 2;
         gbc.ipadx = 50;
         //gbc.weighty = 1;
-        panel.add(new JLabel("-", SwingConstants.CENTER), gbc);
+        /*panel.*/add(new JLabel("-", SwingConstants.CENTER), gbc);
                 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 2;
         gbc.gridy = 2;
 //        gbc.ipadx = 50;
         //gbc.ipady = 10;
-        panel.add(jlScoreSq2, gbc);
+        /*panel.*/add(jlScoreSq2, gbc);
         
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 3;
 //        gbc.ipadx = 50;
         gbc.ipady = 200;
-        panel.add(jlTabSq1, gbc);
+        /*panel.*/add(jlTabSq1, gbc);
                 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 2;
         gbc.gridy = 3;
 //        gbc.ipadx = 50;
         gbc.ipady = 200;
-        panel.add(jlTabSq2, gbc);
-        
+        /*panel.*/add(jlTabSq2, gbc);
+       
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 4;
         //gbc.weightx = 1;
         gbc.gridwidth = 3;
         gbc.ipady = 5;
-        panel.add(jpPb, gbc);
+        /*panel.*/add(jpPb, gbc);
         
       //gbc.fill = GridBagConstraints.NONE;
         gbc.gridx = 0;
@@ -197,7 +190,7 @@ public class PartitaImpl2 implements ActionListener, PropertyChangeListener{
         gbc.gridwidth = 1;
         gbc.ipady = 5;
         gbc.insets = new Insets(10, 20, 10, 10);
-        panel.add(min, gbc);
+        /*panel.*/add(min, gbc);
         
         //gbc.fill = GridBagConstraints.NONE;
         gbc.gridx = 1;
@@ -206,17 +199,24 @@ public class PartitaImpl2 implements ActionListener, PropertyChangeListener{
         gbc.gridwidth = 1;
         gbc.ipady = 5;
         gbc.insets = new Insets(10, 10, 10, 10);
-        panel.add(startStop, gbc);
+        /*panel.*/add(startStop, gbc);
         
+        
+        JPanel southEast = new JPanel();
+        //southEast.setLayout(new FlowLayout());
+        southEast.add(jbSubs);
+        southEast.add(next);
+        
+        gbc.insets = new Insets(10, 0, 10, 0);
         //gbc.fill = GridBagConstraints.NONE;
         gbc.gridx = 2;
         gbc.gridy = 5;
         //gbc.weightx = 1;
-        panel.add(jbSubs, gbc);
+        /*panel.*/add(jbSubs, gbc);
       
         
         // add panels into the frame
-      	f.add(panel);
+//      f.add(panel);
       	
       	//fill();
 	}
@@ -225,8 +225,7 @@ public class PartitaImpl2 implements ActionListener, PropertyChangeListener{
      * Invoked when the user presses the start button.
      */
     public void actionPerformed(ActionEvent evt) {
-        startButton.setEnabled(false);
-        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        //startButton.setEnabled(false);
         //Instances of javax.swing.SwingWorker are not reusuable, so
         //we create new instances as needed.
         task = new Task();
@@ -238,11 +237,13 @@ public class PartitaImpl2 implements ActionListener, PropertyChangeListener{
      * Invoked when task's progress property changes.
      */
     public void propertyChange(PropertyChangeEvent evt) {
+    	int val;
         if ("progress" == evt.getPropertyName()) {
             int progress = (Integer) evt.getNewValue();
-            progressBar.setValue(progress);
-            taskOutput.append(String.format(
-                    "Completed %d%% of task.\n", task.getProgress()));
+            jpPb.setValue(progress);
+//            taskOutput.append(String.format("Completed %d%% of task.\n", task.getProgress()));
+            val = Math.round(((float)task.getProgress() / 100f) * 90f);
+            jpPb.setString(Integer.toString(val));
         } 
     }
     
@@ -251,18 +252,38 @@ public class PartitaImpl2 implements ActionListener, PropertyChangeListener{
      * on the event-dispatching thread.
      */
     private static void createAndShowGUI() {
-        //Create and set up the window.
-        JFrame frame = new JFrame("ProgressBarDemo");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        //Create and set up the content pane.
-        JComponent newContentPane = new ProgressBarDemo();
+//        //Create and set up the window.
+//        JFrame frame = new JFrame("ProgressBarDemo");
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//
+//        //Create and set up the content pane.
+//        JComponent newContentPane = new ProgressBarDemo();
+//        newContentPane.setOpaque(true); //content panes must be opaque
+//        frame.setContentPane(newContentPane);
+//
+//        //Display the window.
+//        frame.pack();
+//        frame.setVisible(true);
+    	
+    	//Create and set up the window.
+    	JFrame f = new JFrame("SIMULAZIONE -.................... PARTITA");
+    	f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		final int sw = (int) screen.getWidth();
+		final int sh = (int) screen.getHeight();
+		f.setSize(2 * sw / 3, 2 * sh / 3);
+//		f.setBounds(100, 100, 640, 700);
+//		f.setMinimumSize(new Dimension(640,700));
+		f.setLocationRelativeTo(null);
+		
+		//Create and set up the content pane.
+        JComponent newContentPane = new PartitaImpl2();
         newContentPane.setOpaque(true); //content panes must be opaque
-        frame.setContentPane(newContentPane);
-
-        //Display the window.
-        frame.pack();
-        frame.setVisible(true);
+        f.setContentPane(newContentPane);
+		
+		//Display the window.
+		f.pack();
+		f.setVisible(true);
     }
 
 	

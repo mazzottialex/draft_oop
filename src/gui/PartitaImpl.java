@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -37,6 +38,7 @@ public class PartitaImpl implements Partita {
 	JButton startStop;
 	JButton jbSubs;
 	JLabel min;
+	JButton next;
 	
 	/**
 	 * Create the frame.
@@ -69,9 +71,13 @@ public class PartitaImpl implements Partita {
 		jlTabSq2.setVerticalAlignment(SwingConstants.TOP);
 		startStop = new JButton("> / ||");
 		jbSubs = new JButton("Subs");
+		jbSubs.setEnabled(false);
 		min = new JLabel("Minuto: 0°");
-		jpPb = new JProgressBar();					//non funziona
-		jpPb.setValue(0);
+		next = new JButton("Avanti");
+		next.setEnabled(false);
+		jpPb = new JProgressBar(10, 90);					//non funziona
+		jpPb.setVisible(true);
+		jpPb.setValue(10);
 		jpPb.setStringPainted(true);
 		
 		
@@ -167,11 +173,18 @@ public class PartitaImpl implements Partita {
         gbc.insets = new Insets(10, 10, 10, 10);
         panel.add(startStop, gbc);
         
+        
+        JPanel southEast = new JPanel();
+        //southEast.setLayout(new FlowLayout());
+        southEast.add(jbSubs);
+        southEast.add(next);
+        
+        gbc.insets = new Insets(10, 0, 10, 0);
         //gbc.fill = GridBagConstraints.NONE;
         gbc.gridx = 2;
         gbc.gridy = 5;
         //gbc.weightx = 1;
-        panel.add(jbSubs, gbc);
+        panel.add(southEast, gbc);
       
         
         // add panels into the frame
