@@ -21,7 +21,7 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
 
 
-public class PartitaImpl2 extends JPanel implements ActionListener, PropertyChangeListener{
+public class Partita extends JPanel implements ActionListener, PropertyChangeListener{
 
 	private static final long serialVersionUID = 1353924410908490014L;
 	//JFrame f;
@@ -78,7 +78,7 @@ public class PartitaImpl2 extends JPanel implements ActionListener, PropertyChan
         }
     }
 	
-	public PartitaImpl2() {
+	public Partita() {
 		// Define the panel to hold the components
 		super(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -248,7 +248,7 @@ public class PartitaImpl2 extends JPanel implements ActionListener, PropertyChan
 		f.setLocationRelativeTo(null);
 		
 		//Create and set up the content pane.
-        JComponent newContentPane = new PartitaImpl2();
+        JComponent newContentPane = new Partita();
         newContentPane.setOpaque(true); //content panes must be opaque
         f.setContentPane(newContentPane);
 		

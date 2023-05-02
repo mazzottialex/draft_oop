@@ -10,7 +10,7 @@ import data.Modulo;
 
 import data.SquadraAvversaria;
 import gui.Home;
-import gui.PartitaImpl2;
+import gui.Partita;
 import gui.Start;
 import logics.LogicsHome;
 import logics.LogicsHomeImpl;
@@ -45,7 +45,7 @@ public class Launch {
 //			Partita gp = new PartitaImpl();
 //			gp.setVisible(true);
 			
-			PartitaImpl2 p = new PartitaImpl2();
+			Partita p = new Partita();
 			javax.swing.SwingUtilities.invokeLater(new Runnable() {
 	            public void run() {
 	                p.createAndShowGUI();
