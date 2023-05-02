@@ -8,13 +8,18 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+
 import utils.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.JLabel;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JTextField;
@@ -81,7 +86,17 @@ public class Impostazioni extends Base {
 	        	 int option = fileChooser.showOpenDialog(contentPane);
 	        	 if(option == JFileChooser.APPROVE_OPTION){
 	        		 File file = fileChooser.getSelectedFile();
-	        		 lblImg.setText("File Selected: " + file.getName());
+	        		 //lblImg.setText("File Selected: " + file.getName());
+	        		 BufferedImage img = null;
+	        		 try {
+	        		     img = ImageIO.read(file);
+	        		     JLabel lblImg = new JLabel(new ImageIcon(img.getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH)));
+	        		     gbc.gridx=1;
+	        			 gbc.gridy=1;
+	        		     contentPane.add(lblImg,gbc);
+	        		 } catch (Exception e1) {
+	        			 e1.printStackTrace();
+	        		 }
 	        	 }else{
 	        		 lblImg.setText("Open command canceled");
 	             }
