@@ -5,7 +5,7 @@ import java.net.URLConnection;
 
 import manageData.ManageStagioniImpl;
 
-public class LogicStartImpl {
+public class LogicStartImpl implements LogicStart {
 	private final ManageStagioniImpl ms;
 	private final Boolean online;
 	

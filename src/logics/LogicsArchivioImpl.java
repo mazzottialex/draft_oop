@@ -10,9 +10,10 @@ import manageData.ExtractDataImpl;
 
 public class LogicsArchivioImpl implements LogicsArchivio {
 
+	private final Boolean online;
 	
-	public LogicsArchivioImpl() {
-		
+	public LogicsArchivioImpl(Boolean online) {
+		this.online=online;
 	}
 
 	@Override
@@ -22,5 +23,8 @@ public class LogicsArchivioImpl implements LogicsArchivio {
 		return li;
 	}
 	
-
+	@Override
+	public Boolean getOnline() {
+		return this.online;
+	}
 }

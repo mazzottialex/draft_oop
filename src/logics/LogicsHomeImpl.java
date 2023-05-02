@@ -23,10 +23,11 @@ public class LogicsHomeImpl implements LogicsHome {
 	private Boolean online;
 	private ManageStagioni ms;
 	
-	public LogicsHomeImpl(String stagione) { //di default
+	public LogicsHomeImpl(String stagione, Boolean online) { //di default
 		li=new ArrayList<>();
 		this.stagione=stagione;
-		this.online
+		this.online=online;
+		ms=new ManageStagioniImpl(online);
 	}
 	
 	@Override

@@ -9,6 +9,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicButtonListener;
+
+import logics.LogicStart;
+import logics.LogicStartImpl;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.GridBagLayout;
@@ -21,7 +25,8 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 public class Start extends Base {
-
+	private final LogicStart log=new LogicStartImpl();
+	
 	public Start() {
 		add(contentPane);
 		
@@ -71,7 +76,7 @@ public class Start extends Base {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				Home home=new Home();
+				Home home=new Home(log.getOnline());
 				contentPane.removeAll();
 				contentPane.add(home.getPanel());
 				contentPane.updateUI();

@@ -38,8 +38,10 @@ import java.awt.FlowLayout;
 public class Archivio extends Base {
 
 	private JTable table;
-	private final LogicsArchivio log=new LogicsArchivioImpl();
-	public Archivio(List<Calciatore> li, String stagione) throws FileNotFoundException, ClassNotFoundException, IOException {
+	private final LogicsArchivio log;
+	public Archivio(List<Calciatore> li, String stagione, Boolean online) throws FileNotFoundException, ClassNotFoundException, IOException {
+		
+		log=new LogicsArchivioImpl(online);
 		
 		TableModel tm= new DefaultTableModel(new String[] {"RUOLO","GIOCATORE","RATING","ATT","CEN","DIF"},0);
 		li=log.liOrdinata(li);	
@@ -66,7 +68,7 @@ public class Archivio extends Base {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Home home=new Home();
+				Home home=new Home(log.getOnline());
 				contentPane.removeAll();
 				contentPane.add(home.getPanel());
 				contentPane.updateUI();;

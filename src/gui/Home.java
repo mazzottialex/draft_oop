@@ -33,8 +33,8 @@ public class Home extends Base {
 	private final LogicsHome log;
 	private final String stagioneDefault="2022-2023";
 	
-	public Home() {
-		log=new LogicsHomeImpl(stagioneDefault);
+	public Home(Boolean online) {
+		log=new LogicsHomeImpl(stagioneDefault, online);
 		log.loadStagione(stagioneDefault);
 		
 		//add(contentPane);
@@ -175,7 +175,7 @@ public class Home extends Base {
 			public void actionPerformed(ActionEvent e) {
 				Archivio archivio;
 				try {
-					archivio = new Archivio(log.getLi(), log.getStagione());
+					archivio = new Archivio(log.getLi(), log.getStagione(), log.getOnline());
 					contentPane.removeAll();
 					contentPane.add(archivio.getPanel());
 	                contentPane.updateUI();
