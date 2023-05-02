@@ -31,19 +31,27 @@ public class Launch {
 		Boolean flagGui=true;
 		
 		if(flagGui) {
-			EventQueue.invokeLater(new Runnable() {
-				public void run() {
-					try {
-						Start frame = new Start();
-						frame.setVisible(true);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			});
+//			EventQueue.invokeLater(new Runnable() {
+//				public void run() {
+//					try {
+//						Start frame = new Start();
+//						frame.setVisible(true);
+//					} catch (Exception e) {
+//						e.printStackTrace();
+//					}
+//				}
+//			});
 			
-			//Partita gp = new Partita();
-			//gp.setVisible(true);
+//			Partita gp = new PartitaImpl();
+//			gp.setVisible(true);
+			
+			Partita p = new Partita();
+			javax.swing.SwingUtilities.invokeLater(new Runnable() {
+	            public void run() {
+	                p.createAndShowGUI();
+	            }
+	        });
+			
 		}
 		else {
 //			Scraping sc = new ScrapingImpl();
