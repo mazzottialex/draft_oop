@@ -56,10 +56,32 @@ public class Home extends Base {
 		btnStart.addMouseListener(new java.awt.event.MouseAdapter() {
 		    public void mouseEntered(java.awt.event.MouseEvent evt) {
 		        btnStart.setBackground(Color.GREEN);
+		        Image newimg = image.getScaledInstance(160, 160,  java.awt.Image.SCALE_SMOOTH);
+		        ImageIcon img = new ImageIcon(newimg);
+				btnStart.setIcon(img);
 		    }
 		    public void mouseExited(java.awt.event.MouseEvent evt) {
 		    	btnStart.setBackground(new Color(0, 64, 128));
+		    	Image newimg = image.getScaledInstance(250, 250,  java.awt.Image.SCALE_SMOOTH);
+		        ImageIcon img = new ImageIcon(newimg);
+				btnStart.setIcon(img);
 		    }
+		});
+		btnStart.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Impostazioni imp;
+				try {
+					imp = new Impostazioni(log.getLi());
+					contentPane.removeAll();
+					contentPane.add(imp.getPanel());
+					contentPane.updateUI();
+				} catch (ClassNotFoundException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
 		});
 		
 		gbc.gridx=0;
@@ -193,9 +215,6 @@ public class Home extends Base {
 		contentPane.add(btnArchivio,gbc);
 	}
 	
-	public JPanel getPanel() {
-		contentPane.updateUI();
-		return contentPane;
-	}
+	
 
 }

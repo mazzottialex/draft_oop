@@ -26,4 +26,8 @@ public class Base extends JFrame {
 		//contentPane.updateUI();
 	}
 
+	public JPanel getPanel() {
+		contentPane.updateUI();
+		return contentPane;
+	}
 }

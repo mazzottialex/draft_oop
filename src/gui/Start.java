@@ -29,7 +29,9 @@ import java.io.IOException;
 public class Start extends Base {
 	private final LogicStart log=new LogicStartImpl();
 	
+
 	public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
+
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
