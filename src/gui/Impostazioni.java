@@ -59,7 +59,7 @@ public class Impostazioni extends Base {
 		
 		JLabel lblNomeSquadra = new JLabel("Nome Squadra:");
 		lblNomeSquadra.setForeground(Color.white);
-		lblNomeSquadra.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+		lblNomeSquadra.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
 		gbc.gridx=0;
 		gbc.gridy=0;
 		gbc.gridwidth=1;
@@ -69,14 +69,14 @@ public class Impostazioni extends Base {
 		
 		textFieldNomeSquadra = new JTextField();
 		textFieldNomeSquadra.setColumns(10);
-		textFieldNomeSquadra.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+		textFieldNomeSquadra.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
 		gbc.gridx=1;
 		gbc.gridy=0;
 		contentPane.add(textFieldNomeSquadra, gbc);
 
 		JLabel lblScegliStemma = new JLabel("Stemma:");
 		lblScegliStemma.setForeground(Color.white);
-		lblScegliStemma.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+		lblScegliStemma.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
 		
 	    List<String> liStemmi=new ArrayList<>();
 	    liStemmi.add("res/stemmi/bianco.png");
@@ -91,12 +91,15 @@ public class Impostazioni extends Base {
 	    
 	    JPanel stemmi=new JPanel();
 		stemmi.setLayout(layout);
+		List<JButton> liButton=new ArrayList<>();
 	    for(int i=0;i<liStemmi.size();i++)
 	    {	   
+	 
 	    	JButton btnStemma=new JButton();
+	    	liButton.add(btnStemma);
 			ImageIcon img=new ImageIcon(liStemmi.get(i));
 			Image image = img.getImage(); // transform it 
-			Image newimg = image.getScaledInstance(40, 45,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+			Image newimg = image.getScaledInstance(65, 70,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 			img = new ImageIcon(newimg);
 			btnStemma.setBackground(Color.white);
 			btnStemma.setIcon(img);
@@ -106,6 +109,16 @@ public class Impostazioni extends Base {
 			gbc.insets=new Insets(2, 2, 2, 2);
 			stemmi.add(btnStemma,gbc);
 			
+			btnStemma.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					JButton btn=(JButton)e.getSource();
+					liButton.forEach(b-> b.setBackground(Color.white));
+					btn.setBackground(new Color(0, 64, 128));;
+
+				}
+			});
 	    };
 	    
 	    gbc.insets=new Insets(25, 2, 5, 2);
