@@ -74,11 +74,9 @@ public class Impostazioni extends Base {
 		gbc.gridy=0;
 		contentPane.add(textFieldNomeSquadra, gbc);
 
-		JButton btnAddImg = new JButton("Scegli Stemma");
-		btnAddImg.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
-		final JLabel lblImg = new JLabel();
-	    lblImg.setForeground(Color.white);
-	    lblImg.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+		JLabel lblScegliStemma = new JLabel("Stemma:");
+		lblScegliStemma.setForeground(Color.white);
+		lblScegliStemma.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
 		
 	    List<String> liStemmi=new ArrayList<>();
 	    liStemmi.add("res/stemmi/bianco.png");
@@ -88,6 +86,8 @@ public class Impostazioni extends Base {
 	    liStemmi.add("res/stemmi/verde.png");
 	    liStemmi.add("res/stemmi/viola.png");
 	    liStemmi.add("res/stemmi/rosso.png");
+	    liStemmi.add("res/stemmi/azzurro.png");
+	    liStemmi.add("res/stemmi/arancione.png");
 	    
 	    JPanel stemmi=new JPanel();
 		stemmi.setLayout(layout);
@@ -107,24 +107,19 @@ public class Impostazioni extends Base {
 			stemmi.add(btnStemma,gbc);
 			
 	    };
+	    
+	    gbc.insets=new Insets(25, 2, 5, 2);
 	    gbc.gridwidth=0;
+	    gbc.gridx=0;
+	    gbc.gridy=1;
+	    contentPane.add(lblScegliStemma, gbc);
+	    
+	    gbc.insets=new Insets(5, 2, 5, 2);
 	    gbc.gridx=0;
 		gbc.gridy=2;
 	    contentPane.add(stemmi,gbc);
 
-	    btnAddImg.addActionListener(new ActionListener() {
-	         @Override
-	    	public void actionPerformed(ActionEvent e) {
-	        	 
-	         }
-	    });
-	      
-	    gbc.gridx=0;
-	    gbc.gridy=1;
-	    contentPane.add(btnAddImg, gbc);
-	    gbc.gridx=1;
-	    gbc.gridy=1;
-	    contentPane.add(lblImg,gbc);
+	    
 		
 		add(contentPane);
 	}
