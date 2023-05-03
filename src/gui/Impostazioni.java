@@ -21,6 +21,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
+
+import data.Squadra;
+
 import javax.swing.JLabel;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -30,7 +33,7 @@ import javax.swing.JTextField;
 
 public class Impostazioni extends Base {
 	private JTextField textFieldNomeSquadra;
-
+	private LogicsImpostazioni log;
 	/**
 	 * Launch the application.
 	 */
@@ -51,6 +54,8 @@ public class Impostazioni extends Base {
 	 * Create the frame.
 	 */
 	public Impostazioni() {
+		
+		log=new LogicsImpostazioniImpl();
 		
 		GridBagConstraints gbc=new GridBagConstraints();
 		GridBagLayout layout=new GridBagLayout();
@@ -134,7 +139,15 @@ public class Impostazioni extends Base {
 
 	    JButton btnProsegui=new JButton("Prosegui");
 	    btnProsegui.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
-		
+		btnProsegui.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Squadra squadra=new Squadra(log.getNomeSquadra, log.getStemma);
+				
+			}
+		});
+	    
 	    gbc.gridx=0;
 		gbc.gridy=3;
 	    gbc.insets=new Insets(45, 2, 5, 2);
