@@ -1,18 +1,17 @@
 package gui;
 
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -21,7 +20,7 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
 
 
-public class Partita extends JPanel implements ActionListener, PropertyChangeListener{
+public class Partita extends Base implements ActionListener, PropertyChangeListener{
 
 	private static final long serialVersionUID = 1353924410908490014L;
 	
@@ -36,6 +35,7 @@ public class Partita extends JPanel implements ActionListener, PropertyChangeLis
 	JButton jbSubs;
 	JLabel min;
 	JButton next;
+	JPanel panel;
 	
 	private Task task;
 	
@@ -125,7 +125,7 @@ public class Partita extends JPanel implements ActionListener, PropertyChangeLis
 
 	public Partita() {
 		// Define the panel to hold the components
-		super(new GridBagLayout());
+		panel = new JPanel(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
 
@@ -162,51 +162,51 @@ public class Partita extends JPanel implements ActionListener, PropertyChangeLis
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 0;
-        /*panel.*/add(jlNomeSq1, gbc);
+        panel.add(jlNomeSq1, gbc);
         
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.ipadx = 50;
-        /*panel.*/add(new JLabel("vs", SwingConstants.CENTER), gbc);
+        panel.add(new JLabel("vs", SwingConstants.CENTER), gbc);
         
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 2;
         gbc.gridy = 0;
-        /*panel.*/add(jlNomeSq2, gbc);
+        panel.add(jlNomeSq2, gbc);
                 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 2;
-        /*panel.*/add(jlScoreSq1, gbc);
+        panel.add(jlScoreSq1, gbc);
                 
         gbc.gridx = 1;
         gbc.gridy = 2;
         gbc.ipadx = 50;
-        /*panel.*/add(new JLabel("-", SwingConstants.CENTER), gbc);
+        panel.add(new JLabel("-", SwingConstants.CENTER), gbc);
                 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 2;
         gbc.gridy = 2;
-        /*panel.*/add(jlScoreSq2, gbc);
+        panel.add(jlScoreSq2, gbc);
         
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.ipady = 200;
-        /*panel.*/add(jlTabSq1, gbc);
+        panel.add(jlTabSq1, gbc);
                 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 2;
         gbc.gridy = 3;
         gbc.ipady = 200;
-        /*panel.*/add(jlTabSq2, gbc);
+        panel.add(jlTabSq2, gbc);
        
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 4;
         gbc.gridwidth = 3;
         gbc.ipady = 5;
-        /*panel.*/add(jpPb, gbc);
+        panel.add(jpPb, gbc);
         
         JPanel southWest = new JPanel();
         southWest.add(jbSubs);
@@ -214,19 +214,26 @@ public class Partita extends JPanel implements ActionListener, PropertyChangeLis
         gbc.gridy = 5;
         gbc.gridwidth = 1;
         gbc.ipady = 5;
-        /*panel.*/add(southWest, gbc);
+        panel.add(southWest, gbc);
         
         gbc.gridx = 1;
         gbc.gridy = 5;
         gbc.gridwidth = 1;
         gbc.ipady = 5;
-        /*panel.*/add(startStop, gbc);
+        panel.add(startStop, gbc);
         
         JPanel southEast = new JPanel();
         southEast.add(next);
         gbc.gridx = 2;
         gbc.gridy = 5;
-        /*panel.*/add(southEast, gbc);
+        panel.add(southEast, gbc);
+        
+        contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
+        
+		contentPane.add(
+				new JLabel(
+						new ImageIcon(
+								new ImageIcon("res/icon.png").getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH))));
 	}
 	
 	/**
@@ -269,35 +276,11 @@ public class Partita extends JPanel implements ActionListener, PropertyChangeLis
      * on the event-dispatching thread.
      */
     public void createAndShowGUI() {
-    	//Create and set up the window.
-    	JFrame f = new JFrame("SIMULAZIONE PARTITA");
-    	f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-		final int sw = (int) screen.getWidth();
-		final int sh = (int) screen.getHeight();
-		f.setSize(2 * sw / 3, 2 * sh / 3);
-//		f.setBounds(100, 100, 640, 700);
-//		f.setMinimumSize(new Dimension(640,700));
-		f.setLocationRelativeTo(null);
-		
 		//Create and set up the content pane.
-        JComponent newContentPane = new Partita();
-        newContentPane.setOpaque(true); //content panes must be opaque
-        f.setContentPane(newContentPane);
+    	contentPane.add(panel);
 		
 		//Display the window.
-		f.pack();
-		f.setVisible(true);
+		pack();
+		setVisible(true);
     }
-    
-    /*
-    public static void main(String[] args) {
-        //Schedule a job for the event-dispatching thread:
-        //creating and showing this application's GUI.
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                createAndShowGUI();
-            }
-        });
-    }*/
 }

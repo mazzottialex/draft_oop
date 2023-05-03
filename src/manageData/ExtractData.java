@@ -23,4 +23,5 @@ public interface ExtractData {
 	public List<String> getNomeCalciatori(String squadra);
 	public List<String> getNomeTitolari(String squadra, Modulo modulo);
 	public List<String> getNomeRiserve(String squadra, Modulo modulo);
+	public List<?> tsr(String squadra, Modulo modulo);
 }
