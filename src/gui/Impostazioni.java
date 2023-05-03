@@ -23,6 +23,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
 
 import data.Squadra;
+import logics.LogicsImpostazioni;
+import logics.LogicsImpostazioniImpl;
 
 import javax.swing.JLabel;
 import javax.imageio.ImageIO;
@@ -102,7 +104,8 @@ public class Impostazioni extends Base {
 	 
 	    	JButton btnStemma=new JButton();
 	    	liButton.add(btnStemma);
-			ImageIcon img=new ImageIcon(liStemmi.get(i));
+	    	String url=liStemmi.get(i);
+			ImageIcon img=new ImageIcon(url);
 			Image image = img.getImage(); // transform it 
 			Image newimg = image.getScaledInstance(65, 70,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 			img = new ImageIcon(newimg);
@@ -121,7 +124,7 @@ public class Impostazioni extends Base {
 					JButton btn=(JButton)e.getSource();
 					liButton.forEach(b-> b.setBackground(Color.white));
 					btn.setBackground(new Color(0, 64, 128));;
-
+					log.setStemma(url);
 				}
 			});
 	    };
@@ -143,7 +146,7 @@ public class Impostazioni extends Base {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Squadra squadra=new Squadra(log.getNomeSquadra, log.getStemma);
+				Squadra squadra=log.getSquadra(textFieldNomeSquadra.getText());
 				
 			}
 		});
