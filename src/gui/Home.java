@@ -193,9 +193,6 @@ public class Home extends Base {
 		contentPane.add(btnArchivio,gbc);
 	}
 	
-	public JPanel getPanel() {
-		contentPane.updateUI();
-		return contentPane;
-	}
+	
 
 }
