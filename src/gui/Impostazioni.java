@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
 
+import data.Calciatore;
 import data.Squadra;
 import logics.LogicsImpostazioni;
 import logics.LogicsImpostazioniImpl;
@@ -36,26 +37,8 @@ import javax.swing.JTextField;
 public class Impostazioni extends Base {
 	private JTextField textFieldNomeSquadra;
 	private LogicsImpostazioni log;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Impostazioni frame = new Impostazioni();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	/**
-	 * Create the frame.
-	 */
-	public Impostazioni() {
+	public Impostazioni(List<Calciatore> li) {
 		
 		log=new LogicsImpostazioniImpl();
 		

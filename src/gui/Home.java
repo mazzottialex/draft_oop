@@ -71,11 +71,16 @@ public class Home extends Base {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Impostazioni imp = new Impostazioni();
-				contentPane.removeAll();
-				contentPane.add(imp.getPanel());
-				contentPane.updateUI();
-				
+				Impostazioni imp;
+				try {
+					imp = new Impostazioni(log.getLi());
+					contentPane.removeAll();
+					contentPane.add(imp.getPanel());
+					contentPane.updateUI();
+				} catch (ClassNotFoundException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		
