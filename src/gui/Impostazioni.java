@@ -132,7 +132,13 @@ public class Impostazioni extends Base {
 		gbc.gridy=2;
 	    contentPane.add(stemmi,gbc);
 
-	    
+	    JButton btnProsegui=new JButton("Prosegui");
+	    btnProsegui.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
+		
+	    gbc.gridx=0;
+		gbc.gridy=3;
+	    gbc.insets=new Insets(45, 2, 5, 2);
+	    contentPane.add(btnProsegui, gbc);
 		
 		add(contentPane);
 	}
