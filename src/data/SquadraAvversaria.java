@@ -60,4 +60,9 @@ public class SquadraAvversaria{
 		ExtractData ed = new ExtractDataImpl(li);
 		return ed.getNomeCalciatori(nomeSquadra);
 	}
+	
+	public List<Object> getTsr() throws FileNotFoundException, ClassNotFoundException, IOException {
+		ExtractData ed = new ExtractDataImpl(li);
+		return (List<Object>) ed.tsr(nomeSquadra, modulo);
+	}
 }
