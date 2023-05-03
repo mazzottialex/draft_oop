@@ -10,4 +10,9 @@ public class Squadra {
 		this.nomeSquadra=nomeSquadra;
 		this.stemma=stemma;
 	}
+
+	@Override
+	public String toString() {
+		return "Squadra [nomeSquadra=" + nomeSquadra + ", stemma=" + stemma + "]";
+	}
 }

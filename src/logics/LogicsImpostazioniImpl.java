@@ -6,7 +6,7 @@ import data.Squadra;
 
 public class LogicsImpostazioniImpl implements LogicsImpostazioni {
 
-	private String stemma;
+	private String stemma="res/stemmi/bianco.png";
 	private String nomeSquadra;
 	
 	
@@ -23,10 +23,7 @@ public class LogicsImpostazioniImpl implements LogicsImpostazioni {
 
 	@Override
 	public void setStemma(String img) {
-		if(img.equals(""))
-			this.stemma="res/stemmi/bianco.png";
-		else
-			this.stemma=img;
+		this.stemma=img;
 	}
 
 }

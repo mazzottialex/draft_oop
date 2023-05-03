@@ -123,7 +123,7 @@ public class Impostazioni extends Base {
 				public void actionPerformed(ActionEvent e) {
 					JButton btn=(JButton)e.getSource();
 					liButton.forEach(b-> b.setBackground(Color.white));
-					btn.setBackground(new Color(0, 64, 128));;
+					btn.setBackground(new Color(0, 64, 128));
 					log.setStemma(url);
 				}
 			});
@@ -147,7 +147,7 @@ public class Impostazioni extends Base {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Squadra squadra=log.getSquadra(textFieldNomeSquadra.getText());
-				
+				System.out.print(squadra.toString());
 			}
 		});
 	    
