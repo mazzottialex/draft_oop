@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.Set;
+import java.util.Vector;
 import java.util.function.Function;
 
 import data.Calciatore;
@@ -184,6 +185,13 @@ public class ExtractDataImpl implements ExtractData{
 		return getRiserve(squadra, modulo)
 				.stream()
 				.map(c -> c.getNominativo())
+				.toList();
+	}
+	
+	public List<?> tsr(String squadra, Modulo modulo) {
+		return getTitolari(squadra, modulo)
+				.stream()
+				.map(c -> c.toVector())
 				.toList();
 	}
 }
