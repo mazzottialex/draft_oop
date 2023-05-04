@@ -93,8 +93,8 @@ public class Launch {
 //			SquadraAvversaria nap = new SquadraAvversaria(0, "NAP", Modulo.M442, li);
 //			System.out.println(nap.getTsr());
 //			
-//			SquadraAvversaria laz = new SquadraAvversaria(0, "LAZ", Modulo.M442, li);
-//			System.out.println(laz.getTsr());
+			SquadraAvversaria laz = new SquadraAvversaria(0, "LAZ", Modulo.M442, li);
+			System.out.println(laz.getTsr());
 			
 //			System.out.println(ex.getListaByRuolo("A")
 //									.stream()

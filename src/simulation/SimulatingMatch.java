@@ -6,8 +6,13 @@ import java.io.IOException;
 import data.SquadraAvversaria;
 
 public interface SimulatingMatch {
-	public int golSubitiFanta(SquadraAvversaria sa) throws FileNotFoundException, ClassNotFoundException, IOException;
-	public int autogolFanta(SquadraAvversaria sa) throws FileNotFoundException, ClassNotFoundException, IOException;
-	public int rigoriParatiFanta(SquadraAvversaria sa) throws FileNotFoundException, ClassNotFoundException, IOException;
-	public double prestazioneDifensiva(SquadraAvversaria sa) throws FileNotFoundException, ClassNotFoundException, IOException;
+	public int golSubitiFanta(SquadraAvversaria s) throws FileNotFoundException, ClassNotFoundException, IOException;
+	public int autogolFanta(SquadraAvversaria s) throws FileNotFoundException, ClassNotFoundException, IOException;
+	public int rigoriParatiFanta(SquadraAvversaria s) throws FileNotFoundException, ClassNotFoundException, IOException;
+	public double prestazioneDifensiva(SquadraAvversaria s) throws FileNotFoundException, ClassNotFoundException, IOException;
+	
+	public int differenzaRigoriFattiSbagliatiFanta(SquadraAvversaria s) throws FileNotFoundException, ClassNotFoundException, IOException;
+	public double capacitaRealizzativa(SquadraAvversaria s, SquadraAvversaria avv) throws FileNotFoundException, ClassNotFoundException, IOException;
+	public double votoDifFanta(SquadraAvversaria s) throws FileNotFoundException, ClassNotFoundException, IOException;
+	public double votoOffFanta(SquadraAvversaria s) throws FileNotFoundException, ClassNotFoundException, IOException;
 }

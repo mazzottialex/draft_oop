@@ -2,6 +2,7 @@ package simulation;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,8 +15,8 @@ import manageData.ExtractDataImpl;
 
 public class SimulatingMatchImpl implements SimulatingMatch {
 
-	private SquadraAvversaria sq1;
-	private SquadraAvversaria sq2;
+	private SquadraAvversaria sq;
+	private SquadraAvversaria sa;
 	private static final double OWNGOAL_RATE = 2.904040404040404; // percentuale di autogol su gol
 	private static final double PENALITY_RATE = 0.2875; // rigori per partita
 	private static final double MISSED_PENALITIES_RATE = 22.82608695652174; // percentuale rigori sbagliati
@@ -32,17 +33,23 @@ public class SimulatingMatchImpl implements SimulatingMatch {
 	private static final double THRESHOLD_4_5_DIF = 6;
 	private static final double BONUS_4_DIF = 1;
 	private static final double BONUS_5_DIF = 2;
-	private static final double MODIFIER_VOTE = 5;
+	private static final double SUB_VOTE = 5;
 	private static final double MOD_VOTE_DIF_D = 3;
 	private static final double MOD_VOTE_DIF_C = 1;
 	private static final double MOD_VOTE_DIF_A = 0.5;
-	private static final double MOD_PREST_DIF_SUB = 14;
-	private static final double MOD_PREST_DIF_DIV = 5;
+	private static final double MOD_VOTE_OFF_D = 0.5;
+	private static final double MOD_VOTE_OFF_C = 4;
+	private static final double MOD_VOTE_OFF_A = 2.5;
+	private static final double COST_SUB_PD = 14; // da aumentare di 1
+	private static final double COST_SUB_PO = 5; // da aumentare di 2
+	private static final double COST_DIV_PD_PO = 5;
+	private static final double MINUTES = 90;
+	private static final double COST_SUB_SM = 5;
 
-	public SimulatingMatchImpl(SquadraAvversaria sq1, SquadraAvversaria sq2) {
+	public SimulatingMatchImpl(SquadraAvversaria sq, SquadraAvversaria sa) {
 		super();
-		this.sq1 = sq1;
-		this.sq2 = sq2;
+		this.sq = sq;
+		this.sa = sa;
 	}
 
 	public static double prob(double min/* 0.8 */, double max/* 0.12 */) {
@@ -77,8 +84,8 @@ public class SimulatingMatchImpl implements SimulatingMatch {
 		return map;
 	}
 
-	public int golSubitiFanta(SquadraAvversaria sa) throws FileNotFoundException, ClassNotFoundException, IOException {
-		Calciatore portiere = new ExtractDataImpl(sa.titolari).getListaByRuolo("P").get(0);
+	public int golSubitiFanta(SquadraAvversaria s) throws FileNotFoundException, ClassNotFoundException, IOException {
+		Calciatore portiere = new ExtractDataImpl(s.titolari).getListaByRuolo("P").get(0);
 		double probCleanSheet = portiere.getCleanSheet() / portiere.getPg();
 		if (prob(0, 1) <= probCleanSheet) {
 			return 0;
@@ -100,9 +107,9 @@ public class SimulatingMatchImpl implements SimulatingMatch {
 		}
 	}
 
-	public int autogolFanta(SquadraAvversaria sa) throws FileNotFoundException, ClassNotFoundException, IOException {
+	public int autogolFanta(SquadraAvversaria s) throws FileNotFoundException, ClassNotFoundException, IOException {
 		int ag = 0;
-		for (int i = 0; i < golSubitiFanta(sa); i++) {
+		for (int i = 0; i < golSubitiFanta(s); i++) {
 			if (prob(0, 100) <= OWNGOAL_RATE) {
 				ag++;
 			}
@@ -110,35 +117,33 @@ public class SimulatingMatchImpl implements SimulatingMatch {
 		return ag;
 	}
 
-	public int rigoriParatiFanta(SquadraAvversaria sa)
+	public int rigoriParatiFanta(SquadraAvversaria s)
 			throws FileNotFoundException, ClassNotFoundException, IOException {
-		int rs = 0;
+		int r = 0;
 		int rp = 0;
-		do {
-			double p = prob(0, 1);
-			if (p <= PENALITY_RATE * PENALITY_RATE * PENALITY_RATE) {
-				rs = 3;
-			} else if (p > PENALITY_RATE * PENALITY_RATE * PENALITY_RATE
-					&& p <= (PENALITY_RATE * PENALITY_RATE) + (PENALITY_RATE * PENALITY_RATE * PENALITY_RATE)) {
-				rs = 2;
-			} else if (p > (PENALITY_RATE * PENALITY_RATE) + (PENALITY_RATE * PENALITY_RATE * PENALITY_RATE)
-					&& p <= PENALITY_RATE + (PENALITY_RATE * PENALITY_RATE)
-							+ (PENALITY_RATE * PENALITY_RATE * PENALITY_RATE)) {
-				rs = 1;
+		double p = prob(0, 1);
+		if (p <= PENALITY_RATE * PENALITY_RATE * PENALITY_RATE) {
+			r = 3;
+		} else if (p > PENALITY_RATE * PENALITY_RATE * PENALITY_RATE
+				&& p <= (PENALITY_RATE * PENALITY_RATE) + (PENALITY_RATE * PENALITY_RATE * PENALITY_RATE)) {
+			r = 2;
+		} else if (p > (PENALITY_RATE * PENALITY_RATE) + (PENALITY_RATE * PENALITY_RATE * PENALITY_RATE)
+				&& p <= PENALITY_RATE + (PENALITY_RATE * PENALITY_RATE)
+						+ (PENALITY_RATE * PENALITY_RATE * PENALITY_RATE)) {
+			r = 1;
+		}
+		for (int i = 0; i < r; i++) {
+			p = prob(0, 1);
+			if (p <= MISSED_PENALITIES_RATE) {
+				rp++;
 			}
-			for (int i = 0; i < rs; i++) {
-				p = prob(0, 1);
-				if (p < MISSED_PENALITIES_RATE) {
-					rp++;
-				}
-			}
-		} while (rs - rp > golSubitiFanta(sa)); // volendo si può togliere anche se non corretto logicamente
+		}
 		return rp;
 	}
 
-	public static double catenaccioFanta(SquadraAvversaria sa)
+	public static double catenaccioFanta(SquadraAvversaria s)
 			throws FileNotFoundException, ClassNotFoundException, IOException {
-		ExtractData ed = new ExtractDataImpl(sa.titolari);
+		ExtractData ed = new ExtractDataImpl(s.titolari);
 		List<Calciatore> difensori = ed.getListaByRuolo("D");
 		Map<Calciatore, Double> votiDif = votiFanta(ed.getLi());
 		double count = 0;
@@ -187,31 +192,122 @@ public class SimulatingMatchImpl implements SimulatingMatch {
 		return count;
 	}
 
-	public static double votoDifensivoFanta(List<Calciatore> titolari) {
+	public static Map<String, Double> votoFanta(SquadraAvversaria s)
+			throws FileNotFoundException, ClassNotFoundException, IOException {
+		double pP = 0;
 		double pD = 0;
 		double pC = 0;
 		double pA = 0;
-		Map<Calciatore, Double> map = votiFanta(titolari);
-		for (Calciatore c : titolari) {
+		Map<Calciatore, Double> mapVoti = votiFanta(s.getTitolari());
+		Map<String, Double> mapModVoti = new HashMap<>();
+		for (Calciatore c : s.getTitolari()) {
 			switch (c.getRuolo()) {
 			case "P":
-				pD += (map.get(c) - MODIFIER_VOTE);
+				pP += (mapVoti.get(c) - SUB_VOTE);
 				break;
 			case "D":
-				pD += (map.get(c) - MODIFIER_VOTE);
+				pD += (mapVoti.get(c) - SUB_VOTE);
 				break;
 			case "C":
-				pC += (map.get(c) - MODIFIER_VOTE);
+				pC += (mapVoti.get(c) - SUB_VOTE);
 				break;
 			case "A":
-				pA += (map.get(c) - MODIFIER_VOTE);
+				pA += (mapVoti.get(c) - SUB_VOTE);
 				break;
 			}
 		}
-		return (MOD_VOTE_DIF_D * pD) + (MOD_VOTE_DIF_C * pC) + (MOD_VOTE_DIF_A * pA);
+		mapModVoti.put("P", pP);
+		mapModVoti.put("D", pD);
+		mapModVoti.put("C", pC);
+		mapModVoti.put("A", pA);
+		return mapModVoti;
 	}
 
-	public double prestazioneDifensiva(SquadraAvversaria sa) throws FileNotFoundException, ClassNotFoundException, IOException {
-		return (votoDifensivoFanta(sa.getTitolari()) + new ExtractDataImpl(sa.getTitolari()).getListaByRuolo("D").size() + catenaccioFanta(sa) - golSubitiFanta(sa) - MOD_PREST_DIF_SUB) / MOD_PREST_DIF_DIV;
+	public double votoDifFanta(SquadraAvversaria s) throws FileNotFoundException, ClassNotFoundException, IOException {
+		Map<String, Double> v = votoFanta(s);
+		return (MOD_VOTE_DIF_D * (v.get("P") + v.get("D"))) + (MOD_VOTE_DIF_C * v.get("D"))
+				+ (MOD_VOTE_DIF_A * v.get("A"));
+	}
+
+	public double votoOffFanta(SquadraAvversaria s) throws FileNotFoundException, ClassNotFoundException, IOException {
+		Map<String, Double> v = votoFanta(s);
+		return (MOD_VOTE_OFF_D * (v.get("D"))) + (MOD_VOTE_OFF_C * v.get("D")) + (MOD_VOTE_OFF_A * v.get("A"));
+	}
+
+	public double prestazioneDifensiva(SquadraAvversaria s)
+			throws FileNotFoundException, ClassNotFoundException, IOException {
+		return (votoDifFanta(s) + new ExtractDataImpl(s.getTitolari()).getListaByRuolo("D").size() + catenaccioFanta(s)
+				- golSubitiFanta(s) - COST_SUB_PD) / COST_DIV_PD_PO;
+	}
+
+	public double golFattiFanta(SquadraAvversaria s) throws FileNotFoundException, ClassNotFoundException, IOException {
+		int gol = 0;
+		for (Calciatore c : s.getTitolari()) {
+			double probGol = c.getGol() / (c.getMinuti() / MINUTES);
+			double p = prob(0, 1);
+			if (p <= probGol * probGol * probGol) {
+				gol += 3;
+			} else if (p > probGol * probGol * probGol && p <= (probGol * probGol) + (probGol * probGol * probGol)) {
+				gol += 2;
+			} else if (p > (probGol * probGol) + (probGol * probGol * probGol)
+					&& p <= probGol + (probGol * probGol) + (probGol * probGol * probGol)) {
+				gol += 3;
+			}
+		}
+		return gol;
+	}
+
+	public int differenzaRigoriFattiSbagliatiFanta(SquadraAvversaria s)
+			throws FileNotFoundException, ClassNotFoundException, IOException {
+		int r = 0;
+		int rs = 0;
+		double p = prob(0, 1);
+		if (p <= PENALITY_RATE * PENALITY_RATE * PENALITY_RATE) {
+			r = 3;
+		} else if (p > PENALITY_RATE * PENALITY_RATE * PENALITY_RATE
+				&& p <= (PENALITY_RATE * PENALITY_RATE) + (PENALITY_RATE * PENALITY_RATE * PENALITY_RATE)) {
+			r = 2;
+		} else if (p > (PENALITY_RATE * PENALITY_RATE) + (PENALITY_RATE * PENALITY_RATE * PENALITY_RATE)
+				&& p <= PENALITY_RATE + (PENALITY_RATE * PENALITY_RATE)
+						+ (PENALITY_RATE * PENALITY_RATE * PENALITY_RATE)) {
+			r = 1;
+		}
+		for (int i = 0; i < r; i++) {
+			p = prob(0, 1);
+			if (p <= MISSED_PENALITIES_RATE) {
+				rs++;
+			}
+		}
+		return (r - rs) - rs;
+	}
+
+	public double capacitaRealizzativa(SquadraAvversaria s, SquadraAvversaria avv)
+			throws FileNotFoundException, ClassNotFoundException, IOException {
+		double sm = superioritaManifesta(s, avv);
+		if (sm > 0) {
+			return cR(s, avv) + superioritaManifesta(s, avv);
+		} else {
+			return cR(s, avv);
+		}
+	}
+
+	public double cR(SquadraAvversaria s, SquadraAvversaria avv)
+			throws FileNotFoundException, ClassNotFoundException, IOException {
+		return golFattiFanta(s) + autogolFanta(avv) + differenzaRigoriFattiSbagliatiFanta(s);
+	}
+
+	public double prestazioneOffensiva(SquadraAvversaria s, SquadraAvversaria avv)
+			throws FileNotFoundException, ClassNotFoundException, IOException {
+		return (votoOffFanta(s) + (capacitaRealizzativa(s, avv) / 2) - COST_SUB_PO) / COST_DIV_PD_PO;
+	}
+
+	public double superioritaManifesta(SquadraAvversaria s, SquadraAvversaria avv)
+			throws FileNotFoundException, ClassNotFoundException, IOException {
+		return prestazioneOffensiva(s, avv) - 2 * prestazioneDifensiva(s) + (prestazioneOffensiva(s, avv)
+				- 2 * prestazioneDifensiva(s) - 2 * prestazioneOffensiva(avv, s) - cR(avv, s) - COST_SUB_SM);
+	}
+	
+	public int golSegnati(SquadraAvversaria s, SquadraAvversaria avv) throws FileNotFoundException, ClassNotFoundException, IOException {
+		return (int) Math.min(capacitaRealizzativa(s, avv), (prestazioneOffensiva(s, avv) - prestazioneDifensiva(avv)));
 	}
 }
