@@ -188,6 +188,7 @@ public class ExtractDataImpl implements ExtractData{
 				.toList();
 	}
 	
+	// ruolo, nome, rating
 	public List<?> tsr(String squadra, Modulo modulo) {
 		return getTitolari(squadra, modulo)
 				.stream()
