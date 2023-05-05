@@ -93,6 +93,7 @@ public class Launch {
 //			SquadraAvversaria sam = new SquadraAvversaria(0, "SAM", Modulo.M442, li);
 //			System.out.println(sam.getTsr());
 //			
+
 			SquadraAvversaria nap = new SquadraAvversaria(0, "NAP", Modulo.M442, li);
 			//System.out.println(nap.getTsr());
 			
@@ -103,6 +104,7 @@ public class Launch {
 //			System.out.println(new SimulatingFunctionsImpl().golSegnati(laz, nap));
 			
 //			System.out.println(new SimulatingMatchImpl(nap, laz).titS1.size());
+
 			
 //			System.out.println(ex.getListaByRuolo("A")
 //									.stream()
