@@ -34,7 +34,6 @@ public class Home extends Base {
 	private final String stagioneDefault="2022-2023";
 	
 	public Home(Boolean online) {
-		contentPane=new JPanel();
 		log=new LogicsHomeImpl(stagioneDefault, online);
 		log.loadStagione(stagioneDefault);
 		
@@ -70,17 +69,11 @@ public class Home extends Base {
 		    }
 		});
 		btnStart.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Impostazioni imp;
 				try {
-					imp = new Impostazioni(log.getLi());
-					contentPane.removeAll();
-					contentPane.add(imp.getPanel());
-					contentPane.updateUI();
+					changeJPanel(new Impostazioni(log.getLi()));
 				} catch (ClassNotFoundException | IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -199,27 +192,11 @@ public class Home extends Base {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Archivio archivio;
 				try {
-					JFrame frame = (JFrame)contentPane.getTopLevelAncestor();
-					//currentPane.removeAll();
-					frame.remove(contentPane);
-					archivio = new Archivio(log.getLi(), log.getStagione(), log.getOnline());
-					frame.add(archivio.getPanel());
-					frame.revalidate();
-					frame.repaint();
-					/*
-					archivio = new Archivio(log.getLi(), log.getStagione(), log.getOnline());
-					contentPane.removeAll();
-					contentPane.add(archivio.getPanel());
-	                contentPane.updateUI();
-	                */
+					changeJPanel(new Archivio(log.getLi(), log.getStagione(), log.getOnline()));
 				} catch (ClassNotFoundException | IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
-				
 			}
 		});
 		gbc.fill=GridBagConstraints.NONE;

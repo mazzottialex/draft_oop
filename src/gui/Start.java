@@ -92,19 +92,7 @@ public class Start extends Base {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				remove(contentPane);
-				Home home=new Home(log.getOnline());
-				//currentPane=home.getPanel();
-				add(home.getPanel());
-				revalidate();
-				repaint(); /*
-				currentPane.remove(contentPane);
-				Home home=new Home(log.getOnline());
-				//contentPane.removeAll();
-				currentPane.add(home.getPanel());
-				currentPane.updateUI();
-				currentPane.revalidate();
-				currentPane.repaint(); */
+				changeJPanel(new Home(log.getOnline()));
 			}
 		});
 		

@@ -67,14 +67,7 @@ public class Archivio extends Base {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JFrame frame = (JFrame)contentPane.getTopLevelAncestor();
-				frame.remove(contentPane);
-				Home home=new Home(log.getOnline());
-				//currentPane=home.getPanel();
-				frame.add(home.getPanel());
-				frame.revalidate();
-				frame.repaint();
-
+				changeJPanel(new Home(log.getOnline()));
 			}
 		});
 		panel.add(btnHome);
@@ -89,7 +82,7 @@ public class Archivio extends Base {
 		
 		table= new JTable(tm);
 		JScrollPane scrollPane=new JScrollPane(table);
-		scrollPane.setPreferredSize(new Dimension(400,550));
+		scrollPane.setPreferredSize(new Dimension(420,580));
 		contentPane.add(scrollPane);
 		
 		TableRowSorter<TableModel> sorter=new TableRowSorter<TableModel>(tm);
