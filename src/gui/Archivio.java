@@ -47,7 +47,6 @@ public class Archivio extends Base {
 		li=log.liOrdinata(li);	
 		
 		
-		
 		li.stream().forEach(c -> ((DefaultTableModel) tm).addRow(c.toVector()));
 		contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		contentPane.setPreferredSize(new Dimension(450, 640));

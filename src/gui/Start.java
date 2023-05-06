@@ -45,7 +45,7 @@ public class Start extends Base {
 	}
 	
 	public Start() {
-		add(contentPane);
+		//add(contentPane);
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0};

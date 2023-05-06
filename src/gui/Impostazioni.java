@@ -95,6 +95,7 @@ public class Impostazioni extends Base {
 			btnStemma.setBackground(Color.white);
 			btnStemma.setIcon(img);
 			btnStemma.setBorderPainted(false);
+			btnStemma.setFocusPainted(false);
 			gbc.gridx=i%3;
 			gbc.gridy=i/3;
 			gbc.insets=new Insets(2, 2, 2, 2);
@@ -139,7 +140,7 @@ public class Impostazioni extends Base {
 	    gbc.insets=new Insets(45, 2, 5, 2);
 	    contentPane.add(btnProsegui, gbc);
 		
-		add(contentPane);
+		//add(contentPane);
 	}
 }
 

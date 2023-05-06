@@ -50,6 +50,7 @@ public class Home extends Base {
 		Image newimg = image.getScaledInstance(250, 250,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		img = new ImageIcon(newimg);
 		btnStart.setBorderPainted(false);
+		btnStart.setFocusPainted(false);
 		btnStart.setIcon(img);
 		btnStart.setBackground(getForeground());
 		btnStart.setPreferredSize(new Dimension(150,40));
@@ -118,6 +119,7 @@ public class Home extends Base {
 		btnCarica.setBorderPainted(false);
 		btnCarica.setBackground(getForeground());
 		btnCarica.setRolloverEnabled(true);
+		btnCarica.setFocusPainted(false);
 		
 		String[] array = log.getStagioni().toArray(new String[log.getStagioni().size()]);
 		JComboBox<String> comboBoxCarica = new JComboBox<>(array);
@@ -160,6 +162,7 @@ public class Home extends Base {
 		btnAggiorna.setBorderPainted(false);
 		btnAggiorna.setBackground(getForeground());
 		btnAggiorna.setRolloverEnabled(true);
+		btnAggiorna.setFocusPainted(false);
 		panelDownLoad.add(btnAggiorna);
 
 		comboBoxAggiorna.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
@@ -187,10 +190,10 @@ public class Home extends Base {
 		gbc.gridy=4;
 		contentPane.add(labelAvviso,gbc);
 		
-		JButton btnArchivio=new JButton("Archivio");
+		JButton btnArchivio=new JButton("ARCHIVIO");
 		btnArchivio.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
-		btnArchivio.setBorderPainted(false);
-		btnArchivio.setRolloverEnabled(true);
+		btnArchivio.setBackground(Color.white);
+		btnArchivio.setForeground(Color.BLUE);
 		btnArchivio.addActionListener(new ActionListener() {
 			
 			@Override
@@ -210,6 +213,7 @@ public class Home extends Base {
 				
 			}
 		});
+		gbc.fill=GridBagConstraints.NONE;
 		gbc.gridx=0;
 		gbc.gridy=5;
 		contentPane.add(btnArchivio,gbc);
