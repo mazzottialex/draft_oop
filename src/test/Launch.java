@@ -24,6 +24,9 @@ import rating.CalcoloRating;
 import rating.CalcoloRatingImpl;
 import scraping.Scraping;
 import scraping.ScrapingImpl;
+import simulation.SimulatingFunctions;
+import simulation.SimulatingFunctionsImpl;
+import simulation.SimulatingMatchImpl;
 
 public class Launch {
 
@@ -90,11 +93,18 @@ public class Launch {
 //			SquadraAvversaria sam = new SquadraAvversaria(0, "SAM", Modulo.M442, li);
 //			System.out.println(sam.getTsr());
 //			
-//			SquadraAvversaria nap = new SquadraAvversaria(0, "NAP", Modulo.M442, li);
-//			System.out.println(nap.getTsr());
-//			
-//			SquadraAvversaria laz = new SquadraAvversaria(0, "LAZ", Modulo.M442, li);
-//			System.out.println(laz.getTsr());
+
+			SquadraAvversaria nap = new SquadraAvversaria(0, "NAP", Modulo.M442, li);
+			//System.out.println(nap.getTsr());
+			
+			SquadraAvversaria laz = new SquadraAvversaria(0, "LAZ", Modulo.M442, li);
+			//System.out.println(laz.getTsr());
+			
+//			System.out.println(new SimulatingFunctionsImpl().golSegnati(nap, laz));
+//			System.out.println(new SimulatingFunctionsImpl().golSegnati(laz, nap));
+			
+//			System.out.println(new SimulatingMatchImpl(nap, laz).titS1.size());
+
 			
 //			System.out.println(ex.getListaByRuolo("A")
 //									.stream()
@@ -115,10 +125,10 @@ public class Launch {
 //			double max = 1.2; // numero massimo
 //			System.out.println(random.nextDouble((max-min)) + min);
 			
-			System.out.println(ex.getLi()
-				.stream()
-				.map(c -> c.getGol())
-				.reduce((m, n) -> m + n));
+//			System.out.println(ex.getLi()
+//				.stream()
+//				.map(c -> c.getGol())
+//				.reduce((m, n) -> m + n));
 
 		}
 

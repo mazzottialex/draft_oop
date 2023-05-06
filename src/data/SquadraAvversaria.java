@@ -38,14 +38,16 @@ public class SquadraAvversaria{
 
 	public List<Calciatore> getTitolari() throws FileNotFoundException, ClassNotFoundException, IOException {
 		ExtractData ed = new ExtractDataImpl(li);
-		return ed.getTitolari(nomeSquadra, modulo);
+		titolari = ed.getTitolari(nomeSquadra, modulo);
+		return titolari;
 	}
 
 	public List<Calciatore> getRiserve() throws FileNotFoundException, ClassNotFoundException, IOException {
 		ExtractData ed = new ExtractDataImpl(li);
-		return ed.getRiserve(nomeSquadra, modulo);
+		riserve = ed.getRiserve(nomeSquadra, modulo);
+		return riserve;
 	}
-	
+	/*
 	public List<String> getNomeTitolari() throws FileNotFoundException, ClassNotFoundException, IOException {
 		ExtractData ed = new ExtractDataImpl(li);
 		return ed.getNomeTitolari(nomeSquadra, modulo);
@@ -60,7 +62,8 @@ public class SquadraAvversaria{
 		ExtractData ed = new ExtractDataImpl(li);
 		return ed.getNomeCalciatori(nomeSquadra);
 	}
-	
+	*/
+	// ruolo, nome, rating
 	public List<Object> getTsr() throws FileNotFoundException, ClassNotFoundException, IOException {
 		ExtractData ed = new ExtractDataImpl(li);
 		return (List<Object>) ed.tsr(nomeSquadra, modulo);
