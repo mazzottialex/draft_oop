@@ -67,10 +67,13 @@ public class Archivio extends Base {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				JFrame frame = (JFrame)contentPane.getTopLevelAncestor();
+				frame.remove(contentPane);
 				Home home=new Home(log.getOnline());
-				contentPane.removeAll();
-				contentPane.add(home.getPanel());
-				contentPane.updateUI();;
+				//currentPane=home.getPanel();
+				frame.add(home.getPanel());
+				frame.revalidate();
+				frame.repaint();
 
 			}
 		});

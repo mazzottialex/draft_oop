@@ -45,7 +45,7 @@ public class Start extends Base {
 	}
 	
 	public Start() {
-		//add(contentPane);
+		add(contentPane);
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0};
@@ -92,11 +92,19 @@ public class Start extends Base {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				remove(contentPane);
 				Home home=new Home(log.getOnline());
-				contentPane.removeAll();
-				contentPane.add(home.getPanel());
-				contentPane.updateUI();
+				//currentPane=home.getPanel();
+				add(home.getPanel());
+				revalidate();
+				repaint(); /*
+				currentPane.remove(contentPane);
+				Home home=new Home(log.getOnline());
+				//contentPane.removeAll();
+				currentPane.add(home.getPanel());
+				currentPane.updateUI();
+				currentPane.revalidate();
+				currentPane.repaint(); */
 			}
 		});
 		
