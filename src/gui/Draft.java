@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -16,6 +17,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.SwingConstants;
 
@@ -47,11 +50,6 @@ public class Draft extends Base {
 		
 		contentPane.setLayout(layout);
 		JPanel panelGiocatore;
-		JLabel lblNome;
-		JLabel lblIcona;
-		ImageIcon img;
-		Image image;
-		Image newimg;
 		JPanel panelPosizione = new JPanel();
 		
 		gbc.insets=new Insets(5, 5, 2, 2);
@@ -61,19 +59,33 @@ public class Draft extends Base {
 			panelPosizione.setLayout(layout);
 			panelGiocatore=new JPanel();
 			panelGiocatore.setLayout(layout);
-			lblNome=new JLabel("Osimenh");
-			lblNome.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
-			lblIcona = new JLabel();
-			img=new ImageIcon("res/attaccante.png");
-			image = img.getImage(); // transform it 
-			newimg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-			img = new ImageIcon(newimg);
-			lblIcona.setIcon(img);
-			gbc.gridy=0;
-			panelGiocatore.add(lblIcona,gbc);
-			gbc.gridy=1;
-			panelGiocatore.add(lblNome,gbc); 
-
+			JButton btnScegli=new JButton("Scegli");
+			btnScegli.setPreferredSize(new Dimension(100,50));
+			btnScegli.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					JButton btn= (JButton) e.getSource();
+					JPanel panel=(JPanel) btn.getParent();
+					panel.remove(btn);
+					
+					JLabel lblNome=new JLabel("Osimenh");
+					lblNome.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+					JLabel lblIcona = new JLabel();
+					ImageIcon img=new ImageIcon("res/attaccante.png");
+					Image image = img.getImage(); // transform it 
+					Image newimg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+					img = new ImageIcon(newimg);
+					lblIcona.setIcon(img);
+					gbc.gridy=0;
+					panel.add(lblIcona,gbc);
+					gbc.gridy=1;
+					panel.add(lblNome,gbc); 
+					
+					revalidate();
+					repaint();
+				}
+			});
+			panelGiocatore.add(btnScegli);
 			panelPosizione.add(panelGiocatore);
 		}
 		gbc.gridy=0;
@@ -83,22 +95,35 @@ public class Draft extends Base {
 		//Centrocampisti
 		for(int i=0;i<3;i++) {
 			panelPosizione.setLayout(layout);
-			
 			panelGiocatore=new JPanel();
 			panelGiocatore.setLayout(layout);
-			lblNome=new JLabel("Barella");
-			lblNome.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
-			lblIcona = new JLabel();
-			img=new ImageIcon("res/centrocampista.png");
-			image = img.getImage(); // transform it 
-			newimg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-			img = new ImageIcon(newimg);
-			lblIcona.setIcon(img);
-			gbc.gridy=0;
-			panelGiocatore.add(lblIcona,gbc);
-			gbc.gridy=1;
-			panelGiocatore.add(lblNome,gbc); 
-
+			JButton btnScegli=new JButton("Scegli");
+			btnScegli.setPreferredSize(new Dimension(100,50));
+			btnScegli.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					JButton btn= (JButton) e.getSource();
+					JPanel panel=(JPanel) btn.getParent();
+					panel.remove(btn);
+					
+					JLabel lblNome=new JLabel("Barella");
+					lblNome.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+					JLabel lblIcona = new JLabel();
+					ImageIcon img=new ImageIcon("res/centrocampista.png");
+					Image image = img.getImage(); // transform it 
+					Image newimg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+					img = new ImageIcon(newimg);
+					lblIcona.setIcon(img);
+					gbc.gridy=0;
+					panel.add(lblIcona,gbc);
+					gbc.gridy=1;
+					panel.add(lblNome,gbc); 
+					
+					revalidate();
+					repaint();
+				}
+			});
+			panelGiocatore.add(btnScegli);
 			panelPosizione.add(panelGiocatore);
 		}
 		gbc.gridy=1;
@@ -107,45 +132,78 @@ public class Draft extends Base {
 		panelPosizione=new JPanel();
 		//Difensori
 		for(int i=0;i<4;i++) {
-			
 			panelPosizione.setLayout(layout);
-			
 			panelGiocatore=new JPanel();
 			panelGiocatore.setLayout(layout);
-			lblNome=new JLabel("Smalling");
-			lblNome.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
-			lblIcona = new JLabel();
-			img=new ImageIcon("res/difensore.png");
-			image = img.getImage(); // transform it 
-			newimg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-			img = new ImageIcon(newimg);
-			lblIcona.setIcon(img);
-			gbc.gridy=0;
-			panelGiocatore.add(lblIcona,gbc);
-			gbc.gridy=1;
-			panelGiocatore.add(lblNome,gbc); 
+			JButton btnScegli=new JButton("Scegli");
+			btnScegli.setPreferredSize(new Dimension(100,50));
+			btnScegli.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					JButton btn= (JButton) e.getSource();
+					JPanel panel=(JPanel) btn.getParent();
+					panel.remove(btn);
+					
+					JLabel lblNome=new JLabel("Osimenh");
+					lblNome.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+					JLabel lblIcona = new JLabel();
+					ImageIcon img=new ImageIcon("res/difensore.png");
+					Image image = img.getImage(); // transform it 
+					Image newimg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+					img = new ImageIcon(newimg);
+					lblIcona.setIcon(img);
+					gbc.gridy=0;
+					panel.add(lblIcona,gbc);
+					gbc.gridy=1;
+					panel.add(lblNome,gbc); 
+					
+					revalidate();
+					repaint();
+				}
+			});
+			panelGiocatore.add(btnScegli);
 			panelPosizione.add(panelGiocatore);
 		}
 		gbc.gridy=2;
 		contentPane.add(panelPosizione, gbc);
 		
+		panelPosizione=new JPanel();
 		//Portiere
-		panelGiocatore=new JPanel();
-		panelGiocatore.setLayout(layout);
-		lblNome=new JLabel("Vicario");
-		lblNome.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
-		lblIcona = new JLabel();
-		img=new ImageIcon("res/portiere.png");
-		image = img.getImage(); // transform it 
-		newimg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-		img = new ImageIcon(newimg);
-		lblIcona.setIcon(img);
-		gbc.gridy=0;
-		panelGiocatore.add(lblIcona,gbc);
-		gbc.gridy=1;
-		panelGiocatore.add(lblNome,gbc); 
+		for(int i=0;i<1;i++) {
+			panelPosizione.setLayout(layout);
+			panelGiocatore=new JPanel();
+			panelGiocatore.setLayout(layout);
+			JButton btnScegli=new JButton("Scegli");
+			btnScegli.setPreferredSize(new Dimension(100,50));
+			btnScegli.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					JButton btn= (JButton) e.getSource();
+					JPanel panel=(JPanel) btn.getParent();
+					panel.remove(btn);
+					
+					JLabel lblNome=new JLabel("Osimenh");
+					lblNome.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+					JLabel lblIcona = new JLabel();
+					ImageIcon img=new ImageIcon("res/portiere.png");
+					Image image = img.getImage(); // transform it 
+					Image newimg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+					img = new ImageIcon(newimg);
+					lblIcona.setIcon(img);
+					gbc.gridy=0;
+					panel.add(lblIcona,gbc);
+					gbc.gridy=1;
+					panel.add(lblNome,gbc); 
+					
+					revalidate();
+					repaint();
+				}
+			});
+			panelGiocatore.add(btnScegli);
+			panelPosizione.add(panelGiocatore);
+		}
 		gbc.gridy=3;
-		contentPane.add(panelGiocatore,gbc);
+		contentPane.add(panelPosizione, gbc);
 	}
 
 }
