@@ -26,7 +26,7 @@ public class utilsGUI {
 		JPanel panelGiocatore=new JPanel();
 		panelGiocatore.setLayout(layout);
 		
-		JLabel lblNome=new JLabel("Osimenh");
+		JLabel lblNome=new JLabel(calciatore);
 		lblNome.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
 		JLabel lblIcona = new JLabel();
 		ImageIcon img=new ImageIcon(file);
