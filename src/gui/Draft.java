@@ -69,9 +69,9 @@ public class Draft extends Base {
 					try {
 						dialog = new DialogScelta(parent, true, li, "A");
 						dialog.setVisible(true);
-						if(!dialog.getCalciatore().equals(null)) {
+						Calciatore c=dialog.getCalciatore();
+						if(c!=null) {
 							panel.remove(btn);
-							Calciatore c=dialog.getCalciatore();
 							panel.add(utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRuolo()));
 						}
 					} catch (ClassNotFoundException | IOException e1) {
@@ -106,10 +106,9 @@ public class Draft extends Base {
 					try {
 						dialog = new DialogScelta(parent, true, li, "C");
 						dialog.setVisible(true);
-						if(dialog.getCalciatore()!=null) {
+						Calciatore c=dialog.getCalciatore();
+						if(c!=null) {
 							panel.remove(btn);
-							Calciatore c=dialog.getCalciatore();
-							
 							panel.add(utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRuolo()));
 						}
 					} catch (ClassNotFoundException | IOException e1) {
@@ -144,9 +143,9 @@ public class Draft extends Base {
 					try {
 						dialog = new DialogScelta(parent, true, li, "D");
 						dialog.setVisible(true);
-						if(!dialog.getCalciatore().equals(null)) {
+						Calciatore c=dialog.getCalciatore();
+						if(c!=null) {
 							panel.remove(btn);
-							Calciatore c=dialog.getCalciatore();
 							panel.add(utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRuolo()));
 						}
 					} catch (ClassNotFoundException | IOException e1) {
@@ -181,9 +180,9 @@ public class Draft extends Base {
 					try {
 						dialog = new DialogScelta(parent, true, li, "P");
 						dialog.setVisible(true);
-						if(!dialog.getCalciatore().equals(null)) {
+						Calciatore c=dialog.getCalciatore();
+						if(c!=null) {
 							panel.remove(btn);
-							Calciatore c=dialog.getCalciatore();
 							panel.add(utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRuolo()));
 						}
 					} catch (ClassNotFoundException | IOException e1) {
