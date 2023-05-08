@@ -1,7 +1,9 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 
 import javax.swing.BoxLayout;
@@ -13,6 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.Insets;
+
 import javax.swing.SwingConstants;
 
 public class Draft extends Base {
@@ -42,25 +46,106 @@ public class Draft extends Base {
 		GridBagLayout layout=new GridBagLayout();
 		
 		contentPane.setLayout(layout);
+		JPanel panelGiocatore;
+		JLabel lblNome;
+		JLabel lblIcona;
+		ImageIcon img;
+		Image image;
+		Image newimg;
+		JPanel panelPosizione = new JPanel();
 		
-		JPanel panelGiocatore=new JPanel();
-		 
+		gbc.insets=new Insets(5, 5, 2, 2);
+		
+		//Attaccanti
+		for(int i=0;i<3;i++) {
+			panelPosizione.setLayout(layout);
+			panelGiocatore=new JPanel();
+			panelGiocatore.setLayout(layout);
+			lblNome=new JLabel("Osimenh");
+			lblNome.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+			lblIcona = new JLabel();
+			img=new ImageIcon("res/attaccante.png");
+			image = img.getImage(); // transform it 
+			newimg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+			img = new ImageIcon(newimg);
+			lblIcona.setIcon(img);
+			gbc.gridy=0;
+			panelGiocatore.add(lblIcona,gbc);
+			gbc.gridy=1;
+			panelGiocatore.add(lblNome,gbc); 
+
+			panelPosizione.add(panelGiocatore);
+		}
+		gbc.gridy=0;
+		contentPane.add(panelPosizione, gbc);
+		
+		panelPosizione = new JPanel();
+		//Centrocampisti
+		for(int i=0;i<3;i++) {
+			panelPosizione.setLayout(layout);
+			
+			panelGiocatore=new JPanel();
+			panelGiocatore.setLayout(layout);
+			lblNome=new JLabel("Barella");
+			lblNome.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+			lblIcona = new JLabel();
+			img=new ImageIcon("res/centrocampista.png");
+			image = img.getImage(); // transform it 
+			newimg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+			img = new ImageIcon(newimg);
+			lblIcona.setIcon(img);
+			gbc.gridy=0;
+			panelGiocatore.add(lblIcona,gbc);
+			gbc.gridy=1;
+			panelGiocatore.add(lblNome,gbc); 
+
+			panelPosizione.add(panelGiocatore);
+		}
+		gbc.gridy=1;
+		contentPane.add(panelPosizione, gbc);
+		
+		panelPosizione=new JPanel();
+		//Difensori
+		for(int i=0;i<4;i++) {
+			
+			panelPosizione.setLayout(layout);
+			
+			panelGiocatore=new JPanel();
+			panelGiocatore.setLayout(layout);
+			lblNome=new JLabel("Smalling");
+			lblNome.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+			lblIcona = new JLabel();
+			img=new ImageIcon("res/difensore.png");
+			image = img.getImage(); // transform it 
+			newimg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+			img = new ImageIcon(newimg);
+			lblIcona.setIcon(img);
+			gbc.gridy=0;
+			panelGiocatore.add(lblIcona,gbc);
+			gbc.gridy=1;
+			panelGiocatore.add(lblNome,gbc); 
+			panelPosizione.add(panelGiocatore);
+		}
+		gbc.gridy=2;
+		contentPane.add(panelPosizione, gbc);
+		
+		//Portiere
+		panelGiocatore=new JPanel();
 		panelGiocatore.setLayout(layout);
-		
-		JLabel lblNome=new JLabel("Osimenh");
-		JLabel lblIcona = new JLabel();
-		ImageIcon img=new ImageIcon("res/portiere.png");
-		Image image = img.getImage(); // transform it 
-		Image newimg = image.getScaledInstance(250, 250,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+		lblNome=new JLabel("Vicario");
+		lblNome.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+		lblIcona = new JLabel();
+		img=new ImageIcon("res/portiere.png");
+		image = img.getImage(); // transform it 
+		newimg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		img = new ImageIcon(newimg);
 		lblIcona.setIcon(img);
-		lblIcona.setBackground(getForeground());
-		
 		gbc.gridy=0;
 		panelGiocatore.add(lblIcona,gbc);
 		gbc.gridy=1;
 		panelGiocatore.add(lblNome,gbc); 
-		contentPane.add(panelGiocatore);
+		gbc.gridy=3;
+		contentPane.add(panelGiocatore,gbc);
 	}
 
 }
