@@ -70,26 +70,28 @@ public class Draft extends Base {
 					JButton btn= (JButton) e.getSource();
 					JPanel panel=(JPanel) btn.getParent();
 	                JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(btn);
-					panel.remove(btn);
+					
 					
 					DialogScelta dialog = new DialogScelta(parent, true);
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setVisible(true);
 
-					
-					JLabel lblNome=new JLabel(dialog.getCalciatore());
-					lblNome.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
-					JLabel lblIcona = new JLabel();
-					ImageIcon img=new ImageIcon("res/attaccante.png");
-					Image image = img.getImage(); // transform it 
-					Image newimg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-					img = new ImageIcon(newimg);
-					lblIcona.setIcon(img);
-					gbc.gridy=0;
-					panel.add(lblIcona,gbc);
-					gbc.gridy=1;
-					panel.add(lblNome,gbc); 
-					
+					if(!dialog.getCalciatore().equals("")) {
+						panel.remove(btn);
+						JLabel lblNome=new JLabel(dialog.getCalciatore());
+						lblNome.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+						JLabel lblIcona = new JLabel();
+						ImageIcon img=new ImageIcon("res/attaccante.png");
+						Image image = img.getImage(); // transform it 
+						Image newimg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+						img = new ImageIcon(newimg);
+						lblIcona.setIcon(img);
+						gbc.gridy=0;
+						panel.add(lblIcona,gbc);
+						gbc.gridy=1;
+						panel.add(lblNome,gbc); 
+						
+					}
 					revalidate();
 					repaint();
 				}
