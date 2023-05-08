@@ -8,6 +8,8 @@ import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,7 +21,8 @@ import javax.swing.border.EmptyBorder;
 public class DialogScelta extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-
+	private String calciatore="";
+	private JButton okButton;
 	/**
 	 * Launch the application.
 	 */
@@ -30,6 +33,8 @@ public class DialogScelta extends JDialog {
 	 */
 	public DialogScelta(Frame parent, Boolean modale) {
 		super(parent, modale);
+		String selezionato="Osime";
+		
 		setBounds(100, 100, 650, 300);
 		setMinimumSize(getSize());
 		getContentPane().setLayout(new BorderLayout());
@@ -65,10 +70,17 @@ public class DialogScelta extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
+				okButton = new JButton("OK");
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
+				okButton.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						calciatore=selezionato;
+						dispose();
+					}
+				});
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
@@ -77,5 +89,8 @@ public class DialogScelta extends JDialog {
 			}
 		}
 	}
-
+	
+	public String getCalciatore() {
+		return this.calciatore;
+	}
 }

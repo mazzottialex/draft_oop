@@ -77,7 +77,7 @@ public class Draft extends Base {
 					dialog.setVisible(true);
 
 					
-					JLabel lblNome=new JLabel("Osimenh");
+					JLabel lblNome=new JLabel(dialog.getCalciatore());
 					lblNome.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
 					JLabel lblIcona = new JLabel();
 					ImageIcon img=new ImageIcon("res/attaccante.png");
