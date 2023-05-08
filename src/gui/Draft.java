@@ -10,8 +10,10 @@ import java.awt.GridBagConstraints;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridBagLayout;
@@ -67,6 +69,11 @@ public class Draft extends Base {
 					JButton btn= (JButton) e.getSource();
 					JPanel panel=(JPanel) btn.getParent();
 					panel.remove(btn);
+					
+					DialogScelta dialog = new DialogScelta();
+					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					dialog.setVisible(true);
+
 					
 					JLabel lblNome=new JLabel("Osimenh");
 					lblNome.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
