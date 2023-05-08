@@ -282,7 +282,7 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
 			throws FileNotFoundException, ClassNotFoundException, IOException {
 		double sm = superioritaManifesta(s, avv);
 		if (sm > 0) {
-			return cR(s, avv) + superioritaManifesta(s, avv);
+			return cR(s, avv) + sm;
 		} else {
 			return cR(s, avv);
 		}
