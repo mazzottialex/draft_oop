@@ -54,7 +54,7 @@ public class DialogScelta extends JDialog {
 		ExtractData ex=new ExtractDataImpl(this.li);
 		this.li=ex.getRandomByRuolo(ruolo,5);
 		
-		setBounds(100, 100, 650, 300);
+		setBounds(100, 100, 700, 300);
 		setMinimumSize(getSize());
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());

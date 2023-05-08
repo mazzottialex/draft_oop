@@ -41,7 +41,8 @@ public class utilsGUI {
 		gbc.gridy=0;
 		panelGiocatore.add(lblIcona,gbc);
 		gbc.gridy=1;
-		panelGiocatore.add(lblNome,gbc); 
+		panelGiocatore.add(lblNome,gbc);
+		
 		return panelGiocatore;
 	}
 	public static JButton getButtonCalciatore(String calciatore, String ruolo) {

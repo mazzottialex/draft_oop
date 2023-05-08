@@ -32,10 +32,6 @@ import javax.swing.SwingUtilities;
 
 public class Draft extends Base {
 
-	/**
-	 * Launch the application.
-	 */
-	
 
 	/**
 	 * Create the frame.
