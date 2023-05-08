@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 
 public class utilsGUI {
 
-	public static JPanel getPanelCalciatore(String calciatore, String ruolo) {
+	public static JPanel getPanelCalciatore(String calciatore, Integer valutazione, String ruolo) {
 		String file="";
 		if(ruolo.equals("P"))
 			file="res/portiere.png";
@@ -32,6 +32,8 @@ public class utilsGUI {
 		
 		JLabel lblNome=new JLabel(calciatore);
 		lblNome.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+		JLabel lblValutazione=new JLabel(valutazione.toString());
+		lblNome.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
 		JLabel lblIcona = new JLabel();
 		ImageIcon img=new ImageIcon(file);
 		Image image = img.getImage(); // transform it 
@@ -42,7 +44,8 @@ public class utilsGUI {
 		panelGiocatore.add(lblIcona,gbc);
 		gbc.gridy=1;
 		panelGiocatore.add(lblNome,gbc);
-		
+		gbc.gridy=2;
+		panelGiocatore.add(lblValutazione,gbc);
 		return panelGiocatore;
 	}
 	public static JButton getButtonCalciatore(String calciatore, String ruolo) {

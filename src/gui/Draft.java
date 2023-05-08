@@ -68,7 +68,7 @@ public class Draft extends Base {
 						Calciatore c=dialog.getCalciatore();
 						if(c!=null) {
 							panel.remove(btn);
-							panel.add(utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRuolo()));
+							panel.add(utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRating().getX(), c.getRuolo()));
 						}
 					} catch (ClassNotFoundException | IOException e1) {
 						e1.printStackTrace();
@@ -105,7 +105,7 @@ public class Draft extends Base {
 						Calciatore c=dialog.getCalciatore();
 						if(c!=null) {
 							panel.remove(btn);
-							panel.add(utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRuolo()));
+							panel.add(utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRating().getX(), c.getRuolo()));
 						}
 					} catch (ClassNotFoundException | IOException e1) {
 						e1.printStackTrace();
@@ -142,7 +142,7 @@ public class Draft extends Base {
 						Calciatore c=dialog.getCalciatore();
 						if(c!=null) {
 							panel.remove(btn);
-							panel.add(utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRuolo()));
+							panel.add(utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRating().getX(), c.getRuolo()));
 						}
 					} catch (ClassNotFoundException | IOException e1) {
 						e1.printStackTrace();
@@ -179,7 +179,7 @@ public class Draft extends Base {
 						Calciatore c=dialog.getCalciatore();
 						if(c!=null) {
 							panel.remove(btn);
-							panel.add(utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRuolo()));
+							panel.add(utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRating().getX(), c.getRuolo()));
 						}
 					} catch (ClassNotFoundException | IOException e1) {
 						e1.printStackTrace();
