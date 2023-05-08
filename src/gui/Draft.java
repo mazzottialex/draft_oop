@@ -101,21 +101,15 @@ public class Draft extends Base {
 				public void actionPerformed(ActionEvent e) {
 					JButton btn= (JButton) e.getSource();
 					JPanel panel=(JPanel) btn.getParent();
-					panel.remove(btn);
+	                JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(btn);
 					
-					JLabel lblNome=new JLabel("Barella");
-					lblNome.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
-					JLabel lblIcona = new JLabel();
-					ImageIcon img=new ImageIcon("res/centrocampista.png");
-					Image image = img.getImage(); // transform it 
-					Image newimg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-					img = new ImageIcon(newimg);
-					lblIcona.setIcon(img);
-					gbc.gridy=0;
-					panel.add(lblIcona,gbc);
-					gbc.gridy=1;
-					panel.add(lblNome,gbc); 
-					
+					DialogScelta dialog = new DialogScelta(parent, true);
+					dialog.setVisible(true);
+
+					if(!dialog.getCalciatore().equals("")) {
+						panel.remove(btn);
+						panel.add(utilsGUI.getPanelCalciatore(dialog.getCalciatore(), "C"));
+					}
 					revalidate();
 					repaint();
 				}
@@ -139,21 +133,15 @@ public class Draft extends Base {
 				public void actionPerformed(ActionEvent e) {
 					JButton btn= (JButton) e.getSource();
 					JPanel panel=(JPanel) btn.getParent();
-					panel.remove(btn);
+	                JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(btn);
 					
-					JLabel lblNome=new JLabel("Osimenh");
-					lblNome.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
-					JLabel lblIcona = new JLabel();
-					ImageIcon img=new ImageIcon("res/difensore.png");
-					Image image = img.getImage(); // transform it 
-					Image newimg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-					img = new ImageIcon(newimg);
-					lblIcona.setIcon(img);
-					gbc.gridy=0;
-					panel.add(lblIcona,gbc);
-					gbc.gridy=1;
-					panel.add(lblNome,gbc); 
-					
+					DialogScelta dialog = new DialogScelta(parent, true);
+					dialog.setVisible(true);
+
+					if(!dialog.getCalciatore().equals("")) {
+						panel.remove(btn);
+						panel.add(utilsGUI.getPanelCalciatore(dialog.getCalciatore(), "D"));
+					}
 					revalidate();
 					repaint();
 				}
@@ -162,7 +150,7 @@ public class Draft extends Base {
 			panelPosizione.add(panelGiocatore);
 		}
 		gbc.gridy=2;
-		contentPane.add(panelPosizione, gbc);
+		contentPane.add(panelPosizione, gbc);;
 		
 		panelPosizione=new JPanel();
 		//Portiere
@@ -177,21 +165,15 @@ public class Draft extends Base {
 				public void actionPerformed(ActionEvent e) {
 					JButton btn= (JButton) e.getSource();
 					JPanel panel=(JPanel) btn.getParent();
-					panel.remove(btn);
+	                JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(btn);
 					
-					JLabel lblNome=new JLabel("Osimenh");
-					lblNome.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
-					JLabel lblIcona = new JLabel();
-					ImageIcon img=new ImageIcon("res/portiere.png");
-					Image image = img.getImage(); // transform it 
-					Image newimg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-					img = new ImageIcon(newimg);
-					lblIcona.setIcon(img);
-					gbc.gridy=0;
-					panel.add(lblIcona,gbc);
-					gbc.gridy=1;
-					panel.add(lblNome,gbc); 
-					
+					DialogScelta dialog = new DialogScelta(parent, true);
+					dialog.setVisible(true);
+
+					if(!dialog.getCalciatore().equals("")) {
+						panel.remove(btn);
+						panel.add(utilsGUI.getPanelCalciatore(dialog.getCalciatore(), "P"));
+					}
 					revalidate();
 					repaint();
 				}

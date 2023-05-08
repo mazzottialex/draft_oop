@@ -15,12 +15,14 @@ public class utilsGUI {
 
 	public static JPanel getPanelCalciatore(String calciatore, String ruolo) {
 		String file="";
-		switch(ruolo) {
-		case "P": file="res/portiere.png";
-		case "D": file="res/difensore.png";
-		case "C": file="res/centrocampista.png";
-		case "A": file="res/attaccante.png";
-		}
+		if(ruolo.equals("P"))
+			file="res/portiere.png";
+		else if(ruolo.equals("D"))
+			file="res/difensore.png";
+		else if(ruolo.equals("C"))
+			file="res/centrocampista.png";
+		else if(ruolo.equals("A"))
+			file="res/attaccante.png";
 		
 		GridBagConstraints gbc=new GridBagConstraints();
 		GridBagLayout layout=new GridBagLayout();
