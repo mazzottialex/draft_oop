@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -8,6 +9,7 @@ import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,6 +19,8 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import org.openqa.selenium.devtools.v109.dom.model.RGBA;
 
 public class DialogScelta extends JDialog {
 
@@ -46,22 +50,7 @@ public class DialogScelta extends JDialog {
 		contentPanel.setLayout(layout);
 		
 		for(int i=0;i<5;i++) {
-			JButton panelGiocatore=new JButton();
-			panelGiocatore.setLayout(layout);
-			panelGiocatore.setPreferredSize(new Dimension(110,150));
-			JLabel lblNome=new JLabel("Osimenh");
-			lblNome.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
-			JLabel lblIcona = new JLabel();
-			ImageIcon img=new ImageIcon("res/attaccante.png");
-			Image image = img.getImage(); // transform it 
-			Image newimg = image.getScaledInstance(90, 90,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-			img = new ImageIcon(newimg);
-			lblIcona.setIcon(img);
-			gbc.gridy=0;
-			panelGiocatore.add(lblIcona,gbc);
-			gbc.gridy=1;
-			panelGiocatore.add(lblNome,gbc); 
-			contentPanel.add(panelGiocatore);
+			contentPanel.add(utilsGUI.getButtonCalciatore("sds", "P"));
 		}
 		
 		getContentPane().add(contentPanel, BorderLayout.CENTER);

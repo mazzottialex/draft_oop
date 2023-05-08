@@ -71,15 +71,12 @@ public class Draft extends Base {
 					JPanel panel=(JPanel) btn.getParent();
 	                JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(btn);
 					
-					
 					DialogScelta dialog = new DialogScelta(parent, true);
-					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setVisible(true);
 
 					if(!dialog.getCalciatore().equals("")) {
 						panel.remove(btn);
 						panel.add(utilsGUI.getPanelCalciatore(dialog.getCalciatore(), "A"));
-						
 					}
 					revalidate();
 					repaint();
