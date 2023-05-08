@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -58,7 +59,7 @@ public class utilsGUI {
 		
 		JButton buttonCalciatore=new JButton();
 		buttonCalciatore.setLayout(layout);
-		
+		buttonCalciatore.setBackground(new Color(240,240,240));
 		JLabel lblNome=new JLabel(calciatore);
 		lblNome.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
 		JLabel lblIcona = new JLabel();

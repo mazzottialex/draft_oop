@@ -12,6 +12,8 @@ import java.awt.Image;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -26,6 +28,7 @@ public class DialogScelta extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private String calciatore="";
+	String selezionato="Osime";
 	private JButton okButton;
 	/**
 	 * Launch the application.
@@ -37,7 +40,7 @@ public class DialogScelta extends JDialog {
 	 */
 	public DialogScelta(Frame parent, Boolean modale) {
 		super(parent, modale);
-		String selezionato="Osime";
+		
 		
 		setBounds(100, 100, 650, 300);
 		setMinimumSize(getSize());
@@ -49,8 +52,21 @@ public class DialogScelta extends JDialog {
 		GridBagLayout layout=new GridBagLayout();
 		contentPanel.setLayout(layout);
 		
+		List<JButton> li=new  ArrayList<>();
 		for(int i=0;i<5;i++) {
-			contentPanel.add(utilsGUI.getButtonCalciatore("sds", "P"));
+			String nomeCalciatore="ciro";
+			JButton btnCalciatore=utilsGUI.getButtonCalciatore(nomeCalciatore, "P");
+			li.add(btnCalciatore);
+			btnCalciatore.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					selezionato=nomeCalciatore;
+					JButton btn= (JButton)e.getSource();
+					li.forEach(el-> el.setBackground(new Color(240,240,240)));
+					btn.setBackground(Color.LIGHT_GRAY);
+				}	
+			});
+			contentPanel.add(btnCalciatore);
 		}
 		
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
