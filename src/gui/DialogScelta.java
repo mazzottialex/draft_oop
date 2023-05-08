@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -22,20 +23,13 @@ public class DialogScelta extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			DialogScelta dialog = new DialogScelta();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	
 
 	/**
 	 * Create the dialog.
 	 */
-	public DialogScelta() {
+	public DialogScelta(Frame parent, Boolean modale) {
+		super(parent, modale);
 		setBounds(100, 100, 650, 300);
 		setMinimumSize(getSize());
 		getContentPane().setLayout(new BorderLayout());

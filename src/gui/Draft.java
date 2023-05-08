@@ -23,6 +23,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 public class Draft extends Base {
 
@@ -45,7 +46,7 @@ public class Draft extends Base {
 	/**
 	 * Create the frame.
 	 */
-	public Draft() {
+	public Draft()  {
 		getContentPane().add(contentPane);
 		GridBagConstraints gbc=new GridBagConstraints();
 		GridBagLayout layout=new GridBagLayout();
@@ -68,9 +69,10 @@ public class Draft extends Base {
 				public void actionPerformed(ActionEvent e) {
 					JButton btn= (JButton) e.getSource();
 					JPanel panel=(JPanel) btn.getParent();
+	                JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(btn);
 					panel.remove(btn);
 					
-					DialogScelta dialog = new DialogScelta();
+					DialogScelta dialog = new DialogScelta(parent, true);
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setVisible(true);
 
