@@ -57,8 +57,8 @@ public class ExtractDataImpl implements ExtractData{
 		for(int i=0; i<n; i++) {
 			posizioni.add(rnd.nextInt(listaRuolo.size()));
 		}
-		return listaRuolo.stream()
-				.filter(c->posizioni.contains(c.getId()))
+		return posizioni.stream()
+				.map(p-> listaRuolo.get(p))
 				.toList();
 	}
 	
