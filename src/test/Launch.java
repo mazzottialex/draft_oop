@@ -32,7 +32,7 @@ public class Launch {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
 
-		Boolean flagGui = false;
+		Boolean flagGui = true;
 		Boolean marto = true;
 		
 		if(flagGui) {
