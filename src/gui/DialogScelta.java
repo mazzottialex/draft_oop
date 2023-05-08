@@ -12,6 +12,8 @@ import java.awt.Image;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,12 +26,17 @@ import javax.swing.border.EmptyBorder;
 
 import org.openqa.selenium.devtools.v109.dom.model.RGBA;
 
+import data.Calciatore;
+import manageData.ExtractData;
+import manageData.ExtractDataImpl;
+
 public class DialogScelta extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private String calciatore="";
-	String selezionato="Osime";
+	private Calciatore calciatore=null;
+	private Calciatore selezionato=null;
 	private JButton okButton;
+	private List<Calciatore> li;
 	/**
 	 * Launch the application.
 	 */
@@ -37,10 +44,15 @@ public class DialogScelta extends JDialog {
 
 	/**
 	 * Create the dialog.
+	 * @throws IOException 
+	 * @throws ClassNotFoundException 
+	 * @throws FileNotFoundException 
 	 */
-	public DialogScelta(Frame parent, Boolean modale) {
+	public DialogScelta(Frame parent, Boolean modale, List<Calciatore> lista, String ruolo) throws FileNotFoundException, ClassNotFoundException, IOException {
 		super(parent, modale);
-		
+		this.li=lista;
+		ExtractData ex=new ExtractDataImpl(this.li);
+		this.li=ex.getRandomByRuolo(ruolo,5);
 		
 		setBounds(100, 100, 650, 300);
 		setMinimumSize(getSize());
@@ -52,17 +64,16 @@ public class DialogScelta extends JDialog {
 		GridBagLayout layout=new GridBagLayout();
 		contentPanel.setLayout(layout);
 		
-		List<JButton> li=new  ArrayList<>();
+		List<JButton> liBtn=new  ArrayList<>();
 		for(int i=0;i<5;i++) {
-			String nomeCalciatore="ciro";
-			JButton btnCalciatore=utilsGUI.getButtonCalciatore(nomeCalciatore, "P");
-			li.add(btnCalciatore);
+			JButton btnCalciatore=utilsGUI.getButtonCalciatore(this.li.get(i).getNominativo(), this.li.get(i).getRuolo());
+			liBtn.add(btnCalciatore);
 			btnCalciatore.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					selezionato=nomeCalciatore;
 					JButton btn= (JButton)e.getSource();
-					li.forEach(el-> el.setBackground(new Color(240,240,240)));
+					selezionato=li.get(liBtn.indexOf(btn));
+					liBtn.forEach(el-> el.setBackground(new Color(240,240,240)));
 					btn.setBackground(Color.LIGHT_GRAY);
 				}	
 			});
@@ -102,7 +113,7 @@ public class DialogScelta extends JDialog {
 		}
 	}
 	
-	public String getCalciatore() {
+	public Calciatore getCalciatore() {
 		return this.calciatore;
 	}
 }

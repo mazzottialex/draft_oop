@@ -16,11 +16,16 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import data.Calciatore;
+
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.List;
 
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
@@ -30,23 +35,12 @@ public class Draft extends Base {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Draft frame = new Draft();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
 	 */
-	public Draft()  {
+	public Draft(List<Calciatore> li)  {
 		getContentPane().add(contentPane);
 		GridBagConstraints gbc=new GridBagConstraints();
 		GridBagLayout layout=new GridBagLayout();
@@ -71,13 +65,21 @@ public class Draft extends Base {
 					JPanel panel=(JPanel) btn.getParent();
 	                JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(btn);
 					
-					DialogScelta dialog = new DialogScelta(parent, true);
-					dialog.setVisible(true);
-
-					if(!dialog.getCalciatore().equals("")) {
-						panel.remove(btn);
-						panel.add(utilsGUI.getPanelCalciatore(dialog.getCalciatore(), "A"));
+					DialogScelta dialog;
+					try {
+						dialog = new DialogScelta(parent, true, li, "A");
+						dialog.setVisible(true);
+						if(!dialog.getCalciatore().equals(null)) {
+							panel.remove(btn);
+							Calciatore c=dialog.getCalciatore();
+							panel.add(utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRuolo()));
+						}
+					} catch (ClassNotFoundException | IOException e1) {
+						e1.printStackTrace();
 					}
+					
+
+					
 					revalidate();
 					repaint();
 				}
@@ -103,13 +105,20 @@ public class Draft extends Base {
 					JPanel panel=(JPanel) btn.getParent();
 	                JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(btn);
 					
-					DialogScelta dialog = new DialogScelta(parent, true);
-					dialog.setVisible(true);
-
-					if(!dialog.getCalciatore().equals("")) {
-						panel.remove(btn);
-						panel.add(utilsGUI.getPanelCalciatore(dialog.getCalciatore(), "C"));
+					DialogScelta dialog;
+					try {
+						dialog = new DialogScelta(parent, true, li, "C");
+						dialog.setVisible(true);
+						if(dialog.getCalciatore()!=null) {
+							panel.remove(btn);
+							Calciatore c=dialog.getCalciatore();
+							System.out.print(c.getNominativo());
+							panel.add(utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRuolo()));
+						}
+					} catch (ClassNotFoundException | IOException e1) {
+						e1.printStackTrace();
 					}
+
 					revalidate();
 					repaint();
 				}
@@ -135,13 +144,19 @@ public class Draft extends Base {
 					JPanel panel=(JPanel) btn.getParent();
 	                JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(btn);
 					
-					DialogScelta dialog = new DialogScelta(parent, true);
-					dialog.setVisible(true);
-
-					if(!dialog.getCalciatore().equals("")) {
-						panel.remove(btn);
-						panel.add(utilsGUI.getPanelCalciatore(dialog.getCalciatore(), "D"));
+	                DialogScelta dialog;
+					try {
+						dialog = new DialogScelta(parent, true, li, "D");
+						dialog.setVisible(true);
+						if(!dialog.getCalciatore().equals(null)) {
+							panel.remove(btn);
+							Calciatore c=dialog.getCalciatore();
+							panel.add(utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRuolo()));
+						}
+					} catch (ClassNotFoundException | IOException e1) {
+						e1.printStackTrace();
 					}
+
 					revalidate();
 					repaint();
 				}
@@ -167,12 +182,17 @@ public class Draft extends Base {
 					JPanel panel=(JPanel) btn.getParent();
 	                JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(btn);
 					
-					DialogScelta dialog = new DialogScelta(parent, true);
-					dialog.setVisible(true);
-
-					if(!dialog.getCalciatore().equals("")) {
-						panel.remove(btn);
-						panel.add(utilsGUI.getPanelCalciatore(dialog.getCalciatore(), "P"));
+	                DialogScelta dialog;
+					try {
+						dialog = new DialogScelta(parent, true, li, "P");
+						dialog.setVisible(true);
+						if(!dialog.getCalciatore().equals(null)) {
+							panel.remove(btn);
+							Calciatore c=dialog.getCalciatore();
+							panel.add(utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRuolo()));
+						}
+					} catch (ClassNotFoundException | IOException e1) {
+						e1.printStackTrace();
 					}
 					revalidate();
 					repaint();
