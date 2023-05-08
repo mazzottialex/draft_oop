@@ -6,6 +6,7 @@ import java.util.Map;
 
 import data.Calciatore;
 import data.SquadraAvversaria;
+import manageData.ExtractDataImpl;
 
 public class SimulatingMatchImpl implements SimulatingMatch {
 	
@@ -30,6 +31,10 @@ public class SimulatingMatchImpl implements SimulatingMatch {
 	public int golFatti2;
 	public int rigoriFatti1;
 	public int rigoriFatti2;
+	private static final double COST_SUB_DIFF = 14; // da aumentare di 1
+	private static final double COST_SUB_OFF = 5; // da aumentare di 2
+	private static final double COST_DIV_DIFF_OFF = 5;
+	private static final double COST_SUB_SM = 5;
 	
 	public SimulatingMatchImpl(SquadraAvversaria s1, SquadraAvversaria s2) throws FileNotFoundException, ClassNotFoundException, IOException {
 		super();
@@ -56,9 +61,41 @@ public class SimulatingMatchImpl implements SimulatingMatch {
 		rigoriFatti2 = sf.differenzaRigoriFattiSbagliatiFanta(s2);
 	}
 	
-	//TODO prestazioneDifensiva
+	// prestazioneDifensiva, se squadra == 1 -> s1; se squadra == 2 -> s2
+	@Override
+	public double prestazioneDifensiva(int squadra) throws FileNotFoundException, ClassNotFoundException, IOException {
+		double pd = 0;
+		switch (squadra) {
+		case 1:
+			pd = (votoDif1 + new ExtractDataImpl(s1.getTitolari()).getListaByRuolo("D").size() + catenaccio1 - golSubiti1 - COST_SUB_DIFF) / COST_DIV_DIFF_OFF;
+			break;
+		case 2:
+			pd = (votoDif2 + new ExtractDataImpl(s2.getTitolari()).getListaByRuolo("D").size() + catenaccio2 - golSubiti2 - COST_SUB_DIFF) / COST_DIV_DIFF_OFF;
+			break;
+
+		default:
+			break;
+		}
+		return pd;
+	}
 	
 	//TODO capacitaRealizzativa
+	@Override
+	public double cR(int squadra) {
+		double cr = 0;
+		switch (squadra) {
+		case 1:
+			cr = golFatti1 + autogol2 + rigoriFatti1;
+			break;
+		case 2:
+			cr = golFatti2 + autogol1 + rigoriFatti2;
+			break;
+
+		default:
+			break;
+		}
+		return cr;
+	}
 	
 	//TODO prestazioneOffensiva
 	
