@@ -104,6 +104,8 @@ public class Launch {
 //			System.out.println(new SimulatingFunctionsImpl().golSegnati(laz, nap));
 			
 //			System.out.println(new SimulatingMatchImpl(nap, laz).titS1.size());
+			
+			System.out.println(new SimulatingMatchImpl(nap, laz).risultato());
 
 			
 //			System.out.println(ex.getListaByRuolo("A")
