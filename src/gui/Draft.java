@@ -54,15 +54,14 @@ public class Draft extends Base {
 		
 		//Attaccanti
 		int nA=3;
+		List<JButton> liBtn=new ArrayList<>();
 		for(int i=0;i<nA;i++) {
 			panelPosizione.setLayout(layout);
 			panelGiocatore=new JPanel();
 			panelGiocatore.setLayout(layout);
 			JButton btnScegli=new JButton("Scegli");
 			btnScegli.setPreferredSize(new Dimension(100,50));
-			
 			ExtractData ex;
-			
 			try {
 				ex = new ExtractDataImpl(li);
 				liRuolo=ex.getRandomByRuolo("A",nA*5);
@@ -70,16 +69,15 @@ public class Draft extends Base {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-    		Map<JButton, Integer> mapBtn=new HashMap<>();
-    		mapBtn.put(btnScegli, i);
+			
+			liBtn.add(btnScegli);
 			btnScegli.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					JButton btn= (JButton) e.getSource();
 					JPanel panel=(JPanel) btn.getParent();
 	                JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(btn);
-					int i=mapBtn.get(btn);
-			
+					int i=liBtn.indexOf(btn);
 					DialogScelta dialog;
 					try {
 						dialog = new DialogScelta(parent, true, liRuolo.subList(5*i, 5*(i+1)), "A");
