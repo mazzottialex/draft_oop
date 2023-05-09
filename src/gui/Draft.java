@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import data.Calciatore;
+import data.Modulo;
 import manageData.ExtractData;
 import manageData.ExtractDataImpl;
 
@@ -38,197 +39,73 @@ import javax.swing.SwingUtilities;
 public class Draft extends Base {
 
 	private List<Calciatore> liRuolo;
-	/**
-	 * Create the frame.
-	 */
+	private final Modulo mod;
+	private final List<String> ruoli=List.of("A","C","D","P");
+	private final int nDraft=5;
+	
 	public Draft(List<Calciatore> li)  {
 		getContentPane().add(contentPane);
 		GridBagConstraints gbc=new GridBagConstraints();
+		gbc.insets=new Insets(5, 5, 2, 2);
 		GridBagLayout layout=new GridBagLayout();
-		
 		contentPane.setLayout(layout);
+		
+		List<JButton> liBtn=new ArrayList<>();
+		mod=Modulo.M433;
+
 		ExtractData ex;
 		try {
 			ex = new ExtractDataImpl(li);
-			liRuolo=ex.getRandom(15,15,20,5);  //*
+			liRuolo=ex.getRandom(mod.getNumAtt()*nDraft, mod.getNumCen()*nDraft, mod.getNumDif()*nDraft, nDraft); 
 		} catch (ClassNotFoundException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		JPanel panelGiocatore;
 		JPanel panelPosizione = new JPanel();
-		int n;
-		String ruolo;
 		
-		gbc.insets=new Insets(5, 5, 2, 2);
-		
-		//Attaccanti
-		panelPosizione = new JPanel();
-		n=3;
-		ruolo="A";
-		List<JButton> liBtn=new ArrayList<>();
-		for(int i=0;i<n;i++) {
-			panelPosizione.setLayout(layout);
-			panelGiocatore=new JPanel();
-			panelGiocatore.setLayout(layout);
-			JButton btnScegli=new JButton("Scegli");
-			btnScegli.setPreferredSize(new Dimension(100,50));
-			
-			
-			liBtn.add(btnScegli);
-			btnScegli.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					JButton btn= (JButton) e.getSource();
-					JPanel panel=(JPanel) btn.getParent();
-	                JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(btn);
-					int i=liBtn.indexOf(btn);
-					DialogScelta dialog;
-					try {
-						dialog = new DialogScelta(parent, true, liRuolo.subList(5*i, 5*(i+1)), "A");
-						dialog.setVisible(true);
-						Calciatore c=dialog.getCalciatore();
-						if(c!=null) {
-							panel.remove(btn);
-							panel.add(utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRating().getX(), c.getRuolo()));
+		for(int i=0; i<ruoli.size();i++) {
+			panelPosizione = new JPanel();
+			for(int j=0;j<mod.getN(ruoli.get(i));j++) {
+				panelPosizione.setLayout(layout);
+				panelGiocatore=new JPanel();
+				panelGiocatore.setLayout(layout);
+				JButton btnScegli=new JButton("Scegli");
+				btnScegli.setPreferredSize(new Dimension(100,50));
+				
+				liBtn.add(btnScegli);
+				btnScegli.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						JButton btn= (JButton) e.getSource();
+						JPanel panel=(JPanel) btn.getParent();
+		                JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(btn);
+						int index=liBtn.indexOf(btn);
+						DialogScelta dialog;
+						try {
+							dialog = new DialogScelta(parent, true, liRuolo.subList(5*index, 5*(index+1)), liRuolo.subList(5*index, 5*(index+1)).get(0).getRuolo());
+							dialog.setVisible(true);
+							Calciatore c=dialog.getCalciatore();
+							if(c!=null) {
+								panel.remove(btn);
+								panel.add(utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRating().getX(), c.getRuolo()));
+							}
+						} catch (ClassNotFoundException | IOException e1) {
+							e1.printStackTrace();
 						}
-					} catch (ClassNotFoundException | IOException e1) {
-						e1.printStackTrace();
+						panel.revalidate();
+						panel.repaint();
 					}
-					panel.revalidate();
-					panel.repaint();
-				}
-			});
-			panelGiocatore.add(btnScegli);
-			panelPosizione.add(panelGiocatore);
+				});
+				panelGiocatore.add(btnScegli);
+				panelPosizione.add(panelGiocatore);
+			}
+			gbc.gridy=i;
+			System.out.print(gbc.gridy);
+			contentPane.add(panelPosizione, gbc);
 		}
-		gbc.gridy=0;
-		contentPane.add(panelPosizione, gbc);
-		
 
-		//Centrocampisti
-		panelPosizione = new JPanel();
-		n=3;
-		ruolo="C";
-		for(int i=0;i<n;i++) {
-			panelPosizione.setLayout(layout);
-			panelGiocatore=new JPanel();
-			panelGiocatore.setLayout(layout);
-			JButton btnScegli=new JButton("Scegli");
-			btnScegli.setPreferredSize(new Dimension(100,50));
-			
-			liBtn.add(btnScegli);
-			btnScegli.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					JButton btn= (JButton) e.getSource();
-					JPanel panel=(JPanel) btn.getParent();
-	                JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(btn);
-					int i=liBtn.indexOf(btn);
-					DialogScelta dialog;
-					try {
-						dialog = new DialogScelta(parent, true, liRuolo.subList(5*i, 5*(i+1)), "C");
-						dialog.setVisible(true);
-						Calciatore c=dialog.getCalciatore();
-						if(c!=null) {
-							panel.remove(btn);
-							panel.add(utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRating().getX(), c.getRuolo()));
-						}
-					} catch (ClassNotFoundException | IOException e1) {
-						e1.printStackTrace();
-					}
-					panel.revalidate();
-					panel.repaint();
-				}
-			});
-			panelGiocatore.add(btnScegli);
-			panelPosizione.add(panelGiocatore);
-		}
-		gbc.gridy=1;
-		contentPane.add(panelPosizione, gbc);
 		
-		//Difensori
-		panelPosizione = new JPanel();
-		n=4;
-		ruolo="D";
-		for(int i=0;i<n;i++) {
-			panelPosizione.setLayout(layout);
-			panelGiocatore=new JPanel();
-			panelGiocatore.setLayout(layout);
-			JButton btnScegli=new JButton("Scegli");
-			btnScegli.setPreferredSize(new Dimension(100,50));
-			
-			liBtn.add(btnScegli);
-			btnScegli.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					JButton btn= (JButton) e.getSource();
-					JPanel panel=(JPanel) btn.getParent();
-	                JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(btn);
-					int i=liBtn.indexOf(btn);
-					DialogScelta dialog;
-					try {
-						dialog = new DialogScelta(parent, true, liRuolo.subList(5*i, 5*(i+1)), "D");
-						dialog.setVisible(true);
-						Calciatore c=dialog.getCalciatore();
-						if(c!=null) {
-							panel.remove(btn);
-							panel.add(utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRating().getX(), c.getRuolo()));
-						}
-					} catch (ClassNotFoundException | IOException e1) {
-						e1.printStackTrace();
-					}
-					panel.revalidate();
-					panel.repaint();
-				}
-			});
-			panelGiocatore.add(btnScegli);
-			panelPosizione.add(panelGiocatore);
-		}
-		gbc.gridy=2;
-		contentPane.add(panelPosizione, gbc);
-		
-		//Portiere
-		panelPosizione = new JPanel();
-		n=1;
-		ruolo="P";
-		for(int i=0;i<n;i++) {
-			panelPosizione.setLayout(layout);
-			panelGiocatore=new JPanel();
-			panelGiocatore.setLayout(layout);
-			JButton btnScegli=new JButton("Scegli");
-			btnScegli.setPreferredSize(new Dimension(100,50));
-			
-			liBtn.add(btnScegli);
-			btnScegli.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					JButton btn= (JButton) e.getSource();
-					JPanel panel=(JPanel) btn.getParent();
-	                JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(btn);
-					int i=liBtn.indexOf(btn);
-					DialogScelta dialog;
-					try {
-						dialog = new DialogScelta(parent, true, liRuolo.subList(5*i, 5*(i+1)), "P");
-						dialog.setVisible(true);
-						Calciatore c=dialog.getCalciatore();
-						if(c!=null) {
-							panel.remove(btn);
-							panel.add(utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRating().getX(), c.getRuolo()));
-						}
-					} catch (ClassNotFoundException | IOException e1) {
-						e1.printStackTrace();
-					}
-					panel.revalidate();
-					panel.repaint();
-				}
-			});
-			panelGiocatore.add(btnScegli);
-			panelPosizione.add(panelGiocatore);
-		}
-		gbc.gridy=3;
-		contentPane.add(panelPosizione, gbc);
 	}
 
 }

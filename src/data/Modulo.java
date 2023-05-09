@@ -3,7 +3,7 @@ package data;
 public enum Modulo {
 	M343(3, 4, 3),
 	M352(3, 5, 2),
-	M433(4, 4, 3),
+	M433(4, 3, 3),
 	M442(4, 4, 2),
 	M451(4, 5, 1),
 	M532(5, 3, 2),
@@ -29,5 +29,17 @@ public enum Modulo {
 	
 	public int getNumAtt() {
 		return att;
+	}
+	
+	public int getN(String ruolo) {
+		if(ruolo=="P")
+			return 1;
+		else if(ruolo=="D")
+			return dif;
+		else if(ruolo=="C")
+			return cen;
+		else if(ruolo=="A")
+			return att;
+		else return 0;
 	}
 }
