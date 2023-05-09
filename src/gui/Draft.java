@@ -27,6 +27,8 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.SwingConstants;
@@ -50,35 +52,40 @@ public class Draft extends Base {
 		gbc.insets=new Insets(5, 5, 2, 2);
 		
 		//Attaccanti
-		for(int i=0;i<3;i++) {
+		int nA=3;
+		for(int i=0;i<nA;i++) {
 			panelPosizione.setLayout(layout);
 			panelGiocatore=new JPanel();
 			panelGiocatore.setLayout(layout);
 			JButton btnScegli=new JButton("Scegli");
 			btnScegli.setPreferredSize(new Dimension(100,50));
+			
 			ExtractData ex;
 			
 			try {
 				ex = new ExtractDataImpl(li);
-				liRuolo=ex.getRandomByRuolo("A",5);
+				liRuolo=ex.getRandomByRuolo("A",nA*5);
 			} catch (ClassNotFoundException | IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-    		
+    		HashMap<JButton, Integer> mapBtn=new HashMap<>();
+    		mapBtn.put(btnScegli, i);
+    		System.out.println(mapBtn.size());
 			btnScegli.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					JButton btn= (JButton) e.getSource();
 					JPanel panel=(JPanel) btn.getParent();
 	                JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(btn);
-					
-	                
-	                
+					int i=mapBtn.get(btn);
+					System.out.println(i);
+	                //System.out.println(liRuolo.subList(5*i, 5*(i+1)).toString() );
+			
 					DialogScelta dialog;
 					try {
 						
-						dialog = new DialogScelta(parent, true, liRuolo, "A");
+						dialog = new DialogScelta(parent, true, liRuolo.subList(5*i, 5*(i+1)), "A");
 						dialog.setVisible(true);
 						Calciatore c=dialog.getCalciatore();
 						if(c!=null) {
