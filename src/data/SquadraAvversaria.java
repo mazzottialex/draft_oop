@@ -12,8 +12,8 @@ public class SquadraAvversaria{
 	private int id;
 	private String nomeSquadra;
 	private Modulo modulo;
-	public List<Calciatore> titolari = new ArrayList<>();
-	public List<Calciatore> riserve = new ArrayList<>();
+	private List<Calciatore> titolari = new ArrayList<>();
+	private List<Calciatore> riserve = new ArrayList<>();
 	private List<Calciatore> li;
 	
 	
