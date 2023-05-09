@@ -55,8 +55,13 @@ public class ExtractDataImpl implements ExtractData{
 		Random rnd = new Random();
 		Set<Integer> posizioni = new HashSet<>();
 		for(int i=0; i<n; i++) {
-			posizioni.add(rnd.nextInt(listaRuolo.size()));
+			int num;
+			do {
+				num=rnd.nextInt(listaRuolo.size());
+			}while(posizioni.contains(num));
+			posizioni.add(num);
 		}
+		
 		return posizioni.stream()
 				.map(p-> listaRuolo.get(p))
 				.toList();

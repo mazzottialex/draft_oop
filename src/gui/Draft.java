@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
@@ -69,9 +70,8 @@ public class Draft extends Base {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-    		HashMap<JButton, Integer> mapBtn=new HashMap<>();
+    		Map<JButton, Integer> mapBtn=new HashMap<>();
     		mapBtn.put(btnScegli, i);
-    		System.out.println(mapBtn.size());
 			btnScegli.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -79,12 +79,9 @@ public class Draft extends Base {
 					JPanel panel=(JPanel) btn.getParent();
 	                JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(btn);
 					int i=mapBtn.get(btn);
-					System.out.println(i);
-	                //System.out.println(liRuolo.subList(5*i, 5*(i+1)).toString() );
 			
 					DialogScelta dialog;
 					try {
-						
 						dialog = new DialogScelta(parent, true, liRuolo.subList(5*i, 5*(i+1)), "A");
 						dialog.setVisible(true);
 						Calciatore c=dialog.getCalciatore();
