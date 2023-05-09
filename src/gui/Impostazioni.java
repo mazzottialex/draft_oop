@@ -130,6 +130,7 @@ public class Impostazioni extends Base {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				changeJPanel(new CreaSquadra());
 				Squadra squadra=log.getSquadra(textFieldNomeSquadra.getText());
 				System.out.print(squadra.toString());
 			}
