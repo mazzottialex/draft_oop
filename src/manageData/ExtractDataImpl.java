@@ -200,4 +200,13 @@ public class ExtractDataImpl implements ExtractData{
 				.map(c -> c.toVector())
 				.toList();
 	}
+	
+	public List<Calciatore> getRandom(int nA, int nC, int nD, int nP){
+		List<Calciatore> li=new ArrayList<>();
+		li.addAll(getRandomByRuolo("A", nA));
+		li.addAll(getRandomByRuolo("C", nC));
+		li.addAll(getRandomByRuolo("D", nD));
+		li.addAll(getRandomByRuolo("P", nP));
+		return li;
+	}
 }
