@@ -109,14 +109,16 @@ public class SimulatingMatchImpl implements SimulatingMatch {
 
 	@Override
 	public double capacitaRealizzativa(int squadra) throws FileNotFoundException, ClassNotFoundException, IOException {
-		double cr = 0;
-		double sm = superioritaManifesta(squadra);
-		if (sm > 0) {
-			cr = cR(squadra) + superioritaManifesta(squadra) / COST_DIV_DIFF_OFF_CR;
-		} else {
-			cr = cR(squadra);
-		}
-		return cr;
+//		double cr = 0;
+//		double sm = superioritaManifesta(squadra);
+//		if (sm > 0) {
+//			cr = cR(squadra) + (superioritaManifesta(squadra) / COST_DIV_DIFF_OFF_CR);
+//		} else {
+//			cr = cR(squadra);
+//		}
+//		return cr;
+		
+		return cR(squadra);
 	}
 
 	// prestazioneOffensiva
@@ -138,39 +140,39 @@ public class SimulatingMatchImpl implements SimulatingMatch {
 	}
 
 	// superioritaManifesta
-	@Override
-	public double superioritaManifesta(int squadra) throws FileNotFoundException, ClassNotFoundException, IOException {
-		double sm = 0;
-		int squadraAvv;
-		switch (squadra) {
-		case SQUADRA1:
-			squadraAvv = SQUADRA2;
-			sm = 2 * prestazioneOffensiva(squadra) - 4 * prestazioneDifensiva(squadra)
-					+ -2 * prestazioneOffensiva(squadraAvv) - cR(squadraAvv) - COST_SUB_SM;
-			break;
-		case SQUADRA2:
-			squadraAvv = SQUADRA1;
-			sm = 2 * prestazioneOffensiva(squadra) - 4 * prestazioneDifensiva(squadra)
-					+ -2 * prestazioneOffensiva(squadraAvv) - cR(squadraAvv) - COST_SUB_SM;
-			break;
+//	@Override
+//	public double superioritaManifesta(int squadra) throws FileNotFoundException, ClassNotFoundException, IOException {
+//		double sm = 0;
+//		int squadraAvv;
+//		switch (squadra) {
+//		case SQUADRA1:
+//			squadraAvv = SQUADRA2;
+//			sm = 2 * prestazioneOffensiva(squadra) - 4 * prestazioneDifensiva(squadra)
+//					+ -2 * prestazioneOffensiva(squadraAvv) - cR(squadraAvv) - COST_SUB_SM;
+//			break;
+//		case SQUADRA2:
+//			squadraAvv = SQUADRA1;
+//			sm = 2 * prestazioneOffensiva(squadra) - 4 * prestazioneDifensiva(squadra)
+//					+ -2 * prestazioneOffensiva(squadraAvv) - cR(squadraAvv) - COST_SUB_SM;
+//			break;
+//
+//		default:
+//			break;
+//		}
+//		return sm;
+//	}
 
-		default:
-			break;
-		}
-		return sm;
-	}
-
-	// TODO risultatoFinale
+	// risultatoFinale
 	@Override
-	public Map<SquadraAvversaria, Integer> risultato()
+	public Map<String, Integer> risultato()
 			throws FileNotFoundException, ClassNotFoundException, IOException {
 		int sq1 = (int) Math.min(capacitaRealizzativa(SQUADRA1),
 				(prestazioneOffensiva(SQUADRA1) - prestazioneDifensiva(SQUADRA2)));
 		int sq2 = (int) Math.min(capacitaRealizzativa(SQUADRA2),
 				(prestazioneOffensiva(SQUADRA2) - prestazioneDifensiva(SQUADRA1)));
-		Map<SquadraAvversaria, Integer> map = new HashMap<>();
-		map.put(this.s1, sq1);
-		map.put(this.s2, sq2);
+		Map<String, Integer> map = new HashMap<>();
+		map.put(this.s1.getNomeSquadra(), sq1 >= 0 ? sq1 : 0);
+		map.put(this.s2.getNomeSquadra(), sq2 >= 0 ? sq2 : 0);
 		return map;
 	}
 }
