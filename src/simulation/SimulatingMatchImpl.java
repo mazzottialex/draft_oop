@@ -10,7 +10,7 @@ import data.SquadraAvversaria;
 import manageData.ExtractDataImpl;
 
 public class SimulatingMatchImpl implements SimulatingMatch {
-	
+
 	private SimulatingFunctions sf;
 	private SquadraAvversaria s1;
 	private SquadraAvversaria s2;
@@ -40,8 +40,9 @@ public class SimulatingMatchImpl implements SimulatingMatch {
 	private static final double COST_SUB_SM = 5;
 	private static final int SQUADRA1 = 1;
 	private static final int SQUADRA2 = 2;
-	
-	public SimulatingMatchImpl(SquadraAvversaria s1, SquadraAvversaria s2) throws FileNotFoundException, ClassNotFoundException, IOException {
+
+	public SimulatingMatchImpl(SquadraAvversaria s1, SquadraAvversaria s2)
+			throws FileNotFoundException, ClassNotFoundException, IOException {
 		super();
 		sf = new SimulatingFunctionsImpl();
 		this.s1 = s1;
@@ -67,17 +68,19 @@ public class SimulatingMatchImpl implements SimulatingMatch {
 		rigoriFatti1 = sf.differenzaRigoriFattiSbagliatiFanta(s1);
 		rigoriFatti2 = sf.differenzaRigoriFattiSbagliatiFanta(s2);
 	}
-	
+
 	// prestazioneDifensiva, se squadra == 1 -> s1; se squadra == 2 -> s2
 	@Override
 	public double prestazioneDifensiva(int squadra) throws FileNotFoundException, ClassNotFoundException, IOException {
 		double pd = 0;
 		switch (squadra) {
 		case SQUADRA1:
-			pd = (votoDif1 + new ExtractDataImpl(s1.getTitolari()).getListaByRuolo("D").size() + catenaccio1 - golSubiti1 - COST_SUB_DIFF) / COST_DIV_DIFF_OFF_CR;
+			pd = (votoDif1 + new ExtractDataImpl(s1.getTitolari()).getListaByRuolo("D").size() + catenaccio1
+					- golSubiti1 - COST_SUB_DIFF) / COST_DIV_DIFF_OFF_CR;
 			break;
 		case SQUADRA2:
-			pd = (votoDif2 + new ExtractDataImpl(s2.getTitolari()).getListaByRuolo("D").size() + catenaccio2 - golSubiti2 - COST_SUB_DIFF) / COST_DIV_DIFF_OFF_CR;
+			pd = (votoDif2 + new ExtractDataImpl(s2.getTitolari()).getListaByRuolo("D").size() + catenaccio2
+					- golSubiti2 - COST_SUB_DIFF) / COST_DIV_DIFF_OFF_CR;
 			break;
 
 		default:
@@ -85,7 +88,7 @@ public class SimulatingMatchImpl implements SimulatingMatch {
 		}
 		return pd;
 	}
-	
+
 	// capacitaRealizzativa
 	@Override
 	public double cR(int squadra) {
@@ -103,7 +106,7 @@ public class SimulatingMatchImpl implements SimulatingMatch {
 		}
 		return cr;
 	}
-	
+
 	@Override
 	public double capacitaRealizzativa(int squadra) throws FileNotFoundException, ClassNotFoundException, IOException {
 		double cr = 0;
@@ -115,7 +118,7 @@ public class SimulatingMatchImpl implements SimulatingMatch {
 		}
 		return cr;
 	}
-	
+
 	// prestazioneOffensiva
 	@Override
 	public double prestazioneOffensiva(int squadra) throws FileNotFoundException, ClassNotFoundException, IOException {
@@ -133,7 +136,7 @@ public class SimulatingMatchImpl implements SimulatingMatch {
 		}
 		return po;
 	}
-	
+
 	// superioritaManifesta
 	@Override
 	public double superioritaManifesta(int squadra) throws FileNotFoundException, ClassNotFoundException, IOException {
@@ -142,11 +145,13 @@ public class SimulatingMatchImpl implements SimulatingMatch {
 		switch (squadra) {
 		case SQUADRA1:
 			squadraAvv = SQUADRA2;
-			sm = 2 * prestazioneOffensiva(squadra) - 4 * prestazioneDifensiva(squadra) + - 2 * prestazioneOffensiva(squadraAvv) - cR(squadraAvv) - COST_SUB_SM;
+			sm = 2 * prestazioneOffensiva(squadra) - 4 * prestazioneDifensiva(squadra)
+					+ -2 * prestazioneOffensiva(squadraAvv) - cR(squadraAvv) - COST_SUB_SM;
 			break;
 		case SQUADRA2:
 			squadraAvv = SQUADRA1;
-			sm = 2 * prestazioneOffensiva(squadra) - 4 * prestazioneDifensiva(squadra) + - 2 * prestazioneOffensiva(squadraAvv) - cR(squadraAvv) - COST_SUB_SM;
+			sm = 2 * prestazioneOffensiva(squadra) - 4 * prestazioneDifensiva(squadra)
+					+ -2 * prestazioneOffensiva(squadraAvv) - cR(squadraAvv) - COST_SUB_SM;
 			break;
 
 		default:
@@ -154,13 +159,15 @@ public class SimulatingMatchImpl implements SimulatingMatch {
 		}
 		return sm;
 	}
-	
-	//TODO risultatoFinale
+
+	// TODO risultatoFinale
 	@Override
 	public Map<SquadraAvversaria, Integer> risultato()
 			throws FileNotFoundException, ClassNotFoundException, IOException {
-		int sq1 = (int) Math.min(capacitaRealizzativa(SQUADRA1), (prestazioneOffensiva(SQUADRA1) - prestazioneDifensiva(SQUADRA2)));
-		int sq2 = (int) Math.min(capacitaRealizzativa(SQUADRA2), (prestazioneOffensiva(SQUADRA2) - prestazioneDifensiva(SQUADRA1)));
+		int sq1 = (int) Math.min(capacitaRealizzativa(SQUADRA1),
+				(prestazioneOffensiva(SQUADRA1) - prestazioneDifensiva(SQUADRA2)));
+		int sq2 = (int) Math.min(capacitaRealizzativa(SQUADRA2),
+				(prestazioneOffensiva(SQUADRA2) - prestazioneDifensiva(SQUADRA1)));
 		Map<SquadraAvversaria, Integer> map = new HashMap<>();
 		map.put(this.s1, sq1);
 		map.put(this.s2, sq2);
