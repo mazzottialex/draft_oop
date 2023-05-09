@@ -15,8 +15,6 @@ import manageData.ExtractDataImpl;
 
 public class SimulatingFunctionsImpl implements SimulatingFunctions {
 
-//	private SquadraAvversaria sq;
-//	private SquadraAvversaria sa;
 	private static final double OWNGOAL_RATE = 2.904040404040404; // percentuale di autogol su gol
 	private static final double PENALITY_RATE = 0.2875; // rigori per partita
 	private static final double MISSED_PENALITIES_RATE = 22.82608695652174; // percentuale rigori sbagliati
@@ -75,7 +73,8 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
 	}
 
 	public int golSubitiFanta(SquadraAvversaria s) throws FileNotFoundException, ClassNotFoundException, IOException {
-		Calciatore portiere = new ExtractDataImpl(s.titolari).getListaByRuolo("P").get(0);
+		ExtractData ed = new ExtractDataImpl(s.titolari);
+		Calciatore portiere = ed.getListaByRuolo("P").get(0);
 		double probCleanSheet = portiere.getCleanSheet() / portiere.getPg();
 		if (prob(0, 1) <= probCleanSheet) {
 			return 0;
