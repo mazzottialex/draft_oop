@@ -51,8 +51,6 @@ public class DialogScelta extends JDialog {
 	public DialogScelta(Frame parent, Boolean modale, List<Calciatore> lista, String ruolo) throws FileNotFoundException, ClassNotFoundException, IOException {
 		super(parent, modale);
 		this.li=lista;
-		ExtractData ex=new ExtractDataImpl(this.li);
-		this.li=ex.getRandomByRuolo(ruolo,5);
 		
 		setBounds(100, 100, 700, 300);
 		setMinimumSize(getSize());

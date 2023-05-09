@@ -18,6 +18,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import data.Calciatore;
+import manageData.ExtractData;
+import manageData.ExtractDataImpl;
 
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -32,7 +34,7 @@ import javax.swing.SwingUtilities;
 
 public class Draft extends Base {
 
-
+	private List<Calciatore> liRuolo=null;
 	/**
 	 * Create the frame.
 	 */
@@ -54,6 +56,16 @@ public class Draft extends Base {
 			panelGiocatore.setLayout(layout);
 			JButton btnScegli=new JButton("Scegli");
 			btnScegli.setPreferredSize(new Dimension(100,50));
+			ExtractData ex;
+			
+			try {
+				ex = new ExtractDataImpl(li);
+				liRuolo=ex.getRandomByRuolo("A",5);
+			} catch (ClassNotFoundException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    		
 			btnScegli.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -61,9 +73,12 @@ public class Draft extends Base {
 					JPanel panel=(JPanel) btn.getParent();
 	                JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(btn);
 					
+	                
+	                
 					DialogScelta dialog;
 					try {
-						dialog = new DialogScelta(parent, true, li, "A");
+						
+						dialog = new DialogScelta(parent, true, liRuolo, "A");
 						dialog.setVisible(true);
 						Calciatore c=dialog.getCalciatore();
 						if(c!=null) {
