@@ -7,6 +7,8 @@ import java.util.*;
 
 import javax.swing.*;
 import javax.swing.JFrame;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 
 import data.Modulo;
 import logics.LogicsCreaSquadraImpl;
@@ -20,6 +22,30 @@ public class CreaSquadra extends Base{
 	
 	public CreaSquadra() {
 		this.log = new LogicsCreaSquadraImpl();
+		
+		
+		// Mi occupo del frame principale 
+		contentPane.setLayout(new BorderLayout());
+		//final JPanel panelSudEst = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		final JPanel panelSud = new JPanel(new FlowLayout());
+
+		
+		final JLabel lblmodSel = new JLabel("Modulo selezionato: ");
+		panelSud.add(lblmodSel);
+		
+		final JLabel lblmoduloSelect = new JLabel("" + log.getModulo());
+
+		panelSud.add(lblmoduloSelect);
+		
+
+		final JButton buttonIniziaTorneo = new JButton("Inizia Torneo");
+		buttonIniziaTorneo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+		panelSud.add(buttonIniziaTorneo);
+		
 		
 		// Creo 2 frame aggiuntivi, uno per modulo e uno per calciatori
 		this.frameModulo = new JFrame("Seleziona modulo: ");
@@ -57,11 +83,8 @@ public class CreaSquadra extends Base{
 		});
 		panelModuloSouth.add(buttonOk);	
 		
-		
-		
 		panelModulo.add(panelModuloNorth, BorderLayout.NORTH);
 		panelModulo.add(panelModuloSouth, BorderLayout.SOUTH);
-		//System.out.println(log.getModuli());
 		
 		
 		//Mi occupo del frame Calciatori
@@ -75,8 +98,6 @@ public class CreaSquadra extends Base{
 		panelCalciatori.add(panelCalciatoriNorth, BorderLayout.NORTH);
 		panelCalciatori.add(panelCalciatoriSouth, BorderLayout.SOUTH);
 		
-		
-
 		// Setto le impostazioni dei due frame aggiuntivi
 		this.frameModulo.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		this.frameCalciatori.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -85,8 +106,9 @@ public class CreaSquadra extends Base{
 		this.frameModulo.setVisible(true);
 		this.frameCalciatori.setVisible(true);
 		
-		
-		
+		// aggiungo il pannello sud del frame principale
+		//contentPane.add(panelSudEst, BorderLayout.SOUTH);
+		contentPane.add(panelSud, BorderLayout.SOUTH);
 		
 		
 	}
