@@ -31,12 +31,13 @@ public class CreaSquadra extends Base{
 		final JPanel panelModuloNorth = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		final JPanel panelModuloSouth = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 	
-		
+		// creo tanti bottoni quanti sono i moduli disponibili
 		JButton[] buttons = new JButton[log.getModuli().size()];
 		ArrayList<Modulo> buttonSelect = new ArrayList<>();
 		for (int i = 0; i <= buttons.length - 1; i++) {
 			buttons[i] = new JButton("" + log.getModuli().get(i));
 			int ind = i; 
+			// faccio in modo che alla pressione del bottono si salvi il modulo selezionato nell'array buttonSelect
 			buttons[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					buttonSelect.add(log.getModuli().get(ind));
@@ -46,6 +47,7 @@ public class CreaSquadra extends Base{
 			panelModuloNorth.add(buttons[i]);
 		}
 		
+		// quando premo il tasto OK salvo nella variabile log.moduloSelct il modulo scelto
 		final JButton buttonOk = new JButton("OK");
 		buttonOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
