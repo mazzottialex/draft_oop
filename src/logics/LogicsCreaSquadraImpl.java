@@ -6,12 +6,24 @@ import data.Modulo;
 
 public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 
-	public Set<Modulo> getModuli() {
-		Set<Modulo> set = new HashSet<>();
+	private Modulo moduloSelect = Modulo.M343;
+	
+	public List<Modulo> getModuli() {
+		List<Modulo> list = new ArrayList<>();
 		for (Modulo m : Modulo.values()) {
-			set.add(m);
+			list.add(m);
 		}
-		return set;
+		return list;
  	}
 
+	@Override
+	public void setModulo(Modulo mod) {
+		this.moduloSelect = mod;
+	}
+
+	@Override
+	public Modulo getModulo() {
+		return this.moduloSelect;
+	}
+	
 }
