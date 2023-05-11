@@ -86,11 +86,6 @@ public class Formazione extends Base{
 			}
 		});
 		contentPane.add(btnScegli);
-		
-		
-		
-		
-		
 	}
 	
 }
