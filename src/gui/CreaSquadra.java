@@ -21,6 +21,11 @@ public class CreaSquadra extends Base{
 	private LogicsCreasquadra log;
 	final JFrame frameModulo;
 	final JFrame frameCalciatori;
+	final JPanel panelSud = new JPanel(new GridBagLayout()); //panel sud del frame principale
+	final GridBagConstraints gbc = new GridBagConstraints();
+	final JLabel lblmodSel;
+	JLabel lblmoduloSelect;
+	final JButton buttonIniziaTorneo;
 	
 	public CreaSquadra() {
 		this.log = new LogicsCreaSquadraImpl();
@@ -28,28 +33,27 @@ public class CreaSquadra extends Base{
 		
 		// Mi occupo del frame principale 
 		contentPane.setLayout(new BorderLayout());
-		//final JPanel panelSudEst = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		final JPanel panelSud = new JPanel(new GridBagLayout());
-		final GridBagConstraints gbc = new GridBagConstraints();
+		//final JPanel panelSudEst = new JPanel(new FlowLayout(FlowLayout.RIGHT));		
+		//final GridBagConstraints gbc = new GridBagConstraints();
 		
 		gbc.insets = new Insets(8,0,8,8);
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		
-		final JLabel lblmodSel = new JLabel("Modulo selezionato: ");
+		lblmodSel = new JLabel("Modulo selezionato: ");
 		panelSud.add(lblmodSel,gbc);
 		
 		gbc.gridx = 1;
 		gbc.gridy = 0;
 		
-		final JLabel lblmoduloSelect = new JLabel("" + log.getModulo());
+		lblmoduloSelect = new JLabel("" + log.getModulo());
 		panelSud.add(lblmoduloSelect,gbc);
 		
 		gbc.insets = new Insets(5,30,5,5);
 		gbc.gridx = 5;
 		gbc.gridy = 0;
 		
-		final JButton buttonIniziaTorneo = new JButton("Inizia Torneo");
+		buttonIniziaTorneo = new JButton("Inizia Torneo");
 		buttonIniziaTorneo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -86,14 +90,12 @@ public class CreaSquadra extends Base{
 			buttons[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					buttonSelect.add(log.getModuli().get(ind));
-					System.out.println(buttonSelect);
+					//System.out.println(buttonSelect);
 				}
 			});
 			panelModuloNorth.add(buttons[i],gbc);
 			gbc.gridx++;
-			if (gbc.gridx == this.MAX_FOR_ROW) {
-				System.out.println(gbc.gridx);
-				System.out.println(gbc.gridy);
+			if (gbc.gridx == CreaSquadra.MAX_FOR_ROW) {
 				gbc.gridx = 0;
 				gbc.gridy++;
 			}
@@ -103,8 +105,11 @@ public class CreaSquadra extends Base{
 		final JButton buttonOk = new JButton("OK");
 		buttonOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				log.setModulo(buttonSelect.get(buttonSelect.size()-1));
-				System.out.println(log.getModulo());
+				if (!buttonSelect.isEmpty()) {
+					log.setModulo(buttonSelect.get(buttonSelect.size()-1));
+				}
+				//System.out.println(log.getModulo());
+				changeButtonModulo();
 			}	
 		});
 		panelModuloSouth.add(buttonOk);	
@@ -135,10 +140,23 @@ public class CreaSquadra extends Base{
 		this.frameModulo.setVisible(true);
 		this.frameCalciatori.setVisible(true);
 		
+		
+		
 		// aggiungo il pannello sud del frame principale
 		//contentPane.add(panelSudEst, BorderLayout.SOUTH);
 		contentPane.add(panelSud, BorderLayout.SOUTH);
 		
+	}
+	
+	
+	public void changeButtonModulo() {
+		gbc.insets = new Insets(8,0,8,8);
+		gbc.gridx = 1;
+		gbc.gridy = 0;		
+		panelSud.remove(lblmoduloSelect);
+		lblmoduloSelect = new JLabel("" + log.getModulo());
+		panelSud.add(lblmoduloSelect,gbc);
+		panelSud.validate();
 		
 	}
 	
