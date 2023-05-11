@@ -24,8 +24,6 @@ import javax.swing.filechooser.FileFilter;
 
 import data.Calciatore;
 import data.Squadra;
-import logics.LogicsImpostazioni;
-import logics.LogicsImpostazioniImpl;
 
 import javax.swing.JLabel;
 import javax.imageio.ImageIO;
@@ -36,12 +34,9 @@ import javax.swing.JTextField;
 
 public class Impostazioni extends Base {
 	private JTextField textFieldNomeSquadra;
-	private LogicsImpostazioni log;
 	private String nomeSquadra="Squadra 1";
 	private String stemma="res/stemmi/bianco.png";
 	public Impostazioni(List<Calciatore> li) {
-		
-		log=new LogicsImpostazioniImpl();
 		
 		GridBagConstraints gbc=new GridBagConstraints();
 		GridBagLayout layout=new GridBagLayout();

@@ -9,6 +9,7 @@ public class Squadra {
 	private final Modulo modulo;
 	private final List<Calciatore> liCalciatori;
 	
+	
 	public Squadra(String nomeSquadra, String stemma, Modulo modulo, List<Calciatore> liCalciatori) {
 		this.nomeSquadra = nomeSquadra;
 		this.stemma = stemma;
@@ -27,5 +28,9 @@ public class Squadra {
 	public List<Calciatore> getLiCalciatori() {
 		return liCalciatori;
 	}
-	
+	@Override
+	public String toString() {
+		return "Squadra [nomeSquadra=" + nomeSquadra + ", stemma=" + stemma + ", modulo=" + modulo + ", liCalciatori="
+				+ liCalciatori + "]";
+	}
 }

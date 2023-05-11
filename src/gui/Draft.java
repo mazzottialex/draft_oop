@@ -19,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 
 import data.Calciatore;
 import data.Modulo;
+import data.Squadra;
 import manageData.ExtractData;
 import manageData.ExtractDataImpl;
 
@@ -42,9 +43,9 @@ public class Draft extends Base {
 	private final Modulo mod;
 	private final List<String> ruoli=List.of("A","C","D","P");
 	private final int nDraft=5;
+	private List<Calciatore> liCalciatori=new ArrayList<>();
 	
 	public Draft(List<Calciatore> li, Modulo mod, String nomeSquadra, String stemma)  {
-		//getContentPane().add(contentPane);
 		GridBagConstraints gbc=new GridBagConstraints();
 		gbc.insets=new Insets(5, 5, 2, 2);
 		GridBagLayout layout=new GridBagLayout();
@@ -63,6 +64,8 @@ public class Draft extends Base {
 		
 		JPanel panelGiocatore;
 		JPanel panelPosizione = new JPanel();
+		JButton btnProsegui=new JButton("Prosegui");
+		btnProsegui.setVisible(false);
 		
 		for(int i=0; i<ruoli.size();i++) {
 			panelPosizione = new JPanel();
@@ -88,7 +91,10 @@ public class Draft extends Base {
 							Calciatore c=dialog.getCalciatore();
 							if(c!=null) {
 								panel.remove(btn);
+								liCalciatori.add(c);
 								panel.add(utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRating().getX(), c.getRuolo()));
+								if(liCalciatori.size()>=11)
+									btnProsegui.setVisible(true);
 							}
 						} catch (ClassNotFoundException | IOException e1) {
 							e1.printStackTrace();
@@ -104,7 +110,24 @@ public class Draft extends Base {
 			System.out.print(gbc.gridy);
 			contentPane.add(panelPosizione, gbc);
 		}
-
+		
+		gbc.insets=new Insets(10, 0, 0, 0);
+		gbc.gridy=4;
+		contentPane.add(btnProsegui, gbc);
+		btnProsegui.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+		btnProsegui.setBackground(Color.white);
+		btnProsegui.setRolloverEnabled(true);
+		btnProsegui.setForeground(Color.BLUE);
+		btnProsegui.addActionListener(new ActionListener() {
+							
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Squadra squadra=new Squadra(nomeSquadra, stemma, mod, liCalciatori);
+				
+				//changeJPanel(new nomeGUI(squadra));
+			}
+		});
+		 
 		
 	}
 
