@@ -59,14 +59,19 @@ public class Formazione extends Base{
 		});
 		contentPane.add(btnScegli);
 		
-		JButton btnProsegui=new JButton();
+		JButton btnProsegui=new JButton("Prosegui");
+		btnProsegui.setFont(new Font("DejaVu Sans", Font.PLAIN, 12));
+		btnProsegui.setBackground(Color.white);
+		btnProsegui.setRolloverEnabled(true);
+		btnProsegui.setForeground(Color.BLUE);
 		btnProsegui.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				changeJPanel(new Draft(liModuli, modulo));
+				changeJPanel(new Draft(li, modulo));
 			}
 		});
+		contentPane.add(btnProsegui);
 		
 		
 		

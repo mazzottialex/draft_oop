@@ -44,6 +44,6 @@ public enum Modulo {
 	}
 	
 	public String toString() {
-		return dif+"-"+cen+""+att;
+		return dif+"-"+cen+"-"+att;
 	}
 }

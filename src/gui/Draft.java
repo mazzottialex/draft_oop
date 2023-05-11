@@ -43,7 +43,7 @@ public class Draft extends Base {
 	private final List<String> ruoli=List.of("A","C","D","P");
 	private final int nDraft=5;
 	
-	public Draft(List<Calciatore> li)  {
+	public Draft(List<Calciatore> li, Modulo mod)  {
 		getContentPane().add(contentPane);
 		GridBagConstraints gbc=new GridBagConstraints();
 		gbc.insets=new Insets(5, 5, 2, 2);
@@ -51,7 +51,7 @@ public class Draft extends Base {
 		contentPane.setLayout(layout);
 		
 		List<JButton> liBtn=new ArrayList<>();
-		mod=Modulo.M433;
+		this.mod=mod;
 
 		ExtractData ex;
 		try {

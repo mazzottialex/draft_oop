@@ -132,7 +132,7 @@ public class Impostazioni extends Base {
 			public void actionPerformed(ActionEvent e) {
 				Squadra squadra=log.getSquadra(textFieldNomeSquadra.getText());
 				System.out.print(squadra.toString());
-				changeJPanel(new Draft(li));
+				changeJPanel(new Formazione(li));
 			}
 		});
 	    

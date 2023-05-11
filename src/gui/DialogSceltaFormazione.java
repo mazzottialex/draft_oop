@@ -71,7 +71,7 @@ public class DialogSceltaFormazione extends JDialog {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					JButton btn= (JButton)e.getSource();
-					selezionato=li.get(liBtn.indexOf(btn));
+					selezionato=liModuli.get(liBtn.indexOf(btn));
 					liBtn.forEach(el-> el.setBackground(new Color(240,240,240)));
 					btn.setBackground(Color.LIGHT_GRAY);
 				}	
