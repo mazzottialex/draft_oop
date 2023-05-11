@@ -2,6 +2,9 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -25,6 +28,10 @@ public class Formazione extends Base{
 	private Modulo modulo;
 
 	public Formazione(List<Calciatore> li) {
+		GridBagConstraints gbc=new GridBagConstraints();
+		GridBagLayout layout=new GridBagLayout();
+		contentPane.setLayout(layout);
+		
 		JButton btnScegli=new JButton("Scegli Formazione");
 		btnScegli.setFont(new Font("DejaVu Sans", Font.PLAIN, 12));
 		btnScegli.setBackground(Color.white);
@@ -47,7 +54,25 @@ public class Formazione extends Base{
 					if(modulo!=null) {
 						panel.remove(btn);
 						JLabel lblModulo=new JLabel("Modulo Scelto:"+modulo.toString());
-						panel.add(lblModulo);
+						lblModulo.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+						lblModulo.setForeground(Color.white);
+						gbc.gridy=0;
+						gbc.insets=new Insets(10, 0, 10, 0);
+						panel.add(lblModulo, gbc);
+						JButton btnProsegui=new JButton("Prosegui");
+						btnProsegui.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+						btnProsegui.setBackground(Color.white);
+						btnProsegui.setRolloverEnabled(true);
+						btnProsegui.setForeground(Color.BLUE);
+						btnProsegui.addActionListener(new ActionListener() {
+							
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								changeJPanel(new Draft(li, modulo));
+							}
+						});
+						gbc.gridy=1;
+						panel.add(btnProsegui, gbc);
 					}
 				} catch (ClassNotFoundException | IOException e1) {
 					e1.printStackTrace();
@@ -59,19 +84,7 @@ public class Formazione extends Base{
 		});
 		contentPane.add(btnScegli);
 		
-		JButton btnProsegui=new JButton("Prosegui");
-		btnProsegui.setFont(new Font("DejaVu Sans", Font.PLAIN, 12));
-		btnProsegui.setBackground(Color.white);
-		btnProsegui.setRolloverEnabled(true);
-		btnProsegui.setForeground(Color.BLUE);
-		btnProsegui.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				changeJPanel(new Draft(li, modulo));
-			}
-		});
-		contentPane.add(btnProsegui);
+		
 		
 		
 		

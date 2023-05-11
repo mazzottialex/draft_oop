@@ -44,7 +44,7 @@ public class Draft extends Base {
 	private final int nDraft=5;
 	
 	public Draft(List<Calciatore> li, Modulo mod)  {
-		getContentPane().add(contentPane);
+		//getContentPane().add(contentPane);
 		GridBagConstraints gbc=new GridBagConstraints();
 		gbc.insets=new Insets(5, 5, 2, 2);
 		GridBagLayout layout=new GridBagLayout();
