@@ -25,5 +25,19 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	public Modulo getModulo() {
 		return this.moduloSelect;
 	}
+
+	public int getNumDif() {
+		return this.moduloSelect.getNumDif();
+	}
+
+	@Override
+	public int getNumCen() {
+		return this.moduloSelect.getNumCen();
+	}
+
+	@Override
+	public int getNumAtt() {
+		return this.moduloSelect.getNumAtt();
+	}
 	
 }

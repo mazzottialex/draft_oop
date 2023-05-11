@@ -12,5 +12,10 @@ public interface LogicsCreasquadra {
 	
 	public Modulo getModulo();
 	
+	public int getNumDif();
+	
+	public int getNumCen();
+	
+	public int getNumAtt();
 	
 }
