@@ -22,15 +22,16 @@ import data.Modulo;
 
 public class Formazione extends Base{
 	private List<Modulo> liModuli;
-	public Formazione() {
+	private Modulo modulo;
+
+	public Formazione(List<Calciatore> li) {
 		JButton btnScegli=new JButton("Scegli Formazione");
 		btnScegli.setFont(new Font("DejaVu Sans", Font.PLAIN, 12));
 		btnScegli.setBackground(Color.white);
 		btnScegli.setRolloverEnabled(true);
 		btnScegli.setForeground(Color.BLUE);
 		Modulo moduli[]=Modulo.values();
-		List<Modulo> li=Arrays.asList(Modulo.values());
-		liModuli=getRandomMod(li);
+		liModuli=getRandomMod(Arrays.asList(Modulo.values()));
 		btnScegli.addActionListener(new ActionListener() {
 			
 			@Override
@@ -42,7 +43,7 @@ public class Formazione extends Base{
 				try {
 					DialogSceltaFormazione dialog=new DialogSceltaFormazione(parent, true, liModuli);
 					dialog.setVisible(true);
-					Modulo modulo=dialog.getModulo();
+					modulo=dialog.getModulo();
 					if(modulo!=null) {
 						panel.remove(btn);
 						JLabel lblModulo=new JLabel("Modulo Scelto:"+modulo.toString());
@@ -58,7 +59,14 @@ public class Formazione extends Base{
 		});
 		contentPane.add(btnScegli);
 		
-		
+		JButton btnProsegui=new JButton();
+		btnProsegui.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				changeJPanel(new Draft(liModuli, modulo));
+			}
+		});
 		
 		
 		
