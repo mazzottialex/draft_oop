@@ -21,11 +21,16 @@ public class CreaSquadra extends Base{
 	private LogicsCreasquadra log;
 	final JFrame frameModulo;
 	final JFrame frameCalciatori;
-	final JPanel panelSud = new JPanel(new GridBagLayout()); //panel sud del frame principale
+	final JPanel panelSud = new JPanel(new GridBagLayout()); //panel Sud del frame principale
+	final JPanel panelCenter = new JPanel(new GridBagLayout()); // Panel Center del frame principale 
 	final GridBagConstraints gbc = new GridBagConstraints();
 	final JLabel lblmodSel;
 	JLabel lblmoduloSelect;
 	final JButton buttonIniziaTorneo;
+	final JButton[] buttonsAtt;
+	final JButton[] buttonsCen;
+	final JButton[] buttonsDif;
+	final JButton buttonPor;
 	
 	public CreaSquadra() {
 		this.log = new LogicsCreaSquadraImpl();
@@ -33,9 +38,8 @@ public class CreaSquadra extends Base{
 		
 		// Mi occupo del frame principale 
 		contentPane.setLayout(new BorderLayout());
-		//final JPanel panelSudEst = new JPanel(new FlowLayout(FlowLayout.RIGHT));		
-		//final GridBagConstraints gbc = new GridBagConstraints();
 		
+		// utilizzo gbc per la disposizione a griglia nel panel sud del frame principale
 		gbc.insets = new Insets(8,0,8,8);
 		gbc.gridx = 0;
 		gbc.gridy = 0;
@@ -60,6 +64,50 @@ public class CreaSquadra extends Base{
 			}
 		});
 		panelSud.add(buttonIniziaTorneo,gbc);
+		
+		// aggiungo il pannello sud al frame principale
+		contentPane.add(panelSud, BorderLayout.SOUTH);
+		
+		//mi occupo del frame principale --> dei giocatori
+		this.buttonsAtt = new JButton[log.getNumAtt()];
+		this.buttonsCen = new JButton[log.getNumCen()];
+		this.buttonsDif = new JButton[log.getNumDif()];
+		this.buttonPor = new JButton("P");
+		
+		gbc.insets = new Insets(5,5,5,5);
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		
+		for (int i=0; i<= log.getNumAtt() - 1; i++) {
+			this.buttonsAtt[i] = new JButton("A");
+			Dimension d = this.buttonsAtt[i].getPreferredSize();
+			this.buttonsAtt[i].setPreferredSize(new Dimension(d.width*2,d.height*2));
+			gbc.gridx++;
+			this.panelCenter.add(this.buttonsAtt[i],gbc);
+		}
+		gbc.gridx = 0;
+		gbc.gridy++;
+		for (int i=0; i<= log.getNumCen() - 1; i++) {
+			this.buttonsCen[i] = new JButton("C");
+			Dimension d = this.buttonsCen[i].getPreferredSize();
+			this.buttonsCen[i].setPreferredSize(new Dimension(d.width*2,d.height*2));
+			gbc.gridx++;
+			this.panelCenter.add(this.buttonsCen[i],gbc);
+		}
+		gbc.gridx = 0;
+		gbc.gridy++;
+		for (int i=0; i<= log.getNumDif() - 1; i++) {
+			this.buttonsDif[i] = new JButton("A");
+			Dimension d = this.buttonsDif[i].getPreferredSize();
+			this.buttonsDif[i].setPreferredSize(new Dimension(d.width*2,d.height*2));
+			gbc.gridx++;
+			this.panelCenter.add(this.buttonsDif[i],gbc);
+		}
+
+		
+		// aggiungo il pannello Center al frame principale
+		panelCenter.setBackground(new Color(0,64,128));
+		contentPane.add(panelCenter, BorderLayout.CENTER);
 		
 		
 		// Creo 2 frame aggiuntivi, uno per modulo e uno per calciatori
@@ -139,13 +187,7 @@ public class CreaSquadra extends Base{
 		this.frameCalciatori.setSize(300,300);
 		this.frameModulo.setVisible(true);
 		this.frameCalciatori.setVisible(true);
-		
-		
-		
-		// aggiungo il pannello sud del frame principale
-		//contentPane.add(panelSudEst, BorderLayout.SOUTH);
-		contentPane.add(panelSud, BorderLayout.SOUTH);
-		
+			
 	}
 	
 	
@@ -156,8 +198,7 @@ public class CreaSquadra extends Base{
 		panelSud.remove(lblmoduloSelect);
 		lblmoduloSelect = new JLabel("" + log.getModulo());
 		panelSud.add(lblmoduloSelect,gbc);
-		panelSud.validate();
-		
+		panelSud.validate();		
 	}
 	
 }
