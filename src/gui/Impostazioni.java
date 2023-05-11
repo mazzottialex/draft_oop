@@ -37,7 +37,8 @@ import javax.swing.JTextField;
 public class Impostazioni extends Base {
 	private JTextField textFieldNomeSquadra;
 	private LogicsImpostazioni log;
-
+	private String nomeSquadra="Squadra 1";
+	private String stemma="res/stemmi/bianco.png";
 	public Impostazioni(List<Calciatore> li) {
 		
 		log=new LogicsImpostazioniImpl();
@@ -108,7 +109,7 @@ public class Impostazioni extends Base {
 					JButton btn=(JButton)e.getSource();
 					liButton.forEach(b-> b.setBackground(Color.white));
 					btn.setBackground(new Color(0, 64, 128));
-					log.setStemma(url);
+					stemma=url;
 				}
 			});
 	    };
@@ -130,9 +131,8 @@ public class Impostazioni extends Base {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Squadra squadra=log.getSquadra(textFieldNomeSquadra.getText());
-				System.out.print(squadra.toString());
-				changeJPanel(new Formazione(li));
+				nomeSquadra=textFieldNomeSquadra.getText();
+				changeJPanel(new Formazione(li, nomeSquadra, stemma));
 			}
 		});
 	    

@@ -30,7 +30,7 @@ public class Formazione extends Base{
 	private Modulo modulo;
 	private LogicsFormazione log;
 
-	public Formazione(List<Calciatore> li) {
+	public Formazione(List<Calciatore> li, String nomeSquadra, String stemma) {
 		log=new LogicsFormazioneImpl();
 		GridBagConstraints gbc=new GridBagConstraints();
 		GridBagLayout layout=new GridBagLayout();
@@ -71,7 +71,7 @@ public class Formazione extends Base{
 							
 							@Override
 							public void actionPerformed(ActionEvent e) {
-								changeJPanel(new Draft(li, modulo));
+								changeJPanel(new Draft(li, modulo, nomeSquadra, stemma));
 							}
 						});
 						gbc.gridy=1;

@@ -43,7 +43,7 @@ public class Draft extends Base {
 	private final List<String> ruoli=List.of("A","C","D","P");
 	private final int nDraft=5;
 	
-	public Draft(List<Calciatore> li, Modulo mod)  {
+	public Draft(List<Calciatore> li, Modulo mod, String nomeSquadra, String stemma)  {
 		//getContentPane().add(contentPane);
 		GridBagConstraints gbc=new GridBagConstraints();
 		gbc.insets=new Insets(5, 5, 2, 2);

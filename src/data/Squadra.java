@@ -8,8 +8,8 @@ public class Squadra {
 	private final String stemma;
 	private final Modulo modulo;
 	private final List<Calciatore> liCalciatori;
+	
 	public Squadra(String nomeSquadra, String stemma, Modulo modulo, List<Calciatore> liCalciatori) {
-		super();
 		this.nomeSquadra = nomeSquadra;
 		this.stemma = stemma;
 		this.modulo = modulo;
