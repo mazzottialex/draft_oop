@@ -22,12 +22,16 @@ import javax.swing.SwingUtilities;
 
 import data.Calciatore;
 import data.Modulo;
+import logics.LogicsFormazione;
+import logics.LogicsFormazioneImpl;
 
 public class Formazione extends Base{
 	private List<Modulo> liModuli;
 	private Modulo modulo;
+	private LogicsFormazione log;
 
 	public Formazione(List<Calciatore> li) {
+		log=new LogicsFormazioneImpl();
 		GridBagConstraints gbc=new GridBagConstraints();
 		GridBagLayout layout=new GridBagLayout();
 		contentPane.setLayout(layout);
@@ -37,8 +41,7 @@ public class Formazione extends Base{
 		btnScegli.setBackground(Color.white);
 		btnScegli.setRolloverEnabled(true);
 		btnScegli.setForeground(Color.BLUE);
-		Modulo moduli[]=Modulo.values();
-		liModuli=getRandomMod(Arrays.asList(Modulo.values()));
+		liModuli=log.getRandomMod(5);
 		btnScegli.addActionListener(new ActionListener() {
 			
 			@Override
@@ -89,19 +92,5 @@ public class Formazione extends Base{
 		
 		
 	}
-	private List<Modulo> getRandomMod(List<Modulo> li){
-		Random rnd = new Random();
-		Set<Integer> posizioni = new HashSet<>();
-		for(int i=0; i<5; i++) {
-			int num;
-			do {
-				num=rnd.nextInt(li.size());
-			}while(posizioni.contains(num));
-			posizioni.add(num);
-		}
-		
-		return posizioni.stream()
-				.map(p-> li.get(p))
-				.toList();
-	}
+	
 }
