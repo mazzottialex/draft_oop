@@ -42,4 +42,8 @@ public enum Modulo {
 			return att;
 		else return 0;
 	}
+	
+	public String toString() {
+		return dif+"-"+cen+""+att;
+	}
 }
