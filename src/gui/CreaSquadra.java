@@ -77,7 +77,7 @@ public class CreaSquadra extends Base{
 		//gbc.insets = new Insets(40,20,40,20);
 		
 		/*se l'attaccante è uno solo si posiziona al centro dell'attacco
-		  se sono 2 scalano di una colonna */
+		  se sono 2 scalano di una colonna 
 		if (log.getNumAtt() == 1) {
 			gbc.gridx = log.getNumCen() / 2;
 		} else if (log.getNumAtt() == 2) {
@@ -85,9 +85,8 @@ public class CreaSquadra extends Base{
 		} else {
 			gbc.gridx = 0;
 		}
-		System.out.println(gbc.gridx);
-		System.out.println(log.getNumCen());
-		System.out.println((log.getNumAtt() != 1) ? 0 : (log.getNumCen() / 2));
+		*/
+		gbc.gridx = this.getGbcX("A");
 		gbc.gridy = 0;
 		gbc.ipady = 10;
 		for (int i=0; i<= log.getNumAtt() - 1; i++) {
@@ -98,7 +97,8 @@ public class CreaSquadra extends Base{
 			gbc.gridx++;
 		}
 		
-		gbc.gridx = (log.getNumCen() == 3 && log.getNumDif() == 5) ? 1 : 0;
+		//gbc.gridx = (log.getNumCen() == 3 && log.getNumDif() == 5) ? 1 : 0;
+		gbc.gridx = this.getGbcX("C");
 		gbc.gridy = gbc.gridy + 3;
 		for (int i=0; i<= log.getNumCen() - 1; i++) {
 			this.buttonsCen[i] = new JButton("C");
@@ -108,7 +108,8 @@ public class CreaSquadra extends Base{
 			gbc.gridx++;
 		}
 		
-		gbc.gridx = (log.getNumDif() == 3 && log.getNumCen() > 4) ? 1 : 0;
+		//gbc.gridx = (log.getNumDif() == 3 && log.getNumCen() > 4) ? 1 : 0;
+		gbc.gridx = this.getGbcX("D");
 		gbc.gridy = gbc.gridy + 3;
 		for (int i=0; i<= log.getNumDif() - 1; i++) {
 			this.buttonsDif[i] = new JButton("D");
@@ -118,9 +119,8 @@ public class CreaSquadra extends Base{
 			gbc.gridx++;
 		}
 		
-		gbc.gridy = gbc.gridy + 3;
 		/* se l'attaccante è uno solo, il portiere è nella sua stessa linea
-		   se la difesa è a 3 o 4 o 5 sta al centro della difesa*/
+		   se la difesa è a 3 o 4 o 5 sta al centro della difesa 
 		if (log.getNumAtt() == 1) {
 			gbc.gridx = log.getNumCen() / 2;
 		} else if (log.getNumDif() == 3 && log.getNumCen() > 4) {
@@ -130,6 +130,9 @@ public class CreaSquadra extends Base{
 		} else {
 			gbc.gridx = (log.getNumDif() / 2) -1;
 		}
+		*/
+		gbc.gridx = this.getGbcX("P");
+		gbc.gridy = gbc.gridy + 3;
 		this.buttonPor = new JButton("P");
 		Dimension d = this.buttonPor.getPreferredSize();
 		this.buttonPor.setPreferredSize(new Dimension(d.width*2,d.height*2));
@@ -232,6 +235,35 @@ public class CreaSquadra extends Base{
 		lblmoduloSelect = new JLabel("" + log.getModulo());
 		panelSud.add(lblmoduloSelect,gbc);
 		panelSud.validate();		
+	}
+	
+	public int getGbcX(String s) {
+		switch (s) {
+		case "A":
+			if (this.log.getNumAtt() == 1) {
+				return this.log.getNumCen() / 2;
+			} else if (this.log.getNumAtt() == 2) {
+				return 1;
+			} else {
+				return 0;
+			}
+		case "C":
+			return (this.log.getNumCen() == 3 && this.log.getNumDif() == 5) ? 1 : 0;
+		case "D":
+			return (this.log.getNumDif() == 3 && this.log.getNumCen() > 4) ? 1 : 0;	
+		case "P":
+			if (this.log.getNumAtt() == 1) {
+				return this.log.getNumCen() / 2;
+			} else if (this.log.getNumDif() == 3 && this.log.getNumCen() > 4) {
+				return 2;
+			} else if (this.log.getNumDif() == 5 || this.log.getNumDif() == 3) {
+				return this.log.getNumDif() / 2;
+			} else {
+				return (this.log.getNumDif() / 2) -1;
+			} 
+		default:
+			return 0;
+		}
 	}
 	
 }
