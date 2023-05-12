@@ -6,7 +6,7 @@ import data.Modulo;
 
 public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 
-	private Modulo moduloSelect = Modulo.M343;
+	private Modulo moduloSelect = Modulo.M532;
 	
 	public List<Modulo> getModuli() {
 		List<Modulo> list = new ArrayList<>();

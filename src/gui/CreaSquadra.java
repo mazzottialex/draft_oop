@@ -30,7 +30,7 @@ public class CreaSquadra extends Base{
 	final JButton[] buttonsAtt;
 	final JButton[] buttonsCen;
 	final JButton[] buttonsDif;
-	final JButton buttonPor;
+	JButton buttonPor;
 	
 	public CreaSquadra() {
 		this.log = new LogicsCreaSquadraImpl();
@@ -53,7 +53,7 @@ public class CreaSquadra extends Base{
 		lblmoduloSelect = new JLabel("" + log.getModulo());
 		panelSud.add(lblmoduloSelect,gbc);
 		
-		gbc.insets = new Insets(5,30,5,5);
+		gbc.insets = new Insets(30,5,30,5);
 		gbc.gridx = 5;
 		gbc.gridy = 0;
 		
@@ -74,39 +74,72 @@ public class CreaSquadra extends Base{
 		this.buttonsDif = new JButton[log.getNumDif()];
 		this.buttonPor = new JButton("P");
 		
-		gbc.insets = new Insets(5,5,5,5);
-		gbc.gridx = 0;
-		gbc.gridy = 0;
+		//gbc.insets = new Insets(40,20,40,20);
 		
+		/*se l'attaccante è uno solo si posiziona al centro dell'attacco
+		  se sono 2 scalano di una colonna */
+		if (log.getNumAtt() == 1) {
+			gbc.gridx = log.getNumCen() / 2;
+		} else if (log.getNumAtt() == 2) {
+			gbc.gridx = 1;
+		} else {
+			gbc.gridx = 0;
+		}
+		System.out.println(gbc.gridx);
+		System.out.println(log.getNumCen());
+		System.out.println((log.getNumAtt() != 1) ? 0 : (log.getNumCen() / 2));
+		gbc.gridy = 0;
+		gbc.ipady = 10;
 		for (int i=0; i<= log.getNumAtt() - 1; i++) {
 			this.buttonsAtt[i] = new JButton("A");
 			Dimension d = this.buttonsAtt[i].getPreferredSize();
 			this.buttonsAtt[i].setPreferredSize(new Dimension(d.width*2,d.height*2));
-			gbc.gridx++;
 			this.panelCenter.add(this.buttonsAtt[i],gbc);
+			gbc.gridx++;
 		}
-		gbc.gridx = 0;
-		gbc.gridy++;
+		
+		gbc.gridx = (log.getNumCen() == 3 && log.getNumDif() == 5) ? 1 : 0;
+		gbc.gridy = gbc.gridy + 3;
 		for (int i=0; i<= log.getNumCen() - 1; i++) {
 			this.buttonsCen[i] = new JButton("C");
 			Dimension d = this.buttonsCen[i].getPreferredSize();
 			this.buttonsCen[i].setPreferredSize(new Dimension(d.width*2,d.height*2));
-			gbc.gridx++;
 			this.panelCenter.add(this.buttonsCen[i],gbc);
+			gbc.gridx++;
 		}
-		gbc.gridx = 0;
-		gbc.gridy++;
+		
+		gbc.gridx = (log.getNumDif() == 3 && log.getNumCen() > 4) ? 1 : 0;
+		gbc.gridy = gbc.gridy + 3;
 		for (int i=0; i<= log.getNumDif() - 1; i++) {
-			this.buttonsDif[i] = new JButton("A");
+			this.buttonsDif[i] = new JButton("D");
 			Dimension d = this.buttonsDif[i].getPreferredSize();
 			this.buttonsDif[i].setPreferredSize(new Dimension(d.width*2,d.height*2));
-			gbc.gridx++;
 			this.panelCenter.add(this.buttonsDif[i],gbc);
+			gbc.gridx++;
 		}
-
+		
+		gbc.gridy = gbc.gridy + 3;
+		/* se l'attaccante è uno solo, il portiere è nella sua stessa linea
+		   se la difesa è a 3 o 4 o 5 sta al centro della difesa*/
+		if (log.getNumAtt() == 1) {
+			gbc.gridx = log.getNumCen() / 2;
+		} else if (log.getNumDif() == 3 && log.getNumCen() > 4) {
+			gbc.gridx = 2;
+		} else if (log.getNumDif() == 5) {
+			gbc.gridx = log.getNumDif() / 2;
+		} else {
+			gbc.gridx = (log.getNumDif() / 2) -1;
+		}
+		this.buttonPor = new JButton("P");
+		Dimension d = this.buttonPor.getPreferredSize();
+		this.buttonPor.setPreferredSize(new Dimension(d.width*2,d.height*2));
+		this.panelCenter.add(this.buttonPor,gbc);
+		
 		
 		// aggiungo il pannello Center al frame principale
-		panelCenter.setBackground(new Color(0,64,128));
+		this.panelCenter.setBackground(new Color(0,128,128));
+		d = this.panelCenter.getPreferredSize();
+		this.panelCenter.setPreferredSize(new Dimension(d.width*2, d.height*2));
 		contentPane.add(panelCenter, BorderLayout.CENTER);
 		
 		
