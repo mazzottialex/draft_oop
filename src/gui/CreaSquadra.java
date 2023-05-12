@@ -216,6 +216,7 @@ public class CreaSquadra extends Base{
 			this.buttonsAtt[i] = new JButton("A");
 			Dimension d = this.buttonsAtt[i].getPreferredSize();
 			this.buttonsAtt[i].setPreferredSize(new Dimension(d.width*2,d.height*2));
+			this.buttonsAtt[i].setBackground(Color.RED);
 			this.panelCenter.add(this.buttonsAtt[i],gbc);
 			gbc.gridx++;
 		}
@@ -226,6 +227,7 @@ public class CreaSquadra extends Base{
 			this.buttonsCen[i] = new JButton("C");
 			Dimension d = this.buttonsCen[i].getPreferredSize();
 			this.buttonsCen[i].setPreferredSize(new Dimension(d.width*2,d.height*2));
+			this.buttonsCen[i].setBackground(Color.GREEN);
 			this.panelCenter.add(this.buttonsCen[i],gbc);
 			gbc.gridx++;
 		}
@@ -236,6 +238,7 @@ public class CreaSquadra extends Base{
 			this.buttonsDif[i] = new JButton("D");
 			Dimension d = this.buttonsDif[i].getPreferredSize();
 			this.buttonsDif[i].setPreferredSize(new Dimension(d.width*2,d.height*2));
+			this.buttonsDif[i].setBackground(Color.CYAN);
 			this.panelCenter.add(this.buttonsDif[i],gbc);
 			gbc.gridx++;
 		}
@@ -245,6 +248,7 @@ public class CreaSquadra extends Base{
 		this.buttonPor = new JButton("P");
 		Dimension d = this.buttonPor.getPreferredSize();
 		this.buttonPor.setPreferredSize(new Dimension(d.width*2,d.height*2));
+		this.buttonPor.setBackground(Color.YELLOW);
 		this.panelCenter.add(this.buttonPor,gbc);
 		
 		
