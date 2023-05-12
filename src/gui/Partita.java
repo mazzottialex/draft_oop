@@ -237,7 +237,7 @@ public class Partita extends Base implements ActionListener, PropertyChangeListe
 	}
 	
 	/**
-     * Invoked when the user presses the start button.
+     * Invoked when the user presses buttons.
      */
     public void actionPerformed(ActionEvent evt) {
         //Instances of javax.swing.SwingWorker are not reusuable, so we create new instances as needed.
@@ -258,7 +258,31 @@ public class Partita extends Base implements ActionListener, PropertyChangeListe
 		}
     }
 
-    /**
+    public void setNomeS1(JLabel jlNomeSq1) {
+		this.jlNomeSq1 = jlNomeSq1;
+	}
+
+	public void setScoreS1(JLabel jlScoreSq1) {
+		this.jlScoreSq1 = jlScoreSq1;
+	}
+
+	public void setTabS1(JLabel jlTabSq1) {
+		this.jlTabSq1 = jlTabSq1;
+	}
+
+	public void setNomeS2(JLabel jlNomeSq2) {
+		this.jlNomeSq2 = jlNomeSq2;
+	}
+
+	public void setScoreS2(JLabel jlScoreSq2) {
+		this.jlScoreSq2 = jlScoreSq2;
+	}
+
+	public void setTabS2(JLabel jlTabSq2) {
+		this.jlTabSq2 = jlTabSq2;
+	}
+
+	/**
      * Invoked when task's progress property changes.
      */
     public void propertyChange(PropertyChangeEvent evt) {
@@ -277,6 +301,7 @@ public class Partita extends Base implements ActionListener, PropertyChangeListe
      */
     public void createAndShowGUI() {
 		//Create and set up the content pane.
+    	add(contentPane);
     	contentPane.add(panel);
 		
 		//Display the window.
