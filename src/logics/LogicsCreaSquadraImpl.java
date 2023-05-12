@@ -1,12 +1,26 @@
 package logics;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 import data.Modulo;
+import manageData.ExtractData;
+import manageData.ExtractDataImpl;
+import manageData.ManageData;
+import manageData.ManageDataImpl;
 
 public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 
-	private Modulo moduloSelect = Modulo.M541;
+	private Modulo moduloSelect;
+	private ManageData md;
+	private ExtractData ex;
+	
+	public LogicsCreaSquadraImpl(String stagione) throws FileNotFoundException, ClassNotFoundException, IOException {
+		this.moduloSelect = Modulo.M343;
+		this.md = new ManageDataImpl(stagione);
+		this.ex = new ExtractDataImpl(this.md.getLi());
+	}
 	
 	public List<Modulo> getModuli() {
 		List<Modulo> list = new ArrayList<>();
