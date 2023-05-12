@@ -3,7 +3,10 @@ package gui;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
+import java.util.List;
 
 import javax.swing.*;
 import javax.swing.JFrame;
@@ -11,12 +14,14 @@ import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 
 import data.Modulo;
+import data.Calciatore;
 import logics.LogicsCreaSquadraImpl;
 import logics.LogicsCreasquadra;
 
 public class CreaSquadra extends Base{
 
-	private final static int MAX_FOR_ROW = 3;
+	private final static int MAX_FOR_ROW = 2;
+	private final static int NUM_PLAYER = 5;
 	
 	private LogicsCreasquadra log;
 	final JFrame frameModulo;
@@ -31,9 +36,11 @@ public class CreaSquadra extends Base{
 	JButton[] buttonsCen;
 	JButton[] buttonsDif;
 	JButton buttonPor;
+	JButton[] buttonsPlayer;
+	JPanel panelCalciatoriCenter;
 	
-	public CreaSquadra() {
-		this.log = new LogicsCreaSquadraImpl();
+	public CreaSquadra() throws FileNotFoundException, ClassNotFoundException, IOException {
+		this.log = new LogicsCreaSquadraImpl("2022-2023");
 		
 		
 		// Mi occupo del frame principale 
@@ -87,9 +94,9 @@ public class CreaSquadra extends Base{
 		final JPanel panelModulo = new JPanel(new BorderLayout());
 		panelModulo.setBackground(new Color(0,64,128));
 		this.frameModulo.add(panelModulo);
-		final JPanel panelModuloNorth = new JPanel(new GridBagLayout());
+		final JPanel panelModuloCenter = new JPanel(new GridBagLayout());
 		final JPanel panelModuloSouth = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		panelModuloNorth.setBackground(new Color(0,64,128));
+		panelModuloCenter.setBackground(new Color(0,64,128));
 		panelModuloSouth.setBackground(new Color(0,64,128));
 		gbc.insets = new Insets(5,5,5,5);
 		gbc.gridx = 0;
@@ -108,7 +115,7 @@ public class CreaSquadra extends Base{
 					//System.out.println(buttonSelect);
 				}
 			});
-			panelModuloNorth.add(buttons[i],gbc);
+			panelModuloCenter.add(buttons[i],gbc);
 			gbc.gridx++;
 			if (gbc.gridx == CreaSquadra.MAX_FOR_ROW) {
 				gbc.gridx = 0;
@@ -130,7 +137,7 @@ public class CreaSquadra extends Base{
 		});
 		panelModuloSouth.add(buttonOk);	
 		
-		panelModulo.add(panelModuloNorth, BorderLayout.NORTH);
+		panelModulo.add(panelModuloCenter, BorderLayout.CENTER);
 		panelModulo.add(panelModuloSouth, BorderLayout.SOUTH);
 		
 		
@@ -138,21 +145,21 @@ public class CreaSquadra extends Base{
 		final JPanel panelCalciatori = new JPanel(new BorderLayout());
 		panelCalciatori.setBackground(new Color(0,64,128));
 		this.frameCalciatori.add(panelCalciatori);
-		final JPanel panelCalciatoriNorth = new JPanel(new FlowLayout());
+		panelCalciatoriCenter = new JPanel(new GridBagLayout());
 		final JPanel panelCalciatoriSouth = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		panelCalciatoriNorth.setBackground(new Color(0,64,128));
+		panelCalciatoriCenter.setBackground(new Color(0,64,128));
 		panelCalciatoriSouth.setBackground(new Color(0,64,128));
 		final JButton buttonOkCalciatori = new JButton("OK");
 		panelCalciatoriSouth.add(buttonOkCalciatori);
 		
-		panelCalciatori.add(panelCalciatoriNorth, BorderLayout.NORTH);
+		panelCalciatori.add(panelCalciatoriCenter, BorderLayout.CENTER);
 		panelCalciatori.add(panelCalciatoriSouth, BorderLayout.SOUTH);
 		
 		// Setto le impostazioni dei due frame aggiuntivi
 		this.frameModulo.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		this.frameCalciatori.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		this.frameModulo.setSize(300,300);
-		this.frameCalciatori.setSize(300,300);
+		this.frameCalciatori.setSize(300,350);
 		this.frameModulo.setVisible(true);
 		this.frameCalciatori.setVisible(true);
 			
@@ -217,6 +224,11 @@ public class CreaSquadra extends Base{
 			Dimension d = this.buttonsAtt[i].getPreferredSize();
 			this.buttonsAtt[i].setPreferredSize(new Dimension(d.width*2,d.height*2));
 			this.buttonsAtt[i].setBackground(Color.RED);
+			this.buttonsAtt[i].addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					choosePlayer("A");
+				}
+			});
 			this.panelCenter.add(this.buttonsAtt[i],gbc);
 			gbc.gridx++;
 		}
@@ -228,6 +240,12 @@ public class CreaSquadra extends Base{
 			Dimension d = this.buttonsCen[i].getPreferredSize();
 			this.buttonsCen[i].setPreferredSize(new Dimension(d.width*2,d.height*2));
 			this.buttonsCen[i].setBackground(Color.GREEN);
+			//final int ind = i;
+			this.buttonsCen[i].addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					choosePlayer("C");
+				}
+			});
 			this.panelCenter.add(this.buttonsCen[i],gbc);
 			gbc.gridx++;
 		}
@@ -239,6 +257,11 @@ public class CreaSquadra extends Base{
 			Dimension d = this.buttonsDif[i].getPreferredSize();
 			this.buttonsDif[i].setPreferredSize(new Dimension(d.width*2,d.height*2));
 			this.buttonsDif[i].setBackground(Color.CYAN);
+			this.buttonsDif[i].addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					choosePlayer("D");
+				}
+			});
 			this.panelCenter.add(this.buttonsDif[i],gbc);
 			gbc.gridx++;
 		}
@@ -249,10 +272,58 @@ public class CreaSquadra extends Base{
 		Dimension d = this.buttonPor.getPreferredSize();
 		this.buttonPor.setPreferredSize(new Dimension(d.width*2,d.height*2));
 		this.buttonPor.setBackground(Color.YELLOW);
+		this.buttonPor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				choosePlayer("P");
+			}
+		});
 		this.panelCenter.add(this.buttonPor,gbc);
 		
 		
 		this.panelCenter.validate();
+	}
+	
+	public void choosePlayer(String ruolo) {
+		this.panelCalciatoriCenter.removeAll();
+		this.panelCalciatoriCenter.repaint();
+		//List<Calciatore> list;
+		
+		
+		//creo i 5 bottoni nel frame calciatori 
+		this.buttonsPlayer = new JButton[CreaSquadra.NUM_PLAYER];
+		//gbc.insets = new Insets(5,5,5,5);
+		gbc.ipadx = 30;
+		gbc.ipady = 40;
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		for (int i = 0; i < this.buttonsPlayer.length; i++) {
+			this.buttonsPlayer[i] = new JButton("aaa");
+			this.panelCalciatoriCenter.add(this.buttonsPlayer[i],gbc);
+			this.buttonsPlayer[i].setBackground(getColorByRuolo(ruolo));
+			gbc.gridx++;
+			if (gbc.gridx == CreaSquadra.MAX_FOR_ROW) {
+				gbc.gridx = 0;
+				gbc.gridy++;
+			}
+		}
+		
+		this.panelCalciatoriCenter.validate();
+		
+	}
+	
+	public Color getColorByRuolo(String ruolo) {
+		switch (ruolo) {
+		case "A":
+			return Color.RED;
+		case "C":
+			return Color.GREEN;	
+		case "D":
+			return Color.CYAN;
+		case "P":
+			return Color.YELLOW;
+		default:
+			return null;
+		}
 	}
 	
 }
