@@ -19,6 +19,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	public LogicsCreaSquadraImpl(String stagione) throws FileNotFoundException, ClassNotFoundException, IOException {
 		this.moduloSelect = Modulo.M343;
 		this.md = new ManageDataImpl(stagione);
+		this.md.LoadData();
 		this.ex = new ExtractDataImpl(this.md.getLi());
 	}
 	
