@@ -53,5 +53,11 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	public int getNumAtt() {
 		return this.moduloSelect.getNumAtt();
 	}
-	
+
+	@Override
+	public ExtractData getEx() {
+		return this.ex;
+	}
+
+
 }

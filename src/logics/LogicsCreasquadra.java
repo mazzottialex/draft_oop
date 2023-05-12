@@ -3,6 +3,7 @@ package logics;
 import java.util.*;
 
 import data.Modulo;
+import manageData.ExtractData;
 
 public interface LogicsCreasquadra {
 
@@ -17,5 +18,8 @@ public interface LogicsCreasquadra {
 	public int getNumCen();
 	
 	public int getNumAtt();
+	
+	//ritorna il campo ExtractDataImpl
+	public ExtractData getEx();
 	
 }
