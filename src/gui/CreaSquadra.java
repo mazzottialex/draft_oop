@@ -286,8 +286,8 @@ public class CreaSquadra extends Base{
 	public void choosePlayer(String ruolo) {
 		this.panelCalciatoriCenter.removeAll();
 		this.panelCalciatoriCenter.repaint();
-		//List<Calciatore> list;
-		
+		List<Calciatore> list = this.log.getEx().getListaByRuolo(ruolo);
+		System.out.println(list);
 		
 		//creo i 5 bottoni nel frame calciatori 
 		this.buttonsPlayer = new JButton[CreaSquadra.NUM_PLAYER];
