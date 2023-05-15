@@ -34,4 +34,13 @@ public interface LogicsCreasquadra {
 	
 	public void setCalciatoreSelect(Calciatore calciatore);
 	
+	public String getRuoloSelect();
+	
+	public void setRuoloSelect(String ruolo);
+	
+	public int getposSelect();
+	
+	public void setposSelect(int pos);
+	
+	
 }
