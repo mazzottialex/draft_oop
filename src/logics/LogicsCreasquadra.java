@@ -26,4 +26,12 @@ public interface LogicsCreasquadra {
 	//ritorna n calciatori casuali del ruolo passato
 	public List<Calciatore> getRandom(String ruolo, int n);
 	
+	public String getNamePlayer();
+	
+	public void setNameString(String name);
+	
+	public Calciatore getCalciatoreSelect();
+	
+	public void setCalciatoreSelect(Calciatore calciatore);
+	
 }
