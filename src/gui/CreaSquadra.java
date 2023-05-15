@@ -153,6 +153,16 @@ public class CreaSquadra extends Base{
 		panelCalciatoriCenter.setBackground(new Color(0,64,128));
 		panelCalciatoriSouth.setBackground(new Color(0,64,128));
 		final JButton buttonOkCalciatori = new JButton("OK");
+		buttonOkCalciatori.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (log.getposSelect() != -1) {
+					changeButtonPlayer(log.getRuoloSelect(), log.getposSelect());
+					panelCalciatoriCenter.removeAll();
+					panelCalciatoriCenter.repaint();
+					panelCalciatoriCenter.validate();
+				}
+			}
+		});
 		panelCalciatoriSouth.add(buttonOkCalciatori);
 		
 		panelCalciatori.add(panelCalciatoriCenter, BorderLayout.CENTER);
@@ -170,7 +180,7 @@ public class CreaSquadra extends Base{
 	
 	
 	public void changeButtonModulo() {
-		gbc.insets = new Insets(8,0,8,8);
+		//gbc.insets = new Insets(8,0,8,8);
 		gbc.gridx = 1;
 		gbc.gridy = 0;		
 		panelSud.remove(lblmoduloSelect);
@@ -241,6 +251,7 @@ public class CreaSquadra extends Base{
 		//CENTROCAMPO
 		gbc.gridx = this.getGbcX("C");
 		gbc.gridy = gbc.gridy + 3;
+		gbc.ipady = 10;
 		for (int i=0; i<= log.getNumCen() - 1; i++) {
 			this.buttonsCen[i] = new JButton("C");
 			Dimension d = this.buttonsCen[i].getPreferredSize();
@@ -258,8 +269,9 @@ public class CreaSquadra extends Base{
 		//DIFESA
 		gbc.gridx = this.getGbcX("D");
 		gbc.gridy = gbc.gridy + 3;
+		gbc.ipady = 10;
 		for (int i=0; i<= log.getNumDif() - 1; i++) {
-			this.buttonsDif[i] = new JButton("D" + i);
+			this.buttonsDif[i] = new JButton("D");
 			Dimension d = this.buttonsDif[i].getPreferredSize();
 			this.buttonsDif[i].setPreferredSize(new Dimension(d.width*2,d.height*2));
 			this.buttonsDif[i].setBackground(Color.CYAN);
@@ -302,8 +314,8 @@ public class CreaSquadra extends Base{
 		//creo i 5 bottoni nel frame calciatori 
 		this.buttonsPlayer = new JButton[CreaSquadra.NUM_PLAYER];
 		//gbc.insets = new Insets(5,5,5,5);
-		gbc.ipadx = 30;
-		gbc.ipady = 40;
+		//gbc.ipadx = 30;
+		//gbc.ipady = 40;
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		for (int i = 0; i < this.buttonsPlayer.length; i++) {
@@ -315,7 +327,9 @@ public class CreaSquadra extends Base{
 				public void actionPerformed(ActionEvent e) {
 					log.setNameString(list.get(ind).getNominativo());
 					log.setCalciatoreSelect(list.get(ind));
-					changeButtonPlayer(ruolo, pos);
+					log.setRuoloSelect(ruolo);
+					log.setposSelect(pos);
+					//changeButtonPlayer(ruolo, pos);
 				}
 			});
 			gbc.gridx++;
@@ -337,6 +351,9 @@ public class CreaSquadra extends Base{
 		switch (ruolo) {
 		case "A":
 			this.buttonsAtt[pos].setText(log.getNamePlayer());
+			if (this.buttonsAtt[pos].getActionListeners().length != 0) {
+				this.buttonsAtt[pos].removeActionListener(this.buttonsAtt[pos].getActionListeners()[0]);
+			}
 			break;
 		case "C":
 			this.buttonsCen[pos].setText(log.getNamePlayer());
