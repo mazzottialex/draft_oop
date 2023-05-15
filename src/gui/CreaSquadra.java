@@ -38,11 +38,13 @@ public class CreaSquadra extends Base{
 	JButton buttonPor;
 	JButton[] buttonsPlayer;
 	JPanel panelCalciatoriCenter;
-	//JButton buttonSelect;
+	JButton buttonSelect;
 	
 	public CreaSquadra() throws FileNotFoundException, ClassNotFoundException, IOException {
 		this.log = new LogicsCreaSquadraImpl("2022-2023");
 		
+		//inizializzo il bottone per i giocatori che seleziono
+		this.buttonSelect = new JButton();
 		
 		// Mi occupo del frame principale 
 		contentPane.setLayout(new BorderLayout());
@@ -206,6 +208,8 @@ public class CreaSquadra extends Base{
 		}
 	}
 	
+	
+	/* metodo che crea la disposizione dei giocaotri nel frame principale */
 	public void changeModulo() {
 		this.panelCenter.removeAll();;
 		this.panelCenter.repaint();
@@ -225,9 +229,10 @@ public class CreaSquadra extends Base{
 			Dimension d = this.buttonsAtt[i].getPreferredSize();
 			this.buttonsAtt[i].setPreferredSize(new Dimension(d.width*2,d.height*2));
 			this.buttonsAtt[i].setBackground(Color.RED);
+			final int ind = i;
 			this.buttonsAtt[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					choosePlayer("A");
+					choosePlayer("A",ind);
 				}
 			});
 			this.panelCenter.add(this.buttonsAtt[i],gbc);
@@ -241,10 +246,10 @@ public class CreaSquadra extends Base{
 			Dimension d = this.buttonsCen[i].getPreferredSize();
 			this.buttonsCen[i].setPreferredSize(new Dimension(d.width*2,d.height*2));
 			this.buttonsCen[i].setBackground(Color.GREEN);
-			//final int ind = i;
+			final int ind = i;
 			this.buttonsCen[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					choosePlayer("C");
+					choosePlayer("C",ind);
 				}
 			});
 			this.panelCenter.add(this.buttonsCen[i],gbc);
@@ -254,13 +259,14 @@ public class CreaSquadra extends Base{
 		gbc.gridx = this.getGbcX("D");
 		gbc.gridy = gbc.gridy + 3;
 		for (int i=0; i<= log.getNumDif() - 1; i++) {
-			this.buttonsDif[i] = new JButton("D");
+			this.buttonsDif[i] = new JButton("D" + i);
 			Dimension d = this.buttonsDif[i].getPreferredSize();
 			this.buttonsDif[i].setPreferredSize(new Dimension(d.width*2,d.height*2));
 			this.buttonsDif[i].setBackground(Color.CYAN);
+			final int ind = i;
 			this.buttonsDif[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					choosePlayer("D");
+					choosePlayer("D",ind);
 				}
 			});
 			this.panelCenter.add(this.buttonsDif[i],gbc);
@@ -275,21 +281,23 @@ public class CreaSquadra extends Base{
 		this.buttonPor.setBackground(Color.YELLOW);
 		this.buttonPor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				choosePlayer("P");
+				choosePlayer("P", 0);
 			}
 		});
 		this.panelCenter.add(this.buttonPor,gbc);
 		
-		
 		this.panelCenter.validate();
 	}
 	
-	public void choosePlayer(String ruolo) {
+	
+	
+	/* metodo che crea i 5 bottoni nel frame frameCalciatori*/
+	public void choosePlayer(String ruolo, int pos) {
 		this.panelCalciatoriCenter.removeAll();
 		this.panelCalciatoriCenter.repaint();
 		List<Calciatore> list = this.log.getRandom(ruolo, NUM_PLAYER);
-		System.out.println(list);
-		System.out.println("lunghezza lista: " + list.size());
+		//System.out.println(list);
+		//System.out.println("lunghezza lista: " + list.size());
 		
 		//creo i 5 bottoni nel frame calciatori 
 		this.buttonsPlayer = new JButton[CreaSquadra.NUM_PLAYER];
@@ -302,6 +310,14 @@ public class CreaSquadra extends Base{
 			this.buttonsPlayer[i] = new JButton("" + list.get(i).getNominativo());
 			this.panelCalciatoriCenter.add(this.buttonsPlayer[i],gbc);
 			this.buttonsPlayer[i].setBackground(getColorByRuolo(ruolo));
+			final int ind = i;
+			this.buttonsPlayer[i].addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					log.setNameString(list.get(ind).getNominativo());
+					log.setCalciatoreSelect(list.get(ind));
+					changeButtonPlayer(ruolo, pos);
+				}
+			});
 			gbc.gridx++;
 			if (gbc.gridx == CreaSquadra.MAX_FOR_ROW) {
 				gbc.gridx = 0;
@@ -312,6 +328,32 @@ public class CreaSquadra extends Base{
 		this.panelCalciatoriCenter.validate();
 		
 	}
+	
+	
+	/* metodo per cambiare la formazione nel frame principale
+	 * mettendo al posto dei vari bottoni il nome del calciatore scelto*/
+	
+	public void changeButtonPlayer(String ruolo, int pos) {
+		switch (ruolo) {
+		case "A":
+			this.buttonsAtt[pos].setText(log.getNamePlayer());
+			break;
+		case "C":
+			this.buttonsCen[pos].setText(log.getNamePlayer());
+			break;
+		case "D":
+			this.buttonsDif[pos].setText(log.getNamePlayer());
+			break;
+		case "P":
+			System.out.println("dentro");
+			this.buttonPor.setText(log.getNamePlayer());
+			break;
+		}
+	
+		this.panelCenter.validate();
+		
+	}
+	
 	
 	public Color getColorByRuolo(String ruolo) {
 		switch (ruolo) {
