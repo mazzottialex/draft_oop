@@ -38,6 +38,7 @@ public class CreaSquadra extends Base{
 	JButton buttonPor;
 	JButton[] buttonsPlayer;
 	JPanel panelCalciatoriCenter;
+	//JButton buttonSelect;
 	
 	public CreaSquadra() throws FileNotFoundException, ClassNotFoundException, IOException {
 		this.log = new LogicsCreaSquadraImpl("2022-2023");
@@ -286,8 +287,9 @@ public class CreaSquadra extends Base{
 	public void choosePlayer(String ruolo) {
 		this.panelCalciatoriCenter.removeAll();
 		this.panelCalciatoriCenter.repaint();
-		List<Calciatore> list = this.log.getEx().getListaByRuolo(ruolo);
+		List<Calciatore> list = this.log.getRandom(ruolo, NUM_PLAYER);
 		System.out.println(list);
+		System.out.println("lunghezza lista: " + list.size());
 		
 		//creo i 5 bottoni nel frame calciatori 
 		this.buttonsPlayer = new JButton[CreaSquadra.NUM_PLAYER];
@@ -297,7 +299,7 @@ public class CreaSquadra extends Base{
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		for (int i = 0; i < this.buttonsPlayer.length; i++) {
-			this.buttonsPlayer[i] = new JButton("aaa");
+			this.buttonsPlayer[i] = new JButton("" + list.get(i).getNominativo());
 			this.panelCalciatoriCenter.add(this.buttonsPlayer[i],gbc);
 			this.buttonsPlayer[i].setBackground(getColorByRuolo(ruolo));
 			gbc.gridx++;
