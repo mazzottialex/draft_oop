@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 
+import data.Calciatore;
 import data.Modulo;
 import manageData.ExtractData;
 import manageData.ExtractDataImpl;
@@ -60,5 +61,22 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 		return this.ex;
 	}
 
+	@Override
+	public List<Calciatore> getRandom(String ruolo, int n) {
+		List<Calciatore> list = this.ex.getListaByRuolo(ruolo);
+		Set<Calciatore> set = new HashSet<>();
+		List<Calciatore> randomList = new ArrayList<>();
+		Random r = new Random();
+		while (set.size() != n) {
+			int random = r.nextInt(list.size());
+			set.add(list.get(random));
+		}
+		randomList.addAll(set);
+		return randomList;
+	}
+
+	
+	
+	
 
 }
