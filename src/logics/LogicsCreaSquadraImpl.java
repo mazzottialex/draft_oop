@@ -13,6 +13,8 @@ import manageData.ManageDataImpl;
 
 public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 
+	private final static int NUM_PLAYER_IN_TEAM = 11;  
+	
 	private Modulo moduloSelect;
 	private ManageData md;
 	private ExtractData ex;
@@ -20,6 +22,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	private Calciatore calciatoreSelect; // calciatore selezionato per entrare in formazione 
 	private String ruoloSelect; //ruolo del calciatore selezionato per entrrare in formazione 
 	private int posSelect; //posizione del calciatore selezionato per entrare in formazione 
+	private List<Calciatore> squadra;
 	
 	public LogicsCreaSquadraImpl(String stagione) throws FileNotFoundException, ClassNotFoundException, IOException {
 		this.moduloSelect = Modulo.M343;
@@ -30,6 +33,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 		this.calciatoreSelect = new Calciatore(0,null,null,null,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 		this.ruoloSelect = null;
 		this.posSelect = -1;
+		this.squadra = new ArrayList<>();
 	}
 	
 	public List<Modulo> getModuli() {
@@ -121,6 +125,24 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	@Override
 	public void setposSelect(int pos) {
 		this.posSelect = pos;
+	}
+
+	@Override
+	public void addPlayerInTeam(Calciatore calciatore) {
+		this.squadra.add(calciatore);
+	}
+
+	@Override
+	public void clearTeam() {
+		this.squadra.clear();
+	}
+
+	@Override
+	public boolean teamComplete() {
+		if (this.squadra.size() == LogicsCreaSquadraImpl.NUM_PLAYER_IN_TEAM) {
+			return true;
+		}
+		return false;
 	}
 
 	
