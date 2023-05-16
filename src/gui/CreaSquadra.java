@@ -375,27 +375,33 @@ public class CreaSquadra extends Base{
 	 * mettendo al posto dei vari bottoni il nome del calciatore scelto*/
 	
 	public void changeButtonPlayer(String ruolo, int pos) {
+		String s = new String();
 		switch (ruolo) {
 		case "A":
-			this.buttonsAtt[pos].setText(log.getNamePlayer());
+			s = textFormat(log.getNamePlayer());
+			this.buttonsAtt[pos].setText(s);
+			this.buttonsAtt[pos].setHorizontalTextPosition(SwingConstants.LEFT);
 			if (this.buttonsAtt[pos].getActionListeners().length != 0) {
 				this.buttonsAtt[pos].removeActionListener(this.buttonsAtt[pos].getActionListeners()[0]);
 			}
 			break;
 		case "C":
-			this.buttonsCen[pos].setText(log.getNamePlayer());
+			s = textFormat(log.getNamePlayer());
+			this.buttonsCen[pos].setText(s);
 			if (this.buttonsCen[pos].getActionListeners().length != 0) {
 				this.buttonsCen[pos].removeActionListener(this.buttonsCen[pos].getActionListeners()[0]);
 			}
 			break;
 		case "D":
-			this.buttonsDif[pos].setText(log.getNamePlayer());
+			s = textFormat(log.getNamePlayer());
+			this.buttonsDif[pos].setText(s);
 			if (this.buttonsDif[pos].getActionListeners().length != 0) {
 				this.buttonsDif[pos].removeActionListener(this.buttonsDif[pos].getActionListeners()[0]);
 			}
 			break;
 		case "P":
-			this.buttonPor.setText(log.getNamePlayer());
+			s = textFormat(log.getNamePlayer());
+			this.buttonPor.setText(s);
 			if (this.buttonPor.getActionListeners().length != 0) {
 				this.buttonPor.removeActionListener(this.buttonPor.getActionListeners()[0]);
 			}
@@ -421,5 +427,17 @@ public class CreaSquadra extends Base{
 			return null;
 		}
 	}
+	
+	public String textFormat(String s) {	
+		String label = "<html>";
+		for (int i=0;i<s.length();i++) {
+			label = label + s.charAt(i);
+			if ((i % 14 == 0) && (i!= 0)) {
+				label = label + "<br>";
+			}
+		}		
+		return label;
+	}
+	
 	
 }
