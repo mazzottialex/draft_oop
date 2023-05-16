@@ -4,8 +4,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Map;
 
-import data.SquadraAvversaria;
-
 public interface SimulatingMatch {
 	public double prestazioneDifensiva(int squadra) throws FileNotFoundException, ClassNotFoundException, IOException;
 
@@ -13,10 +11,10 @@ public interface SimulatingMatch {
 
 	public double capacitaRealizzativa(int squadra) throws FileNotFoundException, ClassNotFoundException, IOException;
 
-	public double superioritaManifesta(int squadra) throws FileNotFoundException, ClassNotFoundException, IOException;
+//	public double superioritaManifesta(int squadra) throws FileNotFoundException, ClassNotFoundException, IOException;
 
 	public double prestazioneOffensiva(int squadra) throws FileNotFoundException, ClassNotFoundException, IOException;
 
-	public Map<SquadraAvversaria, Integer> risultato()
+	public Map<String, Integer> risultato()
 			throws FileNotFoundException, ClassNotFoundException, IOException;
 }

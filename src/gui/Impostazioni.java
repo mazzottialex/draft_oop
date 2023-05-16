@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -130,6 +131,15 @@ public class Impostazioni extends Base {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				try {
+					changeJPanel(new CreaSquadra());
+				} catch (FileNotFoundException e1) {
+					e1.printStackTrace();
+				} catch (ClassNotFoundException e1) {
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 				Squadra squadra=log.getSquadra(textFieldNomeSquadra.getText());
 				System.out.print(squadra.toString());
 			}

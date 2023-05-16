@@ -14,26 +14,26 @@ public class SimulatingMatchImpl implements SimulatingMatch {
 	private SimulatingFunctions sf;
 	private SquadraAvversaria s1;
 	private SquadraAvversaria s2;
-	public Map<Calciatore, Double> voti1;
-	public Map<Calciatore, Double> voti2;
-	public int golSubiti1;
-	public int golSubiti2;
-	public int autogol1;
-	public int autogol2;
-	public int rigoriParati1;
-	public int rigoriParati2;
-	public double catenaccio1;
-	public double catenaccio2;
-	public Map<String, Double> votiMod1;
-	public Map<String, Double> votiMod2;
-	public double votoDif1;
-	public double votoDif2;
-	public double votoOff1;
-	public double votoOff2;
-	public int golFatti1;
-	public int golFatti2;
-	public int rigoriFatti1;
-	public int rigoriFatti2;
+	private Map<Calciatore, Double> voti1;
+	private Map<Calciatore, Double> voti2;
+	private int golSubiti1;
+	private int golSubiti2;
+	private int autogol1;
+	private int autogol2;
+	private int rigoriParati1;
+	private int rigoriParati2;
+	private double catenaccio1;
+	private double catenaccio2;
+	private Map<String, Double> votiMod1;
+	private Map<String, Double> votiMod2;
+	private double votoDif1;
+	private double votoDif2;
+	private double votoOff1;
+	private double votoOff2;
+	private int golFatti1;
+	private int golFatti2;
+	private int rigoriFatti1;
+	private int rigoriFatti2;
 	private static final double COST_SUB_DIFF = 14; // da aumentare di 1
 	private static final double COST_SUB_OFF = 5; // da aumentare di 2
 	private static final double COST_DIV_DIFF_OFF_CR = 5;
@@ -47,8 +47,8 @@ public class SimulatingMatchImpl implements SimulatingMatch {
 		sf = new SimulatingFunctionsImpl();
 		this.s1 = s1;
 		this.s2 = s2;
-		voti1 = SimulatingFunctionsImpl.votiFanta(this.s1.titolari);
-		voti2 = SimulatingFunctionsImpl.votiFanta(this.s2.titolari);
+		voti1 = SimulatingFunctionsImpl.votiFanta(this.s1.getTitolari());
+		voti2 = SimulatingFunctionsImpl.votiFanta(this.s2.getTitolari());
 		golSubiti1 = sf.golSubitiFanta(this.s1);
 		golSubiti2 = sf.golSubitiFanta(this.s2);
 		autogol1 = sf.autogolFanta(this.s1);
@@ -76,11 +76,11 @@ public class SimulatingMatchImpl implements SimulatingMatch {
 		switch (squadra) {
 		case SQUADRA1:
 			pd = (votoDif1 + new ExtractDataImpl(s1.getTitolari()).getListaByRuolo("D").size() + catenaccio1
-					- golSubiti1 - COST_SUB_DIFF) / COST_DIV_DIFF_OFF_CR;
+					- 2 * golSubiti1 - 2 * autogol1 + 3 * rigoriParati1 - COST_SUB_DIFF) / COST_DIV_DIFF_OFF_CR;
 			break;
 		case SQUADRA2:
 			pd = (votoDif2 + new ExtractDataImpl(s2.getTitolari()).getListaByRuolo("D").size() + catenaccio2
-					- golSubiti2 - COST_SUB_DIFF) / COST_DIV_DIFF_OFF_CR;
+					- 2 * golSubiti2 - 2 * autogol2 + 3 * rigoriParati2 - COST_SUB_DIFF) / COST_DIV_DIFF_OFF_CR;
 			break;
 
 		default:
@@ -109,14 +109,16 @@ public class SimulatingMatchImpl implements SimulatingMatch {
 
 	@Override
 	public double capacitaRealizzativa(int squadra) throws FileNotFoundException, ClassNotFoundException, IOException {
-		double cr = 0;
-		double sm = superioritaManifesta(squadra);
-		if (sm > 0) {
-			cr = cR(squadra) + superioritaManifesta(squadra) / COST_DIV_DIFF_OFF_CR;
-		} else {
-			cr = cR(squadra);
-		}
-		return cr;
+//		double cr = 0;
+//		double sm = superioritaManifesta(squadra);
+//		if (sm > 0) {
+//			cr = cR(squadra) + (superioritaManifesta(squadra) / COST_DIV_DIFF_OFF_CR);
+//		} else {
+//			cr = cR(squadra);
+//		}
+//		return cr;
+		
+		return cR(squadra);
 	}
 
 	// prestazioneOffensiva
@@ -128,7 +130,7 @@ public class SimulatingMatchImpl implements SimulatingMatch {
 			po = (votoOff1 + (capacitaRealizzativa(squadra) / 2) - COST_SUB_OFF) / COST_DIV_DIFF_OFF_CR;
 			break;
 		case SQUADRA2:
-			po = (votoOff1 + (capacitaRealizzativa(squadra) / 2) - COST_SUB_OFF) / COST_DIV_DIFF_OFF_CR;
+			po = (votoOff2 + (capacitaRealizzativa(squadra) / 2) - COST_SUB_OFF) / COST_DIV_DIFF_OFF_CR;
 			break;
 
 		default:
@@ -138,39 +140,39 @@ public class SimulatingMatchImpl implements SimulatingMatch {
 	}
 
 	// superioritaManifesta
-	@Override
-	public double superioritaManifesta(int squadra) throws FileNotFoundException, ClassNotFoundException, IOException {
-		double sm = 0;
-		int squadraAvv;
-		switch (squadra) {
-		case SQUADRA1:
-			squadraAvv = SQUADRA2;
-			sm = 2 * prestazioneOffensiva(squadra) - 4 * prestazioneDifensiva(squadra)
-					+ -2 * prestazioneOffensiva(squadraAvv) - cR(squadraAvv) - COST_SUB_SM;
-			break;
-		case SQUADRA2:
-			squadraAvv = SQUADRA1;
-			sm = 2 * prestazioneOffensiva(squadra) - 4 * prestazioneDifensiva(squadra)
-					+ -2 * prestazioneOffensiva(squadraAvv) - cR(squadraAvv) - COST_SUB_SM;
-			break;
+//	@Override
+//	public double superioritaManifesta(int squadra) throws FileNotFoundException, ClassNotFoundException, IOException {
+//		double sm = 0;
+//		int squadraAvv;
+//		switch (squadra) {
+//		case SQUADRA1:
+//			squadraAvv = SQUADRA2;
+//			sm = 2 * prestazioneOffensiva(squadra) - 4 * prestazioneDifensiva(squadra)
+//					+ -2 * prestazioneOffensiva(squadraAvv) - cR(squadraAvv) - COST_SUB_SM;
+//			break;
+//		case SQUADRA2:
+//			squadraAvv = SQUADRA1;
+//			sm = 2 * prestazioneOffensiva(squadra) - 4 * prestazioneDifensiva(squadra)
+//					+ -2 * prestazioneOffensiva(squadraAvv) - cR(squadraAvv) - COST_SUB_SM;
+//			break;
+//
+//		default:
+//			break;
+//		}
+//		return sm;
+//	}
 
-		default:
-			break;
-		}
-		return sm;
-	}
-
-	// TODO risultatoFinale
+	// risultatoFinale
 	@Override
-	public Map<SquadraAvversaria, Integer> risultato()
+	public Map<String, Integer> risultato()
 			throws FileNotFoundException, ClassNotFoundException, IOException {
 		int sq1 = (int) Math.min(capacitaRealizzativa(SQUADRA1),
 				(prestazioneOffensiva(SQUADRA1) - prestazioneDifensiva(SQUADRA2)));
 		int sq2 = (int) Math.min(capacitaRealizzativa(SQUADRA2),
 				(prestazioneOffensiva(SQUADRA2) - prestazioneDifensiva(SQUADRA1)));
-		Map<SquadraAvversaria, Integer> map = new HashMap<>();
-		map.put(this.s1, sq1);
-		map.put(this.s2, sq2);
+		Map<String, Integer> map = new HashMap<>();
+		map.put(this.s1.getNomeSquadra(), sq1 >= 0 ? sq1 : 0);
+		map.put(this.s2.getNomeSquadra(), sq2 >= 0 ? sq2 : 0);
 		return map;
 	}
 }
