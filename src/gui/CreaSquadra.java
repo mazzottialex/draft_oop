@@ -3,6 +3,7 @@ package gui;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
@@ -70,7 +71,31 @@ public class CreaSquadra extends Base{
 		buttonIniziaTorneo = new JButton("Inizia Torneo");
 		buttonIniziaTorneo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				if (log.teamComplete()) {
+					// ...
+				} else {
+					final JFrame err = new JFrame("ERRORE");
+					err.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+					final JDialog prova = new JDialog(err, "ERRORE");
+					prova.setLayout(new FlowLayout());
+					prova.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+					final JLabel label = new JLabel("NON HAI COMPLETATO LA SQUADRA");
+					final JButton buttonOk = new JButton("OK");
+					buttonOk.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							WindowEvent close = new WindowEvent(prova, WindowEvent.WINDOW_CLOSING);
+							prova.dispatchEvent(close);
+						}
+					});
+					prova.add(label);
+					prova.add(buttonOk);
+					//err.add(prova);
+					//err.setBounds( 300, 300, 200, 200);
+					//err.setVisible(true);
+					prova.setBounds( 300, 300, 250, 100);
+					prova.setVisible(true);
+					
+				}
 			}
 		});
 		panelSud.add(buttonIniziaTorneo,gbc);
@@ -90,8 +115,8 @@ public class CreaSquadra extends Base{
 		// Creo 2 frame aggiuntivi, uno per modulo e uno per calciatori
 		this.frameModulo = new JFrame("Seleziona modulo: ");
 		this.frameCalciatori = new JFrame("Seleziona calciatori: ");
-		this.frameModulo.setBounds(600, 100, 200, 300);
-		this.frameCalciatori.setBounds(600, 400, 200, 300);
+		this.frameModulo.setBounds(this.getX() + 520, this.getY(), 200, 300);
+		this.frameCalciatori.setBounds(this.getX() + 520 ,this.getY() + 300, 200, 300);
 		
 		//Mi occupo del frame Modulo
 		final JPanel panelModulo = new JPanel(new BorderLayout());
@@ -133,6 +158,7 @@ public class CreaSquadra extends Base{
 				if (!buttonSelect.isEmpty()) {
 					log.setModulo(buttonSelect.get(buttonSelect.size()-1));
 				}
+				log.clearTeam();
 				//System.out.println(log.getModulo());
 				changeButtonModulo();
 				changeModulo();
@@ -156,6 +182,7 @@ public class CreaSquadra extends Base{
 		buttonOkCalciatori.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (log.getposSelect() != -1) {
+					log.addPlayerInTeam(log.getCalciatoreSelect());
 					changeButtonPlayer(log.getRuoloSelect(), log.getposSelect());
 					panelCalciatoriCenter.removeAll();
 					panelCalciatoriCenter.repaint();
@@ -348,22 +375,36 @@ public class CreaSquadra extends Base{
 	 * mettendo al posto dei vari bottoni il nome del calciatore scelto*/
 	
 	public void changeButtonPlayer(String ruolo, int pos) {
+		String s = new String();
 		switch (ruolo) {
 		case "A":
-			this.buttonsAtt[pos].setText(log.getNamePlayer());
+			s = textFormat(log.getNamePlayer());
+			this.buttonsAtt[pos].setText(s);
+			this.buttonsAtt[pos].setHorizontalTextPosition(SwingConstants.LEFT);
 			if (this.buttonsAtt[pos].getActionListeners().length != 0) {
 				this.buttonsAtt[pos].removeActionListener(this.buttonsAtt[pos].getActionListeners()[0]);
 			}
 			break;
 		case "C":
-			this.buttonsCen[pos].setText(log.getNamePlayer());
+			s = textFormat(log.getNamePlayer());
+			this.buttonsCen[pos].setText(s);
+			if (this.buttonsCen[pos].getActionListeners().length != 0) {
+				this.buttonsCen[pos].removeActionListener(this.buttonsCen[pos].getActionListeners()[0]);
+			}
 			break;
 		case "D":
-			this.buttonsDif[pos].setText(log.getNamePlayer());
+			s = textFormat(log.getNamePlayer());
+			this.buttonsDif[pos].setText(s);
+			if (this.buttonsDif[pos].getActionListeners().length != 0) {
+				this.buttonsDif[pos].removeActionListener(this.buttonsDif[pos].getActionListeners()[0]);
+			}
 			break;
 		case "P":
-			System.out.println("dentro");
-			this.buttonPor.setText(log.getNamePlayer());
+			s = textFormat(log.getNamePlayer());
+			this.buttonPor.setText(s);
+			if (this.buttonPor.getActionListeners().length != 0) {
+				this.buttonPor.removeActionListener(this.buttonPor.getActionListeners()[0]);
+			}
 			break;
 		}
 	
@@ -386,5 +427,17 @@ public class CreaSquadra extends Base{
 			return null;
 		}
 	}
+	
+	public String textFormat(String s) {	
+		String label = "<html>";
+		for (int i=0;i<s.length();i++) {
+			label = label + s.charAt(i);
+			if ((i % 14 == 0) && (i!= 0)) {
+				label = label + "<br>";
+			}
+		}		
+		return label;
+	}
+	
 	
 }

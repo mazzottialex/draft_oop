@@ -42,5 +42,12 @@ public interface LogicsCreasquadra {
 	
 	public void setposSelect(int pos);
 	
+	public void addPlayerInTeam(Calciatore calciatore);
+	
+	public void clearTeam();
+	
+	// ritrona true se il Team é completo, false altrimenti 
+	public boolean teamComplete();
+	
 	
 }
