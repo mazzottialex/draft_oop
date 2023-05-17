@@ -51,6 +51,8 @@ public class Launch {
 				ManageData md = new ManageDataImpl("2022-2023");
 				md.LoadData();
 				List<Calciatore> li = md.getLi();
+				CalcoloRating cr=new CalcoloRatingImpl(li);
+				li=cr.updateRating();
 				SquadraAvversaria nap = new SquadraAvversaria(0, "NAP", Modulo.M442, li);				
 				SquadraAvversaria laz = new SquadraAvversaria(0, "LAZ", Modulo.M442, li);
 				Partita p = new Partita(nap, laz);
