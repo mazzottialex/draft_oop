@@ -207,6 +207,31 @@ public class ExtractDataImpl implements ExtractData{
 		li.addAll(getRandomByRuolo("C", nC));
 		li.addAll(getRandomByRuolo("D", nD));
 		li.addAll(getRandomByRuolo("P", nP));
+		Calciatore c;
+		for(int i=0;i<5;i++) {
+			do {
+				c=getRandomByRuolo("P", 1).get(0);
+			}while(li.contains(c));
+			li.add(c);
+		}
+		for(int i=0;i<10;i++) {
+			do {
+				c=getRandomByRuolo("D", 2).get(0);
+			}while(li.contains(c));
+			li.add(c);
+		}
+		for(int i=0;i<10;i++) {
+			do {
+				c=getRandomByRuolo("C", 2).get(0);
+			}while(li.contains(c));
+			li.add(c);
+		}
+		for(int i=0;i<10;i++) {
+			do {
+				c=getRandomByRuolo("A", 2).get(0);
+			}while(li.contains(c));
+			li.add(c);
+		}
 		return li;
 	}
 }

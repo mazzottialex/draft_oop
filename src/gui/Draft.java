@@ -41,12 +41,13 @@ import javax.swing.SwingUtilities;
 
 public class Draft extends Base {
 
-	private List<Calciatore> liTitolari;
-	private List<Calciatore> liPanchina; 
+	private List<Calciatore> liGiocatori;
+	//private List<Calciatore> liPanchina; 
 	private final List<String> ruoli=List.of("A","C","D","P");
 	private final int nDraft=5;
-	private List<Calciatore> liCalciatori=new ArrayList<>();
-	
+	private List<Calciatore> liTitolari=new ArrayList<>();
+	private List<Calciatore> liRiserve=new ArrayList<>();
+
 	public Draft(List<Calciatore> li, Modulo mod, String nomeSquadra, String stemma)  {
 		GridBagConstraints gbc=new GridBagConstraints();
 		gbc.insets=new Insets(5, 5, 2, 2);
@@ -58,9 +59,9 @@ public class Draft extends Base {
 		ExtractData ex;
 		try {
 			ex = new ExtractDataImpl(li);
-			liTitolari=ex.getRandom(mod.getNumAtt()*nDraft, mod.getNumCen()*nDraft, mod.getNumDif()*nDraft, nDraft);
-			liPanchina=ex.getRandom(2*nDraft, 2*nDraft, 2*nDraft, nDraft);
-			Collections.reverse(liPanchina);
+			liGiocatori=ex.getRandom(mod.getNumAtt()*nDraft, mod.getNumCen()*nDraft, mod.getNumDif()*nDraft, nDraft);
+			//liPanchina=ex.getRandom(2*nDraft, 2*nDraft, 2*nDraft, nDraft);
+			//Collections.reverse(liPanchina);
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		}
@@ -90,14 +91,14 @@ public class Draft extends Base {
 						int index=liBtn.indexOf(btn);
 						DialogScelta dialog;
 						try {
-							dialog = new DialogScelta(parent, true, liTitolari.subList(5*index, 5*(index+1)), liTitolari.subList(5*index, 5*(index+1)).get(0).getRuolo());
+							dialog = new DialogScelta(parent, true, liGiocatori.subList(nDraft*index, nDraft*(index+1)), liGiocatori.subList(nDraft*index, nDraft*(index+1)).get(0).getRuolo());
 							dialog.setVisible(true);
 							Calciatore c=dialog.getCalciatore();
 							if(c!=null) {
 								panel.remove(btn);
-								liCalciatori.add(c);
+								liTitolari.add(c);
 								panel.add(utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRating().getX(), c.getRuolo()));
-								if(liCalciatori.size()>=11)
+								if(liTitolari.size()>=11)
 									btnProsegui.setVisible(true);
 							}
 						} catch (ClassNotFoundException | IOException e1) {
@@ -132,17 +133,17 @@ public class Draft extends Base {
 						JButton btn= (JButton) e.getSource();
 						JPanel panel=(JPanel) btn.getParent();
 		                JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(btn);
-						int index=liBtn.indexOf(btn)-11;
+						int index=liBtn.indexOf(btn);
 						DialogScelta dialog;
 						try {
-							dialog = new DialogScelta(parent, true, liPanchina.subList(5*index, 5*(index+1)), liPanchina.subList(5*index, 5*(index+1)).get(0).getRuolo());
+							dialog = new DialogScelta(parent, true, liGiocatori.subList(nDraft*index, nDraft*(index+1)), liGiocatori.subList(nDraft*index, nDraft*(index+1)).get(0).getRuolo());
 							dialog.setVisible(true);
 							Calciatore c=dialog.getCalciatore();
 							if(c!=null) {
 								panel.remove(btn);
-								liCalciatori.add(c);
+								liRiserve.add(c);
 								panel.add(utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRating().getX(), c.getRuolo()));
-								if(liCalciatori.size()>=11)
+								if(liRiserve.size()>=11)
 									btnProsegui.setVisible(true);
 							}
 						} catch (ClassNotFoundException | IOException e1) {
@@ -173,7 +174,7 @@ public class Draft extends Base {
 							
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Squadra squadra=new Squadra(nomeSquadra, stemma, mod, liCalciatori);
+				Squadra squadra=new Squadra(nomeSquadra, stemma, mod, liTitolari);
 				
 				//changeJPanel(new nomeGUI(squadra));
 			}
