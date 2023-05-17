@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -20,6 +22,8 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
 
 import data.SquadraAvversaria;
+import logics.LogicsPartita;
+import logics.LogicsPartitaImpl;
 
 
 public class Partita extends Base implements ActionListener, PropertyChangeListener{
@@ -40,6 +44,9 @@ public class Partita extends Base implements ActionListener, PropertyChangeListe
 	private JPanel panel;
 	
 	private Task task;
+	private LogicsPartita logics;
+	private SquadraAvversaria s1;
+	private SquadraAvversaria s2;
 	
 	/**
 	 * Create the frame.
@@ -85,10 +92,9 @@ public class Partita extends Base implements ActionListener, PropertyChangeListe
 		 * Main task. Executed in background thread.
 		 */
 		@Override
-		public Void doInBackground() {
+		public Void doInBackground() throws FileNotFoundException, ClassNotFoundException, IOException {
             int progress = 0;
             //Initialize progress property.
-            // TODO impostare nome squadre
             setProgress(0);
             while (progress < 100) {
             	if (!isPaused()) {
@@ -97,10 +103,12 @@ public class Partita extends Base implements ActionListener, PropertyChangeListe
                         Thread.sleep(1000);
                     } catch (InterruptedException ignore) {}
                     //Make progress.
-                    // TODO chiamare funz per gol
-                    // TODO chiamare funz per ammonizioni / espulsioni
                     progress += 1;
                     setProgress(Math.min(progress, 100));
+                    // chiama funzione per gol
+                    changeScore();
+                    // chiama funzione per ammonizioni / espulsioni
+                    logics.sanctions();
                     //Abilita bottone sostituzioni
                     if (progress > 0) {
     					jbSubs.setEnabled(true);
@@ -129,8 +137,24 @@ public class Partita extends Base implements ActionListener, PropertyChangeListe
         	JOptionPane.showMessageDialog(null, "Partita finita");	//dire che è finito
         }
 	}
+	
+	public void changeScore() throws FileNotFoundException, ClassNotFoundException, IOException {
+		logics.computeScore();
+        if (Integer.valueOf(jlScoreSq1.getText()) != logics.getGol1()) {
+        	logics.addScorer(s1);
+        }
+        jlScoreSq1.setText(Integer.toString(logics.getGol1()));
+        if (Integer.valueOf(jlScoreSq2.getText()) != logics.getGol2()) {
+        	logics.addScorer(s2);
+        }
+        jlScoreSq2.setText(Integer.toString(logics.getGol2()));
+	}
 
-	public Partita(SquadraAvversaria s1, SquadraAvversaria s2) {
+	public Partita(SquadraAvversaria s1, SquadraAvversaria s2) throws FileNotFoundException, ClassNotFoundException, IOException {
+		this.s1 = s1;
+		this.s2 = s2;
+		logics = new LogicsPartitaImpl(this.s1, this.s2);
+		
 		// Define the panel to hold the components
 		panel = new JPanel(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
