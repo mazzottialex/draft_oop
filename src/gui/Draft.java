@@ -132,10 +132,10 @@ public class Draft extends Base {
 						JButton btn= (JButton) e.getSource();
 						JPanel panel=(JPanel) btn.getParent();
 		                JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(btn);
-						int index=liBtn.indexOf(btn);
+						int index=liBtn.indexOf(btn)-11;
 						DialogScelta dialog;
 						try {
-							dialog = new DialogScelta(parent, true, liTitolari.subList(5*index, 5*(index+1)), liTitolari.subList(5*index, 5*(index+1)).get(0).getRuolo());
+							dialog = new DialogScelta(parent, true, liPanchina.subList(5*index, 5*(index+1)), liPanchina.subList(5*index, 5*(index+1)).get(0).getRuolo());
 							dialog.setVisible(true);
 							Calciatore c=dialog.getCalciatore();
 							if(c!=null) {
