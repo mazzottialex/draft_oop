@@ -37,7 +37,7 @@ public class utilsGUI {
 		JLabel lblIcona = new JLabel();
 		ImageIcon img=new ImageIcon(file);
 		Image image = img.getImage(); // transform it 
-		Image newimg = image.getScaledInstance(90, 90,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+		Image newimg = image.getScaledInstance(70, 70,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		img = new ImageIcon(newimg);
 		lblIcona.setIcon(img);
 		gbc.gridy=0;

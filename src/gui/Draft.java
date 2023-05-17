@@ -98,7 +98,7 @@ public class Draft extends Base {
 								panel.remove(btn);
 								liTitolari.add(c);
 								panel.add(utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRating().getX(), c.getRuolo()));
-								if(liTitolari.size()>=11)
+								if(liTitolari.size()>=11 && liRiserve.size()>=7)
 									btnProsegui.setVisible(true);
 							}
 						} catch (ClassNotFoundException | IOException e1) {
@@ -118,45 +118,48 @@ public class Draft extends Base {
 		
 		//panchinari
 		
-			panelPosizione = new JPanel();
-			for(int j=0;j<7;j++) {
-				panelPosizione.setLayout(layout);
-				panelGiocatore=new JPanel();
-				panelGiocatore.setLayout(layout);
-				JButton btnScegli=new JButton("Scegli");
-				btnScegli.setPreferredSize(new Dimension(100,50));
+		panelPosizione = new JPanel();
+		for(int j=0;j<7;j++) {
+			panelPosizione.setLayout(layout);
+			panelGiocatore=new JPanel();
+			panelGiocatore.setLayout(layout);
+			JButton btnScegli=new JButton("Scegli");
+			btnScegli.setPreferredSize(new Dimension(100,50));
 				
-				liBtn.add(btnScegli);
-				btnScegli.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						JButton btn= (JButton) e.getSource();
-						JPanel panel=(JPanel) btn.getParent();
-		                JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(btn);
-						int index=liBtn.indexOf(btn);
-						DialogScelta dialog;
-						try {
-							dialog = new DialogScelta(parent, true, liGiocatori.subList(nDraft*index, nDraft*(index+1)), liGiocatori.subList(nDraft*index, nDraft*(index+1)).get(0).getRuolo());
-							dialog.setVisible(true);
-							Calciatore c=dialog.getCalciatore();
-							if(c!=null) {
-								panel.remove(btn);
-								liRiserve.add(c);
-								panel.add(utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRating().getX(), c.getRuolo()));
-								if(liRiserve.size()>=11)
-									btnProsegui.setVisible(true);
-							}
-						} catch (ClassNotFoundException | IOException e1) {
-							e1.printStackTrace();
+			liBtn.add(btnScegli);
+			btnScegli.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					JButton btn= (JButton) e.getSource();
+					JPanel panel=(JPanel) btn.getParent();
+		            JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(btn);
+					int index=liBtn.indexOf(btn);
+					DialogScelta dialog;
+					try {
+						dialog = new DialogScelta(parent, true, liGiocatori.subList(nDraft*index, nDraft*(index+1)), liGiocatori.subList(nDraft*index, nDraft*(index+1)).get(0).getRuolo());
+						dialog.setVisible(true);
+						Calciatore c=dialog.getCalciatore();
+						if(c!=null) {
+							panel.remove(btn);
+							liRiserve.add(c);
+							panel.add(utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRating().getX(), c.getRuolo()));
+							if(liTitolari.size()>=11 && liRiserve.size()>=7)
+								btnProsegui.setVisible(true);
 						}
-						panel.revalidate();
-						panel.repaint();
+					} catch (ClassNotFoundException | IOException e1) {
+						e1.printStackTrace();
 					}
-				});
-				panelGiocatore.add(btnScegli);
-				panelPosizione.add(panelGiocatore);
+					panel.revalidate();
+					panel.repaint();
+				}
+			});
+			panelGiocatore.add(btnScegli);
+			if(j<4)
+				gbc.gridy=4;
+			else
+				gbc.gridy=5;
+			panelPosizione.add(panelGiocatore,gbc);
 			
-			gbc.gridy=4;
 			System.out.print(gbc.gridy);
 			contentPane.add(panelPosizione, gbc);
 		}
@@ -164,7 +167,7 @@ public class Draft extends Base {
 		
 		
 		gbc.insets=new Insets(10, 0, 0, 0);
-		gbc.gridy=5;
+		gbc.gridy=6;
 		contentPane.add(btnProsegui, gbc);
 		btnProsegui.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
 		btnProsegui.setBackground(Color.white);
