@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 
 public class utilsGUI {
 
-	public static JPanel getPanelCalciatore(String calciatore, Integer valutazione, String ruolo) {
+	public static JPanel getPanelCalciatore(String calciatore, Integer valutazione, String ruolo, Boolean icon) {
 		String file="";
 		if(ruolo.equals("P"))
 			file="res/portiere.png";
@@ -41,7 +41,8 @@ public class utilsGUI {
 		img = new ImageIcon(newimg);
 		lblIcona.setIcon(img);
 		gbc.gridy=0;
-		panelGiocatore.add(lblIcona,gbc);
+		if(icon)
+			panelGiocatore.add(lblIcona,gbc);
 		gbc.gridy=1;
 		panelGiocatore.add(lblNome,gbc);
 		gbc.gridy=2;

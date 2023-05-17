@@ -97,7 +97,7 @@ public class Draft extends Base {
 							if(c!=null) {
 								panel.remove(btn);
 								liTitolari.add(c);
-								panel.add(utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRating().getX(), c.getRuolo()));
+								panel.add(utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRating().getX(), c.getRuolo(), true));
 								if(liTitolari.size()>=11 && liRiserve.size()>=7)
 									btnProsegui.setVisible(true);
 							}
@@ -142,7 +142,7 @@ public class Draft extends Base {
 						if(c!=null) {
 							panel.remove(btn);
 							liRiserve.add(c);
-							panel.add(utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRating().getX(), c.getRuolo()));
+							panel.add(utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRating().getX(), c.getRuolo(), false));
 							if(liTitolari.size()>=11 && liRiserve.size()>=7)
 								btnProsegui.setVisible(true);
 						}
@@ -155,12 +155,12 @@ public class Draft extends Base {
 			});
 			panelGiocatore.add(btnScegli);
 			if(j<4)
-				gbc.gridy=4;
+				gbc.gridy=0;
 			else
-				gbc.gridy=5;
+				gbc.gridy=1;
 			panelPosizione.add(panelGiocatore,gbc);
-			
-			System.out.print(gbc.gridy);
+			gbc.gridy=4;
+			System.out.print(j);
 			contentPane.add(panelPosizione, gbc);
 		}
 		
