@@ -32,7 +32,7 @@ public class Launch {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
 
-		Boolean flagGui = false;
+		Boolean flagGui = true;
 		Boolean marto = true;
 		
 		if(flagGui) {
@@ -48,7 +48,12 @@ public class Launch {
 					}
 				});
 			} else {
-				Partita p = new Partita();
+				ManageData md = new ManageDataImpl("2022-2023");
+				md.LoadData();
+				List<Calciatore> li = md.getLi();
+				SquadraAvversaria nap = new SquadraAvversaria(0, "NAP", Modulo.M442, li);				
+				SquadraAvversaria laz = new SquadraAvversaria(0, "LAZ", Modulo.M442, li);
+				Partita p = new Partita(nap, laz);
 				javax.swing.SwingUtilities.invokeLater(new Runnable() {
 		            public void run() {
 		                p.createAndShowGUI();
