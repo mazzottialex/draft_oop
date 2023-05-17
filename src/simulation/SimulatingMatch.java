@@ -15,6 +15,6 @@ public interface SimulatingMatch {
 
 	public double prestazioneOffensiva(int squadra) throws FileNotFoundException, ClassNotFoundException, IOException;
 
-	public Map<String, Integer> risultato()
+	public Map<String, Double> risultato()
 			throws FileNotFoundException, ClassNotFoundException, IOException;
 }

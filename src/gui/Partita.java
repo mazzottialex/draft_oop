@@ -19,23 +19,25 @@ import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
 
+import data.SquadraAvversaria;
+
 
 public class Partita extends Base implements ActionListener, PropertyChangeListener{
 
 	private static final long serialVersionUID = 1353924410908490014L;
 	
-	JProgressBar jpPb;
-	JLabel jlNomeSq1;
-	JLabel jlScoreSq1;
-	JLabel jlTabSq1;
-	JLabel jlNomeSq2;
-	JLabel jlScoreSq2;
-	JLabel jlTabSq2;
-	JButton startStop;
-	JButton jbSubs;
-	JLabel min;
-	JButton next;
-	JPanel panel;
+	private JProgressBar jpPb;
+	private JLabel jlNomeSq1;
+	private JLabel jlScoreSq1;
+	private JLabel jlTabSq1;
+	private JLabel jlNomeSq2;
+	private JLabel jlScoreSq2;
+	private JLabel jlTabSq2;
+	private JButton startStop;
+	private JButton jbSubs;
+	//private JLabel min;
+	private JButton next;
+	private JPanel panel;
 	
 	private Task task;
 	
@@ -86,6 +88,7 @@ public class Partita extends Base implements ActionListener, PropertyChangeListe
 		public Void doInBackground() {
             int progress = 0;
             //Initialize progress property.
+            // TODO impostare nome squadre
             setProgress(0);
             while (progress < 100) {
             	if (!isPaused()) {
@@ -94,6 +97,8 @@ public class Partita extends Base implements ActionListener, PropertyChangeListe
                         Thread.sleep(1000);
                     } catch (InterruptedException ignore) {}
                     //Make progress.
+                    // TODO chiamare funz per gol
+                    // TODO chiamare funz per ammonizioni / espulsioni
                     progress += 1;
                     setProgress(Math.min(progress, 100));
                     //Abilita bottone sostituzioni
@@ -110,6 +115,8 @@ public class Partita extends Base implements ActionListener, PropertyChangeListe
                     } catch (InterruptedException ignore) {}
     			}
             }
+            // TODO fare if, dove se risultato è pari, far apparire nuova barra per supplementari
+            // TODO fare if dove se risultato supplementari è pari, fare rigori
             return null;
         }
 		
@@ -123,20 +130,20 @@ public class Partita extends Base implements ActionListener, PropertyChangeListe
         }
 	}
 
-	public Partita() {
+	public Partita(SquadraAvversaria s1, SquadraAvversaria s2) {
 		// Define the panel to hold the components
 		panel = new JPanel(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
 
 		//define components
-		jlNomeSq1 = new JLabel("sq1", SwingConstants.RIGHT);
-		jlScoreSq1 = new JLabel("nGolsq1", SwingConstants.RIGHT);
+		jlNomeSq1 = new JLabel(s1.getNomeSquadra(), SwingConstants.RIGHT);
+		jlScoreSq1 = new JLabel("0", SwingConstants.RIGHT);
 		jlScoreSq1.setVerticalAlignment(SwingConstants.TOP);
 		jlTabSq1 = new JLabel("sq1Label", SwingConstants.RIGHT);
 		jlTabSq1.setVerticalAlignment(SwingConstants.TOP);
-		jlNomeSq2 = new JLabel("sq2", SwingConstants.LEFT);
-		jlScoreSq2 = new JLabel("nGolsq2", SwingConstants.LEFT);
+		jlNomeSq2 = new JLabel(s2.getNomeSquadra(), SwingConstants.LEFT);
+		jlScoreSq2 = new JLabel("0", SwingConstants.LEFT);
 		jlScoreSq2.setVerticalAlignment(SwingConstants.TOP);
 		jlTabSq2 = new JLabel("sq2Label", SwingConstants.LEFT);
 		jlTabSq2.setVerticalAlignment(SwingConstants.TOP);
@@ -147,7 +154,7 @@ public class Partita extends Base implements ActionListener, PropertyChangeListe
 		jbSubs.setEnabled(false);
 		jbSubs.setActionCommand("subs");
 		jbSubs.addActionListener(this);
-		min = new JLabel("Minuto: 0°");
+		//min = new JLabel("Minuto: 0°");
 		next = new JButton("Avanti");
 		next.setEnabled(false);
 		jpPb = new JProgressBar();
