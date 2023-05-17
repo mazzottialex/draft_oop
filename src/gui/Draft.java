@@ -20,6 +20,7 @@ import javax.swing.border.EmptyBorder;
 import data.Calciatore;
 import data.Modulo;
 import data.Squadra;
+import data.SquadraAvversaria;
 import manageData.ExtractData;
 import manageData.ExtractDataImpl;
 
@@ -60,8 +61,6 @@ public class Draft extends Base {
 		try {
 			ex = new ExtractDataImpl(li);
 			liGiocatori=ex.getRandom(mod.getNumAtt()*nDraft, mod.getNumCen()*nDraft, mod.getNumDif()*nDraft, nDraft);
-			//liPanchina=ex.getRandom(2*nDraft, 2*nDraft, 2*nDraft, nDraft);
-			//Collections.reverse(liPanchina);
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		}
@@ -115,9 +114,15 @@ public class Draft extends Base {
 			System.out.print(gbc.gridy);
 			contentPane.add(panelPosizione, gbc);
 		}
+		JLabel lblPanchina=new JLabel("PANCHINA");
+		lblPanchina.setForeground(Color.white);
+		lblPanchina.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
+		gbc.insets=new Insets(20, 0, 0, 0);
+		gbc.gridy=4;
+		contentPane.add(lblPanchina, gbc);
+		gbc.insets=new Insets(10, 10, 10, 10);
 		
 		//panchinari
-		
 		panelPosizione = new JPanel();
 		for(int j=0;j<7;j++) {
 			panelPosizione.setLayout(layout);
@@ -159,7 +164,7 @@ public class Draft extends Base {
 			else
 				gbc.gridy=1;
 			panelPosizione.add(panelGiocatore,gbc);
-			gbc.gridy=4;
+			gbc.gridy=5;
 			System.out.print(j);
 			contentPane.add(panelPosizione, gbc);
 		}
@@ -177,7 +182,12 @@ public class Draft extends Base {
 							
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Squadra squadra=new Squadra(nomeSquadra, stemma, mod, liTitolari);
+				try {
+					SquadraAvversaria squadra=new SquadraAvversaria(0, nomeSquadra, stemma, mod, liTitolari, liRiserve);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 				//changeJPanel(new nomeGUI(squadra));
 			}
