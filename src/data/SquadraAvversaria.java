@@ -11,22 +11,17 @@ import manageData.ExtractDataImpl;
 public class SquadraAvversaria{
 	private int id;
 	private String nomeSquadra;
-	private final String stemma;
 	private Modulo modulo;
 	public List<Calciatore> titolari = new ArrayList<>();
 	public List<Calciatore> riserve = new ArrayList<>();
-	private List<Calciatore> li = new ArrayList<>();;
+	private List<Calciatore> li;
 	
 	
-	public SquadraAvversaria(int id, String nomeSquadra, String stemma, Modulo modulo, List<Calciatore> titolari, List<Calciatore> riserve) throws FileNotFoundException, IOException {
+	public SquadraAvversaria(int id, String nomeSquadra, Modulo modulo, List<Calciatore> li) throws FileNotFoundException, IOException {
 		this.id = id;
 		this.nomeSquadra = nomeSquadra;
-		this.stemma=stemma;
 		this.modulo = modulo;
-		this.titolari=titolari;
-		this.riserve=riserve;
-		this.li.addAll(titolari);
-		this.li.addAll(riserve);
+		this.li = li;
 	}
 
 	public int getId() {

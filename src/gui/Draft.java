@@ -21,6 +21,7 @@ import data.Calciatore;
 import data.Modulo;
 import data.Squadra;
 import data.SquadraAvversaria;
+import data.SquadraUtente;
 import manageData.ExtractData;
 import manageData.ExtractDataImpl;
 
@@ -182,12 +183,7 @@ public class Draft extends Base {
 							
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try {
-					SquadraAvversaria squadra=new SquadraAvversaria(0, nomeSquadra, stemma, mod, liTitolari, liRiserve);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				Squadra squadra=new SquadraUtente(nomeSquadra, stemma, mod, liTitolari, liRiserve);
 				
 				//changeJPanel(new nomeGUI(squadra));
 			}

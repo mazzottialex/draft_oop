@@ -23,7 +23,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
 
 import data.Calciatore;
-import data.Squadra;
 
 import javax.swing.JLabel;
 import javax.imageio.ImageIO;
