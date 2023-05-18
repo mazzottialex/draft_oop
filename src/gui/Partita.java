@@ -47,6 +47,8 @@ public class Partita extends Base implements ActionListener, PropertyChangeListe
 	private LogicsPartita logics;
 	private SquadraAvversaria s1;
 	private SquadraAvversaria s2;
+
+	private int progress;
 	
 	/**
 	 * Create the frame.
@@ -93,15 +95,17 @@ public class Partita extends Base implements ActionListener, PropertyChangeListe
 		 */
 		@Override
 		public Void doInBackground() throws FileNotFoundException, ClassNotFoundException, IOException {
-            int progress = 0;
+            progress = 0;
             //Initialize progress property.
             setProgress(0);
+            logics.scorers();
             while (progress < 100) {
             	if (!isPaused()) {
             		//Sleep for up to one second.
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException ignore) {}
+                    // TODO se il num di cambi è variato, ricalcolare il ris della partita e porlo in base al tempo rimanente
                     //Make progress.
                     progress += 1;
                     setProgress(Math.min(progress, 100));
@@ -114,9 +118,9 @@ public class Partita extends Base implements ActionListener, PropertyChangeListe
     					jbSubs.setEnabled(true);
     				}
                     //Fine 1° tempo
-//                    if (progress == 50) {
-//						task.pause();
-//					}
+                    if (progress == 50) {
+						task.pause();
+					}
     			} else {
     				try {
                         Thread.sleep(100);
@@ -139,15 +143,14 @@ public class Partita extends Base implements ActionListener, PropertyChangeListe
 	}
 	
 	public void changeScore() throws FileNotFoundException, ClassNotFoundException, IOException {
-		logics.computeScore();
-        if (Integer.valueOf(jlScoreSq1.getText()) != logics.getGol1()) {
+        if (logics.getMinGol1().contains(progress)) {
         	logics.addScorer(s1);
+        	jlScoreSq1.setText(Integer.toString(Integer.valueOf(jlScoreSq1.getText()) + 1));
         }
-        jlScoreSq1.setText(Integer.toString(logics.getGol1()));
-        if (Integer.valueOf(jlScoreSq2.getText()) != logics.getGol2()) {
+        if (logics.getMinGol2().contains(progress)) {
         	logics.addScorer(s2);
+        	jlScoreSq2.setText(Integer.toString(Integer.valueOf(jlScoreSq2.getText()) + 1));
         }
-        jlScoreSq2.setText(Integer.toString(logics.getGol2()));
 	}
 
 	public Partita(SquadraAvversaria s1, SquadraAvversaria s2) throws FileNotFoundException, ClassNotFoundException, IOException {
