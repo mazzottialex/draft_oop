@@ -16,29 +16,33 @@ import logics.LogicsCreaSquadraImpl;
 import logics.LogicsCreasquadra;
 import logics.LogicsImpostazioni;
 import logics.LogicsImpostazioniImpl;
+import logics.LogicsTorneo;
+import logics.LogicsTorneoImpl;
 
 public class Torneo extends Base{
 
-	LogicsImpostazioni logImp;
-	LogicsCreasquadra logCreaSquadra;
+	LogicsTorneo logTor;
 	JPanel panelSud = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 	GridLayout gl = new GridLayout(5,1);
 	JPanel panelCenter = new JPanel(gl);
 	JPanel panelNord = new JPanel(new FlowLayout(FlowLayout.CENTER));
+	GridLayout g1 = new GridLayout(1,1);
+	GridLayout g2 = new GridLayout(1,2);
+	GridLayout g3 = new GridLayout(1,4);
+	GridLayout g4 = new GridLayout(1,8);
+	GridLayout g5 = new GridLayout(1,16);
+	JPanel p1 = new JPanel(g1);  //Panel a riga 0 (squadra vincitrice)
+	JPanel p2 = new JPanel(g2);	 //Panel a riga 1 --> 2 squadre
+	JPanel p3 = new JPanel(g3);	 //Panel a riga 2 --> 4 squadre
+	JPanel p4 = new JPanel(g4);  //Panel a riga 3 --> 8 squadre
+	JPanel p5 = new JPanel(g5);  //Panel a riga 4 --> 16 squadre
 	
 	
-	public Torneo() {
+	
+	
+	public Torneo() throws FileNotFoundException, ClassNotFoundException, IOException {
 					
-		this.logImp = new LogicsImpostazioniImpl();
-		try {
-			this.logCreaSquadra = new LogicsCreaSquadraImpl("2022-2023");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		this.logTor = new LogicsTorneoImpl("2022-2023");
 		
 		this.contentPane.setLayout(new BorderLayout());
 		
@@ -48,17 +52,6 @@ public class Torneo extends Base{
 		this.panelSud.add(buttonSimula);
 		
 		//Mi occupo del PanelCenter
-		GridLayout g1 = new GridLayout(1,1);
-		GridLayout g2 = new GridLayout(1,2);
-		GridLayout g3 = new GridLayout(1,4);
-		GridLayout g4 = new GridLayout(1,8);
-		GridLayout g5 = new GridLayout(1,16);
-		JPanel p1 = new JPanel(g1);  //Panel a riga 0 (squadra vincitrice)
-		JPanel p2 = new JPanel(g2);	 //Panel a riga 1 --> 2 squadre
-		JPanel p3 = new JPanel(g3);	 //Panel a riga 2 --> 4 squadre
-		JPanel p4 = new JPanel(g4);  //Panel a riga 3 --> 8 squadre
-		JPanel p5 = new JPanel(g5);  //Panel a riga 4 --> 16 squadre
-		
 		p5.setBorder(new EmptyBorder(20,5,20,5));
 		g5.setHgap(5);
 		p4.setBorder(new EmptyBorder(20,20,20,20));
@@ -70,7 +63,9 @@ public class Torneo extends Base{
 		p1.setBorder(new EmptyBorder(20,450,20,450));
 		
 		
-		//final JLabel miaSquadra= new JLabel(logImp.getSquadra(getName()));
+		
+		
+		
 		
 		/*
 		final JButton b1 = new JButton("squadra 1");

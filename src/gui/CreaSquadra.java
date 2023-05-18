@@ -71,7 +71,23 @@ public class CreaSquadra extends Base{
 		buttonIniziaTorneo = new JButton("Inizia Torneo");
 		buttonIniziaTorneo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					changeJPanel(new Torneo());
+				} catch (FileNotFoundException e1) {
+					e1.printStackTrace();
+				} catch (ClassNotFoundException e1) {
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				frameCalciatori.setVisible(false);
+				frameModulo.setVisible(false);
+				/*
 				if (log.teamComplete()) {
+					
+					changeJPanel(new Torneo());
+					frameCalciatori.setVisible(false);
+					frameModulo.setVisible(false);
 					// ...
 				} else {
 					final JFrame err = new JFrame("ERRORE");
@@ -94,8 +110,8 @@ public class CreaSquadra extends Base{
 					//err.setVisible(true);
 					prova.setBounds( 300, 300, 250, 100);
 					prova.setVisible(true);
-					
 				}
+				*/
 			}
 		});
 		panelSud.add(buttonIniziaTorneo,gbc);
