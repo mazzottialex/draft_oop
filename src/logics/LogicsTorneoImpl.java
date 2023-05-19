@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.*;
 
 import data.Calciatore;
+import data.Modulo;
 import data.Squadra;
 import data.SquadraAvversaria;
 import manageData.ExtractData;
@@ -19,12 +20,13 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	private Squadra miasquadra;
 	private List<SquadraAvversaria> listSquadre;
 	
-	public LogicsTorneoImpl(String stagione, String nomeSquadra, String stemma, List<Calciatore> titolari, List<Calciatore> riserve) throws FileNotFoundException, ClassNotFoundException, IOException {
+	public LogicsTorneoImpl(String stagione, String nomeSquadra, String stemma, List<Calciatore> titolari, List<Calciatore> riserve, Modulo modulo) throws FileNotFoundException, ClassNotFoundException, IOException {
 		this.md = new ManageDataImpl(stagione);
 		this.md.LoadData();
 		this.ex = new ExtractDataImpl(this.md.getLi());
 		this.listSquadre = new ArrayList<>();
-		this.miasquadra = new Squadra(nomeSquadra, stemma, titolari, riserve);
+		this.miasquadra = new Squadra(nomeSquadra, stemma, titolari, riserve, modulo);
+		//System.out.println(this.miasquadra);
 	}
 	
 	
