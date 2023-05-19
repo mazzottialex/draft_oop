@@ -2,7 +2,12 @@ package logics;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import data.Calciatore;
 import data.SquadraAvversaria;
@@ -13,12 +18,14 @@ import simulation.SimulatingMatchImpl;
 public class LogicsPartitaImpl implements LogicsPartita{
 	private SquadraAvversaria s1;
 	private SquadraAvversaria s2;
-	private double gol1;
-	private double gol2;
+	private int gol1;
+	private int gol2;
+	private List<Integer> list1;
+	private List<Integer> list2;
 	
 	private SimulatingMatch sim;
 	
-	private static final double MINUTES = 90;
+	private static final int MINUTES = 90;
 	
 	public LogicsPartitaImpl(SquadraAvversaria s1, SquadraAvversaria s2) throws FileNotFoundException, ClassNotFoundException, IOException {
 		super();
@@ -30,23 +37,54 @@ public class LogicsPartitaImpl implements LogicsPartita{
 	}
 	
 	@Override
-	public void computeScore() throws FileNotFoundException, ClassNotFoundException, IOException {
-//		int prevGol1 = (int) gol1;
-//		int prevGol2 = (int) gol2;
-		this.gol1 += sim.risultato().get(s1.getNomeSquadra()) / MINUTES;
-		this.gol2 += sim.risultato().get(s2.getNomeSquadra()) / MINUTES;
-//		ris.put(s1.getNomeSquadra(), (int) gol1 > prevGol1 ? (int) gol1 : prevGol1);
-//		ris.put(s2.getNomeSquadra(), (int) gol2 > prevGol2 ? (int) gol2 : prevGol2);
+	public void scorers() throws FileNotFoundException, ClassNotFoundException, IOException {
+		do {
+			list1 = getNumGol(sim.risultato().get(s1.getNomeSquadra()));
+			list2 = getNumGol(sim.risultato().get(s2.getNomeSquadra()));
+		} while (containsAny(list1, list2));
 	}
 	
 	@Override
-	public int getGol1() {
-		return (int) gol1;
+	public List<Integer> getScorers(SquadraAvversaria s) {
+		if (s == s1) {
+			return list1;
+		} else if (s == s2){
+			return list2;
+		}
+		return null;
+	}
+
+	public static <T> boolean containsAny(List<T> l1, List<T> l2) {
+        for (T elem : l1) {
+            if (l2.contains(l1)) {
+                return true;
+            }
+        }
+        return false;
+    }
+	
+	public List<Integer> getNumGol(int gol) {
+		List<Integer> list = new ArrayList<>();
+		Random r = new Random();
+		int min = 0;
+		for (int i = 0; i < gol; i++) {
+			do {
+				min = r.nextInt(MINUTES) + 1;
+			} while (list.contains(min));
+			list.add(min);
+		}
+		Collections.sort(list);
+		return list;
 	}
 	
 	@Override
-	public int getGol2() {
-		return (int) gol2;
+	public List<Integer> getMinGol1() {
+		return list1;
+	}
+	
+	@Override
+	public List<Integer> getMinGol2() {
+		return list2;
 	}
 
 	@Override
