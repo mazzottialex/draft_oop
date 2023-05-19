@@ -17,13 +17,18 @@ public class LogicsImpostazioniImpl implements LogicsImpostazioni {
 	public Squadra getSquadra(String nomeSquadra) {
 		//check se squadra non presente in lista
 		if (nomeSquadra.equals(""))
-			return new Squadra("Squadra 1", this.stemma);
-		return new Squadra(nomeSquadra, this.stemma);
+			return null; //new Squadra("Squadra 1", this.stemma);
+		return null; //new Squadra(nomeSquadra, this.stemma);
 	}
 
 	@Override
 	public void setStemma(String img) {
 		this.stemma=img;
+	}
+
+	
+	public String getStemma() {
+		return this.stemma;
 	}
 
 }

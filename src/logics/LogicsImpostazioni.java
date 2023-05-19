@@ -8,4 +8,5 @@ public interface LogicsImpostazioni {
 
 	public void setStemma(String stemma);
 
+	public String getStemma();
 }
