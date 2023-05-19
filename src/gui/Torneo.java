@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -39,9 +40,11 @@ public class Torneo extends Base{
 	JPanel p3 = new JPanel(g3);	 //Panel a riga 2 --> 4 squadre
 	JPanel p4 = new JPanel(g4);  //Panel a riga 3 --> 8 squadre
 	JPanel p5 = new JPanel(g5);  //Panel a riga 4 --> 16 squadre
-	
-	
-	
+	JButton[] buttonsp5 = new JButton[16];
+	JButton[] buttonsp4 = new JButton[8];
+	JButton[] buttonsp3 = new JButton[4];
+	JButton[] buttonsp2 = new JButton[2];
+	JButton buttonp1 = new JButton();
 	
 	public Torneo(String nomeSquadra, String stemma, List<Calciatore> titolari, List<Calciatore> riserve, Modulo modulo) throws FileNotFoundException, ClassNotFoundException, IOException {
 					
@@ -65,8 +68,14 @@ public class Torneo extends Base{
 		g2.setHgap(400);
 		p1.setBorder(new EmptyBorder(20,450,20,450));
 		
-		
-		
+		//Aggiungo le varie squadre nel panel5 (la prima è sempre quella dell'utente)
+		this.buttonsp5[0] = new JButton(this.logTor.getMiaSquadra().getNomeSquadra());
+		this.p5.add(this.buttonsp5[0]);
+		Collections.shuffle(this.logTor.getListAvversari());
+		for (int i=0;i<this.logTor.getListAvversari().size();i++) {
+			this.buttonsp5[i+1] = new JButton(this.logTor.getListAvversari().get(i).getNomeSquadra());
+			this.p5.add(this.buttonsp5[i+1]);
+		}
 		
 		
 		
