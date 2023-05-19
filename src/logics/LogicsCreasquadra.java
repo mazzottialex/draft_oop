@@ -49,5 +49,9 @@ public interface LogicsCreasquadra {
 	// ritrona true se il Team é completo, false altrimenti 
 	public boolean teamComplete();
 	
+	public String getNomeSquadra();
 	
+	public String getStemma();
+	
+	public List<Calciatore> getTitolari();
 }

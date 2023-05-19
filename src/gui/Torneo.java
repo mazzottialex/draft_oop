@@ -6,12 +6,14 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import data.Calciatore;
 import logics.LogicsCreaSquadraImpl;
 import logics.LogicsCreasquadra;
 import logics.LogicsImpostazioni;
@@ -40,9 +42,9 @@ public class Torneo extends Base{
 	
 	
 	
-	public Torneo() throws FileNotFoundException, ClassNotFoundException, IOException {
+	public Torneo(String nomeSquadra, String stemma, List<Calciatore> titolari, List<Calciatore> riserve) throws FileNotFoundException, ClassNotFoundException, IOException {
 					
-		this.logTor = new LogicsTorneoImpl("2022-2023");
+		this.logTor = new LogicsTorneoImpl("2022-2023", nomeSquadra, stemma, titolari, riserve);
 		
 		this.contentPane.setLayout(new BorderLayout());
 		

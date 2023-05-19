@@ -6,6 +6,7 @@ import java.util.List;
 public class Squadra {
 	public final String nomeSquadra;
 	public final String stemma;
+	//private Modulo modulo;
 	private final List<Calciatore> titolari;
 	private final List<Calciatore> riserve;
 	

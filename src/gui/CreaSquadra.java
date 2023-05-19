@@ -41,8 +41,10 @@ public class CreaSquadra extends Base{
 	JPanel panelCalciatoriCenter;
 	JButton buttonSelect;
 	
-	public CreaSquadra() throws FileNotFoundException, ClassNotFoundException, IOException {
-		this.log = new LogicsCreaSquadraImpl("2022-2023");
+	public CreaSquadra(String nomeSquadra, String stemma) throws FileNotFoundException, ClassNotFoundException, IOException {
+		
+		
+		this.log = new LogicsCreaSquadraImpl("2022-2023", nomeSquadra, stemma);
 		
 		//inizializzo il bottone per i giocatori che seleziono
 		this.buttonSelect = new JButton();
@@ -71,8 +73,14 @@ public class CreaSquadra extends Base{
 		buttonIniziaTorneo = new JButton("Inizia Torneo");
 		buttonIniziaTorneo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				List<Calciatore> riserve = new ArrayList<>();
+				riserve.addAll(log.getRandom("P", 2));
+				riserve.addAll(log.getRandom("D", 3));
+				riserve.addAll(log.getRandom("C", 3));
+				riserve.addAll(log.getRandom("A", 3));
 				try {
-					changeJPanel(new Torneo());
+					changeJPanel(new Torneo(log.getNomeSquadra(), log.getStemma(), log.getTitolari(), riserve));
 				} catch (FileNotFoundException e1) {
 					e1.printStackTrace();
 				} catch (ClassNotFoundException e1) {
