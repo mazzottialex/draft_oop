@@ -132,7 +132,7 @@ public class Impostazioni extends Base {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					changeJPanel(new CreaSquadra());
+					changeJPanel(new CreaSquadra(textFieldNomeSquadra.getText(),log.getStemma()));
 				} catch (FileNotFoundException e1) {
 					e1.printStackTrace();
 				} catch (ClassNotFoundException e1) {
@@ -140,8 +140,8 @@ public class Impostazioni extends Base {
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-				Squadra squadra=log.getSquadra(textFieldNomeSquadra.getText());
-				System.out.print(squadra.toString());
+				//Squadra squadra=log.getSquadra(textFieldNomeSquadra.getText());
+				//System.out.print(squadra.toString());
 			}
 		});
 	    
