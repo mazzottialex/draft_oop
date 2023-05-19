@@ -120,6 +120,7 @@ public class Partita extends Base implements ActionListener, PropertyChangeListe
                     //Fine 1° tempo
                     if (progress == 50) {
 						task.pause();
+						// TODO aggiungere message dialog
 					}
     			} else {
     				try {
@@ -128,6 +129,9 @@ public class Partita extends Base implements ActionListener, PropertyChangeListe
     			}
             }
             // TODO fare if, dove se risultato è pari, far apparire nuova barra per supplementari
+            if (jlScoreSq1.getText() == jlScoreSq2.getText()) {
+            	
+            }
             // TODO fare if dove se risultato supplementari è pari, fare rigori
             return null;
         }
@@ -138,6 +142,7 @@ public class Partita extends Base implements ActionListener, PropertyChangeListe
         @Override
         public void done() {	//quando finisce
         	next.setEnabled(true);
+        	// TODO scrivere chi ha vinto
         	JOptionPane.showMessageDialog(null, "Partita finita");	//dire che è finito
         }
 	}
@@ -261,6 +266,8 @@ public class Partita extends Base implements ActionListener, PropertyChangeListe
         gbc.gridx = 2;
         gbc.gridy = 5;
         panel.add(southEast, gbc);
+        
+        // TODO aggiungere barra per supplementari
         
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
         
