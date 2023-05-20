@@ -67,12 +67,12 @@ public class Archivio extends Base {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				changeJPanel(new Home(log.getOnline()));
+				changeJPanel(new Home(log.getOnline(), stagione));
 			}
 		});
 		panel.add(btnHome);
 		
-		JLabel lblNewLabel = new JLabel("2022-2023");
+		JLabel lblNewLabel = new JLabel(stagione);
 		lblNewLabel.setBounds(262, 11, 77, 17);
 		lblNewLabel.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
 		lblNewLabel.setForeground(Color.white);
