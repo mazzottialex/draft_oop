@@ -27,6 +27,8 @@ import gui.SquadraGui;
 import gui.utilsGUI;
 import manageData.ExtractData;
 import manageData.ExtractDataImpl;
+import manageData.LogicsFile;
+import manageData.LogicsFileImpl;
 
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -186,7 +188,8 @@ public class Draft extends Base {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Squadra squadra=new SquadraUtente(nomeSquadra, stemma, mod, liTitolari, liRiserve);
-				
+				LogicsFile logFile=new LogicsFileImpl();
+				logFile.SaveStorico(squadra);
 				changeJPanel(new SquadraGui(squadra));
 			}
 		});

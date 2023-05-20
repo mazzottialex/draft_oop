@@ -1,10 +1,11 @@
 package data;
 
 import java.awt.Image;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SquadraUtente implements Squadra{
+public class SquadraUtente implements Squadra, Serializable{
 	private final String nomeSquadra;
 	private final String stemma;
 	private final Modulo modulo;

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import data.Calciatore;
+import data.Squadra;
 
 public class LogicsFileImpl implements LogicsFile{
 	
@@ -34,7 +35,6 @@ public class LogicsFileImpl implements LogicsFile{
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-		//System.out.print(li.get(0).toString());
 		return li;
 	}
 
@@ -91,4 +91,41 @@ public class LogicsFileImpl implements LogicsFile{
 		}
 		return true;
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Squadra> LoadStorico() {
+		List<Squadra> li=new ArrayList<>();
+		try(final InputStream file = new FileInputStream("res/storico.txt");
+			final InputStream bstream = new BufferedInputStream(file);
+			final ObjectInputStream ostream=new ObjectInputStream(file);
+					){
+				li=(List<Squadra>)ostream.readObject();
+				ostream.close();
+			}
+		catch (Exception e) {
+			return new ArrayList<>();
+		}
+
+		return li;
+	}
+
+	@Override
+	public Boolean SaveStorico(Squadra s) {
+		List<Squadra> li=LoadStorico();
+		li.add(s);
+		try(final OutputStream file = new FileOutputStream("res/storico.txt", true);
+				final OutputStream bstream = new BufferedOutputStream(file);
+				final ObjectOutputStream ostream=new ObjectOutputStream(file);
+					){
+				ostream.writeObject(li);
+				ostream.close();
+			}
+		catch (Exception e) {
+			return false;
+		}
+		return true;
+	}
+	
+	
 }

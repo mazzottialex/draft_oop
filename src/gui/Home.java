@@ -22,6 +22,8 @@ import javax.swing.border.EmptyBorder;
 
 import logics.LogicsHome;
 import logics.LogicsHomeImpl;
+import manageData.LogicsFile;
+import manageData.LogicsFileImpl;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -34,6 +36,9 @@ public class Home extends Base {
 	private final String stagione;
 	
 	public Home(Boolean online, String stagione) {
+		LogicsFile logf=new LogicsFileImpl();
+		System.out.println(logf.LoadStorico().size());
+		
 		this.stagione=stagione;
 		log=new LogicsHomeImpl(stagione, online);
 		log.loadStagione(stagione);
