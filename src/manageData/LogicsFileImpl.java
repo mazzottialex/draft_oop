@@ -114,7 +114,7 @@ public class LogicsFileImpl implements LogicsFile{
 	public Boolean SaveStorico(Squadra s) {
 		List<Squadra> li=LoadStorico();
 		li.add(s);
-		try(final OutputStream file = new FileOutputStream("res/storico.txt", true);
+		try(final OutputStream file = new FileOutputStream("res/storico.txt");
 				final OutputStream bstream = new BufferedOutputStream(file);
 				final ObjectOutputStream ostream=new ObjectOutputStream(file);
 					){

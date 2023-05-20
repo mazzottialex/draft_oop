@@ -36,8 +36,7 @@ public class Home extends Base {
 	private final String stagione;
 	
 	public Home(Boolean online, String stagione) {
-		LogicsFile logf=new LogicsFileImpl();
-		System.out.println(logf.LoadStorico().size());
+		
 		
 		this.stagione=stagione;
 		log=new LogicsHomeImpl(stagione, online);
