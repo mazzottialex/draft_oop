@@ -6,4 +6,5 @@ public interface Squadra {
 	public List<Calciatore> getTitolari();
 	public List<Calciatore> getRiserve();
 	public String getNomeSquadra();
+	public int getValutazione();
 }

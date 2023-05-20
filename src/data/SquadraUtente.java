@@ -45,4 +45,16 @@ public class SquadraUtente implements Squadra{
 	public List<Calciatore> getRiserve() {
 		return this.liRiserve;
 	}
+	@Override
+	public int getValutazione() {
+		return (int) Math.floor(
+				liTitolari.stream()
+						.map(c->c.getRating()
+						.getX())
+						.mapToDouble(c->c)
+						.average()
+						.orElse(0));
+	}
+	
+	
 }

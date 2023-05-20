@@ -198,25 +198,22 @@ public class Home extends Base {
 				}
 			}
 		});
+		gbc.fill=GridBagConstraints.NONE;
+		gbc.gridx=0;
+		gbc.gridy=5;
+		contentPane.add(btnArchivio,gbc);
 		JButton btnStorico=new JButton("STORICO");
 		btnStorico.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
 		btnStorico.setBackground(Color.white);
 		btnStorico.setForeground(Color.BLUE);
 		btnStorico.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try {
-					changeJPanel(new Archivio(log.getLi(), log.getStagione(), log.getOnline()));
-				} catch (ClassNotFoundException | IOException e1) {
-					e1.printStackTrace();
-				}
+				changeJPanel(new Storico());
 			}
 		});
-		gbc.fill=GridBagConstraints.NONE;
-		gbc.gridx=0;
-		gbc.gridy=5;
-		contentPane.add(btnArchivio,gbc);
+		gbc.gridy=6;
+		contentPane.add(btnStorico,gbc);
 	}
 	
 	
