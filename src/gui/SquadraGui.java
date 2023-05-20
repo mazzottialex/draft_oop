@@ -50,7 +50,6 @@ public class SquadraGui extends Base {
 			panelPosizione=new JPanel();
 			for(int j=0;j<squadra.getModulo().getN(ruoli.get(i));j++) {
 				Calciatore c=squadra.getTitolari().get(count);
-				System.out.println(squadra.getTitolari().size());
 
 				JPanel panel=(utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRating().getX(), c.getRuolo(), true));
 				count++;
@@ -60,10 +59,33 @@ public class SquadraGui extends Base {
 			contentPane.add(panelPosizione, gbc);
 		}
 		
+		JLabel lblPanchina=new JLabel("PANCHINA");
+		lblPanchina.setForeground(Color.white);
+		lblPanchina.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
+		gbc.insets=new Insets(10, 0, 0, 0);
+		gbc.gridy=5;
+		contentPane.add(lblPanchina, gbc);
+		gbc.insets=new Insets(5, 5, 5, 5);
+		
+		//panchinari
+		panelPosizione = new JPanel();
+		panelPosizione.setLayout(layout);
+		for(int j=0;j<7;j++) {
+			Calciatore c=squadra.getRiserve().get(j);
+			if(j<4)
+				gbc.gridy=0;
+			else
+				gbc.gridy=1;
+			panelPosizione.add(utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRating().getX(), c.getRuolo(), false), gbc);
+
+		}
+		gbc.gridy=6;
+		contentPane.add(panelPosizione, gbc);
+		
 		JLabel lblRating=new JLabel("Valutazione: "+squadra.getValutazione());
 		lblRating.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
 		lblRating.setForeground(Color.white);
-		gbc.gridy=6;
+		gbc.gridy=7;
 		contentPane.add(lblRating,gbc);
 	}
 

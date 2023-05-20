@@ -131,9 +131,9 @@ public class Impostazioni extends Base {
 				
 				Boolean braccio=false;
 				
-				if(textFieldNomeSquadra.getText()!="")
+				if(!textFieldNomeSquadra.getText().equals(new String("")))
 					nomeSquadra=textFieldNomeSquadra.getText();
-				
+
 				if(braccio) {
 					try {
 						changeJPanel(new CreaSquadra(nomeSquadra,stemma));
