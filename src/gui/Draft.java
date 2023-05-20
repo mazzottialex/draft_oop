@@ -166,7 +166,6 @@ public class Draft extends Base {
 				gbc.gridy=1;
 			panelPosizione.add(panelGiocatore,gbc);
 			gbc.gridy=5;
-			System.out.print(j);
 			contentPane.add(panelPosizione, gbc);
 		}
 		
