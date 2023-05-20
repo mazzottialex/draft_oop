@@ -128,8 +128,12 @@ public class Impostazioni extends Base {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				
 				Boolean braccio=false;
+				
+				if(textFieldNomeSquadra.getText()!="")
+					nomeSquadra=textFieldNomeSquadra.getText();
+				
 				if(braccio) {
 					try {
 						changeJPanel(new CreaSquadra(nomeSquadra,stemma));
@@ -141,12 +145,9 @@ public class Impostazioni extends Base {
 						e1.printStackTrace();
 					}
 				}
-				//Squadra squadra=log.getSquadra(textFieldNomeSquadra.getText());
-				//System.out.print(squadra.toString());
-				else {
-					nomeSquadra=textFieldNomeSquadra.getText();
+				else 
 					changeJPanel(new Formazione(li, nomeSquadra, stemma));
-				}
+				
 			}
 		});
 	    
