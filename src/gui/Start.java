@@ -28,7 +28,7 @@ import java.io.IOException;
 
 public class Start extends Base {
 	private final LogicStart log=new LogicStartImpl();
-	
+	private final String stagioneDefault="2022-2023";
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
 
@@ -92,7 +92,7 @@ public class Start extends Base {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				changeJPanel(new Home(log.getOnline()));
+				changeJPanel(new Home(log.getOnline(), stagioneDefault));
 			}
 		});
 		

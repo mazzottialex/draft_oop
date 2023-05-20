@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 public class utilsGUI {
 
@@ -29,7 +30,7 @@ public class utilsGUI {
 		
 		JPanel panelGiocatore=new JPanel();
 		panelGiocatore.setLayout(layout);
-		
+		panelGiocatore.setBorder(new EmptyBorder(0,5,0,5));
 		JLabel lblNome=new JLabel(calciatore);
 		lblNome.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
 		JLabel lblValutazione=new JLabel(valutazione.toString());

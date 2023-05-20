@@ -1,4 +1,4 @@
-package gui;
+package v2.gui;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -22,6 +22,7 @@ import javax.swing.SwingUtilities;
 
 import data.Calciatore;
 import data.Modulo;
+import gui.Base;
 import logics.LogicsFormazione;
 import logics.LogicsFormazioneImpl;
 

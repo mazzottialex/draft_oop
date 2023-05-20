@@ -1,6 +1,7 @@
 package data;
 
 import java.awt.Image;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SquadraUtente implements Squadra{
@@ -17,7 +18,8 @@ public class SquadraUtente implements Squadra{
 		this.modulo = modulo;
 		this.liTitolari=liTitolari;
 		this.liRiserve=liRiserve;
-		this.liCalciatori = liTitolari;
+		this.liCalciatori = new ArrayList<>();
+		liCalciatori.addAll(liTitolari);
 		liCalciatori.addAll(liRiserve);
 	}
 	public String getNomeSquadra() {
@@ -39,10 +41,26 @@ public class SquadraUtente implements Squadra{
 	}
 	@Override
 	public List<Calciatore> getTitolari() {
-		return this.liTitolari;
+		System.out.println("getTit="+liTitolari.size());
+
+		return liTitolari.stream()
+				.sorted((c1,c2)->c1.getRuolo().compareTo(c2.getRuolo()))
+				.toList();
 	}
 	@Override
 	public List<Calciatore> getRiserve() {
 		return this.liRiserve;
 	}
+	@Override
+	public int getValutazione() {
+		return (int) Math.floor(
+				liTitolari.stream()
+						.map(c->c.getRating()
+						.getX())
+						.mapToDouble(c->c)
+						.average()
+						.orElse(0));
+	}
+	
+	
 }

@@ -31,13 +31,12 @@ import javax.swing.JComboBox;
 public class Home extends Base {
 	
 	private final LogicsHome log;
-	private final String stagioneDefault="2022-2023";
+	private final String stagione;
 	
-	public Home(Boolean online) {
-		log=new LogicsHomeImpl(stagioneDefault, online);
-		log.loadStagione(stagioneDefault);
-		
-		//add(contentPane);
+	public Home(Boolean online, String stagione) {
+		this.stagione=stagione;
+		log=new LogicsHomeImpl(stagione, online);
+		log.loadStagione(stagione);
 		
 		GridBagConstraints gbc=new GridBagConstraints();
 		GridBagLayout layout=new GridBagLayout();
@@ -203,6 +202,18 @@ public class Home extends Base {
 		gbc.gridx=0;
 		gbc.gridy=5;
 		contentPane.add(btnArchivio,gbc);
+		JButton btnStorico=new JButton("STORICO");
+		btnStorico.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+		btnStorico.setBackground(Color.white);
+		btnStorico.setForeground(Color.BLUE);
+		btnStorico.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				changeJPanel(new Storico());
+			}
+		});
+		gbc.gridy=6;
+		contentPane.add(btnStorico,gbc);
 	}
 	
 	

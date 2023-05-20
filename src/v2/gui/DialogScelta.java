@@ -1,4 +1,4 @@
-package gui;
+package v2.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -27,6 +27,7 @@ import javax.swing.border.EmptyBorder;
 import org.openqa.selenium.devtools.v109.dom.model.RGBA;
 
 import data.Calciatore;
+import gui.utilsGUI;
 import manageData.ExtractData;
 import manageData.ExtractDataImpl;
 
