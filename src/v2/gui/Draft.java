@@ -23,6 +23,7 @@ import data.Squadra;
 import data.SquadraAvversaria;
 import data.SquadraUtente;
 import gui.Base;
+import gui.SquadraGui;
 import gui.utilsGUI;
 import manageData.ExtractData;
 import manageData.ExtractDataImpl;
@@ -69,7 +70,7 @@ public class Draft extends Base {
 		}
 		
 		JPanel panelGiocatore;
-		JPanel panelPosizione = new JPanel();
+		JPanel panelPosizione;
 		JButton btnProsegui=new JButton("Prosegui");
 		btnProsegui.setVisible(false);
 		
@@ -111,7 +112,7 @@ public class Draft extends Base {
 					}
 				});
 				panelGiocatore.add(btnScegli);
-				panelPosizione.add(panelGiocatore);
+				panelPosizione.add(btnScegli);
 			}
 			gbc.gridy=i;
 			System.out.print(gbc.gridy);
@@ -186,7 +187,7 @@ public class Draft extends Base {
 			public void actionPerformed(ActionEvent e) {
 				Squadra squadra=new SquadraUtente(nomeSquadra, stemma, mod, liTitolari, liRiserve);
 				
-				//changeJPanel(new nomeGUI(squadra));
+				changeJPanel(new SquadraGui(squadra));
 			}
 		});
 		 

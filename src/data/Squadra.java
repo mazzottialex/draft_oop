@@ -7,4 +7,5 @@ public interface Squadra {
 	public List<Calciatore> getRiserve();
 	public String getNomeSquadra();
 	public int getValutazione();
+	public Modulo getModulo();
 }
