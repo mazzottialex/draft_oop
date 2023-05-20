@@ -30,7 +30,7 @@ public class utilsGUI {
 		
 		JPanel panelGiocatore=new JPanel();
 		panelGiocatore.setLayout(layout);
-		panelGiocatore.setBorder(new EmptyBorder(0,8,0,8));
+		panelGiocatore.setBorder(new EmptyBorder(0,5,0,5));
 		JLabel lblNome=new JLabel(calciatore);
 		lblNome.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
 		JLabel lblValutazione=new JLabel(valutazione.toString());

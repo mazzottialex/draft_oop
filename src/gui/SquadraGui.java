@@ -1,7 +1,9 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -12,6 +14,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
@@ -32,27 +35,34 @@ public class SquadraGui extends Base {
 		gbc.insets=new Insets(5, 5, 2, 2);
 		GridBagLayout layout=new GridBagLayout();
 		contentPane.setLayout(layout);
+
+		JLabel lblNomeSquadra=new JLabel(squadra.getNomeSquadra());
+		lblNomeSquadra.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
+		lblNomeSquadra.setForeground(Color.white);
+		gbc.gridy=0;
+		contentPane.add(lblNomeSquadra,gbc);
 		
-		//JPanel panelGiocatore;
 		JPanel panelPosizione = new JPanel();
 		panelPosizione.setLayout(layout);
-		//panelGiocatore=new JPanel();
-		//panelGiocatore.setLayout(layout);
+
 		int count=0;
 		for(int i=0; i<ruoli.size();i++) {
 			panelPosizione=new JPanel();
-			//panelGiocatore.setLayout(layout);
 			for(int j=0;j<squadra.getModulo().getN(ruoli.get(i));j++) {
-				//panelGiocatore=new JPanel();
 				Calciatore c=squadra.getTitolari().get(count);
 				JPanel panel=(utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRating().getX(), c.getRuolo(), true));
 				count++;
-				//panelGiocatore.add(panel);
 				panelPosizione.add(panel);
 			}
-			gbc.gridy=i;
+			gbc.gridy=i+1;
 			contentPane.add(panelPosizione, gbc);
 		}
+		
+		JLabel lblRating=new JLabel("Valutazione: "+squadra.getValutazione());
+		lblRating.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
+		lblRating.setForeground(Color.white);
+		gbc.gridy=6;
+		contentPane.add(lblRating,gbc);
 	}
 
 }

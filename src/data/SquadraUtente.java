@@ -39,7 +39,9 @@ public class SquadraUtente implements Squadra{
 	}
 	@Override
 	public List<Calciatore> getTitolari() {
-		return this.liTitolari;
+		return liTitolari.stream()
+				.sorted((c1,c2)->c1.getRuolo().compareTo(c2.getRuolo()))
+				.toList();
 	}
 	@Override
 	public List<Calciatore> getRiserve() {
