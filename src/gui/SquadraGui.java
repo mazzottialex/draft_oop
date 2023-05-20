@@ -6,12 +6,14 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -36,11 +38,31 @@ public class SquadraGui extends Base {
 		GridBagLayout layout=new GridBagLayout();
 		contentPane.setLayout(layout);
 
+		JPanel panelSquadra=new JPanel();
+		panelSquadra.setBackground(getForeground());
+		JLabel lblStemma=new JLabel();
+		ImageIcon img=new ImageIcon(squadra.getStemma());
+		Image image = img.getImage(); // transform it 
+		Image newimg = image.getScaledInstance(55, 60,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+		img = new ImageIcon(newimg);
+		lblStemma.setBackground(Color.white);
+		lblStemma.setIcon(img);
+		lblStemma.setBorder(new EmptyBorder(new Insets(2, 0, 2, 25)));
+		panelSquadra.add(lblStemma);
+		
 		JLabel lblNomeSquadra=new JLabel(squadra.getNomeSquadra());
 		lblNomeSquadra.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
 		lblNomeSquadra.setForeground(Color.white);
+		panelSquadra.add(lblNomeSquadra);
+		
+		JLabel lblRating=new JLabel("Valutazione: "+squadra.getValutazione());
+		lblRating.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
+		lblRating.setForeground(Color.white);
+		lblRating.setBorder(new EmptyBorder(new Insets(2, 25, 2, 0)));
+		panelSquadra.add(lblRating);
+		
 		gbc.gridy=0;
-		contentPane.add(lblNomeSquadra,gbc);
+		contentPane.add(panelSquadra, gbc);
 		
 		JPanel panelPosizione = new JPanel();
 		panelPosizione.setLayout(layout);
@@ -82,11 +104,7 @@ public class SquadraGui extends Base {
 		gbc.gridy=6;
 		contentPane.add(panelPosizione, gbc);
 		
-		JLabel lblRating=new JLabel("Valutazione: "+squadra.getValutazione());
-		lblRating.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
-		lblRating.setForeground(Color.white);
-		gbc.gridy=7;
-		contentPane.add(lblRating,gbc);
+		
 	}
 
 }
