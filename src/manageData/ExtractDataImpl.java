@@ -55,10 +55,15 @@ public class ExtractDataImpl implements ExtractData{
 		Random rnd = new Random();
 		Set<Integer> posizioni = new HashSet<>();
 		for(int i=0; i<n; i++) {
-			posizioni.add(rnd.nextInt(listaRuolo.size()));
+			int num;
+			do {
+				num=rnd.nextInt(listaRuolo.size());
+			}while(posizioni.contains(num));
+			posizioni.add(num);
 		}
-		return listaRuolo.stream()
-				.filter(c->posizioni.contains(c.getId()))
+		
+		return posizioni.stream()
+				.map(p-> listaRuolo.get(p))
 				.toList();
 	}
 	
@@ -194,5 +199,39 @@ public class ExtractDataImpl implements ExtractData{
 				.stream()
 				.map(c -> c.toVector())
 				.toList();
+	}
+	
+	public List<Calciatore> getRandom(int nA, int nC, int nD, int nP){
+		List<Calciatore> li=new ArrayList<>();
+		li.addAll(getRandomByRuolo("A", nA));
+		li.addAll(getRandomByRuolo("C", nC));
+		li.addAll(getRandomByRuolo("D", nD));
+		li.addAll(getRandomByRuolo("P", nP));
+		Calciatore c;
+		for(int i=0;i<5;i++) {
+			do {
+				c=getRandomByRuolo("P", 1).get(0);
+			}while(li.contains(c));
+			li.add(c);
+		}
+		for(int i=0;i<10;i++) {
+			do {
+				c=getRandomByRuolo("D", 2).get(0);
+			}while(li.contains(c));
+			li.add(c);
+		}
+		for(int i=0;i<10;i++) {
+			do {
+				c=getRandomByRuolo("C", 2).get(0);
+			}while(li.contains(c));
+			li.add(c);
+		}
+		for(int i=0;i<10;i++) {
+			do {
+				c=getRandomByRuolo("A", 2).get(0);
+			}while(li.contains(c));
+			li.add(c);
+		}
+		return li;
 	}
 }

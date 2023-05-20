@@ -46,7 +46,7 @@ public class Archivio extends Base {
 		TableModel tm= new DefaultTableModel(new String[] {"RUOLO","GIOCATORE","RATING","ATT","CEN","DIF"},0);
 		li=log.liOrdinata(li);	
 		
-		
+		li.forEach(c->System.out.println(c.getNominativo()+";"+c.getRuolo()));
 		li.stream().forEach(c -> ((DefaultTableModel) tm).addRow(c.toVector()));
 		contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		contentPane.setPreferredSize(new Dimension(450, 640));

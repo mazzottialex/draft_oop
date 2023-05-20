@@ -8,6 +8,7 @@ import data.Calciatore;
 import data.Modulo;
 import data.Squadra;
 import data.SquadraAvversaria;
+import data.SquadraUtente;
 import manageData.ExtractData;
 import manageData.ExtractDataImpl;
 import manageData.ManageData;
@@ -32,7 +33,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 		this.listSquadre = new ArrayList<>();
 		
 		//Creo la squadr dell'utente
-		this.miasquadra = new Squadra(nomeSquadra, stemma, titolari, riserve, modulo);
+		this.miasquadra = new SquadraUtente(nomeSquadra, stemma, modulo, titolari, riserve);
 		//System.out.println(this.miasquadra);
 		
 		// Creo le squadre avversarie (quelle esistenti in serie A)

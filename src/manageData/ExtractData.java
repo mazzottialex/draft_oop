@@ -24,4 +24,5 @@ public interface ExtractData {
 	public List<String> getNomeTitolari(String squadra, Modulo modulo);
 	public List<String> getNomeRiserve(String squadra, Modulo modulo);
 	public List<?> tsr(String squadra, Modulo modulo);
+	public List<Calciatore> getRandom(int nA, int nC, int nD, int nP);
 }

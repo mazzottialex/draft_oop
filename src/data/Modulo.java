@@ -30,4 +30,20 @@ public enum Modulo {
 	public int getNumAtt() {
 		return att;
 	}
+	
+	public int getN(String ruolo) {
+		if(ruolo=="P")
+			return 1;
+		else if(ruolo=="D")
+			return dif;
+		else if(ruolo=="C")
+			return cen;
+		else if(ruolo=="A")
+			return att;
+		else return 0;
+	}
+	
+	public String toString() {
+		return dif+"-"+cen+"-"+att;
+	}
 }
