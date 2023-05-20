@@ -1,4 +1,4 @@
-package gui;
+package v2.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -22,6 +22,8 @@ import data.Modulo;
 import data.Squadra;
 import data.SquadraAvversaria;
 import data.SquadraUtente;
+import gui.Base;
+import gui.utilsGUI;
 import manageData.ExtractData;
 import manageData.ExtractDataImpl;
 
