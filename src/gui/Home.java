@@ -33,12 +33,9 @@ import javax.swing.JComboBox;
 public class Home extends Base {
 	
 	private final LogicsHome log;
-	private final String stagione;
 	
 	public Home(Boolean online, String stagione) {
 		
-		
-		this.stagione=stagione;
 		log=new LogicsHomeImpl(stagione, online);
 		log.loadStagione(stagione);
 		

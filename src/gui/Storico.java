@@ -6,9 +6,12 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,6 +27,7 @@ import manageData.LogicsFileImpl;
 import javax.swing.JScrollPane;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 
 public class Storico extends Base {
 
@@ -33,6 +37,18 @@ public class Storico extends Base {
 		
 		GridBagConstraints gbc=new GridBagConstraints();
 		GridBagLayout layout=new GridBagLayout();
+		
+		JButton btnHome=new JButton("HOME");
+		
+		btnHome.setBounds(10, 8, 70, 28);
+		btnHome.setFont(new Font("DejaVu Sans", Font.PLAIN, 12));
+		btnHome.setBackground(Color.white);
+		btnHome.setRolloverEnabled(true);
+		btnHome.setForeground(Color.BLUE);
+		btnHome.setPreferredSize(new Dimension(100,50));
+		
+		contentPane.add(btnHome);
+		
 		JPanel panelLi = new JPanel();
 		panelLi.setLayout(layout);
 		panelLi.setBackground(new Color(0, 64, 128));
@@ -65,6 +81,14 @@ public class Storico extends Base {
 			panelSquadra.add(lblRating);
 
 			JButton btnVedi=new JButton("VEDI");
+			btnVedi.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					changeJPanel(new SquadraGui(squadra));
+					
+				}
+			});
 			panelSquadra.add(btnVedi);
 			gbc.gridy=count;
 			panelLi.add(panelSquadra, gbc);

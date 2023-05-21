@@ -1,17 +1,21 @@
 package gui;
 
 import java.awt.EventQueue;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 
 public class Base extends JFrame {
 
 	protected JPanel contentPane;
-	
+
 	public Base() {
 		setTitle("DRAFT");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -20,6 +24,8 @@ public class Base extends JFrame {
 		setBackground(new Color(0, 64, 128));
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 64, 128));
+		contentPane.setLayout(new BorderLayout());
+		add(contentPane);
 	}
 
 	public JPanel getPanel() {
