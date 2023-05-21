@@ -32,14 +32,29 @@ public class SquadraGui extends Base {
 	/**
 	 * Create the frame.
 	 */
-	public SquadraGui(Squadra squadra) {
+	public SquadraGui(Squadra squadra, String stagioneP, Boolean online) {
+		this.stagione=stagioneP;
+		this.online=online;
 		GridBagConstraints gbc=new GridBagConstraints();
 		gbc.insets=new Insets(5, 5, 2, 2);
 		GridBagLayout layout=new GridBagLayout();
 		contentPane.setLayout(layout);
 
+		JButton btnStorico=new JButton("STORICO");
+		btnStorico.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+		btnStorico.setBackground(Color.white);
+		btnStorico.setForeground(Color.BLUE);
+		btnStorico.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				changeJPanel(new Storico(stagione, online));
+			}
+		});
+		
 		JPanel panelSquadra=new JPanel();
 		panelSquadra.setBackground(getForeground());
+		panelSquadra.add(btnStorico);
+
 		JLabel lblStemma=new JLabel();
 		ImageIcon img=new ImageIcon(squadra.getStemma());
 		Image image = img.getImage(); // transform it 

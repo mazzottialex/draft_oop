@@ -94,7 +94,7 @@ public class Storico extends Base {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					changeJPanel(new SquadraGui(squadra));
+					changeJPanel(new SquadraGui(squadra, stagioneP, online));
 					
 				}
 			});
