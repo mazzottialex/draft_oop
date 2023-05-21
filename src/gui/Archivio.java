@@ -39,8 +39,9 @@ public class Archivio extends Base {
 
 	private JTable table;
 	private final LogicsArchivio log;
-	public Archivio(List<Calciatore> li, String stagione, Boolean online) throws FileNotFoundException, ClassNotFoundException, IOException {
-		
+	public Archivio(List<Calciatore> li, String stagioneP, Boolean online) throws FileNotFoundException, ClassNotFoundException, IOException {
+		this.stagione=stagioneP;
+		this.online=online;
 		log=new LogicsArchivioImpl(online);
 		
 		TableModel tm= new DefaultTableModel(new String[] {"RUOLO","GIOCATORE","RATING","ATT","CEN","DIF"},0);
@@ -67,7 +68,7 @@ public class Archivio extends Base {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				changeJPanel(new Home(log.getOnline(), stagione));
+				changeJPanel(new Home(stagione, online));
 			}
 		});
 		panel.add(btnHome);

@@ -31,7 +31,9 @@ import java.awt.Dimension;
 
 public class Storico extends Base {
 
-	public Storico() {
+	public Storico(String stagioneP, Boolean online) {
+		this.stagione=stagioneP;
+		this.online=online;
 		LogicsFile logf=new LogicsFileImpl();
 		List<Squadra> li=logf.LoadStorico();
 		
@@ -46,7 +48,14 @@ public class Storico extends Base {
 		btnHome.setRolloverEnabled(true);
 		btnHome.setForeground(Color.BLUE);
 		btnHome.setPreferredSize(new Dimension(100,50));
-		
+		btnHome.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				changeJPanel(new Home(stagione, online));
+				
+			}
+		});
 		contentPane.add(btnHome);
 		
 		JPanel panelLi = new JPanel();

@@ -34,8 +34,9 @@ public class Home extends Base {
 	
 	private final LogicsHome log;
 	
-	public Home(Boolean online, String stagione) {
-		
+	public Home(String stagioneP, Boolean online) {
+		this.stagione=stagioneP;
+		this.online=online;
 		log=new LogicsHomeImpl(stagione, online);
 		log.loadStagione(stagione);
 		
@@ -92,7 +93,7 @@ public class Home extends Base {
 		JLabel lblStagioneSelezionata = new JLabel("Stagione selezionata:");
 		lblStagioneSelezionata.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
 		panelSelectioned.add(lblStagioneSelezionata);
-		JLabel lblStagione = new JLabel(log.getStagione());
+		JLabel lblStagione = new JLabel(stagione);
 		lblStagione.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
 		panelSelectioned.add(lblStagione);
 		
@@ -122,8 +123,10 @@ public class Home extends Base {
 		btnCarica.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(log.loadStagione(comboBoxCarica.getItemAt(comboBoxCarica.getSelectedIndex())))
-					lblStagione.setText(log.getStagione());
+				stagione=comboBoxCarica.getItemAt(comboBoxCarica.getSelectedIndex());
+				if(log.loadStagione(stagione)) {
+					lblStagione.setText(stagione);
+				}
 				else 
 					JOptionPane.showMessageDialog(null, "Errore nel caricamento");
 			}	
@@ -143,7 +146,7 @@ public class Home extends Base {
 		
 		JLabel labelAvviso = new JLabel("");
 		JComboBox<String> comboBoxAggiorna = new JComboBox<>(array);
-		if(!log.getOnline())
+		if(!online)
 		{
 			btnAggiorna.setEnabled(false);
 			comboBoxAggiorna.setEnabled(false);
@@ -166,8 +169,10 @@ public class Home extends Base {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Attendere qualche istante");
-				if(log.downloadStagione(comboBoxAggiorna.getItemAt(comboBoxAggiorna.getSelectedIndex()))) {
-					lblStagione.setText(log.getStagione());
+				stagione=comboBoxAggiorna.getItemAt(comboBoxAggiorna.getSelectedIndex());
+				if(log.downloadStagione(stagione)) {
+					lblStagione.setText(stagione);
+					
 					JOptionPane.showMessageDialog(null, "Caricamento completato");
 			}
 				else 
@@ -193,7 +198,7 @@ public class Home extends Base {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					changeJPanel(new Archivio(log.getLi(), log.getStagione(), log.getOnline()));
+					changeJPanel(new Archivio(log.getLi(), stagione, online));
 				} catch (ClassNotFoundException | IOException e1) {
 					e1.printStackTrace();
 				}
@@ -210,7 +215,7 @@ public class Home extends Base {
 		btnStorico.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				changeJPanel(new Storico());
+				changeJPanel(new Storico(stagione, online));
 			}
 		});
 		gbc.gridy=6;

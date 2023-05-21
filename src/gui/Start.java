@@ -45,7 +45,8 @@ public class Start extends Base {
 	}
 	
 	public Start() {
-		//add(contentPane);
+		stagione=stagioneDefault;
+		online=log.getOnline();
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0};
@@ -92,7 +93,7 @@ public class Start extends Base {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				changeJPanel(new Home(log.getOnline(), stagioneDefault));
+				changeJPanel(new Home(stagione, online));
 			}
 		});
 		

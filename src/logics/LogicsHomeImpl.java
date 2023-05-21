@@ -30,10 +30,6 @@ public class LogicsHomeImpl implements LogicsHome {
 		ms=new ManageStagioniImpl(online);
 	}
 	
-	@Override
-	public String getStagione() {
-		return stagione;
-	}
 	
 	@Override
 	public void setStagione(String stagione) {
@@ -80,7 +76,4 @@ public class LogicsHomeImpl implements LogicsHome {
 		return rat.getLi();
 	}
 	
-	public Boolean getOnline() {
-		return this.online;
-	}
 }

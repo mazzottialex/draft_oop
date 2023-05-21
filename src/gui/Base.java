@@ -15,7 +15,9 @@ import java.awt.Container;
 public class Base extends JFrame {
 
 	protected JPanel contentPane;
-
+	protected Boolean online;
+	protected String stagione;
+	
 	public Base() {
 		setTitle("DRAFT");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
