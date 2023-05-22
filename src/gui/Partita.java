@@ -148,11 +148,11 @@ public class Partita extends Base implements ActionListener, PropertyChangeListe
 	}
 	
 	public void changeScore() throws FileNotFoundException, ClassNotFoundException, IOException {
-        if (logics.getMinGol1().contains(progress)) {
+        if (logics.getMinGol(s1).contains(progress)) {
         	logics.addScorer(s1);
         	jlScoreSq1.setText(Integer.toString(Integer.valueOf(jlScoreSq1.getText()) + 1));
         }
-        if (logics.getMinGol2().contains(progress)) {
+        if (logics.getMinGol(s2).contains(progress)) {
         	logics.addScorer(s2);
         	jlScoreSq2.setText(Integer.toString(Integer.valueOf(jlScoreSq2.getText()) + 1));
         }

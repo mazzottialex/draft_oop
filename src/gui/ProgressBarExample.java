@@ -64,7 +64,7 @@ public class ProgressBarExample extends Base {
         progressBar.setStringPainted(true);
         progressBar.setString("Minuto 0°");
         suppl = false;
-        fineTempo = 90;
+        fineTempo = 45;
         
         // Put constraints on different buttons
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -135,9 +135,7 @@ public class ProgressBarExample extends Base {
         gbc.gridx = 2;
         gbc.gridy = 5;
         panel.add(southEast, gbc);
-        
-        // TODO aggiungere barra per supplementari
-        
+                
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
         
 		contentPane.add(
@@ -197,11 +195,6 @@ public class ProgressBarExample extends Base {
                             if (progressBar.getValue() > 0) {
             					jbSubs.setEnabled(true);
             				}
-                            //Fine 1° tempo
-                            if (progressBar.getValue() == 45) { // TODO non funziona bene
-                            	stopProgress();
-        						// TODO aggiungere message dialog
-        					}
                         }
                     });
 
@@ -212,16 +205,49 @@ public class ProgressBarExample extends Base {
                     }
                 }
 
-                if (!suppl) {
-					if (progressBar.getValue() == 90) {
+//                if (!suppl) {
+//					if (progressBar.getValue() == 90) {
+//						fineTempo = 105;
+//						progressBar.setMaximum(fineTempo);
+//						suppl = true;
+//						JOptionPane.showMessageDialog(null, "Partita finita");
+//					} 
+//				}
+                
+                //Fine tempi reg
+                if (progressBar.getValue() == 90) {
+					if (jlScoreSq1.getText() != jlScoreSq2.getText()) {
+						String win = Integer.valueOf(jlScoreSq1.getText()) > Integer.valueOf(jlScoreSq2.getText()) ? jlScoreSq1.getText() : jlScoreSq2.getText();
+						JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + win);
+					} else {
 						fineTempo = 120;
 						progressBar.setMaximum(fineTempo);
 						suppl = true;
-					} 
+						JOptionPane.showMessageDialog(null, "Fine tempi regolamentari");
+					}
 				}
                 
-                
+                //Fine tempi suppl
+                if (progressBar.getValue() == 120) {
+					if (jlScoreSq1.getText() != jlScoreSq2.getText()) {
+						String win = Integer.valueOf(jlScoreSq1.getText()) > Integer.valueOf(jlScoreSq2.getText()) ? jlScoreSq1.getText() : jlScoreSq2.getText();
+						JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + win);
+					} else {
+						JOptionPane.showMessageDialog(null, "Fine tempi supplementari. Si va ai calci di rigore");
+					}
+				}
 				
+                //Fine 1° tempo
+				if (progressBar.getValue() == 45) {
+					fineTempo = 90;
+					JOptionPane.showMessageDialog(null, "Fine primo tempo");
+				}
+				//Fine 1° tempo suppl
+				if (progressBar.getValue() == 105) {
+					fineTempo = 120;
+					JOptionPane.showMessageDialog(null, "Fine primo tempo supplementare");
+				}
+                
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
