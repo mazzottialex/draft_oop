@@ -6,14 +6,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import data.Calciatore;
+import data.Squadra;
 import data.SquadraAvversaria;
 import manageData.ExtractDataImpl;
 
 public class SimulatingMatchImpl implements SimulatingMatch {
 
 	private SimulatingFunctions sf;
-	private SquadraAvversaria s1;
-	private SquadraAvversaria s2;
+	private Squadra s1;
+	private Squadra s2;
 	private Map<Calciatore, Double> voti1;
 	private Map<Calciatore, Double> voti2;
 	private int golSubiti1;

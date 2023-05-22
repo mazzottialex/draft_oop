@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Random;
 
 import data.Calciatore;
+import data.Squadra;
 import data.SquadraAvversaria;
 import manageData.ExtractData;
 import manageData.ExtractDataImpl;
@@ -72,7 +73,7 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
 		return map;
 	}
 
-	public int golSubitiFanta(SquadraAvversaria s) throws FileNotFoundException, ClassNotFoundException, IOException {
+	public int golSubitiFanta(Squadra s) throws FileNotFoundException, ClassNotFoundException, IOException {
 		ExtractData ed = new ExtractDataImpl(s.getTitolari());
 		Calciatore portiere = ed.getListaByRuolo("P").get(0);
 		double probCleanSheet = portiere.getCleanSheet() / portiere.getPg();
@@ -96,7 +97,7 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
 		}
 	}
 
-	public int autogolFanta(SquadraAvversaria s) throws FileNotFoundException, ClassNotFoundException, IOException {
+	public int autogolFanta(Squadra s) throws FileNotFoundException, ClassNotFoundException, IOException {
 		int ag = 0;
 		for (int i = 0; i < golSubitiFanta(s); i++) {
 			if (prob(0, 100) <= OWNGOAL_RATE) {
@@ -106,7 +107,7 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
 		return ag;
 	}
 
-	public int rigoriParatiFanta(SquadraAvversaria s)
+	public int rigoriParatiFanta(Squadra s)
 			throws FileNotFoundException, ClassNotFoundException, IOException {
 		int r = 0;
 		int rp = 0;
@@ -130,7 +131,7 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
 		return rp;
 	}
 
-	public static double catenaccioFanta(SquadraAvversaria s, Map<Calciatore, Double> votiDif)
+	public static double catenaccioFanta(Squadra s, Map<Calciatore, Double> votiDif)
 			throws FileNotFoundException, ClassNotFoundException, IOException {
 		ExtractData ed = new ExtractDataImpl(s.getTitolari());
 		List<Calciatore> difensori = ed.getListaByRuolo("D");
@@ -180,7 +181,7 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
 		return count;
 	}
 
-	public static Map<String, Double> votoModFanta(SquadraAvversaria s, Map<Calciatore, Double> mapVoti)
+	public static Map<String, Double> votoModFanta(Squadra s, Map<Calciatore, Double> mapVoti)
 			throws FileNotFoundException, ClassNotFoundException, IOException {
 		double pP = 0;
 		double pD = 0;
@@ -210,18 +211,18 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
 		return mapModVoti;
 	}
 
-	public double votoDifFanta(SquadraAvversaria s, Map<String, Double> v)
+	public double votoDifFanta(Squadra s, Map<String, Double> v)
 			throws FileNotFoundException, ClassNotFoundException, IOException {
 		return (MOD_VOTE_DIF_D * (v.get("P") + v.get("D"))) + (MOD_VOTE_DIF_C * v.get("D"))
 				+ (MOD_VOTE_DIF_A * v.get("A"));
 	}
 
-	public double votoOffFanta(SquadraAvversaria s, Map<String, Double> v)
+	public double votoOffFanta(Squadra s, Map<String, Double> v)
 			throws FileNotFoundException, ClassNotFoundException, IOException {
 		return (MOD_VOTE_OFF_D * (v.get("D"))) + (MOD_VOTE_OFF_C * v.get("D")) + (MOD_VOTE_OFF_A * v.get("A"));
 	}
 
-	public int golFattiFanta(SquadraAvversaria s) throws FileNotFoundException, ClassNotFoundException, IOException {
+	public int golFattiFanta(Squadra s) throws FileNotFoundException, ClassNotFoundException, IOException {
 		int gol = 0;
 		for (Calciatore c : s.getTitolari()) {
 			double probGol = c.getGol() / (c.getMinuti() / MINUTES);
@@ -238,7 +239,7 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
 		return gol;
 	}
 
-	public int differenzaRigoriFattiSbagliatiFanta(SquadraAvversaria s)
+	public int differenzaRigoriFattiSbagliatiFanta(Squadra s)
 			throws FileNotFoundException, ClassNotFoundException, IOException {
 		int r = 0;
 		int rs = 0;

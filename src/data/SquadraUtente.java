@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SquadraUtente implements Squadra, Serializable{
+	private final int id;
 	private final String nomeSquadra;
 	private final String stemma;
 	private final Modulo modulo;
@@ -14,6 +15,7 @@ public class SquadraUtente implements Squadra, Serializable{
 	private final List<Calciatore> liRiserve;
 	
 	public SquadraUtente(String nomeSquadra, String stemma, Modulo modulo, List<Calciatore> liTitolari, List<Calciatore> liRiserve) {
+		this.id=0;
 		this.nomeSquadra = nomeSquadra;
 		this.stemma = stemma;
 		this.modulo = modulo;
@@ -23,23 +25,27 @@ public class SquadraUtente implements Squadra, Serializable{
 		liCalciatori.addAll(liTitolari);
 		liCalciatori.addAll(liRiserve);
 	}
+	
+	@Override
 	public String getNomeSquadra() {
 		return nomeSquadra;
 	}
+	
+	@Override
 	public String getStemma() {
 		return stemma;
 	}
+	
+	@Override
 	public Modulo getModulo() {
 		return modulo;
 	}
+	
+	@Override
 	public List<Calciatore> getLiCalciatori() {
 		return liCalciatori;
 	}
-	@Override
-	public String toString() {
-		return "Squadra [nomeSquadra=" + nomeSquadra + ", stemma=" + stemma + ", modulo=" + modulo + ", liCalciatori="
-				+ liCalciatori + "]";
-	}
+	
 	@Override
 	public List<Calciatore> getTitolari() {
 		return liTitolari.stream()
@@ -61,5 +67,14 @@ public class SquadraUtente implements Squadra, Serializable{
 						.orElse(0));
 	}
 	
+	@Override
+	public int getId() {
+		return this.id;
+	}
 	
+	@Override
+	public String toString() {
+		return "Squadra [nomeSquadra=" + nomeSquadra + ", stemma=" + stemma + ", modulo=" + modulo + ", liCalciatori="
+				+ liCalciatori + "]";
+	}
 }
