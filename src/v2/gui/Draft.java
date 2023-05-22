@@ -117,7 +117,6 @@ public class Draft extends Base {
 				panelPosizione.add(btnScegli);
 			}
 			gbc.gridy=i;
-			System.out.print(gbc.gridy);
 			contentPane.add(panelPosizione, gbc);
 		}
 		JLabel lblPanchina=new JLabel("PANCHINA");
@@ -125,7 +124,7 @@ public class Draft extends Base {
 		lblPanchina.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
 		gbc.insets=new Insets(20, 0, 0, 0);
 		gbc.gridy=4;
-		contentPane.add(lblPanchina, gbc);
+		//contentPane.add(lblPanchina, gbc);
 		gbc.insets=new Insets(10, 10, 10, 10);
 		
 		//panchinari
