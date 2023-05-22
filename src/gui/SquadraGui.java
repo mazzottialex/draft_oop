@@ -44,9 +44,11 @@ public class SquadraGui extends Base {
 		btnProsegui.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//
 			}
 		});
-		panelSquadra.add(btnProsegui);
+		if(stagione!=null)
+			panelSquadra.add(btnProsegui);
 		
 		JLabel lblStemma=new JLabel();
 		ImageIcon img=new ImageIcon(squadra.getStemma());
@@ -94,7 +96,7 @@ public class SquadraGui extends Base {
 		lblPanchina.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
 		gbc.insets=new Insets(10, 0, 0, 0);
 		gbc.gridy=5;
-		contentPane.add(lblPanchina, gbc);
+		//contentPane.add(lblPanchina, gbc);
 		gbc.insets=new Insets(5, 5, 5, 5);
 		
 		//panchinari
