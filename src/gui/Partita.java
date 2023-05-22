@@ -1,36 +1,19 @@
 package gui;
-
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Image;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.SwingConstants;
-import javax.swing.SwingWorker;
+import javax.swing.*;
 
 import data.SquadraAvversaria;
 import logics.LogicsPartita;
 import logics.LogicsPartitaImpl;
 
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
-public class Partita extends Base implements ActionListener, PropertyChangeListener{
-
-	private static final long serialVersionUID = 1353924410908490014L;
-	
-	private JProgressBar jpPb;
+public class Partita extends Base {
+    private static final long serialVersionUID = 3533149128342164934L;
+	private JProgressBar progressBar;
 	private JLabel jlNomeSq1;
 	private JLabel jlScoreSq1;
 	private JLabel jlTabSq1;
@@ -43,126 +26,19 @@ public class Partita extends Base implements ActionListener, PropertyChangeListe
 	private JButton next;
 	private JPanel panel;
 	
-	private Task task;
 	private LogicsPartita logics;
 	private SquadraAvversaria s1;
 	private SquadraAvversaria s2;
+    
+    private boolean isRunning;
+    private boolean ris;
+    private int fineTempo;
 
-	private int progress;
-	
-	/**
-	 * Create the frame.
-	 */
-	
-	abstract class PausableSwingWorker<K, V> extends SwingWorker<K, V> {
-
-        private volatile boolean isPaused;
-        private volatile boolean isRunning = false;
-
-        public final void pause() {
-            if (!isPaused() && !isDone()) {
-                isPaused = true;
-                firePropertyChange("paused", false, true);
-            }
-        }
-
-        public final void resume() {
-            if (isPaused() && !isDone()) {
-                isPaused = false;
-                firePropertyChange("paused", true, false);
-            }
-        }
-        
-        public final void start() {
-            if (!isDone()) {
-            	isRunning = true;
-            }
-        }
-
-        public final boolean isPaused() {
-            return isPaused;
-        }
-        
-        public final boolean isRunning() {
-            return isRunning;
-        }
-    }
-	
-	class Task extends PausableSwingWorker<Void, Void> {
-
-		/*
-		 * Main task. Executed in background thread.
-		 */
-		@Override
-		public Void doInBackground() throws FileNotFoundException, ClassNotFoundException, IOException {
-            progress = 0;
-            //Initialize progress property.
-            setProgress(0);
-            logics.scorers();
-            while (progress < 100) {
-            	if (!isPaused()) {
-            		//Sleep for up to one second.
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException ignore) {}
-                    // TODO se il num di cambi è variato, ricalcolare il ris della partita e porlo in base al tempo rimanente
-                    //Make progress.
-                    progress += 1;
-                    setProgress(Math.min(progress, 100));
-                    // chiama funzione per gol
-                    changeScore();
-                    // chiama funzione per ammonizioni / espulsioni
-                    logics.sanctions();
-                    //Abilita bottone sostituzioni
-                    if (progress > 0) {
-    					jbSubs.setEnabled(true);
-    				}
-                    //Fine 1° tempo
-                    if (progress == 50) {
-						task.pause();
-						// TODO aggiungere message dialog
-					}
-    			} else {
-    				try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException ignore) {}
-    			}
-            }
-            // TODO fare if, dove se risultato è pari, far apparire nuova barra per supplementari
-            if (jlScoreSq1.getText() == jlScoreSq2.getText()) {
-            	
-            }
-            // TODO fare if dove se risultato supplementari è pari, fare rigori
-            return null;
-        }
-		
-		/*
-         * Executed in event dispatching thread
-         */
-        @Override
-        public void done() {	//quando finisce
-        	next.setEnabled(true);
-        	// TODO scrivere chi ha vinto
-        	JOptionPane.showMessageDialog(null, "Partita finita");	//dire che è finito
-        }
-	}
-	
-	public void changeScore() throws FileNotFoundException, ClassNotFoundException, IOException {
-        if (logics.getMinGol(s1).contains(progress)) {
-        	logics.addScorer(s1);
-        	jlScoreSq1.setText(Integer.toString(Integer.valueOf(jlScoreSq1.getText()) + 1));
-        }
-        if (logics.getMinGol(s2).contains(progress)) {
-        	logics.addScorer(s2);
-        	jlScoreSq2.setText(Integer.toString(Integer.valueOf(jlScoreSq2.getText()) + 1));
-        }
-	}
-
-	public Partita(SquadraAvversaria s1, SquadraAvversaria s2) throws FileNotFoundException, ClassNotFoundException, IOException {
-		this.s1 = s1;
+    public Partita(SquadraAvversaria s1, SquadraAvversaria s2) throws FileNotFoundException, ClassNotFoundException, IOException {
+    	this.s1 = s1;
 		this.s2 = s2;
 		logics = new LogicsPartitaImpl(this.s1, this.s2);
-		
+    	
 		// Define the panel to hold the components
 		panel = new JPanel(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -179,23 +55,17 @@ public class Partita extends Base implements ActionListener, PropertyChangeListe
 		jlScoreSq2.setVerticalAlignment(SwingConstants.TOP);
 		jlTabSq2 = new JLabel("sq2Label", SwingConstants.LEFT);
 		jlTabSq2.setVerticalAlignment(SwingConstants.TOP);
-		startStop = new JButton("> / ||");
-		startStop.setActionCommand("start");
-		startStop.addActionListener(this);
+		startStop = new JButton("Play");
 		jbSubs = new JButton("Subs");
 		jbSubs.setEnabled(false);
-		jbSubs.setActionCommand("subs");
-		jbSubs.addActionListener(this);
 		//min = new JLabel("Minuto: 0°");
 		next = new JButton("Avanti");
 		next.setEnabled(false);
-		jpPb = new JProgressBar();
-		jpPb.setValue(0);
-		jpPb.setStringPainted(true);
-		jpPb.setString("Minuto 0°");
-		task = new Task();
-        task.addPropertyChangeListener(this);
-		
+		progressBar = new JProgressBar(0, 90);
+        progressBar.setStringPainted(true);
+        progressBar.setString("Minuto 0°");
+        ris = false;
+        fineTempo = 45;
         
         // Put constraints on different buttons
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -245,7 +115,7 @@ public class Partita extends Base implements ActionListener, PropertyChangeListe
         gbc.gridy = 4;
         gbc.gridwidth = 3;
         gbc.ipady = 5;
-        panel.add(jpPb, gbc);
+        panel.add(progressBar, gbc);
         
         JPanel southWest = new JPanel();
         southWest.add(jbSubs);
@@ -266,74 +136,145 @@ public class Partita extends Base implements ActionListener, PropertyChangeListe
         gbc.gridx = 2;
         gbc.gridy = 5;
         panel.add(southEast, gbc);
-        
-        // TODO aggiungere barra per supplementari
-        
+                
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
         
 		contentPane.add(
 				new JLabel(
 						new ImageIcon(
 								new ImageIcon("res/icon.png").getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH))));
-	}
-	
-	/**
-     * Invoked when the user presses buttons.
-     */
-    public void actionPerformed(ActionEvent evt) {
-        //Instances of javax.swing.SwingWorker are not reusuable, so we create new instances as needed.
-    	if (evt.getActionCommand() == "start") {
-    		if (!task.isRunning()) {
-    			task.execute();
-    			task.start();
-			} else {
-				if (task.isPaused()) {
-					task.resume();
-				} else {
-					task.pause();
-				}
+
+
+        startStop.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (isRunning) {
+                    stopProgress();
+                } else {
+                    startProgress();
+                }
+            }
+        });
+
+        jbSubs.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				stopProgress();
+				// TODO Aprire finestra per cambiare giocatori
 			}
-		} else if (evt.getActionCommand() == "subs") {
-			task.pause();
-			// TODO Aprire finestra per cambiare giocatori
-		}
+		});
+
     }
 
-    public void setNomeS1(JLabel jlNomeSq1) {
-		this.jlNomeSq1 = jlNomeSq1;
+    private void startProgress() {
+    	startStop.setText("Stop");
+        isRunning = true;
+        
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+            	if (!ris) {
+            		try {
+						logics.scorers();
+						ris = true;
+					} catch (ClassNotFoundException | IOException e) {
+						e.printStackTrace();
+					}
+				}
+                for (int i = progressBar.getValue(); i <= fineTempo && isRunning; i++) {
+                    final int value = i;
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                        	// TODO se il num di cambi è variato, ricalcolare il ris della partita e porlo in base al tempo rimanente
+                            //Make progress.
+                            progressBar.setValue(value);
+                            progressBar.setString("Minuto " + String.valueOf(value) + "°");
+                            // chiama funzione per gol
+                            
+                            try {
+								changeScore();
+							} catch (ClassNotFoundException | IOException e) {
+								e.printStackTrace();
+							}
+                            // chiama funzione per ammonizioni / espulsioni
+                            logics.sanctions();
+                            //Abilita bottone sostituzioni
+                            if (progressBar.getValue() > 0) {
+            					jbSubs.setEnabled(true);
+            				}
+                        }
+                    });
+
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                
+                //Fine tempi reg
+                if (progressBar.getValue() == 90) {
+					if (jlScoreSq1.getText() != jlScoreSq2.getText()) {
+						String win = Integer.valueOf(jlScoreSq1.getText()) > Integer.valueOf(jlScoreSq2.getText()) ? jlNomeSq1.getText() : jlNomeSq2.getText();
+						JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + win);
+					} else {
+						fineTempo = 120;
+						progressBar.setMaximum(fineTempo);
+						ris = true;
+						JOptionPane.showMessageDialog(null, "Fine tempi regolamentari");
+					}
+				}
+                
+                //Fine tempi suppl
+                if (progressBar.getValue() == 120) {
+					if (jlScoreSq1.getText() != jlScoreSq2.getText()) {
+						String win = Integer.valueOf(jlScoreSq1.getText()) > Integer.valueOf(jlScoreSq2.getText()) ? jlScoreSq1.getText() : jlScoreSq2.getText();
+						JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + win);
+					} else {
+						JOptionPane.showMessageDialog(null, "Fine tempi supplementari. Si va ai calci di rigore");
+						//TODO rigori
+					}
+				}
+				
+                //Fine 1° tempo
+				if (progressBar.getValue() == 45) {
+					fineTempo = 90;
+					JOptionPane.showMessageDialog(null, "Fine primo tempo");
+				}
+				//Fine 1° tempo suppl
+				if (progressBar.getValue() == 105) {
+					fineTempo = 120;
+					JOptionPane.showMessageDialog(null, "Fine primo tempo supplementare");
+				}
+                
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                    	startStop.setText("Play");
+                    }
+                });
+            }
+        });
+
+        thread.start();
+    }
+    
+    public void changeScore() throws FileNotFoundException, ClassNotFoundException, IOException {
+        if (logics.getMinGol(s1).contains(progressBar.getValue())) {
+        	logics.addScorer(s1);
+        	jlScoreSq1.setText(Integer.toString(Integer.valueOf(jlScoreSq1.getText()) + 1));
+        }
+        if (logics.getMinGol(s2).contains(progressBar.getValue())) {
+        	logics.addScorer(s2);
+        	jlScoreSq2.setText(Integer.toString(Integer.valueOf(jlScoreSq2.getText()) + 1));
+        }
 	}
 
-	public void setScoreS1(JLabel jlScoreSq1) {
-		this.jlScoreSq1 = jlScoreSq1;
-	}
-
-	public void setTabS1(JLabel jlTabSq1) {
-		this.jlTabSq1 = jlTabSq1;
-	}
-
-	public void setNomeS2(JLabel jlNomeSq2) {
-		this.jlNomeSq2 = jlNomeSq2;
-	}
-
-	public void setScoreS2(JLabel jlScoreSq2) {
-		this.jlScoreSq2 = jlScoreSq2;
-	}
-
-	public void setTabS2(JLabel jlTabSq2) {
-		this.jlTabSq2 = jlTabSq2;
-	}
-
-	/**
-     * Invoked when task's progress property changes.
-     */
-    public void propertyChange(PropertyChangeEvent evt) {
-    	int val;
-        if ("progress" == evt.getPropertyName()) {
-            int progress = (Integer) evt.getNewValue();
-            jpPb.setValue(progress);
-            val = Math.round(((float)task.getProgress() / 100f) * 90f);
-            jpPb.setString("Minuto " + Integer.toString(val) + "°");
-        } 
+    private void stopProgress() {
+        isRunning = false;
+        startStop.setText("Play");
     }
     
     /**
@@ -350,3 +291,5 @@ public class Partita extends Base implements ActionListener, PropertyChangeListe
 		setVisible(true);
     }
 }
+
+
