@@ -30,7 +30,7 @@ public class ProgressBarExample extends Base {
 	private SquadraAvversaria s2;
     
     private boolean isRunning;
-    private boolean suppl;
+    private boolean ris;
     private int fineTempo;
 
     public ProgressBarExample(SquadraAvversaria s1, SquadraAvversaria s2) throws FileNotFoundException, ClassNotFoundException, IOException {
@@ -63,7 +63,7 @@ public class ProgressBarExample extends Base {
 		progressBar = new JProgressBar(0, 90);
         progressBar.setStringPainted(true);
         progressBar.setString("Minuto 0°");
-        suppl = false;
+        ris = false;
         fineTempo = 45;
         
         // Put constraints on different buttons
@@ -173,6 +173,14 @@ public class ProgressBarExample extends Base {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
+            	if (!ris) {
+            		try {
+						logics.scorers();
+						ris = true;
+					} catch (ClassNotFoundException | IOException e) {
+						e.printStackTrace();
+					}
+				}
                 for (int i = progressBar.getValue(); i <= fineTempo && isRunning; i++) {
                     final int value = i;
                     SwingUtilities.invokeLater(new Runnable() {
@@ -183,12 +191,12 @@ public class ProgressBarExample extends Base {
                             progressBar.setValue(value);
                             progressBar.setString("Minuto " + String.valueOf(value) + "°");
                             // chiama funzione per gol
-                            /*
+                            
                             try {
 								changeScore();
 							} catch (ClassNotFoundException | IOException e) {
 								e.printStackTrace();
-							} */
+							}
                             // chiama funzione per ammonizioni / espulsioni
                             logics.sanctions();
                             //Abilita bottone sostituzioni
@@ -204,25 +212,16 @@ public class ProgressBarExample extends Base {
                         e.printStackTrace();
                     }
                 }
-
-//                if (!suppl) {
-//					if (progressBar.getValue() == 90) {
-//						fineTempo = 105;
-//						progressBar.setMaximum(fineTempo);
-//						suppl = true;
-//						JOptionPane.showMessageDialog(null, "Partita finita");
-//					} 
-//				}
                 
                 //Fine tempi reg
                 if (progressBar.getValue() == 90) {
 					if (jlScoreSq1.getText() != jlScoreSq2.getText()) {
-						String win = Integer.valueOf(jlScoreSq1.getText()) > Integer.valueOf(jlScoreSq2.getText()) ? jlScoreSq1.getText() : jlScoreSq2.getText();
+						String win = Integer.valueOf(jlScoreSq1.getText()) > Integer.valueOf(jlScoreSq2.getText()) ? jlNomeSq1.getText() : jlNomeSq2.getText();
 						JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + win);
 					} else {
 						fineTempo = 120;
 						progressBar.setMaximum(fineTempo);
-						suppl = true;
+						ris = true;
 						JOptionPane.showMessageDialog(null, "Fine tempi regolamentari");
 					}
 				}
@@ -234,6 +233,7 @@ public class ProgressBarExample extends Base {
 						JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + win);
 					} else {
 						JOptionPane.showMessageDialog(null, "Fine tempi supplementari. Si va ai calci di rigore");
+						//TODO rigori
 					}
 				}
 				
@@ -261,11 +261,11 @@ public class ProgressBarExample extends Base {
     }
     
     public void changeScore() throws FileNotFoundException, ClassNotFoundException, IOException {
-        if (logics.getMinGol1().contains(progressBar.getValue())) {
+        if (logics.getMinGol(s1).contains(progressBar.getValue())) {
         	logics.addScorer(s1);
         	jlScoreSq1.setText(Integer.toString(Integer.valueOf(jlScoreSq1.getText()) + 1));
         }
-        if (logics.getMinGol2().contains(progressBar.getValue())) {
+        if (logics.getMinGol(s2).contains(progressBar.getValue())) {
         	logics.addScorer(s2);
         	jlScoreSq2.setText(Integer.toString(Integer.valueOf(jlScoreSq2.getText()) + 1));
         }
