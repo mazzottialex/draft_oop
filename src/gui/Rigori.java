@@ -7,14 +7,15 @@ import java.util.Timer;
 import javax.swing.*;
 
 import data.Calciatore;
+import data.SquadraAvversaria;
 
 public class Rigori extends JFrame {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 5140476454072046580L;
-	private List<Calciatore> s1;
-    private List<Calciatore> s2;
+	private SquadraAvversaria s1;
+    private SquadraAvversaria s2;
     private Iterator<Calciatore> shooterIterator1;
     private Iterator<Calciatore> shooterIterator2;
     private JPanel results1;
@@ -26,11 +27,11 @@ public class Rigori extends JFrame {
     private int tiri2;
     private int totTiri;
     
-    public Rigori(List<Calciatore> titolari1, List<Calciatore> titolari2) {
-    	this.s1 = titolari1;
-        this.s2 = titolari2;
-		this.shooterIterator1 = s1.iterator();
-		this.shooterIterator2 = s2.iterator();
+    public Rigori(SquadraAvversaria s1, SquadraAvversaria s2) {
+    	this.s1 = s1;
+        this.s2 = s2;
+		this.shooterIterator1 = s1.getTitolari().iterator();
+		this.shooterIterator2 = s2.getTitolari().iterator();
 		this.gol1 = 0;
 		this.gol2 = 0;
 		this.tiri1 = 0;
@@ -81,34 +82,34 @@ public class Rigori extends JFrame {
 				} else if ((tiri1 + tiri2) < totTiri || tiri1 != tiri2 || (tiri1 == tiri2 && gol1 == gol2)) {
                     if ((tiri1 + tiri2) % 2 == 0) {
                     	if (!shooterIterator1.hasNext()) {
-                    		shooterIterator1 = s1.iterator();
+                    		shooterIterator1 = s1.getTitolari().iterator();
                         }
                         if (shooterIterator1.hasNext()) {
-                        	Calciatore shooter = shooterIterator1.next();
-                        	// funz TODO
-                            JLabel resultLabel = new JLabel(shooter.getNominativo() + ": " + result);
+                        	Calciatore tiratore = shooterIterator1.next();
+                        	String res = rigore(tiratore, s1);
+                            JLabel resultLabel = new JLabel(tiratore.getNominativo() + ": " + result);
                             resultLabel.setHorizontalAlignment(JLabel.LEFT);
                             results1.add(resultLabel);
                             results1.revalidate();
                             results1.repaint();
-                            if (/*TODO risultato funz*/true) {
+                            if (res.equals("Gol")) {
                             	gol1++;
                             }
                             tiri1++;
                         }
                     } else {
                     	if (!shooterIterator2.hasNext()) {
-                    		shooterIterator2 = s2.iterator();
+                    		shooterIterator2 = s2.getTitolari().iterator();
                         }
                         if (shooterIterator2.hasNext()) {
-                        	Calciatore shooter = shooterIterator2.next();
-                            // funz TODO 
-                            JLabel resultLabel = new JLabel(shooter.getNominativo() + ": " + result);
+                        	Calciatore tiratore = shooterIterator2.next();
+                            String res = rigore(tiratore, s2); 
+                            JLabel resultLabel = new JLabel(tiratore.getNominativo() + ": " + result);
                             resultLabel.setHorizontalAlignment(JLabel.RIGHT);
                             results2.add(resultLabel);
                             results2.revalidate();
                             results2.repaint();
-                            if (/*TODO risultato funz*/true) {
+                            if (res.equals("Gol")) {
                             	gol2++;
                             }
                             tiri2++;
@@ -119,5 +120,22 @@ public class Rigori extends JFrame {
         };
 
         timer.scheduleAtFixedRate(timerTask, 0, 1000);
+    }
+    
+    private String rigore(Calciatore tiratore, SquadraAvversaria dif) {
+        double tirRating = tiratore.getRating().getY().getX() * (0.8 + new Random().nextDouble(0.4));
+
+        double porRating = dif.getPortiereTit().getRating().getY().getX() * (0.8 + new Random().nextDouble(0.4));
+
+        double modPorRating = porRating * 0.75 /*costante rigori fatti nei shootout*/;
+        if (tirRating > modPorRating) {
+            return "Gol";
+        } else {
+            return "Sbagliato";
+        }
+    }
+    
+    public void createAndShowGUI() {
+    	setVisible(true);
     }
 }
