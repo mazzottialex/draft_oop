@@ -117,7 +117,6 @@ public class Draft extends Base {
 				panelPosizione.add(btnScegli);
 			}
 			gbc.gridy=i;
-			System.out.print(gbc.gridy);
 			contentPane.add(panelPosizione, gbc);
 		}
 		JLabel lblPanchina=new JLabel("PANCHINA");

@@ -28,33 +28,28 @@ import v2.gui.DialogScelta;
 public class SquadraGui extends Base {
 
 	private final List<String> ruoli=List.of("A","C","D","P");
-
-	/**
-	 * Create the frame.
-	 */
-	public SquadraGui(Squadra squadra, String stagioneP, Boolean online) {
-		this.stagione=stagioneP;
-		this.online=online;
+	private JPanel panelSquadra=new JPanel();
+	
+	public SquadraGui(Squadra squadra) {
 		GridBagConstraints gbc=new GridBagConstraints();
 		gbc.insets=new Insets(5, 5, 2, 2);
 		GridBagLayout layout=new GridBagLayout();
 		contentPane.setLayout(layout);
-
-		JButton btnStorico=new JButton("STORICO");
-		btnStorico.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
-		btnStorico.setBackground(Color.white);
-		btnStorico.setForeground(Color.BLUE);
-		btnStorico.addActionListener(new ActionListener() {
+		panelSquadra.setBackground(getForeground());
+		
+		JButton btnProsegui=new JButton("PROSEGUI");
+		btnProsegui.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+		btnProsegui.setBackground(Color.white);
+		btnProsegui.setForeground(Color.BLUE);
+		btnProsegui.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				changeJPanel(new Storico(stagione, online));
+				//
 			}
 		});
+		if(stagione!=null)
+			panelSquadra.add(btnProsegui);
 		
-		JPanel panelSquadra=new JPanel();
-		panelSquadra.setBackground(getForeground());
-		panelSquadra.add(btnStorico);
-
 		JLabel lblStemma=new JLabel();
 		ImageIcon img=new ImageIcon(squadra.getStemma());
 		Image image = img.getImage(); // transform it 
@@ -101,7 +96,7 @@ public class SquadraGui extends Base {
 		lblPanchina.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
 		gbc.insets=new Insets(10, 0, 0, 0);
 		gbc.gridy=5;
-		contentPane.add(lblPanchina, gbc);
+		//contentPane.add(lblPanchina, gbc);
 		gbc.insets=new Insets(5, 5, 5, 5);
 		
 		//panchinari
@@ -119,6 +114,24 @@ public class SquadraGui extends Base {
 		gbc.gridy=6;
 		contentPane.add(panelPosizione, gbc);
 		
+	}
+	
+	public SquadraGui(Squadra squadra, String stagioneP, Boolean online) {
+		this(squadra);
+		this.stagione=stagioneP;
+		this.online=online;
+		
+		JButton btnStorico=new JButton("STORICO");
+		btnStorico.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+		btnStorico.setBackground(Color.white);
+		btnStorico.setForeground(Color.BLUE);
+		btnStorico.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				changeJPanel(new Storico(stagione, online));
+			}
+		});
+		panelSquadra.add(btnStorico);
 		
 	}
 

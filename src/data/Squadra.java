@@ -9,4 +9,6 @@ public interface Squadra {
 	public String getStemma();
 	public int getValutazione();
 	public Modulo getModulo();
+	public int getId();
+	public List<Calciatore> getLiCalciatori();
 }

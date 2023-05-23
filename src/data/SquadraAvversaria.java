@@ -1,5 +1,5 @@
 package data;
-
+import java.util.Random;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,22 +8,34 @@ import java.util.List;
 import manageData.ExtractData;
 import manageData.ExtractDataImpl;
 
-public class SquadraAvversaria{
+public class SquadraAvversaria implements Squadra{
 	private int id;
 	private String nomeSquadra;
+	private final String stemma;
 	private Modulo modulo;
-	private List<Calciatore> titolari = new ArrayList<>();
-	private List<Calciatore> riserve = new ArrayList<>();
-	private List<Calciatore> li;
+	private List<Calciatore> liTitolari = new ArrayList<>();
+	private List<Calciatore> liRiserve = new ArrayList<>();
+	private List<Calciatore> liCalciatori;
 	
 	
-	public SquadraAvversaria(int id, String nomeSquadra, Modulo modulo, List<Calciatore> li) throws FileNotFoundException, IOException {
+	public SquadraAvversaria(int id, String nomeSquadra, Modulo modulo, List<Calciatore> li) throws FileNotFoundException, IOException, ClassNotFoundException {
 		this.id = id;
 		this.nomeSquadra = nomeSquadra;
 		this.modulo = modulo;
-		this.li = li;
+		this.liCalciatori = li;
+		ExtractData ed = new ExtractDataImpl(li);
+		this.liTitolari = ed.getTitolari(nomeSquadra, modulo);
+		this.liRiserve = ed.getRiserve(nomeSquadra, modulo);
+		this.stemma=this.setStemma();
 	}
 
+	private String setStemma() {
+		final List<String> liStemmi=List.of("arancione.png", "azzurro.png", "bianco.png", "blu.png", "giallo.png", "nero.png", "rosso.png", "verde.png", "viola.png");
+		Random rnd = new Random();
+        int pos = rnd.nextInt(liStemmi.size());
+        return liStemmi.get(pos);
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -36,16 +48,12 @@ public class SquadraAvversaria{
 		return modulo;
 	}
 
-	public List<Calciatore> getTitolari() throws FileNotFoundException, ClassNotFoundException, IOException {
-		ExtractData ed = new ExtractDataImpl(li);
-		titolari = ed.getTitolari(nomeSquadra, modulo);
-		return titolari;
+	public List<Calciatore> getTitolari(){
+		return liTitolari;
 	}
 
-	public List<Calciatore> getRiserve() throws FileNotFoundException, ClassNotFoundException, IOException {
-		ExtractData ed = new ExtractDataImpl(li);
-		riserve = ed.getRiserve(nomeSquadra, modulo);
-		return riserve;
+	public List<Calciatore> getRiserve() {
+		return liRiserve;
 	}
 	/*
 	public List<String> getNomeTitolari() throws FileNotFoundException, ClassNotFoundException, IOException {
@@ -63,9 +71,27 @@ public class SquadraAvversaria{
 		return ed.getNomeCalciatori(nomeSquadra);
 	}
 	*/
-	// ruolo, nome, rating
-	public List<Object> getTsr() throws FileNotFoundException, ClassNotFoundException, IOException {
-		ExtractData ed = new ExtractDataImpl(li);
-		return (List<Object>) ed.tsr(nomeSquadra, modulo);
+
+	
+	
+	@Override
+	public List<Calciatore> getLiCalciatori() {
+		return liCalciatori;
 	}
+	
+	public String getStemma() {
+		return this.stemma;
+	}
+
+	@Override
+	public int getValutazione() {
+		return (int) Math.floor(
+				liTitolari.stream()
+						.map(c->c.getRating()
+						.getX())
+						.mapToDouble(c->c)
+						.average()
+						.orElse(0));
+	}
+	
 }
