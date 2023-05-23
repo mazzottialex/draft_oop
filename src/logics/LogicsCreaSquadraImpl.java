@@ -16,7 +16,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	private final static int NUM_PLAYER_IN_TEAM = 11;  
 	
 	private Modulo moduloSelect;
-	private ManageData md;
+	//private ManageData md;
 	private ExtractData ex;
 	private String namePlayer; //nome del calciatore selezionato per entrare in formazione
 	private Calciatore calciatoreSelect; // calciatore selezionato per entrare in formazione 
@@ -26,11 +26,11 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	private String nomeSquadra;
 	private String stemma;
 	
-	public LogicsCreaSquadraImpl(String stagione, String nomeSquadra, String stemma) throws FileNotFoundException, ClassNotFoundException, IOException {
+	public LogicsCreaSquadraImpl(String nomeSquadra, String stemma, List<Calciatore> li) throws FileNotFoundException, ClassNotFoundException, IOException {
 		this.moduloSelect = Modulo.M343;
-		this.md = new ManageDataImpl(stagione);
-		this.md.LoadData();
-		this.ex = new ExtractDataImpl(this.md.getLi());
+		//this.md = new ManageDataImpl(stagione);
+		//this.md.LoadData();
+		this.ex = new ExtractDataImpl(li); //(this.md.getLi());
 		this.namePlayer = new String();
 		this.calciatoreSelect = new Calciatore(0,null,null,null,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 		this.ruoloSelect = null;

@@ -129,14 +129,14 @@ public class Impostazioni extends Base {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				Boolean braccio=false;
+				Boolean braccio=true;
 				
 				if(!textFieldNomeSquadra.getText().equals(new String("")))
 					nomeSquadra=textFieldNomeSquadra.getText();
 
 				if(braccio) {
 					try {
-						changeJPanel(new CreaSquadra(nomeSquadra,stemma));
+						changeJPanel(new CreaSquadra(nomeSquadra,stemma, li));
 					} catch (FileNotFoundException e1) {
 						e1.printStackTrace();
 					} catch (ClassNotFoundException e1) {

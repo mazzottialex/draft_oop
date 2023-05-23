@@ -41,10 +41,10 @@ public class CreaSquadra extends Base{
 	JPanel panelCalciatoriCenter;
 	JButton buttonSelect;
 	
-	public CreaSquadra(String nomeSquadra, String stemma) throws FileNotFoundException, ClassNotFoundException, IOException {
+	public CreaSquadra(String nomeSquadra, String stemma, List<Calciatore> li) throws FileNotFoundException, ClassNotFoundException, IOException {
 		
 		
-		this.log = new LogicsCreaSquadraImpl("2022-2023", nomeSquadra, stemma);
+		this.log = new LogicsCreaSquadraImpl(nomeSquadra, stemma, li);
 		
 		//inizializzo il bottone per i giocatori che seleziono
 		this.buttonSelect = new JButton();
