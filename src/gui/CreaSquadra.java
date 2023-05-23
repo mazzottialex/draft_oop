@@ -186,6 +186,7 @@ public class CreaSquadra extends Base{
 				//System.out.println(log.getModulo());
 				changeButtonModulo();
 				changeModulo();
+				frameModulo.setVisible(false);
 			}	
 		});
 		panelModuloSouth.add(buttonOk);	
