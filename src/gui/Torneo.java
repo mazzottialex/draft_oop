@@ -4,10 +4,13 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
+import java.util.*;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -16,12 +19,14 @@ import javax.swing.border.EmptyBorder;
 
 import data.Calciatore;
 import data.Modulo;
+import data.SquadraAvversaria;
 import logics.LogicsCreaSquadraImpl;
 import logics.LogicsCreasquadra;
 import logics.LogicsImpostazioni;
 import logics.LogicsImpostazioniImpl;
 import logics.LogicsTorneo;
 import logics.LogicsTorneoImpl;
+import simulation.SimulatingMatchImpl;
 
 public class Torneo extends Base{
 
@@ -45,6 +50,7 @@ public class Torneo extends Base{
 	JButton[] buttonsp3 = new JButton[4];
 	JButton[] buttonsp2 = new JButton[2];
 	JButton buttonp1 = new JButton();
+	List<SquadraAvversaria> newList = new ArrayList<>();
 	
 	public Torneo(String nomeSquadra, String stemma, List<Calciatore> titolari, List<Calciatore> riserve, Modulo modulo) throws FileNotFoundException, ClassNotFoundException, IOException {
 					
@@ -54,7 +60,22 @@ public class Torneo extends Base{
 		
 		// Aggiungo il bottone Simula nel panelSud
 		JButton buttonSimula = new JButton("Simula");
-		// ... (Action Listener)
+		buttonSimula.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					simulaMatch();
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		this.panelSud.add(buttonSimula);
 		
 		//Mi occupo del PanelCenter
@@ -162,6 +183,76 @@ public class Torneo extends Base{
 		this.contentPane.add(panelSud,BorderLayout.SOUTH);
 		this.contentPane.add(panelCenter, BorderLayout.CENTER);
 		this.contentPane.add(panelNord, BorderLayout.NORTH);
+		
+	}
+	
+	
+	public void simulaMatch() throws FileNotFoundException, ClassNotFoundException, IOException {
+		final int numSquadre = logTor.getNumSquadre();
+		Map<String, Integer> map = new HashMap<>(); //map per il risultato
+		List<String> list = new ArrayList<>(); //lista per i nomi delle squadre che si sfidano 
+		String teamWin = new String(); //nome della squadra vincente
+		switch (numSquadre) {
+		case 16: 
+			
+			for (int i = 1; i < this.buttonsp5.length - 1; i = i + 2) {
+				//System.out.println((new SimulatingMatchImpl(logTor.getListAvversari().get(i),logTor.getListAvversari().get(i+1)).risultato()));
+				map = new SimulatingMatchImpl(logTor.getListAvversari().get(i),logTor.getListAvversari().get(i+1)).risultato();
+				list.addAll(map.keySet());			
+				if (map.get(list.get(0)) >= map.get(list.get(1))) {
+					teamWin = list.get(0);
+				} else {
+					teamWin = list.get(1);
+				}			
+				if (logTor.getListAvversari().get(i).getNomeSquadra().equals(teamWin)) {
+					this.newList.add(logTor.getListAvversari().get(i));
+				} else {
+					this.newList.add(logTor.getListAvversari().get(i+1));
+				}
+				list.clear();
+			}
+			logTor.setListAvversari(this.newList);
+			createLevel();
+			logTor.setNumSquadre(8);
+			break;
+		case 8:
+			// ...
+			logTor.setNumSquadre(4);
+			break;
+		case 4:
+			// ...
+			logTor.setNumSquadre(2);
+			break;
+		case 2:
+			//...
+			logTor.setNumSquadre(1);
+			break;
+		}
+	}
+	
+	
+	public void createLevel() {
+		final int numSquadre = logTor.getNumSquadre();
+		switch (numSquadre) {
+		case 16: 
+			//Aggiungo le varie squadre nel panel4 (la prima è sempre quella dell'utente solo per ora)
+			this.buttonsp4[0] = new JButton(this.logTor.getMiaSquadra().getNomeSquadra());
+			this.p4.add(this.buttonsp4[0]);
+			for (int i=0;i<this.logTor.getListAvversari().size();i++) {
+				this.buttonsp4[i+1] = new JButton(this.logTor.getListAvversari().get(i).getNomeSquadra());
+				this.p4.add(this.buttonsp4[i+1]);
+			}
+			break;
+		case 8:
+			// ...
+			break;
+		case 4:
+			// ...
+			break;
+		case 2:
+			//...
+			break;
+		}
 		
 	}
 	
