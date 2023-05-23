@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class SquadraUtente implements Squadra, Serializable{
 	private final int id;
@@ -76,5 +77,27 @@ public class SquadraUtente implements Squadra, Serializable{
 	public String toString() {
 		return "Squadra [nomeSquadra=" + nomeSquadra + ", stemma=" + stemma + ", modulo=" + modulo + ", liCalciatori="
 				+ liCalciatori + "]";
+	}
+
+	@Override
+	public Calciatore getCalciatoreById(int id) {
+		Calciatore c = null;
+		for (Calciatore calciatore : liCalciatori) {
+			if (calciatore.getId() == id) {
+				c = calciatore;
+			}
+		}
+		return c;
+	}
+
+	@Override
+	public Calciatore getPortiereTit() {
+		Calciatore portiere = null;
+		for (Calciatore calciatore : getTitolari()) {
+			if (calciatore.getRuolo().equals("P")) {
+				portiere = calciatore;
+			}
+		}
+		return portiere;
 	}
 }

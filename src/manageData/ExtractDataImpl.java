@@ -234,4 +234,11 @@ public class ExtractDataImpl implements ExtractData{
 		}
 		return li;
 	}
+
+	@Override
+	public Optional<Calciatore> getCalciatoreById(int id) {
+		return li.stream()
+				.filter(c -> c.getNominativo().equals(id))
+				.findFirst();
+	}
 }

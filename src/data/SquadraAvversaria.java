@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import manageData.ExtractData;
 import manageData.ExtractDataImpl;
@@ -54,25 +55,7 @@ public class SquadraAvversaria implements Squadra{
 
 	public List<Calciatore> getRiserve() {
 		return liRiserve;
-	}
-	/*
-	public List<String> getNomeTitolari() throws FileNotFoundException, ClassNotFoundException, IOException {
-		ExtractData ed = new ExtractDataImpl(li);
-		return ed.getNomeTitolari(nomeSquadra, modulo);
-	}
-	
-	public List<String> getNomeRiserve() throws FileNotFoundException, ClassNotFoundException, IOException {
-		ExtractData ed = new ExtractDataImpl(li);
-		return ed.getNomeRiserve(nomeSquadra, modulo);
-	}
-	
-	public List<String> getNomeCalciatori() throws FileNotFoundException, ClassNotFoundException, IOException {
-		ExtractData ed = new ExtractDataImpl(li);
-		return ed.getNomeCalciatori(nomeSquadra);
-	}
-	*/
-
-	
+	}	
 	
 	@Override
 	public List<Calciatore> getLiCalciatori() {
@@ -92,6 +75,28 @@ public class SquadraAvversaria implements Squadra{
 						.mapToDouble(c->c)
 						.average()
 						.orElse(0));
+	}
+
+	@Override
+	public Calciatore getCalciatoreById(int id) {
+		Calciatore c = null;
+		for (Calciatore calciatore : liCalciatori) {
+			if (calciatore.getId() == id) {
+				c = calciatore;
+			}
+		}
+		return c;
+	}
+
+	@Override
+	public Calciatore getPortiereTit() {
+		Calciatore portiere = null;
+		for (Calciatore calciatore : getTitolari()) {
+			if (calciatore.getRuolo().equals("P")) {
+				portiere = calciatore;
+			}
+		}
+		return portiere;
 	}
 	
 }

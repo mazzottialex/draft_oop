@@ -1,6 +1,7 @@
 package data;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface Squadra {
 	public List<Calciatore> getTitolari();
@@ -11,4 +12,6 @@ public interface Squadra {
 	public Modulo getModulo();
 	public int getId();
 	public List<Calciatore> getLiCalciatori();
+	public Calciatore getCalciatoreById(int id);
+	public Calciatore getPortiereTit();
 }
