@@ -22,6 +22,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	private ExtractData ex;
 	private Squadra miasquadra;
 	private List<SquadraAvversaria> listSquadre;
+	private int numSquadre;
 	
 	public LogicsTorneoImpl(String stagione, String nomeSquadra, String stemma, List<Calciatore> titolari, List<Calciatore> riserve, Modulo modulo) throws FileNotFoundException, ClassNotFoundException, IOException {
 		this.md = new ManageDataImpl(stagione);
@@ -54,6 +55,8 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 		this.listSquadre.add(new SquadraAvversaria(14, "SAL", Modulo.M442, li)); 
 		//System.out.println(this.listSquadre);
 		
+		this.numSquadre = 16;
+		
 	}
 
 	@Override
@@ -64,6 +67,16 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	@Override
 	public Squadra getMiaSquadra() {
 		return this.miasquadra;
+	}
+
+	@Override
+	public int getNumSquadre() {
+		return this.numSquadre;
+	}
+
+	@Override
+	public void setNumSquadre(int numSquadre) {
+		this.numSquadre = numSquadre;
 	}
 	
 }

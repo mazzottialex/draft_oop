@@ -10,4 +10,8 @@ public interface LogicsTorneo {
 	public List<SquadraAvversaria> getListAvversari();
 	
 	public Squadra getMiaSquadra(); 
+	
+	public int getNumSquadre();
+	
+	public void setNumSquadre(int numSquadre);
 }
