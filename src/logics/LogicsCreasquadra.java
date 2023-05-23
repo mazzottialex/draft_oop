@@ -54,4 +54,8 @@ public interface LogicsCreasquadra {
 	public String getStemma();
 	
 	public List<Calciatore> getTitolari();
+	
+	public int getRating();
+	
+	public void setRating(int rating);
 }

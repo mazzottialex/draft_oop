@@ -22,6 +22,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	private Calciatore calciatoreSelect; // calciatore selezionato per entrare in formazione 
 	private String ruoloSelect; //ruolo del calciatore selezionato per entrrare in formazione 
 	private int posSelect; //posizione del calciatore selezionato per entrare in formazione 
+	private int ratingSelect; //rating del calciatore selezionato per entrare in formazione
 	private List<Calciatore> squadra;
 	private String nomeSquadra;
 	private String stemma;
@@ -35,6 +36,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 		this.calciatoreSelect = new Calciatore(0,null,null,null,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 		this.ruoloSelect = null;
 		this.posSelect = -1;
+		this.ratingSelect = 0;
 		this.squadra = new ArrayList<>();
 		this.nomeSquadra = nomeSquadra;
 		this.stemma = stemma;
@@ -162,6 +164,16 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	@Override
 	public List<Calciatore> getTitolari() {
 		return this.squadra;
+	}
+
+	@Override
+	public int getRating() {
+		return this.ratingSelect;
+	}
+
+	@Override
+	public void setRating(int rating) {
+		this.ratingSelect = rating;
 	}
 
 }

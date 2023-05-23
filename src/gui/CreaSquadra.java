@@ -371,7 +371,7 @@ public class CreaSquadra extends Base{
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		for (int i = 0; i < this.buttonsPlayer.length; i++) {
-			this.buttonsPlayer[i] = new JButton("" + list.get(i).getNominativo());
+			this.buttonsPlayer[i] = new JButton("" + list.get(i).getNominativo() + " " + list.get(i).getRating().getX());
 			this.panelCalciatoriCenter.add(this.buttonsPlayer[i],gbc);
 			this.buttonsPlayer[i].setBackground(getColorByRuolo(ruolo));
 			final int ind = i;
@@ -381,6 +381,7 @@ public class CreaSquadra extends Base{
 					log.setCalciatoreSelect(list.get(ind));
 					log.setRuoloSelect(ruolo);
 					log.setposSelect(pos);
+					log.setRating(list.get(ind).getRating().getX());
 					//changeButtonPlayer(ruolo, pos);
 				}
 			});
@@ -403,7 +404,7 @@ public class CreaSquadra extends Base{
 		String s = new String();
 		switch (ruolo) {
 		case "A":
-			s = textFormat(log.getNamePlayer());
+			s = textFormat(log.getNamePlayer() + " " + log.getRating());
 			this.buttonsAtt[pos].setText(s);
 			this.buttonsAtt[pos].setHorizontalTextPosition(SwingConstants.LEFT);
 			if (this.buttonsAtt[pos].getActionListeners().length != 0) {
@@ -411,21 +412,21 @@ public class CreaSquadra extends Base{
 			}
 			break;
 		case "C":
-			s = textFormat(log.getNamePlayer());
+			s = textFormat(log.getNamePlayer() + " " + log.getRating());
 			this.buttonsCen[pos].setText(s);
 			if (this.buttonsCen[pos].getActionListeners().length != 0) {
 				this.buttonsCen[pos].removeActionListener(this.buttonsCen[pos].getActionListeners()[0]);
 			}
 			break;
 		case "D":
-			s = textFormat(log.getNamePlayer());
+			s = textFormat(log.getNamePlayer() + " " + log.getRating());
 			this.buttonsDif[pos].setText(s);
 			if (this.buttonsDif[pos].getActionListeners().length != 0) {
 				this.buttonsDif[pos].removeActionListener(this.buttonsDif[pos].getActionListeners()[0]);
 			}
 			break;
 		case "P":
-			s = textFormat(log.getNamePlayer());
+			s = textFormat(log.getNamePlayer() + " " + log.getRating());
 			this.buttonPor.setText(s);
 			if (this.buttonPor.getActionListeners().length != 0) {
 				this.buttonPor.removeActionListener(this.buttonPor.getActionListeners()[0]);
@@ -455,12 +456,13 @@ public class CreaSquadra extends Base{
 	
 	public String textFormat(String s) {	
 		String label = "<html>";
-		for (int i=0;i<s.length();i++) {
+		for (int i=0;i<s.length() - 2;i++) {
 			label = label + s.charAt(i);
 			if ((i % 14 == 0) && (i!= 0)) {
 				label = label + "<br>";
 			}
-		}		
+		}
+		label = label + s.charAt(s.length()-2) + s.charAt(s.length()-1);
 		return label;
 	}
 	
