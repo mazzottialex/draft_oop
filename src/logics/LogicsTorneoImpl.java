@@ -78,5 +78,10 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	public void setNumSquadre(int numSquadre) {
 		this.numSquadre = numSquadre;
 	}
+
+	@Override
+	public void setListAvversari(List<SquadraAvversaria> list) {
+		this.listSquadre = list;
+	}
 	
 }
