@@ -10,9 +10,9 @@ import data.SquadraAvversaria;
 
 public interface LogicsPartita {
 	public void scorers() throws FileNotFoundException, ClassNotFoundException, IOException;
-	public List<Integer> getScorers(SquadraAvversaria s);
-	public List<Integer> getMinGol1();
-	public List<Integer> getMinGol2();
+	public List<Integer> getMinGol(SquadraAvversaria s);
+//	public List<Integer> getMinGol1();
+//	public List<Integer> getMinGol2();
 	public void addScorer(SquadraAvversaria s);
 	public void sanctions();
 }

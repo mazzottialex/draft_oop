@@ -45,7 +45,7 @@ public class LogicsPartitaImpl implements LogicsPartita{
 	}
 	
 	@Override
-	public List<Integer> getScorers(SquadraAvversaria s) {
+	public List<Integer> getMinGol(SquadraAvversaria s) {
 		if (s == s1) {
 			return list1;
 		} else if (s == s2){
@@ -77,15 +77,15 @@ public class LogicsPartitaImpl implements LogicsPartita{
 		return list;
 	}
 	
-	@Override
-	public List<Integer> getMinGol1() {
-		return list1;
-	}
-	
-	@Override
-	public List<Integer> getMinGol2() {
-		return list2;
-	}
+//	@Override
+//	public List<Integer> getMinGol1() {
+//		return list1;
+//	}
+//	
+//	@Override
+//	public List<Integer> getMinGol2() {
+//		return list2;
+//	}
 
 	@Override
 	public void addScorer(SquadraAvversaria s) {

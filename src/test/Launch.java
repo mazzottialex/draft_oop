@@ -14,7 +14,8 @@ import data.Modulo;
 import data.SquadraAvversaria;
 import gui.Home;
 import gui.Partita;
-import gui.ProgressBarExample;
+import gui.Rigori;
+import gui.Partita;
 import gui.Start;
 import logics.LogicsHome;
 import logics.LogicsHomeImpl;
@@ -58,21 +59,21 @@ public class Launch {
 				li = cr.updateRating();
 				SquadraAvversaria nap = new SquadraAvversaria(0, "NAP", Modulo.M442, li);				
 				SquadraAvversaria laz = new SquadraAvversaria(0, "LAZ", Modulo.M442, li);
-//				Partita p = new Partita(nap, laz);
-//				javax.swing.SwingUtilities.invokeLater(new Runnable() {
+
+//				SwingUtilities.invokeLater(new Runnable() {
+//		            @Override
 //		            public void run() {
-//		                p.createAndShowGUI();
+//		                try {
+//							new Partita(nap, laz).createAndShowGUI();
+//						} catch (ClassNotFoundException | IOException e) {
+//							e.printStackTrace();
+//						}
 //		            }
 //		        });
-				SwingUtilities.invokeLater(new Runnable() {
-		            @Override
-		            public void run() {
-		                try {
-							new ProgressBarExample(nap, laz).createAndShowGUI();
-						} catch (ClassNotFoundException | IOException e) {
-							e.printStackTrace();
-						}
-		            }
+				
+				SwingUtilities.invokeLater(() -> {
+		            Rigori gui = new Rigori(nap, laz);
+		            gui.createAndShowGUI();
 		        });
 			}
 		} else {
