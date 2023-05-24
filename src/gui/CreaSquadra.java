@@ -75,11 +75,6 @@ public class CreaSquadra extends Base{
 		buttonIniziaTorneo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				List<Calciatore> riserve = new ArrayList<>();
-				riserve.addAll(log.getRandom("P", 2));
-				riserve.addAll(log.getRandom("D", 3));
-				riserve.addAll(log.getRandom("C", 3));
-				riserve.addAll(log.getRandom("A", 3));
 				try {
 					changeJPanel(new Torneo(log.getSquadra(), li));
 				} catch (FileNotFoundException e1) {

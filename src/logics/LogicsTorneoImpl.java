@@ -19,8 +19,8 @@ import simulation.SimulatingMatchImpl;
 
 public class LogicsTorneoImpl implements LogicsTorneo {
 
-	private ManageData md;
-	private ExtractData ex;
+	//private ManageData md;
+	//private ExtractData ex;
 	private Squadra miasquadra;
 	private List<SquadraAvversaria> listSquadre;
 	//private List<Integer> golFatti;

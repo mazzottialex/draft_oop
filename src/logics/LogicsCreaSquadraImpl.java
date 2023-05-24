@@ -26,6 +26,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	private int posSelect; //posizione del calciatore selezionato per entrare in formazione 
 	private int ratingSelect; //rating del calciatore selezionato per entrare in formazione
 	private List<Calciatore> liSquadra;
+	private List<Calciatore> riserve;
 	private String nomeSquadra;
 	private String stemma;
 	private Squadra squadra;
@@ -43,11 +44,16 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 		this.liSquadra = new ArrayList<>();
 		this.nomeSquadra = nomeSquadra;
 		this.stemma = stemma;
+		riserve = new ArrayList<>();
+		riserve.addAll(this.getRandom("P", 2));
+		riserve.addAll(this.getRandom("D", 3));
+		riserve.addAll(this.getRandom("C", 3));
+		riserve.addAll(this.getRandom("A", 3));
 		
 	}
 	
 	public Squadra getSquadra() {
-		return new SquadraUtente(nomeSquadra, stemma, moduloSelect, liSquadra, liSquadra); //sistemare titolari e riserve
+		return new SquadraUtente(nomeSquadra, stemma, moduloSelect, liSquadra, riserve); //sistemare titolari e riserve
 	}
 	
 	public List<Modulo> getModuli() {
