@@ -300,7 +300,11 @@ public class CreaSquadra extends Base{
 			final int ind = i;
 			this.buttonsAtt[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					choosePlayerFirstTime("A",ind);
+					if (map.get(buttonsAtt[ind]).isEmpty()) {
+						choosePlayerFirstTime("A",ind);
+					} else {
+						choosePlayer("A",ind);
+					}
 				}
 			});
 			this.panelCenter.add(this.buttonsAtt[i],gbc);
@@ -318,7 +322,11 @@ public class CreaSquadra extends Base{
 			final int ind = i;
 			this.buttonsCen[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					choosePlayerFirstTime("C",ind);
+					if (map.get(buttonsCen[ind]).isEmpty()) {
+						choosePlayerFirstTime("C",ind);
+					} else {
+						choosePlayer("C",ind);
+					}
 				}
 			});
 			this.panelCenter.add(this.buttonsCen[i],gbc);
@@ -337,10 +345,9 @@ public class CreaSquadra extends Base{
 			this.buttonsDif[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if (map.get(buttonsDif[ind]).isEmpty()) {
-						System.out.println("é vuota");
 						choosePlayerFirstTime("D",ind);
 					} else {
-						System.out.println("é piena");
+						choosePlayer("D",ind);
 					}
 					
 				}
@@ -357,7 +364,11 @@ public class CreaSquadra extends Base{
 		this.buttonPor.setBackground(Color.YELLOW);
 		this.buttonPor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				choosePlayerFirstTime("P", 0);
+				if (map.get(buttonPor).isEmpty()) {
+					choosePlayerFirstTime("P",0);
+				} else {
+					choosePlayer("P",0);
+				}
 			}
 		});
 		this.panelCenter.add(this.buttonPor,gbc);
@@ -392,6 +403,31 @@ public class CreaSquadra extends Base{
 		addPlayers(ruolo, pos, list);
 		
 	}
+	
+	public void choosePlayer(String ruolo, int pos) {
+		
+		List<Calciatore> list = new ArrayList<>();
+		
+		switch (ruolo) {
+		case "A":
+			list = map.get(buttonsAtt[pos]);
+			break;
+		case "C":
+			list = map.get(buttonsCen[pos]);
+			break;
+		case "D":
+			list = map.get(buttonsDif[pos]);
+			break;
+		case "P":
+			list = map.get(buttonPor);
+			break;
+		}
+		
+		System.out.println(list);
+		
+		addPlayers(ruolo, pos, list);
+	}
+	
 	
 	public void addPlayers(String ruolo, int pos, List<Calciatore> list) {
 		this.panelCalciatoriCenter.removeAll();
