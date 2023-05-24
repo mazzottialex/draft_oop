@@ -55,7 +55,7 @@ public class Torneo extends Base{
 	
 	public Torneo(Squadra squadra, List<Calciatore> li) throws FileNotFoundException, ClassNotFoundException, IOException {
 					
-		this.logTor = new LogicsTorneoImpl(Squadra squadra, List<Calciatore> li);
+		this.logTor = new LogicsTorneoImpl(squadra, li);
 		
 		this.contentPane.setLayout(new BorderLayout());
 		
