@@ -30,7 +30,7 @@ public class SquadraGui extends Base {
 	private final List<String> ruoli=List.of("A","C","D","P");
 	private JPanel panelSquadra=new JPanel();
 	
-	public SquadraGui(Squadra squadra) {
+	public SquadraGui(Squadra squadra, List<Calciatore> li) {
 		GridBagConstraints gbc=new GridBagConstraints();
 		gbc.insets=new Insets(5, 5, 2, 2);
 		GridBagLayout layout=new GridBagLayout();
@@ -44,7 +44,12 @@ public class SquadraGui extends Base {
 		btnProsegui.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//
+				try {
+					changeJPanel(new Torneo(squadra, li));
+				} catch (ClassNotFoundException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		if(stagione!=null)
@@ -117,7 +122,7 @@ public class SquadraGui extends Base {
 	}
 	
 	public SquadraGui(Squadra squadra, String stagioneP, Boolean online) {
-		this(squadra);
+		this(squadra, null);
 		this.stagione=stagioneP;
 		this.online=online;
 		

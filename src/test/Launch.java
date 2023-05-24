@@ -23,7 +23,7 @@ import data.Modulo;
 import data.SquadraAvversaria;
 import gui.Home;
 import gui.Partita;
-import gui.Rigori;
+//import gui.Rigori;
 import gui.Partita;
 import gui.Start;
 import logics.LogicsHome;
@@ -78,6 +78,21 @@ public class Launch {
 							e.printStackTrace();
 						}
 		            }
+				});
+//				SwingUtilities.invokeLater(new Runnable() {
+//		            @Override
+//		            public void run() {
+//		                try {
+//							new Partita(nap, laz).createAndShowGUI();
+//						} catch (ClassNotFoundException | IOException e) {
+//							e.printStackTrace();
+//						}
+//		            }
+//		        });
+				
+				SwingUtilities.invokeLater(() -> {
+		            //Rigori gui = new Rigori(nap, laz);
+		            //gui.createAndShowGUI();
 		        });
 				
 //				SwingUtilities.invokeLater(() -> {

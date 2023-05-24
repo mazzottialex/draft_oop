@@ -6,6 +6,8 @@ import java.util.*;
 
 import data.Calciatore;
 import data.Modulo;
+import data.Squadra;
+import data.SquadraUtente;
 import manageData.ExtractData;
 import manageData.ExtractDataImpl;
 import manageData.ManageData;
@@ -23,9 +25,11 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	private String ruoloSelect; //ruolo del calciatore selezionato per entrrare in formazione 
 	private int posSelect; //posizione del calciatore selezionato per entrare in formazione 
 	private int ratingSelect; //rating del calciatore selezionato per entrare in formazione
-	private List<Calciatore> squadra;
+	private List<Calciatore> liSquadra;
+	private List<Calciatore> riserve;
 	private String nomeSquadra;
 	private String stemma;
+	private Squadra squadra;
 	
 	public LogicsCreaSquadraImpl(String nomeSquadra, String stemma, List<Calciatore> li) throws FileNotFoundException, ClassNotFoundException, IOException {
 		this.moduloSelect = Modulo.M343;
@@ -37,9 +41,19 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 		this.ruoloSelect = null;
 		this.posSelect = -1;
 		this.ratingSelect = 0;
-		this.squadra = new ArrayList<>();
+		this.liSquadra = new ArrayList<>();
 		this.nomeSquadra = nomeSquadra;
 		this.stemma = stemma;
+		riserve = new ArrayList<>();
+		riserve.addAll(this.getRandom("P", 2));
+		riserve.addAll(this.getRandom("D", 3));
+		riserve.addAll(this.getRandom("C", 3));
+		riserve.addAll(this.getRandom("A", 3));
+		
+	}
+	
+	public Squadra getSquadra() {
+		return new SquadraUtente(nomeSquadra, stemma, moduloSelect, liSquadra, riserve); //sistemare titolari e riserve
 	}
 	
 	public List<Modulo> getModuli() {
@@ -135,17 +149,17 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 
 	@Override
 	public void addPlayerInTeam(Calciatore calciatore) {
-		this.squadra.add(calciatore);
+		this.liSquadra.add(calciatore);
 	}
 
 	@Override
 	public void clearTeam() {
-		this.squadra.clear();
+		this.liSquadra.clear();
 	}
 
 	@Override
 	public boolean teamComplete() {
-		if (this.squadra.size() == LogicsCreaSquadraImpl.NUM_PLAYER_IN_TEAM) {
+		if (this.liSquadra.size() == LogicsCreaSquadraImpl.NUM_PLAYER_IN_TEAM) {
 			return true;
 		}
 		return false;
@@ -163,7 +177,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 
 	@Override
 	public List<Calciatore> getTitolari() {
-		return this.squadra;
+		return this.liSquadra;
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package logics;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import data.Squadra;
@@ -16,4 +18,6 @@ public interface LogicsTorneo {
 	public int getNumSquadre();
 	
 	public void setNumSquadre(int numSquadre);
+	
+	public void simulaMatch() throws FileNotFoundException, ClassNotFoundException, IOException;
 }

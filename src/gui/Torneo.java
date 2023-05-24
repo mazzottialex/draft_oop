@@ -19,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 
 import data.Calciatore;
 import data.Modulo;
+import data.Squadra;
 import data.SquadraAvversaria;
 import logics.LogicsCreaSquadraImpl;
 import logics.LogicsCreasquadra;
@@ -32,29 +33,32 @@ public class Torneo extends Base{
 
 	LogicsTorneo logTor;
 	JPanel panelSud = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-	GridLayout gl = new GridLayout(5,1);
+	GridLayout gl = new GridLayout(6,1);
 	JPanel panelCenter = new JPanel(gl);
 	JPanel panelNord = new JPanel(new FlowLayout(FlowLayout.CENTER));
+	GridLayout g0 = new GridLayout(1,1);
 	GridLayout g1 = new GridLayout(1,1);
 	GridLayout g2 = new GridLayout(1,2);
 	GridLayout g3 = new GridLayout(1,4);
 	GridLayout g4 = new GridLayout(1,8);
 	GridLayout g5 = new GridLayout(1,16);
-	JPanel p1 = new JPanel(g1);  //Panel a riga 0 (squadra vincitrice)
-	JPanel p2 = new JPanel(g2);	 //Panel a riga 1 --> 2 squadre
-	JPanel p3 = new JPanel(g3);	 //Panel a riga 2 --> 4 squadre
-	JPanel p4 = new JPanel(g4);  //Panel a riga 3 --> 8 squadre
-	JPanel p5 = new JPanel(g5);  //Panel a riga 4 --> 16 squadre
+	JPanel p0 = new JPanel(g0);  //Panel a riga 0 (squadra vincitrice)
+	JPanel p1 = new JPanel(g1);  //Panel a riga 1 --> 2 squadre --> 1 partita
+	JPanel p2 = new JPanel(g2);	 //Panel a riga 2 --> 4 squadre --> 2 partite
+	JPanel p3 = new JPanel(g3);	 //Panel a riga 3 --> 8 squadre ---> 4 partite
+	JPanel p4 = new JPanel(g4);  //Panel a riga 4 --> 16 squadre --> 8 partite
+	JPanel p5 = new JPanel(g5);  //Panel a riga 5 --> 16 squadre
 	JButton[] buttonsp5 = new JButton[16];
 	JButton[] buttonsp4 = new JButton[8];
 	JButton[] buttonsp3 = new JButton[4];
 	JButton[] buttonsp2 = new JButton[2];
 	JButton buttonp1 = new JButton();
-	List<SquadraAvversaria> newList = new ArrayList<>();
+	JButton buttonp0 = new JButton();
 	
-	public Torneo(String nomeSquadra, String stemma, List<Calciatore> titolari, List<Calciatore> riserve, Modulo modulo) throws FileNotFoundException, ClassNotFoundException, IOException {
+	
+	public Torneo(Squadra squadra, List<Calciatore> li) throws FileNotFoundException, ClassNotFoundException, IOException {
 					
-		this.logTor = new LogicsTorneoImpl("2022-2023", nomeSquadra, stemma, titolari, riserve, modulo);
+		this.logTor = new LogicsTorneoImpl(squadra, li);
 		
 		this.contentPane.setLayout(new BorderLayout());
 		
@@ -63,7 +67,7 @@ public class Torneo extends Base{
 		buttonSimula.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					simulaMatch();
+					logTor.simulaMatch();
 				} catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -88,6 +92,7 @@ public class Torneo extends Base{
 		p2.setBorder(new EmptyBorder(20,200,20,200));
 		g2.setHgap(400);
 		p1.setBorder(new EmptyBorder(20,450,20,450));
+		p0.setBorder(new EmptyBorder(20,450,20,450));
 		
 		//Aggiungo le varie squadre nel panel5 (la prima è sempre quella dell'utente)
 		this.buttonsp5[0] = new JButton(this.logTor.getMiaSquadra().getNomeSquadra());
@@ -98,6 +103,14 @@ public class Torneo extends Base{
 			this.p5.add(this.buttonsp5[i+1]);
 		}
 		
+		System.out.println(this.logTor.getListAvversari().size());
+		int cont = 1;
+		this.buttonsp4[0] = new JButton(this.logTor.getMiaSquadra().getNomeSquadra() + " - " + this.logTor.getListAvversari().get(0).getNomeSquadra());
+		this.p4.add(this.buttonsp4[0]);
+		for (int i=1;i<this.logTor.getListAvversari().size() - 2;i = i + 2, cont++) {
+			this.buttonsp4[cont] = new JButton(this.logTor.getListAvversari().get(i).getNomeSquadra() + " - " + this.logTor.getListAvversari().get(i+1).getNomeSquadra());
+			this.p4.add(this.buttonsp4[cont]);
+		}
 		
 		
 		/*
@@ -165,12 +178,14 @@ public class Torneo extends Base{
 		p1.add(f1);
 		*/
 		
+		p0.setBackground(new Color(0,64,128));
 		p1.setBackground(new Color(0,64,128));
 		p2.setBackground(new Color(0,64,128));
 		p3.setBackground(new Color(0,64,128));
 		p4.setBackground(new Color(0,64,128));
 		p5.setBackground(new Color(0,64,128));
 		
+		this.panelCenter.add(p0);
 		this.panelCenter.add(p1);
 		this.panelCenter.add(p2);
 		this.panelCenter.add(p3);
@@ -186,7 +201,7 @@ public class Torneo extends Base{
 		
 	}
 	
-	
+	/*
 	public void simulaMatch() throws FileNotFoundException, ClassNotFoundException, IOException {
 		final int numSquadre = logTor.getNumSquadre();
 		Map<String, Integer> map = new HashMap<>(); //map per il risultato
@@ -229,7 +244,7 @@ public class Torneo extends Base{
 			break;
 		}
 	}
-	
+	*/
 	
 	public void createLevel() {
 		final int numSquadre = logTor.getNumSquadre();

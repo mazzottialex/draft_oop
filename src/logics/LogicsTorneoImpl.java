@@ -15,26 +15,25 @@ import manageData.ManageData;
 import manageData.ManageDataImpl;
 import rating.CalcoloRating;
 import rating.CalcoloRatingImpl;
+import simulation.SimulatingMatchImpl;
 
 public class LogicsTorneoImpl implements LogicsTorneo {
 
-	private ManageData md;
-	private ExtractData ex;
+	//private ManageData md;
+	//private ExtractData ex;
 	private Squadra miasquadra;
 	private List<SquadraAvversaria> listSquadre;
+	//private List<Integer> golFatti;
 	private int numSquadre;
+	private List<Calciatore> li;
 	
-	public LogicsTorneoImpl(String stagione, String nomeSquadra, String stemma, List<Calciatore> titolari, List<Calciatore> riserve, Modulo modulo) throws FileNotFoundException, ClassNotFoundException, IOException {
-		this.md = new ManageDataImpl(stagione);
-		this.md.LoadData();
-		List<Calciatore> li = md.getLi();
-		CalcoloRating r = new CalcoloRatingImpl(li);
-		li = r.updateRating();
-		ex = new ExtractDataImpl(li);
+	public LogicsTorneoImpl(Squadra squadra, List<Calciatore> li) throws FileNotFoundException, ClassNotFoundException, IOException {
+		this.li=li;
 		this.listSquadre = new ArrayList<>();
+		//this.golFatti = new ArrayList<>();
 		
 		//Creo la squadr dell'utente
-		this.miasquadra = new SquadraUtente(nomeSquadra, stemma, modulo, titolari, riserve);
+		this.miasquadra = squadra;
 		//System.out.println(this.miasquadra);
 		
 		// Creo le squadre avversarie (quelle esistenti in serie A)
@@ -83,5 +82,58 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	public void setListAvversari(List<SquadraAvversaria> list) {
 		this.listSquadre = list;
 	}
-	
+
+	@Override
+	public void simulaMatch() {
+		List<SquadraAvversaria> newList = new ArrayList<>();
+		final int numSquadre = this.getNumSquadre();
+		Map<String, Integer> map = new HashMap<>(); //map per il risultato
+		List<String> list = new ArrayList<>(); //lista per i nomi delle squadre che si sfidano 
+		String teamWin = new String(); //nome della squadra vincente
+		switch (numSquadre) {
+		case 16: 
+			
+			for (int i = 1; i < numSquadre - 1; i = i + 2) {
+				try {
+					map = new SimulatingMatchImpl(this.getListAvversari().get(i),this.getListAvversari().get(i+1)).risultato();
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				list.addAll(map.keySet());			
+				if (map.get(list.get(0)) >= map.get(list.get(1))) {
+					teamWin = list.get(0);
+				} else {
+					teamWin = list.get(1);
+				}			
+				if (this.getListAvversari().get(i).getNomeSquadra().equals(teamWin)) {
+					newList.add(this.getListAvversari().get(i));
+				} else {
+					newList.add(this.getListAvversari().get(i+1));
+				}
+				list.clear();
+			}
+			this.setListAvversari(newList);
+			System.out.println(newList);
+			this.setNumSquadre(8);
+			break;
+		case 8:
+			// ...
+			this.setNumSquadre(4);
+			break;
+		case 4:
+			// ...
+			this.setNumSquadre(2);
+			break;
+		case 2:
+			//...
+			this.setNumSquadre(1);
+			break;
+		}
+		
+	}
+
 }

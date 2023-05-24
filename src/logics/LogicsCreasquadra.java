@@ -4,10 +4,13 @@ import java.util.*;
 
 import data.Calciatore;
 import data.Modulo;
+import data.Squadra;
 import manageData.ExtractData;
 
 public interface LogicsCreasquadra {
 
+	public Squadra getSquadra();
+	
 	public List<Modulo> getModuli();
 	
 	public void setModulo(Modulo mod);
