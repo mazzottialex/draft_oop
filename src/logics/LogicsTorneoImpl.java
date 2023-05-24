@@ -23,18 +23,14 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	private Squadra miasquadra;
 	private List<SquadraAvversaria> listSquadre;
 	private int numSquadre;
+	private List<Calciatore> li;
 	
-	public LogicsTorneoImpl(String stagione, String nomeSquadra, String stemma, List<Calciatore> titolari, List<Calciatore> riserve, Modulo modulo) throws FileNotFoundException, ClassNotFoundException, IOException {
-		this.md = new ManageDataImpl(stagione);
-		this.md.LoadData();
-		List<Calciatore> li = md.getLi();
-		CalcoloRating r = new CalcoloRatingImpl(li);
-		li = r.updateRating();
-		ex = new ExtractDataImpl(li);
+	public LogicsTorneoImpl(Squadra squadra, List<Calciatore> li) throws FileNotFoundException, ClassNotFoundException, IOException {
+		this.li=li;
 		this.listSquadre = new ArrayList<>();
 		
 		//Creo la squadr dell'utente
-		this.miasquadra = new SquadraUtente(nomeSquadra, stemma, modulo, titolari, riserve);
+		this.miasquadra = squadra;
 		//System.out.println(this.miasquadra);
 		
 		// Creo le squadre avversarie (quelle esistenti in serie A)

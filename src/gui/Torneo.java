@@ -19,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 
 import data.Calciatore;
 import data.Modulo;
+import data.Squadra;
 import data.SquadraAvversaria;
 import logics.LogicsCreaSquadraImpl;
 import logics.LogicsCreasquadra;
@@ -52,9 +53,9 @@ public class Torneo extends Base{
 	JButton buttonp1 = new JButton();
 	List<SquadraAvversaria> newList = new ArrayList<>();
 	
-	public Torneo(String nomeSquadra, String stemma, List<Calciatore> titolari, List<Calciatore> riserve, Modulo modulo) throws FileNotFoundException, ClassNotFoundException, IOException {
+	public Torneo(Squadra squadra, List<Calciatore> li) throws FileNotFoundException, ClassNotFoundException, IOException {
 					
-		this.logTor = new LogicsTorneoImpl("2022-2023", nomeSquadra, stemma, titolari, riserve, modulo);
+		this.logTor = new LogicsTorneoImpl(Squadra squadra, List<Calciatore> li);
 		
 		this.contentPane.setLayout(new BorderLayout());
 		
