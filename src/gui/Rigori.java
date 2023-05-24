@@ -27,6 +27,7 @@ public class Rigori extends Base {
     private int tiri2;
     private int totTiri;
     private SquadraAvversaria winner;
+    private JButton chiudi;
     
     public Rigori(SquadraAvversaria s1, SquadraAvversaria s2) {
     	this.s1 = s1;
@@ -60,7 +61,14 @@ public class Rigori extends Base {
             inizia.setEnabled(false);
             start();
         });
-        add(inizia, BorderLayout.SOUTH);
+        chiudi = new JButton("chiudi");
+        chiudi.addActionListener(e -> {
+        	// TODO
+        	dispose();
+        });
+        chiudi.setEnabled(false);
+        add(inizia, BorderLayout.NORTH);
+        add(chiudi, BorderLayout.SOUTH);
     }
     
     private Iterator<Calciatore> backIterator(List<Calciatore> list) {
@@ -79,6 +87,7 @@ public class Rigori extends Base {
             	if ((((tiri1 + tiri2) >= totTiri) && tiri1 == tiri2 && gol1 != gol2) || ((tiri1 + tiri2) < totTiri && ((((totTiri / 2) - tiri1) + gol1) < gol2 || (((totTiri / 2) - tiri2) + gol2) < gol1))) {
             		timer.cancel();
                     if (gol1 > gol2) {
+                    	chiudi.setEnabled(true);
                     	winner = s1;
                         result.setText("Sfida terminata. Squadra vincente: " +  s1.getNomeSquadra());
                     } else {
