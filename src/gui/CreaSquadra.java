@@ -169,7 +169,6 @@ public class CreaSquadra extends Base{
 			buttons[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					buttonSelect.add(log.getModuli().get(ind));
-					//System.out.println(buttonSelect);
 				}
 			});
 			panelModuloCenter.add(buttons[i],gbc);
@@ -236,7 +235,7 @@ public class CreaSquadra extends Base{
 			
 	}
 	
-	
+	/*metodo per cambiare la label del framePrincipale*/
 	public void changeButtonModulo() {
 		//gbc.insets = new Insets(8,0,8,8);
 		gbc.gridx = 1;
@@ -247,6 +246,7 @@ public class CreaSquadra extends Base{
 		panelSud.validate();		
 	}
 	
+	/*metodo che ritorna la X del gbc*/
 	public int getGbcX(String s) {
 		switch (s) {
 		case "A":
@@ -378,7 +378,7 @@ public class CreaSquadra extends Base{
 	
 	
 	
-	/* metodo che crea i 5 bottoni nel frame frameCalciatori*/
+	/* metodo che crea la list e la mette dentro Map<JButton, List<Calciatore>*/
 	public void choosePlayerFirstTime(String ruolo, int pos) {
 
 		List<Calciatore> list = this.log.getRandom(ruolo, NUM_PLAYER);
@@ -398,16 +398,16 @@ public class CreaSquadra extends Base{
 			map.put(buttonPor, list);
 			break;
 		}
-		System.out.println(map);
 		
-		addPlayers(ruolo, pos, list);
-		
+		addPlayers(ruolo, pos, list);		
 	}
 	
+	/* metodo chiamato dopo che è gia stato chiamato choosePlayerFirstTime*/
 	public void choosePlayer(String ruolo, int pos) {
 		
 		List<Calciatore> list = new ArrayList<>();
 		
+		// list è uguale a quello che c'è dentro il Value della map
 		switch (ruolo) {
 		case "A":
 			list = map.get(buttonsAtt[pos]);
@@ -422,13 +422,11 @@ public class CreaSquadra extends Base{
 			list = map.get(buttonPor);
 			break;
 		}
-		
-		System.out.println(list);
-		
+				
 		addPlayers(ruolo, pos, list);
 	}
 	
-	
+	/* metodo per disegnare nel frameCalciatori i 5 calciatori che si possono selezionare*/
 	public void addPlayers(String ruolo, int pos, List<Calciatore> list) {
 		this.panelCalciatoriCenter.removeAll();
 		this.panelCalciatoriCenter.repaint();
@@ -452,7 +450,6 @@ public class CreaSquadra extends Base{
 					log.setRuoloSelect(ruolo);
 					log.setposSelect(pos);
 					log.setRating(list.get(ind).getRating().getX());
-					//changeButtonPlayer(ruolo, pos);
 				}
 			});
 			gbc.gridx++;
@@ -507,7 +504,7 @@ public class CreaSquadra extends Base{
 		
 	}
 	
-	
+	/* metodo che ritorna il colore in base al ruolo*/
 	public Color getColorByRuolo(String ruolo) {
 		switch (ruolo) {
 		case "A":
@@ -523,6 +520,7 @@ public class CreaSquadra extends Base{
 		}
 	}
 	
+	/* metodo che formatta la stringa dei nomi dei giocatori*/
 	public String textFormat(String s) {	
 		String label = "<html>";
 		for (int i=0;i<s.length() - 2;i++) {
@@ -535,6 +533,7 @@ public class CreaSquadra extends Base{
 		return label;
 	}
 	
+	/* metodo per inizializzare la mappa all'inizio e quando si sceglie il modulo*/
 	public void initMap() {
 		this.map.clear();
 		
