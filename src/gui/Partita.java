@@ -55,12 +55,12 @@ public class Partita extends Base {
 		jlNomeSq1 = new JLabel(s1.getNomeSquadra(), SwingConstants.RIGHT);
 		jlScoreSq1 = new JLabel("0", SwingConstants.RIGHT);
 		jlScoreSq1.setVerticalAlignment(SwingConstants.TOP);
-		jlTabSq1 = new JLabel("sq1Label", SwingConstants.RIGHT);
+		jlTabSq1 = new JLabel("", SwingConstants.RIGHT);
 		jlTabSq1.setVerticalAlignment(SwingConstants.TOP);
 		jlNomeSq2 = new JLabel(s2.getNomeSquadra(), SwingConstants.LEFT);
 		jlScoreSq2 = new JLabel("0", SwingConstants.LEFT);
 		jlScoreSq2.setVerticalAlignment(SwingConstants.TOP);
-		jlTabSq2 = new JLabel("sq2Label", SwingConstants.LEFT);
+		jlTabSq2 = new JLabel("", SwingConstants.LEFT);
 		jlTabSq2.setVerticalAlignment(SwingConstants.TOP);
 		startStop = new JButton("Play");
 		jbSubs = new JButton("Subs");
@@ -292,18 +292,31 @@ public class Partita extends Base {
     
     public void changeScore() throws FileNotFoundException, ClassNotFoundException, IOException {
         if (logics.getMinGol(s1).contains(progressBar.getValue())) {
-//        	jlTabSq1.setText("<html>Prima riga<br>Seconda riga</html>");
         	tab1.add(logics.addScorer(s1));
         	String s = "<html>";
+        	String autogol = "";
         	for (Calciatore calciatore : tab1) {
-				s = s + calciatore.getNominativo() + "<br>";
+        		if (s1.getLiCalciatori().contains(calciatore)) {
+        			autogol = " (AG)";
+        		}
+				s = s + calciatore.getNominativo() + autogol + "<br>";
 			}
         	s += "</html>";
         	jlTabSq1.setText(s);
         	jlScoreSq1.setText(Integer.toString(Integer.valueOf(jlScoreSq1.getText()) + 1));
         }
         if (logics.getMinGol(s2).contains(progressBar.getValue())) {
-        	logics.addScorer(s2);
+        	tab2.add(logics.addScorer(s2));
+        	String s = "<html>";
+        	String autogol = "";
+        	for (Calciatore calciatore : tab2) {
+        		if (s2.getLiCalciatori().contains(calciatore)) {
+        			autogol = " (AG)";
+        		}
+				s = s + calciatore.getNominativo() + autogol + "<br>";
+			}
+        	s += "</html>";
+        	jlTabSq2.setText(s);
         	jlScoreSq2.setText(Integer.toString(Integer.valueOf(jlScoreSq2.getText()) + 1));
         }
 	}

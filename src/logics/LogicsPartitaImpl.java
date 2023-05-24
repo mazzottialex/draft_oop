@@ -104,46 +104,48 @@ public class LogicsPartitaImpl implements LogicsPartita{
 	@Override
 	public Calciatore addScorer(SquadraAvversaria s) {
 		// TODO Auto-generated method stub
-		int g1 = s.getTitolari().get(1).getGol();
-		int g2 = s.getTitolari().get(2).getGol();
-		int g3 = s.getTitolari().get(3).getGol();
-		int g4 = s.getTitolari().get(4).getGol();
-		int g5 = s.getTitolari().get(5).getGol();
-		int g6 = s.getTitolari().get(6).getGol();
-		int g7 = s.getTitolari().get(7).getGol();
-		int g8 = s.getTitolari().get(8).getGol();
-		int g9 = s.getTitolari().get(9).getGol();
-		int g10 = s.getTitolari().get(10).getGol();
-		int totGol = 0;
+		double g1 = s.getTitolari().get(1).getGol();
+		double g2 = s.getTitolari().get(2).getGol();
+		double g3 = s.getTitolari().get(3).getGol();
+		double g4 = s.getTitolari().get(4).getGol();
+		double g5 = s.getTitolari().get(5).getGol();
+		double g6 = s.getTitolari().get(6).getGol();
+		double g7 = s.getTitolari().get(7).getGol();
+		double g8 = s.getTitolari().get(8).getGol();
+		double g9 = s.getTitolari().get(9).getGol();
+		double g10 = s.getTitolari().get(10).getGol();
+		double totGol = 0;
 		for (Calciatore calciatore : s.getTitolari()) {
-		    int r = calciatore.getRating().getX();
+			double r = calciatore.getGol();
 		    totGol += r;
 		}
-		int tot = totGol + (int) ((totGol / 100) + OWNGOAL_RATE);
-		int random = new Random().nextInt(tot);
+//		double tot = totGol + ((totGol / 100) + OWNGOAL_RATE);
+		double autogol = (totGol * OWNGOAL_RATE) / 100;
+		double random = new Random().nextDouble(totGol + autogol);
 		if (random <= g1) {
 		    return s.getTitolari().get(1);
-		} else if (random > g1 && random <= g2) {
+		} else if (random > g1 && random <= g1 + g2) {
 		    return s.getTitolari().get(2);
-		} else if (random > g1 + g2 && random <= g3) {
+		} else if (random > g1 + g2 && random <= g1 + g2 + g3) {
 		    return s.getTitolari().get(3);
-		} else if (random > g1 + g2 + g3 && random <= g4) {
+		} else if (random > g1 + g2 + g3 && random <= g1 + g2 + g3 + g4) {
 		    return s.getTitolari().get(4);
-		} else if (random > g1 + g2 + g3 + g4 && random <= g5) {
+		} else if (random > g1 + g2 + g3 + g4 && random <= g1 + g2 + g3 + g4 + g5) {
 		    return s.getTitolari().get(5);
-		} else if (random > g1 + g2 + g3 + g4 + g5 && random <= g6) {
+		} else if (random > g1 + g2 + g3 + g4 + g5 && random <= g1 + g2 + g3 + g4 + g5 + g6) {
 		    return s.getTitolari().get(6);
-		} else if (random > g1 + g2 + g3 + g4 + g5 + g6 && random <= g7) {
+		} else if (random > g1 + g2 + g3 + g4 + g5 + g6 && random <= g1 + g2 + g3 + g4 + g5 + g6 + g7) {
 		    return s.getTitolari().get(7);
-		} else if (random > g1 + g2 + g3 + g4 + g5 + g6 + g7 && random <= g8) {
+		} else if (random > g1 + g2 + g3 + g4 + g5 + g6 + g7 && random <= g1 + g2 + g3 + g4 + g5 + g6 + g7 + g8) {
 		    return s.getTitolari().get(8);
-		} else if (random > g1 + g2 + g3 + g4 + g5 + g6 + g7 + g8 && random <= g9) {
+		} else if (random > g1 + g2 + g3 + g4 + g5 + g6 + g7 + g8 && random <= g1 + g2 + g3 + g4 + g5 + g6 + g7 + g8 + g9) {
 		    return s.getTitolari().get(9);
-		} else if (random > g1 + g2 + g3 + g4 + g5 + g6 + g7 + g8 + g9 && random <= g10) {
+		} else if (random > g1 + g2 + g3 + g4 + g5 + g6 + g7 + g8 + g9 && random <= g1 + g2 + g3 + g4 + g5 + g6 + g7 + g8 + g9 + g10) {
 		    return s.getTitolari().get(10);
-		} else {
+		} else if (random > g1 + g2 + g3 + g4 + g5 + g6 + g7 + g8 + g9 + g10) {
 		    return getAutogol(s);
 		}
+		return null;
 	}
 	
 	public Calciatore getAutogol(SquadraAvversaria s) {
@@ -153,7 +155,7 @@ public class LogicsPartitaImpl implements LogicsPartita{
 		} else {
 			sq = s1;
 		}
-		int random = new Random().nextInt(sq.getTitolari().size()) + 1;
+		int random = new Random().nextInt(sq.getTitolari().size());
 		return sq.getTitolari().get(random);
 	}
 
