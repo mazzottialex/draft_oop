@@ -1,11 +1,20 @@
 package test;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.List;
 import java.util.Random;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
 import data.Calciatore;
@@ -60,21 +69,21 @@ public class Launch {
 				SquadraAvversaria nap = new SquadraAvversaria(0, "NAP", Modulo.M442, li);				
 				SquadraAvversaria laz = new SquadraAvversaria(0, "LAZ", Modulo.M442, li);
 
-//				SwingUtilities.invokeLater(new Runnable() {
-//		            @Override
-//		            public void run() {
-//		                try {
-//							new Partita(nap, laz).createAndShowGUI();
-//						} catch (ClassNotFoundException | IOException e) {
-//							e.printStackTrace();
-//						}
-//		            }
-//		        });
-				
-				SwingUtilities.invokeLater(() -> {
-		            Rigori gui = new Rigori(nap, laz);
-		            gui.createAndShowGUI();
+				SwingUtilities.invokeLater(new Runnable() {
+		            @Override
+		            public void run() {
+		                try {
+							new Partita(nap, laz).createAndShowGUI();
+						} catch (ClassNotFoundException | IOException e) {
+							e.printStackTrace();
+						}
+		            }
 		        });
+				
+//				SwingUtilities.invokeLater(() -> {
+//		            Rigori gui = new Rigori(nap, laz);
+//		            gui.createAndShowGUI();
+//		        });
 			}
 		} else {
 //			Scraping sc = new ScrapingImpl();
@@ -126,7 +135,7 @@ public class Launch {
 			
 //			System.out.println(new SimulatingMatchImpl(nap, laz).titS1.size());
 			
-			System.out.println(new SimulatingMatchImpl(nap, laz).risultato());
+//			System.out.println(new SimulatingMatchImpl(nap, laz).risultato());
 
 			
 //			System.out.println(ex.getListaByRuolo("A")
@@ -152,10 +161,40 @@ public class Launch {
 //				.stream()
 //				.map(c -> c.getGol())
 //				.reduce((m, n) -> m + n));
+			JFrame frame = new JFrame("Console Message on Window Close Example");
+	        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+	        WindowListener windowListener = new WindowAdapter() {
+	            @Override
+	            public void windowClosing(WindowEvent e) {
+	                printMessageOnConsole("La finestra è stata chiusa."); // Stampa il messaggio sulla console
+	                System.exit(0); // Opzionale: termina l'applicazione
+	            }
+	        };
+
+	        frame.addWindowListener(windowListener);
+
+	        JButton closeButton = new JButton("Chiudi finestra");
+	        closeButton.addActionListener(new ActionListener() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	                printMessageOnConsole("Il pulsante è stato premuto."); // Stampa il messaggio sulla console
+	                frame.dispose(); // Chiude la finestra
+	            }
+	        });
+
+	        frame.getContentPane().add(closeButton);
+
+	        frame.pack();
+	        frame.setVisible(true);
 
 		}
 
 			//System.out.println(sa.getNomeCalciatori());
 	}
+	
+	private static void printMessageOnConsole(String message) {
+        System.out.println(message);
+    }
 }
 
