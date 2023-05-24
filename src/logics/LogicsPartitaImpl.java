@@ -30,6 +30,8 @@ public class LogicsPartitaImpl implements LogicsPartita{
 	private static final int MINUTES_REG = 90;
 	private final static int MINUTES_SUPPL = 120;
 	
+	private static final double OWNGOAL_RATE = 2.904040404040404;
+	
 	public LogicsPartitaImpl(SquadraAvversaria s1, SquadraAvversaria s2) throws FileNotFoundException, ClassNotFoundException, IOException {
 		super();
 		this.s1 = s1;
@@ -100,8 +102,59 @@ public class LogicsPartitaImpl implements LogicsPartita{
 //	}
 
 	@Override
-	public void addScorer(SquadraAvversaria s) {
+	public Calciatore addScorer(SquadraAvversaria s) {
 		// TODO Auto-generated method stub
+		int g1 = s.getTitolari().get(1).getGol();
+		int g2 = s.getTitolari().get(2).getGol();
+		int g3 = s.getTitolari().get(3).getGol();
+		int g4 = s.getTitolari().get(4).getGol();
+		int g5 = s.getTitolari().get(5).getGol();
+		int g6 = s.getTitolari().get(6).getGol();
+		int g7 = s.getTitolari().get(7).getGol();
+		int g8 = s.getTitolari().get(8).getGol();
+		int g9 = s.getTitolari().get(9).getGol();
+		int g10 = s.getTitolari().get(10).getGol();
+		int totGol = 0;
+		for (Calciatore calciatore : s.getTitolari()) {
+		    int r = calciatore.getRating().getX();
+		    totGol += r;
+		}
+		int tot = totGol + (int) ((totGol / 100) + OWNGOAL_RATE);
+		int random = new Random().nextInt(tot);
+		if (random <= g1) {
+		    return s.getTitolari().get(1);
+		} else if (random > g1 && random <= g2) {
+		    return s.getTitolari().get(2);
+		} else if (random > g1 + g2 && random <= g3) {
+		    return s.getTitolari().get(3);
+		} else if (random > g1 + g2 + g3 && random <= g4) {
+		    return s.getTitolari().get(4);
+		} else if (random > g1 + g2 + g3 + g4 && random <= g5) {
+		    return s.getTitolari().get(5);
+		} else if (random > g1 + g2 + g3 + g4 + g5 && random <= g6) {
+		    return s.getTitolari().get(6);
+		} else if (random > g1 + g2 + g3 + g4 + g5 + g6 && random <= g7) {
+		    return s.getTitolari().get(7);
+		} else if (random > g1 + g2 + g3 + g4 + g5 + g6 + g7 && random <= g8) {
+		    return s.getTitolari().get(8);
+		} else if (random > g1 + g2 + g3 + g4 + g5 + g6 + g7 + g8 && random <= g9) {
+		    return s.getTitolari().get(9);
+		} else if (random > g1 + g2 + g3 + g4 + g5 + g6 + g7 + g8 + g9 && random <= g10) {
+		    return s.getTitolari().get(10);
+		} else {
+		    return getAutogol(s);
+		}
+	}
+	
+	public Calciatore getAutogol(SquadraAvversaria s) {
+		SquadraAvversaria sq;
+		if (s == s1) {
+			sq = s2;
+		} else {
+			sq = s1;
+		}
+		int random = new Random().nextInt(sq.getTitolari().size()) + 1;
+		return sq.getTitolari().get(random);
 	}
 
 	@Override

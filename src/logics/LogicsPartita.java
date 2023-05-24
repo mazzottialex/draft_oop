@@ -13,6 +13,6 @@ public interface LogicsPartita {
 	public List<Integer> getMinGol(SquadraAvversaria s);
 //	public List<Integer> getMinGol1();
 //	public List<Integer> getMinGol2();
-	public void addScorer(SquadraAvversaria s);
+	public Calciatore addScorer(SquadraAvversaria s);
 	public void sanctions();
 }

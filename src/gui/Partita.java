@@ -1,6 +1,7 @@
 package gui;
 import javax.swing.*;
 
+import data.Calciatore;
 import data.SquadraAvversaria;
 import logics.LogicsPartita;
 import logics.LogicsPartitaImpl;
@@ -10,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Partita extends Base {
     private static final long serialVersionUID = 3533149128342164934L;
@@ -33,6 +35,11 @@ public class Partita extends Base {
     private boolean isRunning;
     private boolean ris;
     private int fineTempo;
+	private SquadraAvversaria winner;
+	private ArrayList<Calciatore> tab1;
+	private ArrayList<Calciatore> tab2;
+	private boolean rigori;
+	private Rigori gui;
 
     public Partita(SquadraAvversaria s1, SquadraAvversaria s2) throws FileNotFoundException, ClassNotFoundException, IOException {
     	this.s1 = s1;
@@ -66,6 +73,10 @@ public class Partita extends Base {
         progressBar.setString("Minuto 0°");
         ris = false;
         fineTempo = 45;
+        winner = null;
+        tab1 = new ArrayList<>();
+        tab2 = new ArrayList<>();
+        rigori = false;
         
         // Put constraints on different buttons
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -176,6 +187,7 @@ public class Partita extends Base {
             public void run() {
             	if (!ris) {
             		try {
+                    	// TODO se il num di cambi è variato, ricalcolare il ris della partita e porlo in base al tempo rimanente
 						logics.scorers(progressBar.getValue());
 						ris = true;
 					} catch (ClassNotFoundException | IOException e) {
@@ -187,12 +199,10 @@ public class Partita extends Base {
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
-                        	// TODO se il num di cambi è variato, ricalcolare il ris della partita e porlo in base al tempo rimanente
                             //Make progress.
                             progressBar.setValue(value);
                             progressBar.setString("Minuto " + String.valueOf(value) + "°");
                             // chiama funzione per gol
-                            
                             try {
 								changeScore();
 							} catch (ClassNotFoundException | IOException e) {
@@ -204,6 +214,9 @@ public class Partita extends Base {
                             if (progressBar.getValue() > 0) {
             					jbSubs.setEnabled(true);
             				}
+                            if (rigori) {
+                            	winner = gui.getWinner();
+                            }
                         }
                     });
 
@@ -219,8 +232,8 @@ public class Partita extends Base {
 //                	jlScoreSq1.setText("2");
 //                	jlScoreSq2.setText("2");
 					if (jlScoreSq1.getText() != jlScoreSq2.getText()) {
-						String win = Integer.valueOf(jlScoreSq1.getText()) > Integer.valueOf(jlScoreSq2.getText()) ? jlNomeSq1.getText() : jlNomeSq2.getText();
-						JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + win);
+						winner = Integer.valueOf(jlScoreSq1.getText()) > Integer.valueOf(jlScoreSq2.getText()) ? s1 : s2;
+						JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + winner.getNomeSquadra());
 						startStop.setEnabled(false);
 						jbSubs.setEnabled(false);
 						next.setEnabled(true);
@@ -234,15 +247,22 @@ public class Partita extends Base {
                 
                 //Fine tempi suppl
                 if (progressBar.getValue() == 120) {
+//                	jlScoreSq1.setText("2");
+//                	jlScoreSq2.setText("2");
 					jbSubs.setEnabled(false);
 					if (jlScoreSq1.getText() != jlScoreSq2.getText()) {
-						String win = Integer.valueOf(jlScoreSq1.getText()) > Integer.valueOf(jlScoreSq2.getText()) ? jlScoreSq1.getText() : jlScoreSq2.getText();
-						JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + win);
+						winner = Integer.valueOf(jlScoreSq1.getText()) > Integer.valueOf(jlScoreSq2.getText()) ? s1 : s2;
+						JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + winner.getNomeSquadra());
 						startStop.setEnabled(false);
 						next.setEnabled(true);
 					} else {
 						JOptionPane.showMessageDialog(null, "Fine tempi supplementari. Si va ai calci di rigore");
 						//TODO rigori
+						rigori = true;
+						gui = new Rigori(s1, s2);
+						SwingUtilities.invokeLater(() -> {
+				            gui.createAndShowGUI();
+				        });
 						//TODO gestire bottoni dopo rigori
 					}
 				}
@@ -272,7 +292,14 @@ public class Partita extends Base {
     
     public void changeScore() throws FileNotFoundException, ClassNotFoundException, IOException {
         if (logics.getMinGol(s1).contains(progressBar.getValue())) {
-        	logics.addScorer(s1);
+//        	jlTabSq1.setText("<html>Prima riga<br>Seconda riga</html>");
+        	tab1.add(logics.addScorer(s1));
+        	String s = "<html>";
+        	for (Calciatore calciatore : tab1) {
+				s = s + calciatore.getNominativo() + "<br>";
+			}
+        	s += "</html>";
+        	jlTabSq1.setText(s);
         	jlScoreSq1.setText(Integer.toString(Integer.valueOf(jlScoreSq1.getText()) + 1));
         }
         if (logics.getMinGol(s2).contains(progressBar.getValue())) {
@@ -284,6 +311,10 @@ public class Partita extends Base {
     private void stopProgress() {
         isRunning = false;
         startStop.setText("Play");
+    }
+    
+    public SquadraAvversaria getWinner() {
+		return winner;
     }
     
     /**
