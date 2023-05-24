@@ -40,6 +40,7 @@ public class Partita extends Base {
 	private ArrayList<Calciatore> tab2;
 	private boolean rigori;
 	private Rigori gui;
+	private boolean fineRigori;
 
     public Partita(SquadraAvversaria s1, SquadraAvversaria s2) throws FileNotFoundException, ClassNotFoundException, IOException {
     	this.s1 = s1;
@@ -77,6 +78,7 @@ public class Partita extends Base {
         tab1 = new ArrayList<>();
         tab2 = new ArrayList<>();
         rigori = false;
+        fineRigori = false;
         
         // Put constraints on different buttons
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -177,7 +179,11 @@ public class Partita extends Base {
 
     }
 
-    private void startProgress() {
+    public void setFineRigori(boolean fineRigori) {
+		this.fineRigori = fineRigori;
+	}
+
+	private void startProgress() {
     	startStop.setText("Stop");
         isRunning = true;
         
@@ -229,8 +235,8 @@ public class Partita extends Base {
                 
                 //Fine tempi reg
                 if (progressBar.getValue() == 90) {
-//                	jlScoreSq1.setText("2");
-//                	jlScoreSq2.setText("2");
+                	jlScoreSq1.setText("2");
+                	jlScoreSq2.setText("2");
 					if (jlScoreSq1.getText() != jlScoreSq2.getText()) {
 						winner = Integer.valueOf(jlScoreSq1.getText()) > Integer.valueOf(jlScoreSq2.getText()) ? s1 : s2;
 						JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + winner.getNomeSquadra());
@@ -247,8 +253,8 @@ public class Partita extends Base {
                 
                 //Fine tempi suppl
                 if (progressBar.getValue() == 120) {
-//                	jlScoreSq1.setText("2");
-//                	jlScoreSq2.setText("2");
+                	jlScoreSq1.setText("2");
+                	jlScoreSq2.setText("2");
 					jbSubs.setEnabled(false);
 					if (jlScoreSq1.getText() != jlScoreSq2.getText()) {
 						winner = Integer.valueOf(jlScoreSq1.getText()) > Integer.valueOf(jlScoreSq2.getText()) ? s1 : s2;
@@ -257,13 +263,17 @@ public class Partita extends Base {
 						next.setEnabled(true);
 					} else {
 						JOptionPane.showMessageDialog(null, "Fine tempi supplementari. Si va ai calci di rigore");
-						//TODO rigori
+						//TODO da sistemare rigori
 						rigori = true;
 						gui = new Rigori(s1, s2);
 						SwingUtilities.invokeLater(() -> {
 				            gui.createAndShowGUI();
 				        });
-						//TODO gestire bottoni dopo rigori
+						if (true) {
+							//TODO gestire bottoni dopo rigori
+							startStop.setEnabled(false);
+							next.setEnabled(true);
+						}
 					}
 				}
 				
