@@ -22,10 +22,13 @@ public class LogicsPartitaImpl implements LogicsPartita{
 	private int gol2;
 	private List<Integer> list1;
 	private List<Integer> list2;
+	private final static int SUPPL = 90;
+	private final static int GOL_SUPPL = 3;
 	
 	private SimulatingMatch sim;
 	
-	private static final int MINUTES = 90;
+	private static final int MINUTES_REG = 90;
+	private final static int MINUTES_SUPPL = 120;
 	
 	public LogicsPartitaImpl(SquadraAvversaria s1, SquadraAvversaria s2) throws FileNotFoundException, ClassNotFoundException, IOException {
 		super();
@@ -37,10 +40,10 @@ public class LogicsPartitaImpl implements LogicsPartita{
 	}
 	
 	@Override
-	public void scorers() throws FileNotFoundException, ClassNotFoundException, IOException {
+	public void scorers(int tempo) throws FileNotFoundException, ClassNotFoundException, IOException {
 		do {
-			list1 = getNumGol(sim.risultato().get(s1.getNomeSquadra()));
-			list2 = getNumGol(sim.risultato().get(s2.getNomeSquadra()));
+			list1 = getNumGol(sim.risultato().get(s1.getNomeSquadra()), tempo);
+			list2 = getNumGol(sim.risultato().get(s2.getNomeSquadra()), tempo);
 		} while (containsAny(list1, list2));
 	}
 	
@@ -56,20 +59,29 @@ public class LogicsPartitaImpl implements LogicsPartita{
 
 	public static <T> boolean containsAny(List<T> l1, List<T> l2) {
         for (T elem : l1) {
-            if (l2.contains(l1)) {
+            if (l2.contains(elem)) {
                 return true;
             }
         }
         return false;
     }
 	
-	public List<Integer> getNumGol(int gol) {
+	public List<Integer> getNumGol(int g, int tempo) {
 		List<Integer> list = new ArrayList<>();
 		Random r = new Random();
-		int min = 0;
+		int min;
+		int gol = g;
+		int random = MINUTES_REG;
+		if (tempo == SUPPL) {
+			gol = g / GOL_SUPPL;
+			random = MINUTES_SUPPL - MINUTES_REG;
+		}
 		for (int i = 0; i < gol; i++) {
 			do {
-				min = r.nextInt(MINUTES) + 1;
+				min = r.nextInt(random) + 1;
+				if (tempo == SUPPL) {
+					min += MINUTES_REG;
+				}
 			} while (list.contains(min));
 			list.add(min);
 		}

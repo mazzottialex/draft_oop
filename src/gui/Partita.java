@@ -176,7 +176,7 @@ public class Partita extends Base {
             public void run() {
             	if (!ris) {
             		try {
-						logics.scorers();
+						logics.scorers(progressBar.getValue());
 						ris = true;
 					} catch (ClassNotFoundException | IOException e) {
 						e.printStackTrace();
@@ -216,25 +216,34 @@ public class Partita extends Base {
                 
                 //Fine tempi reg
                 if (progressBar.getValue() == 90) {
+//                	jlScoreSq1.setText("2");
+//                	jlScoreSq2.setText("2");
 					if (jlScoreSq1.getText() != jlScoreSq2.getText()) {
 						String win = Integer.valueOf(jlScoreSq1.getText()) > Integer.valueOf(jlScoreSq2.getText()) ? jlNomeSq1.getText() : jlNomeSq2.getText();
 						JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + win);
+						startStop.setEnabled(false);
+						jbSubs.setEnabled(false);
+						next.setEnabled(true);
 					} else {
 						fineTempo = 120;
 						progressBar.setMaximum(fineTempo);
-						ris = true;
+						ris = false;
 						JOptionPane.showMessageDialog(null, "Fine tempi regolamentari");
 					}
 				}
                 
                 //Fine tempi suppl
                 if (progressBar.getValue() == 120) {
+					jbSubs.setEnabled(false);
 					if (jlScoreSq1.getText() != jlScoreSq2.getText()) {
 						String win = Integer.valueOf(jlScoreSq1.getText()) > Integer.valueOf(jlScoreSq2.getText()) ? jlScoreSq1.getText() : jlScoreSq2.getText();
 						JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + win);
+						startStop.setEnabled(false);
+						next.setEnabled(true);
 					} else {
 						JOptionPane.showMessageDialog(null, "Fine tempi supplementari. Si va ai calci di rigore");
 						//TODO rigori
+						//TODO gestire bottoni dopo rigori
 					}
 				}
 				

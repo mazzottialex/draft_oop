@@ -9,7 +9,7 @@ import javax.swing.*;
 import data.Calciatore;
 import data.SquadraAvversaria;
 
-public class Rigori extends JFrame {
+public class Rigori extends Base {
 	/**
 	 * 
 	 */
@@ -39,21 +39,16 @@ public class Rigori extends JFrame {
 		this.totTiri = 10;
 		
 		//gui di prova
-		setTitle("Penalty Shootout");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
-        setSize(800, 400);
         setLocationRelativeTo(null);
 
         results1 = new JPanel();
         results1.setLayout(new BoxLayout(results1, BoxLayout.Y_AXIS));
-        JScrollPane scrollPane1 = new JScrollPane(results1);
-        add(scrollPane1, BorderLayout.WEST);
+        add(results1, BorderLayout.WEST);
 
         results2 = new JPanel();
         results2.setLayout(new BoxLayout(results2, BoxLayout.Y_AXIS));
-        JScrollPane scrollPane2 = new JScrollPane(results2);
-        add(scrollPane2, BorderLayout.EAST);
+        add(results2, BorderLayout.EAST);
 
         result = new JLabel();
         result.setHorizontalAlignment(JLabel.CENTER);
@@ -64,7 +59,7 @@ public class Rigori extends JFrame {
             inizia.setEnabled(false);
             start();
         });
-        add(inizia, BorderLayout.NORTH);
+        add(inizia, BorderLayout.SOUTH);
     }
     
     private Iterator<Calciatore> backIterator(List<Calciatore> list) {
@@ -83,9 +78,9 @@ public class Rigori extends JFrame {
             	if ((((tiri1 + tiri2) >= totTiri) && tiri1 == tiri2 && gol1 != gol2) || ((tiri1 + tiri2) < totTiri && ((((totTiri / 2) - tiri1) + gol1) < gol2 || (((totTiri / 2) - tiri2) + gol2) < gol1))) {
             		timer.cancel();
                     if (gol1 > gol2) {
-                        result.setText("Sfida terminata: Vince Team 1");
+                        result.setText("Sfida terminata. Squadra vincente: " +  s1.getNomeSquadra());
                     } else {
-                        result.setText("Sfida terminata: Vince Team 2");
+                        result.setText("Sfida terminata. Squadra vincente: " +  s2.getNomeSquadra());
                     }
 				} else if ((tiri1 + tiri2) < totTiri || tiri1 != tiri2 || (tiri1 == tiri2 && gol1 == gol2)) {
                     if ((tiri1 + tiri2) % 2 == 0) {
