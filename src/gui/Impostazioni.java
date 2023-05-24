@@ -129,7 +129,7 @@ public class Impostazioni extends Base {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				Boolean braccio=true;
+				Boolean braccio=false;
 				
 				if(!textFieldNomeSquadra.getText().equals(new String("")))
 					nomeSquadra=textFieldNomeSquadra.getText();

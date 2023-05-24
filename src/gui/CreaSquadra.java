@@ -81,7 +81,7 @@ public class CreaSquadra extends Base{
 				riserve.addAll(log.getRandom("C", 3));
 				riserve.addAll(log.getRandom("A", 3));
 				try {
-					changeJPanel(new Torneo(log.getNomeSquadra(), log.getStemma(), log.getTitolari(), riserve, log.getModulo()));
+					changeJPanel(new Torneo(log.getSquadra(), li));
 				} catch (FileNotFoundException e1) {
 					e1.printStackTrace();
 				} catch (ClassNotFoundException e1) {

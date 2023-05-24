@@ -54,7 +54,7 @@ public class Draft extends Base {
 	private final int nDraft=5;
 	private List<Calciatore> liTitolari=new ArrayList<>();
 	private List<Calciatore> liRiserve=new ArrayList<>();
-
+	
 	public Draft(List<Calciatore> li, Modulo mod, String nomeSquadra, String stemma)  {
 		GridBagConstraints gbc=new GridBagConstraints();
 		gbc.insets=new Insets(5, 5, 2, 2);
@@ -189,7 +189,7 @@ public class Draft extends Base {
 				Squadra squadra=new SquadraUtente(nomeSquadra, stemma, mod, liTitolari, liRiserve);
 				LogicsFile logFile=new LogicsFileImpl();
 				logFile.SaveStorico(squadra);
-				changeJPanel(new SquadraGui(squadra));
+				changeJPanel(new SquadraGui(squadra, li));
 			}
 		});
 		 
