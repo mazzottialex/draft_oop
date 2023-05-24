@@ -90,20 +90,9 @@ public class LogicsPartitaImpl implements LogicsPartita{
 		Collections.sort(list);
 		return list;
 	}
-	
-//	@Override
-//	public List<Integer> getMinGol1() {
-//		return list1;
-//	}
-//	
-//	@Override
-//	public List<Integer> getMinGol2() {
-//		return list2;
-//	}
 
 	@Override
 	public Calciatore addScorer(SquadraAvversaria s) {
-		// TODO Auto-generated method stub
 		double g1 = s.getTitolari().get(1).getGol();
 		double g2 = s.getTitolari().get(2).getGol();
 		double g3 = s.getTitolari().get(3).getGol();
@@ -119,7 +108,6 @@ public class LogicsPartitaImpl implements LogicsPartita{
 			double r = calciatore.getGol();
 		    totGol += r;
 		}
-//		double tot = totGol + ((totGol / 100) + OWNGOAL_RATE);
 		double autogol = (totGol * OWNGOAL_RATE) / 100;
 		double random = new Random().nextDouble(totGol + autogol);
 		if (random <= g1) {
