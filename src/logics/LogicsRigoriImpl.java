@@ -16,7 +16,7 @@ public class LogicsRigoriImpl implements LogicsRigori {
 	private Iterator<Calciatore> shooterIterator1;
 	private Iterator<Calciatore> shooterIterator2;
 	private int gol1;
-    private int gol2;
+	private int gol2;
     private int tiri1;
     private int tiri2;
     private int totTiri;
@@ -104,4 +104,14 @@ public class LogicsRigoriImpl implements LogicsRigori {
             return "Sbagliato";
         }
     }
+	
+	@Override
+	public int getGol1() {
+		return gol1;
+	}
+
+	@Override
+	public int getGol2() {
+		return gol2;
+	}
 }
