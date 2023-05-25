@@ -40,6 +40,10 @@ public class Partita extends Base {
 	private ArrayList<Calciatore> tab2;
 	private boolean rigori;
 	private Rigori gui;
+	private String string1 = "";
+	private String string2 = "";
+	private String apri = "<html>";
+	private String chiudi = "</html>";
 
     public Partita(SquadraAvversaria s1, SquadraAvversaria s2) throws FileNotFoundException, ClassNotFoundException, IOException {
     	this.s1 = s1;
@@ -247,8 +251,8 @@ public class Partita extends Base {
                 
                 //Fine tempi suppl
                 if (progressBar.getValue() == 120) {
-                	jlScoreSq1.setText("2");
-                	jlScoreSq2.setText("2");
+//                	jlScoreSq1.setText("2");
+//                	jlScoreSq2.setText("2");
 					jbSubs.setEnabled(false);
 					if (jlScoreSq1.getText() != jlScoreSq2.getText()) {
 						winner = Integer.valueOf(jlScoreSq1.getText()) > Integer.valueOf(jlScoreSq2.getText()) ? s1 : s2;
@@ -297,30 +301,24 @@ public class Partita extends Base {
     public void changeScore() throws FileNotFoundException, ClassNotFoundException, IOException {
         if (logics.getMinGol(s1).contains(progressBar.getValue())) {
         	tab1.add(logics.addScorer(s1));
-        	String s = "<html>";
+        	Calciatore calciatore = tab1.get(tab1.size() - 1);
         	String autogol = "";
-        	for (Calciatore calciatore : tab1) {
-        		if (s1.getLiCalciatori().contains(calciatore)) {
-        			autogol = " (AG)";
-        		}
-				s = s + calciatore.getNominativo() + autogol + "<br>";
-			}
-        	s += "</html>";
-        	jlTabSq1.setText(s);
+        	if (s2.getLiCalciatori().contains(calciatore)) {
+    			autogol = " (AG)";
+    		}
+        	string1 = string1 + Integer.toString(progressBar.getValue()) + "' Gol: " + calciatore.getNominativo() + autogol + "<br>";
+        	jlTabSq1.setText(apri + string1 + chiudi);
         	jlScoreSq1.setText(Integer.toString(Integer.valueOf(jlScoreSq1.getText()) + 1));
         }
         if (logics.getMinGol(s2).contains(progressBar.getValue())) {
         	tab2.add(logics.addScorer(s2));
-        	String s = "<html>";
+        	Calciatore calciatore = tab2.get(tab2.size() - 1);
         	String autogol = "";
-        	for (Calciatore calciatore : tab2) {
-        		if (s2.getLiCalciatori().contains(calciatore)) {
-        			autogol = " (AG)";
-        		}
-				s = s + calciatore.getNominativo() + autogol + "<br>";
-			}
-        	s += "</html>";
-        	jlTabSq2.setText(s);
+        	if (s1.getLiCalciatori().contains(calciatore)) {
+    			autogol = " (AG)";
+    		}
+        	string2 = string2 + Integer.toString(progressBar.getValue()) + "' Gol: " + calciatore.getNominativo() + autogol + "<br>";
+        	jlTabSq2.setText(apri + string2 + chiudi);
         	jlScoreSq2.setText(Integer.toString(Integer.valueOf(jlScoreSq2.getText()) + 1));
         }
 	}
