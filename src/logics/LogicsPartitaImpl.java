@@ -3,25 +3,21 @@ package logics;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import data.Calciatore;
 import data.SquadraAvversaria;
-import gui.Partita;
 import simulation.SimulatingMatch;
 import simulation.SimulatingMatchImpl;
 
 public class LogicsPartitaImpl implements LogicsPartita{
 	private SquadraAvversaria s1;
 	private SquadraAvversaria s2;
-	private int gol1;
-	private int gol2;
 	private List<Integer> list1;
 	private List<Integer> list2;
+	private final static int REG = 0;
 	private final static int SUPPL = 90;
 	private final static int GOL_SUPPL = 3;
 	
@@ -36,17 +32,22 @@ public class LogicsPartitaImpl implements LogicsPartita{
 		super();
 		this.s1 = s1;
 		this.s2 = s2;
-		this.gol1 = 0;
-		this.gol2 = 0;
 		this.sim = new SimulatingMatchImpl(s1, s2);
 	}
 	
 	@Override
 	public void scorers(int tempo) throws FileNotFoundException, ClassNotFoundException, IOException {
-		do {
-			list1 = getNumGol(sim.risultato().get(s1.getNomeSquadra()), tempo);
-			list2 = getNumGol(sim.risultato().get(s2.getNomeSquadra()), tempo);
-		} while (containsAny(list1, list2));
+		if (tempo == REG) {
+			do {
+				list1 = getNumGol(sim.risultato().get(s1.getNomeSquadra()), tempo);
+				list2 = getNumGol(sim.risultato().get(s2.getNomeSquadra()), tempo);
+			} while (containsAny(list1, list2));
+		} else if (tempo == SUPPL) {
+			do {
+				list1 = getNumGol(sim.risultatoSuppl().get(s1.getNomeSquadra()), tempo);
+				list2 = getNumGol(sim.risultatoSuppl().get(s2.getNomeSquadra()), tempo);
+			} while (containsAny(list1, list2));
+		}
 	}
 	
 	@Override
