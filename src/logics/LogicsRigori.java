@@ -6,5 +6,5 @@ import java.util.Map;
 import data.Calciatore;
 
 public interface LogicsRigori {
-	private ArrayList<Map<Calciatore, String>> make();
+	public ArrayList<Map<Calciatore, String>> compute();
 }

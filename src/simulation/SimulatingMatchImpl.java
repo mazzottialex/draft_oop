@@ -176,4 +176,12 @@ public class SimulatingMatchImpl implements SimulatingMatch {
 		map.put(this.s2.getNomeSquadra(), sq2 >= 0 ? sq2 : 0);
 		return map;
 	}
+
+	@Override
+	public Map<String, Integer> risultatoSuppl() throws FileNotFoundException, ClassNotFoundException, IOException {
+		Map<String, Integer> map = new HashMap<>();
+		map.put(s1.getNomeSquadra(), risultato().get(s1.getNomeSquadra()) / 3);
+		map.put(s2.getNomeSquadra(), risultato().get(s1.getNomeSquadra()) / 3);
+		return map;
+	}
 }

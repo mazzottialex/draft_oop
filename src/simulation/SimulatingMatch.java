@@ -17,4 +17,7 @@ public interface SimulatingMatch {
 
 	public Map<String, Integer> risultato()
 			throws FileNotFoundException, ClassNotFoundException, IOException;
+	
+	public Map<String, Integer> risultatoSuppl()
+			throws FileNotFoundException, ClassNotFoundException, IOException;
 }
