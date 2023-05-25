@@ -3,7 +3,6 @@ package logics;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -14,8 +13,6 @@ import data.SquadraAvversaria;
 public class LogicsRigoriImpl implements LogicsRigori {
 	private SquadraAvversaria s1;
 	private SquadraAvversaria s2;
-	private Map<Calciatore, String> ris1;
-	private Map<Calciatore, String> ris2;
 	private Iterator<Calciatore> shooterIterator1;
 	private Iterator<Calciatore> shooterIterator2;
 	private int gol1;
@@ -25,15 +22,13 @@ public class LogicsRigoriImpl implements LogicsRigori {
     private int totTiri;
     private boolean continua;
     private ArrayList<Map<Calciatore, String>> list;
-    private Map<Calciatore, String> list1;
-	private Map<Calciatore, String> list2;
+    private Map<Calciatore, String> map1;
+	private Map<Calciatore, String> map2;
 	
 	public LogicsRigoriImpl(SquadraAvversaria s1, SquadraAvversaria s2) {
 		super();
 		this.s1 = s1;
 		this.s2 = s2;
-		this.ris1 = new LinkedHashMap<>();
-		this.ris2 = new LinkedHashMap<>();
 		this.shooterIterator1 = backIterator(s1.getTitolari());
 		this.shooterIterator2 = backIterator(s2.getTitolari());
 		this.gol1 = 0;
@@ -43,12 +38,12 @@ public class LogicsRigoriImpl implements LogicsRigori {
 		this.totTiri = 10;
 		this.continua = true;
 		this.list = new ArrayList<>();
-		this.list1 = new HashMap<>();
-		this.list2 = new HashMap<>();
+		this.map1 = new HashMap<>();
+		this.map2 = new HashMap<>();
 	}
 	
-//	@Override
-	private ArrayList<Map<Calciatore, String>> make() {
+	@Override
+	public ArrayList<Map<Calciatore, String>> compute() {
 		while (continua) {
 			if ((((tiri1 + tiri2) >= totTiri) && tiri1 == tiri2 && gol1 != gol2) || ((tiri1 + tiri2) < totTiri && ((((totTiri / 2) - tiri1) + gol1) < gol2 || (((totTiri / 2) - tiri2) + gol2) < gol1))) {
                 continua = false;
@@ -60,7 +55,7 @@ public class LogicsRigoriImpl implements LogicsRigori {
                     if (shooterIterator1.hasNext()) {
                     	Calciatore tiratore = shooterIterator1.next();
                     	String res = rigore(tiratore, s2);
-                    	list1.put(tiratore, res);
+                    	map1.put(tiratore, res);
                         if (res.equals("Gol")) {
                         	gol1++;
                         }
@@ -73,7 +68,7 @@ public class LogicsRigoriImpl implements LogicsRigori {
                     if (shooterIterator2.hasNext()) {
                     	Calciatore tiratore = shooterIterator2.next();
                         String res = rigore(tiratore, s1);
-                        list1.put(tiratore, res);
+                        map2.put(tiratore, res);
                         if (res.equals("Gol")) {
                         	gol2++;
                         }
@@ -83,8 +78,8 @@ public class LogicsRigoriImpl implements LogicsRigori {
 			}
 		}
 		
-		list.add(list1);
-		list.add(list2);
+		list.add(map1);
+		list.add(map2);
 		
 		return list;
 	}
