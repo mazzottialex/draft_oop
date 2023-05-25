@@ -40,7 +40,6 @@ public class Partita extends Base {
 	private ArrayList<Calciatore> tab2;
 	private boolean rigori;
 	private Rigori gui;
-	private boolean fineRigori;
 
     public Partita(SquadraAvversaria s1, SquadraAvversaria s2) throws FileNotFoundException, ClassNotFoundException, IOException {
     	this.s1 = s1;
@@ -78,7 +77,6 @@ public class Partita extends Base {
         tab1 = new ArrayList<>();
         tab2 = new ArrayList<>();
         rigori = false;
-        fineRigori = false;
         
         // Put constraints on different buttons
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -179,10 +177,6 @@ public class Partita extends Base {
 
     }
 
-    public void setFineRigori(boolean fineRigori) {
-		this.fineRigori = fineRigori;
-	}
-
 	private void startProgress() {
     	startStop.setText("Stop");
         isRunning = true;
@@ -269,7 +263,7 @@ public class Partita extends Base {
 						SwingUtilities.invokeLater(() -> {
 				            gui.createAndShowGUI();
 				        });
-						if (true) {
+						if (gui.isFine()) {
 							//TODO gestire bottoni dopo rigori
 							startStop.setEnabled(false);
 							next.setEnabled(true);

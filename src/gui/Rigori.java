@@ -1,6 +1,9 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.*;
 import java.util.Timer;
 
@@ -28,8 +31,9 @@ public class Rigori extends Base {
     private int totTiri;
     private SquadraAvversaria winner;
     private JButton chiudi;
-    
-    public Rigori(SquadraAvversaria s1, SquadraAvversaria s2) {
+    private boolean fine;
+
+	public Rigori(SquadraAvversaria s1, SquadraAvversaria s2) {
     	this.s1 = s1;
         this.s2 = s2;
 		this.shooterIterator1 = backIterator(s1.getTitolari());
@@ -39,6 +43,7 @@ public class Rigori extends Base {
 		this.tiri1 = 0;
 		this.tiri2 = 0;
 		this.totTiri = 10;
+		this.fine = false;
 		
 		//gui di prova
         setLayout(new BorderLayout());
@@ -64,12 +69,30 @@ public class Rigori extends Base {
         chiudi = new JButton("chiudi");
         chiudi.addActionListener(e -> {
         	// TODO
+        	fine = true;
         	dispose();
         });
         chiudi.setEnabled(false);
         add(inizia, BorderLayout.NORTH);
         add(chiudi, BorderLayout.SOUTH);
+        
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        
+        WindowListener windowListener = new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                //TODO
+            	fine = true;
+            	dispose();
+            }
+        };
+
+        addWindowListener(windowListener);
     }
+	
+    public boolean isFine() {
+		return fine;
+	}
     
     private Iterator<Calciatore> backIterator(List<Calciatore> list) {
     	List<Calciatore> backList = new ArrayList<>();
@@ -101,7 +124,7 @@ public class Rigori extends Base {
                         }
                         if (shooterIterator1.hasNext()) {
                         	Calciatore tiratore = shooterIterator1.next();
-                        	String res = rigore(tiratore, s1);
+                        	String res = rigore(tiratore, s2);
                             JLabel resultLabel = new JLabel(tiratore.getNominativo() + ": " + res);
                             resultLabel.setHorizontalAlignment(JLabel.LEFT);
                             results1.add(resultLabel);
@@ -118,7 +141,7 @@ public class Rigori extends Base {
                         }
                         if (shooterIterator2.hasNext()) {
                         	Calciatore tiratore = shooterIterator2.next();
-                            String res = rigore(tiratore, s2); 
+                            String res = rigore(tiratore, s1); 
                             JLabel resultLabel = new JLabel(tiratore.getNominativo() + ": " + res);
                             resultLabel.setHorizontalAlignment(JLabel.RIGHT);
                             results2.add(resultLabel);
