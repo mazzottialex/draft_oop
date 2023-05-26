@@ -1,17 +1,25 @@
 package logics;
 
+import java.awt.Component;
+import java.awt.Container;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import data.Calciatore;
-import data.SquadraAvversaria;
+import data.Squadra;
 
 public class LogicsSostituzioneImpl implements LogicsSostituzione{
 	private List<Calciatore> titolari;
 	private List<Calciatore> riserve;
+	private Calciatore entra;
+	private Calciatore esce;
 	
-	public LogicsSostituzioneImpl(SquadraAvversaria s) {
+	public LogicsSostituzioneImpl(Squadra s) {
 		this.titolari = s.getTitolari();
 		this.riserve = s.getRiserve();
+		this.entra = null;
+		this.esce = null;
 	}
 	
 	@Override
@@ -23,5 +31,62 @@ public class LogicsSostituzioneImpl implements LogicsSostituzione{
 	public List<Calciatore> getRiserve() {
 		return riserve;
 	}
+
+	@Override
+	public void selzTit(Calciatore c) {
+		esce = c;
+		System.out.println(entra.getRuolo());
+	}
+
+	@Override
+	public void selezRis(Calciatore c) {
+		entra = c;
+		System.out.println(esce.getRuolo());
+	}
+
+	@Override
+	public void sub(Container parent1, Container parent2, Component component1, Component component2) {
+		if (entra != null && esce != null) {
+			if (esce.getRuolo().equals(entra.getRuolo())) {
+				
+				int index1 = getComponentIndex(parent1, component1);
+                int index2 = getComponentIndex(parent2, component2);
+				
+                if (index1 != -1 && index2 != -1) {
+                    parent1.remove(component1);
+                    parent2.remove(component2);
+
+                    parent1.add(component2, index1);
+                    parent2.add(component1, index2);
+
+                    parent1.revalidate();
+                    parent1.repaint();
+                    parent2.revalidate();
+                    parent2.repaint();
+
+                    // Resetta la selezione dei pannelli
+                    component1.setBackground(null);
+                    component2.setBackground(null);
+                    component1 = null;
+                    component2 = null;
+                }
+				
+				
+			} else {
+				JOptionPane.showMessageDialog(null, "I due giocatori selezionati devono avere lo stesso ruolo");
+			}
+		} else {
+			JOptionPane.showMessageDialog(null, "Bisogna selezionare due giocatori: uno tra i titolari e uno tra le riserve, che devono avere lo stesso ruolo");
+		}
+	}
+	
+	private static int getComponentIndex(Container parent, Component component) {
+        for (int i = 0; i < parent.getComponentCount(); i++) {
+            if (parent.getComponent(i) == component) {
+                return i;
+            }
+        }
+        return -1;
+    }
 	
 }
