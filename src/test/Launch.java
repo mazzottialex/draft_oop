@@ -1,20 +1,30 @@
 package test;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import data.Calciatore;
@@ -23,6 +33,8 @@ import data.Modulo;
 import data.SquadraAvversaria;
 import gui.Home;
 import gui.Partita;
+import gui.Sostituzione;
+import gui.SquadraGui;
 //import gui.Rigori;
 import gui.Partita;
 import gui.Start;
@@ -69,16 +81,6 @@ public class Launch {
 				SquadraAvversaria nap = new SquadraAvversaria(0, "NAP", Modulo.M442, li);				
 				SquadraAvversaria laz = new SquadraAvversaria(0, "LAZ", Modulo.M442, li);
 
-				SwingUtilities.invokeLater(new Runnable() {
-		            @Override
-		            public void run() {
-		                try {
-							new Partita(nap, laz).createAndShowGUI();
-						} catch (ClassNotFoundException | IOException e) {
-							e.printStackTrace();
-						}
-		            }
-				});
 //				SwingUtilities.invokeLater(new Runnable() {
 //		            @Override
 //		            public void run() {
@@ -88,12 +90,10 @@ public class Launch {
 //							e.printStackTrace();
 //						}
 //		            }
-//		        });
+//				});
 				
-				SwingUtilities.invokeLater(() -> {
-		            //Rigori gui = new Rigori(nap, laz);
-		            //gui.createAndShowGUI();
-		        });
+				Sostituzione sub = new Sostituzione(laz);
+				sub.setVisible(true);
 				
 //				SwingUtilities.invokeLater(() -> {
 //		            Rigori gui = new Rigori(nap, laz);
@@ -176,30 +176,29 @@ public class Launch {
 //				.stream()
 //				.map(c -> c.getGol())
 //				.reduce((m, n) -> m + n));
-			JFrame frame = new JFrame("Console Message on Window Close Example");
-	        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+			List<String> stringList = new ArrayList<>();
+	        stringList.add("Stringa 1");
+	        stringList.add("Stringa 2");
+	        stringList.add("Stringa 3");
 
-	        WindowListener windowListener = new WindowAdapter() {
-	            @Override
-	            public void windowClosing(WindowEvent e) {
-	                printMessageOnConsole("La finestra è stata chiusa."); // Stampa il messaggio sulla console
-	                System.exit(0); // Opzionale: termina l'applicazione
-	            }
-	        };
+	        JFrame frame = new JFrame("String Panel Example");
+	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-	        frame.addWindowListener(windowListener);
+	        JPanel mainPanel = new JPanel();
+	        mainPanel.setLayout(new FlowLayout());
 
-	        JButton closeButton = new JButton("Chiudi finestra");
-	        closeButton.addActionListener(new ActionListener() {
-	            @Override
-	            public void actionPerformed(ActionEvent e) {
-	                printMessageOnConsole("Il pulsante è stato premuto."); // Stampa il messaggio sulla console
-	                frame.dispose(); // Chiude la finestra
-	            }
-	        });
+	        for (String str : stringList) {
+	            JPanel panel = createStringPanel(str);
+	            panel.addMouseListener(new MouseAdapter() {
+	                @Override
+	                public void mouseClicked(MouseEvent e) {
+	                    JOptionPane.showMessageDialog(null, str);
+	                }
+	            });
+	            mainPanel.add(panel);
+	        }
 
-	        frame.getContentPane().add(closeButton);
-
+	        frame.getContentPane().add(mainPanel);
 	        frame.pack();
 	        frame.setVisible(true);
 
@@ -208,8 +207,16 @@ public class Launch {
 			//System.out.println(sa.getNomeCalciatori());
 	}
 	
-	private static void printMessageOnConsole(String message) {
-        System.out.println(message);
+	 private static JPanel createStringPanel(String str) {
+        JPanel panel = new JPanel();
+        panel.setPreferredSize(new Dimension(100, 50));
+        panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+        JLabel label = new JLabel(str);
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        panel.add(label);
+
+        return panel;
     }
 }
 
