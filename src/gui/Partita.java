@@ -233,8 +233,8 @@ public class Partita extends Base {
                 
                 //Fine tempi reg
                 if (progressBar.getValue() == 90) {
-                	jlScoreSq1.setText("2");
-                	jlScoreSq2.setText("2");
+//                	jlScoreSq1.setText("2");
+//                	jlScoreSq2.setText("2");
 					if (jlScoreSq1.getText() != jlScoreSq2.getText()) {
 						winner = Integer.valueOf(jlScoreSq1.getText()) > Integer.valueOf(jlScoreSq2.getText()) ? s1 : s2;
 						JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + winner.getNomeSquadra());
@@ -268,7 +268,6 @@ public class Partita extends Base {
 				            gui.createAndShowGUI();
 				        });
 						if (gui.isFine()) {
-							//TODO gestire bottoni dopo rigori
 							startStop.setEnabled(false);
 							next.setEnabled(true);
 						}
@@ -303,7 +302,7 @@ public class Partita extends Base {
         	tab1.add(logics.addScorer(s1));
         	Calciatore calciatore = tab1.get(tab1.size() - 1);
         	String autogol = "";
-        	if (s2.getLiCalciatori().contains(calciatore)) {
+        	if (s2.getTitolari().contains(calciatore)) {
     			autogol = " (AG)";
     		}
         	string1 = string1 + Integer.toString(progressBar.getValue()) + "' Gol: " + calciatore.getNominativo() + autogol + "<br>";
@@ -314,7 +313,7 @@ public class Partita extends Base {
         	tab2.add(logics.addScorer(s2));
         	Calciatore calciatore = tab2.get(tab2.size() - 1);
         	String autogol = "";
-        	if (s1.getLiCalciatori().contains(calciatore)) {
+        	if (s1.getTitolari().contains(calciatore)) {
     			autogol = " (AG)";
     		}
         	string2 = string2 + Integer.toString(progressBar.getValue()) + "' Gol: " + calciatore.getNominativo() + autogol + "<br>";
