@@ -1,9 +1,13 @@
 package test;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -54,6 +58,9 @@ import simulation.SimulatingFunctionsImpl;
 import simulation.SimulatingMatchImpl;
 
 public class Launch {
+	
+	private static JPanel selectedPanel1;
+    private static JPanel selectedPanel2;
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
 
@@ -181,24 +188,89 @@ public class Launch {
 	        stringList.add("Stringa 2");
 	        stringList.add("Stringa 3");
 
-	        JFrame frame = new JFrame("String Panel Example");
+	        JFrame frame = new JFrame("Swap Panels Example");
 	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	        JPanel mainPanel = new JPanel();
-	        mainPanel.setLayout(new FlowLayout());
+	        mainPanel.setLayout(new GridLayout(2, 1)); // Layout a due righe (griglie)
+
+	        JPanel upperPanel = new JPanel(new GridLayout(1, stringList.size())); // Prima griglia superiore
+	        JPanel lowerPanel = new JPanel(new GridLayout(1, stringList.size())); // Seconda griglia inferiore
 
 	        for (String str : stringList) {
 	            JPanel panel = createStringPanel(str);
 	            panel.addMouseListener(new MouseAdapter() {
 	                @Override
 	                public void mouseClicked(MouseEvent e) {
-	                    JOptionPane.showMessageDialog(null, str);
+	                    if (selectedPanel1 == null) {
+	                        selectedPanel1 = panel;
+	                        selectedPanel1.setBackground(Color.YELLOW); // Imposta il colore di sfondo del primo pannello selezionato
+	                    } else if (selectedPanel2 == null) {
+	                        selectedPanel2 = panel;
+	                        selectedPanel2.setBackground(Color.YELLOW); // Imposta il colore di sfondo del secondo pannello selezionato
+	                    } else {
+	                        // Resetta la selezione dei pannelli precedenti
+	                        selectedPanel1.setBackground(null);
+	                        selectedPanel2.setBackground(null);
+
+	                        // Seleziona il primo pannello
+	                        selectedPanel1 = panel;
+	                        selectedPanel1.setBackground(Color.YELLOW);
+	                        selectedPanel2 = null;
+	                    }
 	                }
 	            });
-	            mainPanel.add(panel);
+
+	            if (stringList.indexOf(str) < stringList.size() / 2) {
+	                upperPanel.add(panel); // Aggiungi il pannello alla prima griglia superiore
+	            } else {
+	                lowerPanel.add(panel); // Aggiungi il pannello alla seconda griglia inferiore
+	            }
 	        }
 
-	        frame.getContentPane().add(mainPanel);
+	        mainPanel.add(upperPanel); // Aggiungi la prima griglia superiore al pannello principale
+	        mainPanel.add(lowerPanel); // Aggiungi la seconda griglia inferiore al pannello principale
+
+	        JButton swapButton = new JButton("Scambia");
+	        swapButton.addActionListener(new ActionListener() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	                if (selectedPanel1 != null && selectedPanel2 != null) {
+	                    Container parent1 = selectedPanel1.getParent();
+	                    Container parent2 = selectedPanel2.getParent();
+
+	                    if (parent1 != null && parent2 != null) {
+	                        int index1 = getComponentIndex(parent1, selectedPanel1);
+	                        int index2 = getComponentIndex(parent2, selectedPanel2);
+
+	                        if (index1 != -1 && index2 != -1) {
+	                            parent1.remove(selectedPanel1);
+	                            parent2.remove(selectedPanel2);
+
+	                            parent1.add(selectedPanel2, index1);
+	                            parent2.add(selectedPanel1, index2);
+
+	                            parent1.revalidate();
+	                            parent1.repaint();
+	                            parent2.revalidate();
+	                            parent2.repaint();
+
+	                            // Resetta la selezione dei pannelli
+	                            selectedPanel1.setBackground(null);
+	                            selectedPanel2.setBackground(null);
+	                            selectedPanel1 = null;
+	                            selectedPanel2 = null;
+	                        }
+	                    }
+	                }
+	            }
+	        });
+
+	        JPanel buttonPanel = new JPanel();
+	        buttonPanel.add(swapButton);
+
+	        frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
+	        frame.getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 	        frame.pack();
 	        frame.setVisible(true);
 
@@ -207,7 +279,7 @@ public class Launch {
 			//System.out.println(sa.getNomeCalciatori());
 	}
 	
-	 private static JPanel createStringPanel(String str) {
+	private static JPanel createStringPanel(String str) {
         JPanel panel = new JPanel();
         panel.setPreferredSize(new Dimension(100, 50));
         panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -217,6 +289,15 @@ public class Launch {
         panel.add(label);
 
         return panel;
+    }
+
+    private static int getComponentIndex(Container parent, Component component) {
+        for (int i = 0; i < parent.getComponentCount(); i++) {
+            if (parent.getComponent(i) == component) {
+                return i;
+            }
+        }
+        return -1;
     }
 }
 
