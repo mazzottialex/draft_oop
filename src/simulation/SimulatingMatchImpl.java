@@ -41,6 +41,8 @@ public class SimulatingMatchImpl implements SimulatingMatch {
 	private static final double COST_SUB_SM = 5;
 	private static final int SQUADRA1 = 1;
 	private static final int SQUADRA2 = 2;
+	private static final int MINUTES_REG = 90;
+	private final static int MINUTES_SUPPL = 120;
 
 	public SimulatingMatchImpl(SquadraAvversaria s1, SquadraAvversaria s2)
 			throws FileNotFoundException, ClassNotFoundException, IOException {
@@ -180,8 +182,26 @@ public class SimulatingMatchImpl implements SimulatingMatch {
 	@Override
 	public Map<String, Integer> risultatoSuppl() throws FileNotFoundException, ClassNotFoundException, IOException {
 		Map<String, Integer> map = new HashMap<>();
-		map.put(s1.getNomeSquadra(), risultato().get(s1.getNomeSquadra()) / 3);
-		map.put(s2.getNomeSquadra(), risultato().get(s1.getNomeSquadra()) / 3);
+		map.put(s1.getNomeSquadra(), (int) (risultato().get(s1.getNomeSquadra()) * (double) ((MINUTES_SUPPL - MINUTES_REG) / MINUTES_REG)));
+		map.put(s2.getNomeSquadra(), (int) (risultato().get(s1.getNomeSquadra()) * (double) ((MINUTES_SUPPL - MINUTES_REG) / MINUTES_REG)));
+		return map;
+	}
+
+	@Override
+	public Map<String, Integer> risultatoSub(int minuto)
+			throws FileNotFoundException, ClassNotFoundException, IOException {
+		Map<String, Integer> map = new HashMap<>();
+		if (minuto < MINUTES_REG) {
+			map.put(s1.getNomeSquadra(),
+					(int) (risultato().get(s1.getNomeSquadra()) * (double) ((MINUTES_REG - minuto) / MINUTES_REG)));
+			map.put(s2.getNomeSquadra(), (int) (risultato().get(s1.getNomeSquadra())
+					* (double) ((MINUTES_REG - minuto) / MINUTES_REG)));
+		} else {
+			map.put(s1.getNomeSquadra(),
+					(int) (risultato().get(s1.getNomeSquadra()) * (double) ((MINUTES_SUPPL - MINUTES_REG - minuto) / MINUTES_REG)));
+			map.put(s2.getNomeSquadra(), (int) (risultato().get(s1.getNomeSquadra())
+					* (double) ((MINUTES_SUPPL - MINUTES_REG - minuto) / MINUTES_REG)));
+		}
 		return map;
 	}
 }
