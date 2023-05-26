@@ -47,6 +47,11 @@ public class LogicsPartitaImpl implements LogicsPartita{
 				list1 = getNumGol(sim.risultatoSuppl().get(s1.getNomeSquadra()), tempo);
 				list2 = getNumGol(sim.risultatoSuppl().get(s2.getNomeSquadra()), tempo);
 			} while (containsAny(list1, list2));
+		} else {
+			do {
+				list1 = getNumGol(sim.risultatoSub(tempo).get(s1.getNomeSquadra()), tempo);
+				list2 = getNumGol(sim.risultatoSub(tempo).get(s2.getNomeSquadra()), tempo);
+			} while (containsAny(list1, list2));
 		}
 	}
 	
@@ -76,15 +81,21 @@ public class LogicsPartitaImpl implements LogicsPartita{
 		int gol = g;
 		int random = MINUTES_REG;
 		if (tempo == SUPPL) {
-			gol = g / GOL_SUPPL;
+			gol = ((MINUTES_SUPPL - MINUTES_REG) * g) / MINUTES_REG;
 			random = MINUTES_SUPPL - MINUTES_REG;
+		} else if (tempo != SUPPL && tempo != REG) {
+			if (tempo < MINUTES_REG) {
+				gol = ((MINUTES_REG - tempo) * g) / MINUTES_REG;
+				random = MINUTES_REG - tempo;
+			} else {
+				gol = ((MINUTES_SUPPL - tempo) * g) / MINUTES_REG;
+				random = MINUTES_SUPPL - tempo;
+			}
 		}
 		for (int i = 0; i < gol; i++) {
 			do {
 				min = r.nextInt(random) + 1;
-				if (tempo == SUPPL) {
-					min += MINUTES_REG;
-				}
+				min += tempo;
 			} while (list.contains(min));
 			list.add(min);
 		}
