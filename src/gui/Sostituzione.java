@@ -43,26 +43,10 @@ public class Sostituzione extends Base {
 		contentPane.setLayout(layout);
 		panelSquadra.setBackground(getForeground());
 		
-		JLabel lblStemma = new JLabel();
-		ImageIcon img = new ImageIcon(squadra.getStemma());
-		Image image = img.getImage(); // transform it 
-		Image newimg = image.getScaledInstance(55, 60, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-		img = new ImageIcon(newimg);
-		lblStemma.setBackground(Color.white);
-		lblStemma.setIcon(img);
-		lblStemma.setBorder(new EmptyBorder(new Insets(2, 0, 2, 25)));
-		panelSquadra.add(lblStemma);
-		
-		JLabel lblNomeSquadra = new JLabel(squadra.getNomeSquadra());
+		JLabel lblNomeSquadra = new JLabel("Titolari");
 		lblNomeSquadra.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
 		lblNomeSquadra.setForeground(Color.white);
 		panelSquadra.add(lblNomeSquadra);
-		
-		JLabel lblRating = new JLabel("Valutazione: " + squadra.getValutazione());
-		lblRating.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
-		lblRating.setForeground(Color.white);
-		lblRating.setBorder(new EmptyBorder(new Insets(2, 25, 2, 0)));
-		panelSquadra.add(lblRating);
 		
 		gbc.gridy = 0;
 		contentPane.add(panelSquadra, gbc);
