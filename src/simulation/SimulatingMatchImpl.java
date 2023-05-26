@@ -181,10 +181,7 @@ public class SimulatingMatchImpl implements SimulatingMatch {
 
 	@Override
 	public Map<String, Integer> risultatoSuppl() throws FileNotFoundException, ClassNotFoundException, IOException {
-		Map<String, Integer> map = new HashMap<>();
-		map.put(s1.getNomeSquadra(), (int) (risultato().get(s1.getNomeSquadra()) * (double) ((MINUTES_SUPPL - MINUTES_REG) / MINUTES_REG)));
-		map.put(s2.getNomeSquadra(), (int) (risultato().get(s1.getNomeSquadra()) * (double) ((MINUTES_SUPPL - MINUTES_REG) / MINUTES_REG)));
-		return map;
+		return risultatoSub(MINUTES_REG);
 	}
 
 	@Override
