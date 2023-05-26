@@ -77,10 +77,8 @@ public class LogicsRigoriImpl implements LogicsRigori {
                 }
 			}
 		}
-		
 		list.add(map1);
 		list.add(map2);
-		
 		return list;
 	}
 	
