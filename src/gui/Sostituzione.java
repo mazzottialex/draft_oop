@@ -23,6 +23,7 @@ import javax.swing.border.EmptyBorder;
 import data.Calciatore;
 import data.Squadra;
 import logics.LogicsSostituzione;
+import logics.LogicsSostituzioneImpl;
 
 public class Sostituzione extends Base {
 
@@ -33,9 +34,11 @@ public class Sostituzione extends Base {
 	private final List<String> ruoli = List.of("P", "D", "C", "A");
 	private JPanel panelSquadra = new JPanel();
 	private LogicsSostituzione logics;
+	private static JPanel panelTit;
+	private static JPanel panelRis;
 	
 	public Sostituzione(Squadra squadra) {
-		
+		logics = new LogicsSostituzioneImpl(squadra);
 		
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.insets = new Insets(5, 5, 2, 2);
@@ -65,7 +68,12 @@ public class Sostituzione extends Base {
 		            @Override
 		            public void mouseClicked(MouseEvent e) {
 //		                JOptionPane.showMessageDialog(null, c.getNominativo() + " -> " + c.getRuolo());
-		            	// TODO chiamare funz in logics
+		            	if (panelTit != null) {
+		            		panelTit.setBackground(null); // Ripristina il colore predefinito del pannello precedente
+	                    }
+		            	panelTit = panel;
+		            	panelTit.setBackground(Color.YELLOW); // Imposta il colore di sfondo del pannello selezionato
+		            	logics.selzTit(c);
 		            }
 		        });
 				panelPosizione.add(panel);
@@ -88,18 +96,17 @@ public class Sostituzione extends Base {
 		panelPosizione.setLayout(layout);
 		for(int j = 0; j < 7; j++) {
 			Calciatore c = squadra.getRiserve().get(j);
-//			if(j < 4) {
-//				gbc.gridy = 0;
-//			}
-//			else {
-//				gbc.gridy = 1;
-//			}
 			JPanel panel = (utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRating().getX(), c.getRuolo(), true));
 			panel.addMouseListener(new MouseAdapter() {
 	            @Override
 	            public void mouseClicked(MouseEvent e) {
 //	                JOptionPane.showMessageDialog(null, c.getNominativo() + " -> " + c.getRuolo());
-	            	// TODO chiamare funz in logics
+	            	if (panelRis != null) {
+	            		panelRis.setBackground(null); // Ripristina il colore predefinito del pannello precedente
+                    }
+	            	panelRis = panel;
+	            	panelRis.setBackground(Color.YELLOW); // Imposta il colore di sfondo del pannello selezionato
+	            	logics.selezRis(c);
 	            }
 	        });
 			panelPosizione.add(panel);
@@ -107,6 +114,13 @@ public class Sostituzione extends Base {
 		}
 		gbc.gridy = 6;
 		contentPane.add(panelPosizione, gbc);
+		
+		JButton sostituisci = new JButton("Sostitutisci");
+		sostituisci.addActionListener(e -> {
+			logics.sub(panelTit.getParent(), panelRis.getParent(), panelTit, panelRis);
+		});
+		gbc.gridy = 7;
+		contentPane.add(sostituisci, gbc);
 		
 	}
 }
