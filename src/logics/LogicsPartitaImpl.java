@@ -19,7 +19,6 @@ public class LogicsPartitaImpl implements LogicsPartita{
 	private List<Integer> list2;
 	private final static int REG = 0;
 	private final static int SUPPL = 90;
-	private final static int GOL_SUPPL = 3;
 	
 	private SimulatingMatch sim;
 	
