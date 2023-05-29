@@ -1,19 +1,17 @@
 package data;
 
-import java.awt.Image;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-public class SquadraUtente implements Squadra, Serializable{
+public class SquadraUtente implements Squadra, Serializable {
 	private final int id;
 	private final String nomeSquadra;
 	private final String stemma;
 	private final Modulo modulo;
 	private final List<Calciatore> liCalciatori;
-	private final List<Calciatore> liTitolari;
-	private final List<Calciatore> liRiserve;
+	private List<Calciatore> liTitolari;
+	private List<Calciatore> liRiserve;
 	
 	public SquadraUtente(String nomeSquadra, String stemma, Modulo modulo, List<Calciatore> liTitolari, List<Calciatore> liRiserve) {
 		this.id=0;
@@ -57,6 +55,17 @@ public class SquadraUtente implements Squadra, Serializable{
 	public List<Calciatore> getRiserve() {
 		return this.liRiserve;
 	}
+	
+	@Override
+	public void setTitolari(List<Calciatore> liTitolari) {
+		this.liTitolari = liTitolari;
+	}
+	
+	@Override
+	public void setRiserve(List<Calciatore> liRiserve) {
+		this.liRiserve = liRiserve;
+	}
+	
 	@Override
 	public int getValutazione() {
 		return (int) Math.floor(

@@ -14,4 +14,6 @@ public interface Squadra {
 	public List<Calciatore> getLiCalciatori();
 	public Calciatore getCalciatoreById(int id);
 	public Calciatore getPortiereTit();
+	public void setTitolari(List<Calciatore> liTitolari);
+	public void setRiserve(List<Calciatore> liRiserve);
 }

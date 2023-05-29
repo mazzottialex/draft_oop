@@ -37,31 +37,47 @@ public class SquadraAvversaria implements Squadra{
         return liStemmi.get(pos);
 	}
 	
+	@Override
 	public int getId() {
 		return id;
 	}
 
+	@Override
 	public String getNomeSquadra() {
 		return nomeSquadra;
 	}
 
+	@Override
 	public Modulo getModulo() {
 		return modulo;
 	}
-
+	
+	@Override
 	public List<Calciatore> getTitolari(){
 		return liTitolari;
 	}
 
+	@Override
 	public List<Calciatore> getRiserve() {
 		return liRiserve;
-	}	
+	}
+	
+	@Override
+	public void setTitolari(List<Calciatore> liTitolari) {
+		this.liTitolari = liTitolari;
+	}
+
+	@Override
+	public void setRiserve(List<Calciatore> liRiserve) {
+		this.liRiserve = liRiserve;
+	}
 	
 	@Override
 	public List<Calciatore> getLiCalciatori() {
 		return liCalciatori;
 	}
 	
+	@Override
 	public String getStemma() {
 		return this.stemma;
 	}
