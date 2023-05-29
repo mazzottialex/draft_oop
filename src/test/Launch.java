@@ -39,7 +39,7 @@ import gui.Home;
 import gui.Partita;
 import gui.Sostituzione;
 import gui.SquadraGui;
-//import gui.Rigori;
+import gui.Rigori;
 import gui.Partita;
 import gui.Start;
 import logics.LogicsHome;
