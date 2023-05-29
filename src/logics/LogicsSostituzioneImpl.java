@@ -8,18 +8,21 @@ import javax.swing.JOptionPane;
 
 import data.Calciatore;
 import data.Squadra;
+import data.SquadraUtente;
 
 public class LogicsSostituzioneImpl implements LogicsSostituzione{
 	private List<Calciatore> titolari;
 	private List<Calciatore> riserve;
 	private Calciatore entra;
 	private Calciatore esce;
+	private Squadra s;
 	
 	public LogicsSostituzioneImpl(Squadra s) {
 		this.titolari = s.getTitolari();
 		this.riserve = s.getRiserve();
 		this.entra = null;
 		this.esce = null;
+		this.s = s;
 	}
 	
 	@Override
@@ -33,15 +36,15 @@ public class LogicsSostituzioneImpl implements LogicsSostituzione{
 	}
 
 	@Override
-	public void selzTit(Calciatore c) {
+	public void selezTit(Calciatore c) {
 		esce = c;
-		System.out.println(entra.getRuolo());
+//		System.out.println(entra.getRuolo());
 	}
 
 	@Override
 	public void selezRis(Calciatore c) {
 		entra = c;
-		System.out.println(esce.getRuolo());
+//		System.out.println(esce.getRuolo());
 	}
 
 	@Override
@@ -57,7 +60,6 @@ public class LogicsSostituzioneImpl implements LogicsSostituzione{
                     parent2.remove(component2);
 
                     parent1.add(component2, index1);
-                    parent2.add(component1, index2);
 
                     parent1.revalidate();
                     parent1.repaint();
@@ -69,6 +71,12 @@ public class LogicsSostituzioneImpl implements LogicsSostituzione{
                     component2.setBackground(null);
                     component1 = null;
                     component2 = null;
+                    
+                    int indexEsce = titolari.indexOf(esce);
+                    titolari.set(indexEsce, entra);
+                    riserve.remove(entra);
+                    s.setTitolari(titolari);
+                    s.setRiserve(riserve);
                 }
 				
 				
