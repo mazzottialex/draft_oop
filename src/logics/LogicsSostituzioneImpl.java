@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import data.Calciatore;
 import data.Squadra;
 import data.SquadraUtente;
+import gui.Sostituzione;
 
 public class LogicsSostituzioneImpl implements LogicsSostituzione{
 	private List<Calciatore> titolari;
@@ -16,15 +17,29 @@ public class LogicsSostituzioneImpl implements LogicsSostituzione{
 	private Calciatore entra;
 	private Calciatore esce;
 	private Squadra s;
+	private boolean cambio;
+	private Sostituzione gui;
 	
-	public LogicsSostituzioneImpl(Squadra s) {
+	public LogicsSostituzioneImpl(Squadra s, Sostituzione gui) {
 		this.titolari = s.getTitolari();
 		this.riserve = s.getRiserve();
 		this.entra = null;
 		this.esce = null;
 		this.s = s;
+		this.cambio = false;
+		this.gui = gui;
 	}
 	
+	@Override
+	public boolean isCambio() {
+		return cambio;
+	}
+	
+	@Override
+	public void chiudiGUI() {
+        gui.chiudi();
+    }
+
 	@Override
 	public List<Calciatore> getTitolari() {
 		return titolari;
@@ -38,13 +53,11 @@ public class LogicsSostituzioneImpl implements LogicsSostituzione{
 	@Override
 	public void selezTit(Calciatore c) {
 		esce = c;
-//		System.out.println(entra.getRuolo());
 	}
 
 	@Override
 	public void selezRis(Calciatore c) {
 		entra = c;
-//		System.out.println(esce.getRuolo());
 	}
 
 	@Override
@@ -77,6 +90,12 @@ public class LogicsSostituzioneImpl implements LogicsSostituzione{
                     riserve.remove(entra);
                     s.setTitolari(titolari);
                     s.setRiserve(riserve);
+                    
+                    cambio = true;
+                    
+                    JOptionPane.showMessageDialog(null, "Sostituzione effettuata");
+                    
+                    chiudiGUI();
                 }
 				
 				
