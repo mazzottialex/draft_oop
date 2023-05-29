@@ -36,9 +36,11 @@ public class Sostituzione extends Base {
 	private LogicsSostituzione logics;
 	private static JPanel panelTit;
 	private static JPanel panelRis;
+	private Partita superGui;
 	
-	public Sostituzione(Squadra squadra) {
-		logics = new LogicsSostituzioneImpl(squadra);
+	public Sostituzione(Squadra squadra, Partita superGui) {
+		logics = new LogicsSostituzioneImpl(squadra, this);
+		this.superGui = superGui;
 		
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.insets = new Insets(5, 5, 2, 2);
@@ -69,11 +71,11 @@ public class Sostituzione extends Base {
 		            public void mouseClicked(MouseEvent e) {
 //		                JOptionPane.showMessageDialog(null, c.getNominativo() + " -> " + c.getRuolo());
 		            	if (panelTit != null) {
-		            		panelTit.setBackground(null); // Ripristina il colore predefinito del pannello precedente
+		            		panelTit.setBackground(null);
 	                    }
 		            	panelTit = panel;
-		            	panelTit.setBackground(Color.YELLOW); // Imposta il colore di sfondo del pannello selezionato
-		            	logics.selzTit(c);
+		            	panelTit.setBackground(Color.YELLOW);
+		            	logics.selezTit(c);
 		            }
 		        });
 				panelPosizione.add(panel);
@@ -102,10 +104,10 @@ public class Sostituzione extends Base {
 	            public void mouseClicked(MouseEvent e) {
 //	                JOptionPane.showMessageDialog(null, c.getNominativo() + " -> " + c.getRuolo());
 	            	if (panelRis != null) {
-	            		panelRis.setBackground(null); // Ripristina il colore predefinito del pannello precedente
+	            		panelRis.setBackground(null);
                     }
 	            	panelRis = panel;
-	            	panelRis.setBackground(Color.YELLOW); // Imposta il colore di sfondo del pannello selezionato
+	            	panelRis.setBackground(Color.YELLOW);
 	            	logics.selezRis(c);
 	            }
 	        });
@@ -118,9 +120,17 @@ public class Sostituzione extends Base {
 		JButton sostituisci = new JButton("Sostitutisci");
 		sostituisci.addActionListener(e -> {
 			logics.sub(panelTit.getParent(), panelRis.getParent(), panelTit, panelRis);
+			
 		});
 		gbc.gridy = 7;
 		contentPane.add(sostituisci, gbc);
-		
+	}
+	
+	public void chiudi() {
+        this.dispose();
+    }
+	
+	public void completato() {
+		superGui.addCambio();
 	}
 }
