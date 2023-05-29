@@ -161,7 +161,7 @@ public class Partita extends Base {
 		contentPane.add(
 				new JLabel(
 						new ImageIcon(
-								new ImageIcon("res/icon.png").getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH))));
+								new ImageIcon("src/main/resources/icon.png").getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH))));
 
 
         startStop.addActionListener(new ActionListener() {

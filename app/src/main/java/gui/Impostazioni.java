@@ -37,7 +37,7 @@ import javax.swing.JTextField;
 public class Impostazioni extends Base {
 	private JTextField textFieldNomeSquadra;
 	private String nomeSquadra="Squadra 1";
-	private String stemma="res/stemmi/bianco.png";
+	private String stemma="src/main/resources/stemmi/bianco.png";
 	public Impostazioni(List<Calciatore> li) {
 		
 		GridBagConstraints gbc=new GridBagConstraints();
@@ -67,15 +67,15 @@ public class Impostazioni extends Base {
 		lblScegliStemma.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
 		
 	    List<String> liStemmi=new ArrayList<>();
-	    liStemmi.add("res/stemmi/bianco.png");
-	    liStemmi.add("res/stemmi/blu.png");
-	    liStemmi.add("res/stemmi/giallo.png");
-	    liStemmi.add("res/stemmi/nero.png");
-	    liStemmi.add("res/stemmi/verde.png");
-	    liStemmi.add("res/stemmi/viola.png");
-	    liStemmi.add("res/stemmi/rosso.png");
-	    liStemmi.add("res/stemmi/azzurro.png");
-	    liStemmi.add("res/stemmi/arancione.png");
+	    liStemmi.add("src/main/resources/stemmi/bianco.png");
+	    liStemmi.add("src/main/resources/stemmi/blu.png");
+	    liStemmi.add("src/main/resources/stemmi/giallo.png");
+	    liStemmi.add("src/main/resources/stemmi/nero.png");
+	    liStemmi.add("src/main/resources/stemmi/verde.png");
+	    liStemmi.add("src/main/resources/stemmi/viola.png");
+	    liStemmi.add("src/main/resources/stemmi/rosso.png");
+	    liStemmi.add("src/main/resources/stemmi/azzurro.png");
+	    liStemmi.add("src/main/resources/stemmi/arancione.png");
 	    
 	    JPanel stemmi=new JPanel();
 		stemmi.setLayout(layout);

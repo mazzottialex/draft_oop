@@ -46,7 +46,7 @@ public class Home extends Base {
 		contentPane.setLayout(layout);
 		
 		JButton btnStart = new JButton();
-		ImageIcon img=new ImageIcon("res/start.png");
+		ImageIcon img=new ImageIcon("src/main/resources/start.png");
 		Image image = img.getImage(); // transform it 
 		Image newimg = image.getScaledInstance(250, 250,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		img = new ImageIcon(newimg);

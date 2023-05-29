@@ -25,7 +25,7 @@ public class LogicsFileImpl implements LogicsFile{
 	@Override
 	public List<Calciatore> LoadData(String stagione) throws FileNotFoundException, IOException, ClassNotFoundException {
 		List<Calciatore> li=new ArrayList<>();
-		try(final InputStream file = new FileInputStream("res/backup"+stagione+".txt");
+		try(final InputStream file = new FileInputStream("src/main/resources/backup"+stagione+".txt");
 			final InputStream bstream = new BufferedInputStream(file);
 			final ObjectInputStream ostream=new ObjectInputStream(file);
 					){
@@ -40,7 +40,7 @@ public class LogicsFileImpl implements LogicsFile{
 
 	@Override
 	public Boolean SaveData(List<Calciatore> li, String stagione) {
-		try(final OutputStream file = new FileOutputStream("res/backup"+stagione+".txt");
+		try(final OutputStream file = new FileOutputStream("src/main/resources/backup"+stagione+".txt");
 				final OutputStream bstream = new BufferedOutputStream(file);
 				final ObjectOutputStream ostream=new ObjectOutputStream(file);
 					){
@@ -55,7 +55,7 @@ public class LogicsFileImpl implements LogicsFile{
 	
 	public List<String> loadStagioni(){
 		List<String> ls=new ArrayList<>();
-		try(final InputStream file = new FileInputStream("res/backupStagioni.txt");
+		try(final InputStream file = new FileInputStream("src/main/resources/backupStagioni.txt");
 				final InputStream bstream = new BufferedInputStream(file);
 				final ObjectInputStream ostream=new ObjectInputStream(file);
 						){
@@ -73,7 +73,7 @@ public class LogicsFileImpl implements LogicsFile{
 	
 	@Override
 	public Boolean SaveStagioni(List<String> li){
-		try(final OutputStream file = new FileOutputStream("res/backupStagioni.txt");
+		try(final OutputStream file = new FileOutputStream("src/main/resources/backupStagioni.txt");
 				final OutputStream bstream = new BufferedOutputStream(file);
 				final ObjectOutputStream ostream=new ObjectOutputStream(file);
 					){
@@ -96,7 +96,7 @@ public class LogicsFileImpl implements LogicsFile{
 	@Override
 	public List<Squadra> LoadStorico() {
 		List<Squadra> li=new ArrayList<>();
-		try(final InputStream file = new FileInputStream("res/storico.txt");
+		try(final InputStream file = new FileInputStream("src/main/resources/storico.txt");
 			final InputStream bstream = new BufferedInputStream(file);
 			final ObjectInputStream ostream=new ObjectInputStream(file);
 					){
@@ -114,7 +114,7 @@ public class LogicsFileImpl implements LogicsFile{
 	public Boolean SaveStorico(Squadra s) {
 		List<Squadra> li=LoadStorico();
 		li.add(s);
-		try(final OutputStream file = new FileOutputStream("res/storico.txt");
+		try(final OutputStream file = new FileOutputStream("src/main/resources/storico.txt");
 				final OutputStream bstream = new BufferedOutputStream(file);
 				final ObjectOutputStream ostream=new ObjectOutputStream(file);
 					){

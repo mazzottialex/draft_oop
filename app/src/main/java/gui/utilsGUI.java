@@ -17,13 +17,13 @@ public class utilsGUI {
 	public static JPanel getPanelCalciatore(String calciatore, Integer valutazione, String ruolo, Boolean icon) {
 		String file="";
 		if(ruolo.equals("P"))
-			file="res/portiere.png";
+			file="src/main/resources/portiere.png";
 		else if(ruolo.equals("D"))
-			file="res/difensore.png";
+			file="src/main/resources/difensore.png";
 		else if(ruolo.equals("C"))
-			file="res/centrocampista.png";
+			file="src/main/resources/centrocampista.png";
 		else if(ruolo.equals("A"))
-			file="res/attaccante.png";
+			file="src/main/resources/attaccante.png";
 		
 		GridBagConstraints gbc=new GridBagConstraints();
 		GridBagLayout layout=new GridBagLayout();
@@ -53,13 +53,13 @@ public class utilsGUI {
 	public static JButton getButtonCalciatore(String calciatore, String ruolo) {
 		String file="";
 		if(ruolo.equals("P"))
-			file="res/portiere.png";
+			file="src/main/resources/portiere.png";
 		else if(ruolo.equals("D"))
-			file="res/difensore.png";
+			file="src/main/resources/difensore.png";
 		else if(ruolo.equals("C"))
-			file="res/centrocampista.png";
+			file="src/main/resources/centrocampista.png";
 		else if(ruolo.equals("A"))
-			file="res/attaccante.png";
+			file="src/main/resources/attaccante.png";
 		
 		
 		GridBagConstraints gbc=new GridBagConstraints();
