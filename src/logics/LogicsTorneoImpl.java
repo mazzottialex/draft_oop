@@ -25,6 +25,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	private List<SquadraAvversaria> listSquadre;
 	//private List<Integer> golFatti;
 	private int numSquadre;
+	private Map<String, Integer> risultati;
 	private List<Calciatore> li;
 	
 	public LogicsTorneoImpl(Squadra squadra, List<Calciatore> li) throws FileNotFoundException, ClassNotFoundException, IOException {
@@ -55,7 +56,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 		//System.out.println(this.listSquadre);
 		
 		this.numSquadre = 16;
-		
+		this.risultati = new HashMap<>();
 	}
 
 	@Override
@@ -83,6 +84,8 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 		this.listSquadre = list;
 	}
 
+	/* funzione che calcola i risultati delle partite e setta la lista
+	 * avversaria con le squadre che hanno vinto */
 	@Override
 	public void simulaMatch() {
 		List<SquadraAvversaria> newList = new ArrayList<>();
@@ -96,6 +99,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 			for (int i = 1; i < numSquadre - 1; i = i + 2) {
 				try {
 					map = new SimulatingMatchImpl(this.getListAvversari().get(i),this.getListAvversari().get(i+1)).risultato();
+					System.out.println(map);
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				} catch (ClassNotFoundException e) {
@@ -115,25 +119,34 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 					newList.add(this.getListAvversari().get(i+1));
 				}
 				list.clear();
+				this.risultati.putAll(map);
 			}
 			this.setListAvversari(newList);
 			System.out.println(newList);
 			this.setNumSquadre(8);
 			break;
 		case 8:
+			this.risultati.clear();
 			// ...
 			this.setNumSquadre(4);
 			break;
 		case 4:
+			this.risultati.clear();
 			// ...
 			this.setNumSquadre(2);
 			break;
 		case 2:
+			this.risultati.clear();
 			//...
 			this.setNumSquadre(1);
 			break;
 		}
 		
+	}
+
+	@Override
+	public Map<String, Integer> getRisultati() {
+		return this.risultati;
 	}
 
 }
