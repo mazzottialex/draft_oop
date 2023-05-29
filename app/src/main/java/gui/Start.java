@@ -55,7 +55,7 @@ public class Start extends Base {
 		gridBagLayout.rowWeights = new double[]{Double.MIN_VALUE};
 		contentPane.setLayout(gridBagLayout);
 		
-		ImageIcon img=new ImageIcon("res/icon.png");
+		ImageIcon img=new ImageIcon("src/main/resources/icon.png");
 		Image image = img.getImage(); // transform it 
 		Image newimg = image.getScaledInstance(120, 120,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		img = new ImageIcon(newimg);

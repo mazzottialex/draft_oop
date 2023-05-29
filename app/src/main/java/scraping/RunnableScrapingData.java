@@ -49,7 +49,7 @@ public class RunnableScrapingData implements Runnable{
 		JavascriptExecutor js=(JavascriptExecutor) driver;
 
 		//Attende che la pagina carichi la tabella
-		WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(30)); //aspetta 30 sec per caricare la tabella
+		WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(30).getSeconds()); //aspetta 30 sec per caricare la tabella
 		
 		try {
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("tr")));

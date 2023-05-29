@@ -5,8 +5,11 @@ import java.io.IOException;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
-import java.net.URL;
+
 import data.Calciatore;
+
+import java.net.URL;
+
 import manageData.ManageData;
 import manageData.ManageDataImpl;
 import manageData.ManageStagioni;

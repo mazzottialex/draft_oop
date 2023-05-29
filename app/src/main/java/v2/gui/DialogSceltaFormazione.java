@@ -24,8 +24,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import org.openqa.selenium.devtools.v109.dom.model.RGBA;
-
 import data.Calciatore;
 import data.Modulo;
 import manageData.ExtractData;

@@ -33,7 +33,6 @@ import javax.swing.SwingUtilities;
 
 import data.Calciatore;
 import data.Modulo;
-
 import data.SquadraAvversaria;
 import gui.Home;
 import gui.Partita;

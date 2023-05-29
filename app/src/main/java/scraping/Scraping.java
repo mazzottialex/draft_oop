@@ -1,7 +1,6 @@
 package scraping;
 
 import java.util.List;
-import org.jsoup.nodes.Document;
 
 import data.Calciatore;
 
