@@ -44,6 +44,8 @@ public class Partita extends Base {
 	private String string2 = "";
 	private String apri = "<html>";
 	private String chiudi = "</html>";
+	
+	private int cambi;
 
     public Partita(SquadraAvversaria s1, SquadraAvversaria s2) throws FileNotFoundException, ClassNotFoundException, IOException {
     	this.s1 = s1;
@@ -81,6 +83,7 @@ public class Partita extends Base {
         tab1 = new ArrayList<>();
         tab2 = new ArrayList<>();
         rigori = false;
+        cambi = 0;
         
         // Put constraints on different buttons
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -176,9 +179,21 @@ public class Partita extends Base {
 			public void actionPerformed(ActionEvent e) {
 				stopProgress();
 				// TODO Aprire finestra per cambiare giocatori
+				if (cambi <= 3) {
+					sost();
+				}
 			}
 		});
 
+    }
+    
+    private void sost() {
+    	Sostituzione sub = new Sostituzione(s1, this);
+		sub.setVisible(true);
+    }
+    
+    public void addCambio() {
+        cambi++;
     }
 
 	private void startProgress() {
