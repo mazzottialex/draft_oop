@@ -46,6 +46,7 @@ public class Partita extends Base {
 	private String chiudi = "</html>";
 	
 	private int cambi;
+	private Sostituzione sub;
 
     public Partita(SquadraAvversaria s1, SquadraAvversaria s2) throws FileNotFoundException, ClassNotFoundException, IOException {
     	this.s1 = s1;
@@ -178,9 +179,11 @@ public class Partita extends Base {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				stopProgress();
-				// TODO Aprire finestra per cambiare giocatori
 				if (cambi <= 3) {
 					sost();
+					update();
+					addCambio();
+					ris = true;
 				}
 			}
 		});
@@ -188,12 +191,18 @@ public class Partita extends Base {
     }
     
     private void sost() {
-    	Sostituzione sub = new Sostituzione(s1, this);
+    	sub = new Sostituzione(s1, this, cambi);
+//    	sub.setRiserve(sub.getRiserve() - cambi);
 		sub.setVisible(true);
     }
     
     public void addCambio() {
         cambi++;
+    }
+    
+    public void update() {
+    	s1.setTitolari(sub.getLogics().getTitolari());
+    	s1.setRiserve(sub.getLogics().getRiserve());
     }
 
 	private void startProgress() {
