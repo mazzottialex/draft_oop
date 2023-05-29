@@ -37,10 +37,12 @@ public class Sostituzione extends Base {
 	private static JPanel panelTit;
 	private static JPanel panelRis;
 	private Partita superGui;
-	
-	public Sostituzione(Squadra squadra, Partita superGui) {
+	private int riserve;
+
+	public Sostituzione(Squadra squadra, Partita superGui, int cambiFatti) {
 		logics = new LogicsSostituzioneImpl(squadra, this);
 		this.superGui = superGui;
+		this.riserve = 7 - cambiFatti;
 		
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.insets = new Insets(5, 5, 2, 2);
@@ -69,7 +71,6 @@ public class Sostituzione extends Base {
 				panel.addMouseListener(new MouseAdapter() {
 		            @Override
 		            public void mouseClicked(MouseEvent e) {
-//		                JOptionPane.showMessageDialog(null, c.getNominativo() + " -> " + c.getRuolo());
 		            	if (panelTit != null) {
 		            		panelTit.setBackground(null);
 	                    }
@@ -96,13 +97,12 @@ public class Sostituzione extends Base {
 		//panchinari
 		panelPosizione = new JPanel();
 		panelPosizione.setLayout(layout);
-		for(int j = 0; j < 7; j++) {
+		for(int j = 0; j < riserve; j++) {
 			Calciatore c = squadra.getRiserve().get(j);
 			JPanel panel = (utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRating().getX(), c.getRuolo(), true));
 			panel.addMouseListener(new MouseAdapter() {
 	            @Override
 	            public void mouseClicked(MouseEvent e) {
-//	                JOptionPane.showMessageDialog(null, c.getNominativo() + " -> " + c.getRuolo());
 	            	if (panelRis != null) {
 	            		panelRis.setBackground(null);
                     }
@@ -132,5 +132,9 @@ public class Sostituzione extends Base {
 	
 	public void completato() {
 		superGui.addCambio();
+	}
+	
+	public LogicsSostituzione getLogics() {
+		return logics;
 	}
 }
