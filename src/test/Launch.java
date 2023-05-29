@@ -88,19 +88,19 @@ public class Launch {
 				SquadraAvversaria nap = new SquadraAvversaria(0, "NAP", Modulo.M442, li);				
 				SquadraAvversaria laz = new SquadraAvversaria(0, "LAZ", Modulo.M442, li);
 
-//				SwingUtilities.invokeLater(new Runnable() {
-//		            @Override
-//		            public void run() {
-//		                try {
-//							new Partita(nap, laz).createAndShowGUI();
-//						} catch (ClassNotFoundException | IOException e) {
-//							e.printStackTrace();
-//						}
-//		            }
-//				});
+				SwingUtilities.invokeLater(new Runnable() {
+		            @Override
+		            public void run() {
+		                try {
+							new Partita(nap, laz).createAndShowGUI();
+						} catch (ClassNotFoundException | IOException e) {
+							e.printStackTrace();
+						}
+		            }
+				});
 				
-				Sostituzione sub = new Sostituzione(laz);
-				sub.setVisible(true);
+//				Sostituzione sub = new Sostituzione(laz);
+//				sub.setVisible(true);
 				
 //				SwingUtilities.invokeLater(() -> {
 //		            Rigori gui = new Rigori(nap, laz);
