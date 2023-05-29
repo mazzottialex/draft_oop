@@ -96,10 +96,15 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 		switch (numSquadre) {
 		case 16: 
 			
+			//... qua devo simulare la partita della squadra utente contro this.getListAvversari().get(0)
+			
+			System.out.println(this.listSquadre.get(0).getNomeSquadra());
+			System.out.println(this.listSquadre.size());
+			
 			for (int i = 1; i < numSquadre - 1; i = i + 2) {
 				try {
 					map = new SimulatingMatchImpl(this.getListAvversari().get(i),this.getListAvversari().get(i+1)).risultato();
-					System.out.println(map);
+					//System.out.println(map);
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				} catch (ClassNotFoundException e) {
@@ -122,17 +127,79 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 				this.risultati.putAll(map);
 			}
 			this.setListAvversari(newList);
-			System.out.println(newList);
 			this.setNumSquadre(8);
 			break;
 		case 8:
 			this.risultati.clear();
-			// ...
+			
+			// ... //... qua devo simulare la partita della squadra utente contro this.getListAvversari().get(0)
+			
+			System.out.println(this.listSquadre.get(0).getNomeSquadra());
+			System.out.println(this.listSquadre.size());
+			
+			for (int i = 1; i < numSquadre - 1; i = i + 2) {
+				try {
+					map = new SimulatingMatchImpl(this.getListAvversari().get(i),this.getListAvversari().get(i+1)).risultato();
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				list.addAll(map.keySet());			
+				if (map.get(list.get(0)) >= map.get(list.get(1))) {
+					teamWin = list.get(0);
+				} else {
+					teamWin = list.get(1);
+				}			
+				if (this.getListAvversari().get(i).getNomeSquadra().equals(teamWin)) {
+					newList.add(this.getListAvversari().get(i));
+				} else {
+					newList.add(this.getListAvversari().get(i+1));
+				}
+				list.clear();
+				this.risultati.putAll(map);	
+			}
+			this.setListAvversari(newList);
 			this.setNumSquadre(4);
 			break;
 		case 4:
 			this.risultati.clear();
+			
+			System.out.println(this.listSquadre.get(0).getNomeSquadra());
+			System.out.println(this.listSquadre.size());
+			
+			
+			try {
+				map = new SimulatingMatchImpl(this.getListAvversari().get(1),this.getListAvversari().get(2)).risultato();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			list.addAll(map.keySet());			
+			if (map.get(list.get(0)) >= map.get(list.get(1))) {
+				teamWin = list.get(0);
+			} else {
+				teamWin = list.get(1);
+			}			
+			if (this.getListAvversari().get(1).getNomeSquadra().equals(teamWin)) {
+				newList.add(this.getListAvversari().get(1));
+			} else {
+				newList.add(this.getListAvversari().get(2));
+			}
+			list.clear();
+			this.risultati.putAll(map);	
+			this.setListAvversari(newList);
+			
+			System.out.println(map);
+			System.out.println(risultati);
+			System.out.println(newList);
 			// ...
+			
 			this.setNumSquadre(2);
 			break;
 		case 2:

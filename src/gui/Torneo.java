@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -108,7 +109,7 @@ public class Torneo extends Base{
 			this.p5.add(this.buttonsp5[i+1]);
 		}
 		
-		System.out.println(this.logTor.getListAvversari().size());
+		//System.out.println(this.logTor.getListAvversari().size());
 		int cont = 1;
 		this.buttonsp4[0] = new JButton(this.logTor.getMiaSquadra().getNomeSquadra() + " - " + this.logTor.getListAvversari().get(0).getNomeSquadra());
 		this.p4.add(this.buttonsp4[0]);
@@ -214,8 +215,10 @@ public class Torneo extends Base{
 			this.p4.removeAll();
 			this.p4.repaint();
 			
+			// mettere il risultato della partita della squadra utente (prima da fare in Logic)
+			// metto i risultati nelle partite che si svolgono
 			int cont = 1;
-			this.buttonsp4[0] = new JButton(this.logTor.getMiaSquadra().getNomeSquadra() + " - " + this.logTor.getListAvversari().get(0).getNomeSquadra());
+			this.buttonsp4[0] = new JButton(this.logTor.getMiaSquadra().getNomeSquadra() + " - " + this.listAvversarie.get(0).getNomeSquadra());
 			this.p4.add(this.buttonsp4[0]);
 			for (int i=1;i<this.listAvversarie.size() - 1;i = i + 2, cont++) {
 				String squad1 = new String(this.listAvversarie.get(i).getNomeSquadra());
@@ -226,19 +229,78 @@ public class Torneo extends Base{
 				this.p4.add(this.buttonsp4[cont]);
 			}
 			
-			// ... (creare il panel 3) con le squadre che hanno vinto 
 			
 			
+			// ... creo il panel 3 con le squadre che hanno vinto
+			// (ora faccio finta che vinca sempre la squadra dell'utente poi dovrò cambiare) 
+			this.buttonsp3[0] = new JButton(this.logTor.getMiaSquadra().getNomeSquadra() + " - " + this.logTor.getListAvversari().get(0).getNomeSquadra());
+			this.p3.add(this.buttonsp3[0]);
+			cont = 1;
+			for (int i=1;i<this.logTor.getListAvversari().size() - 1;i = i + 2, cont++) {
+				this.buttonsp3[cont] = new JButton(this.logTor.getListAvversari().get(i).getNomeSquadra() + " - " + this.logTor.getListAvversari().get(i+1).getNomeSquadra());
+				this.p3.add(this.buttonsp3[cont]);
+			}
+			
+			
+			this.p3.validate();
 			this.p4.validate();
 			this.panelCenter.validate();
 			this.listAvversarie = logTor.getListAvversari();
 			break;
 			
 		case 4:
-			// ...
+			this.p3.removeAll();
+			this.p3.repaint();
+			
+			// mettere il risultato della partita della squadra utente (prima da fare in Logic)
+			// metto i risultati nelle partite che si svolgono
+			int cont1 = 1;
+			this.buttonsp3[0] = new JButton(this.logTor.getMiaSquadra().getNomeSquadra() + " - " + this.listAvversarie.get(0).getNomeSquadra());
+			this.p3.add(this.buttonsp3[0]);
+			for (int i=1;i<this.listAvversarie.size() - 1;i = i + 2, cont1++) {
+				String squad1 = new String(this.listAvversarie.get(i).getNomeSquadra());
+				var ris1 = this.logTor.getRisultati().get(squad1);
+				String squad2 = new String(this.listAvversarie.get(i+1).getNomeSquadra());
+				var ris2 = this.logTor.getRisultati().get(squad2);
+				this.buttonsp3[cont1] = new JButton(squad1 + " " + ris1 + " " + " - " + " " + ris2 + " " + squad2);
+				this.p3.add(this.buttonsp3[cont1]);
+			}
+			
+			// ... creo il panel 2 con le squadre che hanno vinto 
+			// (ora faccio finta che vinca sempre la squadra dell'utente poi dovrò cambiare) 
+			this.buttonsp2[0] = new JButton(this.logTor.getMiaSquadra().getNomeSquadra() + " - " + this.logTor.getListAvversari().get(0).getNomeSquadra());
+			this.p2.add(this.buttonsp2[0]);
+			this.buttonsp2[1] = new JButton(this.logTor.getListAvversari().get(1).getNomeSquadra() + " - " + this.logTor.getListAvversari().get(2).getNomeSquadra());
+			this.p2.add(this.buttonsp2[1]);
+
+			this.p2.validate();
+			this.p3.validate();
+			this.panelCenter.validate();
+			this.listAvversarie = logTor.getListAvversari();
 			break;
 		case 2:
+			this.p2.removeAll();
+			this.p2.repaint();
+			
+			// metto i risultati nel panel 2 (ora non ho quelli della squadraUtente)
+			this.buttonsp2[0] = new JButton(this.logTor.getMiaSquadra().getNomeSquadra() + " - " + this.listAvversarie.get(0).getNomeSquadra());
+			this.p2.add(this.buttonsp2[0]);
+			
+			String squad1 = new String(this.listAvversarie.get(1).getNomeSquadra());
+			var ris1 = this.logTor.getRisultati().get(squad1);
+			String squad2 = new String(this.listAvversarie.get(2).getNomeSquadra());
+			var ris2 = this.logTor.getRisultati().get(squad2);
+			this.buttonsp2[1] = new JButton(squad1 + " " + ris1 + " " + " - " + " " + ris2 + " " + squad2);
+			this.p2.add(this.buttonsp2[1]);
+			
+			// aggiungo la nuova partita ...
 			// ...
+			
+			
+			this.p1.validate();
+			this.p2.validate();
+			this.panelCenter.validate();
+			this.listAvversarie = logTor.getListAvversari();
 			break;
 		case 1:
 			//...
