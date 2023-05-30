@@ -90,11 +90,13 @@ public class Launch {
 				SwingUtilities.invokeLater(new Runnable() {
 		            @Override
 		            public void run() {
+		            	/*
 		                try {
 							new Partita(nap, laz).createAndShowGUI();
 						} catch (ClassNotFoundException | IOException e) {
 							e.printStackTrace();
 						}
+						*/
 		            }
 				});
 				
