@@ -9,6 +9,7 @@ import data.Modulo;
 import data.Squadra;
 import data.SquadraAvversaria;
 import data.SquadraUtente;
+import gui.Partita;
 import manageData.ExtractData;
 import manageData.ExtractDataImpl;
 import manageData.ManageData;
@@ -97,6 +98,26 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 		case 16: 
 			
 			//... qua devo simulare la partita della squadra utente contro this.getListAvversari().get(0)
+			/*
+			try {
+				Partita p1 = new Partita(this.getListAvversari().get(0), this.getListAvversari().get(1));
+				p1.createAndShowGUI();
+				
+				System.out.println("ciaooooo");
+				System.out.println(p1.getWinner());
+				//System.out.println(p1.getWinner().getNomeSquadra());
+				
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			*/
 			
 			System.out.println(this.listSquadre.get(0).getNomeSquadra());
 			System.out.println(this.listSquadre.size());
@@ -117,7 +138,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 					teamWin = list.get(0);
 				} else {
 					teamWin = list.get(1);
-				}			
+				}
 				if (this.getListAvversari().get(i).getNomeSquadra().equals(teamWin)) {
 					newList.add(this.getListAvversari().get(i));
 				} else {
