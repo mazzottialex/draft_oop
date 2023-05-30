@@ -53,7 +53,7 @@ public class Partita extends JDialog {
 	private int cambi;
 	private Sostituzione sub;
 	
-	private boolean over;
+//	private boolean over;
 
     public Partita(Frame parent,boolean modale, Squadra s1, Squadra s2) throws FileNotFoundException, ClassNotFoundException, IOException {
     	super(parent,modale);
@@ -105,7 +105,7 @@ public class Partita extends JDialog {
 		this.tab2 = new ArrayList<>();
 		this.rigori = false;
 		this.cambi = 0;
-		this.over = false;
+//		this.over = false;
         
         // Put constraints on different buttons
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -286,7 +286,7 @@ public class Partita extends JDialog {
 						startStop.setEnabled(false);
 						jbSubs.setEnabled(false);
 						next.setEnabled(true);
-						over = true;
+//						over = true;
 					} else {
 						fineTempo = 120;
 						progressBar.setMaximum(fineTempo);
@@ -305,7 +305,7 @@ public class Partita extends JDialog {
 						JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + winner.getNomeSquadra());
 						startStop.setEnabled(false);
 						next.setEnabled(true);
-						over = true;
+//						over = true;
 					} else {
 						JOptionPane.showMessageDialog(null, "Fine tempi supplementari. Si va ai calci di rigore");
 						//TODO da sistemare rigori
@@ -317,7 +317,7 @@ public class Partita extends JDialog {
 						if (gui.isFine()) {
 							startStop.setEnabled(false);
 							next.setEnabled(true);
-							over = true;
+//							over = true;
 						}
 					}
 				}
@@ -379,9 +379,17 @@ public class Partita extends JDialog {
 		return winner;
     }
     
-    public boolean isOver() {
-    	return over;
+    public int getGolS1() {
+    	return Integer.valueOf(jlScoreSq1.getText());
     }
+    
+    public int getGolS2() {
+    	return Integer.valueOf(jlScoreSq2.getText());
+    }
+    
+//    public boolean isOver() {
+//    	return over;
+//    }
     
     /**
      * Create the GUI and show it. As with all GUI code, this must run
