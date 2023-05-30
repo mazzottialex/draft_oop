@@ -19,6 +19,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -33,7 +34,9 @@ import javax.swing.SwingUtilities;
 
 import data.Calciatore;
 import data.Modulo;
+import data.Squadra;
 import data.SquadraAvversaria;
+import data.SquadraUtente;
 import gui.Home;
 import gui.Partita;
 import gui.Sostituzione;
@@ -84,22 +87,21 @@ public class Launch {
 				List<Calciatore> li = md.getLi();
 				CalcoloRating cr = new CalcoloRatingImpl(li);
 				li = cr.updateRating();
-				SquadraAvversaria nap = new SquadraAvversaria(0, "NAP", Modulo.M442, li);				
-				SquadraAvversaria laz = new SquadraAvversaria(0, "LAZ", Modulo.M442, li);
+				Squadra nap = new SquadraAvversaria(0, "NAP", Modulo.M433, li);	
+				Squadra s = new SquadraUtente("squadra", null, Modulo.M433, nap.getTitolari(), nap.getRiserve());
+				Squadra laz = new SquadraAvversaria(0, "LAZ", Modulo.M442, li);
 
-				SwingUtilities.invokeLater(new Runnable() {
-		            @Override
-		            public void run() {
-		            	/*
-		                try {
-							new Partita(nap, laz).createAndShowGUI();
-						} catch (ClassNotFoundException | IOException e) {
-							e.printStackTrace();
-						}
-						*/
-		            }
-				});
-				
+//				SwingUtilities.invokeLater(new Runnable() {
+//		            @Override
+//		            public void run() {
+//		                try {
+//							new Partita(s, laz).createAndShowGUI();
+//						} catch (ClassNotFoundException | IOException e) {
+//							e.printStackTrace();
+//						}
+//		            }
+//				});
+//				
 //				Sostituzione sub = new Sostituzione(laz);
 //				sub.setVisible(true);
 				
@@ -299,6 +301,14 @@ public class Launch {
             }
         }
         return -1;
+    }
+    
+    public static <T> List<T> invertiLista(List<T> lista) {
+        List<T> listaInvertita = new ArrayList<>();
+        for (int i = lista.size() - 1; i >= 0; i--) {
+            listaInvertita.add(lista.get(i));
+        }
+        return listaInvertita;
     }
 }
 
