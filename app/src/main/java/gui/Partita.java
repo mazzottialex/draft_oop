@@ -1,5 +1,6 @@
 package gui;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 import data.Calciatore;
 import data.Squadra;
@@ -13,8 +14,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Partita extends Base {
+public class Partita extends JDialog {
     private static final long serialVersionUID = 3533149128342164934L;
+    
+    
+    private JPanel contentPane = new JPanel();
+    
 	private JProgressBar progressBar;
 	private JLabel jlNomeSq1;
 	private JLabel jlScoreSq1;
@@ -50,7 +55,21 @@ public class Partita extends Base {
 	
 	private boolean over;
 
-    public Partita(Squadra s1, Squadra s2) throws FileNotFoundException, ClassNotFoundException, IOException {
+    public Partita(Frame parent,boolean modale, Squadra s1, Squadra s2) throws FileNotFoundException, ClassNotFoundException, IOException {
+    	super(parent,modale);
+    	
+		setBounds(100, 100, 700, 300);
+		setMinimumSize(getSize());
+ 
+		setTitle("PARTITA");
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setBounds(100, 100, 500, 700);
+		setBackground(new Color(0, 64, 128));
+		contentPane.setBackground(new Color(0, 64, 128));
+		contentPane.setLayout(new BorderLayout());
+		//add(contentPane);
+    	//contentPane.add(panel);
+    	
     	this.s1 = s1;
 		this.s2 = s2;
 		this.logics = new LogicsPartitaImpl(this.s1, this.s2);
