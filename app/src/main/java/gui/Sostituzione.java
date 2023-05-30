@@ -7,6 +7,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -29,12 +31,12 @@ public class Sostituzione extends Base {
 	private LogicsSostituzione logics;
 	private static JPanel panelTit;
 	private static JPanel panelRis;
-	private Partita superGui;
+//	private Partita superGui;
 	private int riserve;
 
 	public Sostituzione(Squadra squadra, Partita superGui, int cambiFatti) {
 		logics = new LogicsSostituzioneImpl(squadra, this);
-		this.superGui = superGui;
+//		this.superGui = superGui;
 		this.riserve = 7 - cambiFatti;
 		
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -117,15 +119,24 @@ public class Sostituzione extends Base {
 		});
 		gbc.gridy = 7;
 		contentPane.add(sostituisci, gbc);
+		
+		addWindowListener(new WindowAdapter() {
+	        @Override
+	        public void windowClosing(WindowEvent e) {
+	            dispose();
+	        }
+	    });
+		
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
 	
 	public void chiudi() {
         this.dispose();
     }
 	
-	public void completato() {
-		superGui.addCambio();
-	}
+//	public void completato() {
+//		superGui.addCambio();
+//	}
 	
 	public LogicsSostituzione getLogics() {
 		return logics;
