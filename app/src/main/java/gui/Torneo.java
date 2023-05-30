@@ -14,8 +14,10 @@ import java.util.List;
 import java.util.*;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 import data.Calciatore;
@@ -29,6 +31,7 @@ import logics.LogicsImpostazioniImpl;
 import logics.LogicsTorneo;
 import logics.LogicsTorneoImpl;
 import simulation.SimulatingMatchImpl;
+import v2.gui.DialogScelta;
 
 public class Torneo extends Base{
 
@@ -70,6 +73,32 @@ public class Torneo extends Base{
 		JButton buttonSimula = new JButton("Simula");
 		buttonSimula.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				if (!logTor.getEliminated()) {
+					JButton btn= (JButton) e.getSource();
+					JPanel panel=(JPanel) btn.getParent();
+		            JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(btn);
+					Partita dialog;
+					try {
+						dialog = new Partita(parent, true, logTor.getMiaSquadra(), logTor.getListAvversari().get(0));
+						dialog.createAndShowGUI();
+						dialog.setVisible(true);
+						
+						if (dialog.getWinner() != logTor.getMiaSquadra()) {
+							logTor.setEliminated(true);
+							logTor.setSquadraAvv(logTor.getListAvversari().get(0));
+						}
+						//System.out.println(dialog.getWinner().getNomeSquadra());
+						//System.out.println(dialog.isOver());
+						
+						
+						
+					} catch (ClassNotFoundException | IOException e1) {
+						e1.printStackTrace();
+					}
+				}
+				System.out.println("ciao");
+				
 				
 				try {
 					logTor.simulaMatch();
@@ -121,71 +150,6 @@ public class Torneo extends Base{
 		}
 		
 		
-		/*
-		final JButton b1 = new JButton("squadra 1");
-		final JButton b2 = new JButton("squadra 2");
-		final JButton b3 = new JButton("squadra 3");
-		final JButton b4 = new JButton("squadra 4");
-		final JButton b5 = new JButton("squadra 5");
-		final JButton b6 = new JButton("squadra 6");
-		final JButton b7 = new JButton("squadra 7");
-		final JButton b8 = new JButton("squadra 8");
-		final JButton b9 = new JButton("squadra 9");
-		final JButton b10 = new JButton("squadra 10");
-		final JButton b11 = new JButton("squadra 11");
-		final JButton b12 = new JButton("squadra 12");
-		final JButton b13 = new JButton("squadra 13");
-		final JButton b14 = new JButton("squadra 14");
-		final JButton b15 = new JButton("squadra 15");
-		final JButton b16 = new JButton("squadra 16");
-		p5.add(b1);
-		p5.add(b2);
-		p5.add(b3);
-		p5.add(b4);
-		p5.add(b5);
-		p5.add(b6);
-		p5.add(b7);
-		p5.add(b8);
-		p5.add(b9);
-		p5.add(b10);
-		p5.add(b11);
-		p5.add(b12);
-		p5.add(b13);
-		p5.add(b14);
-		p5.add(b15);
-		p5.add(b16);
-		final JButton c1 = new JButton("squadra 1");
-		final JButton c3 = new JButton("squadra 1");
-		final JButton c5 = new JButton("squadra 1");
-		final JButton c7 = new JButton("squadra 1");
-		final JButton c9 = new JButton("squadra 1");
-		final JButton c11 = new JButton("squadra 1");
-		final JButton c13 = new JButton("squadra 1");
-		final JButton c15 = new JButton("squadra 1");
-		p4.add(c1);
-		p4.add(c3);
-		p4.add(c5);
-		p4.add(c7);
-		p4.add(c9);
-		p4.add(c11);
-		p4.add(c13);
-		p4.add(c15);
-		final JButton d1 = new JButton("squadra 1");
-		final JButton d2 = new JButton("squadra 1");
-		final JButton d3 = new JButton("squadra 1");
-		final JButton d4 = new JButton("squadra 1");
-		p3.add(d1);
-		p3.add(d2);
-		p3.add(d3);
-		p3.add(d4);
-		final JButton e1 = new JButton("squadra 1");
-		final JButton e2 = new JButton("squadra 1");
-		p2.add(e1);
-		p2.add(e2);
-		final JButton f1 = new JButton("squadra 1");
-		p1.add(f1);
-		*/
-		
 		p0.setBackground(new Color(0,64,128));
 		p1.setBackground(new Color(0,64,128));
 		p2.setBackground(new Color(0,64,128));
@@ -221,6 +185,7 @@ public class Torneo extends Base{
 			// metto i risultati nelle partite che si svolgono
 			int cont = 1;
 			this.buttonsp4[0] = new JButton(this.logTor.getMiaSquadra().getNomeSquadra() + " - " + this.listAvversarie.get(0).getNomeSquadra());
+			
 			this.p4.add(this.buttonsp4[0]);
 			for (int i=1;i<this.listAvversarie.size() - 1;i = i + 2, cont++) {
 				String squad1 = new String(this.listAvversarie.get(i).getNomeSquadra());
@@ -235,8 +200,13 @@ public class Torneo extends Base{
 			
 			// ... creo il panel 3 con le squadre che hanno vinto
 			// (ora faccio finta che vinca sempre la squadra dell'utente poi dovrò cambiare) 
-			this.buttonsp3[0] = new JButton(this.logTor.getMiaSquadra().getNomeSquadra() + " - " + this.logTor.getListAvversari().get(0).getNomeSquadra());
-			this.p3.add(this.buttonsp3[0]);
+			if (!logTor.getEliminated()) {
+				this.buttonsp3[0] = new JButton(this.logTor.getMiaSquadra().getNomeSquadra() + " - " + this.logTor.getListAvversari().get(0).getNomeSquadra());
+				this.p3.add(this.buttonsp3[0]);
+			} else {
+				this.buttonsp3[0] = new JButton(this.logTor.getSquadraAvv().getNomeSquadra() + " - " + this.logTor.getListAvversari().get(0).getNomeSquadra());
+				this.p3.add(this.buttonsp3[0]);
+			}
 			cont = 1;
 			for (int i=1;i<this.logTor.getListAvversari().size() - 1;i = i + 2, cont++) {
 				this.buttonsp3[cont] = new JButton(this.logTor.getListAvversari().get(i).getNomeSquadra() + " - " + this.logTor.getListAvversari().get(i+1).getNomeSquadra());

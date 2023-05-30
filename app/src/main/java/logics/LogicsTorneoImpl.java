@@ -28,6 +28,8 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	private int numSquadre;
 	private Map<String, Integer> risultati;
 	private List<Calciatore> li;
+	private boolean eliminated;
+	private SquadraAvversaria squadraAvv; // squadra al posto della squadra utente se vince 
 	
 	public LogicsTorneoImpl(Squadra squadra, List<Calciatore> li) throws FileNotFoundException, ClassNotFoundException, IOException {
 		this.li=li;
@@ -58,6 +60,8 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 		
 		this.numSquadre = 16;
 		this.risultati = new HashMap<>();
+		this.eliminated = false;
+		this.squadraAvv = new SquadraAvversaria(0, "aaa", Modulo.M442, li);
 	}
 
 	@Override
@@ -99,28 +103,6 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 		case 16: 
 			
 			//... qua devo simulare la partita della squadra utente contro this.getListAvversari().get(0)
-			/*
-			try {
-				Partita p1 = new Partita(this.getListAvversari().get(0), this.getListAvversari().get(1));
-				p1.createAndShowGUI();
-				System.out.println("ciaooooo");
-				System.out.println(p1.getWinner());
-				//System.out.println(p1.getWinner().getNomeSquadra());
-				
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			*/
-
-			//System.out.println("ciaooooo");
-			//System.out.println(p1.getWinner());
 			
 			
 			//System.out.println(this.listSquadre.get(0).getNomeSquadra());
@@ -271,6 +253,26 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	@Override
 	public Map<String, Integer> getRisultati() {
 		return this.risultati;
+	}
+
+	@Override
+	public boolean getEliminated() {
+		return this.eliminated;
+	}
+
+	@Override
+	public void setEliminated(boolean eliminated) {
+		this.eliminated = eliminated;
+	}
+
+	@Override
+	public SquadraAvversaria getSquadraAvv() {
+		return this.squadraAvv;
+	}
+
+	@Override
+	public void setSquadraAvv(SquadraAvversaria squadra) {
+		this.squadraAvv = squadra;
 	}
 
 }

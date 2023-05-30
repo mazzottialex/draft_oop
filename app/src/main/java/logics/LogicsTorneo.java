@@ -23,4 +23,12 @@ public interface LogicsTorneo {
 	public void simulaMatch() throws FileNotFoundException, ClassNotFoundException, IOException;
 	
 	public Map<String,Integer> getRisultati();
+	
+	public boolean getEliminated();
+	
+	public void setEliminated(boolean eliminated);
+	
+	public SquadraAvversaria getSquadraAvv();
+	
+	public void setSquadraAvv(SquadraAvversaria squadra);
 }
