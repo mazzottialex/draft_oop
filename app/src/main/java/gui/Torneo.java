@@ -70,6 +70,7 @@ public class Torneo extends Base{
 		JButton buttonSimula = new JButton("Simula");
 		buttonSimula.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				try {
 					logTor.simulaMatch();
 					createLevel();
@@ -83,6 +84,8 @@ public class Torneo extends Base{
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				
+				
 			}
 		});
 		this.panelSud.add(buttonSimula);

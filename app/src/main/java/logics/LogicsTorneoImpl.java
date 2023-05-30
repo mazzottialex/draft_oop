@@ -94,6 +94,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 		Map<String, Integer> map = new HashMap<>(); //map per il risultato
 		List<String> list = new ArrayList<>(); //lista per i nomi delle squadre che si sfidano 
 		String teamWin = new String(); //nome della squadra vincente
+		String teamLose = new String(); //nome della squadra perdente
 		switch (numSquadre) {
 		case 16: 
 			
@@ -102,7 +103,6 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 			try {
 				Partita p1 = new Partita(this.getListAvversari().get(0), this.getListAvversari().get(1));
 				p1.createAndShowGUI();
-				
 				System.out.println("ciaooooo");
 				System.out.println(p1.getWinner());
 				//System.out.println(p1.getWinner().getNomeSquadra());
@@ -118,13 +118,61 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 				e.printStackTrace();
 			}
 			*/
+
+			//System.out.println("ciaooooo");
+			//System.out.println(p1.getWinner());
 			
-			System.out.println(this.listSquadre.get(0).getNomeSquadra());
-			System.out.println(this.listSquadre.size());
+			
+			//System.out.println(this.listSquadre.get(0).getNomeSquadra());
+			//System.out.println(this.listSquadre.size());
 			
 			for (int i = 1; i < numSquadre - 1; i = i + 2) {
 				try {
-					map = new SimulatingMatchImpl(this.getListAvversari().get(i),this.getListAvversari().get(i+1)).risultato();
+					SimulatingMatchImpl s = new SimulatingMatchImpl(this.getListAvversari().get(i),this.getListAvversari().get(i+1));
+					map = s.risultato();
+					System.out.println(map);
+					list.addAll(map.keySet());
+					if (map.get(list.get(0)) == map.get(list.get(1))) {
+						map = s.risultatoSuppl();
+						System.out.println(map);
+						list.clear();
+					}
+					
+					list.addAll(map.keySet());
+					if (map.get(list.get(0)) > map.get(list.get(1))) {
+						teamWin = list.get(0);
+					} else if (map.get(list.get(0)) < map.get(list.get(1))){
+						teamWin = list.get(1);
+					} else {
+						LogicsRigoriImpl r = new LogicsRigoriImpl(this.getListAvversari().get(i), this.getListAvversari().get(i+1));
+						//System.out.println(r.getGol1());
+						//System.out.println(r.getGol2());
+						teamWin = r.getWinner().getNomeSquadra();
+						if (teamWin.equals(this.getListAvversari().get(i).getNomeSquadra())) {
+							teamLose = this.getListAvversari().get(i+1).getNomeSquadra();
+						} else {
+							teamLose = this.getListAvversari().get(i).getNomeSquadra();
+						}
+						//System.out.println("ha vinto ai rigori" + teamWin);
+						map.clear();
+						if (r.getGol1() > r.getGol2()) {
+							map.put(teamWin, r.getGol1());
+							map.put(teamLose, r.getGol2());
+							//System.out.println(map);
+						} else {
+							map.put(teamWin, r.getGol2());
+							map.put(teamLose, r.getGol1());
+							//System.out.println(map);
+						}
+					}
+					if (this.getListAvversari().get(i).getNomeSquadra().equals(teamWin)) {
+						newList.add(this.getListAvversari().get(i));
+					} else {
+						newList.add(this.getListAvversari().get(i+1));
+					}
+					list.clear();
+					this.risultati.putAll(map);
+					//map = new SimulatingMatchImpl(this.getListAvversari().get(i),this.getListAvversari().get(i+1)).risultato();
 					//System.out.println(map);
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
@@ -133,19 +181,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				list.addAll(map.keySet());			
-				if (map.get(list.get(0)) >= map.get(list.get(1))) {
-					teamWin = list.get(0);
-				} else {
-					teamWin = list.get(1);
-				}
-				if (this.getListAvversari().get(i).getNomeSquadra().equals(teamWin)) {
-					newList.add(this.getListAvversari().get(i));
-				} else {
-					newList.add(this.getListAvversari().get(i+1));
-				}
-				list.clear();
-				this.risultati.putAll(map);
+
 			}
 			this.setListAvversari(newList);
 			this.setNumSquadre(8);
