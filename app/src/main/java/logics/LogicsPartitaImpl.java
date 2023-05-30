@@ -8,13 +8,13 @@ import java.util.List;
 import java.util.Random;
 
 import data.Calciatore;
-import data.SquadraAvversaria;
+import data.Squadra;
 import simulation.SimulatingMatch;
 import simulation.SimulatingMatchImpl;
 
 public class LogicsPartitaImpl implements LogicsPartita{
-	private SquadraAvversaria s1;
-	private SquadraAvversaria s2;
+	private Squadra s1;
+	private Squadra s2;
 	private List<Integer> list1;
 	private List<Integer> list2;
 	private final static int REG = 0;
@@ -27,7 +27,7 @@ public class LogicsPartitaImpl implements LogicsPartita{
 	
 	private static final double OWNGOAL_RATE = 2.904040404040404;
 	
-	public LogicsPartitaImpl(SquadraAvversaria s1, SquadraAvversaria s2) throws FileNotFoundException, ClassNotFoundException, IOException {
+	public LogicsPartitaImpl(Squadra s1, Squadra s2) throws FileNotFoundException, ClassNotFoundException, IOException {
 		super();
 		this.s1 = s1;
 		this.s2 = s2;
@@ -55,7 +55,7 @@ public class LogicsPartitaImpl implements LogicsPartita{
 	}
 	
 	@Override
-	public List<Integer> getMinGol(SquadraAvversaria s) {
+	public List<Integer> getMinGol(Squadra s) {
 		if (s == s1) {
 			return list1;
 		} else if (s == s2){
@@ -103,7 +103,7 @@ public class LogicsPartitaImpl implements LogicsPartita{
 	}
 
 	@Override
-	public Calciatore addScorer(SquadraAvversaria s) {
+	public Calciatore addScorer(Squadra s) {
 		double g1 = s.getTitolari().get(1).getGol();
 		double g2 = s.getTitolari().get(2).getGol();
 		double g3 = s.getTitolari().get(3).getGol();
@@ -147,8 +147,8 @@ public class LogicsPartitaImpl implements LogicsPartita{
 		return null;
 	}
 	
-	public Calciatore getAutogol(SquadraAvversaria s) {
-		SquadraAvversaria sq;
+	public Calciatore getAutogol(Squadra s) {
+		Squadra sq;
 		if (s == s1) {
 			sq = s2;
 		} else {

@@ -2,7 +2,7 @@ package gui;
 import javax.swing.*;
 
 import data.Calciatore;
-import data.SquadraAvversaria;
+import data.Squadra;
 import logics.LogicsPartita;
 import logics.LogicsPartitaImpl;
 
@@ -29,13 +29,13 @@ public class Partita extends Base {
 	private JPanel panel;
 	
 	private LogicsPartita logics;
-	private SquadraAvversaria s1;
-	private SquadraAvversaria s2;
+	private Squadra s1;
+	private Squadra s2;
     
     private boolean isRunning;
     private boolean ris;
     private int fineTempo;
-	private SquadraAvversaria winner;
+	private Squadra winner;
 	private ArrayList<Calciatore> tab1;
 	private ArrayList<Calciatore> tab2;
 	private boolean rigori;
@@ -47,44 +47,46 @@ public class Partita extends Base {
 	
 	private int cambi;
 	private Sostituzione sub;
+	
+	private boolean over;
 
-    public Partita(SquadraAvversaria s1, SquadraAvversaria s2) throws FileNotFoundException, ClassNotFoundException, IOException {
+    public Partita(Squadra s1, Squadra s2) throws FileNotFoundException, ClassNotFoundException, IOException {
     	this.s1 = s1;
 		this.s2 = s2;
-		logics = new LogicsPartitaImpl(this.s1, this.s2);
+		this.logics = new LogicsPartitaImpl(this.s1, this.s2);
     	
 		// Define the panel to hold the components
-		panel = new JPanel(new GridBagLayout());
+		this.panel = new JPanel(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
 
 		//define components
-		jlNomeSq1 = new JLabel(s1.getNomeSquadra(), SwingConstants.RIGHT);
-		jlScoreSq1 = new JLabel("0", SwingConstants.RIGHT);
-		jlScoreSq1.setVerticalAlignment(SwingConstants.TOP);
-		jlTabSq1 = new JLabel("", SwingConstants.RIGHT);
-		jlTabSq1.setVerticalAlignment(SwingConstants.TOP);
-		jlNomeSq2 = new JLabel(s2.getNomeSquadra(), SwingConstants.LEFT);
-		jlScoreSq2 = new JLabel("0", SwingConstants.LEFT);
-		jlScoreSq2.setVerticalAlignment(SwingConstants.TOP);
-		jlTabSq2 = new JLabel("", SwingConstants.LEFT);
-		jlTabSq2.setVerticalAlignment(SwingConstants.TOP);
-		startStop = new JButton("Play");
-		jbSubs = new JButton("Subs");
-		jbSubs.setEnabled(false);
-		//min = new JLabel("Minuto: 0°");
-		next = new JButton("Avanti");
-		next.setEnabled(false);
-		progressBar = new JProgressBar(0, 90);
-        progressBar.setStringPainted(true);
-        progressBar.setString("Minuto 0°");
-        ris = false;
-        fineTempo = 45;
-        winner = null;
-        tab1 = new ArrayList<>();
-        tab2 = new ArrayList<>();
-        rigori = false;
-        cambi = 0;
+        this.jlNomeSq1 = new JLabel(s1.getNomeSquadra(), SwingConstants.RIGHT);
+        this.jlScoreSq1 = new JLabel("0", SwingConstants.RIGHT);
+        this.jlScoreSq1.setVerticalAlignment(SwingConstants.TOP);
+        this.jlTabSq1 = new JLabel("", SwingConstants.RIGHT);
+        this.jlTabSq1.setVerticalAlignment(SwingConstants.TOP);
+        this.jlNomeSq2 = new JLabel(s2.getNomeSquadra(), SwingConstants.LEFT);
+        this.jlScoreSq2 = new JLabel("0", SwingConstants.LEFT);
+        this.jlScoreSq2.setVerticalAlignment(SwingConstants.TOP);
+        this.jlTabSq2 = new JLabel("", SwingConstants.LEFT);
+        this.jlTabSq2.setVerticalAlignment(SwingConstants.TOP);
+		this.startStop = new JButton("Play");
+		this.jbSubs = new JButton("Subs");
+		this.jbSubs.setEnabled(false);
+		this.next = new JButton("Avanti");
+		this.next.setEnabled(false);
+		this.progressBar = new JProgressBar(0, 90);
+		this.progressBar.setStringPainted(true);
+		this.progressBar.setString("Minuto 0°");
+		this.ris = false;
+		this.fineTempo = 45;
+		this.winner = null;
+		this.tab1 = new ArrayList<>();
+		this.tab2 = new ArrayList<>();
+		this.rigori = false;
+		this.cambi = 0;
+		this.over = false;
         
         // Put constraints on different buttons
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -265,6 +267,7 @@ public class Partita extends Base {
 						startStop.setEnabled(false);
 						jbSubs.setEnabled(false);
 						next.setEnabled(true);
+						over = true;
 					} else {
 						fineTempo = 120;
 						progressBar.setMaximum(fineTempo);
@@ -283,6 +286,7 @@ public class Partita extends Base {
 						JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + winner.getNomeSquadra());
 						startStop.setEnabled(false);
 						next.setEnabled(true);
+						over = true;
 					} else {
 						JOptionPane.showMessageDialog(null, "Fine tempi supplementari. Si va ai calci di rigore");
 						//TODO da sistemare rigori
@@ -294,6 +298,7 @@ public class Partita extends Base {
 						if (gui.isFine()) {
 							startStop.setEnabled(false);
 							next.setEnabled(true);
+							over = true;
 						}
 					}
 				}
@@ -351,8 +356,12 @@ public class Partita extends Base {
         startStop.setText("Play");
     }
     
-    public SquadraAvversaria getWinner() {
+    public Squadra getWinner() {
 		return winner;
+    }
+    
+    public boolean isOver() {
+    	return over;
     }
     
     /**

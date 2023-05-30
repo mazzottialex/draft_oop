@@ -8,7 +8,6 @@ import javax.swing.JOptionPane;
 
 import data.Calciatore;
 import data.Squadra;
-import data.SquadraUtente;
 import gui.Sostituzione;
 
 public class LogicsSostituzioneImpl implements LogicsSostituzione{
