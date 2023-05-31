@@ -4,6 +4,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +17,7 @@ import javax.swing.JPanel;
 import data.Calciatore;
 import data.Squadra;
 import gui.Base;
+import gui.Partita;
 import logics.CreaSquadreAvversarie;
 import logics.CreaSquadreAvversarieImpl;
 
@@ -24,7 +27,7 @@ public class Torneo extends Base {
 	final int nSquadre=(int) Math.pow(2, turni);
 	int count=0;
 	public Torneo(Squadra squadra, List<Calciatore> li) {
-		
+		t=this;
 		GridBagConstraints gbc=new GridBagConstraints();
 		GridBagLayout layout=new GridBagLayout();
 		contentPane.setLayout(layout);
@@ -76,6 +79,30 @@ public class Torneo extends Base {
 			}
 		});
 		
+		JButton prova=new JButton("prova");
+		prova.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Partita partita=new Partita(squadra, liSquadre.get(1));
+					
+					partita.createAndShowGUI();
+					partita.addWindowListener(new WindowAdapter() {
+						@Override
+					    public void windowClosed(WindowEvent e) {
+							partita.getWinner();
+						}
+					});
+					
+				} catch (ClassNotFoundException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
+		
 		gbc.insets=new Insets(5, 5, 5, 5);
 		gbc.gridy=3;
 		contentPane.add(liPanelFase.get(0), gbc);
@@ -86,6 +113,8 @@ public class Torneo extends Base {
 		
 		gbc.gridy=4;
 		contentPane.add(btnSimula, gbc);
+		
+		gbc.gridy=5;
+		contentPane.add(prova, gbc);
 	}
-
 }
