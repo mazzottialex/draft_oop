@@ -4,6 +4,7 @@
 package application;
 
 import java.awt.EventQueue;
+import java.awt.Frame;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
@@ -22,6 +23,7 @@ import manageData.ManageData;
 import manageData.ManageDataImpl;
 import rating.CalcoloRating;
 import rating.CalcoloRatingImpl;
+import v2.gui.Torneo;
 
 public class App {
     public String getGreeting() {
@@ -29,7 +31,7 @@ public class App {
     }
 
     public static void main(String[] args) throws FileNotFoundException, ClassNotFoundException, IOException {
-    	EventQueue.invokeLater(new Runnable() {
+    /*	EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					Start frame = new Start();
@@ -38,8 +40,15 @@ public class App {
 					e.printStackTrace();
 				}
 			}
-		});
-    	
+		});*/
+    	ManageData md = new ManageDataImpl("2022-2023");
+		md.LoadData();
+		List<Calciatore> li = md.getLi();
+		CalcoloRating cr = new CalcoloRatingImpl(li);
+		li = cr.updateRating();
+		Squadra nap = new SquadraAvversaria(0, "NAP", Modulo.M442, li);	
+    	Torneo t= new Torneo(nap, li);
+    	t.setVisible(true);
     	/*
     	ManageData md = new ManageDataImpl("2022-2023");
 		md.LoadData();

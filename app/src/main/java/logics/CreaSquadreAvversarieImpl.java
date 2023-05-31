@@ -11,6 +11,7 @@ import java.util.Set;
 
 import data.Calciatore;
 import data.Modulo;
+import data.Squadra;
 import data.SquadraAvversaria;
 
 public class CreaSquadreAvversarieImpl implements CreaSquadreAvversarie {
@@ -33,10 +34,10 @@ public class CreaSquadreAvversarieImpl implements CreaSquadreAvversarie {
         return new ArrayList<>(squadreSet);
     }
 
-    public List<SquadraAvversaria> selezionaSquadreCasuali(List<String> squadre, Modulo modulo, int numeroSquadre) throws FileNotFoundException, ClassNotFoundException, IOException {
+    public List<Squadra> selezionaSquadreCasuali(List<String> squadre, Modulo modulo, int numeroSquadre) throws FileNotFoundException, ClassNotFoundException, IOException {
         Collections.shuffle(squadre); // Mescola l'ordine delle squadre
         int id = 0;
-        List<SquadraAvversaria> listSquadre = new ArrayList<>();
+        List<Squadra> listSquadre = new ArrayList<>();
         for (String s : squadre) {
 			listSquadre.add(new SquadraAvversaria(id, s, modulo, li));
 			id++;
@@ -52,7 +53,7 @@ public class CreaSquadreAvversarieImpl implements CreaSquadreAvversarie {
     }
     
     @Override
-    public List<SquadraAvversaria> getSquadre() throws FileNotFoundException, ClassNotFoundException, IOException {
+    public List<Squadra> getSquadre() throws FileNotFoundException, ClassNotFoundException, IOException {
     	return selezionaSquadreCasuali(squadre, selezionaModulo(), numero);
     }
 }
