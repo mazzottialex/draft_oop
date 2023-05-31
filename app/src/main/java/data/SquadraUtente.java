@@ -48,9 +48,17 @@ public class SquadraUtente implements Squadra, Serializable {
 	@Override
 	public List<Calciatore> getTitolari() {
 		return liTitolari.stream()
+				.sorted((c1,c2)->c2.getRuolo().compareTo(c1.getRuolo()))
+				.toList();
+	}
+	
+	@Override
+	public List<Calciatore> getTitolariDesc() {
+		return liTitolari.stream()
 				.sorted((c1,c2)->c1.getRuolo().compareTo(c2.getRuolo()))
 				.toList();
 	}
+	
 	@Override
 	public List<Calciatore> getRiserve() {
 		return this.liRiserve;

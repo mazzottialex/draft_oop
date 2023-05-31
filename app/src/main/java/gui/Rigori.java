@@ -1,6 +1,8 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Frame;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
@@ -14,7 +16,7 @@ import data.Squadra;
 import logics.LogicsRigori;
 import logics.LogicsRigoriImpl;
 
-public class Rigori extends Base {
+public class Rigori extends JDialog {
 	/**
 	 * 
 	 */
@@ -35,6 +37,8 @@ public class Rigori extends Base {
     private Iterator<Calciatore> tiratori2;
     private Iterator<String> ris1;
     private Iterator<String> ris2;
+    private JPanel contentPane=new JPanel();
+
 
 	public Rigori(Squadra s1, Squadra s2) {
     	this.s1 = s1;

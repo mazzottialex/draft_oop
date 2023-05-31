@@ -7,6 +7,8 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Collections;
@@ -80,26 +82,32 @@ public class Torneo extends Base{
 				eliminatedThisTurn = false;
 				
 				if (!logTor.getEliminated()) {
-					JButton btn= (JButton) e.getSource();
-					JPanel panel=(JPanel) btn.getParent();
-		            JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(btn);
-					Partita dialog;
+					Partita p;
 					try {
-						dialog = new Partita(parent, true, logTor.getMiaSquadra(), logTor.getListAvversari().get(0));
-						dialog.createAndShowGUI();
-						dialog.setVisible(true);	
-						if (dialog.getWinner() != logTor.getMiaSquadra()) {
-							logTor.setEliminated(true);
-							logTor.setSquadraAvv(logTor.getListAvversari().get(0));
-							eliminatedThisTurn = true;
-						}
-						risSquadraUte = dialog.getGolS1();
-						risSquadraAvv = dialog.getGolS2();	
-						
+						p = new Partita(logTor.getMiaSquadra(), logTor.getListAvversari().get(0));
+						p.createAndShowGUI();
+						p.addWindowListener(new WindowAdapter() {
+							@Override
+						    public void windowClosed(WindowEvent e) {
+						        System.out.println(p.getWinner().toString());
+						        if (p.getWinner() != logTor.getMiaSquadra()) {
+									logTor.setEliminated(true);
+									logTor.setSquadraAvv(logTor.getListAvversari().get(0));
+									eliminatedThisTurn = true;
+								}
+								risSquadraUte = p.getGolS1();
+								risSquadraAvv = p.getGolS2();	
+						    }
+						});
 					} catch (ClassNotFoundException | IOException e1) {
+						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
+					
+					//System.out.println(p.getWinner());
+					
 				}
+				
 				
 				try {
 					logTor.simulaMatch();
@@ -202,7 +210,7 @@ public class Torneo extends Base{
 			// ... creo il panel 3 con le squadre che hanno vinto
 			// (ora faccio finta che vinca sempre la squadra dell'utente poi dovrò cambiare) 
 			if (!logTor.getEliminated()) {
-				System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+//				System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
 				this.buttonsp3[0] = new JButton(this.logTor.getMiaSquadra().getNomeSquadra() + " - " + this.logTor.getListAvversari().get(0).getNomeSquadra());
 				this.p3.add(this.buttonsp3[0]);
 			} else {

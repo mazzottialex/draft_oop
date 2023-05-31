@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class Partita extends JDialog {
     private static final long serialVersionUID = 3533149128342164934L;
     
-    
+    private JDialog frame=this;
     private JPanel contentPane = new JPanel();
     
 	private JProgressBar progressBar;
@@ -54,8 +54,12 @@ public class Partita extends JDialog {
 	private int cambi;
 	private Sostituzione sub;
 	
+	private int score1;
+	private int score2;
 //	private boolean over;
 
+	/*
+<<<<<<< HEAD
     public Partita(Frame parent,boolean modale, Squadra s1, Squadra s2) throws FileNotFoundException, ClassNotFoundException, IOException {
     	super(parent,modale);
     	
@@ -72,6 +76,11 @@ public class Partita extends JDialog {
 		//add(contentPane);
     	//contentPane.add(panel);
     	
+=======
+*/
+    public Partita(Squadra s1, Squadra s2) throws FileNotFoundException, ClassNotFoundException, IOException {
+
+//>>>>>>> 56d0c26272dabc1843f572fe195144a163df07a4
     	this.s1 = s1;
 		this.s2 = s2;
 		this.logics = new LogicsPartitaImpl(this.s1, this.s2);
@@ -207,10 +216,25 @@ public class Partita extends JDialog {
 					update();
 					addCambio();
 					ris = true;
+					if(cambi==3) {
+						JButton button=(JButton) e.getSource();
+						JPanel panel=(JPanel) button.getParent();
+						button.setEnabled(false);
+						panel.revalidate();
+						panel.repaint();
+					}
 				}
 			}
 		});
+        
+        next.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 
+        /*
         next.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -218,7 +242,7 @@ public class Partita extends JDialog {
 				dispatchEvent(close);
 			}
         });
-        
+        */
     }
     
     private void sost() {
@@ -257,7 +281,9 @@ public class Partita extends JDialog {
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
-                            //Make progress.
+                            
+
+                        	//Make progress.
                             progressBar.setValue(value);
                             progressBar.setString("Minuto " + String.valueOf(value) + "°");
                             // chiama funzione per gol
@@ -269,9 +295,10 @@ public class Partita extends JDialog {
                             // chiama funzione per ammonizioni / espulsioni
                             logics.sanctions();
                             //Abilita bottone sostituzioni
-                            if (progressBar.getValue() > 0) {
+                            if (progressBar.getValue() > 0 && cambi<3) {
             					jbSubs.setEnabled(true);
             				}
+                            
                             if (rigori) {
                             	winner = gui.getWinner();
                             }
@@ -289,7 +316,8 @@ public class Partita extends JDialog {
                 if (progressBar.getValue() == 90) {
 //                	jlScoreSq1.setText("2");
 //                	jlScoreSq2.setText("2");
-					if (jlScoreSq1.getText() != jlScoreSq2.getText()) {
+
+					if (!jlScoreSq1.getText().equals(jlScoreSq2.getText())) {
 						winner = Integer.valueOf(jlScoreSq1.getText()) > Integer.valueOf(jlScoreSq2.getText()) ? s1 : s2;
 						JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + winner.getNomeSquadra());
 						startStop.setEnabled(false);
@@ -309,8 +337,10 @@ public class Partita extends JDialog {
 //                	jlScoreSq1.setText("2");
 //                	jlScoreSq2.setText("2");
 					jbSubs.setEnabled(false);
-					if (jlScoreSq1.getText() != jlScoreSq2.getText()) {
+
+					if (!jlScoreSq1.getText().equals(jlScoreSq2.getText())) {
 						winner = Integer.valueOf(jlScoreSq1.getText()) > Integer.valueOf(jlScoreSq2.getText()) ? s1 : s2;
+
 						JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + winner.getNomeSquadra());
 						startStop.setEnabled(false);
 						next.setEnabled(true);
@@ -364,7 +394,8 @@ public class Partita extends JDialog {
     		}
         	string1 = string1 + Integer.toString(progressBar.getValue()) + "' Gol: " + calciatore.getNominativo() + autogol + "<br>";
         	jlTabSq1.setText(apri + string1 + chiudi);
-        	jlScoreSq1.setText(Integer.toString(Integer.valueOf(jlScoreSq1.getText()) + 1));
+        	score1++;
+        	jlScoreSq1.setText(score1+"");
         }
         if (logics.getMinGol(s2).contains(progressBar.getValue())) {
         	tab2.add(logics.addScorer(s2));
@@ -375,7 +406,8 @@ public class Partita extends JDialog {
     		}
         	string2 = string2 + Integer.toString(progressBar.getValue()) + "' Gol: " + calciatore.getNominativo() + autogol + "<br>";
         	jlTabSq2.setText(apri + string2 + chiudi);
-        	jlScoreSq2.setText(Integer.toString(Integer.valueOf(jlScoreSq2.getText()) + 1));
+        	score2++;
+        	jlScoreSq1.setText(score2+"");
         }
 	}
 
@@ -389,11 +421,11 @@ public class Partita extends JDialog {
     }
     
     public int getGolS1() {
-    	return Integer.valueOf(jlScoreSq1.getText());
+    	return score1;
     }
     
     public int getGolS2() {
-    	return Integer.valueOf(jlScoreSq2.getText());
+    	return score2;
     }
     
 //    public boolean isOver() {
