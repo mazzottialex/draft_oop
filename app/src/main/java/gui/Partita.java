@@ -53,6 +53,8 @@ public class Partita extends JDialog {
 	private int cambi;
 	private Sostituzione sub;
 	
+	private int score1;
+	private int score2;
 //	private boolean over;
 
     public Partita(Frame parent,boolean modale, Squadra s1, Squadra s2) throws FileNotFoundException, ClassNotFoundException, IOException {
@@ -208,7 +210,13 @@ public class Partita extends JDialog {
 				}
 			}
 		});
-
+        
+        next.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
     }
     
     private void sost() {
@@ -279,8 +287,8 @@ public class Partita extends JDialog {
                 if (progressBar.getValue() == 90) {
 //                	jlScoreSq1.setText("2");
 //                	jlScoreSq2.setText("2");
-					if (jlScoreSq1.getText() != jlScoreSq2.getText()) {
-						winner = Integer.valueOf(jlScoreSq1.getText()) > Integer.valueOf(jlScoreSq2.getText()) ? s1 : s2;
+					if (score1 != score2) {
+						winner = score1 > score2 ? s1 : s2;
 						JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + winner.getNomeSquadra());
 						startStop.setEnabled(false);
 						jbSubs.setEnabled(false);
@@ -299,8 +307,8 @@ public class Partita extends JDialog {
 //                	jlScoreSq1.setText("2");
 //                	jlScoreSq2.setText("2");
 					jbSubs.setEnabled(false);
-					if (jlScoreSq1.getText() != jlScoreSq2.getText()) {
-						winner = Integer.valueOf(jlScoreSq1.getText()) > Integer.valueOf(jlScoreSq2.getText()) ? s1 : s2;
+					if (score1 != score2) {
+						winner = score1 > score2 ? s1 : s2;
 						JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + winner.getNomeSquadra());
 						startStop.setEnabled(false);
 						next.setEnabled(true);
@@ -354,7 +362,8 @@ public class Partita extends JDialog {
     		}
         	string1 = string1 + Integer.toString(progressBar.getValue()) + "' Gol: " + calciatore.getNominativo() + autogol + "<br>";
         	jlTabSq1.setText(apri + string1 + chiudi);
-        	jlScoreSq1.setText(Integer.toString(Integer.valueOf(jlScoreSq1.getText()) + 1));
+        	score1++;
+        	jlScoreSq1.setText(score1+"");
         }
         if (logics.getMinGol(s2).contains(progressBar.getValue())) {
         	tab2.add(logics.addScorer(s2));
@@ -365,7 +374,8 @@ public class Partita extends JDialog {
     		}
         	string2 = string2 + Integer.toString(progressBar.getValue()) + "' Gol: " + calciatore.getNominativo() + autogol + "<br>";
         	jlTabSq2.setText(apri + string2 + chiudi);
-        	jlScoreSq2.setText(Integer.toString(Integer.valueOf(jlScoreSq2.getText()) + 1));
+        	score2++;
+        	jlScoreSq1.setText(score2+"");
         }
 	}
 
@@ -379,11 +389,11 @@ public class Partita extends JDialog {
     }
     
     public int getGolS1() {
-    	return Integer.valueOf(jlScoreSq1.getText());
+    	return score1;
     }
     
     public int getGolS2() {
-    	return Integer.valueOf(jlScoreSq2.getText());
+    	return score2;
     }
     
 //    public boolean isOver() {
