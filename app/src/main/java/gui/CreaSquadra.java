@@ -75,21 +75,20 @@ public class CreaSquadra extends Base{
 		buttonIniziaTorneo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				try {
-					changeJPanel(new Torneo(log.getSquadra(), li));
-				} catch (FileNotFoundException e1) {
-					e1.printStackTrace();
-				} catch (ClassNotFoundException e1) {
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-				frameCalciatori.setVisible(false);
-				frameModulo.setVisible(false);
-				/*
 				if (log.teamComplete()) {
 					
-					changeJPanel(new Torneo());
+					try {
+						changeJPanel(new Torneo(log.getSquadra(), li));
+					} catch (FileNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (ClassNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					frameCalciatori.setVisible(false);
 					frameModulo.setVisible(false);
 					// ...
@@ -115,7 +114,7 @@ public class CreaSquadra extends Base{
 					prova.setBounds( 300, 300, 250, 100);
 					prova.setVisible(true);
 				}
-				*/
+				
 			}
 		});
 		panelSud.add(buttonIniziaTorneo,gbc);
@@ -272,7 +271,7 @@ public class CreaSquadra extends Base{
 	}
 	
 	
-	/* metodo che crea la disposizione dei giocaotri nel frame principale */
+	/* metodo che crea la disposizione dei giocatori nel frame principale */
 	public void changeModulo() {
 		this.panelCenter.removeAll();;
 		this.panelCenter.repaint();

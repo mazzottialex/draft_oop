@@ -10,6 +10,7 @@ import logics.LogicsPartitaImpl;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -59,9 +60,29 @@ public class Partita extends JDialog {
 //	private int score2;
 //	private boolean over;
 
-
+	/*
+<<<<<<< HEAD
+    public Partita(Frame parent,boolean modale, Squadra s1, Squadra s2) throws FileNotFoundException, ClassNotFoundException, IOException {
+    	super(parent,modale);
+    	
+		setBounds(100, 100, 700, 300);
+		setMinimumSize(getSize());
+ 
+		setTitle("PARTITA");
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setBounds(100, 100, 500, 700);
+		setBackground(new Color(0, 64, 128));
+		contentPane.setBackground(new Color(0, 64, 128));
+		contentPane.setLayout(new BorderLayout());
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		//add(contentPane);
+    	//contentPane.add(panel);
+    	
+=======
+*/
     public Partita(Squadra s1, Squadra s2) throws FileNotFoundException, ClassNotFoundException, IOException {
 
+//>>>>>>> 56d0c26272dabc1843f572fe195144a163df07a4
     	this.s1 = s1;
 		this.s2 = s2;
 		this.logics = new LogicsPartitaImpl(this.s1, this.s2);
@@ -216,6 +237,15 @@ public class Partita extends JDialog {
 			}
 		});
 
+        /*
+        next.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				WindowEvent close = new WindowEvent(parent, WindowEvent.WINDOW_CLOSING);
+				dispatchEvent(close);
+			}
+        });
+        */
     }
     
     private void sost() {

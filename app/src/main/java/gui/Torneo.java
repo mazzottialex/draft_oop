@@ -83,32 +83,69 @@ public class Torneo extends Base{
 				
 				if (!logTor.getEliminated()) {
 					Partita p;
+					
 					try {
 						p = new Partita(logTor.getMiaSquadra(), logTor.getListAvversari().get(0));
 						p.createAndShowGUI();
 						p.addWindowListener(new WindowAdapter() {
-							@Override
-						    public void windowClosed(WindowEvent e) {
-						        System.out.println(p.getWinner().toString());
-						        if (p.getWinner() != logTor.getMiaSquadra()) {
+							public void windowClosed(WindowEvent e) {
+								if (p.getWinner() != logTor.getMiaSquadra()) {
 									logTor.setEliminated(true);
 									logTor.setSquadraAvv(logTor.getListAvversari().get(0));
 									eliminatedThisTurn = true;
 								}
 								risSquadraUte = p.getGolS1();
 								risSquadraAvv = p.getGolS2();	
-						    }
+								
+								try {
+									logTor.simulaMatch();
+									createLevel();
+								} catch (FileNotFoundException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								} catch (ClassNotFoundException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								} catch (IOException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+								
+							}
 						});
-					} catch (ClassNotFoundException | IOException e1) {
+					} catch (FileNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (ClassNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-					
-					//System.out.println(p.getWinner());
-					
 				}
-				
-				
+					/*
+					JPanel panel=(JPanel) btn.getParent();
+		            JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(btn);
+					Partita dialog;
+					try {
+						dialog = new Partita(parent, true, logTor.getMiaSquadra(), logTor.getListAvversari().get(0));
+						dialog.createAndShowGUI();
+						dialog.setVisible(true);	
+						if (dialog.getWinner() != logTor.getMiaSquadra()) {
+							logTor.setEliminated(true);
+							logTor.setSquadraAvv(logTor.getListAvversari().get(0));
+							eliminatedThisTurn = true;
+						}
+						risSquadraUte = dialog.getGolS1();
+						risSquadraAvv = dialog.getGolS2();	
+						
+					} catch (ClassNotFoundException | IOException e1) {
+						e1.printStackTrace();
+					}
+				}
+				*/
+				/*
 				try {
 					logTor.simulaMatch();
 					createLevel();
@@ -122,9 +159,10 @@ public class Torneo extends Base{
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
-				
+				*/
 			}
+				
+			
 		});
 		this.panelSud.add(buttonSimula);
 		
@@ -143,7 +181,7 @@ public class Torneo extends Base{
 		//Aggiungo le varie squadre nel panel5 (la prima è sempre quella dell'utente)
 		this.buttonsp5[0] = new JButton(this.logTor.getMiaSquadra().getNomeSquadra());
 		this.p5.add(this.buttonsp5[0]);
-		Collections.shuffle(this.logTor.getListAvversari());
+		//Collections.shuffle(this.logTor.getListAvversari());
 		for (int i=0;i<this.logTor.getListAvversari().size();i++) {
 			this.buttonsp5[i+1] = new JButton(this.logTor.getListAvversari().get(i).getNomeSquadra());
 			this.p5.add(this.buttonsp5[i+1]);
@@ -176,6 +214,7 @@ public class Torneo extends Base{
 		this.panelSud.setBackground(new Color(0,64,128));
 		this.panelCenter.setBackground(new Color(0,64,128));
 		this.panelNord.setBackground(new Color(0,128,128));
+		this.panelNord.setBounds(200, 300, 200, 300);
 		this.contentPane.add(panelSud,BorderLayout.SOUTH);
 		this.contentPane.add(panelCenter, BorderLayout.CENTER);
 		this.contentPane.add(panelNord, BorderLayout.NORTH);
@@ -210,7 +249,7 @@ public class Torneo extends Base{
 			// ... creo il panel 3 con le squadre che hanno vinto
 			// (ora faccio finta che vinca sempre la squadra dell'utente poi dovrò cambiare) 
 			if (!logTor.getEliminated()) {
-//				System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+				System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
 				this.buttonsp3[0] = new JButton(this.logTor.getMiaSquadra().getNomeSquadra() + " - " + this.logTor.getListAvversari().get(0).getNomeSquadra());
 				this.p3.add(this.buttonsp3[0]);
 			} else {
@@ -324,18 +363,27 @@ public class Torneo extends Base{
 				this.p1.add(this.buttonp1);
 			}
 			
+			String winner = new String();
 			
 			if (this.eliminatedThisTurn) {
 				this.buttonp0 = new JButton(this.logTor.getSquadraAvv().getNomeSquadra());
+				winner = this.logTor.getSquadraAvv().getNomeSquadra();
 			} else if (!logTor.getEliminated()) {
 				this.buttonp0 = new JButton(this.logTor.getMiaSquadra().getNomeSquadra());
+				winner = this.logTor.getMiaSquadra().getNomeSquadra();
 			} else {
 				this.buttonp0 = new JButton(this.logTor.getWinner());
+				winner = this.logTor.getWinner();
 			}
 			this.p0.add(this.buttonp0);
 			
+			// da mettere a posto
+			JLabel label = new JLabel(winner + " HA VINTO IL TORNEO!!!!");
+			this.panelNord.add(label);
 			
 			
+			this.logTor.setNumSquadre(0);
+			this.panelNord.validate();
 			this.p0.validate();
 			this.p1.validate();
 			this.panelCenter.validate();
