@@ -4,16 +4,31 @@
 package application;
 
 import java.awt.EventQueue;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.List;
 
+import javax.swing.SwingUtilities;
+
+import data.Calciatore;
+import data.Modulo;
+import data.SquadraAvversaria;
+import gui.Partita;
 import gui.Start;
+import manageData.ManageData;
+import manageData.ManageDataImpl;
+import rating.CalcoloRating;
+import rating.CalcoloRatingImpl;
 
 public class App {
     public String getGreeting() {
         return "Hello World!";
     }
 
-    public static void main(String[] args) {
-    	EventQueue.invokeLater(new Runnable() {
+    public static void main(String[] args) throws FileNotFoundException, ClassNotFoundException, IOException {
+    	/*EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					Start frame = new Start();
@@ -22,6 +37,36 @@ public class App {
 					e.printStackTrace();
 				}
 			}
+		});
+    	
+    	*/
+    	ManageData md = new ManageDataImpl("2022-2023");
+		md.LoadData();
+		List<Calciatore> li = md.getLi();
+		CalcoloRating cr = new CalcoloRatingImpl(li);
+		li = cr.updateRating();
+		SquadraAvversaria nap = new SquadraAvversaria(0, "NAP", Modulo.M442, li);				
+		SquadraAvversaria laz = new SquadraAvversaria(0, "LAZ", Modulo.M442, li);
+
+		SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+					Partita p=new Partita(nap, laz);
+					p.createAndShowGUI();
+					p.addWindowListener(new WindowAdapter() {
+						@Override
+					    public void windowClosed(WindowEvent e) {
+					        // Il codice qui verrà eseguito quando il frame viene chiuso
+					        System.out.println(p.getWinner().toString()); // Stampa il vincitore
+					    }
+					});
+					//System.out.println(p.getWinner());
+				} catch (ClassNotFoundException | IOException e) {
+					e.printStackTrace();
+				
+				}
+            }
 		});
     }
 }

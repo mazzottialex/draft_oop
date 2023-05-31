@@ -187,6 +187,13 @@ public class Partita extends Base {
 				}
 			}
 		});
+        
+        next.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 
     }
     
