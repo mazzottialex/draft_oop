@@ -327,7 +327,7 @@ public class Torneo extends Base{
 			this.p0.add(this.buttonp0);
 			
 			
-			
+			this.logTor.setNumSquadre(0);
 			this.p0.validate();
 			this.p1.validate();
 			this.panelCenter.validate();
