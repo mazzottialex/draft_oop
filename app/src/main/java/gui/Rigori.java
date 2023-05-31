@@ -113,7 +113,8 @@ public class Rigori extends Base {
             public void run() {
             	if (!tiratori1.hasNext() && !tiratori2.hasNext()) {
             		//TODO dire chi ha vinto
-            		result.setText("Sfida terminata. Squadra vincente: " +  winner());
+            		JOptionPane.showMessageDialog(null, "Tiri di rigore terminati. Squadra vincente: " + winner());
+            		result.setText(gol1 + " - " + gol2);
             		chiudi.setEnabled(true);
             		timer.cancel();
 				} else {
