@@ -14,6 +14,7 @@ import javax.swing.SwingUtilities;
 
 import data.Calciatore;
 import data.Modulo;
+import data.Squadra;
 import data.SquadraAvversaria;
 import gui.Partita;
 import gui.Start;
@@ -45,8 +46,8 @@ public class App {
 		List<Calciatore> li = md.getLi();
 		CalcoloRating cr = new CalcoloRatingImpl(li);
 		li = cr.updateRating();
-		SquadraAvversaria nap = new SquadraAvversaria(0, "NAP", Modulo.M442, li);				
-		SquadraAvversaria laz = new SquadraAvversaria(0, "LAZ", Modulo.M442, li);
+		Squadra nap = new SquadraAvversaria(0, "NAP", Modulo.M442, li);				
+		Squadra laz = new SquadraAvversaria(0, "LAZ", Modulo.M442, li);
 
 		SwingUtilities.invokeLater(new Runnable() {
             @Override

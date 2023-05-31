@@ -10,7 +10,7 @@ import java.util.Timer;
 import javax.swing.*;
 
 import data.Calciatore;
-import data.SquadraAvversaria;
+import data.Squadra;
 import logics.LogicsRigori;
 import logics.LogicsRigoriImpl;
 
@@ -19,15 +19,15 @@ public class Rigori extends Base {
 	 * 
 	 */
 	private static final long serialVersionUID = 5140476454072046580L;
-	private SquadraAvversaria s1;
-    private SquadraAvversaria s2;
+	private Squadra s1;
+    private Squadra s2;
     private JPanel results1;
     private JPanel results2;
     private JLabel result;
     private int gol1;
     private int gol2;
     private int totTiri;
-    private SquadraAvversaria winner;
+    private Squadra winner;
     private JButton chiudi;
     private boolean fine;
     private LogicsRigori logics;
@@ -36,7 +36,7 @@ public class Rigori extends Base {
     private Iterator<String> ris1;
     private Iterator<String> ris2;
 
-	public Rigori(SquadraAvversaria s1, SquadraAvversaria s2) {
+	public Rigori(Squadra s1, Squadra s2) {
     	this.s1 = s1;
         this.s2 = s2;
 		this.gol1 = 0;
@@ -199,7 +199,7 @@ public class Rigori extends Base {
 		}
 	}
 
-	public SquadraAvversaria getWinner() {
+	public Squadra getWinner() {
     	return winner;
     }
     

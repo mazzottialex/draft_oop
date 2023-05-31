@@ -8,11 +8,11 @@ import java.util.Map;
 import java.util.Random;
 
 import data.Calciatore;
-import data.SquadraAvversaria;
+import data.Squadra;
 
 public class LogicsRigoriImpl implements LogicsRigori {
-	private SquadraAvversaria s1;
-	private SquadraAvversaria s2;
+	private Squadra s1;
+	private Squadra s2;
 	private Iterator<Calciatore> shooterIterator1;
 	private Iterator<Calciatore> shooterIterator2;
 	private int gol1;
@@ -25,7 +25,7 @@ public class LogicsRigoriImpl implements LogicsRigori {
     private Map<Calciatore, String> map1;
 	private Map<Calciatore, String> map2;
 	
-	public LogicsRigoriImpl(SquadraAvversaria s1, SquadraAvversaria s2) {
+	public LogicsRigoriImpl(Squadra s1, Squadra s2) {
 		super();
 		this.s1 = s1;
 		this.s2 = s2;
@@ -90,7 +90,7 @@ public class LogicsRigoriImpl implements LogicsRigori {
 		return backList.iterator();
     }
 	
-	private String rigore(Calciatore tiratore, SquadraAvversaria dif) {
+	private String rigore(Calciatore tiratore, Squadra dif) {
         double tirRating = tiratore.getRating().getY().getX() * (0.8 + new Random().nextDouble(0.4));
 
         double porRating = dif.getPortiereTit().getRating().getY().getZ() * (0.8 + new Random().nextDouble(0.4));

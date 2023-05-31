@@ -2,7 +2,7 @@ package gui;
 import javax.swing.*;
 
 import data.Calciatore;
-import data.SquadraAvversaria;
+import data.Squadra;
 import logics.LogicsPartita;
 import logics.LogicsPartitaImpl;
 
@@ -29,13 +29,13 @@ public class Partita extends Base {
 	private JPanel panel;
 	
 	private LogicsPartita logics;
-	private SquadraAvversaria s1;
-	private SquadraAvversaria s2;
+	private Squadra s1;
+	private Squadra s2;
     
     private boolean isRunning;
     private boolean ris;
     private int fineTempo;
-	private SquadraAvversaria winner;
+	private Squadra winner;
 	private ArrayList<Calciatore> tab1;
 	private ArrayList<Calciatore> tab2;
 	private boolean rigori;
@@ -48,7 +48,7 @@ public class Partita extends Base {
 	private int cambi;
 	private Sostituzione sub;
 
-    public Partita(SquadraAvversaria s1, SquadraAvversaria s2) throws FileNotFoundException, ClassNotFoundException, IOException {
+    public Partita(Squadra s1, Squadra s2) throws FileNotFoundException, ClassNotFoundException, IOException {
     	this.s1 = s1;
 		this.s2 = s2;
 		logics = new LogicsPartitaImpl(this.s1, this.s2);
@@ -368,7 +368,7 @@ public class Partita extends Base {
         startStop.setText("Play");
     }
     
-    public SquadraAvversaria getWinner() {
+    public Squadra getWinner() {
 		return winner;
     }
     

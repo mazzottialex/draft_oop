@@ -7,7 +7,7 @@ import java.util.Map;
 
 import data.Calciatore;
 import data.Squadra;
-import data.SquadraAvversaria;
+import data.Squadra;
 import manageData.ExtractDataImpl;
 
 public class SimulatingMatchImpl implements SimulatingMatch {
@@ -44,7 +44,7 @@ public class SimulatingMatchImpl implements SimulatingMatch {
 	private static final int MINUTES_REG = 90;
 	private final static int MINUTES_SUPPL = 120;
 
-	public SimulatingMatchImpl(SquadraAvversaria s1, SquadraAvversaria s2)
+	public SimulatingMatchImpl(Squadra s1, Squadra s2)
 			throws FileNotFoundException, ClassNotFoundException, IOException {
 		super();
 		sf = new SimulatingFunctionsImpl();
