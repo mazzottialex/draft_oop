@@ -326,17 +326,6 @@ public class Partita extends JDialog {
 						SwingUtilities.invokeLater(() -> {
 				            guiRigori.createAndShowGUI();
 				        });
-//						if (guiRigori.isFine()) {
-//							winner = getWinnerR();
-//							if (guiRigori.getWinner() == s1) {
-//								jlScoreSq1.setText(jlScoreSq1.getText() + " *");
-//							} else {
-//								jlScoreSq2.setText(jlScoreSq2.getText() + " *");
-//							}
-//							startStop.setEnabled(false);
-//							next.setEnabled(true);
-////							over = true;
-//						}
 					}
 				}
 				
@@ -363,7 +352,7 @@ public class Partita extends JDialog {
         thread.start();
     }
 	
-	public void getWinnerR(Squadra s) {
+	public void setWinnerR(Squadra s) {
 			winner = s;
 			if (s == s1) {
 				jlScoreSq1.setText(jlScoreSq1.getText() + " *");
