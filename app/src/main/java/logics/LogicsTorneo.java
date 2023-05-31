@@ -33,4 +33,6 @@ public interface LogicsTorneo {
 	public void setSquadraAvv(SquadraAvversaria squadra);
 	
 	public Map<String,Integer> getRisMatch();
+	
+	public String getWinner();
 }

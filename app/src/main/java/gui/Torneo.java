@@ -302,7 +302,35 @@ public class Torneo extends Base{
 			this.listAvversarie = logTor.getListAvversari();
 			break;
 		case 1:
-			//...
+			this.p1.removeAll();
+			this.p1.repaint();
+			
+			// metto i risultati nel panel 1
+			if (!logTor.getEliminated() || this.eliminatedThisTurn) {
+				this.buttonp1 = new JButton(this.logTor.getMiaSquadra().getNomeSquadra() + " " + this.risSquadraUte + " " + " - " + " " + this.risSquadraAvv + " " + this.listAvversarie.get(0).getNomeSquadra());
+				this.p1.add(this.buttonp1);
+			} else {
+				int ris11 =this.logTor.getRisMatch().get(this.logTor.getSquadraAvv().getNomeSquadra());
+				int ris21 =this.logTor.getRisMatch().get(this.listAvversarie.get(0).getNomeSquadra());
+				this.buttonp1 = new JButton(this.logTor.getSquadraAvv().getNomeSquadra() + " " + ris11 + " " + " - " + " " + ris21 + " " + this.listAvversarie.get(0).getNomeSquadra());
+				this.p1.add(this.buttonp1);
+			}
+			
+			
+			if (this.eliminatedThisTurn) {
+				this.buttonp0 = new JButton(this.logTor.getSquadraAvv().getNomeSquadra());
+			} else if (!logTor.getEliminated()) {
+				this.buttonp0 = new JButton(this.logTor.getMiaSquadra().getNomeSquadra());
+			} else {
+				this.buttonp0 = new JButton(this.logTor.getWinner());
+			}
+			this.p0.add(this.buttonp0);
+			
+			
+			
+			this.p0.validate();
+			this.p1.validate();
+			this.panelCenter.validate();
 			break;
 		}
 		

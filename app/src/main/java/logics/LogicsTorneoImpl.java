@@ -31,6 +31,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	private boolean eliminated;
 	private SquadraAvversaria squadraAvv; // squadra al posto della squadra utente se vince 
 	private Map<String, Integer> risMatch; // ris della squadra al posto della squadra utente
+	private String Winner;
 	
 	public LogicsTorneoImpl(Squadra squadra, List<Calciatore> li) throws FileNotFoundException, ClassNotFoundException, IOException {
 		this.li=li;
@@ -64,6 +65,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 		this.eliminated = false;
 		this.squadraAvv = new SquadraAvversaria(0, "aaa", Modulo.M442, li);
 		this.risMatch = new HashMap<>();
+		this.Winner = new String();
 	}
 
 	@Override
@@ -327,7 +329,46 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 			break;
 		case 2:
 			this.risultati.clear();
-			//...
+			
+			if (this.getEliminated()) {
+				try {
+					SimulatingMatchImpl s = new SimulatingMatchImpl(this.squadraAvv,this.getListAvversari().get(0));
+					this.risMatch = s.risultato();
+					map = s.risultato();
+					System.out.println(map);
+					list.addAll(map.keySet());
+					if (map.get(list.get(0)) == map.get(list.get(1))) {
+						map = s.risultatoSuppl();
+						System.out.println(map);
+						list.clear();
+					}
+					
+					list.addAll(map.keySet());
+					if (map.get(list.get(0)) > map.get(list.get(1))) {
+						teamWin = list.get(0);
+						this.Winner = teamWin;
+					} else if (map.get(list.get(0)) < map.get(list.get(1))){
+						teamWin = list.get(1);
+						this.Winner = teamWin;
+					} else {
+						LogicsRigoriImpl r = new LogicsRigoriImpl(this.getListAvversari().get(1), this.getListAvversari().get(2));
+						//System.out.println(r.getGol1());
+						//System.out.println(r.getGol2());
+						teamWin = r.getWinner().getNomeSquadra();
+						this.Winner = teamWin;
+					}
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
 			this.setNumSquadre(1);
 			break;
 		}
@@ -363,5 +404,11 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	public Map<String, Integer> getRisMatch() {
 		return this.risMatch;
 	}
+
+	@Override
+	public String getWinner() {
+		return this.Winner;
+	}
+
 
 }
