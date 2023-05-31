@@ -10,6 +10,7 @@ import logics.LogicsPartitaImpl;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -67,6 +68,7 @@ public class Partita extends JDialog {
 		setBackground(new Color(0, 64, 128));
 		contentPane.setBackground(new Color(0, 64, 128));
 		contentPane.setLayout(new BorderLayout());
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		//add(contentPane);
     	//contentPane.add(panel);
     	
@@ -209,6 +211,14 @@ public class Partita extends JDialog {
 			}
 		});
 
+        next.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				WindowEvent close = new WindowEvent(parent, WindowEvent.WINDOW_CLOSING);
+				dispatchEvent(close);
+			}
+        });
+        
     }
     
     private void sost() {
