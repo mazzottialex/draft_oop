@@ -271,7 +271,7 @@ public class CreaSquadra extends Base{
 	}
 	
 	
-	/* metodo che crea la disposizione dei giocaotri nel frame principale */
+	/* metodo che crea la disposizione dei giocatori nel frame principale */
 	public void changeModulo() {
 		this.panelCenter.removeAll();;
 		this.panelCenter.repaint();
