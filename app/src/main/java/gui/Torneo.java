@@ -130,7 +130,7 @@ public class Torneo extends Base{
 		p2.setBorder(new EmptyBorder(20,200,20,200));
 		g2.setHgap(400);
 		p1.setBorder(new EmptyBorder(20,450,20,450));
-		p0.setBorder(new EmptyBorder(20,450,20,450));
+		p0.setBorder(new EmptyBorder(20,500,20,500));
 		
 		//Aggiungo le varie squadre nel panel5 (la prima è sempre quella dell'utente)
 		this.buttonsp5[0] = new JButton(this.logTor.getMiaSquadra().getNomeSquadra());
@@ -167,8 +167,7 @@ public class Torneo extends Base{
 		
 		this.panelSud.setBackground(new Color(0,64,128));
 		this.panelCenter.setBackground(new Color(0,64,128));
-		this.panelNord.setBackground(new Color(0,128,128));
-		this.panelNord.setBounds(200, 300, 200, 300);
+		this.panelNord.setBackground(new Color(0,64,128));
 		this.contentPane.add(panelSud,BorderLayout.SOUTH);
 		this.contentPane.add(panelCenter, BorderLayout.CENTER);
 		this.contentPane.add(panelNord, BorderLayout.NORTH);
