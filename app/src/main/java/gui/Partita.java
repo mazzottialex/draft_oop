@@ -53,8 +53,8 @@ public class Partita extends JDialog {
 	private int cambi;
 	private Sostituzione sub;
 	
-	private int score1;
-	private int score2;
+//	private int score1;
+//	private int score2;
 //	private boolean over;
 
 
@@ -364,8 +364,7 @@ public class Partita extends JDialog {
     		}
         	string1 = string1 + Integer.toString(progressBar.getValue()) + "' Gol: " + calciatore.getNominativo() + autogol + "<br>";
         	jlTabSq1.setText(apri + string1 + chiudi);
-        	score1++;
-        	jlScoreSq1.setText(score1+"");
+        	jlScoreSq1.setText(String.valueOf(Integer.valueOf(jlScoreSq1.getText()) + 1));
         }
         if (logics.getMinGol(s2).contains(progressBar.getValue())) {
         	tab2.add(logics.addScorer(s2));
@@ -376,8 +375,7 @@ public class Partita extends JDialog {
     		}
         	string2 = string2 + Integer.toString(progressBar.getValue()) + "' Gol: " + calciatore.getNominativo() + autogol + "<br>";
         	jlTabSq2.setText(apri + string2 + chiudi);
-        	score2++;
-        	jlScoreSq1.setText(score2+"");
+        	jlScoreSq2.setText(String.valueOf(Integer.valueOf(jlScoreSq2.getText()) + 1));
         }
 	}
 
@@ -391,11 +389,11 @@ public class Partita extends JDialog {
     }
     
     public int getGolS1() {
-    	return score1;
+    	return Integer.valueOf(jlScoreSq1.getText());
     }
     
     public int getGolS2() {
-    	return score2;
+    	return Integer.valueOf(jlScoreSq2.getText());
     }
     
 //    public boolean isOver() {
