@@ -59,6 +59,9 @@ public class Torneo extends Base{
 	JButton buttonp1 = new JButton();
 	JButton buttonp0 = new JButton();
 	private List<SquadraAvversaria> listAvversarie;
+	int risSquadraUte = 0;
+	int risSquadraAvv = 0;
+	boolean eliminatedThisTurn = false;
 	
 	
 	public Torneo(Squadra squadra, List<Calciatore> li) throws FileNotFoundException, ClassNotFoundException, IOException {
@@ -74,6 +77,8 @@ public class Torneo extends Base{
 		buttonSimula.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				eliminatedThisTurn = false;
+				
 				if (!logTor.getEliminated()) {
 					JButton btn= (JButton) e.getSource();
 					JPanel panel=(JPanel) btn.getParent();
@@ -82,23 +87,19 @@ public class Torneo extends Base{
 					try {
 						dialog = new Partita(parent, true, logTor.getMiaSquadra(), logTor.getListAvversari().get(0));
 						dialog.createAndShowGUI();
-						dialog.setVisible(true);
-						
+						dialog.setVisible(true);	
 						if (dialog.getWinner() != logTor.getMiaSquadra()) {
 							logTor.setEliminated(true);
 							logTor.setSquadraAvv(logTor.getListAvversari().get(0));
+							eliminatedThisTurn = true;
 						}
-						//System.out.println(dialog.getWinner().getNomeSquadra());
-						//System.out.println(dialog.isOver());
-						
-						
+						risSquadraUte = dialog.getGolS1();
+						risSquadraAvv = dialog.getGolS2();	
 						
 					} catch (ClassNotFoundException | IOException e1) {
 						e1.printStackTrace();
 					}
 				}
-				System.out.println("ciao");
-				
 				
 				try {
 					logTor.simulaMatch();
@@ -184,7 +185,7 @@ public class Torneo extends Base{
 			// mettere il risultato della partita della squadra utente (prima da fare in Logic)
 			// metto i risultati nelle partite che si svolgono
 			int cont = 1;
-			this.buttonsp4[0] = new JButton(this.logTor.getMiaSquadra().getNomeSquadra() + " - " + this.listAvversarie.get(0).getNomeSquadra());
+			this.buttonsp4[0] = new JButton(this.logTor.getMiaSquadra().getNomeSquadra() + " " + this.risSquadraUte + " " + " - " + " " + this.risSquadraAvv + " " + this.listAvversarie.get(0).getNomeSquadra());
 			
 			this.p4.add(this.buttonsp4[0]);
 			for (int i=1;i<this.listAvversarie.size() - 1;i = i + 2, cont++) {
@@ -201,6 +202,7 @@ public class Torneo extends Base{
 			// ... creo il panel 3 con le squadre che hanno vinto
 			// (ora faccio finta che vinca sempre la squadra dell'utente poi dovrò cambiare) 
 			if (!logTor.getEliminated()) {
+				System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
 				this.buttonsp3[0] = new JButton(this.logTor.getMiaSquadra().getNomeSquadra() + " - " + this.logTor.getListAvversari().get(0).getNomeSquadra());
 				this.p3.add(this.buttonsp3[0]);
 			} else {
@@ -226,9 +228,17 @@ public class Torneo extends Base{
 			
 			// mettere il risultato della partita della squadra utente (prima da fare in Logic)
 			// metto i risultati nelle partite che si svolgono
+			if (!logTor.getEliminated() || this.eliminatedThisTurn) {
+				this.buttonsp3[0] = new JButton(this.logTor.getMiaSquadra().getNomeSquadra() + " " + this.risSquadraUte + " " + " - " + " " + this.risSquadraAvv + " " + this.listAvversarie.get(0).getNomeSquadra());
+				this.p3.add(this.buttonsp3[0]);
+				
+			} else {
+				int ris1 =this.logTor.getRisMatch().get(this.logTor.getSquadraAvv().getNomeSquadra());
+				int ris2 =this.logTor.getRisMatch().get(this.listAvversarie.get(0).getNomeSquadra());
+				this.buttonsp3[0] = new JButton(this.logTor.getSquadraAvv().getNomeSquadra() + " " + ris1 + " " + " - " + " " + ris2 + " " + this.listAvversarie.get(0).getNomeSquadra());
+				this.p3.add(this.buttonsp3[0]);
+			}
 			int cont1 = 1;
-			this.buttonsp3[0] = new JButton(this.logTor.getMiaSquadra().getNomeSquadra() + " - " + this.listAvversarie.get(0).getNomeSquadra());
-			this.p3.add(this.buttonsp3[0]);
 			for (int i=1;i<this.listAvversarie.size() - 1;i = i + 2, cont1++) {
 				String squad1 = new String(this.listAvversarie.get(i).getNomeSquadra());
 				var ris1 = this.logTor.getRisultati().get(squad1);
@@ -240,8 +250,13 @@ public class Torneo extends Base{
 			
 			// ... creo il panel 2 con le squadre che hanno vinto 
 			// (ora faccio finta che vinca sempre la squadra dell'utente poi dovrò cambiare) 
-			this.buttonsp2[0] = new JButton(this.logTor.getMiaSquadra().getNomeSquadra() + " - " + this.logTor.getListAvversari().get(0).getNomeSquadra());
-			this.p2.add(this.buttonsp2[0]);
+			if (!logTor.getEliminated()) {
+				this.buttonsp2[0] = new JButton(this.logTor.getMiaSquadra().getNomeSquadra() + " - " + this.logTor.getListAvversari().get(0).getNomeSquadra());
+				this.p2.add(this.buttonsp2[0]);
+			} else {
+				this.buttonsp2[0] = new JButton(this.logTor.getSquadraAvv().getNomeSquadra() + " - " + this.logTor.getListAvversari().get(0).getNomeSquadra());
+				this.p2.add(this.buttonsp2[0]);
+			}
 			this.buttonsp2[1] = new JButton(this.logTor.getListAvversari().get(1).getNomeSquadra() + " - " + this.logTor.getListAvversari().get(2).getNomeSquadra());
 			this.p2.add(this.buttonsp2[1]);
 
@@ -255,9 +270,15 @@ public class Torneo extends Base{
 			this.p2.repaint();
 			
 			// metto i risultati nel panel 2 (ora non ho quelli della squadraUtente)
-			this.buttonsp2[0] = new JButton(this.logTor.getMiaSquadra().getNomeSquadra() + " - " + this.listAvversarie.get(0).getNomeSquadra());
-			this.p2.add(this.buttonsp2[0]);
-			
+			if (!logTor.getEliminated() || this.eliminatedThisTurn) {
+				this.buttonsp2[0] = new JButton(this.logTor.getMiaSquadra().getNomeSquadra() + " " + this.risSquadraUte + " " + " - " + " " + this.risSquadraAvv + " " + this.listAvversarie.get(0).getNomeSquadra());
+				this.p2.add(this.buttonsp2[0]);
+			} else {
+				int ris1 =this.logTor.getRisMatch().get(this.logTor.getSquadraAvv().getNomeSquadra());
+				int ris2 =this.logTor.getRisMatch().get(this.listAvversarie.get(0).getNomeSquadra());
+				this.buttonsp2[0] = new JButton(this.logTor.getSquadraAvv().getNomeSquadra() + " " + ris1 + " " + " - " + " " + ris2 + " " + this.listAvversarie.get(0).getNomeSquadra());
+				this.p2.add(this.buttonsp2[0]);
+			}
 			String squad1 = new String(this.listAvversarie.get(1).getNomeSquadra());
 			var ris1 = this.logTor.getRisultati().get(squad1);
 			String squad2 = new String(this.listAvversarie.get(2).getNomeSquadra());
@@ -266,7 +287,13 @@ public class Torneo extends Base{
 			this.p2.add(this.buttonsp2[1]);
 			
 			// aggiungo la nuova partita ...
-			// ...
+			if (!logTor.getEliminated()) {
+				this.buttonp1 = new JButton(this.logTor.getMiaSquadra().getNomeSquadra() + " - " + this.logTor.getListAvversari().get(0).getNomeSquadra());
+				this.p2.add(this.buttonp1);
+			} else {
+				this.buttonp1 = new JButton(this.logTor.getSquadraAvv().getNomeSquadra()+ " - " + this.logTor.getListAvversari().get(0).getNomeSquadra());
+				this.p1.add(this.buttonp1);
+			}
 			
 			
 			this.p1.validate();
@@ -275,7 +302,35 @@ public class Torneo extends Base{
 			this.listAvversarie = logTor.getListAvversari();
 			break;
 		case 1:
-			//...
+			this.p1.removeAll();
+			this.p1.repaint();
+			
+			// metto i risultati nel panel 1
+			if (!logTor.getEliminated() || this.eliminatedThisTurn) {
+				this.buttonp1 = new JButton(this.logTor.getMiaSquadra().getNomeSquadra() + " " + this.risSquadraUte + " " + " - " + " " + this.risSquadraAvv + " " + this.listAvversarie.get(0).getNomeSquadra());
+				this.p1.add(this.buttonp1);
+			} else {
+				int ris11 =this.logTor.getRisMatch().get(this.logTor.getSquadraAvv().getNomeSquadra());
+				int ris21 =this.logTor.getRisMatch().get(this.listAvversarie.get(0).getNomeSquadra());
+				this.buttonp1 = new JButton(this.logTor.getSquadraAvv().getNomeSquadra() + " " + ris11 + " " + " - " + " " + ris21 + " " + this.listAvversarie.get(0).getNomeSquadra());
+				this.p1.add(this.buttonp1);
+			}
+			
+			
+			if (this.eliminatedThisTurn) {
+				this.buttonp0 = new JButton(this.logTor.getSquadraAvv().getNomeSquadra());
+			} else if (!logTor.getEliminated()) {
+				this.buttonp0 = new JButton(this.logTor.getMiaSquadra().getNomeSquadra());
+			} else {
+				this.buttonp0 = new JButton(this.logTor.getWinner());
+			}
+			this.p0.add(this.buttonp0);
+			
+			
+			
+			this.p0.validate();
+			this.p1.validate();
+			this.panelCenter.validate();
 			break;
 		}
 		
