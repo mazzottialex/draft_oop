@@ -213,7 +213,6 @@ public class Partita extends JDialog {
     
     private void sost() {
     	sub = new Sostituzione(s1, this, cambi);
-//    	sub.setRiserve(sub.getRiserve() - cambi);
 		sub.setVisible(true);
     }
     
