@@ -161,7 +161,6 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 
 	@Override
 	public boolean teamComplete() {
-		//System.out.println(this.liSquadra.size());
 		if (this.liSquadra.size() == LogicsCreaSquadraImpl.NUM_PLAYER_IN_TEAM) {
 			return true;
 		}
