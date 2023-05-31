@@ -81,7 +81,7 @@ public class Rigori extends Base {
         	// TODO
         	fine = true;
         	dispose();
-        	partita.setWinnerR(winner);
+        	partita.setWinnerR(winner, gol1, gol2);
         });
         chiudi.setEnabled(false);
         add(inizia, BorderLayout.NORTH);
@@ -95,7 +95,7 @@ public class Rigori extends Base {
                 //TODO
             	fine = true;
             	dispose();
-            	partita.setWinnerR(winner);
+            	partita.setWinnerR(winner, gol1, gol2);
             }
         };
 

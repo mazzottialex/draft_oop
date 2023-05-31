@@ -382,13 +382,15 @@ public class Partita extends JDialog {
         thread.start();
     }
 	
-	public void setWinnerR(Squadra s) {
+	public void setWinnerR(Squadra s, int gol1, int gol2) {
 			winner = s;
-			if (s == s1) {
-				jlScoreSq1.setText(jlScoreSq1.getText() + " *");
-			} else {
-				jlScoreSq2.setText(jlScoreSq2.getText() + " *");
-			}
+//			if (s == s1) {
+//				jlScoreSq1.setText(jlScoreSq1.getText() + " *");
+//			} else {
+//				jlScoreSq2.setText(jlScoreSq2.getText() + " *");
+//			}
+			jlScoreSq1.setText(jlScoreSq1.getText() + " (" + gol1 + ")");
+			jlScoreSq2.setText(jlScoreSq2.getText() + " (" + gol2 + ")");
 			startStop.setEnabled(false);
 			next.setEnabled(true);
 	}
