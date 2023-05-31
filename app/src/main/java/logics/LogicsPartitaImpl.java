@@ -38,8 +38,8 @@ public class LogicsPartitaImpl implements LogicsPartita{
 	public void scorers(int tempo) throws FileNotFoundException, ClassNotFoundException, IOException {
 		if (tempo == REG) {
 			do {
-				list1 = getNumGol(sim.risultato().get(s1.getNomeSquadra()), tempo);
-				list2 = getNumGol(sim.risultato().get(s2.getNomeSquadra()), tempo);
+				list1 = getNumGol(sim.risultato().get(s1), tempo);
+				list2 = getNumGol(sim.risultato().get(s2), tempo);
 			} while (containsAny(list1, list2));
 		} else if (tempo == SUPPL) {
 			do {

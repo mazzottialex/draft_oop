@@ -166,15 +166,15 @@ public class SimulatingMatchImpl implements SimulatingMatch {
 
 	// risultatoFinale
 	@Override
-	public Map<String, Integer> risultato()
+	public Map<Squadra, Integer> risultato()
 			throws FileNotFoundException, ClassNotFoundException, IOException {
 		int sq1 = (int) Math.round(Math.min(capacitaRealizzativa(SQUADRA1),
 				(prestazioneOffensiva(SQUADRA1) - prestazioneDifensiva(SQUADRA2))));
 		int sq2 = (int) Math.round(Math.min(capacitaRealizzativa(SQUADRA2),
 				(prestazioneOffensiva(SQUADRA2) - prestazioneDifensiva(SQUADRA1))));
-		Map<String, Integer> map = new HashMap<>();
-		map.put(this.s1.getNomeSquadra(), sq1 >= 0 ? sq1 : 0);
-		map.put(this.s2.getNomeSquadra(), sq2 >= 0 ? sq2 : 0);
+		Map<Squadra, Integer> map = new HashMap<>();
+		map.put(this.s1, sq1 >= 0 ? sq1 : 0);
+		map.put(this.s2, sq2 >= 0 ? sq2 : 0);
 		return map;
 	}
 
