@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class Partita extends JDialog {
     private static final long serialVersionUID = 3533149128342164934L;
     
-    
+    private JDialog frame=this;
     private JPanel contentPane = new JPanel();
     
 	private JProgressBar progressBar;
@@ -310,7 +310,7 @@ public class Partita extends JDialog {
 						JOptionPane.showMessageDialog(null, "Fine tempi supplementari. Si va ai calci di rigore");
 						//TODO da sistemare rigori
 						rigori = true;
-						gui = new Rigori(s1, s2);
+						gui = new Rigori(frame ,true, s1, s2);
 						SwingUtilities.invokeLater(() -> {
 				            gui.createAndShowGUI();
 				        });
