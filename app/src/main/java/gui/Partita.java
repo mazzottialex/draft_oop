@@ -184,6 +184,13 @@ public class Partita extends Base {
 					update();
 					addCambio();
 					ris = true;
+					if(cambi==3) {
+						JButton button=(JButton) e.getSource();
+						JPanel panel=(JPanel) button.getParent();
+						button.setEnabled(false);
+						panel.revalidate();
+						panel.repaint();
+					}
 				}
 			}
 		});
@@ -234,7 +241,9 @@ public class Partita extends Base {
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
-                            //Make progress.
+                            
+
+                        	//Make progress.
                             progressBar.setValue(value);
                             progressBar.setString("Minuto " + String.valueOf(value) + "°");
                             // chiama funzione per gol
@@ -246,9 +255,10 @@ public class Partita extends Base {
                             // chiama funzione per ammonizioni / espulsioni
                             logics.sanctions();
                             //Abilita bottone sostituzioni
-                            if (progressBar.getValue() > 0) {
+                            if (progressBar.getValue() > 0 && cambi<3) {
             					jbSubs.setEnabled(true);
             				}
+                            
                             if (rigori) {
                             	winner = gui.getWinner();
                             }
@@ -266,7 +276,7 @@ public class Partita extends Base {
                 if (progressBar.getValue() == 90) {
 //                	jlScoreSq1.setText("2");
 //                	jlScoreSq2.setText("2");
-					if (jlScoreSq1.getText() != jlScoreSq2.getText()) {
+					if (jlScoreSq1.getText().equals(jlScoreSq2.getText())) {
 						winner = Integer.valueOf(jlScoreSq1.getText()) > Integer.valueOf(jlScoreSq2.getText()) ? s1 : s2;
 						JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + winner.getNomeSquadra());
 						startStop.setEnabled(false);
@@ -285,7 +295,7 @@ public class Partita extends Base {
 //                	jlScoreSq1.setText("2");
 //                	jlScoreSq2.setText("2");
 					jbSubs.setEnabled(false);
-					if (jlScoreSq1.getText() != jlScoreSq2.getText()) {
+					if (jlScoreSq1.getText().equals(jlScoreSq2.getText())) {
 						winner = Integer.valueOf(jlScoreSq1.getText()) > Integer.valueOf(jlScoreSq2.getText()) ? s1 : s2;
 						JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + winner.getNomeSquadra());
 						startStop.setEnabled(false);
