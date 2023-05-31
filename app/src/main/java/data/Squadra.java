@@ -16,4 +16,5 @@ public interface Squadra {
 	public Calciatore getPortiereTit();
 	public void setTitolari(List<Calciatore> liTitolari);
 	public void setRiserve(List<Calciatore> liRiserve);
+	List<Calciatore> getTitolariDesc();
 }

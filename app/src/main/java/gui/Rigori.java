@@ -39,21 +39,9 @@ public class Rigori extends JDialog {
     private Iterator<String> ris2;
     private JPanel contentPane=new JPanel();
 
-	public Rigori(JDialog parent, boolean modale, Squadra s1, Squadra s2) {
-    	super(parent,modale);
 
-    	setTitle("DRAFT");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 500, 700);
-		setMinimumSize(getSize());
-		setBackground(new Color(0, 64, 128));
-		contentPane = new JPanel();
-		contentPane.setBackground(new Color(0, 64, 128));
-		contentPane.setLayout(new BorderLayout());
-		add(contentPane);
-
-		//add(contentPanel);
-		this.s1 = s1;
+	public Rigori(Squadra s1, Squadra s2) {
+    	this.s1 = s1;
         this.s2 = s2;
 		this.gol1 = 0;
 		this.gol2 = 0;

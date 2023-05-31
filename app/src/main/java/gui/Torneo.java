@@ -85,7 +85,7 @@ public class Torneo extends Base{
 		            JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(btn);
 					Partita dialog;
 					try {
-						dialog = new Partita(parent, true, logTor.getMiaSquadra(), logTor.getListAvversari().get(0));
+						dialog = new Partita(logTor.getMiaSquadra(), logTor.getListAvversari().get(0));
 						dialog.createAndShowGUI();
 						dialog.setVisible(true);	
 						if (dialog.getWinner() != logTor.getMiaSquadra()) {

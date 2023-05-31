@@ -86,7 +86,7 @@ public class SquadraGui extends Base {
 		for(int i=0; i<ruoli.size();i++) {
 			panelPosizione=new JPanel();
 			for(int j=0;j<squadra.getModulo().getN(ruoli.get(i));j++) {
-				Calciatore c=squadra.getTitolari().get(count);
+				Calciatore c=squadra.getTitolariDesc().get(count);
 
 				JPanel panel=(utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRating().getX(), c.getRuolo(), true));
 				count++;

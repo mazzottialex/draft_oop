@@ -57,21 +57,9 @@ public class Partita extends JDialog {
 	private int score2;
 //	private boolean over;
 
-    public Partita(Frame parent,boolean modale, Squadra s1, Squadra s2) throws FileNotFoundException, ClassNotFoundException, IOException {
-    	super(parent,modale);
-    	
-		setBounds(100, 100, 700, 300);
-		setMinimumSize(getSize());
- 
-		setTitle("PARTITA");
-		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		setBounds(100, 100, 500, 700);
-		setBackground(new Color(0, 64, 128));
-		contentPane.setBackground(new Color(0, 64, 128));
-		contentPane.setLayout(new BorderLayout());
-		//add(contentPane);
-    	//contentPane.add(panel);
-    	
+
+    public Partita(Squadra s1, Squadra s2) throws FileNotFoundException, ClassNotFoundException, IOException {
+
     	this.s1 = s1;
 		this.s2 = s2;
 		this.logics = new LogicsPartitaImpl(this.s1, this.s2);
@@ -207,6 +195,13 @@ public class Partita extends JDialog {
 					update();
 					addCambio();
 					ris = true;
+					if(cambi==3) {
+						JButton button=(JButton) e.getSource();
+						JPanel panel=(JPanel) button.getParent();
+						button.setEnabled(false);
+						panel.revalidate();
+						panel.repaint();
+					}
 				}
 			}
 		});
@@ -217,6 +212,7 @@ public class Partita extends JDialog {
 				dispose();
 			}
 		});
+
     }
     
     private void sost() {
@@ -255,7 +251,9 @@ public class Partita extends JDialog {
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
-                            //Make progress.
+                            
+
+                        	//Make progress.
                             progressBar.setValue(value);
                             progressBar.setString("Minuto " + String.valueOf(value) + "°");
                             // chiama funzione per gol
@@ -267,9 +265,10 @@ public class Partita extends JDialog {
                             // chiama funzione per ammonizioni / espulsioni
                             logics.sanctions();
                             //Abilita bottone sostituzioni
-                            if (progressBar.getValue() > 0) {
+                            if (progressBar.getValue() > 0 && cambi<3) {
             					jbSubs.setEnabled(true);
             				}
+                            
                             if (rigori) {
                             	winner = gui.getWinner();
                             }
@@ -287,8 +286,9 @@ public class Partita extends JDialog {
                 if (progressBar.getValue() == 90) {
 //                	jlScoreSq1.setText("2");
 //                	jlScoreSq2.setText("2");
-					if (score1 != score2) {
-						winner = score1 > score2 ? s1 : s2;
+
+					if (!jlScoreSq1.getText().equals(jlScoreSq2.getText())) {
+						winner = Integer.valueOf(jlScoreSq1.getText()) > Integer.valueOf(jlScoreSq2.getText()) ? s1 : s2;
 						JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + winner.getNomeSquadra());
 						startStop.setEnabled(false);
 						jbSubs.setEnabled(false);
@@ -307,8 +307,10 @@ public class Partita extends JDialog {
 //                	jlScoreSq1.setText("2");
 //                	jlScoreSq2.setText("2");
 					jbSubs.setEnabled(false);
-					if (score1 != score2) {
-						winner = score1 > score2 ? s1 : s2;
+
+					if (!jlScoreSq1.getText().equals(jlScoreSq2.getText())) {
+						winner = Integer.valueOf(jlScoreSq1.getText()) > Integer.valueOf(jlScoreSq2.getText()) ? s1 : s2;
+
 						JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + winner.getNomeSquadra());
 						startStop.setEnabled(false);
 						next.setEnabled(true);
@@ -317,7 +319,7 @@ public class Partita extends JDialog {
 						JOptionPane.showMessageDialog(null, "Fine tempi supplementari. Si va ai calci di rigore");
 						//TODO da sistemare rigori
 						rigori = true;
-						gui = new Rigori(frame ,true, s1, s2);
+						gui = new Rigori(s1, s2);
 						SwingUtilities.invokeLater(() -> {
 				            gui.createAndShowGUI();
 				        });
