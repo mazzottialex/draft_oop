@@ -43,6 +43,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 		//System.out.println(this.miasquadra);
 		
 		// Creo le squadre avversarie (quelle esistenti in serie A)
+		/*
 		this.listSquadre.add(new SquadraAvversaria(0, "NAP", Modulo.M442, li)); 
 		this.listSquadre.add(new SquadraAvversaria(1, "LAZ", Modulo.M442, li)); 
 		this.listSquadre.add(new SquadraAvversaria(2, "JUV", Modulo.M442, li)); 
@@ -58,7 +59,10 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 		this.listSquadre.add(new SquadraAvversaria(12, "BOL", Modulo.M442, li)); 
 		this.listSquadre.add(new SquadraAvversaria(13, "TOR", Modulo.M442, li)); 
 		this.listSquadre.add(new SquadraAvversaria(14, "SAL", Modulo.M442, li)); 
+		*/
 		//System.out.println(this.listSquadre);
+		CreaSquadreAvversarieImpl cs = new CreaSquadreAvversarieImpl(li, 15);
+		this.listSquadre.addAll(cs.getSquadre());
 		
 		this.numSquadre = 16;
 		this.risultati = new HashMap<>();

@@ -135,7 +135,7 @@ public class Torneo extends Base{
 		//Aggiungo le varie squadre nel panel5 (la prima è sempre quella dell'utente)
 		this.buttonsp5[0] = new JButton(this.logTor.getMiaSquadra().getNomeSquadra());
 		this.p5.add(this.buttonsp5[0]);
-		Collections.shuffle(this.logTor.getListAvversari());
+		//Collections.shuffle(this.logTor.getListAvversari());
 		for (int i=0;i<this.logTor.getListAvversari().size();i++) {
 			this.buttonsp5[i+1] = new JButton(this.logTor.getListAvversari().get(i).getNomeSquadra());
 			this.p5.add(this.buttonsp5[i+1]);
