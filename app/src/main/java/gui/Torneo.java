@@ -168,6 +168,7 @@ public class Torneo extends Base{
 		this.panelSud.setBackground(new Color(0,64,128));
 		this.panelCenter.setBackground(new Color(0,64,128));
 		this.panelNord.setBackground(new Color(0,128,128));
+		this.panelNord.setBounds(200, 300, 200, 300);
 		this.contentPane.add(panelSud,BorderLayout.SOUTH);
 		this.contentPane.add(panelCenter, BorderLayout.CENTER);
 		this.contentPane.add(panelNord, BorderLayout.NORTH);
@@ -316,18 +317,27 @@ public class Torneo extends Base{
 				this.p1.add(this.buttonp1);
 			}
 			
+			String winner = new String();
 			
 			if (this.eliminatedThisTurn) {
 				this.buttonp0 = new JButton(this.logTor.getSquadraAvv().getNomeSquadra());
+				winner = this.logTor.getSquadraAvv().getNomeSquadra();
 			} else if (!logTor.getEliminated()) {
 				this.buttonp0 = new JButton(this.logTor.getMiaSquadra().getNomeSquadra());
+				winner = this.logTor.getMiaSquadra().getNomeSquadra();
 			} else {
 				this.buttonp0 = new JButton(this.logTor.getWinner());
+				winner = this.logTor.getWinner();
 			}
 			this.p0.add(this.buttonp0);
 			
+			// da mettere a posto
+			JLabel label = new JLabel(winner + " HA VINTO IL TORNEO!!!!");
+			this.panelNord.add(label);
+			
 			
 			this.logTor.setNumSquadre(0);
+			this.panelNord.validate();
 			this.p0.validate();
 			this.p1.validate();
 			this.panelCenter.validate();
