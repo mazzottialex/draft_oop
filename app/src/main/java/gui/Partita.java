@@ -15,10 +15,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Partita extends JDialog {
+public class Partita extends Base {
     private static final long serialVersionUID = 3533149128342164934L;
     
-    private JDialog frame=this;
     private JPanel contentPane = new JPanel();
     
 	private JProgressBar progressBar;
@@ -30,7 +29,6 @@ public class Partita extends JDialog {
 	private JLabel jlTabSq2;
 	private JButton startStop;
 	private JButton jbSubs;
-	//private JLabel min;
 	private JButton next;
 	private JPanel panel;
 	
@@ -56,10 +54,8 @@ public class Partita extends JDialog {
 	
 	private Partita partita;
 	
-//	private int score1;
-//	private int score2;
-//	private boolean over;
-
+	private int score1;
+	private int score2;
 	/*
 <<<<<<< HEAD
     public Partita(Frame parent,boolean modale, Squadra s1, Squadra s2) throws FileNotFoundException, ClassNotFoundException, IOException {
@@ -94,13 +90,15 @@ public class Partita extends JDialog {
         gbc.insets = new Insets(10, 10, 10, 10);
 
 		//define components
+        this.score1 = 0;
+        this.score2 = 0;
         this.jlNomeSq1 = new JLabel(s1.getNomeSquadra(), SwingConstants.RIGHT);
-        this.jlScoreSq1 = new JLabel("0", SwingConstants.RIGHT);
+        this.jlScoreSq1 = new JLabel(String.valueOf(score1), SwingConstants.RIGHT);
         this.jlScoreSq1.setVerticalAlignment(SwingConstants.TOP);
         this.jlTabSq1 = new JLabel("", SwingConstants.RIGHT);
         this.jlTabSq1.setVerticalAlignment(SwingConstants.TOP);
         this.jlNomeSq2 = new JLabel(s2.getNomeSquadra(), SwingConstants.LEFT);
-        this.jlScoreSq2 = new JLabel("0", SwingConstants.LEFT);
+        this.jlScoreSq2 = new JLabel(String.valueOf(score2), SwingConstants.LEFT);
         this.jlScoreSq2.setVerticalAlignment(SwingConstants.TOP);
         this.jlTabSq2 = new JLabel("", SwingConstants.LEFT);
         this.jlTabSq2.setVerticalAlignment(SwingConstants.TOP);
@@ -119,7 +117,6 @@ public class Partita extends JDialog {
 		this.tab2 = new ArrayList<>();
 		this.rigori = false;
 		this.cambi = 0;
-//		this.over = false;
         
         // Put constraints on different buttons
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -155,13 +152,13 @@ public class Partita extends JDialog {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 3;
-        gbc.ipady = 200;
+//        gbc.ipady = 200;
         panel.add(jlTabSq1, gbc);
                 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 2;
         gbc.gridy = 3;
-        gbc.ipady = 200;
+//        gbc.ipady = 200;
         panel.add(jlTabSq2, gbc);
        
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -193,10 +190,10 @@ public class Partita extends JDialog {
                 
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
         
-		contentPane.add(
-				new JLabel(
-						new ImageIcon(
-								new ImageIcon("src/main/resources/icon.png").getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH))));
+//		contentPane.add(
+//				new JLabel(
+//						new ImageIcon(
+//								new ImageIcon("src/main/resources/icon.png").getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH))));
 
 
         startStop.addActionListener(new ActionListener() {
@@ -265,14 +262,11 @@ public class Partita extends JDialog {
 	private void startProgress() {
     	startStop.setText("Stop");
         isRunning = true;
-        
-
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
             	if (!ris) {
             		try {
-                    	// TODO se il num di cambi è variato, ricalcolare il ris della partita e porlo in base al tempo rimanente
 						logics.scorers(progressBar.getValue());
 						ris = true;
 					} catch (ClassNotFoundException | IOException e) {
@@ -284,8 +278,6 @@ public class Partita extends JDialog {
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
-                            
-
                         	//Make progress.
                             progressBar.setValue(value);
                             progressBar.setString("Minuto " + String.valueOf(value) + "°");
@@ -307,7 +299,6 @@ public class Partita extends JDialog {
                             }
                         }
                     });
-
                     try {
                         Thread.sleep(100);
                     } catch (InterruptedException e) {
@@ -317,16 +308,16 @@ public class Partita extends JDialog {
                 
                 //Fine tempi reg
                 if (progressBar.getValue() == 90) {
-                	//jlScoreSq1.setText("2");
-                	//jlScoreSq2.setText("2");
 
-					if (!jlScoreSq1.getText().equals(jlScoreSq2.getText())) {
-						winner = Integer.valueOf(jlScoreSq1.getText()) > Integer.valueOf(jlScoreSq2.getText()) ? s1 : s2;
+//                	jlScoreSq1.setText("2");
+//                	jlScoreSq2.setText("2");
+					if (score1 != score2) {
+						winner = score1 > score2 ? s1 : s2;
+
 						JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + winner.getNomeSquadra());
 						startStop.setEnabled(false);
 						jbSubs.setEnabled(false);
 						next.setEnabled(true);
-//						over = true;
 					} else {
 						fineTempo = 120;
 						progressBar.setMaximum(fineTempo);
@@ -337,20 +328,15 @@ public class Partita extends JDialog {
                 
                 //Fine tempi suppl
                 if (progressBar.getValue() == 120) {
-                	//jlScoreSq1.setText("2");
-                	//jlScoreSq2.setText("2");
+
 					jbSubs.setEnabled(false);
-
-					if (!jlScoreSq1.getText().equals(jlScoreSq2.getText())) {
-						winner = Integer.valueOf(jlScoreSq1.getText()) > Integer.valueOf(jlScoreSq2.getText()) ? s1 : s2;
-
+					if (score1 != score2) {
+						winner = score1 > score2 ? s1 : s2;
 						JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + winner.getNomeSquadra());
 						startStop.setEnabled(false);
 						next.setEnabled(true);
-//						over = true;
 					} else {
 						JOptionPane.showMessageDialog(null, "Fine tempi supplementari. Si va ai calci di rigore");
-						//TODO da sistemare rigori
 						rigori = true;
 						guiRigori = new Rigori(s1, s2, partita);
 						SwingUtilities.invokeLater(() -> {
@@ -364,6 +350,7 @@ public class Partita extends JDialog {
 					fineTempo = 90;
 					JOptionPane.showMessageDialog(null, "Fine primo tempo");
 				}
+				
 				//Fine 1° tempo suppl
 				if (progressBar.getValue() == 105) {
 					fineTempo = 120;
@@ -384,13 +371,8 @@ public class Partita extends JDialog {
 	
 	public void setWinnerR(Squadra s, int gol1, int gol2) {
 			winner = s;
-//			if (s == s1) {
-//				jlScoreSq1.setText(jlScoreSq1.getText() + " *");
-//			} else {
-//				jlScoreSq2.setText(jlScoreSq2.getText() + " *");
-//			}
-			jlScoreSq1.setText(jlScoreSq1.getText() + " (" + gol1 + ")");
-			jlScoreSq2.setText(jlScoreSq2.getText() + " (" + gol2 + ")");
+			jlScoreSq1.setText(score1 + " (" + gol1 + ")");
+			jlScoreSq2.setText(score2 + " (" + gol2 + ")");
 			startStop.setEnabled(false);
 			next.setEnabled(true);
 	}
@@ -405,7 +387,8 @@ public class Partita extends JDialog {
     		}
         	string1 = string1 + Integer.toString(progressBar.getValue()) + "' Gol: " + calciatore.getNominativo() + autogol + "<br>";
         	jlTabSq1.setText(apri + string1 + chiudi);
-        	jlScoreSq1.setText(String.valueOf(Integer.valueOf(jlScoreSq1.getText()) + 1));
+        	score1++;
+        	jlScoreSq1.setText(String.valueOf(score1));
         }
         if (logics.getMinGol(s2).contains(progressBar.getValue())) {
         	tab2.add(logics.addScorer(s2));
@@ -416,7 +399,8 @@ public class Partita extends JDialog {
     		}
         	string2 = string2 + Integer.toString(progressBar.getValue()) + "' Gol: " + calciatore.getNominativo() + autogol + "<br>";
         	jlTabSq2.setText(apri + string2 + chiudi);
-        	jlScoreSq2.setText(String.valueOf(Integer.valueOf(jlScoreSq2.getText()) + 1));
+        	score2++;
+        	jlScoreSq2.setText(String.valueOf(score2));
         }
 	}
 
@@ -430,16 +414,12 @@ public class Partita extends JDialog {
     }
     
     public int getGolS1() {
-    	return Integer.valueOf(jlScoreSq1.getText());
+    	return score1;
     }
     
     public int getGolS2() {
-    	return Integer.valueOf(jlScoreSq2.getText());
+    	return score2;
     }
-    
-//    public boolean isOver() {
-//    	return over;
-//    }
     
     /**
      * Create the GUI and show it. As with all GUI code, this must run
