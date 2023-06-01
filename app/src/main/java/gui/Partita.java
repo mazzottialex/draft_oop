@@ -15,10 +15,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Partita extends JDialog {
+public class Partita extends Base {
     private static final long serialVersionUID = 3533149128342164934L;
     
-    private JDialog frame = this;
     private JPanel contentPane = new JPanel();
     
 	private JProgressBar progressBar;
@@ -153,13 +152,13 @@ public class Partita extends JDialog {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 3;
-        gbc.ipady = 200;
+//        gbc.ipady = 200;
         panel.add(jlTabSq1, gbc);
                 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 2;
         gbc.gridy = 3;
-        gbc.ipady = 200;
+//        gbc.ipady = 200;
         panel.add(jlTabSq2, gbc);
        
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -191,10 +190,10 @@ public class Partita extends JDialog {
                 
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
         
-		contentPane.add(
-				new JLabel(
-						new ImageIcon(
-								new ImageIcon("src/main/resources/icon.png").getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH))));
+//		contentPane.add(
+//				new JLabel(
+//						new ImageIcon(
+//								new ImageIcon("src/main/resources/icon.png").getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH))));
 
 
         startStop.addActionListener(new ActionListener() {
@@ -387,7 +386,8 @@ public class Partita extends JDialog {
     		}
         	string1 = string1 + Integer.toString(progressBar.getValue()) + "' Gol: " + calciatore.getNominativo() + autogol + "<br>";
         	jlTabSq1.setText(apri + string1 + chiudi);
-        	jlScoreSq1.setText(String.valueOf(score1++));
+        	score1++;
+        	jlScoreSq1.setText(String.valueOf(score1));
         }
         if (logics.getMinGol(s2).contains(progressBar.getValue())) {
         	tab2.add(logics.addScorer(s2));
@@ -398,7 +398,8 @@ public class Partita extends JDialog {
     		}
         	string2 = string2 + Integer.toString(progressBar.getValue()) + "' Gol: " + calciatore.getNominativo() + autogol + "<br>";
         	jlTabSq2.setText(apri + string2 + chiudi);
-        	jlScoreSq2.setText(String.valueOf(score2++));
+        	score2++;
+        	jlScoreSq2.setText(String.valueOf(score2));
         }
 	}
 
