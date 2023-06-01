@@ -13,8 +13,10 @@ import data.Squadra;
 public class LogicsRigoriImpl implements LogicsRigori {
 	private Squadra s1;
 	private Squadra s2;
-	private Iterator<Calciatore> shooterIterator1;
-	private Iterator<Calciatore> shooterIterator2;
+//	private Iterator<Calciatore> shooterIterator1;
+//	private Iterator<Calciatore> shooterIterator2;
+	private List<Calciatore> titolari1;
+	private List<Calciatore> titolari2;
 	private int gol1;
 	private int gol2;
     private int tiri1;
@@ -29,8 +31,10 @@ public class LogicsRigoriImpl implements LogicsRigori {
 		super();
 		this.s1 = s1;
 		this.s2 = s2;
-		this.shooterIterator1 = backIterator(s1.getTitolari());
-		this.shooterIterator2 = backIterator(s2.getTitolari());
+//		this.shooterIterator1 = backIterator(s1.getTitolari());
+//		this.shooterIterator2 = backIterator(s2.getTitolari());
+		this.titolari1 = s1.getTitolari();
+		this.titolari2 = s2.getTitolari();
 		this.gol1 = 0;
 		this.gol2 = 0;
 		this.tiri1 = 0;
@@ -50,31 +54,31 @@ public class LogicsRigoriImpl implements LogicsRigori {
                 continua = false;
 			} else if ((tiri1 + tiri2) < totTiri || tiri1 != tiri2 || (tiri1 == tiri2 && gol1 == gol2)) {
                 if ((tiri1 + tiri2) % 2 == 0) {
-                	if (!shooterIterator1.hasNext()) {
-                		shooterIterator1 = backIterator(s1.getTitolari());
+                	if (titolari1.isEmpty()) {
+                		titolari1 = s1.getTitolari();
                     }
-                    if (shooterIterator1.hasNext()) {
-                    	Calciatore tiratore = shooterIterator1.next();
-                    	String res = rigore(tiratore, s2);
-                    	map1.put(tiratore, res);
-                        if (res.equals("Gol")) {
-                        	gol1++;
-                        }
-                        tiri1++;
+                	Calciatore tiratore = bestRating(titolari1);
+                	System.out.print(tiratore.getRating().getY().getX() + " ");
+                	titolari1.remove(tiratore);
+                	String res = rigore(tiratore, s2);
+                	map1.put(tiratore, res);
+                    if (res.equals("Gol")) {
+                    	gol1++;
                     }
+                    tiri1++;
                 } else {
-                	if (!shooterIterator2.hasNext()) {
-                		shooterIterator2 = backIterator(s2.getTitolari());
+                	if (titolari2.isEmpty()) {
+                		titolari2 = s2.getTitolari();
                     }
-                    if (shooterIterator2.hasNext()) {
-                    	Calciatore tiratore = shooterIterator2.next();
-                        String res = rigore(tiratore, s1);
-                        map2.put(tiratore, res);
-                        if (res.equals("Gol")) {
-                        	gol2++;
-                        }
-                        tiri2++;
+                	Calciatore tiratore = bestRating(titolari2);
+                	System.out.println(tiratore.getRating().getY().getX());
+                	titolari2.remove(tiratore);
+                    String res = rigore(tiratore, s1);
+                    map2.put(tiratore, res);
+                    if (res.equals("Gol")) {
+                    	gol2++;
                     }
+                    tiri2++;
                 }
 			}
 		}
@@ -83,13 +87,25 @@ public class LogicsRigoriImpl implements LogicsRigori {
 		return list;
 	}
 	
-	private Iterator<Calciatore> backIterator(List<Calciatore> list) {
-    	List<Calciatore> backList = new ArrayList<>();
-    	for (int i = list.size() - 1; i >= 0; i--) {
-    		backList.add(list.get(i));
-        }
-		return backList.iterator();
-    }
+	private Calciatore bestRating(List<Calciatore> list) {
+		Calciatore best = list.get(list.size() - 1);
+//		for (Calciatore calciatore : list) {
+//			if (best == null || calciatore.getRating().getY().getX() > best.getRating().getY().getX()) {
+//				best = calciatore;
+//			}
+//		}
+//		return best;
+		list.remove(best);
+		return best;
+	}
+	
+//	private Iterator<Calciatore> backIterator(List<Calciatore> list) {
+//    	List<Calciatore> backList = new ArrayList<>();
+//    	for (int i = list.size() - 1; i >= 0; i--) {
+//    		backList.add(list.get(i));
+//        }
+//		return backList.iterator();
+//    }
 	
 	private String rigore(Calciatore tiratore, Squadra dif) {
         double tirRating = tiratore.getRating().getY().getX() * (0.8 + new Random().nextDouble(0.4));
