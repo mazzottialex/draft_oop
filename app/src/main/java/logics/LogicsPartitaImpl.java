@@ -43,13 +43,13 @@ public class LogicsPartitaImpl implements LogicsPartita{
 			} while (containsAny(list1, list2));
 		} else if (tempo == SUPPL) {
 			do {
-				list1 = getNumGol(sim.risultatoSuppl().get(s1.getNomeSquadra()), tempo);
-				list2 = getNumGol(sim.risultatoSuppl().get(s2.getNomeSquadra()), tempo);
+				list1 = getNumGol(sim.risultatoSuppl().get(s1), tempo);
+				list2 = getNumGol(sim.risultatoSuppl().get(s2), tempo);
 			} while (containsAny(list1, list2));
 		} else {
 			do {
-				list1 = getNumGol(sim.risultatoSub(tempo).get(s1.getNomeSquadra()), tempo);
-				list2 = getNumGol(sim.risultatoSub(tempo).get(s2.getNomeSquadra()), tempo);
+				list1 = getNumGol(sim.risultatoSub(tempo).get(s1), tempo);
+				list2 = getNumGol(sim.risultatoSub(tempo).get(s2), tempo);
 			} while (containsAny(list1, list2));
 		}
 	}

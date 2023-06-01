@@ -24,6 +24,8 @@ import gui.Base;
 import gui.Partita;
 import logics.CreaSquadreAvversarie;
 import logics.CreaSquadreAvversarieImpl;
+import logics.LogicsRigori;
+import logics.LogicsRigoriImpl;
 import simulation.SimulatingMatch;
 import simulation.SimulatingMatchImpl;
 
@@ -31,7 +33,7 @@ public class Torneo extends Base {
 	List<Squadra> turnoDaSimul=new ArrayList<>();
 	List<JPanel> liPanelFase=new ArrayList<>();
 	private Torneo pane;
-	final int turni=4;
+	final int turni=3;
 	final int nSquadre=(int) Math.pow(2, turni);
 	int count=0;
 	private TorneoColl tabellone;
@@ -65,9 +67,9 @@ public class Torneo extends Base {
 		};
 		liPanelFase.add(panelFase);
 		//////////////////
-		JButton prova=new JButton("prova");
+		JButton btnSimula=new JButton("Simula");
 		
-		prova.addActionListener(new ActionListener() {
+		btnSimula.addActionListener(new ActionListener() {
 			List<Squadra> liSquadreVinc=new ArrayList<>();
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -130,8 +132,23 @@ public class Torneo extends Base {
 								Squadra s2=it.next();
 								int score1=sim.risultato().get(s1);
 								int score2=sim.risultato().get(s2);
-								liSquadreVinc.add(score1>score2 ? s1 : s2);
-								//System.out.print(score1>score2 ? s1 : s2);
+								if(score1==score2)
+								{
+									score1=sim.risultatoSuppl().get(s1);
+									score2=sim.risultatoSuppl().get(s2);
+									//RIGORI
+									if(score1==score2) {
+										LogicsRigori rigori=new LogicsRigoriImpl(s1, s2);
+										liSquadreVinc.add(rigori.getWinner());
+									}
+									else {
+										liSquadreVinc.add(score1>score2 ? s1 : s2);
+									}
+								}
+								else{
+									liSquadreVinc.add(score1>score2 ? s1 : s2);
+								}
+								
 
 							} catch (ClassNotFoundException | IOException e1) {
 								// TODO Auto-generated catch block
@@ -152,6 +169,6 @@ public class Torneo extends Base {
 		
 		
 		gbc.gridy=5;
-		contentPane.add(prova, gbc);
+		contentPane.add(btnSimula, gbc);
 	}
 }

@@ -317,8 +317,8 @@ public class Partita extends JDialog {
                 
                 //Fine tempi reg
                 if (progressBar.getValue() == 90) {
-                	jlScoreSq1.setText("2");
-                	jlScoreSq2.setText("2");
+                	//jlScoreSq1.setText("2");
+                	//jlScoreSq2.setText("2");
 
 					if (!jlScoreSq1.getText().equals(jlScoreSq2.getText())) {
 						winner = Integer.valueOf(jlScoreSq1.getText()) > Integer.valueOf(jlScoreSq2.getText()) ? s1 : s2;
@@ -337,8 +337,8 @@ public class Partita extends JDialog {
                 
                 //Fine tempi suppl
                 if (progressBar.getValue() == 120) {
-                	jlScoreSq1.setText("2");
-                	jlScoreSq2.setText("2");
+                	//jlScoreSq1.setText("2");
+                	//jlScoreSq2.setText("2");
 					jbSubs.setEnabled(false);
 
 					if (!jlScoreSq1.getText().equals(jlScoreSq2.getText())) {
