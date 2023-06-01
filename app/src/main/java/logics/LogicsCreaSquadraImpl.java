@@ -30,6 +30,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	private String nomeSquadra;
 	private String stemma;
 	private Squadra squadra;
+	private List<Calciatore> calcUsciti;
 	
 	public LogicsCreaSquadraImpl(String nomeSquadra, String stemma, List<Calciatore> li) throws FileNotFoundException, ClassNotFoundException, IOException {
 		this.moduloSelect = Modulo.M343;
@@ -42,6 +43,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 		this.posSelect = -1;
 		this.ratingSelect = 0;
 		this.liSquadra = new ArrayList<>();
+		this.calcUsciti = new ArrayList<>();
 		this.nomeSquadra = nomeSquadra;
 		this.stemma = stemma;
 		riserve = new ArrayList<>();
@@ -98,10 +100,20 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 		List<Calciatore> list = this.ex.getListaByRuolo(ruolo);
 		Set<Calciatore> set = new HashSet<>();
 		List<Calciatore> randomList = new ArrayList<>();
+		boolean test = false;
 		Random r = new Random();
 		while (set.size() != n) {
 			int random = r.nextInt(list.size());
-			set.add(list.get(random));
+			Calciatore c = list.get(random);
+			test = false;
+			for (Calciatore uscito : this.calcUsciti) {
+				if (c.equals(uscito)) {
+					test = true;
+				}
+			}
+			if (!test) {
+				set.add(list.get(random));
+			}
 		}
 		randomList.addAll(set);
 		return randomList;
@@ -149,7 +161,9 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 
 	@Override
 	public void addPlayerInTeam(Calciatore calciatore) {
-		this.liSquadra.add(calciatore);
+		if (!this.liSquadra.contains(calciatore)) {
+			this.liSquadra.add(calciatore);
+		}
 	}
 
 	@Override
@@ -188,6 +202,11 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	@Override
 	public void setRating(int rating) {
 		this.ratingSelect = rating;
+	}
+
+	@Override
+	public List<Calciatore> getCalcUsciti() {
+		return this.calcUsciti;
 	}
 
 }

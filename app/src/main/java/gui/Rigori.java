@@ -16,7 +16,7 @@ import data.Squadra;
 import logics.LogicsRigori;
 import logics.LogicsRigoriImpl;
 
-public class Rigori extends JDialog {
+public class Rigori extends Base {
 	/**
 	 * 
 	 */
@@ -38,9 +38,10 @@ public class Rigori extends JDialog {
     private Iterator<String> ris1;
     private Iterator<String> ris2;
     private JPanel contentPane=new JPanel();
+    private Partita partita;
 
 
-	public Rigori(Squadra s1, Squadra s2) {
+	public Rigori(Squadra s1, Squadra s2, Partita partita) {
     	this.s1 = s1;
         this.s2 = s2;
 		this.gol1 = 0;
@@ -52,6 +53,7 @@ public class Rigori extends JDialog {
 		tiratori2 = logics.compute().get(1).keySet().iterator();
 		ris1 = logics.compute().get(0).values().iterator();
 		ris2 = logics.compute().get(1).values().iterator();
+		this.partita = partita;
 		
 		//gui di prova
         setLayout(new BorderLayout());
@@ -79,6 +81,7 @@ public class Rigori extends JDialog {
         	// TODO
         	fine = true;
         	dispose();
+        	partita.setWinnerR(winner, gol1, gol2);
         });
         chiudi.setEnabled(false);
         add(inizia, BorderLayout.NORTH);
@@ -92,6 +95,7 @@ public class Rigori extends JDialog {
                 //TODO
             	fine = true;
             	dispose();
+            	partita.setWinnerR(winner, gol1, gol2);
             }
         };
 
@@ -109,7 +113,9 @@ public class Rigori extends JDialog {
             public void run() {
             	if (!tiratori1.hasNext() && !tiratori2.hasNext()) {
             		//TODO dire chi ha vinto
-            		result.setText("Sfida terminata. Squadra vincente: " +  winner());
+            		JOptionPane.showMessageDialog(null, "Tiri di rigore terminati. Squadra vincente: " + winner());
+            		result.setText(gol1 + " - " + gol2);
+            		chiudi.setEnabled(true);
             		timer.cancel();
 				} else {
 					if (totTiri % 2 == 0) {
