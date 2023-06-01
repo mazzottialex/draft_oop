@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
+import utils.Pair;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -32,6 +32,8 @@ import simulation.SimulatingMatchImpl;
 public class Torneo extends Base {
 	List<Squadra> turnoDaSimul=new ArrayList<>();
 	List<JPanel> liPanelFase=new ArrayList<>();
+	List<Pair<Squadra, Integer>> liRis=new ArrayList<>();
+
 	private Torneo pane;
 	final int turni=3;
 	final int nSquadre=(int) Math.pow(2, turni);
@@ -92,7 +94,34 @@ public class Torneo extends Base {
 								tabellone.addLi(liSquadreVinc);
 								liSquadreVinc=new ArrayList<>();
 								
+								liRis.add(new Pair<Squadra, Integer>(turnoDaSimul.get(0), partita.getGolS1()));
+								liRis.add(new Pair<Squadra, Integer>(turnoDaSimul.get(1), partita.getGolS2()));
+								tabellone.setLiLastRisul(liRis);
+								liRis=new ArrayList<>();
 								JPanel panelFase=new JPanel();
+								
+								contentPane.remove(count+1);
+								
+								for(int i=0;i<tabellone.getLiLastRisul().size();i++) {
+									JPanel matchPanel=new JPanel();
+									matchPanel.add(new JLabel(tabellone.getLiLastRisul().get(i).getX().getNomeSquadra()+" "+tabellone.getLiLastRisul().get(i).getY()));
+									//CHECK se non vincitore
+									if(tabellone.getLastLi().size()>1) {
+										matchPanel.add(new JLabel("-"));
+										i++;
+										matchPanel.add(new JLabel(tabellone.getLiLastRisul().get(i).getX().getNomeSquadra()+" "+tabellone.getLiLastRisul().get(i).getY()));
+									}panelFase.add(matchPanel);
+								}
+								liPanelFase.add(panelFase);
+								
+								
+								liPanelFase.forEach(lis->{
+									gbc.gridy=turni-count;
+									contentPane.add(lis, gbc);
+								});
+								
+								panelFase=new JPanel();
+								liPanelFase=new ArrayList<>();
 								
 								for(int i=0;i<tabellone.getLastLi().size();i++) {
 									JPanel matchPanel=new JPanel();
@@ -148,12 +177,13 @@ public class Torneo extends Base {
 								else{
 									liSquadreVinc.add(score1>score2 ? s1 : s2);
 								}
-								
-
+								liRis.add(new Pair<Squadra, Integer>(s1, score1));
+								liRis.add(new Pair<Squadra, Integer>(s2, score2));
 							} catch (ClassNotFoundException | IOException e1) {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
+							
 						}
 					}
 				}
@@ -161,14 +191,16 @@ public class Torneo extends Base {
 		});
 		gbc.insets=new Insets(5, 5, 5, 5);
 		
+		gbc.gridy=5;
+		contentPane.add(btnSimula, gbc);
+		
 		liPanelFase.forEach(lis->{
-			count++;
-			gbc.gridy=turni-count;
+			
+			gbc.gridy=0;
 			contentPane.add(lis, gbc);
 		});
 		
 		
-		gbc.gridy=5;
-		contentPane.add(btnSimula, gbc);
+		
 	}
 }
