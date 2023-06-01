@@ -115,7 +115,7 @@ public class Sostituzione extends Base {
 		JButton sostituisci = new JButton("Sostitutisci");
 		sostituisci.addActionListener(e -> {
 			logics.sub(panelTit.getParent(), panelRis.getParent(), panelTit, panelRis);
-			
+			dispose();
 		});
 		gbc.gridy = 7;
 		contentPane.add(sostituisci, gbc);

@@ -18,6 +18,7 @@ import data.Calciatore;
 import data.Modulo;
 import logics.LogicsCreaSquadraImpl;
 import logics.LogicsCreasquadra;
+import v2.gui.*;
 
 public class CreaSquadra extends Base{
 
@@ -77,6 +78,8 @@ public class CreaSquadra extends Base{
 				
 				if (log.teamComplete()) {
 					
+					changeJPanel(new TorneoV2(log.getSquadra(), li));
+					/*
 					try {
 						changeJPanel(new Torneo(log.getSquadra(), li));
 					} catch (FileNotFoundException e1) {
@@ -88,7 +91,7 @@ public class CreaSquadra extends Base{
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
-					}
+					}*/
 					frameCalciatori.setVisible(false);
 					frameModulo.setVisible(false);
 					// ...

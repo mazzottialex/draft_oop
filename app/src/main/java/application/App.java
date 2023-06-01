@@ -4,6 +4,7 @@
 package application;
 
 import java.awt.EventQueue;
+import java.awt.Frame;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
@@ -17,11 +18,13 @@ import data.Modulo;
 import data.Squadra;
 import data.SquadraAvversaria;
 import gui.Partita;
+import gui.Rigori;
 import gui.Start;
 import manageData.ManageData;
 import manageData.ManageDataImpl;
 import rating.CalcoloRating;
 import rating.CalcoloRatingImpl;
+import v2.gui.TorneoV2;
 
 public class App {
     public String getGreeting() {
@@ -29,7 +32,7 @@ public class App {
     }
 
     public static void main(String[] args) throws FileNotFoundException, ClassNotFoundException, IOException {
-    	EventQueue.invokeLater(new Runnable() {
+    	/*EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					Start frame = new Start();
@@ -39,8 +42,15 @@ public class App {
 				}
 			}
 		});
+    	ManageData md = new ManageDataImpl("2022-2023");
+		md.LoadData();
+		List<Calciatore> li = md.getLi();
+		CalcoloRating cr = new CalcoloRatingImpl(li);
+		li = cr.updateRating();
+		Squadra nap = new SquadraAvversaria(0, "NAP", Modulo.M442, li);	
+    	Torneo t= new Torneo(nap, li);
+    	t.setVisible(true);*/
     	
-    	/*
     	ManageData md = new ManageDataImpl("2022-2023");
 		md.LoadData();
 		List<Calciatore> li = md.getLi();
@@ -53,15 +63,16 @@ public class App {
             @Override
             public void run() {
                 try {
-					Partita p=new Partita(nap, laz);
-					p.createAndShowGUI();
-					p.addWindowListener(new WindowAdapter() {
-						@Override
-					    public void windowClosed(WindowEvent e) {
-					        // Il codice qui verrà eseguito quando il frame viene chiuso
-					        System.out.println(p.getWinner().toString()); // Stampa il vincitore
-					    }
-					});
+					Partita p = new Partita(nap, laz);
+					Rigori r = new Rigori(nap, laz, null);
+					r.createAndShowGUI();
+//					p.addWindowListener(new WindowAdapter() {
+//						@Override
+//					    public void windowClosed(WindowEvent e) {
+//					        // Il codice qui verrà eseguito quando il frame viene chiuso
+//					        System.out.println(p.getWinner().toString()); // Stampa il vincitore
+//					    }
+//					});
 					//System.out.println(p.getWinner());
 				} catch (ClassNotFoundException | IOException e) {
 					e.printStackTrace();
@@ -69,6 +80,6 @@ public class App {
 				}
             }
 		});
-		*/
+		
     }
 }

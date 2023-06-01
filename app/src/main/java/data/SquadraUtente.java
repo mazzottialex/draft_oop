@@ -90,11 +90,6 @@ public class SquadraUtente implements Squadra, Serializable {
 		return this.id;
 	}
 	
-	@Override
-	public String toString() {
-		return "Squadra [nomeSquadra=" + nomeSquadra + ", stemma=" + stemma + ", modulo=" + modulo + ", liCalciatori="
-				+ liCalciatori + "]";
-	}
 
 	@Override
 	public Calciatore getCalciatoreById(int id) {
@@ -116,5 +111,9 @@ public class SquadraUtente implements Squadra, Serializable {
 			}
 		}
 		return portiere;
+	}
+	@Override
+	public String toString() {
+		return "SquadraAvversaria [nomeSquadra=" + nomeSquadra + "]";
 	}
 }

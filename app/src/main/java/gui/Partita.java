@@ -217,8 +217,8 @@ public class Partita extends Base {
 					addCambio();
 					ris = true;
 					if(cambi == 3) {
-						JButton button=(JButton) e.getSource();
-						JPanel panel=(JPanel) button.getParent();
+						JButton button = (JButton) e.getSource();
+						JPanel panel = (JPanel) button.getParent();
 						button.setEnabled(false);
 						panel.revalidate();
 						panel.repaint();
@@ -233,16 +233,6 @@ public class Partita extends Base {
 				dispose();
 			}
 		});
-
-        /*
-        next.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				WindowEvent close = new WindowEvent(parent, WindowEvent.WINDOW_CLOSING);
-				dispatchEvent(close);
-			}
-        });
-        */
     }
     
     private void sost() {
@@ -308,10 +298,12 @@ public class Partita extends Base {
                 
                 //Fine tempi reg
                 if (progressBar.getValue() == 90) {
+
 //                	jlScoreSq1.setText("2");
 //                	jlScoreSq2.setText("2");
 					if (score1 != score2) {
 						winner = score1 > score2 ? s1 : s2;
+
 						JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + winner.getNomeSquadra());
 						startStop.setEnabled(false);
 						jbSubs.setEnabled(false);
@@ -326,8 +318,7 @@ public class Partita extends Base {
                 
                 //Fine tempi suppl
                 if (progressBar.getValue() == 120) {
-//                	jlScoreSq1.setText("2");
-//                	jlScoreSq2.setText("2");
+
 					jbSubs.setEnabled(false);
 					if (score1 != score2) {
 						winner = score1 > score2 ? s1 : s2;
@@ -381,7 +372,7 @@ public class Partita extends Base {
         	tab1.add(logics.addScorer(s1));
         	Calciatore calciatore = tab1.get(tab1.size() - 1);
         	String autogol = "";
-        	if (s2.getTitolari().contains(calciatore)) {
+        	if (!s1.getTitolari().contains(calciatore)) {
     			autogol = " (AG)";
     		}
         	string1 = string1 + Integer.toString(progressBar.getValue()) + "' Gol: " + calciatore.getNominativo() + autogol + "<br>";
@@ -393,7 +384,7 @@ public class Partita extends Base {
         	tab2.add(logics.addScorer(s2));
         	Calciatore calciatore = tab2.get(tab2.size() - 1);
         	String autogol = "";
-        	if (s1.getTitolari().contains(calciatore)) {
+        	if (!s2.getTitolari().contains(calciatore)) {
     			autogol = " (AG)";
     		}
         	string2 = string2 + Integer.toString(progressBar.getValue()) + "' Gol: " + calciatore.getNominativo() + autogol + "<br>";

@@ -141,4 +141,10 @@ public class SquadraAvversaria implements Squadra {
 		return portiere;
 	}
 
+
+	@Override
+	public String toString() {
+		return nomeSquadra;
+	}
+
 }
