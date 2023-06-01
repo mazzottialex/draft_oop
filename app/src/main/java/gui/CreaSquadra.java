@@ -377,6 +377,9 @@ public class CreaSquadra extends Base{
 
 		List<Calciatore> list = this.log.getRandom(ruolo, NUM_PLAYER);
 		
+		// aggiungo per poi controllare che non ci siano doppioni
+		this.log.getCalcUsciti().addAll(list);
+		
 		//Aggiungo la lista list nella mappa map
 		switch (ruolo) {
 		case "A":
