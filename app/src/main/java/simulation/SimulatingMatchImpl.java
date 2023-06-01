@@ -178,6 +178,7 @@ public class SimulatingMatchImpl implements SimulatingMatch {
 		return map;
 	}
 
+	/*
 	@Override
 	public Map<String, Integer> risultato2() throws FileNotFoundException, ClassNotFoundException, IOException {
 		int sq1 = (int) Math.round(Math.min(capacitaRealizzativa(SQUADRA1),
@@ -189,7 +190,7 @@ public class SimulatingMatchImpl implements SimulatingMatch {
 		map.put(this.s2.getNomeSquadra(), sq2 >= 0 ? sq2 : 0);
 		return map;
 	}
-	
+	*/
 	
 	
 	@Override
@@ -214,4 +215,41 @@ public class SimulatingMatchImpl implements SimulatingMatch {
 		}
 		return map;
 	}
+	
+	@Override
+	public Map<String, Integer> risultato2() throws FileNotFoundException, ClassNotFoundException, IOException {
+		int sq1 = (int) Math.round(Math.min(capacitaRealizzativa(SQUADRA1),
+				(prestazioneOffensiva(SQUADRA1) - prestazioneDifensiva(SQUADRA2))));
+		int sq2 = (int) Math.round(Math.min(capacitaRealizzativa(SQUADRA2),
+				(prestazioneOffensiva(SQUADRA2) - prestazioneDifensiva(SQUADRA1))));
+		Map<String, Integer> map = new HashMap<>();
+		map.put(this.s1.getNomeSquadra(), sq1 >= 0 ? sq1 : 0);
+		map.put(this.s2.getNomeSquadra(), sq2 >= 0 ? sq2 : 0);
+		return map;
+	}
+	
+	@Override
+	public Map<String, Integer> risultatoSuppl2() throws FileNotFoundException, ClassNotFoundException, IOException {
+		return risultatoSub2(MINUTES_REG);
+	}
+
+	@Override
+	public Map<String, Integer> risultatoSub2(int minuto)
+			throws FileNotFoundException, ClassNotFoundException, IOException {
+		Map<String, Integer> map = new HashMap<>();
+		if (minuto < MINUTES_REG) {
+			map.put(s1.getNomeSquadra(),
+					(int) (risultato2().get(s1.getNomeSquadra()) * (double) ((MINUTES_REG - minuto) / MINUTES_REG)));
+			map.put(s2.getNomeSquadra(), (int) (risultato2().get(s1.getNomeSquadra())
+					* (double) ((MINUTES_REG - minuto) / MINUTES_REG)));
+		} else {
+			map.put(s1.getNomeSquadra(),
+					(int) (risultato2().get(s1.getNomeSquadra()) * (double) ((MINUTES_SUPPL - MINUTES_REG - minuto) / MINUTES_REG)));
+			map.put(s2.getNomeSquadra(), (int) (risultato2().get(s1.getNomeSquadra())
+					* (double) ((MINUTES_SUPPL - MINUTES_REG - minuto) / MINUTES_REG)));
+		}
+		return map;
+	}
+	
+	
 }
