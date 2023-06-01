@@ -104,47 +104,27 @@ public class LogicsPartitaImpl implements LogicsPartita{
 
 	@Override
 	public Calciatore addScorer(Squadra s) {
-		double g1 = s.getTitolari().get(1).getGol();
-		double g2 = s.getTitolari().get(2).getGol();
-		double g3 = s.getTitolari().get(3).getGol();
-		double g4 = s.getTitolari().get(4).getGol();
-		double g5 = s.getTitolari().get(5).getGol();
-		double g6 = s.getTitolari().get(6).getGol();
-		double g7 = s.getTitolari().get(7).getGol();
-		double g8 = s.getTitolari().get(8).getGol();
-		double g9 = s.getTitolari().get(9).getGol();
-		double g10 = s.getTitolari().get(10).getGol();
 		double totGol = 0;
-		for (Calciatore calciatore : s.getTitolari()) {
-			double r = calciatore.getGol();
-		    totGol += r;
+		List<Calciatore> titolari = s.getTitolari();
+		List<Double> golList = new ArrayList<>();
+
+		for (Calciatore calciatore : titolari) {
+		    double gol = calciatore.getGol();
+		    golList.add(gol);
+		    totGol += gol;
 		}
+
 		double autogol = (totGol * OWNGOAL_RATE) / 100;
 		double random = new Random().nextDouble(totGol + autogol);
-		if (random <= g1) {
-		    return s.getTitolari().get(1);
-		} else if (random > g1 && random <= g1 + g2) {
-		    return s.getTitolari().get(2);
-		} else if (random > g1 + g2 && random <= g1 + g2 + g3) {
-		    return s.getTitolari().get(3);
-		} else if (random > g1 + g2 + g3 && random <= g1 + g2 + g3 + g4) {
-		    return s.getTitolari().get(4);
-		} else if (random > g1 + g2 + g3 + g4 && random <= g1 + g2 + g3 + g4 + g5) {
-		    return s.getTitolari().get(5);
-		} else if (random > g1 + g2 + g3 + g4 + g5 && random <= g1 + g2 + g3 + g4 + g5 + g6) {
-		    return s.getTitolari().get(6);
-		} else if (random > g1 + g2 + g3 + g4 + g5 + g6 && random <= g1 + g2 + g3 + g4 + g5 + g6 + g7) {
-		    return s.getTitolari().get(7);
-		} else if (random > g1 + g2 + g3 + g4 + g5 + g6 + g7 && random <= g1 + g2 + g3 + g4 + g5 + g6 + g7 + g8) {
-		    return s.getTitolari().get(8);
-		} else if (random > g1 + g2 + g3 + g4 + g5 + g6 + g7 + g8 && random <= g1 + g2 + g3 + g4 + g5 + g6 + g7 + g8 + g9) {
-		    return s.getTitolari().get(9);
-		} else if (random > g1 + g2 + g3 + g4 + g5 + g6 + g7 + g8 + g9 && random <= g1 + g2 + g3 + g4 + g5 + g6 + g7 + g8 + g9 + g10) {
-		    return s.getTitolari().get(10);
-		} else if (random > g1 + g2 + g3 + g4 + g5 + g6 + g7 + g8 + g9 + g10) {
-		    return getAutogol(s);
+
+		double cumulativeProbability = 0.0;
+		for (int i = 0; i < titolari.size(); i++) {
+		    cumulativeProbability += golList.get(i);
+		    if (random <= cumulativeProbability) {
+		        return titolari.get(i);
+		    }
 		}
-		return null;
+		return getAutogol(s);
 	}
 	
 	public Calciatore getAutogol(Squadra s) {

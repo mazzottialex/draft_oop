@@ -1,8 +1,9 @@
 package gui;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Frame;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
@@ -23,23 +24,22 @@ public class Rigori extends Base {
 	private static final long serialVersionUID = 5140476454072046580L;
 	private Squadra s1;
     private Squadra s2;
-    private JPanel results1;
-    private JPanel results2;
+    private JLabel results1;
+    private JLabel results2;
     private JLabel result;
     private int gol1;
     private int gol2;
     private int totTiri;
     private Squadra winner;
     private JButton chiudi;
-    private boolean fine;
     private LogicsRigori logics;
     private Iterator<Calciatore> tiratori1;
     private Iterator<Calciatore> tiratori2;
     private Iterator<String> ris1;
     private Iterator<String> ris2;
-    private JPanel contentPane=new JPanel();
-    private Partita partita;
-
+    private JPanel panel;
+    private String str1;
+    private String str2;
 
 	public Rigori(Squadra s1, Squadra s2, Partita partita) {
     	this.s1 = s1;
@@ -47,29 +47,67 @@ public class Rigori extends Base {
 		this.gol1 = 0;
 		this.gol2 = 0;
 		this.totTiri = 0;
-		this.fine = false;
 		logics = new LogicsRigoriImpl(s1, s2);
 		tiratori1 = logics.compute().get(0).keySet().iterator();
 		tiratori2 = logics.compute().get(1).keySet().iterator();
 		ris1 = logics.compute().get(0).values().iterator();
 		ris2 = logics.compute().get(1).values().iterator();
-		this.partita = partita;
+		str1 = "";
+		str2 = "";
 		
 		//gui di prova
-        setLayout(new BorderLayout());
-        setLocationRelativeTo(null);
+//        setLayout(new BorderLayout());
+//        setLocationRelativeTo(null);
+        
+        this.panel = new JPanel(new GridBagLayout());
+		GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
+        
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        panel.add(new JLabel(s1.getNomeSquadra(), SwingConstants.RIGHT), gbc);
+        
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.ipadx = 50;
+        panel.add(new JLabel("vs", SwingConstants.CENTER), gbc);
+        
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        panel.add(new JLabel(s2.getNomeSquadra(), SwingConstants.LEFT), gbc);
 
-        results1 = new JPanel();
-        results1.setLayout(new BoxLayout(results1, BoxLayout.Y_AXIS));
-        add(results1, BorderLayout.WEST);
+        results1 = new JLabel();
+//        results1.setLayout(new BoxLayout(results1, BoxLayout.Y_AXIS));
+//        add(results1, BorderLayout.WEST);
+        
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.ipady = 200;
+        panel.add(results1, gbc);
 
-        results2 = new JPanel();
-        results2.setLayout(new BoxLayout(results2, BoxLayout.Y_AXIS));
-        add(results2, BorderLayout.EAST);
+        results2 = new JLabel();
+//        results2.setLayout(new BoxLayout(results2, BoxLayout.Y_AXIS));
+//        add(results2, BorderLayout.EAST);
+                
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 2;
+        gbc.gridy = 2;
+        gbc.ipady = 200;
+        panel.add(results2, gbc);
 
         result = new JLabel();
-        result.setHorizontalAlignment(JLabel.CENTER);
-        add(result, BorderLayout.CENTER);
+//        result.setHorizontalAlignment(JLabel.CENTER);
+//        add(result, BorderLayout.CENTER);
+        
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.gridwidth = 3;
+//        gbc.ipady = 5;
+        panel.add(result, gbc);
         
         JButton inizia = new JButton("inizia");
         inizia.addActionListener(e -> {
@@ -78,8 +116,6 @@ public class Rigori extends Base {
         });
         chiudi = new JButton("chiudi");
         chiudi.addActionListener(e -> {
-        	// TODO
-        	fine = true;
         	dispose();
         	partita.setWinnerR(winner, gol1, gol2);
         });
@@ -92,8 +128,6 @@ public class Rigori extends Base {
         WindowListener windowListener = new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                //TODO
-            	fine = true;
             	dispose();
             	partita.setWinnerR(winner, gol1, gol2);
             }
@@ -101,10 +135,6 @@ public class Rigori extends Base {
 
         addWindowListener(windowListener);
     }
-	
-    public boolean isFine() {
-		return fine;
-	}
     
     private void start() {
         Timer timer = new Timer();
@@ -112,8 +142,7 @@ public class Rigori extends Base {
             @Override
             public void run() {
             	if (!tiratori1.hasNext() && !tiratori2.hasNext()) {
-            		//TODO dire chi ha vinto
-            		JOptionPane.showMessageDialog(null, "Tiri di rigore terminati. Squadra vincente: " + winner());
+            		JOptionPane.showMessageDialog(null, "Tiri di rigore terminati. Squadra vincente: " + getNomeWinner());
             		result.setText(gol1 + " - " + gol2);
             		chiudi.setEnabled(true);
             		timer.cancel();
@@ -121,11 +150,11 @@ public class Rigori extends Base {
 					if (totTiri % 2 == 0) {
 						if (tiratori1.hasNext() && ris1.hasNext()) {
 							String res = ris1.next();
-							JLabel resultLabel = new JLabel(tiratori1.next().getNominativo() + ": " + res);
-							resultLabel.setHorizontalAlignment(JLabel.LEFT);
-							results1.add(resultLabel);
-							results1.revalidate();
-							results1.repaint();
+							String resultLabel = tiratori1.next().getNominativo() + ": " + res;
+							str1 = str1 + resultLabel + "<br>";
+							results1.setText("<html>" + str1 + "</html>");
+//							results1.revalidate();
+//							results1.repaint();
 							if (res.equals("Gol")) {
                             	gol1++;
                             }
@@ -134,11 +163,11 @@ public class Rigori extends Base {
 					} else {
 						if (tiratori2.hasNext() && ris2.hasNext()) {
 							String res = ris2.next();
-							JLabel resultLabel = new JLabel(tiratori2.next().getNominativo() + ": " + res);
-							resultLabel.setHorizontalAlignment(JLabel.RIGHT);
-							results2.add(resultLabel);
-							results2.revalidate();
-							results2.repaint();
+							String resultLabel = tiratori2.next().getNominativo() + ": " + res;
+							str2 = str2 + resultLabel + "<br>";
+							results2.setText("<html>" + str2 + "</html>");
+//							results2.revalidate();
+//							results2.repaint();
 							if (res.equals("Gol")) {
                             	gol2++;
                             }
@@ -152,21 +181,21 @@ public class Rigori extends Base {
         timer.scheduleAtFixedRate(timerTask, 0, 1000);
     }
     
-    private String winner() {
-    	if (gol1 > gol2) {
-			winner = s1;
-			return s1.getNomeSquadra();
-		} else {
-			winner = s2;
-			return s2.getNomeSquadra();
-		}
+    private String getNomeWinner() {
+    	return getWinner().getNomeSquadra();
 	}
 
 	public Squadra getWinner() {
+		if (gol1 > gol2) {
+			winner = s1;
+		} else {
+			winner = s2;
+		}
     	return winner;
     }
     
     public void createAndShowGUI() {
+    	add(panel);
     	setVisible(true);
     }
 }

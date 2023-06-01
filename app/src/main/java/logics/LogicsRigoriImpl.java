@@ -45,7 +45,8 @@ public class LogicsRigoriImpl implements LogicsRigori {
 	@Override
 	public ArrayList<Map<Calciatore, String>> compute() {
 		while (continua) {
-			if ((((tiri1 + tiri2) >= totTiri) && tiri1 == tiri2 && gol1 != gol2) || ((tiri1 + tiri2) < totTiri && ((((totTiri / 2) - tiri1) + gol1) < gol2 || (((totTiri / 2) - tiri2) + gol2) < gol1))) {
+			if ((((tiri1 + tiri2) >= totTiri) && tiri1 == tiri2 && gol1 != gol2)
+					|| ((tiri1 + tiri2) < totTiri && ((((totTiri / 2) - tiri1) + gol1) < gol2 || (((totTiri / 2) - tiri2) + gol2) < gol1))) {
                 continua = false;
 			} else if ((tiri1 + tiri2) < totTiri || tiri1 != tiri2 || (tiri1 == tiri2 && gol1 == gol2)) {
                 if ((tiri1 + tiri2) % 2 == 0) {
@@ -113,6 +114,7 @@ public class LogicsRigoriImpl implements LogicsRigori {
 		return gol2;
 	}
 	
+	@Override
 	public Squadra getWinner() {
 		if (gol1 > gol2) {
 			return s1;
