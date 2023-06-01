@@ -90,7 +90,7 @@ public class TorneoV2 extends Base {
 							@Override
 						    public void windowClosed(WindowEvent e) {
 								System.out.print(liSquadreVinc);
-								liSquadreVinc.add(partita.getWinner());
+								liSquadreVinc.add(0, partita.getWinner());
 								tabellone.addLi(liSquadreVinc);
 								liSquadreVinc=new ArrayList<>();
 								
@@ -143,6 +143,8 @@ public class TorneoV2 extends Base {
 								});
 								pane.revalidate();
 								pane.repaint();
+								contentPane.revalidate();
+								contentPane.repaint();
 							};
 							
 						});
@@ -150,7 +152,7 @@ public class TorneoV2 extends Base {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-					for (int i=2; i< turnoDaSimul.size()-1;i=i+2) {
+					for (int i=0; i< turnoDaSimul.size()-1;i=i+2) {
 						if(!(turnoDaSimul.get(i) instanceof SquadraUtente))
 						{
 							try {
