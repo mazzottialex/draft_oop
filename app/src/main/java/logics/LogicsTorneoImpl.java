@@ -104,9 +104,22 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 		List<SquadraAvversaria> newList = new ArrayList<>();
 		final int numSquadre = this.getNumSquadre();
 		Map<String, Integer> map = new HashMap<>(); //map per il risultato
-		List<String> list = new ArrayList<>(); //lista per i nomi delle squadre che si sfidano 
+		List<String> list = new ArrayList<>(); //lista per i nomi delle squadre che si sfidano
 		String teamWin = new String(); //nome della squadra vincente
 		String teamLose = new String(); //nome della squadra perdente
+		
+		/* da cambiare */ 
+		Map<Squadra, Integer> map2 = new HashMap<>();
+		List<Squadra> list2 = new ArrayList<>();
+		try {
+			Squadra teamWin2 = new SquadraAvversaria(0, "aaa", Modulo.M343, li);
+			Squadra teamLose2 = new SquadraAvversaria(0, "aaa", Modulo.M343, li);
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		switch (numSquadre) {
 		case 16: 
 			
@@ -115,13 +128,15 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 				try {
 					SimulatingMatchImpl s = new SimulatingMatchImpl(this.getListAvversari().get(i),this.getListAvversari().get(i+1));
 					map = s.risultato2();
+					// map2 = s.risultato();
 					System.out.println(map);
-					list.addAll(map.keySet());
+					list.addAll(map.keySet());		
 					if (map.get(list.get(0)) == map.get(list.get(1))) {
 						map = s.risultatoSuppl2();
 						list.clear();
 					}			
 					list.addAll(map.keySet());
+					list2.addAll(map2.keySet());
 					if (map.get(list.get(0)) > map.get(list.get(1))) {
 						teamWin = list.get(0);
 					} else if (map.get(list.get(0)) < map.get(list.get(1))){
