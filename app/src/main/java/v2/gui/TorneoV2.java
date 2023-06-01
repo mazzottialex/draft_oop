@@ -325,7 +325,7 @@ public class TorneoV2 extends Base {
 		liPanelFase.forEach(lis->{
 			
 			gbc.gridy=0;
-			contentPane.add(lis, gbc);
+			contentPane.add(panelFase, gbc);
 		});
 		
 		

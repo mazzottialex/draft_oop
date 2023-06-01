@@ -18,6 +18,8 @@ import data.Calciatore;
 import data.Modulo;
 import logics.LogicsCreaSquadraImpl;
 import logics.LogicsCreasquadra;
+import manageData.LogicsFile;
+import manageData.LogicsFileImpl;
 import v2.gui.*;
 
 public class CreaSquadra extends Base{
@@ -77,8 +79,11 @@ public class CreaSquadra extends Base{
 			public void actionPerformed(ActionEvent e) {
 				
 				if (log.teamComplete()) {
-					
+					LogicsFile logFile=new LogicsFileImpl();
+					logFile.SaveStorico(log.getSquadra());
 					changeJPanel(new TorneoV2(log.getSquadra(), li));
+					
+					
 					/*
 					try {
 						changeJPanel(new Torneo(log.getSquadra(), li));
