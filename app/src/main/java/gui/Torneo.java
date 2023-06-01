@@ -90,10 +90,13 @@ public class Torneo extends Base{
 						p.addWindowListener(new WindowAdapter() {
 							public void windowClosed(WindowEvent e) {
 								if (p.getWinner() != logTor.getMiaSquadra()) {
+									//p.createAndShowGUI();
+									System.out.println("ciao");
 									logTor.setEliminated(true);
 									logTor.setSquadraAvv(logTor.getListAvversari().get(0));
 									eliminatedThisTurn = true;
 								}
+								System.out.println("ciao 2 ");
 								risSquadraUte = p.getGolS1();
 								risSquadraAvv = p.getGolS2();	
 								
@@ -110,7 +113,7 @@ public class Torneo extends Base{
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}
-								
+								System.out.println("ciao 3 ");
 							}
 						});
 					} catch (FileNotFoundException e1) {

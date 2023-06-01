@@ -61,4 +61,6 @@ public interface LogicsCreasquadra {
 	public int getRating();
 	
 	public void setRating(int rating);
+	
+	public List<Calciatore> getCalcUsciti();
 }
