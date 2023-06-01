@@ -41,7 +41,7 @@ public class App {
 					e.printStackTrace();
 				}
 			}
-		});
+		});*//*
     	ManageData md = new ManageDataImpl("2022-2023");
 		md.LoadData();
 		List<Calciatore> li = md.getLi();
@@ -65,7 +65,7 @@ public class App {
                 try {
 					Partita p = new Partita(nap, laz);
 					Rigori r = new Rigori(nap, laz, null);
-					r.createAndShowGUI();
+					p.createAndShowGUI();
 //					p.addWindowListener(new WindowAdapter() {
 //						@Override
 //					    public void windowClosed(WindowEvent e) {

@@ -298,12 +298,10 @@ public class Partita extends Base {
                 
                 //Fine tempi reg
                 if (progressBar.getValue() == 90) {
-
-//                	jlScoreSq1.setText("2");
-//                	jlScoreSq2.setText("2");
+                	jlScoreSq1.setText("2");
+                	jlScoreSq2.setText("2");
 					if (score1 != score2) {
 						winner = score1 > score2 ? s1 : s2;
-
 						JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + winner.getNomeSquadra());
 						startStop.setEnabled(false);
 						jbSubs.setEnabled(false);
@@ -318,7 +316,8 @@ public class Partita extends Base {
                 
                 //Fine tempi suppl
                 if (progressBar.getValue() == 120) {
-
+                	jlScoreSq1.setText("2");
+                	jlScoreSq2.setText("2");
 					jbSubs.setEnabled(false);
 					if (score1 != score2) {
 						winner = score1 > score2 ? s1 : s2;
@@ -327,6 +326,7 @@ public class Partita extends Base {
 						next.setEnabled(true);
 					} else {
 						JOptionPane.showMessageDialog(null, "Fine tempi supplementari. Si va ai calci di rigore");
+						startStop.setEnabled(false);
 						rigori = true;
 						guiRigori = new Rigori(s1, s2, partita);
 						SwingUtilities.invokeLater(() -> {
