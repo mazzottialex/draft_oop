@@ -47,10 +47,10 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 		this.nomeSquadra = nomeSquadra;
 		this.stemma = stemma;
 		riserve = new ArrayList<>();
-		riserve.addAll(this.getRandom("P", 2));
-		riserve.addAll(this.getRandom("D", 3));
-		riserve.addAll(this.getRandom("C", 3));
-		riserve.addAll(this.getRandom("A", 3));
+		riserve.addAll(this.getRandom("P", 1));
+		riserve.addAll(this.getRandom("D", 2));
+		riserve.addAll(this.getRandom("C", 2));
+		riserve.addAll(this.getRandom("A", 2));
 		
 	}
 	
