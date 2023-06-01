@@ -22,6 +22,7 @@ import data.SquadraUtente;
 import data.TorneoColl;
 import gui.Base;
 import gui.Partita;
+import gui.Start;
 import logics.CreaSquadreAvversarie;
 import logics.CreaSquadreAvversarieImpl;
 import logics.LogicsRigori;
@@ -70,19 +71,38 @@ public class TorneoV2 extends Base {
 		liPanelFase.add(panelFase);
 		//////////////////
 		JButton btnSimula=new JButton("Simula");
+		JButton btnHome=new JButton("Torna alla Home");
+		btnHome.setVisible(false);
+		
+		btnHome.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				changeJPanel(new Start());
+				
+			}
+		});
 		
 		btnSimula.addActionListener(new ActionListener() {
 			List<Squadra> liSquadreVinc=new ArrayList<>();
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//SVUOLTO LIPANELFASE
 				liPanelFase=new ArrayList<>();
 				turnoDaSimul=tabellone.getLastLi();
+				if(turnoDaSimul.size()==1) {
+					btnSimula.setVisible(false);
+					btnHome.setVisible(true);
+
+				}
+				//SVUOLTO LIPANELFASE
+				
 				System.out.print("turno:"+turnoDaSimul);
 				//SE NON ABBIAMO UN VINCITORE
 				if(turnoDaSimul.size()>1) {
 					//System.out.println(turnoDaSimul);
 					if(turnoDaSimul.get(0) instanceof SquadraUtente) {
+						JButton btn=(JButton) e.getSource();
+						btn.setEnabled(false);
 						Partita partita;
 						try {
 							partita = new Partita(turnoDaSimul.get(0), turnoDaSimul.get(1));
@@ -91,12 +111,12 @@ public class TorneoV2 extends Base {
 							partita.addWindowListener(new WindowAdapter() {
 								@Override
 							    public void windowClosed(WindowEvent e) {
+									btn.setEnabled(true);
 									
 									liSquadreVinc.add(0, partita.getWinner());
 									tabellone.addLi(liSquadreVinc);
 									System.out.print("sv:"+liSquadreVinc);
 									liSquadreVinc=new ArrayList<>();
-									
 									
 									liRis.add(0,new Pair<Squadra, Integer>(turnoDaSimul.get(0), partita.getGolS1()));
 									liRis.add(1,new Pair<Squadra, Integer>(turnoDaSimul.get(1), partita.getGolS2()));
@@ -104,7 +124,7 @@ public class TorneoV2 extends Base {
 									liRis=new ArrayList<>();
 									JPanel panelFase=new JPanel();
 									
-									contentPane.remove(count+1);
+									contentPane.remove(count+2);
 									
 									for(int i=0;i<tabellone.getLiLastRisul().size();i++) {
 										JPanel matchPanel=new JPanel();
@@ -241,7 +261,7 @@ public class TorneoV2 extends Base {
 						liRis=new ArrayList<>();
 						JPanel panelFase=new JPanel();
 									
-						contentPane.remove(count+1);
+						contentPane.remove(count+2);
 									
 						for(int i=0;i<tabellone.getLiLastRisul().size();i++) {
 							JPanel matchPanel=new JPanel();
@@ -299,10 +319,13 @@ public class TorneoV2 extends Base {
 		gbc.gridy=5;
 		contentPane.add(btnSimula, gbc);
 		
+		gbc.gridy=5;
+		contentPane.add(btnHome, gbc);
+		
 		liPanelFase.forEach(lis->{
 			
 			gbc.gridy=0;
-			contentPane.add(lis, gbc);
+			contentPane.add(panelFase, gbc);
 		});
 		
 		

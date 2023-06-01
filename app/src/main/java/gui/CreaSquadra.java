@@ -18,6 +18,8 @@ import data.Calciatore;
 import data.Modulo;
 import logics.LogicsCreaSquadraImpl;
 import logics.LogicsCreasquadra;
+import manageData.LogicsFile;
+import manageData.LogicsFileImpl;
 import v2.gui.*;
 
 public class CreaSquadra extends Base{
@@ -76,10 +78,20 @@ public class CreaSquadra extends Base{
 		buttonIniziaTorneo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				
 				if (log.teamComplete()) {
-					
+//<<<<<<< HEAD
+					/*
 					//changeJPanel(new TorneoV2(log.getSquadra(), li));
 					
+=======
+					LogicsFile logFile=new LogicsFileImpl();
+					logFile.SaveStorico(log.getSquadra());
+					changeJPanel(new TorneoV2(log.getSquadra(), li));
+					*/
+					
+					
+//>>>>>>> dced3feeaf1c74314ff36292daa94051fe6c6f36
 					try {
 						changeJPanel(new Torneo(log.getSquadra(), li));
 					} catch (FileNotFoundException e1) {
