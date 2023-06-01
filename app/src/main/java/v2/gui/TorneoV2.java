@@ -22,6 +22,7 @@ import data.SquadraUtente;
 import data.TorneoColl;
 import gui.Base;
 import gui.Partita;
+import gui.Start;
 import logics.CreaSquadreAvversarie;
 import logics.CreaSquadreAvversarieImpl;
 import logics.LogicsRigori;
@@ -72,6 +73,16 @@ public class TorneoV2 extends Base {
 		JButton btnSimula=new JButton("Simula");
 		JButton btnHome=new JButton("Torna alla Home");
 		btnHome.setVisible(false);
+		
+		btnHome.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				changeJPanel(new Start());
+				
+			}
+		});
+		
 		btnSimula.addActionListener(new ActionListener() {
 			List<Squadra> liSquadreVinc=new ArrayList<>();
 			@Override
