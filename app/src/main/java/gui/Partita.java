@@ -217,8 +217,8 @@ public class Partita extends Base {
 					addCambio();
 					ris = true;
 					if(cambi == 3) {
-						JButton button=(JButton) e.getSource();
-						JPanel panel=(JPanel) button.getParent();
+						JButton button = (JButton) e.getSource();
+						JPanel panel = (JPanel) button.getParent();
 						button.setEnabled(false);
 						panel.revalidate();
 						panel.repaint();
@@ -233,16 +233,6 @@ public class Partita extends Base {
 				dispose();
 			}
 		});
-
-        /*
-        next.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				WindowEvent close = new WindowEvent(parent, WindowEvent.WINDOW_CLOSING);
-				dispatchEvent(close);
-			}
-        });
-        */
     }
     
     private void sost() {
@@ -382,7 +372,7 @@ public class Partita extends Base {
         	tab1.add(logics.addScorer(s1));
         	Calciatore calciatore = tab1.get(tab1.size() - 1);
         	String autogol = "";
-        	if (s2.getTitolari().contains(calciatore)) {
+        	if (!s1.getTitolari().contains(calciatore)) {
     			autogol = " (AG)";
     		}
         	string1 = string1 + Integer.toString(progressBar.getValue()) + "' Gol: " + calciatore.getNominativo() + autogol + "<br>";
@@ -394,7 +384,7 @@ public class Partita extends Base {
         	tab2.add(logics.addScorer(s2));
         	Calciatore calciatore = tab2.get(tab2.size() - 1);
         	String autogol = "";
-        	if (s1.getTitolari().contains(calciatore)) {
+        	if (!s2.getTitolari().contains(calciatore)) {
     			autogol = " (AG)";
     		}
         	string2 = string2 + Integer.toString(progressBar.getValue()) + "' Gol: " + calciatore.getNominativo() + autogol + "<br>";
