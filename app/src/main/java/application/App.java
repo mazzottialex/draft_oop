@@ -23,7 +23,7 @@ import manageData.ManageData;
 import manageData.ManageDataImpl;
 import rating.CalcoloRating;
 import rating.CalcoloRatingImpl;
-import v2.gui.Torneo;
+import v2.gui.TorneoV2;
 
 public class App {
     public String getGreeting() {
@@ -31,7 +31,7 @@ public class App {
     }
 
     public static void main(String[] args) throws FileNotFoundException, ClassNotFoundException, IOException {
-    /*	EventQueue.invokeLater(new Runnable() {
+    	EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					Start frame = new Start();
@@ -40,7 +40,7 @@ public class App {
 					e.printStackTrace();
 				}
 			}
-		});*/
+		});/*
     	ManageData md = new ManageDataImpl("2022-2023");
 		md.LoadData();
 		List<Calciatore> li = md.getLi();

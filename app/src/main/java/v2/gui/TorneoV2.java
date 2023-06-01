@@ -29,17 +29,17 @@ import logics.LogicsRigoriImpl;
 import simulation.SimulatingMatch;
 import simulation.SimulatingMatchImpl;
 
-public class Torneo extends Base {
-	List<Squadra> turnoDaSimul=new ArrayList<>();
-	List<JPanel> liPanelFase=new ArrayList<>();
-	List<Pair<Squadra, Integer>> liRis=new ArrayList<>();
+public class TorneoV2 extends Base {
+	private List<Squadra> turnoDaSimul=new ArrayList<>();
+	private List<JPanel> liPanelFase=new ArrayList<>();
+	private List<Pair<Squadra, Integer>> liRis=new ArrayList<>();
 
-	private Torneo pane;
+	private TorneoV2 pane;
 	final int turni=3;
 	final int nSquadre=(int) Math.pow(2, turni);
-	int count=0;
+	private int count=0;
 	private TorneoColl tabellone;
-	public Torneo(Squadra squadra, List<Calciatore> li) {
+	public TorneoV2(Squadra squadra, List<Calciatore> li) {
 		pane=this;
 		GridBagConstraints gbc=new GridBagConstraints();
 		GridBagLayout layout=new GridBagLayout();
@@ -123,6 +123,7 @@ public class Torneo extends Base {
 								panelFase=new JPanel();
 								liPanelFase=new ArrayList<>();
 								
+								System.out.println(tabellone.getLastLi().size());
 								for(int i=0;i<tabellone.getLastLi().size();i++) {
 									JPanel matchPanel=new JPanel();
 									matchPanel.add(new JLabel(tabellone.getLastLi().get(i).getNomeSquadra()));
