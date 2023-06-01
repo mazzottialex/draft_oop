@@ -27,12 +27,13 @@ import simulation.SimulatingMatchImpl;
 
 public class Torneo extends Base {
 
+	private Torneo pane;
 	final int turni=3;
 	final int nSquadre=(int) Math.pow(2, turni);
 	int count=0;
 	private TorneoColl tabellone;
 	public Torneo(Squadra squadra, List<Calciatore> li) {
-		
+		pane=this;
 		GridBagConstraints gbc=new GridBagConstraints();
 		GridBagLayout layout=new GridBagLayout();
 		contentPane.setLayout(layout);
@@ -78,10 +79,9 @@ public class Torneo extends Base {
 					matchPanel.add(new JLabel(liSquadre.get(i).getNomeSquadra()));
 					liPanelFase.get(count).add(matchPanel);
 				};
-				JButton btn= (JButton) e.getSource();
-				JPanel panel=(JPanel) btn.getParent();
-				panel.revalidate();
-				panel.repaint();
+				
+				pane.revalidate();
+				pane.repaint();
 				
 			}
 		});
@@ -102,7 +102,23 @@ public class Torneo extends Base {
 							
 							tabellone.addSemi(partita.getWinner());
 							System.out.print(partita.getWinner().toString());
-							liSquadre=tabellone.getSemi();
+							count=0;
+							tabellone.getTabellone().forEach(li-> {
+								count++;
+								for(int i=0;i<liSquadre.size();i++) {
+									
+									JPanel matchPanel=new JPanel();
+									matchPanel.add(new JLabel(liSquadre.get(i).getNomeSquadra()));
+									matchPanel.add(new JLabel("-"));
+									i++;
+									matchPanel.add(new JLabel(liSquadre.get(i).getNomeSquadra()));
+									liPanelFase.get(count).add(matchPanel);
+									
+								};
+							});
+			
+							pane.revalidate();
+							pane.repaint();
 						}
 					});
 					
