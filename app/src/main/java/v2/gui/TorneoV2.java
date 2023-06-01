@@ -78,120 +78,222 @@ public class TorneoV2 extends Base {
 				//SVUOLTO LIPANELFASE
 				liPanelFase=new ArrayList<>();
 				turnoDaSimul=tabellone.getLastLi();
+				System.out.print("turno:"+turnoDaSimul);
 				//SE NON ABBIAMO UN VINCITORE
 				if(turnoDaSimul.size()>1) {
-					System.out.println(turnoDaSimul);
-					Partita partita;
-					try {
-						partita = new Partita(turnoDaSimul.get(0), turnoDaSimul.get(1));
-					
-						partita.createAndShowGUI();
-						partita.addWindowListener(new WindowAdapter() {
-							@Override
-						    public void windowClosed(WindowEvent e) {
-								System.out.print(liSquadreVinc);
-								liSquadreVinc.add(0, partita.getWinner());
-								tabellone.addLi(liSquadreVinc);
-								liSquadreVinc=new ArrayList<>();
-								
-								liRis.add(new Pair<Squadra, Integer>(turnoDaSimul.get(0), partita.getGolS1()));
-								liRis.add(new Pair<Squadra, Integer>(turnoDaSimul.get(1), partita.getGolS2()));
-								tabellone.setLiLastRisul(liRis);
-								liRis=new ArrayList<>();
-								JPanel panelFase=new JPanel();
-								
-								contentPane.remove(count+1);
-								
-								for(int i=0;i<tabellone.getLiLastRisul().size();i++) {
-									JPanel matchPanel=new JPanel();
-									matchPanel.add(new JLabel(tabellone.getLiLastRisul().get(i).getX().getNomeSquadra()+" "+tabellone.getLiLastRisul().get(i).getY()));
-									//CHECK se non vincitore
-									if(tabellone.getLastLi().size()>1) {
-										matchPanel.add(new JLabel("-"));
-										i++;
+					//System.out.println(turnoDaSimul);
+					if(turnoDaSimul.get(0) instanceof SquadraUtente) {
+						Partita partita;
+						try {
+							partita = new Partita(turnoDaSimul.get(0), turnoDaSimul.get(1));
+						
+							partita.createAndShowGUI();
+							partita.addWindowListener(new WindowAdapter() {
+								@Override
+							    public void windowClosed(WindowEvent e) {
+									
+									liSquadreVinc.add(0, partita.getWinner());
+									tabellone.addLi(liSquadreVinc);
+									System.out.print("sv:"+liSquadreVinc);
+									liSquadreVinc=new ArrayList<>();
+									
+									
+									liRis.add(0,new Pair<Squadra, Integer>(turnoDaSimul.get(0), partita.getGolS1()));
+									liRis.add(1,new Pair<Squadra, Integer>(turnoDaSimul.get(1), partita.getGolS2()));
+									tabellone.setLiLastRisul(liRis);
+									liRis=new ArrayList<>();
+									JPanel panelFase=new JPanel();
+									
+									contentPane.remove(count+1);
+									
+									for(int i=0;i<tabellone.getLiLastRisul().size();i++) {
+										JPanel matchPanel=new JPanel();
 										matchPanel.add(new JLabel(tabellone.getLiLastRisul().get(i).getX().getNomeSquadra()+" "+tabellone.getLiLastRisul().get(i).getY()));
-									}panelFase.add(matchPanel);
-								}
-								liPanelFase.add(panelFase);
-								
-								
-								liPanelFase.forEach(lis->{
-									gbc.gridy=turni-count;
-									contentPane.add(lis, gbc);
-								});
-								
-								panelFase=new JPanel();
-								liPanelFase=new ArrayList<>();
-								
-								System.out.println(tabellone.getLastLi().size());
-								for(int i=0;i<tabellone.getLastLi().size();i++) {
-									JPanel matchPanel=new JPanel();
-									matchPanel.add(new JLabel(tabellone.getLastLi().get(i).getNomeSquadra()));
-									//CHECK se non vincitore
-									if(tabellone.getLastLi().size()>1) {
-										matchPanel.add(new JLabel("-"));
-										i++;
-										matchPanel.add(new JLabel(tabellone.getLastLi().get(i).getNomeSquadra()));
-									}panelFase.add(matchPanel);
-								}
-								liPanelFase.add(panelFase);
-								
-								liPanelFase.forEach(lis->{
-									count++;
-									gbc.gridy=turni-count;
-									contentPane.add(lis, gbc);
-								});
-								pane.revalidate();
-								pane.repaint();
-								contentPane.revalidate();
-								contentPane.repaint();
-							};
-							
-						});
-					} catch (ClassNotFoundException | IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					for (int i=0; i< turnoDaSimul.size()-1;i=i+2) {
-						if(!(turnoDaSimul.get(i) instanceof SquadraUtente))
-						{
-							try {
-								SimulatingMatch sim=new SimulatingMatchImpl(turnoDaSimul.get(i), turnoDaSimul.get(i+1));
-								
-								//tabellone.addSemi(sim.risultato().keySet().iterator().next());
-								Iterator<Squadra> it=sim.risultato().keySet().iterator();
-								Squadra s1=it.next();
-								Squadra s2=it.next();
-								int score1=sim.risultato().get(s1);
-								int score2=sim.risultato().get(s2);
-								if(score1==score2)
-								{
-									score1=sim.risultatoSuppl().get(s1);
-									score2=sim.risultatoSuppl().get(s2);
-									//RIGORI
-									if(score1==score2) {
-										LogicsRigori rigori=new LogicsRigoriImpl(s1, s2);
-										liSquadreVinc.add(rigori.getWinner());
+										//CHECK se non vincitore
+										if(tabellone.getLastLi().size()>1) {
+											matchPanel.add(new JLabel("-"));
+											i++;
+											matchPanel.add(new JLabel(tabellone.getLiLastRisul().get(i).getX().getNomeSquadra()+" "+tabellone.getLiLastRisul().get(i).getY()));
+										}panelFase.add(matchPanel);
 									}
-									else {
+									liPanelFase.add(panelFase);
+									
+									
+									liPanelFase.forEach(lis->{
+										gbc.gridy=turni-count;
+										contentPane.add(lis, gbc);
+									});
+									
+									panelFase=new JPanel();
+									liPanelFase=new ArrayList<>();
+									
+									System.out.println(tabellone.getLastLi().size());
+									for(int i=0;i<tabellone.getLastLi().size();i++) {
+										JPanel matchPanel=new JPanel();
+										matchPanel.add(new JLabel(tabellone.getLastLi().get(i).getNomeSquadra()));
+										//CHECK se non vincitore
+										if(tabellone.getLastLi().size()>1) {
+											matchPanel.add(new JLabel("-"));
+											i++;
+											matchPanel.add(new JLabel(tabellone.getLastLi().get(i).getNomeSquadra()));
+										}panelFase.add(matchPanel);
+									}
+									liPanelFase.add(panelFase);
+									
+									liPanelFase.forEach(lis->{
+										count++;
+										gbc.gridy=turni-count;
+										contentPane.add(lis, gbc);
+									});
+									pane.revalidate();
+									pane.repaint();
+									contentPane.revalidate();
+									contentPane.repaint();
+								};
+								
+							});
+						} catch (ClassNotFoundException | IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						
+						for (int i=0; i< turnoDaSimul.size()-1;i=i+2) {
+							if(!(turnoDaSimul.get(i) instanceof SquadraUtente))
+							{
+								try {
+									SimulatingMatch sim=new SimulatingMatchImpl(turnoDaSimul.get(i), turnoDaSimul.get(i+1));
+									
+									//tabellone.addSemi(sim.risultato().keySet().iterator().next());
+									Iterator<Squadra> it=sim.risultato().keySet().iterator();
+									Squadra s1=it.next();
+									Squadra s2=it.next();
+									int score1=sim.risultato().get(s1);
+									int score2=sim.risultato().get(s2);
+									if(score1==score2)
+									{
+										score1=sim.risultatoSuppl().get(s1);
+										score2=sim.risultatoSuppl().get(s2);
+										//RIGORI
+										if(score1==score2) {
+											LogicsRigori rigori=new LogicsRigoriImpl(s1, s2);
+											liSquadreVinc.add(rigori.getWinner());
+										}
+										else {
+											liSquadreVinc.add(score1>score2 ? s1 : s2);
+										}
+									}
+									else{
 										liSquadreVinc.add(score1>score2 ? s1 : s2);
 									}
+									liRis.add(new Pair<Squadra, Integer>(s1, score1));
+									liRis.add(new Pair<Squadra, Integer>(s2, score2));
+								} catch (ClassNotFoundException | IOException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
 								}
-								else{
-									liSquadreVinc.add(score1>score2 ? s1 : s2);
-								}
-								liRis.add(new Pair<Squadra, Integer>(s1, score1));
-								liRis.add(new Pair<Squadra, Integer>(s2, score2));
-							} catch (ClassNotFoundException | IOException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
+								
 							}
-							
 						}
+					}else {
+						//Simula le partite
+						for (int i=0; i< turnoDaSimul.size()-1;i=i+2) {
+							if(!(turnoDaSimul.get(i) instanceof SquadraUtente))
+							{
+								try {
+									SimulatingMatch sim=new SimulatingMatchImpl(turnoDaSimul.get(i), turnoDaSimul.get(i+1));
+									
+									//tabellone.addSemi(sim.risultato().keySet().iterator().next());
+									Iterator<Squadra> it=sim.risultato().keySet().iterator();
+									Squadra s1=it.next();
+									Squadra s2=it.next();
+									int score1=sim.risultato().get(s1);
+									int score2=sim.risultato().get(s2);
+									if(score1==score2)
+									{
+										score1=sim.risultatoSuppl().get(s1);
+										score2=sim.risultatoSuppl().get(s2);
+										//RIGORI
+										if(score1==score2) {
+											LogicsRigori rigori=new LogicsRigoriImpl(s1, s2);
+											liSquadreVinc.add(rigori.getWinner());
+										}
+										else {
+											liSquadreVinc.add(score1>score2 ? s1 : s2);
+										}
+									}
+									else{
+										liSquadreVinc.add(score1>score2 ? s1 : s2);
+									}
+									liRis.add(new Pair<Squadra, Integer>(s1, score1));
+									liRis.add(new Pair<Squadra, Integer>(s2, score2));
+								} catch (ClassNotFoundException | IOException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+								
+							}
+						}
+						tabellone.addLi(liSquadreVinc);
+						liSquadreVinc=new ArrayList<>();
+						
+						
+						tabellone.setLiLastRisul(liRis);
+						liRis=new ArrayList<>();
+						JPanel panelFase=new JPanel();
+									
+						contentPane.remove(count+1);
+									
+						for(int i=0;i<tabellone.getLiLastRisul().size();i++) {
+							JPanel matchPanel=new JPanel();
+							matchPanel.add(new JLabel(tabellone.getLiLastRisul().get(i).getX().getNomeSquadra()+" "+tabellone.getLiLastRisul().get(i).getY()));
+							//CHECK se non vincitore
+							if(tabellone.getLastLi().size()>1) {
+								matchPanel.add(new JLabel("-"));
+								i++;
+								matchPanel.add(new JLabel(tabellone.getLiLastRisul().get(i).getX().getNomeSquadra()+" "+tabellone.getLiLastRisul().get(i).getY()));
+							}panelFase.add(matchPanel);
+						}
+						liPanelFase.add(panelFase);
+									
+									
+						liPanelFase.forEach(lis->{
+							gbc.gridy=turni-count;
+							contentPane.add(lis, gbc);
+						});
+									
+						panelFase=new JPanel();
+						liPanelFase=new ArrayList<>();
+									
+						System.out.println(tabellone.getLastLi().size());
+						for(int i=0;i<tabellone.getLastLi().size();i++) {
+							JPanel matchPanel=new JPanel();
+							matchPanel.add(new JLabel(tabellone.getLastLi().get(i).getNomeSquadra()));
+							//CHECK se non vincitore
+							if(tabellone.getLastLi().size()>1) {
+								matchPanel.add(new JLabel("-"));
+								i++;
+								matchPanel.add(new JLabel(tabellone.getLastLi().get(i).getNomeSquadra()));
+							}panelFase.add(matchPanel);
+						}
+						liPanelFase.add(panelFase);
+									
+						liPanelFase.forEach(lis->{
+							count++;
+							gbc.gridy=turni-count;
+							contentPane.add(lis, gbc);
+						});
+						pane.revalidate();
+						pane.repaint();
+						contentPane.revalidate();
+						contentPane.repaint();
 					}
+								
 				}
 			}
+						
+		
 		});
+	
 		gbc.insets=new Insets(5, 5, 5, 5);
 		
 		gbc.gridy=5;
