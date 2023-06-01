@@ -7,29 +7,31 @@ import java.util.Set;
 
 public class TorneoColl {
 	private List<List<Squadra>> tabellone;
-	private List<Squadra> quarti;
-	private List<Squadra> semifinali=new ArrayList<>();
-	private List<Squadra> finale=new ArrayList<>();
-	//private List<Squadra> li;
-	
+	private List<Squadra> lastLi;
 	public TorneoColl(List<Squadra> li) {
 		tabellone=new ArrayList<>();
-		this.quarti=li;
-		tabellone.add(quarti);
+		tabellone.add(li);
+		lastLi=li;
 	}
 	
-	public void addSemi(Squadra s) {
-		semifinali.add(s);
-		tabellone.add(semifinali);
+	
+
+	public void addLi(List<Squadra> li) {
+		tabellone.add(li);
+		lastLi=li;
 	}
 	
-	public void addFinale(Squadra s) {
-		finale.add(s);
-		tabellone.add(finale);
+	public List<Squadra> getLastLi(){
+		return lastLi;
 	}
 
 	public List<List<Squadra>> getTabellone() {
 		return tabellone;
+	}
+	
+	@Override
+	public String toString() {
+		return "TorneoColl [tabellone=" + tabellone + "]";
 	}
 
 }
