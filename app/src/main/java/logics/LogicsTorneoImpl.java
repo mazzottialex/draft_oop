@@ -114,7 +114,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 			for (int i = 1; i < numSquadre - 1; i = i + 2) {
 				try {
 					SimulatingMatchImpl s = new SimulatingMatchImpl(this.getListAvversari().get(i),this.getListAvversari().get(i+1));
-					map = s.risultato();
+					map = s.risultato2();
 					list.addAll(map.keySet());
 					if (map.get(list.get(0)) == map.get(list.get(1))) {
 						map = s.risultatoSuppl();
@@ -168,7 +168,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 			if (this.getEliminated()) {
 				try {
 					SimulatingMatchImpl s = new SimulatingMatchImpl(this.squadraAvv,this.getListAvversari().get(0));
-					this.risMatch = s.risultato();
+					this.risMatch = s.risultato2();
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -184,7 +184,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 			for (int i = 1; i < numSquadre - 1; i = i + 2) {
 				try {
 					SimulatingMatchImpl s = new SimulatingMatchImpl(this.getListAvversari().get(i),this.getListAvversari().get(i+1));
-					map = s.risultato();
+					map = s.risultato2();
 					list.addAll(map.keySet());
 					if (map.get(list.get(0)) == map.get(list.get(1))) {
 						map = s.risultatoSuppl();
@@ -253,7 +253,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 			
 			try {
 				SimulatingMatchImpl s  = new SimulatingMatchImpl(this.getListAvversari().get(1),this.getListAvversari().get(2));
-				map = s.risultato();
+				map = s.risultato2();
 				list.addAll(map.keySet());
 				if (map.get(list.get(0)) == map.get(list.get(1))) {
 					map = s.risultatoSuppl();
@@ -306,8 +306,8 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 			if (this.getEliminated()) {
 				try {
 					SimulatingMatchImpl s = new SimulatingMatchImpl(this.squadraAvv,this.getListAvversari().get(0));
-					this.risMatch = s.risultato();
-					map = s.risultato();
+					this.risMatch = s.risultato2();
+					map = s.risultato2();
 					list.addAll(map.keySet());
 					if (map.get(list.get(0)) == map.get(list.get(1))) {
 						map = s.risultatoSuppl();
