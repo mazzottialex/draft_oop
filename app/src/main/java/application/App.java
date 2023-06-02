@@ -64,7 +64,7 @@ public class App {
             public void run() {
                 try {
 					Partita p = new Partita(nap, laz);
-					Rigori r = new Rigori(nap, laz, null);
+					//Rigori r = new Rigori(nap, laz, null);
 					p.createAndShowGUI();
 //					p.addWindowListener(new WindowAdapter() {
 //						@Override

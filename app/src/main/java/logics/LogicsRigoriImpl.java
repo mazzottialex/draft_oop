@@ -58,9 +58,10 @@ public class LogicsRigoriImpl implements LogicsRigori {
                 		titolari1 = s1.getTitolari();
                     }
                 	Calciatore tiratore = bestRating(titolari1);
-                	System.out.print(tiratore.getRating().getY().getX() + " ");
+                	System.out.print(tiratore.getNominativo() + " " + tiratore.getRating().getY().getX() + " ");
                 	titolari1.remove(tiratore);
                 	String res = rigore(tiratore, s2);
+                	System.out.print(res + " ");
                 	map1.put(tiratore, res);
                     if (res.equals("Gol")) {
                     	gol1++;
@@ -71,9 +72,10 @@ public class LogicsRigoriImpl implements LogicsRigori {
                 		titolari2 = s2.getTitolari();
                     }
                 	Calciatore tiratore = bestRating(titolari2);
-                	System.out.println(tiratore.getRating().getY().getX());
+                	System.out.print(tiratore.getNominativo() + " " + tiratore.getRating().getY().getX());
                 	titolari2.remove(tiratore);
                     String res = rigore(tiratore, s1);
+                    System.out.println(res + " ");
                     map2.put(tiratore, res);
                     if (res.equals("Gol")) {
                     	gol2++;
@@ -82,6 +84,8 @@ public class LogicsRigoriImpl implements LogicsRigori {
                 }
 			}
 		}
+		titolari1 = s1.getTitolari();
+		titolari2 = s2.getTitolari();
 		list.add(map1);
 		list.add(map2);
 		return list;
@@ -95,7 +99,7 @@ public class LogicsRigoriImpl implements LogicsRigori {
 //			}
 //		}
 //		return best;
-		list.remove(best);
+//		list.remove(best);
 		return best;
 	}
 	
@@ -110,7 +114,7 @@ public class LogicsRigoriImpl implements LogicsRigori {
 	private String rigore(Calciatore tiratore, Squadra dif) {
         double tirRating = tiratore.getRating().getY().getX() * (0.8 + new Random().nextDouble(0.4));
 
-        double porRating = dif.getPortiereTit().getRating().getY().getZ() * (0.8 + new Random().nextDouble(0.4));
+        double porRating = 85/*dif.getPortiereTit().getRating().getY().getZ()*/ * (0.8 + new Random().nextDouble(0.4));
 
         double modPorRating = porRating * 0.75 /*costante rigori fatti nei shootout*/;
         if (tirRating > modPorRating) {

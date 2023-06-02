@@ -103,12 +103,10 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	public void simulaMatch() {
 		List<SquadraAvversaria> newList = new ArrayList<>();
 		final int numSquadre = this.getNumSquadre();
-		Map<Squadra, Integer> map = new HashMap<>(); //map per il risultato
-		List<Squadra> list = new ArrayList<>(); //lista per i nomi delle squadre che si sfidano 
-		String teamWinName = new String(); //nome della squadra vincente
-		String teamLoseName = new String(); //nome della squadra perdente
-		Squadra teamWin;
-		Squadra teamLose;
+		Map<String, Integer> map = new HashMap<>(); //map per il risultato
+		List<String> list = new ArrayList<>(); //lista per i nomi delle squadre che si sfidano 
+		String teamWin = new String(); //nome della squadra vincente
+		String teamLose = new String(); //nome della squadra perdente
 		switch (numSquadre) {
 		case 16: 
 			
@@ -125,20 +123,15 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 					list.addAll(map.keySet());
 					if (map.get(list.get(0)) > map.get(list.get(1))) {
 						teamWin = list.get(0);
-						teamWinName = teamWin.getNomeSquadra();
 					} else if (map.get(list.get(0)) < map.get(list.get(1))){
 						teamWin = list.get(1);
-						teamWinName = teamWin.getNomeSquadra();
 					} else {
 						LogicsRigoriImpl r = new LogicsRigoriImpl(this.getListAvversari().get(i), this.getListAvversari().get(i+1));
-						teamWin = r.getWinner();
-						teamWinName = teamWin.getNomeSquadra();
-						if (teamWinName.equals(this.getListAvversari().get(i).getNomeSquadra())) {
-							teamLose = this.getListAvversari().get(i+1);
-							teamLoseName = teamLose.getNomeSquadra();
+						teamWin = r.getWinner().getNomeSquadra();
+						if (teamWin.equals(this.getListAvversari().get(i).getNomeSquadra())) {
+							teamLose = this.getListAvversari().get(i+1).getNomeSquadra();
 						} else {
-							teamLose = this.getListAvversari().get(i);
-							teamLoseName = teamLose.getNomeSquadra();
+							teamLose = this.getListAvversari().get(i).getNomeSquadra();
 						}
 						map.clear();
 						if (r.getGol1() > r.getGol2()) {
@@ -149,7 +142,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 							map.put(teamLose, r.getGol1());
 						}
 					}
-					if (this.getListAvversari().get(i).getNomeSquadra().equals(teamWinName)) {
+					if (this.getListAvversari().get(i).getNomeSquadra().equals(teamWin)) {
 						newList.add(this.getListAvversari().get(i));
 					} else {
 						newList.add(this.getListAvversari().get(i+1));
@@ -200,27 +193,27 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 					
 					list.addAll(map.keySet());
 					if (map.get(list.get(0)) > map.get(list.get(1))) {
-						teamWinName = list.get(0);
+						teamWin = list.get(0);
 					} else if (map.get(list.get(0)) < map.get(list.get(1))){
-						teamWinName = list.get(1);
+						teamWin = list.get(1);
 					} else {
 						LogicsRigoriImpl r = new LogicsRigoriImpl(this.getListAvversari().get(i), this.getListAvversari().get(i+1));
-						teamWinName = r.getWinner().getNomeSquadra();
-						if (teamWinName.equals(this.getListAvversari().get(i).getNomeSquadra())) {
-							teamLoseName = this.getListAvversari().get(i+1).getNomeSquadra();
+						teamWin = r.getWinner().getNomeSquadra();
+						if (teamWin.equals(this.getListAvversari().get(i).getNomeSquadra())) {
+							teamLose = this.getListAvversari().get(i+1).getNomeSquadra();
 						} else {
-							teamLoseName = this.getListAvversari().get(i).getNomeSquadra();
+							teamLose = this.getListAvversari().get(i).getNomeSquadra();
 						}
 						map.clear();
 						if (r.getGol1() > r.getGol2()) {
-							map.put(teamWinName, r.getGol1());
-							map.put(teamLoseName, r.getGol2());
+							map.put(teamWin, r.getGol1());
+							map.put(teamLose, r.getGol2());
 						} else {
-							map.put(teamWinName, r.getGol2());
-							map.put(teamLoseName, r.getGol1());
+							map.put(teamWin, r.getGol2());
+							map.put(teamLose, r.getGol1());
 						}
 					}
-					if (this.getListAvversari().get(i).getNomeSquadra().equals(teamWinName)) {
+					if (this.getListAvversari().get(i).getNomeSquadra().equals(teamWin)) {
 						newList.add(this.getListAvversari().get(i));
 					} else {
 						newList.add(this.getListAvversari().get(i+1));
@@ -269,27 +262,27 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 				
 				list.addAll(map.keySet());
 				if (map.get(list.get(0)) > map.get(list.get(1))) {
-					teamWinName = list.get(0);
+					teamWin = list.get(0);
 				} else if (map.get(list.get(0)) < map.get(list.get(1))){
-					teamWinName = list.get(1);
+					teamWin = list.get(1);
 				} else {
 					LogicsRigoriImpl r = new LogicsRigoriImpl(this.getListAvversari().get(1), this.getListAvversari().get(2));
-					teamWinName = r.getWinner().getNomeSquadra();
-					if (teamWinName.equals(this.getListAvversari().get(1).getNomeSquadra())) {
-						teamLoseName = this.getListAvversari().get(2).getNomeSquadra();
+					teamWin = r.getWinner().getNomeSquadra();
+					if (teamWin.equals(this.getListAvversari().get(1).getNomeSquadra())) {
+						teamLose = this.getListAvversari().get(2).getNomeSquadra();
 					} else {
-						teamLoseName = this.getListAvversari().get(1).getNomeSquadra();
+						teamLose = this.getListAvversari().get(1).getNomeSquadra();
 					}
 					map.clear();
 					if (r.getGol1() > r.getGol2()) {
-						map.put(teamWinName, r.getGol1());
-						map.put(teamLoseName, r.getGol2());
+						map.put(teamWin, r.getGol1());
+						map.put(teamLose, r.getGol2());
 					} else {
-						map.put(teamWinName, r.getGol2());
-						map.put(teamLoseName, r.getGol1());
+						map.put(teamWin, r.getGol2());
+						map.put(teamLose, r.getGol1());
 					}
 				}
-				if (this.getListAvversari().get(1).getNomeSquadra().equals(teamWinName)) {
+				if (this.getListAvversari().get(1).getNomeSquadra().equals(teamWin)) {
 					newList.add(this.getListAvversari().get(1));
 				} else {
 					newList.add(this.getListAvversari().get(2));
@@ -323,15 +316,15 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 					
 					list.addAll(map.keySet());
 					if (map.get(list.get(0)) > map.get(list.get(1))) {
-						teamWinName = list.get(0);
-						this.Winner = teamWinName;
+						teamWin = list.get(0);
+						this.Winner = teamWin;
 					} else if (map.get(list.get(0)) < map.get(list.get(1))){
-						teamWinName = list.get(1);
-						this.Winner = teamWinName;
+						teamWin = list.get(1);
+						this.Winner = teamWin;
 					} else {
 						LogicsRigoriImpl r = new LogicsRigoriImpl(this.squadraAvv, this.getListAvversari().get(0));
-						teamWinName = r.getWinner().getNomeSquadra();
-						this.Winner = teamWinName;
+						teamWin = r.getWinner().getNomeSquadra();
+						this.Winner = teamWin;
 					}
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block

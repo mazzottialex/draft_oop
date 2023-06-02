@@ -298,8 +298,8 @@ public class Partita extends Base {
                 
                 //Fine tempi reg
                 if (progressBar.getValue() == 90) {
-                	jlScoreSq1.setText("2");
-                	jlScoreSq2.setText("2");
+                	jlScoreSq1.setText("2"); score1 = 2;
+                	jlScoreSq2.setText("2"); score2 = 2;
 					if (score1 != score2) {
 						winner = score1 > score2 ? s1 : s2;
 						JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + winner.getNomeSquadra());
@@ -316,8 +316,8 @@ public class Partita extends Base {
                 
                 //Fine tempi suppl
                 if (progressBar.getValue() == 120) {
-                	jlScoreSq1.setText("2");
-                	jlScoreSq2.setText("2");
+                	jlScoreSq1.setText("2"); score1 = 2;
+                	jlScoreSq2.setText("2"); score2 = 2;
 					jbSubs.setEnabled(false);
 					if (score1 != score2) {
 						winner = score1 > score2 ? s1 : s2;
