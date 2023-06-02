@@ -80,19 +80,16 @@ public class CreaSquadra extends Base{
 				
 				
 				if (log.teamComplete()) {
-//<<<<<<< HEAD
-					/*
-					//changeJPanel(new TorneoV2(log.getSquadra(), li));
-					
-=======
 					LogicsFile logFile=new LogicsFileImpl();
 					logFile.SaveStorico(log.getSquadra());
+
+					
 					changeJPanel(new TorneoV2(log.getSquadra(), li));
-					*/
 					
 					
-//>>>>>>> dced3feeaf1c74314ff36292daa94051fe6c6f36
-					try {
+					
+
+		/*			try {
 						changeJPanel(new Torneo(log.getSquadra(), li));
 					} catch (FileNotFoundException e1) {
 						// TODO Auto-generated catch block
@@ -104,6 +101,7 @@ public class CreaSquadra extends Base{
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
+					*/
 					frameCalciatori.setVisible(false);
 					frameModulo.setVisible(false);
 					// ...

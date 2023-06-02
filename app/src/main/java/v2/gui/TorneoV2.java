@@ -59,16 +59,7 @@ public class TorneoV2 extends Base {
 		tabellone=new TorneoColl(liSquadre);
 		
 		//AGGIUNGE 1 TURNO
-		JPanel panelFase=new JPanel();
-		for(int i=0;i<tabellone.getLastLi().size();i++) {
-			JPanel matchPanel=new JPanel();
-			matchPanel.add(new JLabel(tabellone.getLastLi().get(i).getNomeSquadra()));
-			matchPanel.add(new JLabel("-"));
-			i++;
-			matchPanel.add(new JLabel(tabellone.getLastLi().get(i).getNomeSquadra()));
-			panelFase.add(matchPanel);
-		};
-		liPanelFase.add(panelFase);
+		liPanelFase.add(createPaneFase(tabellone.getLastLi()));
 		//////////////////
 		JButton btnSimula=new JButton("Simula");
 		JButton btnHome=new JButton("Torna alla Home");
@@ -122,21 +113,12 @@ public class TorneoV2 extends Base {
 									liRis.add(1,new Pair<Squadra, Integer>(turnoDaSimul.get(1), partita.getGolS2()));
 									tabellone.setLiLastRisul(liRis);
 									liRis=new ArrayList<>();
-									JPanel panelFase=new JPanel();
+									
 									
 									contentPane.remove(count+2);
 									
-									for(int i=0;i<tabellone.getLiLastRisul().size();i++) {
-										JPanel matchPanel=new JPanel();
-										matchPanel.add(new JLabel(tabellone.getLiLastRisul().get(i).getX().getNomeSquadra()+" "+tabellone.getLiLastRisul().get(i).getY()));
-										//CHECK se non vincitore
-										if(tabellone.getLastLi().size()>1) {
-											matchPanel.add(new JLabel("-"));
-											i++;
-											matchPanel.add(new JLabel(tabellone.getLiLastRisul().get(i).getX().getNomeSquadra()+" "+tabellone.getLiLastRisul().get(i).getY()));
-										}panelFase.add(matchPanel);
-									}
-									liPanelFase.add(panelFase);
+									liPanelFase.add(createPaneFase2(tabellone.getLiLastRisul()));
+
 									
 									
 									liPanelFase.forEach(lis->{
@@ -144,21 +126,11 @@ public class TorneoV2 extends Base {
 										contentPane.add(lis, gbc);
 									});
 									
-									panelFase=new JPanel();
+									
 									liPanelFase=new ArrayList<>();
 									
-									System.out.println(tabellone.getLastLi().size());
-									for(int i=0;i<tabellone.getLastLi().size();i++) {
-										JPanel matchPanel=new JPanel();
-										matchPanel.add(new JLabel(tabellone.getLastLi().get(i).getNomeSquadra()));
-										//CHECK se non vincitore
-										if(tabellone.getLastLi().size()>1) {
-											matchPanel.add(new JLabel("-"));
-											i++;
-											matchPanel.add(new JLabel(tabellone.getLastLi().get(i).getNomeSquadra()));
-										}panelFase.add(matchPanel);
-									}
-									liPanelFase.add(panelFase);
+									
+									liPanelFase.add(createPaneFase(tabellone.getLastLi()));
 									
 									liPanelFase.forEach(lis->{
 										count++;
@@ -259,21 +231,12 @@ public class TorneoV2 extends Base {
 						
 						tabellone.setLiLastRisul(liRis);
 						liRis=new ArrayList<>();
-						JPanel panelFase=new JPanel();
+						// panelFase=new JPanel();
 									
 						contentPane.remove(count+2);
 									
-						for(int i=0;i<tabellone.getLiLastRisul().size();i++) {
-							JPanel matchPanel=new JPanel();
-							matchPanel.add(new JLabel(tabellone.getLiLastRisul().get(i).getX().getNomeSquadra()+" "+tabellone.getLiLastRisul().get(i).getY()));
-							//CHECK se non vincitore
-							if(tabellone.getLastLi().size()>1) {
-								matchPanel.add(new JLabel("-"));
-								i++;
-								matchPanel.add(new JLabel(tabellone.getLiLastRisul().get(i).getX().getNomeSquadra()+" "+tabellone.getLiLastRisul().get(i).getY()));
-							}panelFase.add(matchPanel);
-						}
-						liPanelFase.add(panelFase);
+						
+						liPanelFase.add(createPaneFase2(tabellone.getLiLastRisul()));
 									
 									
 						liPanelFase.forEach(lis->{
@@ -281,21 +244,11 @@ public class TorneoV2 extends Base {
 							contentPane.add(lis, gbc);
 						});
 									
-						panelFase=new JPanel();
+						//panelFase=new JPanel();
 						liPanelFase=new ArrayList<>();
 									
-						System.out.println(tabellone.getLastLi().size());
-						for(int i=0;i<tabellone.getLastLi().size();i++) {
-							JPanel matchPanel=new JPanel();
-							matchPanel.add(new JLabel(tabellone.getLastLi().get(i).getNomeSquadra()));
-							//CHECK se non vincitore
-							if(tabellone.getLastLi().size()>1) {
-								matchPanel.add(new JLabel("-"));
-								i++;
-								matchPanel.add(new JLabel(tabellone.getLastLi().get(i).getNomeSquadra()));
-							}panelFase.add(matchPanel);
-						}
-						liPanelFase.add(panelFase);
+						
+						liPanelFase.add(createPaneFase(tabellone.getLastLi()));
 									
 						liPanelFase.forEach(lis->{
 							count++;
@@ -325,10 +278,37 @@ public class TorneoV2 extends Base {
 		liPanelFase.forEach(lis->{
 			
 			gbc.gridy=0;
-			contentPane.add(panelFase, gbc);
-		});
-		
-		
-		
+			contentPane.add(lis, gbc);
+		});		
+	}
+	private JPanel createPaneFase(List<Squadra> li) {
+		JPanel panelFase=new JPanel();
+		for(int i=0;i<li.size();i++) {
+			JPanel matchPanel=new JPanel();
+			matchPanel.add(new JLabel(li.get(i).getNomeSquadra()));
+			if(tabellone.getLastLi().size()>1) {
+				matchPanel.add(new JLabel("-"));
+				i++;
+				matchPanel.add(new JLabel(li.get(i).getNomeSquadra()));
+			}
+			panelFase.add(matchPanel);
+		};
+		return panelFase;
+	}
+	
+	private JPanel createPaneFase2(List<Pair<Squadra, Integer>> li) {
+		JPanel panelFase=new JPanel();
+		for(int i=0;i<li.size();i++) {
+			JPanel matchPanel=new JPanel();
+			matchPanel.add(new JLabel(li.get(i).getX().getNomeSquadra()+" "+li.get(i).getY()));
+			if(tabellone.getLastLi().size()>1) {
+				matchPanel.add(new JLabel("-"));
+				i++;
+				matchPanel.add(new JLabel(li.get(i).getX().getNomeSquadra()+" "+li.get(i).getY()));
+			}
+			panelFase.add(matchPanel);
+		};
+		return panelFase;
 	}
 }
+
