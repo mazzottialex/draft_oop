@@ -1,4 +1,7 @@
 package v2.gui;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -71,7 +74,7 @@ public class TorneoV2 extends Base {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				turnoDaSimul=tabellone.getLastLi();
-				if(turnoDaSimul.size()==1) {
+				if(turnoDaSimul.size()==2) {
 					btnSimula.setVisible(false);
 					btnHome.setVisible(true);
 				}
@@ -210,8 +213,11 @@ public class TorneoV2 extends Base {
 		JPanel panelFase=new JPanel();
 		for(int i=0;i<li.size();i++) {
 			JPanel matchPanel=new JPanel();
-			matchPanel.add(new JLabel(li.get(i).getNomeSquadra()));
-			if(tabellone.getLastLi().size()>1) {
+			if(tabellone.getLastLi().size()==1) {
+				matchPanel.add(new JLabel(li.get(i).getNomeSquadra()));
+				
+			}
+			else if(tabellone.getLastLi().size()>1) {
 				matchPanel.add(new JLabel("-"));
 				i++;
 				matchPanel.add(new JLabel(li.get(i).getNomeSquadra()));
@@ -223,14 +229,26 @@ public class TorneoV2 extends Base {
 	
 	private JPanel createPaneFase2(List<Pair<Squadra, Integer>> li) {
 		JPanel panelFase=new JPanel();
-		for(int i=0;i<li.size();i++) {
+		for(int i=0;i<li.size();i=i+2) {
+			int score1=li.get(i).getY();
+			int score2=li.get(i+1).getY();
+			Squadra s1=li.get(i).getX();
+			Squadra s2=li.get(i+1).getX();
 			JPanel matchPanel=new JPanel();
-			matchPanel.add(new JLabel(li.get(i).getX().getNomeSquadra()+" "+li.get(i).getY()));
-			if(tabellone.getLastLi().size()>1) {
-				matchPanel.add(new JLabel("-"));
-				i++;
-				matchPanel.add(new JLabel(li.get(i).getX().getNomeSquadra()+" "+li.get(i).getY()));
+			
+			JLabel labelSquadra1;
+			JLabel labelSquadra2;
+			labelSquadra1=new JLabel(s1.getNomeSquadra()+" "+score1);
+			labelSquadra2=new JLabel(score2+" "+s2.getNomeSquadra());
+			if(score1>score2) {
+				labelSquadra2.setForeground(Color.gray);
 			}
+			else {
+				labelSquadra1.setForeground(Color.gray);
+			}
+			matchPanel.add(labelSquadra1);
+			matchPanel.add(new JLabel("-"));
+			matchPanel.add(labelSquadra2);
 			panelFase.add(matchPanel);
 		};
 		return panelFase;
