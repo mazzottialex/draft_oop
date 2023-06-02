@@ -398,7 +398,37 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 					l.addAll(map2.keySet());
 					this.risMatch.put(l.get(0).getNomeSquadra(), map2.get(l.get(0)));
 					this.risMatch.put(l.get(1).getNomeSquadra(), map2.get(l.get(1)));
-					l.clear();
+					System.out.println("ultima partita");
+					System.out.println(this.risMatch);
+					//l.clear();
+					int r1 = map2.get(l.get(0));
+					int r2 = map2.get(l.get(1));
+					if (r1 > r2) {
+						this.Winner = l.get(0).getNomeSquadra();
+					} else if (r2 > r1) {
+						this.Winner = l.get(1).getNomeSquadra();
+					} else {
+						System.out.println("pareggio");
+						map2 = s.risultatoSuppl();
+						l.clear();
+						l.addAll(map2.keySet());
+						this.risMatch.clear();
+						this.risMatch.put(l.get(0).getNomeSquadra(), map2.get(l.get(0))+r1);
+						this.risMatch.put(l.get(1).getNomeSquadra(), map2.get(l.get(1))+r2);
+						
+						int p1 = map2.get(l.get(0));
+						int p2 = map2.get(l.get(1));
+						if (p1 > p2) {
+							this.Winner = l.get(0).getNomeSquadra();
+						} else if (p2 > p1) {
+							this.Winner = l.get(1).getNomeSquadra();
+							//l.clear();
+						} else {
+							this.Winner = new LogicsRigoriImpl(this.squadraAvv,this.getListAvversari().get(0)).getWinner().getNomeSquadra();
+						}
+						System.out.println(this.risMatch);
+					}
+					/*
 					//this.risMatch = s.risultato2();
 					map.clear();
 					map2 = s.risultatoSuppl();
@@ -416,7 +446,8 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 						l.clear();
 						list.clear();
 					}
-					
+					*/
+					/*
 					list.addAll(map.keySet());
 					if (map.get(list.get(0)) > map.get(list.get(1))) {
 						teamWin = list.get(0);
@@ -429,6 +460,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 						teamWin = r.getWinner().getNomeSquadra();
 						this.Winner = teamWin;
 					}
+					*/
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

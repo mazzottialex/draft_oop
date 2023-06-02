@@ -234,7 +234,7 @@ public class Torneo extends Base{
 		
 		this.panelSud.setBackground(new Color(0,64,128));
 		this.panelCenter.setBackground(new Color(0,64,128));
-		this.panelNord.setBackground(new Color(0,128,128));
+		//this.panelNord.setBackground(new Color(0,128,128));
 		//this.panelNord.setBounds(200, 300, 200, 300);
 		this.contentPane.add(panelSud,BorderLayout.SOUTH);
 		this.contentPane.add(panelCenter, BorderLayout.CENTER);
