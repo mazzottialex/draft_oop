@@ -25,10 +25,4 @@ public interface SimulatingMatch {
 	
 	public Map<Squadra, Integer> risultatoSub(int minuto)
 			throws FileNotFoundException, ClassNotFoundException, IOException;
-
-	Map<String, Integer> risultato2() throws FileNotFoundException, ClassNotFoundException, IOException;
-
-	Map<String, Integer> risultatoSuppl2() throws FileNotFoundException, ClassNotFoundException, IOException;
-
-	Map<String, Integer> risultatoSub2(int minuto) throws FileNotFoundException, ClassNotFoundException, IOException;
 }
