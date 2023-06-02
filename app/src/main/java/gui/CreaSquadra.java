@@ -10,7 +10,6 @@ import java.util.*;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.JFrame;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 
@@ -77,8 +76,7 @@ public class CreaSquadra extends Base{
 		buttonIniziaTorneo = new JButton("Inizia Torneo");
 		buttonIniziaTorneo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				
+							
 				if (log.teamComplete()) {
 					/*
 					LogicsFile logFile=new LogicsFileImpl();
@@ -88,10 +86,25 @@ public class CreaSquadra extends Base{
 					changeJPanel(new TorneoV2(log.getSquadra(), li));
 					*/
 					
-					
-
 					try {
-						changeJPanel(new Torneo(log.getSquadra(), li));
+						Base tempTorneo = new Torneo(log.getSquadra(), li);
+						changeJPanel(tempTorneo);
+						JFrame topFrame = (JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, tempTorneo.getPanel());
+						System.out.println(" cs " + topFrame);
+						final int initialScreenPercentage = 50;//75
+						Toolkit tk = Toolkit.getDefaultToolkit();
+						Dimension screenSize = tk.getScreenSize();
+						int height = screenSize.height * initialScreenPercentage / 100;
+						int width = screenSize.width * initialScreenPercentage / 100;
+						topFrame.setPreferredSize(new Dimension(width, height));
+						//centrare?
+						/*topFrame.setLocation(
+								(screenSize.width - width) / 2,
+								(screenSize.height - height) / 2
+						);*/
+						topFrame.validate();
+						topFrame.repaint();
+						topFrame.pack();
 					} catch (FileNotFoundException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -128,6 +141,7 @@ public class CreaSquadra extends Base{
 					prova.setBounds( 300, 300, 250, 100);
 					prova.setVisible(true);
 				}
+				
 				
 			}
 		});
