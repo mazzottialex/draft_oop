@@ -80,16 +80,17 @@ public class CreaSquadra extends Base{
 				
 				
 				if (log.teamComplete()) {
+					/*
 					LogicsFile logFile=new LogicsFileImpl();
 					logFile.SaveStorico(log.getSquadra());
 
 					
 					changeJPanel(new TorneoV2(log.getSquadra(), li));
-					
+					*/
 					
 					
 
-		/*			try {
+					try {
 						changeJPanel(new Torneo(log.getSquadra(), li));
 					} catch (FileNotFoundException e1) {
 						// TODO Auto-generated catch block
@@ -101,7 +102,7 @@ public class CreaSquadra extends Base{
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-					*/
+					
 					frameCalciatori.setVisible(false);
 					frameModulo.setVisible(false);
 					// ...
