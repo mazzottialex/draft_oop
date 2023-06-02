@@ -66,7 +66,7 @@ public class Torneo extends Base{
 	int risSquadraUte = 0;
 	int risSquadraAvv = 0;
 	//boolean eliminatedThisTurn = false;
-	
+	JButton buttonSimula;
 	
 	public Torneo(Squadra squadra, List<Calciatore> li) throws FileNotFoundException, ClassNotFoundException, IOException {
 					
@@ -77,7 +77,7 @@ public class Torneo extends Base{
 		this.contentPane.setLayout(new BorderLayout());
 		
 		// Aggiungo il bottone Simula nel panelSud
-		JButton buttonSimula = new JButton("Simula");
+		buttonSimula = new JButton("Simula");
 		buttonSimula.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -387,13 +387,14 @@ public class Torneo extends Base{
 			}
 			this.p0.add(this.buttonp0);
 			
-			this.panelNord.removeAll();
-			this.panelNord.repaint();
+			//this.panelNord.removeAll();
+			//this.panelNord.repaint();
 			
 			// da mettere a posto
 			JLabel label = new JLabel(winner + " HA VINTO IL TORNEO!!!!");
 			this.panelNord.add(label);
 			
+			buttonSimula.setVisible(false);
 			contentPane.validate();
 			this.logTor.setNumSquadre(0);
 			this.panelNord.validate();
