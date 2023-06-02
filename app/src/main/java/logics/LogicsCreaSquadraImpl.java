@@ -165,8 +165,6 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 		if (!this.liSquadra.contains(calciatore)) {
 			this.liSquadra.add(calciatore);
 		}
-		System.out.println(this.liSquadra.size());
-		System.out.println(this.liSquadra);
 	}
 
 	@Override
