@@ -161,6 +161,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 
 	@Override
 	public void addPlayerInTeam(Calciatore calciatore) {
+		
 		if (!this.liSquadra.contains(calciatore)) {
 			this.liSquadra.add(calciatore);
 		}

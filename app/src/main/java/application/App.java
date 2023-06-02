@@ -24,7 +24,7 @@ import manageData.ManageData;
 import manageData.ManageDataImpl;
 import rating.CalcoloRating;
 import rating.CalcoloRatingImpl;
-import v2.gui.TorneoV2;
+//import v2.gui.TorneoV2;
 
 public class App {
     public String getGreeting() {
@@ -32,7 +32,7 @@ public class App {
     }
 
     public static void main(String[] args) throws FileNotFoundException, ClassNotFoundException, IOException {
-    	/*EventQueue.invokeLater(new Runnable() {
+    	EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					Start frame = new Start();
@@ -41,7 +41,10 @@ public class App {
 					e.printStackTrace();
 				}
 			}
-		});*//*
+
+		});
+    	/*
+
     	ManageData md = new ManageDataImpl("2022-2023");
 		md.LoadData();
 		List<Calciatore> li = md.getLi();
@@ -49,7 +52,7 @@ public class App {
 		li = cr.updateRating();
 		Squadra nap = new SquadraAvversaria(0, "NAP", Modulo.M442, li);	
     	Torneo t= new Torneo(nap, li);
-    	t.setVisible(true);*/
+    	t.setVisible(true);
     	
     	ManageData md = new ManageDataImpl("2022-2023");
 		md.LoadData();
@@ -80,6 +83,6 @@ public class App {
 				}
             }
 		});
-		
+		*/
     }
 }

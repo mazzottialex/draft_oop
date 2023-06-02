@@ -18,6 +18,8 @@ import data.Calciatore;
 import data.Modulo;
 import logics.LogicsCreaSquadraImpl;
 import logics.LogicsCreasquadra;
+import manageData.LogicsFile;
+import manageData.LogicsFileImpl;
 import v2.gui.*;
 
 public class CreaSquadra extends Base{
@@ -76,11 +78,18 @@ public class CreaSquadra extends Base{
 		buttonIniziaTorneo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				
 				if (log.teamComplete()) {
+					LogicsFile logFile=new LogicsFileImpl();
+					logFile.SaveStorico(log.getSquadra());
+
 					
 					changeJPanel(new TorneoV2(log.getSquadra(), li));
-					/*
-					try {
+					
+					
+					
+
+		/*			try {
 						changeJPanel(new Torneo(log.getSquadra(), li));
 					} catch (FileNotFoundException e1) {
 						// TODO Auto-generated catch block
@@ -91,7 +100,8 @@ public class CreaSquadra extends Base{
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
-					}*/
+					}
+					*/
 					frameCalciatori.setVisible(false);
 					frameModulo.setVisible(false);
 					// ...
@@ -293,7 +303,7 @@ public class CreaSquadra extends Base{
 			this.buttonsAtt[i] = new JButton("A");
 			Dimension d = this.buttonsAtt[i].getPreferredSize();
 			this.buttonsAtt[i].setPreferredSize(new Dimension(d.width*2,d.height*2));
-			this.buttonsAtt[i].setBackground(Color.RED);
+			this.buttonsAtt[i].setBackground(Color.ORANGE);
 			final int ind = i;
 			this.buttonsAtt[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -442,6 +452,7 @@ public class CreaSquadra extends Base{
 			this.buttonsPlayer[i] = new JButton("" + list.get(i).getNominativo() + " " + list.get(i).getRating().getX());
 			this.panelCalciatoriCenter.add(this.buttonsPlayer[i],gbc);
 			this.buttonsPlayer[i].setBackground(getColorByRuolo(ruolo));
+			
 			final int ind = i;
 			this.buttonsPlayer[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -508,7 +519,7 @@ public class CreaSquadra extends Base{
 	public Color getColorByRuolo(String ruolo) {
 		switch (ruolo) {
 		case "A":
-			return Color.RED;
+			return Color.ORANGE;
 		case "C":
 			return Color.GREEN;	
 		case "D":
