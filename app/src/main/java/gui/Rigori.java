@@ -55,7 +55,7 @@ public class Rigori extends Base {
 		str1 = "";
 		str2 = "";
 		
-		//gui di prova
+		// gui di prova
 //        setLayout(new BorderLayout());
 //        setLocationRelativeTo(null);
         
