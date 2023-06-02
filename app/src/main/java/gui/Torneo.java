@@ -234,7 +234,7 @@ public class Torneo extends Base{
 		this.panelSud.setBackground(new Color(0,64,128));
 		this.panelCenter.setBackground(new Color(0,64,128));
 		this.panelNord.setBackground(new Color(0,128,128));
-		this.panelNord.setBounds(200, 300, 200, 300);
+		//this.panelNord.setBounds(200, 300, 200, 300);
 		this.contentPane.add(panelSud,BorderLayout.SOUTH);
 		this.contentPane.add(panelCenter, BorderLayout.CENTER);
 		this.contentPane.add(panelNord, BorderLayout.NORTH);
@@ -404,11 +404,14 @@ public class Torneo extends Base{
 			}
 			this.p0.add(this.buttonp0);
 			
+			this.panelNord.removeAll();
+			this.panelNord.repaint();
+			
 			// da mettere a posto
 			JLabel label = new JLabel(winner + " HA VINTO IL TORNEO!!!!");
 			this.panelNord.add(label);
 			
-			
+			contentPane.validate();
 			this.logTor.setNumSquadre(0);
 			this.panelNord.validate();
 			this.p0.validate();
