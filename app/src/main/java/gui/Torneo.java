@@ -89,9 +89,11 @@ public class Torneo extends Base{
 					
 					try {
 						p = new Partita(logTor.getMiaSquadra(), logTor.getListAvversari().get(0));
+						buttonSimula.setVisible(false);
 						p.createAndShowGUI();
 						p.addWindowListener(new WindowAdapter() {
 							public void windowClosed(WindowEvent e) {
+								buttonSimula.setVisible(true);
 								if (p.getWinner() != logTor.getMiaSquadra()) {
 									logTor.setEliminated(true);
 									logTor.setSquadraAvv(logTor.getListAvversari().get(0));
@@ -146,44 +148,8 @@ public class Torneo extends Base{
 						e1.printStackTrace();
 					}
 				}
-					/*
-					JPanel panel=(JPanel) btn.getParent();
-		            JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(btn);
-					Partita dialog;
-					try {
-						dialog = new Partita(parent, true, logTor.getMiaSquadra(), logTor.getListAvversari().get(0));
-						dialog.createAndShowGUI();
-						dialog.setVisible(true);	
-						if (dialog.getWinner() != logTor.getMiaSquadra()) {
-							logTor.setEliminated(true);
-							logTor.setSquadraAvv(logTor.getListAvversari().get(0));
-							eliminatedThisTurn = true;
-						}
-						risSquadraUte = dialog.getGolS1();
-						risSquadraAvv = dialog.getGolS2();	
-						
-					} catch (ClassNotFoundException | IOException e1) {
-						e1.printStackTrace();
-					}
-				}
-				*/
-				/*
-				try {
-					logTor.simulaMatch();
-					createLevel();
-				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				*/
+				//buttonSimula.setVisible(true);
 			}
-			
 		});
 		this.panelSud.add(buttonSimula);
 		
