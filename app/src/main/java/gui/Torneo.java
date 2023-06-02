@@ -31,6 +31,7 @@ import logics.LogicsCreaSquadraImpl;
 import logics.LogicsCreasquadra;
 import logics.LogicsImpostazioni;
 import logics.LogicsImpostazioniImpl;
+import logics.LogicsRigoriImpl;
 import logics.LogicsTorneo;
 import logics.LogicsTorneoImpl;
 import simulation.SimulatingMatchImpl;
@@ -304,6 +305,13 @@ public class Torneo extends Base{
 				this.p3.add(this.buttonsp3[0]);
 				if (ris2 > ris1) {
 					this.logTor.setSquadraAvv(this.listAvversarie.get(0));
+				} else if (ris1 == ris2) {
+					// rigori
+					Squadra vinc = new LogicsRigoriImpl(this.logTor.getSquadraAvv(), this.listAvversarie.get(0)).getWinner();
+					System.out.println(vinc.getNomeSquadra());
+					if (vinc.getNomeSquadra().equals(this.listAvversarie.get(0).getNomeSquadra())) {
+						this.logTor.setSquadraAvv(this.listAvversarie.get(0));
+					}
 				}
 			}
 			int cont1 = 1;
@@ -351,7 +359,16 @@ public class Torneo extends Base{
 				this.p2.add(this.buttonsp2[0]);
 				if (ris2 > ris1) {
 					this.logTor.setSquadraAvv(this.listAvversarie.get(0));
+				} else if (ris1 == ris2) {
+					// rigori
+					Squadra vinc = new LogicsRigoriImpl(this.logTor.getSquadraAvv(), this.listAvversarie.get(0)).getWinner();
+					System.out.println(vinc.getNomeSquadra());
+					if (vinc.getNomeSquadra().equals(this.listAvversarie.get(0).getNomeSquadra())) {
+						this.logTor.setSquadraAvv(this.listAvversarie.get(0));
+					}
 				}
+				
+				
 			}
 			String squad1 = new String(this.listAvversarie.get(1).getNomeSquadra());
 			var ris1 = this.logTor.getRisultati().get(squad1);
