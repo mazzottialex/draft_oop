@@ -17,6 +17,7 @@ import java.util.Set;
 import utils.Pair;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import data.Calciatore;
@@ -214,10 +215,11 @@ public class TorneoV2 extends Base {
 		for(int i=0;i<li.size();i++) {
 			JPanel matchPanel=new JPanel();
 			if(tabellone.getLastLi().size()==1) {
-				matchPanel.add(new JLabel(li.get(i).getNomeSquadra()));
-				
+				matchPanel.add(new JLabel("Vincitore: "+li.get(i).getNomeSquadra()));
+		        JOptionPane.showMessageDialog(null, "Il vincitore del torneo è: "+li.get(i).getNomeSquadra(), "Fine torneo", JOptionPane.INFORMATION_MESSAGE);
 			}
 			else if(tabellone.getLastLi().size()>1) {
+				matchPanel.add(new JLabel(li.get(i).getNomeSquadra()));
 				matchPanel.add(new JLabel("-"));
 				i++;
 				matchPanel.add(new JLabel(li.get(i).getNomeSquadra()));
