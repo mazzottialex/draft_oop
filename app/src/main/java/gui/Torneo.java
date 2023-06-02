@@ -302,6 +302,9 @@ public class Torneo extends Base{
 				int ris2 =this.logTor.getRisMatch().get(this.listAvversarie.get(0).getNomeSquadra());
 				this.buttonsp3[0] = new JButton(this.logTor.getSquadraAvv().getNomeSquadra() + " " + ris1 + " " + " - " + " " + ris2 + " " + this.listAvversarie.get(0).getNomeSquadra());
 				this.p3.add(this.buttonsp3[0]);
+				if (ris2 > ris1) {
+					this.logTor.setSquadraAvv(this.listAvversarie.get(0));
+				}
 			}
 			int cont1 = 1;
 			for (int i=1;i<this.listAvversarie.size() - 1;i = i + 2, cont1++) {
@@ -346,6 +349,9 @@ public class Torneo extends Base{
 				int ris2 =this.logTor.getRisMatch().get(this.listAvversarie.get(0).getNomeSquadra());
 				this.buttonsp2[0] = new JButton(this.logTor.getSquadraAvv().getNomeSquadra() + " " + ris1 + " " + " - " + " " + ris2 + " " + this.listAvversarie.get(0).getNomeSquadra());
 				this.p2.add(this.buttonsp2[0]);
+				if (ris2 > ris1) {
+					this.logTor.setSquadraAvv(this.listAvversarie.get(0));
+				}
 			}
 			String squad1 = new String(this.listAvversarie.get(1).getNomeSquadra());
 			var ris1 = this.logTor.getRisultati().get(squad1);
