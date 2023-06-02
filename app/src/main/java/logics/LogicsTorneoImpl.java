@@ -141,7 +141,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 
 					if (map.get(list.get(0)) == map.get(list.get(1))) {
 						map.clear();
-						map2 = s.risultato();
+						map2 = s.risultatoSuppl();
 						l.addAll(map2.keySet());
 						map.put(l.get(0).getNomeSquadra(), map2.get(l.get(0)));
 						map.put(l.get(1).getNomeSquadra(), map2.get(l.get(1)));
@@ -230,7 +230,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 					list.addAll(map.keySet());
 					if (map.get(list.get(0)) == map.get(list.get(1))) {
 						map.clear();
-						map2 = s.risultato();
+						map2 = s.risultatoSuppl();
 						l.addAll(map2.keySet());
 						map.put(l.get(0).getNomeSquadra(), map2.get(l.get(0)));
 						map.put(l.get(1).getNomeSquadra(), map2.get(l.get(1)));
@@ -314,7 +314,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 				list.addAll(map.keySet());
 				if (map.get(list.get(0)) == map.get(list.get(1))) {
 					map.clear();
-					map2 = s.risultato();
+					map2 = s.risultatoSuppl();
 					l.addAll(map2.keySet());
 					map.put(l.get(0).getNomeSquadra(), map2.get(l.get(0)));
 					map.put(l.get(1).getNomeSquadra(), map2.get(l.get(1)));
@@ -383,7 +383,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 					list.addAll(map.keySet());
 					if (map.get(list.get(0)) == map.get(list.get(1))) {
 						map.clear();
-						map2 = s.risultato();
+						map2 = s.risultatoSuppl();
 						l.addAll(map2.keySet());
 						map.put(l.get(0).getNomeSquadra(), map2.get(l.get(0)));
 						map.put(l.get(1).getNomeSquadra(), map2.get(l.get(1)));
