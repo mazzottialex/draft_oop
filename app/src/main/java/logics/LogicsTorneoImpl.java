@@ -111,18 +111,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 		String teamLose = new String(); //nome della squadra perdente
 		Map<Squadra, Integer> map2 = new HashMap<>();
 		List<Squadra> l = new ArrayList<>(); // appoggio
-		/* da cambiare *
-		Map<Squadra, Integer> map2 = new HashMap<>();
-		List<Squadra> list2 = new ArrayList<>();
-		try {
-			Squadra teamWin2 = new SquadraAvversaria(0, "aaa", Modulo.M343, li);
-			Squadra teamLose2 = new SquadraAvversaria(0, "aaa", Modulo.M343, li);
-		} catch (ClassNotFoundException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		*/
-		
+
 		switch (numSquadre) {
 		case 16: 
 			
@@ -205,7 +194,6 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 					int r2 = map2.get(l.get(1));
 					//l.clear();
 					if (this.risMatch.get(l.get(0).getNomeSquadra()) == this.risMatch.get(l.get(1).getNomeSquadra())) {
-						System.out.println("pareggio");
 						map2 = s.risultatoSuppl();
 						l.clear();
 						l.addAll(map2.keySet());
@@ -213,7 +201,6 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 						this.risMatch.put(l.get(0).getNomeSquadra(), map2.get(l.get(0))+r1);
 						this.risMatch.put(l.get(1).getNomeSquadra(), map2.get(l.get(1))+r2);
 						l.clear();
-						System.out.println(this.risMatch);
 					}
 					//this.risMatch = s.risultato2();
 					
@@ -307,7 +294,6 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 					int r1 = map2.get(l.get(0));
 					int r2 = map2.get(l.get(1));
 					if (this.risMatch.get(l.get(0).getNomeSquadra()) == this.risMatch.get(l.get(1).getNomeSquadra())) {
-						System.out.println("pareggio");
 						map2 = s.risultatoSuppl();
 						l.clear();
 						l.addAll(map2.keySet());
@@ -315,7 +301,6 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 						this.risMatch.put(l.get(0).getNomeSquadra(), map2.get(l.get(0))+r1);
 						this.risMatch.put(l.get(1).getNomeSquadra(), map2.get(l.get(1))+r2);
 						l.clear();
-						System.out.println(this.risMatch);
 					}
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
@@ -398,8 +383,6 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 					l.addAll(map2.keySet());
 					this.risMatch.put(l.get(0).getNomeSquadra(), map2.get(l.get(0)));
 					this.risMatch.put(l.get(1).getNomeSquadra(), map2.get(l.get(1)));
-					System.out.println("ultima partita");
-					System.out.println(this.risMatch);
 					//l.clear();
 					int r1 = map2.get(l.get(0));
 					int r2 = map2.get(l.get(1));
@@ -408,7 +391,6 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 					} else if (r2 > r1) {
 						this.Winner = l.get(1).getNomeSquadra();
 					} else {
-						System.out.println("pareggio");
 						map2 = s.risultatoSuppl();
 						l.clear();
 						l.addAll(map2.keySet());
@@ -426,7 +408,6 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 						} else {
 							this.Winner = new LogicsRigoriImpl(this.squadraAvv,this.getListAvversari().get(0)).getWinner().getNomeSquadra();
 						}
-						System.out.println(this.risMatch);
 					}
 					/*
 					//this.risMatch = s.risultato2();
