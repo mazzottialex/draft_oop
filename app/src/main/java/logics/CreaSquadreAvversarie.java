@@ -5,8 +5,7 @@ import java.io.IOException;
 import java.util.List;
 
 import data.Squadra;
-import data.SquadraAvversaria;
 
 public interface CreaSquadreAvversarie {
-	public List<Squadra> getSquadre() throws FileNotFoundException, ClassNotFoundException, IOException;
+    public List<Squadra> getSquadre() throws FileNotFoundException, ClassNotFoundException, IOException;
 }
