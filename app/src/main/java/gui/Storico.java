@@ -40,14 +40,18 @@ public class Storico extends Base {
 		GridBagConstraints gbc=new GridBagConstraints();
 		GridBagLayout layout=new GridBagLayout();
 		
+		contentPane.setLayout(new BorderLayout());
+		
 		JButton btnHome=new JButton("HOME");
 		
-		btnHome.setBounds(10, 8, 70, 28);
+		JPanel panelBtn=new JPanel();
+		panelBtn.setBackground(getBackground());
+		panelBtn.setPreferredSize(new Dimension(50, 50));
 		btnHome.setFont(new Font("DejaVu Sans", Font.PLAIN, 12));
 		btnHome.setBackground(Color.white);
 		btnHome.setRolloverEnabled(true);
 		btnHome.setForeground(Color.BLUE);
-		btnHome.setPreferredSize(new Dimension(100,50));
+		btnHome.setPreferredSize(new Dimension(70,30));
 		btnHome.addActionListener(new ActionListener() {
 			
 			@Override
@@ -56,7 +60,8 @@ public class Storico extends Base {
 				
 			}
 		});
-		contentPane.add(btnHome);
+		panelBtn.add(btnHome);
+		contentPane.add(panelBtn, BorderLayout.NORTH);
 		
 		JPanel panelLi = new JPanel();
 		panelLi.setLayout(layout);
@@ -104,7 +109,7 @@ public class Storico extends Base {
 			count++;
 		}
 		JScrollPane scrollPane=new JScrollPane(panelLi);
-		contentPane.add(scrollPane);
+		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
 		
 	}
