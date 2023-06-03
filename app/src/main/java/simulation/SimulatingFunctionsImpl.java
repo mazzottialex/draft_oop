@@ -128,7 +128,6 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
         List<Calciatore> difensori = ed.getListaByRuolo("D");
         double count = 0;
         double totVoti = 0;
-
         if (difensori.size() >= 3) {
             double threshold = difensori.size() == 3 ? THRESHOLD_3_DIF : THRESHOLD_4_5_DIF;
             for (Calciatore c : difensori) {
@@ -158,7 +157,6 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
         for (Calciatore c : s.getTitolari()) {
             String ruolo = c.getRuolo();
             double voto = mapVoti.get(c) - SUB_VOTE;
-
             if (!mapModVoti.containsKey(ruolo)) {
                 mapModVoti.put(ruolo, voto);
             } else {
