@@ -56,29 +56,8 @@ public class Partita extends Base {
 	
 	private int score1;
 	private int score2;
-	/*
-<<<<<<< HEAD
-    public Partita(Frame parent,boolean modale, Squadra s1, Squadra s2) throws FileNotFoundException, ClassNotFoundException, IOException {
-    	super(parent,modale);
-    	
-		setBounds(100, 100, 700, 300);
-		setMinimumSize(getSize());
- 
-		setTitle("PARTITA");
-		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		setBounds(100, 100, 500, 700);
-		setBackground(new Color(0, 64, 128));
-		contentPane.setBackground(new Color(0, 64, 128));
-		contentPane.setLayout(new BorderLayout());
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		//add(contentPane);
-    	//contentPane.add(panel);
-    	
-=======
-*/
-    public Partita(Squadra s1, Squadra s2) throws FileNotFoundException, ClassNotFoundException, IOException {
 
-//>>>>>>> 56d0c26272dabc1843f572fe195144a163df07a4
+    public Partita(Squadra s1, Squadra s2) throws FileNotFoundException, ClassNotFoundException, IOException {
     	this.s1 = s1;
 		this.s2 = s2;
 		this.logics = new LogicsPartitaImpl(this.s1, this.s2);
