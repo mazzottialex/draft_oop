@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -81,5 +82,13 @@ public class utilsGUI {
 		gbc.gridy=1;
 		buttonCalciatore.add(lblNome,gbc); 
 		return buttonCalciatore;
+	}
+	
+	public static JButton standardButton(String s) {
+		JButton btn=new JButton(s);
+		btn.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+		btn.setBackground(Color.white);
+		btn.setForeground(Color.BLUE);
+		return btn;
 	}
 }

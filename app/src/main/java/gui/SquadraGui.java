@@ -37,10 +37,7 @@ public class SquadraGui extends Base {
 		contentPane.setLayout(layout);
 		panelSquadra.setBackground(getForeground());
 		
-		JButton btnProsegui=new JButton("PROSEGUI");
-		btnProsegui.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
-		btnProsegui.setBackground(Color.white);
-		btnProsegui.setForeground(Color.BLUE);
+		JButton btnProsegui=utilsGUI.standardButton("Prosegui");
 		btnProsegui.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -126,10 +123,7 @@ public class SquadraGui extends Base {
 		this.stagione=stagioneP;
 		this.online=online;
 		
-		JButton btnStorico=new JButton("STORICO");
-		btnStorico.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
-		btnStorico.setBackground(Color.white);
-		btnStorico.setForeground(Color.BLUE);
+		JButton btnStorico=utilsGUI.standardButton("Storico");
 		btnStorico.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

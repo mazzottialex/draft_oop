@@ -23,6 +23,7 @@ import javax.swing.SwingUtilities;
 import data.Calciatore;
 import data.Modulo;
 import gui.Base;
+import gui.utilsGUI;
 import logics.LogicsFormazione;
 import logics.LogicsFormazioneImpl;
 
@@ -37,11 +38,7 @@ public class Formazione extends Base{
 		GridBagLayout layout=new GridBagLayout();
 		contentPane.setLayout(layout);
 		
-		JButton btnScegli=new JButton("Scegli Formazione");
-		btnScegli.setFont(new Font("DejaVu Sans", Font.PLAIN, 12));
-		btnScegli.setBackground(Color.white);
-		btnScegli.setRolloverEnabled(true);
-		btnScegli.setForeground(Color.BLUE);
+		JButton btnScegli=utilsGUI.standardButton("Scegli Modulo");
 		liModuli=log.getRandomMod(5);
 		btnScegli.addActionListener(new ActionListener() {
 			
@@ -63,11 +60,7 @@ public class Formazione extends Base{
 						gbc.gridy=0;
 						gbc.insets=new Insets(10, 0, 10, 0);
 						panel.add(lblModulo, gbc);
-						JButton btnProsegui=new JButton("Prosegui");
-						btnProsegui.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
-						btnProsegui.setBackground(Color.white);
-						btnProsegui.setRolloverEnabled(true);
-						btnProsegui.setForeground(Color.BLUE);
+						JButton btnProsegui=utilsGUI.standardButton("Prosegui");
 						btnProsegui.addActionListener(new ActionListener() {
 							
 							@Override

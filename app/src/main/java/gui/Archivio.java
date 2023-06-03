@@ -57,13 +57,8 @@ public class Archivio extends Base {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JButton btnHome = new JButton("HOME");
+		JButton btnHome = utilsGUI.standardButton("Home");
 
-		btnHome.setBounds(10, 8, 70, 28);
-		btnHome.setFont(new Font("DejaVu Sans", Font.PLAIN, 12));
-		btnHome.setBackground(Color.white);
-		btnHome.setRolloverEnabled(true);
-		btnHome.setForeground(Color.BLUE);
 		btnHome.addActionListener(new ActionListener() {
 			
 			@Override

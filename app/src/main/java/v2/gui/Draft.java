@@ -73,7 +73,7 @@ public class Draft extends Base {
 		
 		JPanel panelGiocatore;
 		JPanel panelPosizione;
-		JButton btnProsegui=new JButton("Prosegui");
+		JButton btnProsegui=utilsGUI.standardButton("Prosegui");
 		btnProsegui.setVisible(false);
 		
 		//titolari

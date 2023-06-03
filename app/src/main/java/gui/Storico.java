@@ -42,16 +42,12 @@ public class Storico extends Base {
 		
 		contentPane.setLayout(new BorderLayout());
 		
-		JButton btnHome=new JButton("HOME");
+		JButton btnHome=utilsGUI.standardButton("Home");
 		
 		JPanel panelBtn=new JPanel();
 		panelBtn.setBackground(getBackground());
 		panelBtn.setPreferredSize(new Dimension(50, 50));
-		btnHome.setFont(new Font("DejaVu Sans", Font.PLAIN, 12));
-		btnHome.setBackground(Color.white);
-		btnHome.setRolloverEnabled(true);
-		btnHome.setForeground(Color.BLUE);
-		btnHome.setPreferredSize(new Dimension(70,30));
+		
 		btnHome.addActionListener(new ActionListener() {
 			
 			@Override
@@ -94,7 +90,7 @@ public class Storico extends Base {
 			panelSquadra.add(lblRating);
 			panelSquadra.add(lblRating);
 
-			JButton btnVedi=new JButton("VEDI");
+			JButton btnVedi=utilsGUI.standardButton("Vedi");
 			btnVedi.addActionListener(new ActionListener() {
 				
 				@Override

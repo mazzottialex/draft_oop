@@ -189,10 +189,7 @@ public class Home extends Base {
 		gbc.gridy=4;
 		contentPane.add(labelAvviso,gbc);
 		
-		JButton btnArchivio=new JButton("ARCHIVIO");
-		btnArchivio.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
-		btnArchivio.setBackground(Color.white);
-		btnArchivio.setForeground(Color.BLUE);
+		JButton btnArchivio=utilsGUI.standardButton("Archivio");
 		btnArchivio.addActionListener(new ActionListener() {
 			
 			@Override
@@ -208,10 +205,7 @@ public class Home extends Base {
 		gbc.gridx=0;
 		gbc.gridy=5;
 		contentPane.add(btnArchivio,gbc);
-		JButton btnStorico=new JButton("STORICO");
-		btnStorico.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
-		btnStorico.setBackground(Color.white);
-		btnStorico.setForeground(Color.BLUE);
+		JButton btnStorico=utilsGUI.standardButton("Storico");
 		btnStorico.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -222,6 +216,4 @@ public class Home extends Base {
 		contentPane.add(btnStorico,gbc);
 	}
 	
-	
-
 }
