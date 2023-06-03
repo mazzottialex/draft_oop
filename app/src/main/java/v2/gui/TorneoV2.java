@@ -189,7 +189,7 @@ public class TorneoV2 extends Base {
             if (tabellone.getLastLi().size() == 1) {
                 matchPanel.add(new JLabel("Vincitore: " + li.get(i).getNomeSquadra()));
                 JOptionPane.showMessageDialog(null, "Il vincitore del torneo è: "
-                	+ li.get(i).getNomeSquadra(), "Fine torneo", JOptionPane.INFORMATION_MESSAGE);
+                + li.get(i).getNomeSquadra(), "Fine torneo", JOptionPane.INFORMATION_MESSAGE);
             } else if (tabellone.getLastLi().size() > 1) {
                 matchPanel.add(new JLabel(li.get(i).getNomeSquadra()));
                 matchPanel.add(new JLabel("-"));
