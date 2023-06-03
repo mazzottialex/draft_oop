@@ -51,6 +51,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 		riserve.addAll(this.getRandom("D", 2));
 		riserve.addAll(this.getRandom("C", 2));
 		riserve.addAll(this.getRandom("A", 2));
+		this.calcUsciti.addAll(riserve);
 		
 	}
 	
