@@ -25,12 +25,12 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	private String ruoloSelect; //ruolo del calciatore selezionato per entrrare in formazione 
 	private int posSelect; //posizione del calciatore selezionato per entrare in formazione 
 	private int ratingSelect; //rating del calciatore selezionato per entrare in formazione
-	private List<Calciatore> liSquadra;
-	private List<Calciatore> riserve;
-	private String nomeSquadra;
-	private String stemma;
+	private final List<Calciatore> liSquadra;
+	private final List<Calciatore> riserve;
+	private final String nomeSquadra;
+	private final String stemma;
 	private Squadra squadra;
-	private List<Calciatore> calcUsciti;
+	private final List<Calciatore> calcUsciti;
 	
 	public LogicsCreaSquadraImpl(String nomeSquadra, String stemma, List<Calciatore> li) throws FileNotFoundException, ClassNotFoundException, IOException {
 		this.moduloSelect = Modulo.M343;
