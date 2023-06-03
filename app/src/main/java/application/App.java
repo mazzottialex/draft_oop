@@ -32,7 +32,7 @@ public class App {
     }
 
     public static void main(String[] args) throws FileNotFoundException, ClassNotFoundException, IOException {
-    	EventQueue.invokeLater(new Runnable() {
+    	/*EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					Start frame = new Start();
@@ -41,8 +41,10 @@ public class App {
 					e.printStackTrace();
 				}
 			}
-		});
-    	/*
+
+		});*/
+    	
+/*
     	ManageData md = new ManageDataImpl("2022-2023");
 		md.LoadData();
 		List<Calciatore> li = md.getLi();
@@ -51,7 +53,7 @@ public class App {
 		Squadra nap = new SquadraAvversaria(0, "NAP", Modulo.M442, li);	
     	Torneo t= new Torneo(nap, li);
     	t.setVisible(true);
-    	
+    	*/
     	ManageData md = new ManageDataImpl("2022-2023");
 		md.LoadData();
 		List<Calciatore> li = md.getLi();
@@ -63,8 +65,7 @@ public class App {
 		SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                try {
-					Partita p = new Partita(nap, laz);
+//					Partita p = new Partita(nap, laz);
 					Rigori r = new Rigori(nap, laz, null);
 					r.createAndShowGUI();
 //					p.addWindowListener(new WindowAdapter() {
@@ -75,12 +76,8 @@ public class App {
 //					    }
 //					});
 					//System.out.println(p.getWinner());
-				} catch (ClassNotFoundException | IOException e) {
-					e.printStackTrace();
-				
-				}
             }
 		});
-		*/
+		
     }
 }
