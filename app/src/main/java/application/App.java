@@ -17,6 +17,7 @@ import data.Calciatore;
 import data.Modulo;
 import data.Squadra;
 import data.SquadraAvversaria;
+import data.SquadraUtente;
 import gui.Partita;
 import gui.Rigori;
 import gui.Start;
@@ -60,20 +61,21 @@ public class App {
 		List<Calciatore> li = md.getLi();
 		CalcoloRating cr = new CalcoloRatingImpl(li);
 		li = cr.updateRating();
-		Squadra nap = new SquadraAvversaria(0, "NAP", Modulo.M442, li);				
+		Squadra nap = new SquadraAvversaria(0, "NAP", Modulo.M442, li);	
+		Squadra ut = new SquadraUtente(null, null, Modulo.M442, nap.getTitolari(), nap.getRiserve());
 		Squadra laz = new SquadraAvversaria(0, "LAZ", Modulo.M442, li);
 
 		SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-//					try {
-//						Partita p = new Partita(nap, laz);
-//						p.createAndShowGUI();
-//					} catch (ClassNotFoundException | IOException e) {
-//						e.printStackTrace();
-//					}
-					Rigori r = new Rigori(nap, laz, null);
-					r.createAndShowGUI();
+					try {
+						Partita p = new Partita(ut, laz);
+						p.createAndShowGUI();
+					} catch (ClassNotFoundException | IOException e) {
+						e.printStackTrace();
+					}
+//					Rigori r = new Rigori(nap, laz, null);
+//					r.createAndShowGUI();
             }
 		});
 		
