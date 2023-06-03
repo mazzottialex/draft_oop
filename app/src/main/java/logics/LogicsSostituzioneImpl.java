@@ -17,7 +17,6 @@ public class LogicsSostituzioneImpl implements LogicsSostituzione {
     private Calciatore entra;
     private Calciatore esce;
     private Squadra s;
-    private boolean cambio;
     private Sostituzione gui;
 
     public LogicsSostituzioneImpl(Squadra s, Sostituzione gui) {
@@ -26,13 +25,7 @@ public class LogicsSostituzioneImpl implements LogicsSostituzione {
         this.entra = null;
         this.esce = null;
         this.s = s;
-        this.cambio = false;
         this.gui = gui;
-    }
-
-    @Override
-    public boolean isCambio() {
-        return cambio;
     }
 
     @Override
@@ -84,7 +77,6 @@ public class LogicsSostituzioneImpl implements LogicsSostituzione {
                     riserve.remove(entra);
                     s.setTitolari(titolari);
                     s.setRiserve(riserve);
-                    cambio = true;
                     JOptionPane.showMessageDialog(null, "Sostituzione effettuata");
                     chiudiGUI();
                 }

@@ -12,6 +12,6 @@ public interface LogicsSostituzione {
     public void selezTit(Calciatore c);
     public void selezRis(Calciatore c);
     public void sub(Container parent1, Container parent2, Component component1, Component component2);
-    public boolean isCambio();
+//    public boolean isCambio();
     public void chiudiGUI();
 }

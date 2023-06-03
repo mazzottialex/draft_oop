@@ -26,7 +26,7 @@ public class Sostituzione extends Base {
      * 
      */
     private static final long serialVersionUID = 5244133982320404420L;
-    private final List < String > ruoli = List.of("P", "D", "C", "A");
+    private final List<String> ruoli = List.of("P", "D", "C", "A");
     private JPanel panelSquadra = new JPanel();
     private LogicsSostituzione logics;
     private static JPanel panelTit;
