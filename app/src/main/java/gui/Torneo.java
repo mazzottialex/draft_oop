@@ -210,7 +210,7 @@ public class Torneo extends Base{
 		
 	}
 	
-	public void createLevel() {
+	private void createLevel() {
 		final int numSquadre = logTor.getNumSquadre();
 		switch (numSquadre) {
 		case 8: 

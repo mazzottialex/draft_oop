@@ -90,7 +90,6 @@ public class CreaSquadra extends Base{
 						Base tempTorneo = new Torneo(log.getSquadra(), li);
 						changeJPanel(tempTorneo);
 						JFrame topFrame = (JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, tempTorneo.getPanel());
-						System.out.println(" cs " + topFrame);
 						final int initialScreenPercentage = 50;//75
 						Toolkit tk = Toolkit.getDefaultToolkit();
 						Dimension screenSize = tk.getScreenSize();
@@ -269,7 +268,7 @@ public class CreaSquadra extends Base{
 	}
 	
 	/*metodo che ritorna la X del gbc*/
-	public int getGbcX(String s) {
+	private int getGbcX(String s) {
 		switch (s) {
 		case "A":
 			if (this.log.getNumAtt() == 1) {
@@ -300,7 +299,7 @@ public class CreaSquadra extends Base{
 	
 	
 	/* metodo che crea la disposizione dei giocatori nel frame principale */
-	public void changeModulo() {
+	private void changeModulo() {
 		this.panelCenter.removeAll();;
 		this.panelCenter.repaint();
 		
@@ -401,7 +400,7 @@ public class CreaSquadra extends Base{
 	
 	
 	/* metodo che crea la list e la mette dentro Map<JButton, List<Calciatore>*/
-	public void choosePlayerFirstTime(String ruolo, int pos) {
+	private void choosePlayerFirstTime(String ruolo, int pos) {
 
 		List<Calciatore> list = this.log.getRandom(ruolo, NUM_PLAYER);
 		
@@ -428,7 +427,7 @@ public class CreaSquadra extends Base{
 	}
 	
 	/* metodo chiamato dopo che è gia stato chiamato choosePlayerFirstTime*/
-	public void choosePlayer(String ruolo, int pos) {
+	private void choosePlayer(String ruolo, int pos) {
 		
 		List<Calciatore> list = new ArrayList<>();
 		
@@ -452,7 +451,7 @@ public class CreaSquadra extends Base{
 	}
 	
 	/* metodo per disegnare nel frameCalciatori i 5 calciatori che si possono selezionare*/
-	public void addPlayers(String ruolo, int pos, List<Calciatore> list) {
+	private void addPlayers(String ruolo, int pos, List<Calciatore> list) {
 		this.panelCalciatoriCenter.removeAll();
 		this.panelCalciatoriCenter.repaint();
 		
@@ -492,7 +491,7 @@ public class CreaSquadra extends Base{
 	
 	/* metodo per cambiare la formazione nel frame principale
 	 * mettendo al posto dei vari bottoni il nome del calciatore scelto*/
-	public void changeButtonPlayer(String ruolo, int pos) {
+	private void changeButtonPlayer(String ruolo, int pos) {
 		String s = new String();
 		switch (ruolo) {
 		case "A":
@@ -531,7 +530,7 @@ public class CreaSquadra extends Base{
 	}
 	
 	/* metodo che ritorna il colore in base al ruolo*/
-	public Color getColorByRuolo(String ruolo) {
+	private Color getColorByRuolo(String ruolo) {
 		switch (ruolo) {
 		case "A":
 			return Color.ORANGE;
@@ -547,7 +546,7 @@ public class CreaSquadra extends Base{
 	}
 	
 	/* metodo che formatta la stringa dei nomi dei giocatori*/
-	public String textFormat(String s) {	
+	private String textFormat(String s) {	
 		String label = "<html>";
 		for (int i=0;i<s.length() - 2;i++) {
 			label = label + s.charAt(i);
@@ -560,7 +559,7 @@ public class CreaSquadra extends Base{
 	}
 	
 	/* metodo per inizializzare la mappa all'inizio e quando si sceglie il modulo*/
-	public void initMap() {
+	private void initMap() {
 		this.map.clear();
 		
 		for (int i=0; i< log.getNumAtt(); i++) {
