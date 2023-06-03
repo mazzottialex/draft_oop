@@ -78,13 +78,13 @@ public class CreaSquadra extends Base{
 			public void actionPerformed(ActionEvent e) {
 							
 				if (log.teamComplete()) {
-					
+					/*
 					LogicsFile logFile=new LogicsFileImpl();
 					logFile.SaveStorico(log.getSquadra());
 
 					
 					changeJPanel(new TorneoV2(log.getSquadra(), li));
-					/*
+					*/
 					
 					try {
 						Base tempTorneo = new Torneo(log.getSquadra(), li);
@@ -101,6 +101,7 @@ public class CreaSquadra extends Base{
 								(screenSize.width - width) / 2,
 								(screenSize.height - height) / 2
 						);
+						*/
 						topFrame.validate();
 						topFrame.repaint();
 						topFrame.pack();
@@ -114,7 +115,7 @@ public class CreaSquadra extends Base{
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-					*/
+					
 					frameCalciatori.setVisible(false);
 					frameModulo.setVisible(false);
 					// ...
