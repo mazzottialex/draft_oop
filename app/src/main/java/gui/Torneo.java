@@ -39,6 +39,12 @@ import simulation.SimulatingMatchImpl;
 import utils.RoundedBorder;
 import v2.gui.DialogScelta;
 
+
+/**
+ * 
+ * @author Braccini Davide
+ *
+ */
 public class Torneo extends Base{
 
 	LogicsTorneo logTor;
