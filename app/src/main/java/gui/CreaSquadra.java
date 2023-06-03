@@ -27,21 +27,21 @@ public class CreaSquadra extends Base{
 	private final static int NUM_PLAYER = 5;
 	
 	private LogicsCreasquadra log;
-	final JFrame frameModulo;
-	final JFrame frameCalciatori;
-	final JPanel panelSud = new JPanel(new GridBagLayout()); //panel Sud del frame principale
-	final JPanel panelCenter = new JPanel(new GridBagLayout()); // Panel Center del frame principale 
-	final GridBagConstraints gbc = new GridBagConstraints();
-	final JLabel lblmodSel;
-	JLabel lblmoduloSelect;
-	final JButton buttonIniziaTorneo;
-	JButton[] buttonsAtt;
-	JButton[] buttonsCen;
-	JButton[] buttonsDif;
-	JButton buttonPor;
-	JButton[] buttonsPlayer;
-	JPanel panelCalciatoriCenter;
-	JButton buttonSelect;
+	private final JFrame frameModulo;
+	private final JFrame frameCalciatori;
+	private final JPanel panelSud = new JPanel(new GridBagLayout()); //panel Sud del frame principale
+	private final JPanel panelCenter = new JPanel(new GridBagLayout()); // Panel Center del frame principale 
+	private final GridBagConstraints gbc = new GridBagConstraints();
+	private final JLabel lblmodSel;
+	private JLabel lblmoduloSelect;
+	private final JButton buttonIniziaTorneo;
+	private JButton[] buttonsAtt;
+	private JButton[] buttonsCen;
+	private JButton[] buttonsDif;
+	private JButton buttonPor;
+	private JButton[] buttonsPlayer;
+	private JPanel panelCalciatoriCenter;
+	private JButton buttonSelect;
 	private Map<JButton, List<Calciatore>> map; //serve per tenere in memoria i 5 calciatori disponibili 
 	
 	public CreaSquadra(String nomeSquadra, String stemma, List<Calciatore> li) throws FileNotFoundException, ClassNotFoundException, IOException {
