@@ -8,7 +8,6 @@ import data.Squadra;
 import utils.Pair;
 
 public interface LogicsRigori {
-	public ArrayList<Map<Calciatore, String>> compute_old();
 	public ArrayList<Map<Integer, Pair<Calciatore, String>>> compute();
 
 	int getGol1();
