@@ -58,7 +58,7 @@ public class Archivio extends Base {
 		panel.setLayout(null);
 		
 		JButton btnHome = utilsGUI.standardButton("Home");
-
+		btnHome.setBounds(10, 8, 80, 28);
 		btnHome.addActionListener(new ActionListener() {
 			
 			@Override
