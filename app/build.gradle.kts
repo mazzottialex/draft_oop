@@ -38,8 +38,7 @@ dependencies {
 
 	compileOnly("com.github.spotbugs:spotbugs-annotations:4.7.3") // Use the latest version
 }
-	
-}
+
 
 application {
     // Define the main class for the application.

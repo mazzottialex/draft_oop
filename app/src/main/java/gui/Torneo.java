@@ -27,7 +27,7 @@ import javax.swing.border.EmptyBorder;
 import data.Calciatore;
 import data.Modulo;
 import data.Squadra;
-import data.SquadraAvversaria;
+import data.Squadra;
 import logics.LogicsCreaSquadraImpl;
 import logics.LogicsCreasquadra;
 import logics.LogicsImpostazioni;
@@ -64,7 +64,7 @@ public class Torneo extends Base{
 	MyJLabel[] labelsp2 = new MyJLabel[2];
 	MyJLabel labelp1 = new MyJLabel();
 	MyJLabel labelp0 = new MyJLabel();
-	private List<SquadraAvversaria> listAvversarie;
+	private List<Squadra> listAvversarie;
 	int risSquadraUte = 0;
 	int risSquadraAvv = 0;
 	//boolean eliminatedThisTurn = false;

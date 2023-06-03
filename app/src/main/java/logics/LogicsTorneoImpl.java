@@ -7,7 +7,7 @@ import java.util.*;
 import data.Calciatore;
 import data.Modulo;
 import data.Squadra;
-import data.SquadraAvversaria;
+import data.Squadra;
 import data.SquadraUtente;
 import gui.Partita;
 import manageData.ExtractData;
@@ -23,13 +23,13 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	//private ManageData md;
 	//private ExtractData ex;
 	private Squadra miasquadra;
-	private List<SquadraAvversaria> listSquadre;
+	private List<Squadra> listSquadre;
 	//private List<Integer> golFatti;
 	private int numSquadre;
 	private Map<String, Integer> risultati;
 	private List<Calciatore> li;
 	private boolean eliminated;
-	private SquadraAvversaria squadraAvv; // squadra al posto della squadra utente se vince 
+	private Squadra squadraAvv; // squadra al posto della squadra utente se vince 
 	private Map<String, Integer> risMatch; // ris della squadra al posto della squadra utente
 	private String Winner;
 	private boolean elimThisTurn;
@@ -63,19 +63,19 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 		*/
 		//System.out.println(this.listSquadre);
 		CreaSquadreAvversarieImpl cs = new CreaSquadreAvversarieImpl(li, 15);
-		this.listSquadre.addAll((Collection<? extends SquadraAvversaria>) cs.getSquadre());
+		this.listSquadre.addAll(cs.getSquadre());
 		
 		this.numSquadre = 16;
 		this.risultati = new HashMap<>();
 		this.eliminated = false;
-		this.squadraAvv = new SquadraAvversaria(0, "aaa", Modulo.M442, li);
+		//this.squadraAvv = new Squadra(0, "aaa", Modulo.M442, li);
 		this.risMatch = new HashMap<>();
 		this.Winner = new String();
 		this.elimThisTurn = false;
 	}
 
 	@Override
-	public List<SquadraAvversaria> getListAvversari() {
+	public List<Squadra> getListAvversari() {
 		return this.listSquadre;
 	}
 
@@ -95,7 +95,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	}
 
 	@Override
-	public void setListAvversari(List<SquadraAvversaria> list) {
+	public void setListAvversari(List<Squadra> list) {
 		this.listSquadre = list;
 	}
 
@@ -103,7 +103,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	 * avversaria con le squadre che hanno vinto */
 	@Override
 	public void simulaMatch() {
-		List<SquadraAvversaria> newList = new ArrayList<>();
+		List<Squadra> newList = new ArrayList<>();
 		final int numSquadre = this.getNumSquadre();
 		Map<String, Integer> map = new HashMap<>(); //map per il risultato
 		List<String> list = new ArrayList<>(); //lista per i nomi delle squadre che si sfidano
@@ -476,12 +476,12 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	}
 
 	@Override
-	public SquadraAvversaria getSquadraAvv() {
+	public Squadra getSquadraAvv() {
 		return this.squadraAvv;
 	}
 
 	@Override
-	public void setSquadraAvv(SquadraAvversaria squadra) {
+	public void setSquadraAvv(Squadra squadra) {
 		this.squadraAvv = squadra;
 	}
 

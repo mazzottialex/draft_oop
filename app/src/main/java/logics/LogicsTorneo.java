@@ -10,9 +10,9 @@ import data.SquadraAvversaria;
 
 public interface LogicsTorneo {
 
-	public List<SquadraAvversaria> getListAvversari();
+	public List<Squadra> getListAvversari();
 	
-	public void setListAvversari(List<SquadraAvversaria> list);
+	public void setListAvversari(List<Squadra> list);
 	
 	public Squadra getMiaSquadra(); 
 	
@@ -28,9 +28,9 @@ public interface LogicsTorneo {
 	
 	public void setEliminated(boolean eliminated);
 	
-	public SquadraAvversaria getSquadraAvv();
+	public Squadra getSquadraAvv();
 	
-	public void setSquadraAvv(SquadraAvversaria squadra);
+	public void setSquadraAvv(Squadra squadra);
 	
 	public Map<String,Integer> getRisMatch();
 	
