@@ -22,15 +22,15 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 
 	//private ManageData md;
 	//private ExtractData ex;
-	private Squadra miasquadra;
+	private final Squadra miasquadra;
 	private List<Squadra> listSquadre;
 	//private List<Integer> golFatti;
 	private int numSquadre;
-	private Map<String, Integer> risultati;
-	private List<Calciatore> li;
+	private final Map<String, Integer> risultati;
+	private final List<Calciatore> li;
 	private boolean eliminated;
 	private Squadra squadraAvv; // squadra al posto della squadra utente se vince 
-	private Map<String, Integer> risMatch; // ris della squadra al posto della squadra utente
+	private final Map<String, Integer> risMatch; // ris della squadra al posto della squadra utente
 	private String Winner;
 	private boolean elimThisTurn;
 	

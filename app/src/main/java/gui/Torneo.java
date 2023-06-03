@@ -52,34 +52,34 @@ public class Torneo extends Base{
 	private final static int NUM_TURN_3 = 4;
 	private final static int NUM_TURN_4 = 2;
 	
-	private LogicsTorneo logTor;
-	private JPanel panelSud = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-	private GridLayout gl = new GridLayout(6,1);
-	private JPanel panelCenter = new JPanel(gl);
-	private JPanel panelNord = new JPanel(new FlowLayout(FlowLayout.CENTER));
-	private GridLayout g0 = new GridLayout(1,1);
-	private GridLayout g1 = new GridLayout(1,1);
-	private GridLayout g2 = new GridLayout(1,NUM_TURN_4);
-	private  GridLayout g3 = new GridLayout(1,NUM_TURN_3);
-	private GridLayout g4 = new GridLayout(1,NUM_TURN_2);
-	private  GridLayout g5 = new GridLayout(1,NUM_TURN_1);
-	private  JPanel p0 = new JPanel(g0);  //Panel a riga 0 (squadra vincitrice)
-	private JPanel p1 = new JPanel(g1);  //Panel a riga 1 --> 2 squadre --> 1 partita
-	private JPanel p2 = new JPanel(g2);	 //Panel a riga 2 --> 4 squadre --> 2 partite
-	private JPanel p3 = new JPanel(g3);	 //Panel a riga 3 --> 8 squadre ---> 4 partite
-	private JPanel p4 = new JPanel(g4);  //Panel a riga 4 --> 16 squadre --> 8 partite
-	private JPanel p5 = new JPanel(g5);  //Panel a riga 5 --> 16 squadre
-	private MyJLabel[] labelsp5 = new MyJLabel[NUM_TURN_1];
-	private MyJLabel[] labelsp4 = new MyJLabel[NUM_TURN_2];
-	private MyJLabel[] labelsp3 = new MyJLabel[NUM_TURN_3];
-	private MyJLabel[] labelsp2 = new MyJLabel[NUM_TURN_4];
+	private final LogicsTorneo logTor;
+	private final JPanel panelSud = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+	private final GridLayout gl = new GridLayout(6,1);
+	private final JPanel panelCenter = new JPanel(gl);
+	private final JPanel panelNord = new JPanel(new FlowLayout(FlowLayout.CENTER));
+	private final GridLayout g0 = new GridLayout(1,1);
+	private final GridLayout g1 = new GridLayout(1,1);
+	private final GridLayout g2 = new GridLayout(1,NUM_TURN_4);
+	private final GridLayout g3 = new GridLayout(1,NUM_TURN_3);
+	private final GridLayout g4 = new GridLayout(1,NUM_TURN_2);
+	private final GridLayout g5 = new GridLayout(1,NUM_TURN_1);
+	private final JPanel p0 = new JPanel(g0);  //Panel a riga 0 (squadra vincitrice)
+	private final JPanel p1 = new JPanel(g1);  //Panel a riga 1 --> 2 squadre --> 1 partita
+	private final JPanel p2 = new JPanel(g2);	 //Panel a riga 2 --> 4 squadre --> 2 partite
+	private final JPanel p3 = new JPanel(g3);	 //Panel a riga 3 --> 8 squadre ---> 4 partite
+	private final JPanel p4 = new JPanel(g4);  //Panel a riga 4 --> 16 squadre --> 8 partite
+	private final JPanel p5 = new JPanel(g5);  //Panel a riga 5 --> 16 squadre
+	private final MyJLabel[] labelsp5 = new MyJLabel[NUM_TURN_1];
+	private final MyJLabel[] labelsp4 = new MyJLabel[NUM_TURN_2];
+	private final MyJLabel[] labelsp3 = new MyJLabel[NUM_TURN_3];
+	private final MyJLabel[] labelsp2 = new MyJLabel[NUM_TURN_4];
 	private MyJLabel labelp1 = new MyJLabel();
 	private MyJLabel labelp0 = new MyJLabel();
 	private List<Squadra> listAvversarie;
 	private int risSquadraUte = 0;
 	private int risSquadraAvv = 0;
 	//boolean eliminatedThisTurn = false;
-	private JButton buttonSimula;
+	private final JButton buttonSimula;
 	
 	public Torneo(Squadra squadra, List<Calciatore> li) throws FileNotFoundException, ClassNotFoundException, IOException {
 					
