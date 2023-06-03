@@ -2,6 +2,7 @@ package logics;
 
 import java.awt.Component;
 import java.awt.Container;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -20,8 +21,8 @@ public class LogicsSostituzioneImpl implements LogicsSostituzione{
 	private Sostituzione gui;
 	
 	public LogicsSostituzioneImpl(Squadra s, Sostituzione gui) {
-		this.titolari = s.getTitolari();
-		this.riserve = s.getRiserve();
+		this.titolari = new ArrayList<>(s.getTitolari());
+		this.riserve = new ArrayList<>( s.getRiserve());
 		this.entra = null;
 		this.esce = null;
 		this.s = s;
