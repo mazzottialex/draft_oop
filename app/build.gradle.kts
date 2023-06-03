@@ -9,6 +9,8 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
+
+    id("org.danilopianini.gradle-java-qa") version "0.40.0"
 }
 
 repositories {
@@ -32,6 +34,10 @@ dependencies {
 	//implementation("org.seleniumhq.selenium:selenium-support:2.43.1")
 	//implementation("org.seleniumhq.selenium:selenium-devtools-v86:4.0.0")
 //Thanks for using https://jar-download.com
+	
+
+	compileOnly("com.github.spotbugs:spotbugs-annotations:4.7.3") // Use the latest version
+}
 	
 }
 
