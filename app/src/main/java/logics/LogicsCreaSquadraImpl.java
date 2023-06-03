@@ -10,8 +10,6 @@ import data.Squadra;
 import data.SquadraUtente;
 import manageData.ExtractData;
 import manageData.ExtractDataImpl;
-import manageData.ManageData;
-import manageData.ManageDataImpl;
 
 public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 

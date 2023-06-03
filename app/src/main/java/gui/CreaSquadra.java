@@ -10,15 +10,10 @@ import java.util.*;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.event.AncestorEvent;
-import javax.swing.event.AncestorListener;
-
 import data.Calciatore;
 import data.Modulo;
 import logics.LogicsCreaSquadraImpl;
 import logics.LogicsCreasquadra;
-import manageData.LogicsFile;
-import manageData.LogicsFileImpl;
 import v2.gui.*;
 
 public class CreaSquadra extends Base{

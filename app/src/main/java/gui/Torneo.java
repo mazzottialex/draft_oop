@@ -2,8 +2,6 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -12,32 +10,19 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
-import java.util.*;
-
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 import data.Calciatore;
-import data.Modulo;
 import data.Squadra;
-import data.Squadra;
-import logics.LogicsCreaSquadraImpl;
-import logics.LogicsCreasquadra;
-import logics.LogicsImpostazioni;
-import logics.LogicsImpostazioniImpl;
 import logics.LogicsRigoriImpl;
 import logics.LogicsTorneo;
 import logics.LogicsTorneoImpl;
-import simulation.SimulatingMatchImpl;
 import utils.RoundedBorder;
-import v2.gui.DialogScelta;
 
 
 /**

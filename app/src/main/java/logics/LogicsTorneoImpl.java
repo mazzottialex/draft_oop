@@ -5,17 +5,7 @@ import java.io.IOException;
 import java.util.*;
 
 import data.Calciatore;
-import data.Modulo;
 import data.Squadra;
-import data.Squadra;
-import data.SquadraUtente;
-import gui.Partita;
-import manageData.ExtractData;
-import manageData.ExtractDataImpl;
-import manageData.ManageData;
-import manageData.ManageDataImpl;
-import rating.CalcoloRating;
-import rating.CalcoloRatingImpl;
 import simulation.SimulatingMatchImpl;
 
 public class LogicsTorneoImpl implements LogicsTorneo {
