@@ -308,8 +308,8 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 					//l.clear();
 					int r1 = map2.get(l.get(0));
 					int r2 = map2.get(l.get(1));
-					if (this.risMatch.get(l.get(0).getNomeSquadra()).equals
-							(this.risMatch.get(l.get(1).getNomeSquadra()))) {
+					if (this.risMatch.get(l.get(0).getNomeSquadra()).equals(
+							this.risMatch.get(l.get(1).getNomeSquadra()))) {
 						map2 = s.risultatoSuppl();
 						l.clear();
 						l.addAll(map2.keySet());
@@ -395,7 +395,8 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 			
 			if (this.getEliminated() && !this.getElimThisTurn()) {
 				try {
-					SimulatingMatchImpl s = new SimulatingMatchImpl(this.squadraAvv, this.getListAvversari().get(0));
+					SimulatingMatchImpl s = new SimulatingMatchImpl(this.squadraAvv, 
+							this.getListAvversari().get(0));
 					map2 = s.risultato();
 					l.clear();
 					l.addAll(map2.keySet());

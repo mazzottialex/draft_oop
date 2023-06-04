@@ -170,4 +170,11 @@ public interface LogicsCreasquadra {
 	 * @return the list of player already used
 	 */
 	List<Calciatore> getCalcUsciti();
+	
+	/**
+	 * 
+	 * @param list the list of player already used
+	 */
+	void addCalcUsciti(List<Calciatore> list);
+	
 }

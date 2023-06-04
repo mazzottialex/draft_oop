@@ -300,4 +300,9 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 		return this.calcUsciti;
 	}
 
+	@Override
+	public void addCalcUsciti(List<Calciatore> list) {
+		this.calcUsciti.addAll(list);
+	}
+
 }
