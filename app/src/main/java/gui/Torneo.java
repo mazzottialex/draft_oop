@@ -178,7 +178,7 @@ public class Torneo extends Base {
 		this.p4.add(this.labelsp4[0]);
 		for (int i = 1; i < this.logTor.getListAvversari().size() - 1; i = i + 2, cont++) {
 			this.labelsp4[cont] = new MyJLabel(this.logTor.getListAvversari().get(i).getNomeSquadra() 
-								+ " - " + this.logTor.getListAvversari().get(i + 1).getNomeSquadra());
+							+ " - " + this.logTor.getListAvversari().get(i + 1).getNomeSquadra());
 			this.p4.add(this.labelsp4[cont]);
 		}
 		p0.setBackground(this.panelColor);
@@ -211,8 +211,10 @@ public class Torneo extends Base {
 			// mettere il risultato della partita della squadra utente (prima da fare in Logic)
 			// metto i risultati nelle partite che si svolgono
 			int cont = 1;
-			this.labelsp4[0] = new MyJLabel(this.logTor.getMiaSquadra().getNomeSquadra() + " " + this.risSquadraUte + " " 
-							+ " - " + " " + this.risSquadraAvv + " " + this.listAvversarie.get(0).getNomeSquadra());
+			this.labelsp4[0] = new MyJLabel(this.logTor.getMiaSquadra().getNomeSquadra() 
+							+ " " + this.risSquadraUte + " " 
+							+ " - " + " " + this.risSquadraAvv + " " 
+							+ this.listAvversarie.get(0).getNomeSquadra());
 			this.p4.add(this.labelsp4[0]);
 			for (int i = 1; i < this.listAvversarie.size() - 1; i = i + 2, cont++) {
 				String squad1 = new String(this.listAvversarie.get(i).getNomeSquadra());
@@ -249,14 +251,15 @@ public class Torneo extends Base {
 			// mettere il risultato della partita della squadra utente
 			// metto i risultati nelle partite che si svolgono
 			if (!logTor.getEliminated() || this.logTor.getElimThisTurn()) {
-				this.labelsp3[0] = new MyJLabel(this.logTor.getMiaSquadra().getNomeSquadra() + " " + this.risSquadraUte + " " 
-								+ " - " + " " + this.risSquadraAvv + " " + this.listAvversarie.get(0).getNomeSquadra());
+				this.labelsp3[0] = new MyJLabel(this.logTor.getMiaSquadra().getNomeSquadra() 
+							+ " " + this.risSquadraUte + " " 
+							+ " - " + " " + this.risSquadraAvv + " " + this.listAvversarie.get(0).getNomeSquadra());
 				this.p3.add(this.labelsp3[0]);
 			} else {
 				int ris1 = this.logTor.getRisMatch().get(this.logTor.getSquadraAvv().getNomeSquadra());
 				int ris2 = this.logTor.getRisMatch().get(this.listAvversarie.get(0).getNomeSquadra());
-				this.labelsp3[0] = new MyJLabel(this.logTor.getSquadraAvv().getNomeSquadra() + " " + ris1 + " " 
-								+ " - " + " " + ris2 + " " + this.listAvversarie.get(0).getNomeSquadra());
+				this.labelsp3[0] = new MyJLabel(this.logTor.getSquadraAvv().getNomeSquadra() + " " + ris1 + " "
+							+ " - " + " " + ris2 + " " + this.listAvversarie.get(0).getNomeSquadra());
 				this.p3.add(this.labelsp3[0]);
 				if (ris2 > ris1) {
 					this.logTor.setSquadraAvv(this.listAvversarie.get(0));
@@ -302,8 +305,8 @@ public class Torneo extends Base {
 			this.p2.repaint();
 			// metto i risultati nel panel 2 (ora non ho quelli della squadraUtente)
 			if (!logTor.getEliminated() || this.logTor.getElimThisTurn()) {
-				this.labelsp2[0] = new MyJLabel(this.logTor.getMiaSquadra().getNomeSquadra() + " " + this.risSquadraUte + " " +
-								" - " + " " + this.risSquadraAvv + " " + this.listAvversarie.get(0).getNomeSquadra());
+				this.labelsp2[0] = new MyJLabel(this.logTor.getMiaSquadra().getNomeSquadra() + " " + this.risSquadraUte + " "
+								+ " - " + " " + this.risSquadraAvv + " " + this.listAvversarie.get(0).getNomeSquadra());
 				this.p2.add(this.labelsp2[0]);
 			} else {
 				int ris1 = this.logTor.getRisMatch().get(this.logTor.getSquadraAvv().getNomeSquadra());
@@ -376,7 +379,6 @@ public class Torneo extends Base {
 			label.setForeground(Color.red);
 			label.setOpaque(true);
 			this.panelNord.add(label);
-			
 			buttonSimula.setVisible(false);
 			contentPane.validate();
 			this.logTor.setNumSquadre(0);
@@ -386,7 +388,6 @@ public class Torneo extends Base {
 			this.panelCenter.validate();
 			break;
 		}
-		
 	}
 	
 	/**
@@ -403,9 +404,7 @@ public class Torneo extends Base {
 			setBorder(new RoundedBorder(Color.white, 20));
 			setBackground(new Color(0, 64, 128));
 			setForeground(Color.white);
-
 			setOpaque(true);
-
 		}
 	}
 }
