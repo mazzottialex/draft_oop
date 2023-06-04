@@ -34,6 +34,8 @@ public interface LogicsTorneo {
 	
 	public Map<String,Integer> getRisMatch();
 	
+	public void clearRisMatch();
+	
 	public String getWinner();
 	
 	public boolean getElimThisTurn();

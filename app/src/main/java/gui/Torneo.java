@@ -300,7 +300,7 @@ public class Torneo extends Base{
 			this.labelsp2[1] = new MyJLabel(this.logTor.getListAvversari().get(1).getNomeSquadra() + " - " + this.logTor.getListAvversari().get(2).getNomeSquadra());
 			this.p2.add(this.labelsp2[1]);
 
-			this.logTor.getRisMatch().clear();
+			this.logTor.clearRisMatch();
 			this.p2.validate();
 			this.p3.validate();
 			this.panelCenter.validate();
@@ -347,7 +347,7 @@ public class Torneo extends Base{
 				this.p1.add(this.labelp1);
 			}
 			
-			this.logTor.getRisMatch().clear();
+			this.logTor.clearRisMatch();
 			this.p1.validate();
 			this.p2.validate();
 			this.panelCenter.validate();

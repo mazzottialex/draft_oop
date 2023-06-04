@@ -468,5 +468,10 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 		this.elimThisTurn = b;
 	}
 
+	@Override
+	public void clearRisMatch() {
+		this.risMatch.clear();
+	}
+
 
 }
