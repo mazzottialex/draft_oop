@@ -32,7 +32,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	private final List<Calciatore> riserve;
 	private final String nomeSquadra;
 	private final String stemma;
-	private Squadra squadra;
+	//private Squadra squadra;
 	private final List<Calciatore> calcUsciti;
 	
 	/**

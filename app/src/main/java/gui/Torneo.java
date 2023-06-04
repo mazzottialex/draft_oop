@@ -399,6 +399,7 @@ public class Torneo extends Base {
 	 *
 	 */
 	private static class MyJLabel extends JLabel {
+		private static final long serialVersionUID = 1L;
 		public MyJLabel() {
 			super();
 		}

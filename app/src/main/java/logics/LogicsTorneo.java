@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import data.Squadra;
-import data.SquadraAvversaria;
+//import data.SquadraAvversaria;
 
 /**
  * The interface that models the logic of Torneo.

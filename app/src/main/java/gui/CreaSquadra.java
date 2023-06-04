@@ -14,9 +14,9 @@ import data.Calciatore;
 import data.Modulo;
 import logics.LogicsCreaSquadraImpl;
 import logics.LogicsCreasquadra;
-import manageData.LogicsFile;
-import manageData.LogicsFileImpl;
-import v2.gui.*;
+//import manageData.LogicsFile;
+//import manageData.LogicsFileImpl;
+//import v2.gui.*;
 
 
 /**The GUI where the user chooses his team.
@@ -28,7 +28,8 @@ import v2.gui.*;
  */
 public class CreaSquadra extends Base {
 
-    private static final int MAX_FOR_ROW = 2;
+    private static final long serialVersionUID = 1L;
+	private static final int MAX_FOR_ROW = 2;
 	private static final int NUM_PLAYER = 5;
 	
 	private LogicsCreasquadra log;
@@ -46,7 +47,7 @@ public class CreaSquadra extends Base {
 	private JButton buttonPor;
 	private JButton[] buttonsPlayer;
 	private JPanel panelCalciatoriCenter;
-	private JButton buttonSelect;
+	//private JButton buttonSelect;
 	private Map<JButton, List<Calciatore>> map; //serve per tenere in memoria i 5 calciatori disponibili 
 	
 	/**Constructor of CreaSquadra, add the necessary graphics components.
@@ -62,7 +63,7 @@ public class CreaSquadra extends Base {
 			
 		this.log = new LogicsCreaSquadraImpl(nomeSquadra, stemma, li);
 		//inizializzo il bottone per i giocatori che seleziono
-		this.buttonSelect = new JButton();
+		//this.buttonSelect = new JButton();
 		// Mi occupo del frame principale 
 		contentPane.setLayout(new BorderLayout());
 		// utilizzo gbc per la disposizione a griglia nel panel sud del frame principale
