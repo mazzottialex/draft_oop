@@ -40,9 +40,9 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	 * @param nomeSquadra the name of the team
 	 * @param stemma the arms
 	 * @param li the list of all the players in Serie A
-	 * @throws FileNotFoundException if...
-	 * @throws ClassNotFoundException if...
-	 * @throws IOException if...
+	 * @throws FileNotFoundException 
+	 * @throws ClassNotFoundException
+	 * @throws IOException
 	 */
 	public LogicsCreaSquadraImpl(final String nomeSquadra, final String stemma, final List<Calciatore> li) 
 			throws FileNotFoundException, ClassNotFoundException, IOException {

@@ -72,9 +72,9 @@ public class Torneo extends Base {
 	 * Constructor of Torneo, add the necessary graphics components.
 	 * @param squadra the user's team
 	 * @param li the list of all the players in Serie A
-	 * @throws FileNotFoundException if ...
-	 * @throws ClassNotFoundException if ...
-	 * @throws IOException if ...
+	 * @throws FileNotFoundException 
+	 * @throws ClassNotFoundException 
+	 * @throws IOException 
 	 */
 	public Torneo(final Squadra squadra, final List<Calciatore> li) 
 			throws FileNotFoundException, ClassNotFoundException, IOException {			

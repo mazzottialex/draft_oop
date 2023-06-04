@@ -54,9 +54,9 @@ public class CreaSquadra extends Base {
 	 * @param nomeSquadra the String that contains the name of the team
 	 * @param stemma the String that contains the arms of the team
 	 * @param li the list of all the players in Serie A
-	 * @throws FileNotFoundException if...
-	 * @throws ClassNotFoundException if...
-	 * @throws IOException if...
+	 * @throws FileNotFoundException
+	 * @throws ClassNotFoundException
+	 * @throws IOException 
 	 */
 	public CreaSquadra(final String nomeSquadra, final String stemma, final List<Calciatore> li) 
 			throws FileNotFoundException, ClassNotFoundException, IOException {
