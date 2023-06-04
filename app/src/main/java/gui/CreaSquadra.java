@@ -18,6 +18,14 @@ import manageData.LogicsFile;
 import manageData.LogicsFileImpl;
 import v2.gui.*;
 
+
+/**The GUI where the user chooses his team.
+ * This class generates 2 additional frames,
+ * one where you can choose the module for the 
+ * team and the other where you select the players.
+ * @author Davide Braccini
+ *
+ */
 public class CreaSquadra extends Base{
 
 	private final static int MAX_FOR_ROW = 2;
@@ -41,6 +49,15 @@ public class CreaSquadra extends Base{
 	private JButton buttonSelect;
 	private Map<JButton, List<Calciatore>> map; //serve per tenere in memoria i 5 calciatori disponibili 
 	
+	
+	/**Constructor of CreaSquadra, add the necessary graphics components
+	 * @param nomeSquadra the String that contains the name of the team
+	 * @param stemma the String that contains the arms of the team
+	 * @param li the list of all the players in Serie A
+	 * @throws FileNotFoundException if...
+	 * @throws ClassNotFoundException if...
+	 * @throws IOException if...
+	 */
 	public CreaSquadra(String nomeSquadra, String stemma, List<Calciatore> li) throws FileNotFoundException, ClassNotFoundException, IOException {
 		
 		
