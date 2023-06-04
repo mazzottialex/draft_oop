@@ -159,8 +159,8 @@ public class CreaSquadra extends Base {
 		this.frameModulo = new JFrame("Seleziona modulo: ");
 		this.frameCalciatori = new JFrame("Seleziona calciatori: ");
 		// dimensione fissa
-		this.frameModulo.setBounds(this.getX() + 520, this.getY(), 200, 300);
-		this.frameCalciatori.setBounds(this.getX() + 520, this.getY() + 300, 200, 300);
+		this.frameModulo.setBounds(620, 100, 200, 300);
+		this.frameCalciatori.setBounds(620, 400, 200, 300);
 		//Mi occupo del frame Modulo
 		final JPanel panelModulo = new JPanel(new BorderLayout());
 		panelModulo.setBackground(new Color(0, 64, 128));

@@ -96,7 +96,7 @@ public class Torneo extends Base {
 						p.addWindowListener(new WindowAdapter() {
 							public void windowClosed(final WindowEvent e) {
 								buttonSimula.setVisible(true);
-								if (p.getWinner() != logTor.getMiaSquadra()) {
+								if (p.getWinner().getId() != 0) {
 									logTor.setEliminated(true);
 									logTor.setSquadraAvv(logTor.getListAvversari().get(0));
 									//eliminatedThisTurn = true;
@@ -107,8 +107,8 @@ public class Torneo extends Base {
 								//System.out.println(p.getGolS2());
 								risSquadraUte = p.getGolS1();
 								risSquadraAvv = p.getGolS2();	
-								//risSquadraUte = 1;
-								//risSquadraAvv = 2;			
+								//risSquadraUte = 2;
+								//risSquadraAvv = 0;			
 								try {
 									logTor.simulaMatch();
 									createLevel();

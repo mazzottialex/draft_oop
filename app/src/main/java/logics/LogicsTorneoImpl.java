@@ -7,6 +7,7 @@ import java.util.*;
 import data.Calciatore;
 import data.Squadra;
 import data.SquadraAvversaria;
+import data.SquadraUtente;
 //import data.SquadraUtente;
 import simulation.SimulatingMatchImpl;
 
@@ -91,8 +92,10 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	 */
 	@Override
 	public Squadra getMiaSquadra() {
-		return this.miasquadra;
-		//Squadra copy = new SquadraUtente(this.miasquadra, , , , );
+		//return this.miasquadra;
+		final Squadra copy = new SquadraUtente(this.miasquadra.getNomeSquadra(), this.miasquadra.getStemma(),
+				this.miasquadra.getModulo(), this.miasquadra.getTitolari(), this.miasquadra.getRiserve());
+		return copy;
 	}
 
 	/**
