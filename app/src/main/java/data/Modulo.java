@@ -8,30 +8,24 @@ public enum Modulo {
     M451(4, 5, 1),
     M532(5, 3, 2),
     M541(5, 4, 1);
-
-    private int dif;
-    private int cen;
-    private int att;
-
-    private Modulo(int dif, int cen, int att) {
+    private final int dif;
+    private final int cen;
+    private final int att;
+    private Modulo(final int dif, final int cen, final int att) {
         this.dif = dif;
         this.cen = cen;
         this.att = att;
     }
-
     public int getNumDif() {
         return dif;
     }
-
     public int getNumCen() {
         return cen;
     }
-
     public int getNumAtt() {
         return att;
     }
-
-    public int getN(String ruolo) {
+    public int getN(final String ruolo) {
         if (ruolo == "P")
             return 1;
         else if (ruolo == "D")
@@ -42,7 +36,6 @@ public enum Modulo {
             return att;
         else return 0;
     }
-
     public String toString() {
         return dif + "-" + cen + "-" + att;
     }
