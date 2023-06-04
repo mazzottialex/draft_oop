@@ -12,13 +12,13 @@ import manageData.ExtractData;
 import manageData.ExtractDataImpl;
 
 /**
- * The class that handles the team creation logic
+ * The class that handles the team creation logic.
  * @author Davide Braccini
  *
  */
 public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 
-	private final static int NUM_PLAYER_IN_TEAM = 11;  
+	private static final int NUM_PLAYER_IN_TEAM = 11;  
 	
 	private Modulo moduloSelect;
 	//private ManageData md;
@@ -36,7 +36,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	private final List<Calciatore> calcUsciti;
 	
 	/**
-	 * Constructor of LogicsCreaSquadraImpl
+	 * Constructor of LogicsCreaSquadraImpl.
 	 * @param nomeSquadra the name of the team
 	 * @param stemma the arms
 	 * @param li the list of all the players in Serie A
@@ -44,13 +44,14 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	 * @throws ClassNotFoundException if...
 	 * @throws IOException if...
 	 */
-	public LogicsCreaSquadraImpl(String nomeSquadra, String stemma, List<Calciatore> li) throws FileNotFoundException, ClassNotFoundException, IOException {
+	public LogicsCreaSquadraImpl(final String nomeSquadra, final String stemma, final List<Calciatore> li) 
+			throws FileNotFoundException, ClassNotFoundException, IOException {
 		this.moduloSelect = Modulo.M343;
 		//this.md = new ManageDataImpl(stagione);
 		//this.md.LoadData();
 		this.ex = new ExtractDataImpl(li); //(this.md.getLi());
 		this.namePlayer = new String();
-		this.calciatoreSelect = new Calciatore(0,null,null,null,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+		this.calciatoreSelect = new Calciatore(0, null, null, null, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 		this.ruoloSelect = null;
 		this.posSelect = -1;
 		this.ratingSelect = 0;
@@ -64,7 +65,6 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 		riserve.addAll(this.getRandom("C", 2));
 		riserve.addAll(this.getRandom("A", 2));
 		this.calcUsciti.addAll(riserve);
-		
 	}
 	
 	/**
@@ -89,7 +89,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setModulo(Modulo mod) {
+	public void setModulo(final Modulo mod) {
 		this.moduloSelect = mod;
 	}
 
@@ -136,7 +136,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<Calciatore> getRandom(String ruolo, int n) {
+	public List<Calciatore> getRandom(final String ruolo, final int n) {
 		List<Calciatore> list = this.ex.getListaByRuolo(ruolo);
 		Set<Calciatore> set = new HashSet<>();
 		List<Calciatore> randomList = new ArrayList<>();
@@ -171,7 +171,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setNameString(String name) {
+	public void setNameString(final String name) {
 		this.namePlayer = name;
 	}
 
@@ -187,7 +187,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setCalciatoreSelect(Calciatore calciatore) {
+	public void setCalciatoreSelect(final Calciatore calciatore) {
 		this.calciatoreSelect = calciatore;
 	}
 
@@ -203,7 +203,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setRuoloSelect(String ruolo) {
+	public void setRuoloSelect(final String ruolo) {
 		this.ruoloSelect = ruolo;
 	}
 
@@ -219,7 +219,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setposSelect(int pos) {
+	public void setposSelect(final int pos) {
 		this.posSelect = pos;
 	}
 
@@ -227,8 +227,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void addPlayerInTeam(Calciatore calciatore) {
-		
+	public void addPlayerInTeam(final Calciatore calciatore) {
 		if (!this.liSquadra.contains(calciatore)) {
 			this.liSquadra.add(calciatore);
 		}
@@ -289,7 +288,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setRating(int rating) {
+	public void setRating(final int rating) {
 		this.ratingSelect = rating;
 	}
 
