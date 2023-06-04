@@ -29,6 +29,8 @@ dependencies {
     implementation("org.seleniumhq.selenium:selenium-chrome-driver:4.9.1")
     implementation("org.seleniumhq.selenium:selenium-support:3.141.59")
     
+    implementation("org.seleniumhq.selenium:selenium-firefox-driver:4.9.1")
+    
     implementation("org.slf4j:slf4j-api:1.7.32")
     implementation("org.slf4j:slf4j-simple:1.7.32")
 	//implementation("org.seleniumhq.selenium:selenium-support:2.43.1")
