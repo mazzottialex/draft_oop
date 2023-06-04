@@ -26,8 +26,8 @@ import utils.RoundedBorder;
 
 
 /**
- * 
- * @author Braccini Davide
+ * The GUI where the tournament is played
+ * @author Davide Braccini
  *
  */
 public class Torneo extends Base{
@@ -66,6 +66,14 @@ public class Torneo extends Base{
 	//boolean eliminatedThisTurn = false;
 	private final JButton buttonSimula;
 	
+	/**
+	 * Constructor of Torneo, add the necessary graphics components
+	 * @param squadra the user's team
+	 * @param li the list of all the players in Serie A
+	 * @throws FileNotFoundException if ...
+	 * @throws ClassNotFoundException if ...
+	 * @throws IOException if ...
+	 */
 	public Torneo(Squadra squadra, List<Calciatore> li) throws FileNotFoundException, ClassNotFoundException, IOException {
 					
 		this.logTor = new LogicsTorneoImpl(squadra, li);
@@ -406,7 +414,11 @@ public class Torneo extends Base{
 		
 	}
 	
-	
+	/**
+	 * The inner classe that extends JLabel
+	 * @author Davide Braccini
+	 *
+	 */
 	private static class MyJLabel extends JLabel{
 		public MyJLabel() {
 			super();

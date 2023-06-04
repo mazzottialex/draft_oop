@@ -36,7 +36,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	private final List<Calciatore> calcUsciti;
 	
 	/**
-	 * 
+	 * Constructor of LogicsCreaSquadraImpl
 	 * @param nomeSquadra the name of the team
 	 * @param stemma the arms
 	 * @param li the list of all the players in Serie A
