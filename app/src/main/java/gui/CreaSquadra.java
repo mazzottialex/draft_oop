@@ -14,8 +14,18 @@ import data.Calciatore;
 import data.Modulo;
 import logics.LogicsCreaSquadraImpl;
 import logics.LogicsCreasquadra;
+import manageData.LogicsFile;
+import manageData.LogicsFileImpl;
 import v2.gui.*;
 
+
+/**The GUI where the user chooses his team.
+ * This class generates 2 additional frames,
+ * one where you can choose the module for the 
+ * team and the other where you select the players.
+ * @author Davide Braccini
+ *
+ */
 public class CreaSquadra extends Base{
 
 	private final static int MAX_FOR_ROW = 2;
@@ -39,6 +49,15 @@ public class CreaSquadra extends Base{
 	private JButton buttonSelect;
 	private Map<JButton, List<Calciatore>> map; //serve per tenere in memoria i 5 calciatori disponibili 
 	
+	
+	/**Constructor of CreaSquadra, add the necessary graphics components
+	 * @param nomeSquadra the String that contains the name of the team
+	 * @param stemma the String that contains the arms of the team
+	 * @param li the list of all the players in Serie A
+	 * @throws FileNotFoundException if...
+	 * @throws ClassNotFoundException if...
+	 * @throws IOException if...
+	 */
 	public CreaSquadra(String nomeSquadra, String stemma, List<Calciatore> li) throws FileNotFoundException, ClassNotFoundException, IOException {
 		
 		
@@ -73,6 +92,7 @@ public class CreaSquadra extends Base{
 			public void actionPerformed(ActionEvent e) {
 							
 				if (log.teamComplete()) {
+					
 					/*
 					LogicsFile logFile=new LogicsFileImpl();
 					logFile.SaveStorico(log.getSquadra());
@@ -113,7 +133,7 @@ public class CreaSquadra extends Base{
 					
 					frameCalciatori.setVisible(false);
 					frameModulo.setVisible(false);
-					// ...
+					
 				} else {
 					final JFrame err = new JFrame("ERRORE");
 					err.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -253,7 +273,7 @@ public class CreaSquadra extends Base{
 	}
 	
 	/*metodo per cambiare la label del framePrincipale*/
-	public void changeButtonModulo() {
+	private void changeButtonModulo() {
 		//gbc.insets = new Insets(8,0,8,8);
 		gbc.gridx = 1;
 		gbc.gridy = 0;		

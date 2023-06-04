@@ -8,6 +8,11 @@ import data.Calciatore;
 import data.Squadra;
 import simulation.SimulatingMatchImpl;
 
+/**
+ * The class that manages the logic of the tournament
+ * @author Davide Braccini
+ *
+ */
 public class LogicsTorneoImpl implements LogicsTorneo {
 
 	//private ManageData md;
@@ -24,6 +29,14 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	private String Winner;
 	private boolean elimThisTurn;
 	
+	/**
+	 * Constructor of LogicsTorneoImpl
+	 * @param squadra the user's team 
+	 * @param li the list of all the players in Serie A
+	 * @throws FileNotFoundException if ...
+	 * @throws ClassNotFoundException if ...
+	 * @throws IOException if ...
+	 */
 	public LogicsTorneoImpl(Squadra squadra, List<Calciatore> li) throws FileNotFoundException, ClassNotFoundException, IOException {
 		this.li=li;
 		this.listSquadre = new ArrayList<>();
@@ -64,33 +77,49 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 		this.elimThisTurn = false;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<Squadra> getListAvversari() {
 		return this.listSquadre;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Squadra getMiaSquadra() {
 		return this.miasquadra;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int getNumSquadre() {
 		return this.numSquadre;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void setNumSquadre(int numSquadre) {
 		this.numSquadre = numSquadre;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void setListAvversari(List<Squadra> list) {
 		this.listSquadre = list;
 	}
 
-	/* funzione che calcola i risultati delle partite e setta la lista
-	 * avversaria con le squadre che hanno vinto */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void simulaMatch() {
 		List<Squadra> newList = new ArrayList<>();
@@ -423,49 +452,84 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 		
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Map<String, Integer> getRisultati() {
 		return this.risultati;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean getEliminated() {
 		return this.eliminated;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void setEliminated(boolean eliminated) {
 		this.eliminated = eliminated;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Squadra getSquadraAvv() {
 		return this.squadraAvv;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void setSquadraAvv(Squadra squadra) {
 		this.squadraAvv = squadra;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Map<String, Integer> getRisMatch() {
 		return this.risMatch;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getWinner() {
 		return this.Winner;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean getElimThisTurn() {
 		return this.elimThisTurn;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void setElimThisTurn(boolean b) {
 		this.elimThisTurn = b;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void clearRisMatch() {
+		this.risMatch.clear();
 	}
 
 
