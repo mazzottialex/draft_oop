@@ -11,6 +11,11 @@ import data.SquadraUtente;
 import manageData.ExtractData;
 import manageData.ExtractDataImpl;
 
+/**
+ * The class that handles the team creation logic
+ * @author Davide Braccini
+ *
+ */
 public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 
 	private final static int NUM_PLAYER_IN_TEAM = 11;  
@@ -30,6 +35,15 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	private Squadra squadra;
 	private final List<Calciatore> calcUsciti;
 	
+	/**
+	 * 
+	 * @param nomeSquadra the name of the team
+	 * @param stemma the arms
+	 * @param li the list of all the players in Serie A
+	 * @throws FileNotFoundException if...
+	 * @throws ClassNotFoundException if...
+	 * @throws IOException if...
+	 */
 	public LogicsCreaSquadraImpl(String nomeSquadra, String stemma, List<Calciatore> li) throws FileNotFoundException, ClassNotFoundException, IOException {
 		this.moduloSelect = Modulo.M343;
 		//this.md = new ManageDataImpl(stagione);
@@ -53,10 +67,16 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 		
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	public Squadra getSquadra() {
 		return new SquadraUtente(nomeSquadra, stemma, moduloSelect, liSquadra, riserve); //sistemare titolari e riserve
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	public List<Modulo> getModuli() {
 		List<Modulo> list = new ArrayList<>();
 		for (Modulo m : Modulo.values()) {
@@ -65,35 +85,56 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 		return list;
  	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void setModulo(Modulo mod) {
 		this.moduloSelect = mod;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Modulo getModulo() {
 		return this.moduloSelect;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public int getNumDif() {
 		return this.moduloSelect.getNumDif();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int getNumCen() {
 		return this.moduloSelect.getNumCen();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int getNumAtt() {
 		return this.moduloSelect.getNumAtt();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ExtractData getEx() {
 		return this.ex;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<Calciatore> getRandom(String ruolo, int n) {
 		List<Calciatore> list = this.ex.getListaByRuolo(ruolo);
@@ -118,46 +159,73 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 		return randomList;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getNamePlayer() {
 		return this.namePlayer;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void setNameString(String name) {
 		this.namePlayer = name;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Calciatore getCalciatoreSelect() {
 		return this.calciatoreSelect;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void setCalciatoreSelect(Calciatore calciatore) {
 		this.calciatoreSelect = calciatore;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getRuoloSelect() {
 		return this.ruoloSelect;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void setRuoloSelect(String ruolo) {
 		this.ruoloSelect = ruolo;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int getposSelect() {
 		return this.posSelect; 
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void setposSelect(int pos) {
 		this.posSelect = pos;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void addPlayerInTeam(Calciatore calciatore) {
 		
@@ -166,11 +234,17 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void clearTeam() {
 		this.liSquadra.clear();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean teamComplete() {
 		if (this.liSquadra.size() == LogicsCreaSquadraImpl.NUM_PLAYER_IN_TEAM) {
@@ -179,31 +253,49 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 		return false;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getNomeSquadra() {
 		return this.nomeSquadra;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getStemma() {
 		return this.stemma;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<Calciatore> getTitolari() {
 		return this.liSquadra;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int getRating() {
 		return this.ratingSelect;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void setRating(int rating) {
 		this.ratingSelect = rating;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<Calciatore> getCalcUsciti() {
 		return this.calcUsciti;

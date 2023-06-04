@@ -92,6 +92,7 @@ public class CreaSquadra extends Base{
 			public void actionPerformed(ActionEvent e) {
 							
 				if (log.teamComplete()) {
+					
 					/*
 					LogicsFile logFile=new LogicsFileImpl();
 					logFile.SaveStorico(log.getSquadra());
@@ -132,7 +133,7 @@ public class CreaSquadra extends Base{
 					
 					frameCalciatori.setVisible(false);
 					frameModulo.setVisible(false);
-					// ...
+					
 				} else {
 					final JFrame err = new JFrame("ERRORE");
 					err.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -272,7 +273,7 @@ public class CreaSquadra extends Base{
 	}
 	
 	/*metodo per cambiare la label del framePrincipale*/
-	public void changeButtonModulo() {
+	private void changeButtonModulo() {
 		//gbc.insets = new Insets(8,0,8,8);
 		gbc.gridx = 1;
 		gbc.gridy = 0;		
