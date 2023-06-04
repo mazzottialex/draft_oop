@@ -9,7 +9,7 @@ import data.Squadra;
 import simulation.SimulatingMatchImpl;
 
 /**
- * The class that manages the logic of the tournament
+ * The class that manages the logic of the tournament.
  * @author Davide Braccini
  *
  */
