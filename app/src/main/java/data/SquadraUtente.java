@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SquadraUtente implements Squadra, Serializable {
+public class SquadraUtente implements Squadra {
 	private final int id;
 	private final String nomeSquadra;
 	private final String stemma;
