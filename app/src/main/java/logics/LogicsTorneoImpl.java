@@ -133,7 +133,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 		List<String> list = new ArrayList<>(); //lista per i nomi delle squadre che si sfidano
 		String teamWin; //nome della squadra vincente
 		String teamLose; //nome della squadra perdente
-		Map<Squadra, Integer> map2 = new HashMap<>();
+		Map<Squadra, Integer> map2;
 		List<Squadra> l = new ArrayList<>(); // appoggio
 
 		switch (numSquadre) {
