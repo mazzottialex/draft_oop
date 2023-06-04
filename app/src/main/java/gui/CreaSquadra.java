@@ -14,6 +14,8 @@ import data.Calciatore;
 import data.Modulo;
 import logics.LogicsCreaSquadraImpl;
 import logics.LogicsCreasquadra;
+import manageData.LogicsFile;
+import manageData.LogicsFileImpl;
 import v2.gui.*;
 
 public class CreaSquadra extends Base{
