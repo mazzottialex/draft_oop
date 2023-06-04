@@ -32,6 +32,7 @@ import utils.RoundedBorder;
  */
 public class Torneo extends Base {
 
+	private static final long serialVersionUID = 1L;
 	private static final int NUM_TURN_1 = 16;
 	private static final int NUM_TURN_2 = 8;
 	private static final int NUM_TURN_3 = 4;

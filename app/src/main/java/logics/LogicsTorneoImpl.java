@@ -22,7 +22,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	//private List<Integer> golFatti;
 	private int numSquadre;
 	private final Map<String, Integer> risultati;
-	private final List<Calciatore> li;
+	//private final List<Calciatore> li;
 	private boolean eliminated;
 	private Squadra squadraAvv; // squadra al posto della squadra utente se vince 
 	private final Map<String, Integer> risMatch; // ris della squadra al posto della squadra utente
@@ -39,7 +39,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	 */
 	public LogicsTorneoImpl(final Squadra squadra, final List<Calciatore> li) 
 			throws FileNotFoundException, ClassNotFoundException, IOException {
-		this.li = li;
+
 		this.listSquadre = new ArrayList<>();
 		//this.golFatti = new ArrayList<>();
 		//Creo la squadra dell'utente
