@@ -65,6 +65,7 @@ public class Torneo extends Base {
 	private int risSquadraAvv = 0;
 	//boolean eliminatedThisTurn = false;
 	private final JButton buttonSimula;
+	private final Color panelColor = new Color(0, 64, 128);
 	
 	/**
 	 * Constructor of Torneo, add the necessary graphics components.
@@ -74,7 +75,8 @@ public class Torneo extends Base {
 	 * @throws ClassNotFoundException if ...
 	 * @throws IOException if ...
 	 */
-	public Torneo(final Squadra squadra, final List<Calciatore> li) throws FileNotFoundException, ClassNotFoundException, IOException {			
+	public Torneo(final Squadra squadra, final List<Calciatore> li) 
+			throws FileNotFoundException, ClassNotFoundException, IOException {			
 		this.logTor = new LogicsTorneoImpl(squadra, li);
 		this.listAvversarie = logTor.getListAvversari();
 		this.contentPane.setLayout(new BorderLayout());
@@ -82,7 +84,6 @@ public class Torneo extends Base {
 		buttonSimula = new JButton("Simula");
 		buttonSimula.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
-				
 				//eliminatedThisTurn = false;
 				logTor.setElimThisTurn(false);
 				if (!logTor.getEliminated()) {
@@ -92,7 +93,7 @@ public class Torneo extends Base {
 						buttonSimula.setVisible(false);
 						p.createAndShowGUI();
 						p.addWindowListener(new WindowAdapter() {
-							public void windowClosed(WindowEvent e) {
+							public void windowClosed(final WindowEvent e) {
 								buttonSimula.setVisible(true);
 								if (p.getWinner() != logTor.getMiaSquadra()) {
 									logTor.setEliminated(true);
@@ -151,7 +152,6 @@ public class Torneo extends Base {
 			}
 		});
 		this.panelSud.add(buttonSimula);
-		
 		//Mi occupo del PanelCenter
 		p5.setBorder(new EmptyBorder(20, 5, 20, 5));
 		g5.setHgap(5);
@@ -163,110 +163,100 @@ public class Torneo extends Base {
 		g2.setHgap(300);
 		p1.setBorder(new EmptyBorder(20, 450, 20, 450));
 		p0.setBorder(new EmptyBorder(20, 450, 20, 450));
-		
 		//Aggiungo le varie squadre nel panel5 (la prima è sempre quella dell'utente)
 		this.labelsp5[0] = new MyJLabel(this.logTor.getMiaSquadra().getNomeSquadra());
 		this.p5.add(this.labelsp5[0]);
 		//Collections.shuffle(this.logTor.getListAvversari());
 		for (int i = 0; i < this.logTor.getListAvversari().size(); i++) {
-			this.labelsp5[i+1] = new MyJLabel(this.logTor.getListAvversari().get(i).getNomeSquadra());
-			this.p5.add(this.labelsp5[i+1]);
+			this.labelsp5[i + 1] = new MyJLabel(this.logTor.getListAvversari().get(i).getNomeSquadra());
+			this.p5.add(this.labelsp5[i + 1]);
 		}
-		
 		//System.out.println(this.logTor.getListAvversari().size());
 		int cont = 1;
-		this.labelsp4[0] = new MyJLabel(this.logTor.getMiaSquadra().getNomeSquadra() + " - " + this.logTor.getListAvversari().get(0).getNomeSquadra());
+		this.labelsp4[0] = new MyJLabel(this.logTor.getMiaSquadra().getNomeSquadra() + " - " 
+						+ this.logTor.getListAvversari().get(0).getNomeSquadra());
 		this.p4.add(this.labelsp4[0]);
-		for (int i = 1; i<this.logTor.getListAvversari().size() - 1; i = i + 2, cont++) {
-			this.labelsp4[cont] = new MyJLabel(this.logTor.getListAvversari().get(i).getNomeSquadra() + " - " + this.logTor.getListAvversari().get(i+1).getNomeSquadra());
+		for (int i = 1; i < this.logTor.getListAvversari().size() - 1; i = i + 2, cont++) {
+			this.labelsp4[cont] = new MyJLabel(this.logTor.getListAvversari().get(i).getNomeSquadra() 
+								+ " - " + this.logTor.getListAvversari().get(i + 1).getNomeSquadra());
 			this.p4.add(this.labelsp4[cont]);
 		}
-		
-		
-		p0.setBackground(new Color(0, 64, 128));
-		p1.setBackground(new Color(0, 64, 128));
-		p2.setBackground(new Color(0, 64, 128));
-		p3.setBackground(new Color(0, 64, 128));
-		p4.setBackground(new Color(0, 64, 128));
-		p5.setBackground(new Color(0, 64, 128));
-		
+		p0.setBackground(this.panelColor);
+		p1.setBackground(this.panelColor);
+		p2.setBackground(this.panelColor);
+		p3.setBackground(this.panelColor);
+		p4.setBackground(this.panelColor);
+		p5.setBackground(this.panelColor);
 		this.panelCenter.add(p0);
 		this.panelCenter.add(p1);
 		this.panelCenter.add(p2);
 		this.panelCenter.add(p3);
 		this.panelCenter.add(p4);
 		this.panelCenter.add(p5);
-		
-		this.panelSud.setBackground(new Color(0, 64, 128));
-		this.panelCenter.setBackground(new Color(0, 64, 128));
+		this.panelSud.setBackground(this.panelColor);
+		this.panelCenter.setBackground(this.panelColor);
 		this.panelNord.setBackground(Color.white);
 		//this.panelNord.setBounds(200, 300, 200, 300);
-		this.contentPane.add(panelSud,BorderLayout.SOUTH);
+		this.contentPane.add(panelSud, BorderLayout.SOUTH);
 		this.contentPane.add(panelCenter, BorderLayout.CENTER);
 		this.contentPane.add(panelNord, BorderLayout.NORTH);
-		
 	}
 	
 	private void createLevel() {
 		final int numSquadre = logTor.getNumSquadre();
 		switch (numSquadre) {
 		case 8: 
-			
 			this.p4.removeAll();
 			this.p4.repaint();
-			
 			// mettere il risultato della partita della squadra utente (prima da fare in Logic)
 			// metto i risultati nelle partite che si svolgono
 			int cont = 1;
-			this.labelsp4[0] = new MyJLabel(this.logTor.getMiaSquadra().getNomeSquadra() + " " + this.risSquadraUte + " " + " - " + " " + this.risSquadraAvv + " " + this.listAvversarie.get(0).getNomeSquadra());
-			
+			this.labelsp4[0] = new MyJLabel(this.logTor.getMiaSquadra().getNomeSquadra() + " " + this.risSquadraUte + " " 
+							+ " - " + " " + this.risSquadraAvv + " " + this.listAvversarie.get(0).getNomeSquadra());
 			this.p4.add(this.labelsp4[0]);
-			for (int i=1;i<this.listAvversarie.size() - 1;i = i + 2, cont++) {
+			for (int i = 1; i < this.listAvversarie.size() - 1; i = i + 2, cont++) {
 				String squad1 = new String(this.listAvversarie.get(i).getNomeSquadra());
 				var ris1 = this.logTor.getRisultati().get(squad1);
-				String squad2 = new String(this.listAvversarie.get(i+1).getNomeSquadra());
+				String squad2 = new String(this.listAvversarie.get(i + 1).getNomeSquadra());
 				var ris2 = this.logTor.getRisultati().get(squad2);
 				this.labelsp4[cont] = new MyJLabel(squad1 + " " + ris1 + " " + " - " + " " + ris2 + " " + squad2);
 				this.p4.add(this.labelsp4[cont]);
 			}
-			
-			
-			
 			// ... creo il panel 3 con le squadre che hanno vinto 
 			if (!logTor.getEliminated()) {
-				this.labelsp3[0] = new MyJLabel(this.logTor.getMiaSquadra().getNomeSquadra() + " - " + this.logTor.getListAvversari().get(0).getNomeSquadra());
+				this.labelsp3[0] = new MyJLabel(this.logTor.getMiaSquadra().getNomeSquadra() 
+						+ " - " + this.logTor.getListAvversari().get(0).getNomeSquadra());
 				this.p3.add(this.labelsp3[0]);
 			} else {
-				this.labelsp3[0] = new MyJLabel(this.logTor.getSquadraAvv().getNomeSquadra() + " - " + this.logTor.getListAvversari().get(0).getNomeSquadra());
+				this.labelsp3[0] = new MyJLabel(this.logTor.getSquadraAvv().getNomeSquadra() 
+						+ " - " + this.logTor.getListAvversari().get(0).getNomeSquadra());
 				this.p3.add(this.labelsp3[0]);
 			}
 			cont = 1;
-			for (int i=1;i<this.logTor.getListAvversari().size() - 1;i = i + 2, cont++) {
-				this.labelsp3[cont] = new MyJLabel(this.logTor.getListAvversari().get(i).getNomeSquadra() + " - " + this.logTor.getListAvversari().get(i+1).getNomeSquadra());
+			for (int i = 1 ; i < this.logTor.getListAvversari().size() - 1; i = i + 2, cont++) {
+				this.labelsp3[cont] = new MyJLabel(this.logTor.getListAvversari().get(i).getNomeSquadra() 
+						+ " - " + this.logTor.getListAvversari().get(i + 1).getNomeSquadra());
 				this.p3.add(this.labelsp3[cont]);
 			}
-			
-			
 			this.p3.validate();
 			this.p4.validate();
 			this.panelCenter.validate();
 			this.listAvversarie = logTor.getListAvversari();
 			break;
-			
 		case 4:
 			this.p3.removeAll();
 			this.p3.repaint();
-			
-			// mettere il risultato della partita della squadra utente (prima da fare in Logic)
+			// mettere il risultato della partita della squadra utente
 			// metto i risultati nelle partite che si svolgono
 			if (!logTor.getEliminated() || this.logTor.getElimThisTurn()) {
-				this.labelsp3[0] = new MyJLabel(this.logTor.getMiaSquadra().getNomeSquadra() + " " + this.risSquadraUte + " " + " - " + " " + this.risSquadraAvv + " " + this.listAvversarie.get(0).getNomeSquadra());
+				this.labelsp3[0] = new MyJLabel(this.logTor.getMiaSquadra().getNomeSquadra() + " " + this.risSquadraUte + " " 
+								+ " - " + " " + this.risSquadraAvv + " " + this.listAvversarie.get(0).getNomeSquadra());
 				this.p3.add(this.labelsp3[0]);
-				
 			} else {
-				int ris1 =this.logTor.getRisMatch().get(this.logTor.getSquadraAvv().getNomeSquadra());
-				int ris2 =this.logTor.getRisMatch().get(this.listAvversarie.get(0).getNomeSquadra());
-				this.labelsp3[0] = new MyJLabel(this.logTor.getSquadraAvv().getNomeSquadra() + " " + ris1 + " " + " - " + " " + ris2 + " " + this.listAvversarie.get(0).getNomeSquadra());
+				int ris1 = this.logTor.getRisMatch().get(this.logTor.getSquadraAvv().getNomeSquadra());
+				int ris2 = this.logTor.getRisMatch().get(this.listAvversarie.get(0).getNomeSquadra());
+				this.labelsp3[0] = new MyJLabel(this.logTor.getSquadraAvv().getNomeSquadra() + " " + ris1 + " " 
+								+ " - " + " " + ris2 + " " + this.listAvversarie.get(0).getNomeSquadra());
 				this.p3.add(this.labelsp3[0]);
 				if (ris2 > ris1) {
 					this.logTor.setSquadraAvv(this.listAvversarie.get(0));
@@ -279,8 +269,7 @@ public class Torneo extends Base {
 				}
 			}
 			int cont1 = 1;
-			for (int i=1;i<this.listAvversarie.size() - 1;i = i + 2, cont1++) {
-
+			for (int i = 1; i < this.listAvversarie.size() - 1; i = i + 2, cont1++) {
 				String squad1 = new String(this.listAvversarie.get(i).getNomeSquadra());
 				var ris1 = this.logTor.getRisultati().get(squad1);
 				String squad2 = new String(this.listAvversarie.get(i+1).getNomeSquadra());
@@ -288,19 +277,20 @@ public class Torneo extends Base {
 				this.labelsp3[cont1] = new MyJLabel(squad1 + " " + ris1 + " " + " - " + " " + ris2 + " " + squad2);
 				this.p3.add(this.labelsp3[cont1]);
 			}
-			
 			// ... creo il panel 2 con le squadre che hanno vinto 
 			// (ora faccio finta che vinca sempre la squadra dell'utente poi dovrò cambiare) 
 			if (!logTor.getEliminated()) {
-				this.labelsp2[0] = new MyJLabel(this.logTor.getMiaSquadra().getNomeSquadra() + " - " + this.logTor.getListAvversari().get(0).getNomeSquadra());
+				this.labelsp2[0] = new MyJLabel(this.logTor.getMiaSquadra().getNomeSquadra() 
+									+ " - " + this.logTor.getListAvversari().get(0).getNomeSquadra());
 				this.p2.add(this.labelsp2[0]);
 			} else {
-				this.labelsp2[0] = new MyJLabel(this.logTor.getSquadraAvv().getNomeSquadra() + " - " + this.logTor.getListAvversari().get(0).getNomeSquadra());
+				this.labelsp2[0] = new MyJLabel(this.logTor.getSquadraAvv().getNomeSquadra()
+									+ " - " + this.logTor.getListAvversari().get(0).getNomeSquadra());
 				this.p2.add(this.labelsp2[0]);
 			}
-			this.labelsp2[1] = new MyJLabel(this.logTor.getListAvversari().get(1).getNomeSquadra() + " - " + this.logTor.getListAvversari().get(2).getNomeSquadra());
+			this.labelsp2[1] = new MyJLabel(this.logTor.getListAvversari().get(1).getNomeSquadra()
+								+ " - " + this.logTor.getListAvversari().get(2).getNomeSquadra());
 			this.p2.add(this.labelsp2[1]);
-
 			this.logTor.clearRisMatch();
 			this.p2.validate();
 			this.p3.validate();
@@ -310,15 +300,16 @@ public class Torneo extends Base {
 		case 2:
 			this.p2.removeAll();
 			this.p2.repaint();
-			
 			// metto i risultati nel panel 2 (ora non ho quelli della squadraUtente)
 			if (!logTor.getEliminated() || this.logTor.getElimThisTurn()) {
-				this.labelsp2[0] = new MyJLabel(this.logTor.getMiaSquadra().getNomeSquadra() + " " + this.risSquadraUte + " " + " - " + " " + this.risSquadraAvv + " " + this.listAvversarie.get(0).getNomeSquadra());
+				this.labelsp2[0] = new MyJLabel(this.logTor.getMiaSquadra().getNomeSquadra() + " " + this.risSquadraUte + " " +
+								" - " + " " + this.risSquadraAvv + " " + this.listAvversarie.get(0).getNomeSquadra());
 				this.p2.add(this.labelsp2[0]);
 			} else {
 				int ris1 = this.logTor.getRisMatch().get(this.logTor.getSquadraAvv().getNomeSquadra());
 				int ris2 = this.logTor.getRisMatch().get(this.listAvversarie.get(0).getNomeSquadra());
-				this.labelsp2[0] = new MyJLabel(this.logTor.getSquadraAvv().getNomeSquadra() + " " + ris1 + " " + " - " + " " + ris2 + " " + this.listAvversarie.get(0).getNomeSquadra());
+				this.labelsp2[0] = new MyJLabel(this.logTor.getSquadraAvv().getNomeSquadra() + " " + ris1 + " " +
+								" - " + " " + ris2 + " " + this.listAvversarie.get(0).getNomeSquadra());
 				this.p2.add(this.labelsp2[0]);
 				if (ris2 > ris1) {
 					this.logTor.setSquadraAvv(this.listAvversarie.get(0));
@@ -329,7 +320,6 @@ public class Torneo extends Base {
 						this.logTor.setSquadraAvv(this.listAvversarie.get(0));
 					}
 				}
-				
 			}
 			String squad1 = new String(this.listAvversarie.get(1).getNomeSquadra());
 			var ris1 = this.logTor.getRisultati().get(squad1);
@@ -337,16 +327,16 @@ public class Torneo extends Base {
 			var ris2 = this.logTor.getRisultati().get(squad2);
 			this.labelsp2[1] = new MyJLabel(squad1 + " " + ris1 + " " + " - " + " " + ris2 + " " + squad2);
 			this.p2.add(this.labelsp2[1]);
-			
 			// aggiungo la nuova partita ...
 			if (!logTor.getEliminated()) {
-				this.labelp1 = new MyJLabel(this.logTor.getMiaSquadra().getNomeSquadra() + " - " + this.logTor.getListAvversari().get(0).getNomeSquadra());
+				this.labelp1 = new MyJLabel(this.logTor.getMiaSquadra().getNomeSquadra()
+									+ " - " + this.logTor.getListAvversari().get(0).getNomeSquadra());
 				this.p1.add(this.labelp1);
 			} else {
-				this.labelp1 = new MyJLabel(this.logTor.getSquadraAvv().getNomeSquadra()+ " - " + this.logTor.getListAvversari().get(0).getNomeSquadra());
+				this.labelp1 = new MyJLabel(this.logTor.getSquadraAvv().getNomeSquadra() +
+									" - " + this.logTor.getListAvversari().get(0).getNomeSquadra());
 				this.p1.add(this.labelp1);
 			}
-			
 			this.logTor.clearRisMatch();
 			this.p1.validate();
 			this.p2.validate();
@@ -356,20 +346,19 @@ public class Torneo extends Base {
 		case 1:
 			this.p1.removeAll();
 			this.p1.repaint();
-			
 			// metto i risultati nel panel 1
 			if (!logTor.getEliminated() || this.logTor.getElimThisTurn()) {
-				this.labelp1 = new MyJLabel(this.logTor.getMiaSquadra().getNomeSquadra() + " " + this.risSquadraUte + " " + " - " + " " + this.risSquadraAvv + " " + this.listAvversarie.get(0).getNomeSquadra());
+				this.labelp1 = new MyJLabel(this.logTor.getMiaSquadra().getNomeSquadra() + " " + this.risSquadraUte + " "
+								+ " - " + " " + this.risSquadraAvv + " " + this.listAvversarie.get(0).getNomeSquadra());
 				this.p1.add(this.labelp1);
 			} else {
 				int ris11 = this.logTor.getRisMatch().get(this.logTor.getSquadraAvv().getNomeSquadra());
 				int ris21 = this.logTor.getRisMatch().get(this.listAvversarie.get(0).getNomeSquadra());
-				this.labelp1 = new MyJLabel(this.logTor.getSquadraAvv().getNomeSquadra() + " " + ris11 + " " + " - " + " " + ris21 + " " + this.listAvversarie.get(0).getNomeSquadra());
+				this.labelp1 = new MyJLabel(this.logTor.getSquadraAvv().getNomeSquadra() + " " + ris11 + " " 
+								+ " - " + " " + ris21 + " " + this.listAvversarie.get(0).getNomeSquadra());
 				this.p1.add(this.labelp1);
 			}
-			
 			String winner = new String();
-			
 			if (this.logTor.getElimThisTurn()) {
 				this.labelp0 = new MyJLabel(this.logTor.getSquadraAvv().getNomeSquadra());
 				winner = this.logTor.getSquadraAvv().getNomeSquadra();
@@ -381,17 +370,11 @@ public class Torneo extends Base {
 				winner = this.logTor.getWinner();
 			}
 			this.p0.add(this.labelp0);
-			
-			//this.panelNord.removeAll();
-			//this.panelNord.repaint();
-			
-			// da mettere a posto
 			final JLabel label = new JLabel("The winner is: " + winner + "!");
 			label.setBorder(new RoundedBorder(Color.red, 20));
 			label.setBackground(Color.white);
 			label.setForeground(Color.red);
 			label.setOpaque(true);
-			
 			this.panelNord.add(label);
 			
 			buttonSimula.setVisible(false);
@@ -411,11 +394,11 @@ public class Torneo extends Base {
 	 * @author Davide Braccini
 	 *
 	 */
-	private static class MyJLabel extends JLabel{
+	private static class MyJLabel extends JLabel {
 		public MyJLabel() {
 			super();
 		}
-		public MyJLabel(String text) {
+		public MyJLabel(final String text) {
 			super(text, SwingConstants.CENTER);
 			setBorder(new RoundedBorder(Color.white, 20));
 			setBackground(new Color(0, 64, 128));
