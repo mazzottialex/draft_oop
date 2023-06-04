@@ -158,6 +158,7 @@ public class CreaSquadra extends Base {
 		// Creo 2 frame aggiuntivi, uno per modulo e uno per calciatori
 		this.frameModulo = new JFrame("Seleziona modulo: ");
 		this.frameCalciatori = new JFrame("Seleziona calciatori: ");
+		// dimensione fissa
 		this.frameModulo.setBounds(this.getX() + 520, this.getY(), 200, 300);
 		this.frameCalciatori.setBounds(this.getX() + 520, this.getY() + 300, 200, 300);
 		//Mi occupo del frame Modulo
@@ -471,7 +472,7 @@ public class CreaSquadra extends Base {
 	/* metodo per cambiare la formazione nel frame principale
 	 * mettendo al posto dei vari bottoni il nome del calciatore scelto*/
 	private void changeButtonPlayer(final String ruolo, final int pos) {
-		String s = new String();
+		String s;
 		switch (ruolo) {
 		case "A":
 			s = textFormat(log.getNamePlayer() + " " + log.getRating());

@@ -2,6 +2,7 @@ package logics;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +14,7 @@ import data.Squadra;
  * @author Davide Braccini
  *
  */
-public interface LogicsTorneo {
+public interface LogicsTorneo extends Serializable{
 
 	/**
 	 * 

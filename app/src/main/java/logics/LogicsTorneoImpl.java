@@ -6,6 +6,8 @@ import java.util.*;
 
 import data.Calciatore;
 import data.Squadra;
+import data.SquadraAvversaria;
+//import data.SquadraUtente;
 import simulation.SimulatingMatchImpl;
 
 /**
@@ -15,6 +17,7 @@ import simulation.SimulatingMatchImpl;
  */
 public class LogicsTorneoImpl implements LogicsTorneo {
 
+	private static final long serialVersionUID = 1L;
 	//private ManageData md;
 	//private ExtractData ex;
 	private final Squadra miasquadra;
@@ -71,7 +74,6 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 		this.eliminated = false;
 		//this.squadraAvv = new Squadra(0, "aaa", Modulo.M442, li);
 		this.risMatch = new HashMap<>();
-		this.winner = new String();
 		this.elimThisTurn = false;
 	}
 
@@ -90,6 +92,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	@Override
 	public Squadra getMiaSquadra() {
 		return this.miasquadra;
+		//Squadra copy = new SquadraUtente(this.miasquadra, , , , );
 	}
 
 	/**
@@ -113,7 +116,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	 */
 	@Override
 	public void setListAvversari(final List<Squadra> list) {
-		this.listSquadre = list;
+		this.listSquadre = new ArrayList<>(list);
 	}
 
 	/**
@@ -125,8 +128,8 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 		final int numSquadre = this.getNumSquadre();
 		Map<String, Integer> map = new HashMap<>(); //map per il risultato
 		List<String> list = new ArrayList<>(); //lista per i nomi delle squadre che si sfidano
-		String teamWin = new String(); //nome della squadra vincente
-		String teamLose = new String(); //nome della squadra perdente
+		String teamWin; //nome della squadra vincente
+		String teamLose; //nome della squadra perdente
 		Map<Squadra, Integer> map2 = new HashMap<>();
 		List<Squadra> l = new ArrayList<>(); // appoggio
 
@@ -488,6 +491,14 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	@Override
 	public void setSquadraAvv(final Squadra squadra) {
 		this.squadraAvv = squadra;
+		/*
+		try {
+			this.squadraAvv = new SquadraAvversaria(squadra.getId(), squadra.getStemma(), squadra.getModulo(), squadra.getLiCalciatori());
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
 	}
 
 	/**

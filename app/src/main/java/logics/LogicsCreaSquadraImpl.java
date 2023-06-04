@@ -181,6 +181,8 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	@Override
 	public Calciatore getCalciatoreSelect() {
 		return this.calciatoreSelect;
+		//Calciatore copy = this.calciatoreSelect;
+		
 	}
 
 	/**
@@ -297,7 +299,8 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	 */
 	@Override
 	public List<Calciatore> getCalcUsciti() {
-		return this.calcUsciti;
+		//return this.calcUsciti;
+		return List.copyOf(this.calcUsciti);
 	}
 
 	/**

@@ -1,5 +1,6 @@
 package logics;
 
+import java.io.Serializable;
 import java.util.*;
 
 import data.Calciatore;
@@ -11,7 +12,7 @@ import manageData.ExtractData;
  * @author Davide Braccini
  *
  */
-public interface LogicsCreasquadra {
+public interface LogicsCreasquadra extends Serializable{
 
 	/**
 	 * 

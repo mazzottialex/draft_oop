@@ -218,9 +218,9 @@ public class Torneo extends Base {
 							+ this.listAvversarie.get(0).getNomeSquadra());
 			this.p4.add(this.labelsp4[0]);
 			for (int i = 1; i < this.listAvversarie.size() - 1; i = i + 2, cont++) {
-				String squad1 = new String(this.listAvversarie.get(i).getNomeSquadra());
+				String squad1 = this.listAvversarie.get(i).getNomeSquadra();
 				var ris1 = this.logTor.getRisultati().get(squad1);
-				String squad2 = new String(this.listAvversarie.get(i + 1).getNomeSquadra());
+				String squad2 = this.listAvversarie.get(i + 1).getNomeSquadra();
 				var ris2 = this.logTor.getRisultati().get(squad2);
 				this.labelsp4[cont] = new MyJLabel(squad1 + " " + ris1 + " " + " - " + " " + ris2 + " " + squad2);
 				this.p4.add(this.labelsp4[cont]);
@@ -274,9 +274,9 @@ public class Torneo extends Base {
 			}
 			int cont1 = 1;
 			for (int i = 1; i < this.listAvversarie.size() - 1; i = i + 2, cont1++) {
-				String squad1 = new String(this.listAvversarie.get(i).getNomeSquadra());
+				String squad1 = this.listAvversarie.get(i).getNomeSquadra();
 				var ris1 = this.logTor.getRisultati().get(squad1);
-				String squad2 = new String(this.listAvversarie.get(i+1).getNomeSquadra());
+				String squad2 = this.listAvversarie.get(i+1).getNomeSquadra();
 				var ris2 = this.logTor.getRisultati().get(squad2);
 				this.labelsp3[cont1] = new MyJLabel(squad1 + " " + ris1 + " " + " - " + " " + ris2 + " " + squad2);
 				this.p3.add(this.labelsp3[cont1]);
@@ -325,9 +325,9 @@ public class Torneo extends Base {
 					}
 				}
 			}
-			String squad1 = new String(this.listAvversarie.get(1).getNomeSquadra());
+			String squad1 = this.listAvversarie.get(1).getNomeSquadra();
 			var ris1 = this.logTor.getRisultati().get(squad1);
-			String squad2 = new String(this.listAvversarie.get(2).getNomeSquadra());
+			String squad2 = this.listAvversarie.get(2).getNomeSquadra();
 			var ris2 = this.logTor.getRisultati().get(squad2);
 			this.labelsp2[1] = new MyJLabel(squad1 + " " + ris1 + " " + " - " + " " + ris2 + " " + squad2);
 			this.p2.add(this.labelsp2[1]);
@@ -362,7 +362,7 @@ public class Torneo extends Base {
 								+ " - " + " " + ris21 + " " + this.listAvversarie.get(0).getNomeSquadra());
 				this.p1.add(this.labelp1);
 			}
-			String winner = new String();
+			String winner;
 			if (this.logTor.getElimThisTurn()) {
 				this.labelp0 = new MyJLabel(this.logTor.getSquadraAvv().getNomeSquadra());
 				winner = this.logTor.getSquadraAvv().getNomeSquadra();
