@@ -80,7 +80,8 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	 */
 	@Override
 	public List<Squadra> getListAvversari() {
-		return this.listSquadre;
+		//return this.listSquadre;
+		return List.copyOf(this.listSquadre);
 	}
 
 	/**
@@ -441,6 +442,8 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 			
 			this.setNumSquadre(1);
 			break;
+		default:
+			break;
 		}
 		
 	}
@@ -450,7 +453,8 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	 */
 	@Override
 	public Map<String, Integer> getRisultati() {
-		return this.risultati;
+		//return this.risultati;
+		return Map.copyOf(this.risultati);
 	}
 
 	/**
@@ -490,7 +494,8 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	 */
 	@Override
 	public Map<String, Integer> getRisMatch() {
-		return this.risMatch;
+		//return this.risMatch;
+		return Map.copyOf(this.risMatch);
 	}
 
 	/**

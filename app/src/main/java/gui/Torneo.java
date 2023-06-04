@@ -387,6 +387,8 @@ public class Torneo extends Base {
 			this.p1.validate();
 			this.panelCenter.validate();
 			break;
+		default:
+			break;
 		}
 	}
 	

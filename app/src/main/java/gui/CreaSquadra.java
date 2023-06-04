@@ -402,6 +402,8 @@ public class CreaSquadra extends Base {
 		case "P":
 			map.put(buttonPor, list);
 			break;
+		default:
+			break;
 		}
 		addPlayers(ruolo, pos, list);		
 	}
@@ -422,6 +424,8 @@ public class CreaSquadra extends Base {
 			break;
 		case "P":
 			list = map.get(buttonPor);
+			break;
+		default:
 			break;
 		}	
 		addPlayers(ruolo, pos, list);
@@ -495,6 +499,8 @@ public class CreaSquadra extends Base {
 			if (this.buttonPor.getActionListeners().length != 0) {
 				this.buttonPor.removeActionListener(this.buttonPor.getActionListeners()[0]);
 			}
+			break;
+		default:
 			break;
 		}
 		this.panelCenter.validate();
