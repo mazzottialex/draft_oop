@@ -57,7 +57,7 @@ public interface LogicsTorneo {
 	 * 
 	 * @return the map with the results
 	 */
-	Map<String,Integer> getRisultati();
+	Map<String, Integer> getRisultati();
 	
 	/**
 	 * 
