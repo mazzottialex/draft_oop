@@ -38,8 +38,7 @@ public class SquadraAvversaria implements Squadra {
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    public SquadraAvversaria(final int id, final String nomeSquadra, final Modulo modulo,
-    		final List<Calciatore> li)
+    public SquadraAvversaria(final int id, final String nomeSquadra, final Modulo modulo, final List<Calciatore> li)
     throws FileNotFoundException, IOException, ClassNotFoundException {
         this.id = id;
         this.nomeSquadra = nomeSquadra;
