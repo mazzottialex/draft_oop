@@ -17,29 +17,26 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import data.Calciatore;
-import logics.LogicsArchivio;
-import logics.LogicsArchivioImpl;
+import logics.LogicsArchive;
+import logics.LogicsArchiveImpl;
 import java.awt.FlowLayout;
 
-public class Archivio extends Base {
+public class Archive extends Base {
     private JTable table;
-    private final LogicsArchivio log;
+    private final LogicsArchive log;
     private final TableModel tm = new DefaultTableModel(new String[] {
-            "RUOLO",
-            "GIOCATORE",
+            "POSITION",
+            "PLAYERS",
             "RATING",
             "ATT",
-            "CEN",
-            "DIF"
+            "MID",
+            "DEF"
         }, 0);
-    public Archivio(List<Calciatore> li, final String stagioneP, final Boolean online)
+    public Archive(List<Calciatore> li, final String season, final Boolean online)
     		throws FileNotFoundException, ClassNotFoundException, IOException {
-        this.stagione = stagioneP;
-        this.online = online;
-        log = new LogicsArchivioImpl(online);
-        li = log.liOrdinata(li);
-        li.forEach(c -> System.out.println(c.getNominativo() + ";" + c.getRuolo()));
-        li.stream().forEach(c -> ((DefaultTableModel) tm).addRow(c.toVector()));
+        log = new LogicsArchiveImpl(season, online);
+        List<Calciatore> liOrdered = log.liOrdered(li);
+        liOrdered.stream().forEach(c -> ((DefaultTableModel) tm).addRow(c.toVector()));
         contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
         contentPane.setPreferredSize(new Dimension(450, 640));
         JPanel panel = new JPanel();
@@ -52,11 +49,11 @@ public class Archivio extends Base {
         btnHome.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                changeJPanel(new Home(stagione, online));
+                changeJPanel(new Home(log.getSeason(), log.getOnline()));
             }
         });
         panel.add(btnHome);
-        JLabel lblNewLabel = new JLabel(stagione);
+        JLabel lblNewLabel = new JLabel(log.getSeason());
         lblNewLabel.setBounds(262, 11, 77, 17);
         lblNewLabel.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
         lblNewLabel.setForeground(Color.white);

@@ -164,7 +164,7 @@ public class Home extends Base {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 try {
-                    changeJPanel(new Archivio(log.getLi(), log.getSeason(), log.getOnline()));
+                    changeJPanel(new Archive(log.getLi(), log.getSeason(), log.getOnline()));
                 } catch (ClassNotFoundException | IOException e1) {
                     e1.printStackTrace();
                 }
