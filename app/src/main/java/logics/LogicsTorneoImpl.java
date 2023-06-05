@@ -37,9 +37,9 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	 * Constructor of LogicsTorneoImpl.
 	 * @param squadra the user's team 
 	 * @param li the list of all the players in Serie A
-	 * @throws FileNotFoundException if ...
-	 * @throws ClassNotFoundException if ...
-	 * @throws IOException if ...
+	 * @throws FileNotFoundException 
+	 * @throws ClassNotFoundException 
+	 * @throws IOException 
 	 */
 	public LogicsTorneoImpl(final Squadra squadra, final List<Calciatore> li) 
 			throws FileNotFoundException, ClassNotFoundException, IOException {
@@ -496,7 +496,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 		this.squadraAvv = squadra;
 		/*
 		try {
-			this.squadraAvv = new SquadraAvversaria(squadra.getId(), squadra.getStemma(), squadra.getModulo(), squadra.getLiCalciatori());
+			this.squadraAvv = new SquadraAvversaria(squadra.getId(), squadra.getNomeSquadra(), squadra.getModulo(), squadra.getLiCalciatori());
 		} catch (ClassNotFoundException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

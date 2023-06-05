@@ -48,9 +48,9 @@ public interface LogicsTorneo extends Serializable{
 	
 	/**
 	 * Simulate the matches of the turnament.
-	 * @throws FileNotFoundException if..
-	 * @throws ClassNotFoundException if..
-	 * @throws IOException if..
+	 * @throws FileNotFoundException 
+	 * @throws ClassNotFoundException 
+	 * @throws IOException 
 	 */
 	void simulaMatch() throws FileNotFoundException, ClassNotFoundException, IOException;
 	

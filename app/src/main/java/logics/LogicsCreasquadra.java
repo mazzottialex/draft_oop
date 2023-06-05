@@ -178,4 +178,16 @@ public interface LogicsCreasquadra extends Serializable{
 	 */
 	void addCalcUsciti(List<Calciatore> list);
 	
+	/**
+	 * 
+	 * @return true if the module was selected
+	 */
+	boolean getClickModulo();
+	
+	/**
+	 * 
+	 * @param click true if the module was selected
+	 */
+	void setClickModulo(boolean click);
+	
 }
