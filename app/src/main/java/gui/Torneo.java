@@ -166,6 +166,7 @@ public class Torneo extends Base {
 		p0.setBorder(new EmptyBorder(20, 450, 20, 450));
 		//Aggiungo le varie squadre nel panel5 (la prima è sempre quella dell'utente)
 		this.labelsp5[0] = new MyJLabel(this.logTor.getMiaSquadra().getNomeSquadra());
+		this.labelsp5[0].setText(textFormat(7, this.labelsp5[0].getText()));
 		this.p5.add(this.labelsp5[0]);
 		//Collections.shuffle(this.logTor.getListAvversari());
 		for (int i = 0; i < this.logTor.getListAvversari().size(); i++) {
@@ -176,6 +177,7 @@ public class Torneo extends Base {
 		int cont = 1;
 		this.labelsp4[0] = new MyJLabel(this.logTor.getMiaSquadra().getNomeSquadra() + " - " 
 						+ this.logTor.getListAvversari().get(0).getNomeSquadra());
+		this.labelsp4[0].setText(textFormat(14, this.labelsp4[0].getText()));
 		this.p4.add(this.labelsp4[0]);
 		for (int i = 1; i < this.logTor.getListAvversari().size() - 1; i = i + 2, cont++) {
 			this.labelsp4[cont] = new MyJLabel(this.logTor.getListAvversari().get(i).getNomeSquadra() 
@@ -216,6 +218,7 @@ public class Torneo extends Base {
 							+ " " + this.risSquadraUte + " " 
 							+ " - " + " " + this.risSquadraAvv + " " 
 							+ this.listAvversarie.get(0).getNomeSquadra());
+			this.labelsp4[0].setText(textFormat(14, this.labelsp4[0].getText()));
 			this.p4.add(this.labelsp4[0]);
 			for (int i = 1; i < this.listAvversarie.size() - 1; i = i + 2, cont++) {
 				String squad1 = this.listAvversarie.get(i).getNomeSquadra();
@@ -229,6 +232,7 @@ public class Torneo extends Base {
 			if (!logTor.getEliminated()) {
 				this.labelsp3[0] = new MyJLabel(this.logTor.getMiaSquadra().getNomeSquadra() 
 						+ " - " + this.logTor.getListAvversari().get(0).getNomeSquadra());
+				//this.labelsp3[0].setText(textFormat(14, this.labelsp3[0].getText()));
 				this.p3.add(this.labelsp3[0]);
 			} else {
 				this.labelsp3[0] = new MyJLabel(this.logTor.getSquadraAvv().getNomeSquadra() 
@@ -255,6 +259,7 @@ public class Torneo extends Base {
 				this.labelsp3[0] = new MyJLabel(this.logTor.getMiaSquadra().getNomeSquadra() 
 							+ " " + this.risSquadraUte + " " 
 							+ " - " + " " + this.risSquadraAvv + " " + this.listAvversarie.get(0).getNomeSquadra());
+				//this.labelsp3[0].setText(textFormat(this.labelsp3[0].getText()));
 				this.p3.add(this.labelsp3[0]);
 			} else {
 				int ris1 = this.logTor.getRisMatch().get(this.logTor.getSquadraAvv().getNomeSquadra());
@@ -286,6 +291,7 @@ public class Torneo extends Base {
 			if (!logTor.getEliminated()) {
 				this.labelsp2[0] = new MyJLabel(this.logTor.getMiaSquadra().getNomeSquadra() 
 									+ " - " + this.logTor.getListAvversari().get(0).getNomeSquadra());
+				//this.labelsp2[0].setText(textFormat(this.labelsp2[0].getText()));
 				this.p2.add(this.labelsp2[0]);
 			} else {
 				this.labelsp2[0] = new MyJLabel(this.logTor.getSquadraAvv().getNomeSquadra()
@@ -308,6 +314,7 @@ public class Torneo extends Base {
 			if (!logTor.getEliminated() || this.logTor.getElimThisTurn()) {
 				this.labelsp2[0] = new MyJLabel(this.logTor.getMiaSquadra().getNomeSquadra() + " " + this.risSquadraUte + " "
 								+ " - " + " " + this.risSquadraAvv + " " + this.listAvversarie.get(0).getNomeSquadra());
+				//this.labelsp2[0].setText(textFormat(this.labelsp2[0].getText()));
 				this.p2.add(this.labelsp2[0]);
 			} else {
 				int ris1 = this.logTor.getRisMatch().get(this.logTor.getSquadraAvv().getNomeSquadra());
@@ -335,6 +342,7 @@ public class Torneo extends Base {
 			if (!logTor.getEliminated()) {
 				this.labelp1 = new MyJLabel(this.logTor.getMiaSquadra().getNomeSquadra()
 									+ " - " + this.logTor.getListAvversari().get(0).getNomeSquadra());
+				//this.labelp1.setText(textFormat(this.labelp1.getText()));
 				this.p1.add(this.labelp1);
 			} else {
 				this.labelp1 = new MyJLabel(this.logTor.getSquadraAvv().getNomeSquadra() +
@@ -354,6 +362,7 @@ public class Torneo extends Base {
 			if (!logTor.getEliminated() || this.logTor.getElimThisTurn()) {
 				this.labelp1 = new MyJLabel(this.logTor.getMiaSquadra().getNomeSquadra() + " " + this.risSquadraUte + " "
 								+ " - " + " " + this.risSquadraAvv + " " + this.listAvversarie.get(0).getNomeSquadra());
+				//this.labelp1.setText(textFormat(this.labelp1.getText()));
 				this.p1.add(this.labelp1);
 			} else {
 				int ris11 = this.logTor.getRisMatch().get(this.logTor.getSquadraAvv().getNomeSquadra());
@@ -393,6 +402,19 @@ public class Torneo extends Base {
 		}
 	}
 	
+	/* metodo che formatta la stringa dei nomi dei giocatori*/
+	private String textFormat(final int max, final String s) {	
+		String label = "<html>";
+		for (int i = 0; i < s.length() - 2; i++) {
+			label = label + s.charAt(i);
+			if ((i % max == 0) && (i != 0)) {
+				label = label + "<br>";
+			}
+		}
+		label = label + s.charAt(s.length() - 2) + s.charAt(s.length() - 1);
+		return label;
+	}
+	
 	/**
 	 * The inner classe that extends JLabel
 	 * @author Davide Braccini
@@ -411,4 +433,5 @@ public class Torneo extends Base {
 			setOpaque(true);
 		}
 	}
+	
 }
