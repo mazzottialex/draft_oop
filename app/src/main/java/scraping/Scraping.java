@@ -6,5 +6,5 @@ public interface Scraping {
     public List<Calciatore> getLista();
     public Boolean ReadTable(String stagione);
     public Boolean ReadTable();
-    public List<String> getStagioni();
+    public List<String> getStagioni(Boolean flagChrome);
 }

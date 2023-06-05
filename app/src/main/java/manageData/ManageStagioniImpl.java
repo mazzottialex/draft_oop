@@ -23,7 +23,7 @@ public class ManageStagioniImpl extends Thread implements ManageStagioni {
         return false;
     }
     public void run() {
-        li = s.getStagioni();
+        li = s.getStagioni(true);
         file.SaveStagioni(li);
     }
 }
