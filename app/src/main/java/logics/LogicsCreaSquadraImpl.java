@@ -34,6 +34,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	private final String stemma;
 	//private Squadra squadra;
 	private final List<Calciatore> calcUsciti;
+	private boolean clickModulo;
 	
 	/**
 	 * Constructor of LogicsCreaSquadraImpl.
@@ -65,6 +66,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 		riserve.addAll(this.getRandom("C", 2));
 		riserve.addAll(this.getRandom("A", 2));
 		this.calcUsciti.addAll(riserve);
+		this.clickModulo = false;
 	}
 	
 	/**
@@ -309,6 +311,22 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	@Override
 	public void addCalcUsciti(List<Calciatore> list) {
 		this.calcUsciti.addAll(list);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean getClickModulo() {
+		return this.clickModulo;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setClickModulo(boolean click) {
+		this.clickModulo = click;
 	}
 
 }
