@@ -11,9 +11,9 @@ import manageData.ExtractData;
 import manageData.ExtractDataImpl;
 
 /** 
- * Questa classe rappresenta un oggetto SquadraAvversaria ed implementa Squadra.
- * Ogni squadra avversaria ha un id, un nome, uno stemma, un modulo, una lista di titolari,
- * una lista di riserve e una lista di tutti i calciatori di una certa annata.
+ * This class represents an opposing team and implements the `Squadra` interface.
+ * Each opposing team has an ID, a name, an emblem, a formation, a list of starters,
+ * a list of substitutes, and a list of all players for a particular season.
  *
  */
 public class SquadraAvversaria implements Squadra {
@@ -27,12 +27,12 @@ public class SquadraAvversaria implements Squadra {
 
 
     /**
-     * Costruttore della classe SquadraAvversaria.
+     * Constructor for the `SquadraAvversaria` class.
      * 
-     * @param id            L'id della squadra.
-     * @param nomeSquadra   Il nome della squadra.
-     * @param modulo        Il modulo della squadra.
-     * @param li            La lista di calciatori di una certa annata.
+     * @param id            The ID of the team.
+     * @param nomeSquadra   The name of the team.
+     * @param modulo        The formation of the team.
+     * @param li            The list of players for a particular season.
      * @throws FileNotFoundException
      * @throws IOException
      * @throws ClassNotFoundException
@@ -49,6 +49,11 @@ public class SquadraAvversaria implements Squadra {
         this.stemma = this.setStemma();
     }
 
+    /**
+     * Sets the emblem for the opposing team.
+     *
+     * @return The emblem filename.
+     */
     private String setStemma() {
         final List<String> liStemmi = List.of("arancione.png", "azzurro.png",
             "bianco.png", "blu.png", "giallo.png", "nero.png", "rosso.png",
