@@ -11,7 +11,7 @@ import manageData.ExtractData;
 import manageData.ExtractDataImpl;
 
 /** 
- * This class represents an opposing team and implements the `Squadra` interface.
+ * This class represents an opposing team and implements the {@code Squadra} interface.
  * Each opposing team has an ID, a name, an emblem, a formation, a list of starters,
  * a list of substitutes, and a list of all players for a particular season.
  *
@@ -27,7 +27,7 @@ public class SquadraAvversaria implements Squadra {
 
 
     /**
-     * Constructor for the `SquadraAvversaria` class.
+     * Constructor for the {@code SquadraAvversaria} class.
      * 
      * @param id            The ID of the team.
      * @param nomeSquadra   The name of the team.

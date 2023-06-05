@@ -3,7 +3,7 @@ package data;
 import java.util.List;
 
 /**
- * The Squadra interface represents a team in a football (soccer) match.
+ * The {@code Squadra} interface represents a team in a football (soccer) match.
  */
 public interface Squadra {
 
