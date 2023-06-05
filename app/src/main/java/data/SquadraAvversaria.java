@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
+
 import manageData.ExtractData;
 import manageData.ExtractDataImpl;
 
@@ -80,7 +82,7 @@ public class SquadraAvversaria implements Squadra {
     public List<Calciatore> getTitolariDesc() {
         return liTitolari.stream()
             .sorted((c1, c2) -> c1.getRuolo().compareTo(c2.getRuolo()))
-            .toList();
+            .collect(Collectors.toList());
     }
 
     @Override

@@ -8,6 +8,8 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
+import java.util.stream.Collectors;
+
 import data.Calciatore;
 import data.Modulo;
 public class ExtractDataImpl implements ExtractData {
@@ -20,7 +22,7 @@ public class ExtractDataImpl implements ExtractData {
     public List<Calciatore> getCalciatoreBySquadra(final String squadra) {
         return li.stream()
             .filter(c -> c.getSquadra().equals(squadra))
-            .toList();
+            .collect(Collectors.toList());
     }
     @Override
     public List<Calciatore> getLi() {
@@ -37,7 +39,7 @@ public class ExtractDataImpl implements ExtractData {
     public List<Calciatore> getListaByRuolo(final String ruolo) {
         return li.stream()
             .filter(c -> c.getRuolo().equals(ruolo))
-            .toList();
+            .collect(Collectors.toList());
     }
     @Override
     public List<Calciatore> getRandomByRuolo(final String ruolo, int n) {
@@ -53,7 +55,7 @@ public class ExtractDataImpl implements ExtractData {
         }
         return posizioni.stream()
             .map(p -> listaRuolo.get(p))
-            .toList();
+            .collect(Collectors.toList());
     }
 
     @Override
@@ -81,7 +83,7 @@ public class ExtractDataImpl implements ExtractData {
     public List<Calciatore> getListOrdered(final Function<Calciatore, Integer> attr) {
         return li.stream()
             .sorted((c1, c2) -> attr.apply(c1) - attr.apply(c2))
-            .toList();
+            .collect(Collectors.toList());
     }
     @Override
     public List<Calciatore> getTitolariBySquadraByRuolo(final String squadra, 
@@ -104,7 +106,7 @@ public class ExtractDataImpl implements ExtractData {
             .filter(c -> c.getRuolo().equals(ruolo))
             .sorted((c1, c2) -> c2.getRating().getX() - c1.getRating().getX())
             .limit(n)
-            .toList();
+            .collect(Collectors.toList());
         return lista;
     }
 
@@ -134,7 +136,7 @@ public class ExtractDataImpl implements ExtractData {
             .sorted((c1, c2) -> c2.getRating().getX() - c1.getRating().getX())
             .skip(m)
             .limit(n)
-            .toList();
+            .collect(Collectors.toList());
         return lista;
     }
 
@@ -162,21 +164,21 @@ public class ExtractDataImpl implements ExtractData {
         return getCalciatoreBySquadra(squadra)
             .stream()
             .map(c -> c.getNominativo())
-            .toList();
+            .collect(Collectors.toList());
     }
 
     public List<String> getNomeTitolari(final String squadra, final Modulo modulo) {
         return getTitolari(squadra, modulo)
             .stream()
             .map(c -> c.getNominativo())
-            .toList();
+            .collect(Collectors.toList());
     }
 
     public List<String> getNomeRiserve(final String squadra, final Modulo modulo) {
         return getRiserve(squadra, modulo)
             .stream()
             .map(c -> c.getNominativo())
-            .toList();
+            .collect(Collectors.toList());
     }
 
     // ruolo, nome, rating
@@ -184,7 +186,7 @@ public class ExtractDataImpl implements ExtractData {
         return getTitolari(squadra, modulo)
             .stream()
             .map(c -> c.toVector())
-            .toList();
+            .collect(Collectors.toList());
     }
 
     public List<Calciatore> getRandom(final int nA, final int nC, final int nD, final int nP) {
@@ -223,7 +225,7 @@ public class ExtractDataImpl implements ExtractData {
     @Override
     public Optional<Calciatore> getCalciatoreById(final int id) {
         return li.stream()
-            .filter(c -> c.getNominativo().equals(id))
+            .filter(c -> c.getId() == id)
             .findFirst();
     }
 }

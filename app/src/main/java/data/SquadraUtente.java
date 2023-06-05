@@ -3,6 +3,7 @@ package data;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SquadraUtente implements Squadra {
 	private final int id;
@@ -49,14 +50,14 @@ public class SquadraUtente implements Squadra {
 	public List<Calciatore> getTitolari() {
 		return liTitolari.stream()
 				.sorted((c1,c2)->c2.getRuolo().compareTo(c1.getRuolo()))
-				.toList();
+				.collect(Collectors.toList());
 	}
 	
 	@Override
 	public List<Calciatore> getTitolariDesc() {
 		return liTitolari.stream()
 				.sorted((c1,c2)->c1.getRuolo().compareTo(c2.getRuolo()))
-				.toList();
+				.collect(Collectors.toList());
 	}
 	
 	@Override
