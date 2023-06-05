@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import data.Calciatore;
 import data.Modulo;
 import logics.LogicsCreaSquadraImpl;
-import logics.LogicsCreasquadra;
+import logics.LogicsCreaSquadra;
 //import manageData.LogicsFile;
 //import manageData.LogicsFileImpl;
 //import v2.gui.*;
@@ -61,7 +61,7 @@ public class CreaSquadra extends Base {
     private static final int GRAND3 = 300;
     private static final int GRAND35 = 350;
     private static final int GRAND1 = 100;
-    private LogicsCreasquadra log;
+    private LogicsCreaSquadra log;
     private final JFrame frameModulo;
     private final JFrame frameCalciatori;
     private final JPanel panelSud = new JPanel(new GridBagLayout()); //panel Sud del frame principale

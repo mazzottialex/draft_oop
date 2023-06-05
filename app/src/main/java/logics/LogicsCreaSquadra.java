@@ -12,7 +12,7 @@ import manageData.ExtractData;
  * @author Davide Braccini
  *
  */
-public interface LogicsCreasquadra extends Serializable {
+public interface LogicsCreaSquadra extends Serializable {
 
 	/**
 	 * 

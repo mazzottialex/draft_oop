@@ -20,7 +20,7 @@ import manageData.ExtractDataImpl;
  * @author Davide Braccini
  *
  */
-public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
+public class LogicsCreaSquadraImpl implements LogicsCreaSquadra {
 
 	private static final long serialVersionUID = 1L;
 	private static final int NUM_PLAYER_IN_TEAM = 11;
