@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.*;
 
 import data.Calciatore;
+import data.Modulo;
 import data.Squadra;
 import data.SquadraAvversaria;
 import data.SquadraUtente;
@@ -47,7 +48,9 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 		this.listSquadre = new ArrayList<>();
 		//this.golFatti = new ArrayList<>();
 		//Creo la squadra dell'utente
-		this.miasquadra = squadra;
+		this.miasquadra = new SquadraUtente(squadra.getNomeSquadra(), squadra.getStemma(), 
+				squadra.getModulo(), squadra.getTitolari(), squadra.getRiserve());
+		//this.miasquadra = squadra;
 		// Creo le squadre avversarie (quelle esistenti in serie A)
 		/*
 		this.listSquadre.add(new SquadraAvversaria(0, "NAP", Modulo.M442, li)); 
@@ -73,7 +76,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 		this.numSquadre = 16;
 		this.risultati = new HashMap<>();
 		this.eliminated = false;
-		//this.squadraAvv = new Squadra(0, "aaa", Modulo.M442, li);
+		this.squadraAvv = new SquadraAvversaria(1, "aaa", Modulo.M442, li);
 		this.risMatch = new HashMap<>();
 		this.elimThisTurn = false;
 	}
@@ -485,7 +488,15 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	 */
 	@Override
 	public Squadra getSquadraAvv() {
-		return this.squadraAvv;
+		//return this.squadraAvv;
+		try {
+			final SquadraAvversaria copy = new SquadraAvversaria(this.squadraAvv.getId(), this.squadraAvv.getNomeSquadra(),
+					this.squadraAvv.getModulo(), this.squadraAvv.getLiCalciatori());
+			return copy;
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	/**
@@ -493,15 +504,14 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	 */
 	@Override
 	public void setSquadraAvv(final Squadra squadra) {
-		this.squadraAvv = squadra;
-		/*
+		//this.squadraAvv = squadra;
 		try {
-			this.squadraAvv = new SquadraAvversaria(squadra.getId(), squadra.getNomeSquadra(), squadra.getModulo(), squadra.getLiCalciatori());
+			this.squadraAvv = new SquadraAvversaria(squadra.getId(), squadra.getNomeSquadra(),
+					squadra.getModulo(), squadra.getLiCalciatori());
 		} catch (ClassNotFoundException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		*/
 	}
 
 	/**

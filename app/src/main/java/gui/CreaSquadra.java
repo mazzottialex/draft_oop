@@ -1,15 +1,32 @@
 package gui;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.Toolkit;
+//import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.*;
+//import java.util.*;
 import java.util.List;
-
-import javax.swing.*;
+import java.util.Map;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.JDialog;
+import java.util.HashMap;
+import java.util.ArrayList;
+//import javax.swing.*;
 import data.Calciatore;
 import data.Modulo;
 import logics.LogicsCreaSquadraImpl;
@@ -29,16 +46,16 @@ import logics.LogicsCreasquadra;
 public class CreaSquadra extends Base {
 
     private static final long serialVersionUID = 1L;
-	private static final int MAX_FOR_ROW = 2;
-	private static final int NUM_PLAYER = 5;
+    private static final int MAX_FOR_ROW = 2;
+    private static final int NUM_PLAYER = 5;
 	
-	private LogicsCreasquadra log;
-	private final JFrame frameModulo;
-	private final JFrame frameCalciatori;
-	private final JPanel panelSud = new JPanel(new GridBagLayout()); //panel Sud del frame principale
-	private final JPanel panelCenter = new JPanel(new GridBagLayout()); // Panel Center del frame principale 
-	private final GridBagConstraints gbc = new GridBagConstraints();
-	private final JLabel lblmodSel;
+    private LogicsCreasquadra log;
+    private final JFrame frameModulo;
+    private final JFrame frameCalciatori;
+    private final JPanel panelSud = new JPanel(new GridBagLayout()); //panel Sud del frame principale
+    private final JPanel panelCenter = new JPanel(new GridBagLayout()); // Panel Center del frame principale 
+    private final GridBagConstraints gbc = new GridBagConstraints();
+    private final JLabel lblmodSel;
 	private JLabel lblmoduloSelect;
 	private final JButton buttonIniziaTorneo;
 	private JButton[] buttonsAtt;

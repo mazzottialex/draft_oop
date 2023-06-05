@@ -17,7 +17,8 @@ import manageData.ExtractDataImpl;
  *
  */
 public class SquadraAvversaria implements Squadra {
-    private int id;
+    private static final long serialVersionUID = 1L;
+	private int id;
     private String nomeSquadra;
     private final String stemma;
     private Modulo modulo;
@@ -37,8 +38,7 @@ public class SquadraAvversaria implements Squadra {
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    public SquadraAvversaria(final int id, final String nomeSquadra, final Modulo modulo,
-    		final List<Calciatore> li)
+    public SquadraAvversaria(final int id, final String nomeSquadra, final Modulo modulo, final List<Calciatore> li)
     throws FileNotFoundException, IOException, ClassNotFoundException {
         this.id = id;
         this.nomeSquadra = nomeSquadra;

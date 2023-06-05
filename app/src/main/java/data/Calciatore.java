@@ -1,6 +1,7 @@
 package data;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Vector;
 
 import utils.Pair;
@@ -154,6 +155,29 @@ public class Calciatore implements Serializable{
 		v.add(rating.getY().getZ());
 		return v;
 	}
-	
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(ammonizioni, assist, cleanSheet, dribling, espulsioni, gol, id, minuti, nominativo, parate,
+				passaggi, passaggiChiave, pg, rating, ratingCartellino, rubati, ruolo, squadra, tackle, tiri);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Calciatore other = (Calciatore) obj;
+		return ammonizioni == other.ammonizioni && assist == other.assist && cleanSheet == other.cleanSheet
+				&& dribling == other.dribling && espulsioni == other.espulsioni && gol == other.gol && id == other.id
+				&& minuti == other.minuti && Objects.equals(nominativo, other.nominativo) && parate == other.parate
+				&& passaggi == other.passaggi && passaggiChiave == other.passaggiChiave && pg == other.pg
+				&& Objects.equals(rating, other.rating) && Objects.equals(ratingCartellino, other.ratingCartellino)
+				&& rubati == other.rubati && Objects.equals(ruolo, other.ruolo)
+				&& Objects.equals(squadra, other.squadra) && tackle == other.tackle && tiri == other.tiri;
+	}
 	
 }
