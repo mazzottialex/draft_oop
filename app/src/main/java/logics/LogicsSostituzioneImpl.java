@@ -65,7 +65,7 @@ public class LogicsSostituzioneImpl implements LogicsSostituzione {
 
     @Override
     public void sub(final Container parent1, final Container parent2, final Component component1, final Component component2) {
-        if (esce.getRuolo().equals(entra.getRuolo())) {
+        if (esce.getPos().equals(entra.getPos())) {
             int index1 = getComponentIndex(parent1, component1);
             int index2 = getComponentIndex(parent2, component2);
             if (index1 != -1 && index2 != -1) {

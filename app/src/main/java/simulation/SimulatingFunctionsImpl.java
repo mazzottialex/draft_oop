@@ -53,7 +53,7 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
     }
 
     public static double votoFanta(Player c) {
-        double k = RUOLO_COEFFICIENT_MAP.getOrDefault(c.getRuolo(), 0.0);
+        double k = RUOLO_COEFFICIENT_MAP.getOrDefault(c.getPos(), 0.0);
         return k * c.getRating().getX() * prob(0.8, 1.2);
     }
 
@@ -68,7 +68,7 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
     public int golSubitiFanta(Team s) throws FileNotFoundException, ClassNotFoundException, IOException {
         ExtractData ed = new ExtractDataImpl(s.getTitolari());
         Player portiere = ed.getListaByRuolo("P").get(0);
-        double probCleanSheet = portiere.getCleanSheet() / (portiere.getPg() == 0 ? 1 : portiere.getPg());
+        double probCleanSheet = portiere.getCleanSheets() / (portiere.getMatchesPlayed() == 0 ? 1 : portiere.getMatchesPlayed());
         if (prob(0, 1) <= probCleanSheet) {
             return 0;
         } else {
@@ -155,7 +155,7 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
             throws FileNotFoundException, ClassNotFoundException, IOException {
         Map<String, Double> mapModVoti = new HashMap<>();
         for (Player c : s.getTitolari()) {
-            String ruolo = c.getRuolo();
+            String ruolo = c.getPos();
             double voto = mapVoti.get(c) - SUB_VOTE;
             if (!mapModVoti.containsKey(ruolo)) {
                 mapModVoti.put(ruolo, voto);
@@ -182,7 +182,7 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
     public int golFattiFanta(Team s) throws FileNotFoundException, ClassNotFoundException, IOException {
         int gol = 0;
         for (Player c: s.getTitolari()) {
-            double probGol = c.getGol() / (c.getMinuti() / MINUTES);
+            double probGol = c.getGoals() / (c.getMinutes() / MINUTES);
             double p = prob(0, 1);
             if (p <= Math.pow(probGol, 3)) {
                 gol += 3;

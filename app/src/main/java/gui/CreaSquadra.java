@@ -489,13 +489,13 @@ public class CreaSquadra extends Base {
         gbc.gridy = 0;
         for (int i = 0; i < this.buttonsPlayer.length; i++) {
             this.buttonsPlayer[i] = new JButton(
-                    "" + list.get(i).getNominativo() + " " + list.get(i).getRating().getX());
+                    "" + list.get(i).getName() + " " + list.get(i).getRating().getX());
             this.panelCalciatoriCenter.add(this.buttonsPlayer[i], gbc);
             this.buttonsPlayer[i].setBackground(getColorByRuolo(ruolo));
             final int ind = i;
             this.buttonsPlayer[i].addActionListener(new ActionListener() {
                 public void actionPerformed(final ActionEvent e) {
-                    log.setNameString(list.get(ind).getNominativo());
+                    log.setNameString(list.get(ind).getName());
                     log.setCalciatoreSelect(list.get(ind));
                     log.setRuoloSelect(ruolo);
                     log.setposSelect(pos);

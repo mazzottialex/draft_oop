@@ -189,16 +189,16 @@ public class LogicsCreaSquadraImpl implements LogicsCreaSquadra {
     @Override
     public Player getCalciatoreSelect() {
         // return this.calciatoreSelect;
-        final Player copy = new Player(this.calciatoreSelect.getId(), this.calciatoreSelect.getNominativo(),
-                this.calciatoreSelect.getRuolo(), this.calciatoreSelect.getSquadra(), this.calciatoreSelect.getPg(),
-                this.calciatoreSelect.getMinuti(), this.calciatoreSelect.getGol(), this.calciatoreSelect.getTiri(),
-                this.calciatoreSelect.getDribling(), this.calciatoreSelect.getAssist(),
-                this.calciatoreSelect.getPassaggi(), this.calciatoreSelect.getPassaggiChiave(),
-                this.calciatoreSelect.getAmmonizioni(), this.calciatoreSelect.getEspulsioni(),
-                this.calciatoreSelect.getRubati(), this.calciatoreSelect.getTackle(),
-                this.calciatoreSelect.getCleanSheet(), this.calciatoreSelect.getParate());
+        final Player copy = new Player(this.calciatoreSelect.getId(), this.calciatoreSelect.getName(),
+                this.calciatoreSelect.getPos(), this.calciatoreSelect.getTeam(), this.calciatoreSelect.getMatchesPlayed(),
+                this.calciatoreSelect.getMinutes(), this.calciatoreSelect.getGoals(), this.calciatoreSelect.getShots(),
+                this.calciatoreSelect.getDribbles(), this.calciatoreSelect.getAssists(),
+                this.calciatoreSelect.getPasses(), this.calciatoreSelect.getKeyPasses(),
+                this.calciatoreSelect.getYellowCards(), this.calciatoreSelect.getRedCards(),
+                this.calciatoreSelect.getBallsRecovered(), this.calciatoreSelect.getTacklesWon(),
+                this.calciatoreSelect.getCleanSheets(), this.calciatoreSelect.getSaves());
         copy.setRating(this.calciatoreSelect.getRating());
-        copy.setRatingCartellino(this.calciatoreSelect.getRatingCartellino());
+        copy.setCardRating(this.calciatoreSelect.getCardRating());
         return copy;
     }
 
@@ -207,13 +207,13 @@ public class LogicsCreaSquadraImpl implements LogicsCreaSquadra {
      */
     @Override
     public void setCalciatoreSelect(final Player calciatore) {
-        final Player copy = new Player(calciatore.getId(), calciatore.getNominativo(), calciatore.getRuolo(),
-                calciatore.getSquadra(), calciatore.getPg(), calciatore.getMinuti(), calciatore.getGol(),
-                calciatore.getTiri(), calciatore.getDribling(), calciatore.getAssist(), calciatore.getPassaggi(),
-                calciatore.getPassaggiChiave(), calciatore.getAmmonizioni(), calciatore.getEspulsioni(),
-                calciatore.getRubati(), calciatore.getTackle(), calciatore.getCleanSheet(), calciatore.getParate());
+        final Player copy = new Player(calciatore.getId(), calciatore.getName(), calciatore.getPos(),
+                calciatore.getTeam(), calciatore.getMatchesPlayed(), calciatore.getMinutes(), calciatore.getGoals(),
+                calciatore.getShots(), calciatore.getDribbles(), calciatore.getAssists(), calciatore.getPasses(),
+                calciatore.getKeyPasses(), calciatore.getYellowCards(), calciatore.getRedCards(),
+                calciatore.getBallsRecovered(), calciatore.getTacklesWon(), calciatore.getCleanSheets(), calciatore.getSaves());
         copy.setRating(calciatore.getRating());
-        copy.setRatingCartellino(calciatore.getRatingCartellino());
+        copy.setCardRating(calciatore.getCardRating());
         this.calciatoreSelect = copy;
         // this.calciatoreSelect = calciatore;
     }

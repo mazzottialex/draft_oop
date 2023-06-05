@@ -9,146 +9,146 @@ import utils.Triple;
 
 public class Player implements Serializable{
 
-	private static final long serialVersionUID = -557391519003956401L; //per serializzazione
+	private static final long serialVersionUID = -557391519003956401L;
 	private final int id;
-	private final String nominativo;
-	private final String ruolo;
-	private final String squadra;
-	private final int pg; //partite giocate
-	private final int minuti;
-	private final int gol;
-	private final int tiri;
-	private final int dribling;
-	private final int assist;
-	private final int passaggi;
-	private final int passaggiChiave;
-	private final int ammonizioni;
-	private final int espulsioni;
-	private final int rubati;
-	private final int tackle;
-	private final int cleanSheet;
-	private final int parate;
-	private Pair<Integer, Integer> ratingCartellino;
+	private final String name;
+	private final String pos;
+	private final String team;
+	private final int matchesPlayed;
+	private final int minutes;
+	private final int goals;
+	private final int shots;
+	private final int dribbles;
+	private final int assists;
+	private final int passes;
+	private final int keyPasses;
+	private final int yellowCards;
+	private final int redCards;
+	private final int ballsRecovered;
+	private final int tacklesWon;
+	private final int cleanSheets;
+	private final int saves;
+	private Pair<Integer, Integer> cardRating;
 	private Pair<Integer, Triple<Integer, Integer, Integer>> rating; //VAL, A-C-D
 
-	public Player(int id, String nominativo, String ruolo, String squadra, int pg, int minuti, int gol, int tiri,
-			int dribling, int assist, int passaggi, int passaggiChiave, int ammonizioni, int espulsioni, int rubati,
-			int tackle, int cleanSheet, int parate) {
+	public Player(int id, String name, String pos, String team, int matchesPlayed, int minutes, int goals, int shots,
+			int dribbles, int assists, int passes, int keyPasses, int yellowCards, int redCards, int ballsRecovered, int tacklesWon,
+			int cleanSheets, int saves) {
 		this.id = id;
-		this.nominativo = nominativo;
-		this.ruolo = ruolo;
-		this.squadra = squadra;
-		this.pg = pg;
-		this.minuti = minuti;
-		this.gol = gol;
-		this.tiri = tiri;
-		this.dribling = dribling;
-		this.assist = assist;
-		this.passaggi = passaggi;
-		this.passaggiChiave = passaggiChiave;
-		this.ammonizioni = ammonizioni;
-		this.espulsioni = espulsioni;
-		this.rubati = rubati;
-		this.tackle = tackle;
-		this.cleanSheet = cleanSheet;
-		this.parate = parate;
-		this.rating=null;
-		this.ratingCartellino=null;
+		this.name = name;
+		this.pos = pos;
+		this.team = team;
+		this.matchesPlayed = matchesPlayed;
+		this.minutes = minutes;
+		this.goals = goals;
+		this.shots = shots;
+		this.dribbles = dribbles;
+		this.assists = assists;
+		this.passes = passes;
+		this.keyPasses = keyPasses;
+		this.yellowCards = yellowCards;
+		this.redCards = redCards;
+		this.ballsRecovered = ballsRecovered;
+		this.tacklesWon = tacklesWon;
+		this.cleanSheets = cleanSheets;
+		this.saves = saves;
+		this.rating = null;
+		this.cardRating = null;
 	}
 
 	public int getId() {
 		return id;
 	}
 	
-	public String getNominativo() {
-		return nominativo;
+	public String getName() {
+		return name;
 	}
 	
-	public String getRuolo() {
-		return ruolo;
+	public String getPos() {
+		return pos;
 	}
 
-	public String getSquadra() {
-		return squadra;
+	public String getTeam() {
+		return team;
 	}
 
-	public int getPg() {
-		return pg;
+	public int getMatchesPlayed() {
+		return matchesPlayed;
 	}
 
-	public int getMinuti() {
-		return minuti;
+	public int getMinutes() {
+		return minutes;
 	}
 
-	public int getGol() {
-		return gol;
+	public int getGoals() {
+		return goals;
 	}
 
-	public int getTiri() {
-		return tiri;
+	public int getShots() {
+		return shots;
 	}
 
-	public int getDribling() {
-		return dribling;
+	public int getDribbles() {
+		return dribbles;
 	}
 
-	public int getAssist() {
-		return assist;
+	public int getAssists() {
+		return assists;
 	}
 
-	public int getPassaggi() {
-		return passaggi;
+	public int getPasses() {
+		return passes;
 	}
 
-	public int getPassaggiChiave() {
-		return passaggiChiave;
+	public int getKeyPasses() {
+		return keyPasses;
 	}
 
-	public int getAmmonizioni() {
-		return ammonizioni;
+	public int getYellowCards() {
+		return yellowCards;
 	}
 
-	public int getEspulsioni() {
-		return espulsioni;
+	public int getRedCards() {
+		return redCards;
 	}
 
-	public int getRubati() {
-		return rubati;
+	public int getBallsRecovered() {
+		return ballsRecovered;
+	}
+	
+	public int getTacklesWon() {
+		return tacklesWon;
 	}
 
-	public int getTackle() {
-		return tackle;
+	public int getCleanSheets() {
+		return cleanSheets;
 	}
 
-	public int getCleanSheet() {
-		return cleanSheet;
+	public int getSaves() {
+		return saves;
 	}
 
-	public int getParate() {
-		return parate;
-	}
-
-	public Pair<Integer, Integer> getRatingCartellino(){
-		return ratingCartellino;
+	public Pair<Integer, Integer> getCardRating(){
+		return cardRating;
 	}
 	
 	public Pair<Integer, Triple<Integer, Integer, Integer>> getRating() {
 		return rating;
 	}
 
-	public void setRatingCartellino(Pair<Integer, Integer> ratingCartellino) {
-		this.ratingCartellino=ratingCartellino;
+	public void setCardRating(Pair<Integer, Integer> cardRating) {
+		this.cardRating = cardRating;
 	}
 	
-	public void setRating(Pair<Integer, Triple<Integer, Integer, Integer>> rating) {
-		this.rating=rating;
+	public void setRating(Pair<Integer, Triple<Integer, Integer, Integer>> overallRating) {
+		this.rating = overallRating;
 	}
 
 	
 	public Vector<?> toVector() {
-		Vector<Object> v=new Vector<>();
-		v.add(ruolo);
-		v.add(nominativo);
+		Vector<Object> v = new Vector<>();
+		v.add(pos);
+		v.add(name);
 		v.add(rating.getX());
 		v.add(rating.getY().getX());
 		v.add(rating.getY().getY());
@@ -158,8 +158,8 @@ public class Player implements Serializable{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(ammonizioni, assist, cleanSheet, dribling, espulsioni, gol, id, minuti, nominativo, parate,
-				passaggi, passaggiChiave, pg, rating, ratingCartellino, rubati, ruolo, squadra, tackle, tiri);
+		return Objects.hash(yellowCards, assists, cleanSheets, dribbles, redCards, goals, id, minutes, name, saves,
+				passes, keyPasses, matchesPlayed, rating, cardRating, tacklesWon, shots, ballsRecovered);
 	}
 
 	@Override
@@ -171,13 +171,11 @@ public class Player implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Player other = (Player) obj;
-		return ammonizioni == other.ammonizioni && assist == other.assist && cleanSheet == other.cleanSheet
-				&& dribling == other.dribling && espulsioni == other.espulsioni && gol == other.gol && id == other.id
-				&& minuti == other.minuti && Objects.equals(nominativo, other.nominativo) && parate == other.parate
-				&& passaggi == other.passaggi && passaggiChiave == other.passaggiChiave && pg == other.pg
-				&& Objects.equals(rating, other.rating) && Objects.equals(ratingCartellino, other.ratingCartellino)
-				&& rubati == other.rubati && Objects.equals(ruolo, other.ruolo)
-				&& Objects.equals(squadra, other.squadra) && tackle == other.tackle && tiri == other.tiri;
+		return yellowCards == other.yellowCards && assists == other.assists && cleanSheets == other.cleanSheets
+				&& dribbles == other.dribbles && redCards == other.redCards && goals == other.goals && id == other.id
+				&& minutes == other.minutes && Objects.equals(name, other.name) && saves == other.saves
+				&& passes == other.passes && keyPasses == other.keyPasses && matchesPlayed == other.matchesPlayed
+				&& Objects.equals(rating, other.rating) && Objects.equals(cardRating, other.cardRating)
+				&& tacklesWon == other.tacklesWon && shots == other.shots && ballsRecovered == other.ballsRecovered;
 	}
-	
 }

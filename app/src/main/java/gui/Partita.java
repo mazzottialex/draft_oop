@@ -398,7 +398,7 @@ public class Partita extends Base {
                 autogol = " (AG)";
             }
             string1 = string1 + Integer.toString(progressBar.getValue())
-                    + "' Gol: " + calciatore.getNominativo() + autogol + "<br>";
+                    + "' Gol: " + calciatore.getName() + autogol + "<br>";
             jlTabSq1.setText(apri + string1 + chiudi);
             score1++;
             jlScoreSq1.setText(String.valueOf(score1));
@@ -411,7 +411,7 @@ public class Partita extends Base {
                 autogol = " (AG)";
             }
             string2 = string2 + Integer.toString(progressBar.getValue())
-                    + "' Gol: " + calciatore.getNominativo() + autogol + "<br>";
+                    + "' Gol: " + calciatore.getName() + autogol + "<br>";
             jlTabSq2.setText(apri + string2 + chiudi);
             score2++;
             jlScoreSq2.setText(String.valueOf(score2));

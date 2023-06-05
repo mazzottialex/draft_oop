@@ -72,14 +72,14 @@ public class Draft extends Base {
                         try {
                             dialog = new DialogScelta(parent, true,
                             		liGiocatori.subList(nDraft * index, nDraft * (index + 1)), 
-                            		liGiocatori.subList(nDraft * index, nDraft * (index + 1)).get(0).getRuolo());
+                            		liGiocatori.subList(nDraft * index, nDraft * (index + 1)).get(0).getPos());
                             dialog.setVisible(true);
                             Player c = dialog.getCalciatore();
                             if (c != null) {
                                 panel.remove(btn);
                                 liTitolari.add(c);
-                                panel.add(utilsGUI.getPanelCalciatore(c.getNominativo(), 
-                                		c.getRating().getX(), c.getRuolo(), true));
+                                panel.add(utilsGUI.getPanelCalciatore(c.getName(), 
+                                		c.getRating().getX(), c.getPos(), true));
                                 if (liTitolari.size() >= 11 && liRiserve.size() >= 7) {
                                     btnProsegui.setVisible(true);
                                 }
@@ -124,14 +124,14 @@ public class Draft extends Base {
                     try {
                         dialog = new DialogScelta(parent, true,
                         liGiocatori.subList(nDraft * index, nDraft * (index + 1)),
-                        liGiocatori.subList(nDraft * index, nDraft * (index + 1)).get(0).getRuolo());
+                        liGiocatori.subList(nDraft * index, nDraft * (index + 1)).get(0).getPos());
                         dialog.setVisible(true);
                         Player c = dialog.getCalciatore();
                         if (c != null) {
                             panel.remove(btn);
                             liRiserve.add(c);
-                            panel.add(utilsGUI.getPanelCalciatore(c.getNominativo(), 
-                            c.getRating().getX(), c.getRuolo(), false));
+                            panel.add(utilsGUI.getPanelCalciatore(c.getName(), 
+                            c.getRating().getX(), c.getPos(), false));
                             if (liTitolari.size() >= 11 && liRiserve.size() >= 7) {
                                 btnProsegui.setVisible(true);
                             }

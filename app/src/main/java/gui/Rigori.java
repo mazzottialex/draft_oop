@@ -165,7 +165,7 @@ public class Rigori extends Base {
                     if (totTiri % 2 == 0) {
                         if (rig1.containsKey(tiri1)) {
                             String res = rig1.get(tiri1).getY();
-                            String tiratore = rig1.get(tiri1).getX().getNominativo();
+                            String tiratore = rig1.get(tiri1).getX().getName();
                             String resultLabel = tiratore + ": " + res;
                             str1 = str1 + resultLabel + "<br>";
                             results1.setText("<html>" + str1 + "</html>");
@@ -177,7 +177,7 @@ public class Rigori extends Base {
                     } else {
                         if (rig2.containsKey(tiri2)) {
                             String res = rig2.get(tiri2).getY();
-                            String tiratore = rig2.get(tiri2).getX().getNominativo();
+                            String tiratore = rig2.get(tiri2).getX().getName();
                             String resultLabel = tiratore + ": " + res;
                             str2 = str2 + resultLabel + "<br>";
                             results2.setText("<html>" + str2 + "</html>");

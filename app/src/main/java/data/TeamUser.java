@@ -55,14 +55,14 @@ public class TeamUser implements Team, Serializable {
     @Override
     public List<Player> getTitolari() {
         return liTitolari.stream()
-            .sorted((c1, c2) -> c2.getRuolo().compareTo(c1.getRuolo()))
+            .sorted((c1, c2) -> c2.getPos().compareTo(c1.getPos()))
             .collect(Collectors.toList());
     }
 
     @Override
     public List<Player> getTitolariDesc() {
         return liTitolari.stream()
-            .sorted((c1, c2) -> c1.getRuolo().compareTo(c2.getRuolo()))
+            .sorted((c1, c2) -> c1.getPos().compareTo(c2.getPos()))
             .collect(Collectors.toList());
     }
 
@@ -112,7 +112,7 @@ public class TeamUser implements Team, Serializable {
     public Player getPortiereTit() {
         Player portiere = null;
         for (Player calciatore: getTitolari()) {
-            if (calciatore.getRuolo().equals("P")) {
+            if (calciatore.getPos().equals("P")) {
                 portiere = calciatore;
             }
         }

@@ -64,7 +64,7 @@ public class ViewTeam extends Base {
             panelPosition = new JPanel();
             for (int j = 0; j < team.getModulo().getN(pos.get(i)); j++) {
                 Player p = team.getTitolariDesc().get(count);
-                JPanel panel = (utilsGUI.getPanelCalciatore(p.getNominativo(), p.getRating().getX(), p.getRuolo(), true));
+                JPanel panel = (utilsGUI.getPanelCalciatore(p.getName(), p.getRating().getX(), p.getPos(), true));
                 count++;
                 panelPosition.add(panel);
             }
@@ -87,8 +87,8 @@ public class ViewTeam extends Base {
                 gbc.gridy = 0;
             else
                 gbc.gridy = 1;
-            panelPosition.add(utilsGUI.getPanelCalciatore(p.getNominativo(),
-            		p.getRating().getX(), p.getRuolo(), false), gbc);
+            panelPosition.add(utilsGUI.getPanelCalciatore(p.getName(),
+            		p.getRating().getX(), p.getPos(), false), gbc);
         }
         gbc.gridy = 6;
         contentPane.add(panelPosition, gbc);

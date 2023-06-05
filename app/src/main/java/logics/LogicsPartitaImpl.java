@@ -133,7 +133,7 @@ public class LogicsPartitaImpl implements LogicsPartita {
         List<Double> golList = new ArrayList<>();
 
         for (Player calciatore: titolari) {
-            double gol = calciatore.getGol();
+            double gol = calciatore.getGoals();
             golList.add(gol);
             totGol += gol;
         }

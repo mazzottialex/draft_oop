@@ -21,7 +21,7 @@ public class ExtractDataImpl implements ExtractData {
     @Override
     public List<Player> getCalciatoreBySquadra(final String squadra) {
         return li.stream()
-            .filter(c -> c.getSquadra().equals(squadra))
+            .filter(c -> c.getTeam().equals(squadra))
             .collect(Collectors.toList());
     }
     @Override
@@ -31,14 +31,14 @@ public class ExtractDataImpl implements ExtractData {
     @Override
     public Optional<Player> getCalciatoreByName(final String name) {
         return li.stream()
-            .filter(c -> c.getNominativo().equals(name))
+            .filter(c -> c.getName().equals(name))
             .findFirst();
     }
     //RUOLI: P, D, C, A
     @Override
     public List<Player> getListaByRuolo(final String ruolo) {
         return li.stream()
-            .filter(c -> c.getRuolo().equals(ruolo))
+            .filter(c -> c.getPos().equals(ruolo))
             .collect(Collectors.toList());
     }
     @Override
@@ -103,7 +103,7 @@ public class ExtractDataImpl implements ExtractData {
                 break;
         }
         final List <Player> lista = getCalciatoreBySquadra(squadra).stream()
-            .filter(c -> c.getRuolo().equals(ruolo))
+            .filter(c -> c.getPos().equals(ruolo))
             .sorted((c1, c2) -> c2.getRating().getX() - c1.getRating().getX())
             .limit(n)
             .collect(Collectors.toList());
@@ -132,7 +132,7 @@ public class ExtractDataImpl implements ExtractData {
                 break;
         }
         List<Player> lista = getCalciatoreBySquadra(squadra).stream()
-            .filter(c -> c.getRuolo().equals(ruolo))
+            .filter(c -> c.getPos().equals(ruolo))
             .sorted((c1, c2) -> c2.getRating().getX() - c1.getRating().getX())
             .skip(m)
             .limit(n)
@@ -163,21 +163,21 @@ public class ExtractDataImpl implements ExtractData {
     public List<String> getNomeCalciatori(final String squadra) {
         return getCalciatoreBySquadra(squadra)
             .stream()
-            .map(c -> c.getNominativo())
+            .map(c -> c.getName())
             .collect(Collectors.toList());
     }
 
     public List<String> getNomeTitolari(final String squadra, final Modulo modulo) {
         return getTitolari(squadra, modulo)
             .stream()
-            .map(c -> c.getNominativo())
+            .map(c -> c.getName())
             .collect(Collectors.toList());
     }
 
     public List<String> getNomeRiserve(final String squadra, final Modulo modulo) {
         return getRiserve(squadra, modulo)
             .stream()
-            .map(c -> c.getNominativo())
+            .map(c -> c.getName())
             .collect(Collectors.toList());
     }
 

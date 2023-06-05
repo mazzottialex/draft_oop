@@ -45,7 +45,7 @@ public class CreaSquadreAvversarieImpl implements CreaSquadreAvversarie {
     public static List<String> raccogliSquadre(final List<Player> calciatori) {
         Set<String> squadreSet = new HashSet<>();
         for (Player calciatore: calciatori) {
-            squadreSet.add(calciatore.getSquadra());
+            squadreSet.add(calciatore.getTeam());
         }
         return new ArrayList<>(squadreSet);
     }

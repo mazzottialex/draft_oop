@@ -32,7 +32,7 @@ public class DialogScelta extends JDialog {
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         List<JButton> liBtn = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            JButton btnCalciatore = utilsGUI.getButtonCalciatore(this.li.get(i).getNominativo(), this.li.get(i).getRuolo());
+            JButton btnCalciatore = utilsGUI.getButtonCalciatore(this.li.get(i).getName(), this.li.get(i).getPos());
             liBtn.add(btnCalciatore);
             btnCalciatore.addActionListener(new ActionListener() {
                 @Override
