@@ -104,7 +104,7 @@ public class SquadraGui extends Base {
         btnStorico.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                changeJPanel(new Storico(stagione, online));
+                changeJPanel(new History(stagione, online));
             }
         });
         panelSquadra.add(btnStorico);

@@ -178,7 +178,7 @@ public class Home extends Base {
         btnStorico.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                changeJPanel(new Storico(log.getSeason(), log.getOnline()));
+                changeJPanel(new History(log.getSeason(), log.getOnline()));
             }
         });
         gbc.gridy = 6;
