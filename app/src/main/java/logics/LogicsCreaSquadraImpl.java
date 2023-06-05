@@ -36,7 +36,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	//private Squadra squadra;
 	private final List<Calciatore> calcUsciti;
 	private boolean clickModulo;
-	
+	private Random r = new Random();
 	/**
 	 * Constructor of LogicsCreaSquadraImpl.
 	 * @param nomeSquadra the name of the team
@@ -145,7 +145,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 		boolean test = false;
 		//Random r = new Random();
 		while (set.size() != n) {
-			int random = new Random().nextInt(list.size());
+			int random = r.nextInt(list.size());
 			Calciatore c = list.get(random);
 			test = false;
 			for (Calciatore uscito : this.calcUsciti) {
