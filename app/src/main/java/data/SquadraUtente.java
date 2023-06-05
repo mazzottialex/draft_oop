@@ -1,10 +1,13 @@
 package data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SquadraUtente implements Squadra {
+
+public class SquadraUtente implements Squadra, Serializable {
+
 	
 	private static final long serialVersionUID = 1L;
     private final int id;
@@ -15,7 +18,9 @@ public class SquadraUtente implements Squadra {
     private List<Calciatore> liTitolari;
     private List<Calciatore> liRiserve;
 
-    public SquadraUtente(final String nomeSquadra, final String stemma, final Modulo modulo, final List<Calciatore> liTitolari, final List < Calciatore > liRiserve) {
+
+    public SquadraUtente(final String nomeSquadra, final String stemma, final Modulo modulo,
+        final List<Calciatore> liTitolari, final List<Calciatore> liRiserve) {
         this.id = 0;
         this.nomeSquadra = nomeSquadra;
         this.stemma = stemma;
@@ -43,7 +48,7 @@ public class SquadraUtente implements Squadra {
     }
 
     @Override
-    public List < Calciatore > getLiCalciatori() {
+    public List<Calciatore> getLiCalciatori() {
         return liCalciatori;
     }
 
@@ -118,3 +123,4 @@ public class SquadraUtente implements Squadra {
         return "SquadraAvversaria [nomeSquadra=" + nomeSquadra + "]";
     }
 }
+
