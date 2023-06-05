@@ -12,7 +12,7 @@ import data.Modulo;
 import data.Squadra;
 import data.SquadraUtente;
 import gui.Base;
-import gui.SquadraGui;
+import gui.ViewTeam;
 import gui.utilsGUI;
 import manageData.ExtractData;
 import manageData.ExtractDataImpl;
@@ -167,7 +167,7 @@ public class Draft extends Base {
                 Squadra squadra = new SquadraUtente(nomeSquadra, stemma, mod, liTitolari, liRiserve);
                 LogicsFile logFile = new LogicsFileImpl();
                 logFile.SaveStorico(squadra);
-                changeJPanel(new SquadraGui(squadra, li));
+               // changeJPanel(new ViewTeam(squadra, li));
             }
         });
     }

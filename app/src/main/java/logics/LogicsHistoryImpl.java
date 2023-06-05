@@ -7,8 +7,8 @@ import manageData.LogicsFile;
 import manageData.LogicsFileImpl;
 
 public class LogicsHistoryImpl implements LogicsHistory{
-	private String season;
-	private Boolean online;
+	private final String season;
+	private final Boolean online;
 	private LogicsFile file=new LogicsFileImpl();
 	public LogicsHistoryImpl(final String season, final Boolean online ) {
 		this.season=season;

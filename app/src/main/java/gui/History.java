@@ -69,7 +69,7 @@ public class History extends Base {
 			btnVedi.addActionListener(new ActionListener() {	
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					changeJPanel(new SquadraGui(team, log.getSeason(), log.getOnline()));	
+					changeJPanel(new ViewTeam(team, log.getSeason(), log.getOnline()));	
 				}
 			});
 			panelTeam.add(btnVedi);
