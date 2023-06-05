@@ -211,7 +211,8 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 			this.risultati.clear();
 			if (this.getEliminated() && !this.getElimThisTurn()) {
 				try {
-					SimulatingMatchImpl s = new SimulatingMatchImpl(this.squadraAvv, this.getListAvversari().get(0)); 
+					SimulatingMatchImpl s = new SimulatingMatchImpl(this.squadraAvv, 
+							this.getListAvversari().get(0)); 
 					map2 = s.risultato();
 					l.clear();
 					l.addAll(map2.keySet());
@@ -219,7 +220,8 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 					this.risMatch.put(l.get(1).getNomeSquadra(), map2.get(l.get(1)));
 					int r1 = map2.get(l.get(0));
 					int r2 = map2.get(l.get(1));
-					if (this.risMatch.get(l.get(0).getNomeSquadra()).equals(this.risMatch.get(l.get(1).getNomeSquadra()))) {
+					if (this.risMatch.get(l.get(0).getNomeSquadra()).equals(
+							this.risMatch.get(l.get(1).getNomeSquadra()))) {
 						map2 = s.risultatoSuppl();
 						l.clear();
 						l.addAll(map2.keySet());
@@ -432,7 +434,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 							//l.clear();
 						} else {
 							this.winner = new LogicsRigoriImpl(this.squadraAvv, 
-									this.getListAvversari().get(0)).getWinner().getNomeSquadra(); 
+									this.getListAvversari().get(0)).getWinner().getNomeSquadra();
 						}
 					}
 				} catch (FileNotFoundException e) {
@@ -485,8 +487,9 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	public Squadra getSquadraAvv() {
 		//return this.squadraAvv;
 		try {
-			final SquadraAvversaria copy = new SquadraAvversaria(this.squadraAvv.getId(), this.squadraAvv.getNomeSquadra(), 
-					this.squadraAvv.getModulo(), this.squadraAvv.getLiCalciatori());
+			final SquadraAvversaria copy = new SquadraAvversaria(this.squadraAvv.getId(), 
+					this.squadraAvv.getNomeSquadra(), this.squadraAvv.getModulo(), 
+					this.squadraAvv.getLiCalciatori());
 			return copy;
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
