@@ -32,6 +32,7 @@ import utils.RoundedBorder;
  */
 public class Torneo extends Base {
 
+	private static final long serialVersionUID = 1L;
 	private static final int NUM_TURN_1 = 16;
 	private static final int NUM_TURN_2 = 8;
 	private static final int NUM_TURN_3 = 4;
@@ -71,9 +72,9 @@ public class Torneo extends Base {
 	 * Constructor of Torneo, add the necessary graphics components.
 	 * @param squadra the user's team
 	 * @param li the list of all the players in Serie A
-	 * @throws FileNotFoundException if ...
-	 * @throws ClassNotFoundException if ...
-	 * @throws IOException if ...
+	 * @throws FileNotFoundException 
+	 * @throws ClassNotFoundException 
+	 * @throws IOException 
 	 */
 	public Torneo(final Squadra squadra, final List<Calciatore> li) 
 			throws FileNotFoundException, ClassNotFoundException, IOException {			
@@ -95,7 +96,7 @@ public class Torneo extends Base {
 						p.addWindowListener(new WindowAdapter() {
 							public void windowClosed(final WindowEvent e) {
 								buttonSimula.setVisible(true);
-								if (p.getWinner() != logTor.getMiaSquadra()) {
+								if (p.getWinner().getId() != 0) {
 									logTor.setEliminated(true);
 									logTor.setSquadraAvv(logTor.getListAvversari().get(0));
 									//eliminatedThisTurn = true;
@@ -106,8 +107,8 @@ public class Torneo extends Base {
 								//System.out.println(p.getGolS2());
 								risSquadraUte = p.getGolS1();
 								risSquadraAvv = p.getGolS2();	
-								//risSquadraUte = 1;
-								//risSquadraAvv = 2;			
+								//risSquadraUte = 2;
+								//risSquadraAvv = 0;			
 								try {
 									logTor.simulaMatch();
 									createLevel();
@@ -217,9 +218,9 @@ public class Torneo extends Base {
 							+ this.listAvversarie.get(0).getNomeSquadra());
 			this.p4.add(this.labelsp4[0]);
 			for (int i = 1; i < this.listAvversarie.size() - 1; i = i + 2, cont++) {
-				String squad1 = new String(this.listAvversarie.get(i).getNomeSquadra());
+				String squad1 = this.listAvversarie.get(i).getNomeSquadra();
 				var ris1 = this.logTor.getRisultati().get(squad1);
-				String squad2 = new String(this.listAvversarie.get(i + 1).getNomeSquadra());
+				String squad2 = this.listAvversarie.get(i + 1).getNomeSquadra();
 				var ris2 = this.logTor.getRisultati().get(squad2);
 				this.labelsp4[cont] = new MyJLabel(squad1 + " " + ris1 + " " + " - " + " " + ris2 + " " + squad2);
 				this.p4.add(this.labelsp4[cont]);
@@ -273,9 +274,9 @@ public class Torneo extends Base {
 			}
 			int cont1 = 1;
 			for (int i = 1; i < this.listAvversarie.size() - 1; i = i + 2, cont1++) {
-				String squad1 = new String(this.listAvversarie.get(i).getNomeSquadra());
+				String squad1 = this.listAvversarie.get(i).getNomeSquadra();
 				var ris1 = this.logTor.getRisultati().get(squad1);
-				String squad2 = new String(this.listAvversarie.get(i+1).getNomeSquadra());
+				String squad2 = this.listAvversarie.get(i+1).getNomeSquadra();
 				var ris2 = this.logTor.getRisultati().get(squad2);
 				this.labelsp3[cont1] = new MyJLabel(squad1 + " " + ris1 + " " + " - " + " " + ris2 + " " + squad2);
 				this.p3.add(this.labelsp3[cont1]);
@@ -324,9 +325,9 @@ public class Torneo extends Base {
 					}
 				}
 			}
-			String squad1 = new String(this.listAvversarie.get(1).getNomeSquadra());
+			String squad1 = this.listAvversarie.get(1).getNomeSquadra();
 			var ris1 = this.logTor.getRisultati().get(squad1);
-			String squad2 = new String(this.listAvversarie.get(2).getNomeSquadra());
+			String squad2 = this.listAvversarie.get(2).getNomeSquadra();
 			var ris2 = this.logTor.getRisultati().get(squad2);
 			this.labelsp2[1] = new MyJLabel(squad1 + " " + ris1 + " " + " - " + " " + ris2 + " " + squad2);
 			this.p2.add(this.labelsp2[1]);
@@ -361,7 +362,7 @@ public class Torneo extends Base {
 								+ " - " + " " + ris21 + " " + this.listAvversarie.get(0).getNomeSquadra());
 				this.p1.add(this.labelp1);
 			}
-			String winner = new String();
+			String winner;
 			if (this.logTor.getElimThisTurn()) {
 				this.labelp0 = new MyJLabel(this.logTor.getSquadraAvv().getNomeSquadra());
 				winner = this.logTor.getSquadraAvv().getNomeSquadra();
@@ -398,6 +399,7 @@ public class Torneo extends Base {
 	 *
 	 */
 	private static class MyJLabel extends JLabel {
+		private static final long serialVersionUID = 1L;
 		public MyJLabel() {
 			super();
 		}

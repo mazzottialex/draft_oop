@@ -14,9 +14,9 @@ import data.Calciatore;
 import data.Modulo;
 import logics.LogicsCreaSquadraImpl;
 import logics.LogicsCreasquadra;
-import manageData.LogicsFile;
-import manageData.LogicsFileImpl;
-import v2.gui.*;
+//import manageData.LogicsFile;
+//import manageData.LogicsFileImpl;
+//import v2.gui.*;
 
 
 /**The GUI where the user chooses his team.
@@ -28,7 +28,8 @@ import v2.gui.*;
  */
 public class CreaSquadra extends Base {
 
-    private static final int MAX_FOR_ROW = 2;
+    private static final long serialVersionUID = 1L;
+	private static final int MAX_FOR_ROW = 2;
 	private static final int NUM_PLAYER = 5;
 	
 	private LogicsCreasquadra log;
@@ -46,23 +47,23 @@ public class CreaSquadra extends Base {
 	private JButton buttonPor;
 	private JButton[] buttonsPlayer;
 	private JPanel panelCalciatoriCenter;
-	private JButton buttonSelect;
+	//private JButton buttonSelect;
 	private Map<JButton, List<Calciatore>> map; //serve per tenere in memoria i 5 calciatori disponibili 
 	
 	/**Constructor of CreaSquadra, add the necessary graphics components.
 	 * @param nomeSquadra the String that contains the name of the team
 	 * @param stemma the String that contains the arms of the team
 	 * @param li the list of all the players in Serie A
-	 * @throws FileNotFoundException if...
-	 * @throws ClassNotFoundException if...
-	 * @throws IOException if...
+	 * @throws FileNotFoundException
+	 * @throws ClassNotFoundException
+	 * @throws IOException 
 	 */
 	public CreaSquadra(final String nomeSquadra, final String stemma, final List<Calciatore> li) 
 			throws FileNotFoundException, ClassNotFoundException, IOException {
 			
 		this.log = new LogicsCreaSquadraImpl(nomeSquadra, stemma, li);
 		//inizializzo il bottone per i giocatori che seleziono
-		this.buttonSelect = new JButton();
+		//this.buttonSelect = new JButton();
 		// Mi occupo del frame principale 
 		contentPane.setLayout(new BorderLayout());
 		// utilizzo gbc per la disposizione a griglia nel panel sud del frame principale
@@ -135,9 +136,6 @@ public class CreaSquadra extends Base {
 					});
 					prova.add(label);
 					prova.add(buttonOk);
-					//err.add(prova);
-					//err.setBounds( 300, 300, 200, 200);
-					//err.setVisible(true);
 					prova.setBounds(300, 300, 250, 100);
 					prova.setVisible(true);
 				}
@@ -157,8 +155,9 @@ public class CreaSquadra extends Base {
 		// Creo 2 frame aggiuntivi, uno per modulo e uno per calciatori
 		this.frameModulo = new JFrame("Seleziona modulo: ");
 		this.frameCalciatori = new JFrame("Seleziona calciatori: ");
-		this.frameModulo.setBounds(this.getX() + 520, this.getY(), 200, 300);
-		this.frameCalciatori.setBounds(this.getX() + 520, this.getY() + 300, 200, 300);
+		// dimensione fissa
+		this.frameModulo.setBounds(620, 100, 200, 300);
+		this.frameCalciatori.setBounds(620, 400, 200, 300);
 		//Mi occupo del frame Modulo
 		final JPanel panelModulo = new JPanel(new BorderLayout());
 		panelModulo.setBackground(new Color(0, 64, 128));
@@ -202,6 +201,7 @@ public class CreaSquadra extends Base {
 				changeModulo();
 				initMap();
 				frameModulo.setVisible(false);
+				log.setClickModulo(true);
 			}	
 		});
 		panelModuloSouth.add(buttonOk);	
@@ -305,10 +305,14 @@ public class CreaSquadra extends Base {
 			final int ind = i;
 			this.buttonsAtt[i].addActionListener(new ActionListener() {
 				public void actionPerformed(final ActionEvent e) {
-					if (map.get(buttonsAtt[ind]).isEmpty()) {
-						choosePlayerFirstTime("A", ind);
+					if (log.getClickModulo()) {
+						if (map.get(buttonsAtt[ind]).isEmpty()) {
+							choosePlayerFirstTime("A", ind);
+						} else {
+							choosePlayer("A", ind);
+						}
 					} else {
-						choosePlayer("A", ind);
+						createJDialog();
 					}
 				}
 			});
@@ -327,10 +331,14 @@ public class CreaSquadra extends Base {
 			final int ind = i;
 			this.buttonsCen[i].addActionListener(new ActionListener() {
 				public void actionPerformed(final ActionEvent e) {
-					if (map.get(buttonsCen[ind]).isEmpty()) {
-						choosePlayerFirstTime("C", ind);
+					if (log.getClickModulo()) {
+						if (map.get(buttonsCen[ind]).isEmpty()) {
+							choosePlayerFirstTime("C", ind);
+						} else {
+							choosePlayer("C", ind);
+						}
 					} else {
-						choosePlayer("C", ind);
+						createJDialog();
 					}
 				}
 			});
@@ -349,12 +357,15 @@ public class CreaSquadra extends Base {
 			final int ind = i;
 			this.buttonsDif[i].addActionListener(new ActionListener() {
 				public void actionPerformed(final ActionEvent e) {
-					if (map.get(buttonsDif[ind]).isEmpty()) {
-						choosePlayerFirstTime("D", ind);
+					if (log.getClickModulo()) {
+						if (map.get(buttonsDif[ind]).isEmpty()) {
+							choosePlayerFirstTime("D", ind);
+						} else {
+							choosePlayer("D", ind);
+						}
 					} else {
-						choosePlayer("D", ind);
+						createJDialog();
 					}
-					
 				}
 			});
 			this.panelCenter.add(this.buttonsDif[i],gbc);
@@ -369,10 +380,14 @@ public class CreaSquadra extends Base {
 		this.buttonPor.setBackground(Color.YELLOW);
 		this.buttonPor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (map.get(buttonPor).isEmpty()) {
-					choosePlayerFirstTime("P", 0);
+				if (log.getClickModulo()) {
+					if (map.get(buttonPor).isEmpty()) {
+						choosePlayerFirstTime("P", 0);
+					} else {
+						choosePlayer("P", 0);
+					}
 				} else {
-					choosePlayer("P", 0);
+					createJDialog();
 				}
 			}
 		});
@@ -387,7 +402,8 @@ public class CreaSquadra extends Base {
 
 		List<Calciatore> list = this.log.getRandom(ruolo, NUM_PLAYER);
 		// aggiungo per poi controllare che non ci siano doppioni
-		this.log.getCalcUsciti().addAll(list);
+		//this.log.getCalcUsciti().addAll(list);
+		this.log.addCalcUsciti(list);
 		//Aggiungo la lista list nella mappa map
 		switch (ruolo) {
 		case "A":
@@ -469,7 +485,7 @@ public class CreaSquadra extends Base {
 	/* metodo per cambiare la formazione nel frame principale
 	 * mettendo al posto dei vari bottoni il nome del calciatore scelto*/
 	private void changeButtonPlayer(final String ruolo, final int pos) {
-		String s = new String();
+		String s;
 		switch (ruolo) {
 		case "A":
 			s = textFormat(log.getNamePlayer() + " " + log.getRating());
@@ -552,4 +568,23 @@ public class CreaSquadra extends Base {
 		System.out.println(map);
 	}
 	
+	private void createJDialog() {
+		final JFrame mo = new JFrame("MODULO");
+		mo.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		final JDialog moProva = new JDialog(mo, "ERRORE");
+		moProva.setLayout(new FlowLayout());
+		moProva.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		final JLabel label = new JLabel("SELEZIONA UN MODULO");
+		final JButton buttonOk = new JButton("OK");
+		buttonOk.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent e) {
+				WindowEvent close = new WindowEvent(moProva, WindowEvent.WINDOW_CLOSING);
+				moProva.dispatchEvent(close);
+			}
+		});
+		moProva.add(label);
+		moProva.add(buttonOk);
+		moProva.setBounds(300, 300, 200, 100);
+		moProva.setVisible(true);
+	}
 }

@@ -115,7 +115,7 @@ public class LogicsPartitaImpl implements LogicsPartita {
         }
 
         double autogol = (totGol * OWNGOAL_RATE) / 100;
-        double random = new Random().nextDouble(totGol + autogol);
+        double random = new Random().nextDouble() * (totGol + autogol);
 
         double cumulativeProbability = 0.0;
         for (int i = 0; i < titolari.size(); i++) {

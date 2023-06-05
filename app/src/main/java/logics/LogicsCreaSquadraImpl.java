@@ -18,6 +18,7 @@ import manageData.ExtractDataImpl;
  */
 public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 
+	private static final long serialVersionUID = 1L;
 	private static final int NUM_PLAYER_IN_TEAM = 11;  
 	
 	private Modulo moduloSelect;
@@ -32,17 +33,18 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	private final List<Calciatore> riserve;
 	private final String nomeSquadra;
 	private final String stemma;
-	private Squadra squadra;
+	//private Squadra squadra;
 	private final List<Calciatore> calcUsciti;
+	private boolean clickModulo;
 	
 	/**
 	 * Constructor of LogicsCreaSquadraImpl.
 	 * @param nomeSquadra the name of the team
 	 * @param stemma the arms
 	 * @param li the list of all the players in Serie A
-	 * @throws FileNotFoundException if...
-	 * @throws ClassNotFoundException if...
-	 * @throws IOException if...
+	 * @throws FileNotFoundException 
+	 * @throws ClassNotFoundException
+	 * @throws IOException
 	 */
 	public LogicsCreaSquadraImpl(final String nomeSquadra, final String stemma, final List<Calciatore> li) 
 			throws FileNotFoundException, ClassNotFoundException, IOException {
@@ -65,6 +67,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 		riserve.addAll(this.getRandom("C", 2));
 		riserve.addAll(this.getRandom("A", 2));
 		this.calcUsciti.addAll(riserve);
+		this.clickModulo = false;
 	}
 	
 	/**
@@ -181,6 +184,8 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	@Override
 	public Calciatore getCalciatoreSelect() {
 		return this.calciatoreSelect;
+		//Calciatore copy = this.calciatoreSelect;
+		
 	}
 
 	/**
@@ -297,7 +302,32 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	 */
 	@Override
 	public List<Calciatore> getCalcUsciti() {
-		return this.calcUsciti;
+		//return this.calcUsciti;
+		return List.copyOf(this.calcUsciti);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void addCalcUsciti(List<Calciatore> list) {
+		this.calcUsciti.addAll(list);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean getClickModulo() {
+		return this.clickModulo;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setClickModulo(boolean click) {
+		this.clickModulo = click;
 	}
 
 }

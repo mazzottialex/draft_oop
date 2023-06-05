@@ -36,7 +36,7 @@ public class CreaSquadreAvversarieImpl implements CreaSquadreAvversarie {
 
     public List<Squadra> selezionaSquadreCasuali(List<String> squadre, Modulo modulo, int numeroSquadre) throws FileNotFoundException, ClassNotFoundException, IOException {
         Collections.shuffle(squadre); // Mescola l'ordine delle squadre
-        int id = 0;
+        int id = 1;
         List<Squadra> listSquadre = new ArrayList<>();
         for (String s: squadre) {
             listSquadre.add(new SquadraAvversaria(id, s, modulo, li));

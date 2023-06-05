@@ -1,5 +1,6 @@
 package logics;
 
+import java.io.Serializable;
 import java.util.*;
 
 import data.Calciatore;
@@ -11,7 +12,7 @@ import manageData.ExtractData;
  * @author Davide Braccini
  *
  */
-public interface LogicsCreasquadra {
+public interface LogicsCreasquadra extends Serializable{
 
 	/**
 	 * 
@@ -170,4 +171,23 @@ public interface LogicsCreasquadra {
 	 * @return the list of player already used
 	 */
 	List<Calciatore> getCalcUsciti();
+	
+	/**
+	 * 
+	 * @param list the list of player already used
+	 */
+	void addCalcUsciti(List<Calciatore> list);
+	
+	/**
+	 * 
+	 * @return true if the module was selected
+	 */
+	boolean getClickModulo();
+	
+	/**
+	 * 
+	 * @param click true if the module was selected
+	 */
+	void setClickModulo(boolean click);
+	
 }

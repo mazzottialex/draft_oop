@@ -2,18 +2,19 @@ package logics;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
 import data.Squadra;
-import data.SquadraAvversaria;
+//import data.SquadraAvversaria;
 
 /**
  * The interface that models the logic of Torneo.
  * @author Davide Braccini
  *
  */
-public interface LogicsTorneo {
+public interface LogicsTorneo extends Serializable{
 
 	/**
 	 * 
@@ -47,9 +48,9 @@ public interface LogicsTorneo {
 	
 	/**
 	 * Simulate the matches of the turnament.
-	 * @throws FileNotFoundException if..
-	 * @throws ClassNotFoundException if..
-	 * @throws IOException if..
+	 * @throws FileNotFoundException 
+	 * @throws ClassNotFoundException 
+	 * @throws IOException 
 	 */
 	void simulaMatch() throws FileNotFoundException, ClassNotFoundException, IOException;
 	
