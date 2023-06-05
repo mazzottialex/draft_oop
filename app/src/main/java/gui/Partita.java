@@ -1,18 +1,28 @@
 package gui;
 
-import javax.swing.*;
 
 import data.Calciatore;
 import data.Squadra;
 import logics.LogicsPartita;
 import logics.LogicsPartitaImpl;
 
-import java.awt.*;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 /**
  * Represents a football match GUI.
@@ -160,13 +170,13 @@ public class Partita extends Base {
         JPanel southWest = new JPanel();
         southWest.add(jbSubs);
         gbc.gridx = 0;
-        gbc.gridy = 5;
+        gbc.gridy = GRID_5;
         gbc.gridwidth = 1;
         gbc.ipady = GRID_5;
         panel.add(southWest, gbc);
 
         gbc.gridx = 1;
-        gbc.gridy = 5;
+        gbc.gridy = GRID_5;
         gbc.gridwidth = 1;
         gbc.ipady = GRID_5;
         panel.add(startStop, gbc);
@@ -385,8 +395,8 @@ public class Partita extends Base {
             if (!s1.getTitolari().contains(calciatore)) {
                 autogol = " (AG)";
             }
-            string1 = string1 + Integer.toString(progressBar.getValue()) +
-            		"' Gol: " + calciatore.getNominativo() + autogol + "<br>";
+            string1 = string1 + Integer.toString(progressBar.getValue())
+                    + "' Gol: " + calciatore.getNominativo() + autogol + "<br>";
             jlTabSq1.setText(apri + string1 + chiudi);
             score1++;
             jlScoreSq1.setText(String.valueOf(score1));
@@ -398,8 +408,8 @@ public class Partita extends Base {
             if (!s2.getTitolari().contains(calciatore)) {
                 autogol = " (AG)";
             }
-            string2 = string2 + Integer.toString(progressBar.getValue()) +
-            		"' Gol: " + calciatore.getNominativo() + autogol + "<br>";
+            string2 = string2 + Integer.toString(progressBar.getValue())
+                    + "' Gol: " + calciatore.getNominativo() + autogol + "<br>";
             jlTabSq2.setText(apri + string2 + chiudi);
             score2++;
             jlScoreSq2.setText(String.valueOf(score2));
