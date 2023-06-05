@@ -52,7 +52,6 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 		//this.md = new ManageDataImpl(stagione);
 		//this.md.LoadData();
 		this.ex = new ExtractDataImpl(li); //(this.md.getLi());
-		this.namePlayer = new String();
 		this.calciatoreSelect = new Calciatore(0, null, null, null, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 		this.ruoloSelect = null;
 		this.posSelect = -1;
@@ -144,9 +143,9 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 		Set<Calciatore> set = new HashSet<>();
 		List<Calciatore> randomList = new ArrayList<>();
 		boolean test = false;
-		Random r = new Random();
+		//Random r = new Random();
 		while (set.size() != n) {
-			int random = r.nextInt(list.size());
+			int random = new Random().nextInt(list.size());
 			Calciatore c = list.get(random);
 			test = false;
 			for (Calciatore uscito : this.calcUsciti) {
@@ -183,9 +182,19 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	 */
 	@Override
 	public Calciatore getCalciatoreSelect() {
-		return this.calciatoreSelect;
-		//Calciatore copy = this.calciatoreSelect;
-		
+		//return this.calciatoreSelect;
+		final Calciatore copy = new Calciatore(this.calciatoreSelect.getId(), this.calciatoreSelect.getNominativo(), 
+				this.calciatoreSelect.getRuolo(), this.calciatoreSelect.getSquadra(), 
+				this.calciatoreSelect.getPg(), this.calciatoreSelect.getMinuti(), 
+				this.calciatoreSelect.getGol(), this.calciatoreSelect.getTiri(), 
+				this.calciatoreSelect.getDribling(), this.calciatoreSelect.getAssist(), 
+				this.calciatoreSelect.getPassaggi(), this.calciatoreSelect.getPassaggiChiave(), 
+				this.calciatoreSelect.getAmmonizioni(), this.calciatoreSelect.getEspulsioni(), 
+				this.calciatoreSelect.getRubati(), this.calciatoreSelect.getTackle(), 
+				this.calciatoreSelect.getCleanSheet(), this.calciatoreSelect.getParate());
+		copy.setRating(this.calciatoreSelect.getRating());
+		copy.setRatingCartellino(this.calciatoreSelect.getRatingCartellino());
+		return copy;
 	}
 
 	/**
@@ -193,7 +202,19 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	 */
 	@Override
 	public void setCalciatoreSelect(final Calciatore calciatore) {
-		this.calciatoreSelect = calciatore;
+		final Calciatore copy = new Calciatore(calciatore.getId(), calciatore.getNominativo(), 
+				calciatore.getRuolo(), calciatore.getSquadra(), 
+				calciatore.getPg(), calciatore.getMinuti(), 
+				calciatore.getGol(), calciatore.getTiri(), 
+				calciatore.getDribling(), calciatore.getAssist(), 
+				calciatore.getPassaggi(), calciatore.getPassaggiChiave(), 
+				calciatore.getAmmonizioni(), calciatore.getEspulsioni(), 
+				calciatore.getRubati(), calciatore.getTackle(), 
+				calciatore.getCleanSheet(), calciatore.getParate());
+		copy.setRating(calciatore.getRating());
+		copy.setRatingCartellino(calciatore.getRatingCartellino());
+		this.calciatoreSelect = copy;
+		//this.calciatoreSelect = calciatore;
 	}
 
 	/**
@@ -278,7 +299,8 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	 */
 	@Override
 	public List<Calciatore> getTitolari() {
-		return this.liSquadra;
+		//return this.liSquadra;
+		return List.copyOf(this.liSquadra);
 	}
 
 	/**
