@@ -1,11 +1,8 @@
 package logics;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
-
 import data.Calciatore;
-
 public interface LogicsHome {
 	public void setStagione(String stagione);
 	public List<String> getStagioni();

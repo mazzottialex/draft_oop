@@ -1,16 +1,12 @@
 package logics;
-
 import java.awt.Component;
 import java.awt.Container;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JOptionPane;
-
 import data.Calciatore;
 import data.Squadra;
 import gui.Sostituzione;
-
 public class LogicsSostituzioneImpl implements LogicsSostituzione {
     private List<Calciatore> titolari;
     private List<Calciatore> riserve;
@@ -18,8 +14,7 @@ public class LogicsSostituzioneImpl implements LogicsSostituzione {
     private Calciatore esce;
     private Squadra s;
     private Sostituzione gui;
-
-    public LogicsSostituzioneImpl(Squadra s, Sostituzione gui) {
+    public LogicsSostituzioneImpl(final Squadra s, final Sostituzione gui) {
         this.titolari = new ArrayList<>(s.getTitolari());
         this.riserve = new ArrayList<>(s.getRiserve());
         this.entra = null;
@@ -44,17 +39,17 @@ public class LogicsSostituzioneImpl implements LogicsSostituzione {
     }
 
     @Override
-    public void selezTit(Calciatore c) {
+    public void selezTit(final Calciatore c) {
         esce = c;
     }
 
     @Override
-    public void selezRis(Calciatore c) {
+    public void selezRis(final Calciatore c) {
         entra = c;
     }
 
     @Override
-    public void sub(Container parent1, Container parent2, Component component1, Component component2) {
+    public void sub(final Container parent1, final Container parent2, Component component1, Component component2) {
         if (entra != null && esce != null) {
             if (esce.getRuolo().equals(entra.getRuolo())) {
                 int index1 = getComponentIndex(parent1, component1);
@@ -87,8 +82,7 @@ public class LogicsSostituzioneImpl implements LogicsSostituzione {
             JOptionPane.showMessageDialog(null, "Bisogna selezionare due giocatori: uno tra i titolari e uno tra le riserve, che devono avere lo stesso ruolo");
         }
     }
-
-    private static int getComponentIndex(Container parent, Component component) {
+    private static int getComponentIndex(final Container parent, final Component component) {
         for (int i = 0; i < parent.getComponentCount(); i++) {
             if (parent.getComponent(i) == component) {
                 return i;
@@ -96,5 +90,4 @@ public class LogicsSostituzioneImpl implements LogicsSostituzione {
         }
         return -1;
     }
-
 }
