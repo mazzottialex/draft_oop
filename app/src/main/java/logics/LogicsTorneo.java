@@ -16,11 +16,11 @@ import data.Squadra;
  */
 public interface LogicsTorneo extends Serializable {
 
-	/**
-	 * 
-	 * @return the list of opposing teams
-	 */
-	List<Squadra> getListAvversari();
+    /**
+     * 
+     * @return the list of opposing teams
+     */
+    List<Squadra> getListAvversari();
 	
 	/**
 	 * 

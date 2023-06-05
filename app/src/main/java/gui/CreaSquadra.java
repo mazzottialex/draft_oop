@@ -129,11 +129,10 @@ public class CreaSquadra extends Base {
 						int width = screenSize.width * initialScreenPercentage / 100;
 						topFrame.setPreferredSize(new Dimension(width, height));
 						//centrare?
-						/*topFrame.setLocation(
-								(screenSize.width - width) / 2,
-								(screenSize.height - height) / 2
-						);
-						*/
+                        /*
+                         * topFrame.setLocation( (screenSize.width - width) / 2, (screenSize.height -
+                         * height) / 2 );
+                         */
 						topFrame.validate();
 						topFrame.repaint();
 						topFrame.pack();
