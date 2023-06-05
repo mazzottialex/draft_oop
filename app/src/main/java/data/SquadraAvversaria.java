@@ -29,15 +29,16 @@ public class SquadraAvversaria implements Squadra {
     /**
      * Costruttore della classe SquadraAvversaria.
      * 
-     * @param id			L'id della squadra.
-     * @param nomeSquadra	Il nome della squadra.
-     * @param modulo		Il modulo della squadra.
-     * @param li			La lista di calciatori di una certa annata.
+     * @param id            L'id della squadra.
+     * @param nomeSquadra   Il nome della squadra.
+     * @param modulo        Il modulo della squadra.
+     * @param li            La lista di calciatori di una certa annata.
      * @throws FileNotFoundException
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    public SquadraAvversaria(int id, String nomeSquadra, Modulo modulo, List <Calciatore> li)
+    public SquadraAvversaria(final int id, final String nomeSquadra, final Modulo modulo,
+    		final List<Calciatore> li)
     throws FileNotFoundException, IOException, ClassNotFoundException {
         this.id = id;
         this.nomeSquadra = nomeSquadra;
@@ -91,12 +92,12 @@ public class SquadraAvversaria implements Squadra {
     }
 
     @Override
-    public void setTitolari(List <Calciatore> liTitolari) {
+    public void setTitolari(final List<Calciatore> liTitolari) {
         this.liTitolari = liTitolari;
     }
 
     @Override
-    public void setRiserve(List <Calciatore> liRiserve) {
+    public void setRiserve(final List<Calciatore> liRiserve) {
         this.liRiserve = liRiserve;
     }
 
@@ -122,7 +123,7 @@ public class SquadraAvversaria implements Squadra {
     }
 
     @Override
-    public Calciatore getCalciatoreById(int id) {
+    public Calciatore getCalciatoreById(final int id) {
         Calciatore c = null;
         for (Calciatore calciatore: liCalciatori) {
             if (calciatore.getId() == id) {

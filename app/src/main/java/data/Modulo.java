@@ -4,12 +4,40 @@ package data;
  * Represents different football formations (modules).
  */
 public enum Modulo {
+	
+	/**
+	 * 343 formation.
+	 */
     M343(3, 4, 3),
+    
+    /**
+	 * 352 formation.
+	 */
     M352(3, 5, 2),
+    
+    /**
+	 * 433 formation.
+	 */
     M433(4, 3, 3),
+    
+    /**
+	 * 442 formation.
+	 */
     M442(4, 4, 2),
+    
+    /**
+	 * 451 formation.
+	 */
     M451(4, 5, 1),
+    
+    /**
+	 * 532 formation.
+	 */
     M532(5, 3, 2),
+    
+    /**
+	 * 541 formation.
+	 */
     M541(5, 4, 1);
 
     private int dif;
@@ -23,7 +51,7 @@ public enum Modulo {
      * @param cen The number of midfielders.
      * @param att The number of attackers.
      */
-    private Modulo(int dif, int cen, int att) {
+    Modulo(final int dif, final int cen, final int att) {
         this.dif = dif;
         this.cen = cen;
         this.att = att;
@@ -48,9 +76,9 @@ public enum Modulo {
     }
 
     /**
-     * Returns the number of attackers in the formation.
+     * Returns the number of forwards in the formation.
      *
-     * @return The number of attackers.
+     * @return The number of forwards.
      */
     public int getNumAtt() {
         return att;
@@ -62,15 +90,19 @@ public enum Modulo {
      * @param ruolo The role of the player (e.g., "P", "D", "C", "A").
      * @return The number of players for the given role.
      */
-    public int getN(String ruolo) {
-        if (ruolo == "P")
-            return 1;
-        else if (ruolo == "D")
-            return dif;
-        else if (ruolo == "C")
-            return cen;
-        else if (ruolo == "A")
-            return att;
+    public int getN(final String ruolo) {
+        if (ruolo == "P") {
+        	return 1;
+        }
+        else if (ruolo == "D") {
+        	return dif;
+        }
+        else if (ruolo == "C") {
+        	return cen;
+        }
+        else if (ruolo == "A") {
+        	return att;
+        }
         else return 0;
     }
 
