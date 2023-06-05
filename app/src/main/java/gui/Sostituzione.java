@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import data.Calciatore;
@@ -24,7 +25,6 @@ import logics.LogicsSostituzioneImpl;
  * Represents a GUI for substituting players.
  */
 public class Sostituzione extends Base {
-
     /**
      * 
      */
@@ -51,6 +51,8 @@ public class Sostituzione extends Base {
     public Sostituzione(final Squadra squadra, final Partita superGui, final int cambiFatti) {
         logics = new LogicsSostituzioneImpl(squadra, this);
         this.riserve = RISERVE - cambiFatti;
+        panelTit = null;
+        panelRis = null;
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(INSETS_5, INSETS_5, 2, 2);
@@ -124,8 +126,19 @@ public class Sostituzione extends Base {
 
         JButton sostituisci = new JButton("Sostitutisci");
         sostituisci.addActionListener(e -> {
-            logics.sub(panelTit.getParent(), panelRis.getParent(), panelTit, panelRis);
-            dispose();
+            if (panelTit == null || panelRis == null) {
+                JOptionPane.showMessageDialog(null, "Bisogna selezionare due giocatori: uno tra i titolari e uno tra le riserve, che devono avere lo stesso ruolo");
+        	    if (panelTit != null) {
+                    panelTit.setBackground(null);
+                }
+        	    if (panelRis != null) {
+                    panelRis.setBackground(null);
+                }
+            } else {
+                logics.sub(panelTit.getParent(), panelRis.getParent(), panelTit, panelRis);
+            }
+            panelTit = null;
+            panelRis = null;
         });
         gbc.gridy = GRID_7;
         contentPane.add(sostituisci, gbc);
