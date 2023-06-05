@@ -206,10 +206,12 @@ public class Partita extends Base {
                 stopProgress();
                 if (cambi <= 3) {
                     sost();
-                    update();
-                    addCambio();
-                    ris = true;
-                    if (cambi == 3) {
+                    if (!s1.getTitolari().equals(sub.getLogics().getTitolari())) {
+						update();
+						addCambio();
+						ris = true;
+					}
+					if (cambi == 3) {
                         JButton button = (JButton) e.getSource();
                         JPanel panel = (JPanel) button.getParent();
                         button.setEnabled(false);
