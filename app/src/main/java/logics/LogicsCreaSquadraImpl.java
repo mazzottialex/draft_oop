@@ -2,8 +2,12 @@ package logics;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.*;
-
+//import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Set;
+import java.util.HashSet;
 import data.Calciatore;
 import data.Modulo;
 import data.Squadra;
@@ -19,8 +23,7 @@ import manageData.ExtractDataImpl;
 public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 
 	private static final long serialVersionUID = 1L;
-	private static final int NUM_PLAYER_IN_TEAM = 11;  
-	
+	private static final int NUM_PLAYER_IN_TEAM = 11;
 	private Modulo moduloSelect;
 	//private ManageData md;
 	private ExtractData ex;
@@ -332,7 +335,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void addCalcUsciti(List<Calciatore> list) {
+	public void addCalcUsciti(final List<Calciatore> list) {
 		this.calcUsciti.addAll(list);
 	}
 
@@ -348,7 +351,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setClickModulo(boolean click) {
+	public void setClickModulo(final boolean click) {
 		this.clickModulo = click;
 	}
 

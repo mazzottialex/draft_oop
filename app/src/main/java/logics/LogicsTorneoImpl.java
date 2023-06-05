@@ -434,7 +434,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 							//l.clear();
 						} else {
 							this.winner = new LogicsRigoriImpl(this.squadraAvv, 
-									this.getListAvversari().get(0)).getWinner().getNomeSquadra();
+						        this.getListAvversari().get(0)).getWinner().getNomeSquadra();
 						}
 					}
 				} catch (FileNotFoundException e) {
