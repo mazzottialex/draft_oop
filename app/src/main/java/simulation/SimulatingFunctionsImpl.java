@@ -49,7 +49,7 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
 
     public static double prob(double min, double max) {
         Random random = new Random();
-        return random.nextDouble(max - min) + min;
+        return min + (max - min) * random.nextDouble();
     }
 
     public static double votoFanta(Calciatore c) {

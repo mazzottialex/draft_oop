@@ -84,8 +84,8 @@ public class LogicsRigoriImpl implements LogicsRigori {
     }
 
     private String rigore(Calciatore tiratore, Squadra dif) {
-        double tirRating = tiratore.getRating().getY().getX() * (0.8 + new Random().nextDouble(0.4));
-        double porRating = dif.getPortiereTit().getRating().getY().getZ() * (0.8 + new Random().nextDouble(0.4));
+        double tirRating = tiratore.getRating().getY().getX() * (0.8 + new Random().nextDouble() * 0.4);
+        double porRating = dif.getPortiereTit().getRating().getY().getZ() * (0.8 + new Random().nextDouble() * 0.4);
         double modPorRating = porRating * 0.75 /*costante rigori fatti nei shootout*/ ;
         if (tirRating > modPorRating) {
             return "Gol";
