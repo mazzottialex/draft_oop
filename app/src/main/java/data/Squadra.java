@@ -1,11 +1,12 @@
 package data;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * The Squadra interface represents a team in a football (soccer) match.
  */
-public interface Squadra {
+public interface Squadra extends Serializable{
 
     /**
      * Returns a list of the starting players (titolari) for the team.

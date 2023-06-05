@@ -17,7 +17,8 @@ import manageData.ExtractDataImpl;
  *
  */
 public class SquadraAvversaria implements Squadra {
-    private int id;
+    private static final long serialVersionUID = 1L;
+	private int id;
     private String nomeSquadra;
     private final String stemma;
     private Modulo modulo;

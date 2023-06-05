@@ -1,11 +1,12 @@
 package data;
 
-import java.io.Serializable;
+//import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class SquadraUtente implements Squadra {
+	private static final long serialVersionUID = 1L;
 	private final int id;
 	private final String nomeSquadra;
 	private final String stemma;
