@@ -18,6 +18,7 @@ import manageData.ExtractDataImpl;
  */
 public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 
+	private static final long serialVersionUID = 1L;
 	private static final int NUM_PLAYER_IN_TEAM = 11;  
 	
 	private Modulo moduloSelect;
