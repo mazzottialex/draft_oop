@@ -14,7 +14,7 @@ import data.Squadra;
  * @author Davide Braccini
  *
  */
-public interface LogicsTorneo extends Serializable{
+public interface LogicsTorneo extends Serializable {
 
 	/**
 	 * 
