@@ -22,11 +22,11 @@ public class LogicsHomeImpl implements LogicsHome {
         ms = new ManageStagioniImpl(online);
     }
     @Override
-    public void setStagione(final String stagione) {
+    public void setSeason(final String stagione) {
         this.stagione = stagione;
     }
     @Override
-    public List<String> getStagioni() {
+    public List<String> getSeason() {
         return ms.getStagioni();
     }
     @Override
@@ -42,7 +42,7 @@ public class LogicsHomeImpl implements LogicsHome {
         return true;
     }
     @Override
-    public Boolean downloadStagione(final String stagione) {
+    public Boolean downloadSeason(final String stagione) {
         final ManageData md = new ManageDataImpl(stagione);
         this.stagione = stagione;
         try {

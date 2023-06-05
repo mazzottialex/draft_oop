@@ -19,13 +19,25 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+
+/**
+ * The Home class represents the home screen of the application
+ */
 public class Home extends Base {
-    private final LogicsHome log;
-    public Home(final String stagioneP, final Boolean online) {
-        this.stagione = stagioneP;
+    private static final long serialVersionUID = 1L;
+	private final LogicsHome log;
+	
+	/**
+     * Constructs a new Home object
+     *
+     * @param season_ the selected season as a String
+     * @param online    the online status as a Boolean value
+     */
+    public Home(final String season_, final Boolean online) {
+        this.season = season_;
         this.online = online;
-        log = new LogicsHomeImpl(stagione, online);
-        log.loadStagione(stagione);
+        log = new LogicsHomeImpl(season, online);
+        log.loadStagione(season);
         GridBagConstraints gbc = new GridBagConstraints();
         GridBagLayout layout = new GridBagLayout();
         contentPane.setLayout(layout);
@@ -71,12 +83,12 @@ public class Home extends Base {
         contentPane.add(btnStart, gbc);
         JPanel panelSelectioned = new JPanel();
         panelSelectioned.setPreferredSize(new Dimension(70, 40));
-        JLabel lblStagioneSelezionata = new JLabel("Stagione selezionata:");
-        lblStagioneSelezionata.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
-        panelSelectioned.add(lblStagioneSelezionata);
-        JLabel lblStagione = new JLabel(stagione);
-        lblStagione.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
-        panelSelectioned.add(lblStagione);
+        JLabel lblSeasonSelected = new JLabel("Season selected:");
+        lblSeasonSelected.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+        panelSelectioned.add(lblSeasonSelected);
+        JLabel lblSeason = new JLabel(season);
+        lblSeason.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+        panelSelectioned.add(lblSeason);
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.insets = new Insets(8, 0, 8, 0);
@@ -84,79 +96,78 @@ public class Home extends Base {
         JPanel panelLoad = new JPanel();
         panelLoad.setBackground(new Color(240, 240, 240));
         panelLoad.setLayout(new BoxLayout(panelLoad, BoxLayout.X_AXIS));
-        JButton btnCarica = new JButton("Carica");
-        btnCarica.setHorizontalAlignment(SwingConstants.RIGHT);
-        btnCarica.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
-        btnCarica.setBorderPainted(false);
-        btnCarica.setBackground(getForeground());
-        btnCarica.setRolloverEnabled(true);
-        btnCarica.setFocusPainted(false);
-        String[] array = log.getStagioni().toArray(new String[log.getStagioni().size()]);
-        JComboBox<String> comboBoxCarica = new JComboBox<>(array);
-        comboBoxCarica.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
-        btnCarica.addActionListener(new ActionListener() {
+        JButton btnLoad = new JButton("Choose a season:");
+        btnLoad.setHorizontalAlignment(SwingConstants.RIGHT);
+        btnLoad.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+        btnLoad.setBorderPainted(false);
+        btnLoad.setBackground(getForeground());
+        btnLoad.setRolloverEnabled(true);
+        btnLoad.setFocusPainted(false);
+        String[] array = log.getSeason().toArray(new String[log.getSeason().size()]);
+        JComboBox<String> comboBoxLoad = new JComboBox<>(array);
+        comboBoxLoad.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+        btnLoad.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                stagione = comboBoxCarica.getItemAt(comboBoxCarica.getSelectedIndex());
-                if (log.loadStagione(stagione)) {
-                    lblStagione.setText(stagione);
+                season = comboBoxLoad.getItemAt(comboBoxLoad.getSelectedIndex());
+                if (log.loadStagione(season)) {
+                    lblSeason.setText(season);
                 } else
-                    JOptionPane.showMessageDialog(null, "Errore nel caricamento");
+                    JOptionPane.showMessageDialog(null, "Loading error...");
             }
         });
-        panelLoad.add(btnCarica);
-        panelLoad.add(comboBoxCarica);
+        panelLoad.add(btnLoad);
+        panelLoad.add(comboBoxLoad);
         gbc.gridx = 0;
         gbc.gridy = 2;
         contentPane.add(panelLoad, gbc);
         JPanel panelDownLoad = new JPanel();
         panelDownLoad.setBackground(new Color(240, 240, 240));
         panelDownLoad.setLayout(new BoxLayout(panelDownLoad, BoxLayout.X_AXIS));
-        JButton btnAggiorna = new JButton("Aggiorna");
-        JLabel labelAvviso = new JLabel("");
-        JComboBox<String> comboBoxAggiorna = new JComboBox<>(array);
+        JButton btnDownload = new JButton("Download season");
+        JLabel labelWarning = new JLabel("");
+        JComboBox<String> comboBoxDownload = new JComboBox<>(array);
         if (!online) {
-            btnAggiorna.setEnabled(false);
-            comboBoxAggiorna.setEnabled(false);
-            labelAvviso = new JLabel("Sei offline");
-            labelAvviso.setForeground(Color.yellow);
-            labelAvviso.setFont(new Font("DejaVu Sans", Font.ITALIC, 12));
+            btnDownload.setEnabled(false);
+            comboBoxDownload.setEnabled(false);
+            labelWarning = new JLabel("Offline mode");
+            labelWarning.setForeground(Color.yellow);
+            labelWarning.setFont(new Font("DejaVu Sans", Font.ITALIC, 12));
         }
-        btnAggiorna.setHorizontalAlignment(SwingConstants.RIGHT);
-        btnAggiorna.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
-        btnAggiorna.setBorderPainted(false);
-        btnAggiorna.setBackground(getForeground());
-        btnAggiorna.setRolloverEnabled(true);
-        btnAggiorna.setFocusPainted(false);
-        panelDownLoad.add(btnAggiorna);
-        comboBoxAggiorna.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
-        btnAggiorna.addActionListener(new ActionListener() {
+        btnDownload.setHorizontalAlignment(SwingConstants.RIGHT);
+        btnDownload.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+        btnDownload.setBorderPainted(false);
+        btnDownload.setBackground(getForeground());
+        btnDownload.setRolloverEnabled(true);
+        btnDownload.setFocusPainted(false);
+        panelDownLoad.add(btnDownload);
+        comboBoxDownload.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+        btnDownload.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Attendere qualche istante");
-                stagione = comboBoxAggiorna.getItemAt(comboBoxAggiorna.getSelectedIndex());
-                if (log.downloadStagione(stagione)) {
-                    lblStagione.setText(stagione);
-
-                    JOptionPane.showMessageDialog(null, "Caricamento completato");
+                JOptionPane.showMessageDialog(null, "Wait a few seconds");
+                season = comboBoxDownload.getItemAt(comboBoxDownload.getSelectedIndex());
+                if (log.downloadSeason(season)) {
+                    lblSeason.setText(season);
+                    JOptionPane.showMessageDialog(null, "Download completed");
                 } else
                     JOptionPane.showMessageDialog(null, "Errore nel caricamento");
             }
         });
-        panelDownLoad.add(comboBoxAggiorna);
+        panelDownLoad.add(comboBoxDownload);
         gbc.gridx = 0;
         gbc.gridy = 3;
         //gbc.anchor=100;
         contentPane.add(panelDownLoad, gbc);
         gbc.gridx = 0;
         gbc.gridy = 4;
-        contentPane.add(labelAvviso, gbc);
+        contentPane.add(labelWarning, gbc);
         JButton btnArchivio = utilsGUI.standardButton("Archivio");
         btnArchivio.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    changeJPanel(new Archivio(log.getLi(), stagione, online));
+                    changeJPanel(new Archivio(log.getLi(), season, online));
                 } catch (ClassNotFoundException | IOException e1) {
                     e1.printStackTrace();
                 }
@@ -170,7 +181,7 @@ public class Home extends Base {
         btnStorico.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                changeJPanel(new Storico(stagione, online));
+                changeJPanel(new Storico(season, online));
             }
         });
         gbc.gridy = 6;
