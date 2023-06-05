@@ -12,11 +12,11 @@ import java.util.List;
 import javax.swing.*;
 import data.Calciatore;
 import data.Modulo;
+import gui_v2.*;
 import logics.LogicsCreaSquadraImpl;
 import logics.LogicsCreasquadra;
 import manageData.LogicsFile;
 import manageData.LogicsFileImpl;
-import v2.gui.*;
 
 
 /**The GUI where the user chooses his team.

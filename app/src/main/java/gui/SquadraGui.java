@@ -23,7 +23,7 @@ import javax.swing.border.EmptyBorder;
 
 import data.Calciatore;
 import data.Squadra;
-import v2.gui.DialogScelta;
+import gui_v2.DialogScelta;
 
 public class SquadraGui extends Base {
 

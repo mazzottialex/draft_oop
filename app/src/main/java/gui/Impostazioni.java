@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import utils.*;
-import v2.gui.Formazione;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -26,6 +25,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
 
 import data.Calciatore;
+import gui_v2.Formazione;
 
 import javax.swing.JLabel;
 import javax.imageio.ImageIO;
