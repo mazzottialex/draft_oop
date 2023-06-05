@@ -55,6 +55,7 @@ public class App {
 		Squadra nap = new SquadraAvversaria(0, "NAP", Modulo.M442, li);	
     	Torneo t= new Torneo(nap, li);
     	t.setVisible(true);
+
     	*//*
     	ManageData md = new ManageDataImpl("2022-2023");
 		md.LoadData();

@@ -6,8 +6,11 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import data.Calciatore;
 import utils.Pair;
+
 public class ScrapingImpl implements Scraping {
     private final List<Calciatore> li = new ArrayList<>();
     private final String url = 
@@ -48,13 +51,21 @@ public class ScrapingImpl implements Scraping {
     	final String defaultStagione = "2022-2023";
         return this.ReadTable(defaultStagione);
     }
-    public List<String> getStagioni() {
+    public List<String> getStagioni(final Boolean flagChrome) {
         //Nascondere pagine chrome
     	final List<String> stagioni = new ArrayList<>();
-    	final ChromeOptions options = new ChromeOptions();
-        options.addArguments("headless");
-        //Oggetto per creare il collegamento
-        final WebDriver driver = new ChromeDriver(options);
+    	final WebDriver driver;
+    	if(flagChrome) {
+	    	final ChromeOptions options = new ChromeOptions();
+	        options.addArguments("headless");
+	        //Oggetto per creare il collegamento
+	        driver = new ChromeDriver(options);
+    	}
+    	else {
+    		final FirefoxOptions options = new FirefoxOptions();
+            options.addArguments("-headless");
+            driver = new FirefoxDriver(options);
+    	}
         driver.get(this.url);
         //Oggetto per eseguire operazioni sulla pagina
         final JavascriptExecutor js = (JavascriptExecutor) driver;
