@@ -17,116 +17,118 @@ import simulation.SimulatingMatchImpl;
 
 /**
  * The class that manages the logic of the tournament.
+ * 
  * @author Davide Braccini
  *
  */
 public class LogicsTorneoImpl implements LogicsTorneo {
 
-	private static final long serialVersionUID = 1L;
-	private static final int NUM_AVVERSARI = 15;
-	//private ManageData md;
-	//private ExtractData ex;
-	private final Squadra miasquadra;
-	private List<Squadra> listSquadre;
-	//private List<Integer> golFatti;
-	private int numSquadre;
-	private final Map<String, Integer> risultati;
-	//private final List<Calciatore> li;
-	private boolean eliminated;
-	private Squadra squadraAvv; // squadra al posto della squadra utente se vince 
-	private final Map<String, Integer> risMatch; // ris della squadra al posto della squadra utente
-	private String winner;
-	private boolean elimThisTurn;
-	
-	/**
-	 * Constructor of LogicsTorneoImpl.
-	 * @param squadra the user's team 
-	 * @param li the list of all the players in Serie A
-	 * @throws FileNotFoundException 
-	 * @throws ClassNotFoundException 
-	 * @throws IOException 
-	 */
-	public LogicsTorneoImpl(final Squadra squadra, final List<Calciatore> li) 
-			throws FileNotFoundException, ClassNotFoundException, IOException {
+    private static final long serialVersionUID = 1L;
+    private static final int NUM_AVVERSARI = 15;
+    // private ManageData md;
+    // private ExtractData ex;
+    private final Squadra miasquadra;
+    private List<Squadra> listSquadre;
+    // private List<Integer> golFatti;
+    private int numSquadre;
+    private final Map<String, Integer> risultati;
+    // private final List<Calciatore> li;
+    private boolean eliminated;
+    private Squadra squadraAvv; // squadra al posto della squadra utente se vince
+    private final Map<String, Integer> risMatch; // ris della squadra al posto della squadra utente
+    private String winner;
+    private boolean elimThisTurn;
 
-		this.listSquadre = new ArrayList<>();
-		//this.golFatti = new ArrayList<>();
-		//Creo la squadra dell'utente
-		this.miasquadra = new SquadraUtente(squadra.getNomeSquadra(), squadra.getStemma(), 
-				squadra.getModulo(), squadra.getTitolari(), squadra.getRiserve());
-		//this.miasquadra = squadra;
-		// Creo le squadre avversarie (quelle esistenti in serie A)
-		/*
-		this.listSquadre.add(new SquadraAvversaria(0, "NAP", Modulo.M442, li)); 
-		this.listSquadre.add(new SquadraAvversaria(1, "LAZ", Modulo.M442, li)); 
-		this.listSquadre.add(new SquadraAvversaria(2, "JUV", Modulo.M442, li)); 
-		this.listSquadre.add(new SquadraAvversaria(3, "INT", Modulo.M442, li)); 
-		this.listSquadre.add(new SquadraAvversaria(4, "MIL", Modulo.M442, li)); 
-		this.listSquadre.add(new SquadraAvversaria(5, "ROM", Modulo.M442, li)); 
-		this.listSquadre.add(new SquadraAvversaria(6, "ATA", Modulo.M442, li)); 
-		this.listSquadre.add(new SquadraAvversaria(7, "FIO", Modulo.M442, li)); 
-		this.listSquadre.add(new SquadraAvversaria(8, "UDI", Modulo.M442, li)); 
-		this.listSquadre.add(new SquadraAvversaria(9, "MON", Modulo.M442, li)); 
-		this.listSquadre.add(new SquadraAvversaria(10, "CRE", Modulo.M442, li)); 
-		this.listSquadre.add(new SquadraAvversaria(11, "VER", Modulo.M442, li)); 
-		this.listSquadre.add(new SquadraAvversaria(12, "BOL", Modulo.M442, li)); 
-		this.listSquadre.add(new SquadraAvversaria(13, "TOR", Modulo.M442, li)); 
-		this.listSquadre.add(new SquadraAvversaria(14, "SAL", Modulo.M442, li)); 
-		*/
-		//System.out.println(this.listSquadre);
-		CreaSquadreAvversarieImpl cs = new CreaSquadreAvversarieImpl(li, NUM_AVVERSARI);
-		this.listSquadre.addAll(cs.getSquadre());
-		this.numSquadre = 16;
-		this.risultati = new HashMap<>();
-		this.eliminated = false;
-		this.squadraAvv = new SquadraAvversaria(1, "aaa", Modulo.M442, li);
-		this.risMatch = new HashMap<>();
-		this.elimThisTurn = false;
-	}
+    /**
+     * Constructor of LogicsTorneoImpl.
+     * 
+     * @param squadra the user's team
+     * @param li      the list of all the players in Serie A
+     * @throws FileNotFoundException
+     * @throws ClassNotFoundException
+     * @throws IOException
+     */
+    public LogicsTorneoImpl(final Squadra squadra, final List<Calciatore> li)
+            throws FileNotFoundException, ClassNotFoundException, IOException {
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public List<Squadra> getListAvversari() {
-		//return this.listSquadre;
-		return List.copyOf(this.listSquadre);
-	}
+        this.listSquadre = new ArrayList<>();
+        // this.golFatti = new ArrayList<>();
+        // Creo la squadra dell'utente
+        this.miasquadra = new SquadraUtente(squadra.getNomeSquadra(), squadra.getStemma(), squadra.getModulo(),
+                squadra.getTitolari(), squadra.getRiserve());
+        // this.miasquadra = squadra;
+        // Creo le squadre avversarie (quelle esistenti in serie A)
+        /*
+         * this.listSquadre.add(new SquadraAvversaria(0, "NAP", Modulo.M442, li));
+         * this.listSquadre.add(new SquadraAvversaria(1, "LAZ", Modulo.M442, li));
+         * this.listSquadre.add(new SquadraAvversaria(2, "JUV", Modulo.M442, li));
+         * this.listSquadre.add(new SquadraAvversaria(3, "INT", Modulo.M442, li));
+         * this.listSquadre.add(new SquadraAvversaria(4, "MIL", Modulo.M442, li));
+         * this.listSquadre.add(new SquadraAvversaria(5, "ROM", Modulo.M442, li));
+         * this.listSquadre.add(new SquadraAvversaria(6, "ATA", Modulo.M442, li));
+         * this.listSquadre.add(new SquadraAvversaria(7, "FIO", Modulo.M442, li));
+         * this.listSquadre.add(new SquadraAvversaria(8, "UDI", Modulo.M442, li));
+         * this.listSquadre.add(new SquadraAvversaria(9, "MON", Modulo.M442, li));
+         * this.listSquadre.add(new SquadraAvversaria(10, "CRE", Modulo.M442, li));
+         * this.listSquadre.add(new SquadraAvversaria(11, "VER", Modulo.M442, li));
+         * this.listSquadre.add(new SquadraAvversaria(12, "BOL", Modulo.M442, li));
+         * this.listSquadre.add(new SquadraAvversaria(13, "TOR", Modulo.M442, li));
+         * this.listSquadre.add(new SquadraAvversaria(14, "SAL", Modulo.M442, li));
+         */
+        // System.out.println(this.listSquadre);
+        CreaSquadreAvversarieImpl cs = new CreaSquadreAvversarieImpl(li, NUM_AVVERSARI);
+        this.listSquadre.addAll(cs.getSquadre());
+        this.numSquadre = 16;
+        this.risultati = new HashMap<>();
+        this.eliminated = false;
+        this.squadraAvv = new SquadraAvversaria(1, "aaa", Modulo.M442, li);
+        this.risMatch = new HashMap<>();
+        this.elimThisTurn = false;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Squadra getMiaSquadra() {
-		//return this.miasquadra;
-		final Squadra copy = new SquadraUtente(this.miasquadra.getNomeSquadra(), this.miasquadra.getStemma(),
-				this.miasquadra.getModulo(), this.miasquadra.getTitolari(), this.miasquadra.getRiserve());
-		return copy;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Squadra> getListAvversari() {
+        // return this.listSquadre;
+        return List.copyOf(this.listSquadre);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public int getNumSquadre() {
-		return this.numSquadre;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Squadra getMiaSquadra() {
+        // return this.miasquadra;
+        final Squadra copy = new SquadraUtente(this.miasquadra.getNomeSquadra(), this.miasquadra.getStemma(),
+                this.miasquadra.getModulo(), this.miasquadra.getTitolari(), this.miasquadra.getRiserve());
+        return copy;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setNumSquadre(final int numSquadre) {
-		this.numSquadre = numSquadre;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getNumSquadre() {
+        return this.numSquadre;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setListAvversari(final List<Squadra> list) {
-		this.listSquadre = new ArrayList<>(list);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setNumSquadre(final int numSquadre) {
+        this.numSquadre = numSquadre;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setListAvversari(final List<Squadra> list) {
+        this.listSquadre = new ArrayList<>(list);
+    }
 
     /**
      * {@inheritDoc}
@@ -452,103 +454,101 @@ public class LogicsTorneoImpl implements LogicsTorneo {
         }
     }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Map<String, Integer> getRisultati() {
-		//return this.risultati;
-		return Map.copyOf(this.risultati);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Map<String, Integer> getRisultati() {
+        // return this.risultati;
+        return Map.copyOf(this.risultati);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean getEliminated() {
-		return this.eliminated;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean getEliminated() {
+        return this.eliminated;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setEliminated(final boolean eliminated) {
-		this.eliminated = eliminated;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setEliminated(final boolean eliminated) {
+        this.eliminated = eliminated;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 * */
-	@Override
-	public Squadra getSquadraAvv() {
-		//return this.squadraAvv;
-		try {
-			final SquadraAvversaria copy = new SquadraAvversaria(this.squadraAvv.getId(), 
-					this.squadraAvv.getNomeSquadra(), this.squadraAvv.getModulo(), 
-					this.squadraAvv.getLiCalciatori());
-			return copy;
-		} catch (ClassNotFoundException | IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Squadra getSquadraAvv() {
+        // return this.squadraAvv;
+        try {
+            final SquadraAvversaria copy = new SquadraAvversaria(this.squadraAvv.getId(),
+                    this.squadraAvv.getNomeSquadra(), this.squadraAvv.getModulo(), this.squadraAvv.getLiCalciatori());
+            return copy;
+        } catch (ClassNotFoundException | IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setSquadraAvv(final Squadra squadra) {
-		//this.squadraAvv = squadra;
-		try {
-			this.squadraAvv = new SquadraAvversaria(squadra.getId(), squadra.getNomeSquadra(),
-					squadra.getModulo(), squadra.getLiCalciatori());
-		} catch (ClassNotFoundException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setSquadraAvv(final Squadra squadra) {
+        // this.squadraAvv = squadra;
+        try {
+            this.squadraAvv = new SquadraAvversaria(squadra.getId(), squadra.getNomeSquadra(), squadra.getModulo(),
+                    squadra.getLiCalciatori());
+        } catch (ClassNotFoundException | IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Map<String, Integer> getRisMatch() {
-		//return this.risMatch;
-		return Map.copyOf(this.risMatch);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Map<String, Integer> getRisMatch() {
+        // return this.risMatch;
+        return Map.copyOf(this.risMatch);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String getWinner() {
-		return this.winner;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getWinner() {
+        return this.winner;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean getElimThisTurn() {
-		return this.elimThisTurn;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean getElimThisTurn() {
+        return this.elimThisTurn;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setElimThisTurn(final boolean b) {
-		this.elimThisTurn = b;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setElimThisTurn(final boolean b) {
+        this.elimThisTurn = b;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void clearRisMatch() {
-		this.risMatch.clear();
-	}
-
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void clearRisMatch() {
+        this.risMatch.clear();
+    }
 
 }
