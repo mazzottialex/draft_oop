@@ -6,21 +6,21 @@ import java.util.List;
 /**
  * The {@code Squadra} interface represents a team in a football (soccer) match.
  */
-public interface Squadra extends Serializable{
+public interface Team extends Serializable{
 
     /**
      * Returns a list of the starting players (titolari) for the team.
      *
      * @return a list of Calciatore objects representing the starting players.
      */
-    List<Calciatore> getTitolari();
+    List<Player> getTitolari();
 
     /**
      * Returns a list of the reserve players (riserve) for the team.
      *
      * @return a list of Calciatore objects representing the reserve players.
      */
-    List<Calciatore> getRiserve();
+    List<Player> getRiserve();
 
     /**
      * Returns the name of the team.
@@ -62,7 +62,7 @@ public interface Squadra extends Serializable{
      *
      * @return a list of Calciatore objects representing all the players in the team.
      */
-    List<Calciatore> getLiCalciatori();
+    List<Player> getLiCalciatori();
 
     /**
      * Returns the player (calciatore) with the specified ID.
@@ -70,33 +70,33 @@ public interface Squadra extends Serializable{
      * @param id the ID of the player to retrieve.
      * @return the Calciatore object with the specified ID.
      */
-    Calciatore getCalciatoreById(int id);
+    Player getCalciatoreById(int id);
 
     /**
      * Returns the starting goalkeeper (portiere titolare) for the team.
      *
      * @return the Calciatore object representing the starting goalkeeper.
      */
-    Calciatore getPortiereTit();
+    Player getPortiereTit();
 
     /**
      * Sets the list of starting players (titolari) for the team.
      *
      * @param liTitolari a list of Calciatore objects representing the starting players.
      */
-    void setTitolari(List<Calciatore> liTitolari);
+    void setTitolari(List<Player> liTitolari);
 
     /**
      * Sets the list of reserve players (riserve) for the team.
      *
      * @param liRiserve a list of Calciatore objects representing the reserve players.
      */
-    void setRiserve(List<Calciatore> liRiserve);
+    void setRiserve(List<Player> liRiserve);
 
     /**
      * Returns a list of the starting players (titolari) in descending order.
      *
      * @return a list of Calciatore objects representing the starting players in descending order.
      */
-    List<Calciatore> getTitolariDesc();
+    List<Player> getTitolariDesc();
 }

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-public class SquadraUtente implements Squadra, Serializable {
+public class TeamUser implements Team, Serializable {
 
 	
 	private static final long serialVersionUID = 1L;
@@ -14,13 +14,13 @@ public class SquadraUtente implements Squadra, Serializable {
     private final String nomeSquadra;
     private final String stemma;
     private final Modulo modulo;
-    private final List<Calciatore> liCalciatori;
-    private List<Calciatore> liTitolari;
-    private List<Calciatore> liRiserve;
+    private final List<Player> liCalciatori;
+    private List<Player> liTitolari;
+    private List<Player> liRiserve;
 
 
-    public SquadraUtente(final String nomeSquadra, final String stemma, final Modulo modulo,
-        final List<Calciatore> liTitolari, final List<Calciatore> liRiserve) {
+    public TeamUser(final String nomeSquadra, final String stemma, final Modulo modulo,
+        final List<Player> liTitolari, final List<Player> liRiserve) {
         this.id = 0;
         this.nomeSquadra = nomeSquadra;
         this.stemma = stemma;
@@ -48,36 +48,36 @@ public class SquadraUtente implements Squadra, Serializable {
     }
 
     @Override
-    public List<Calciatore> getLiCalciatori() {
+    public List<Player> getLiCalciatori() {
         return liCalciatori;
     }
 
     @Override
-    public List<Calciatore> getTitolari() {
+    public List<Player> getTitolari() {
         return liTitolari.stream()
             .sorted((c1, c2) -> c2.getRuolo().compareTo(c1.getRuolo()))
             .collect(Collectors.toList());
     }
 
     @Override
-    public List<Calciatore> getTitolariDesc() {
+    public List<Player> getTitolariDesc() {
         return liTitolari.stream()
             .sorted((c1, c2) -> c1.getRuolo().compareTo(c2.getRuolo()))
             .collect(Collectors.toList());
     }
 
     @Override
-    public List < Calciatore > getRiserve() {
+    public List < Player > getRiserve() {
         return this.liRiserve;
     }
 
     @Override
-    public void setTitolari(final List<Calciatore> liTitolari) {
+    public void setTitolari(final List<Player> liTitolari) {
         this.liTitolari = liTitolari;
     }
 
     @Override
-    public void setRiserve(final List<Calciatore> liRiserve) {
+    public void setRiserve(final List<Player> liRiserve) {
         this.liRiserve = liRiserve;
     }
 
@@ -98,9 +98,9 @@ public class SquadraUtente implements Squadra, Serializable {
     }
 
     @Override
-    public Calciatore getCalciatoreById(final int id) {
-        Calciatore c = null;
-        for (Calciatore calciatore: liCalciatori) {
+    public Player getCalciatoreById(final int id) {
+        Player c = null;
+        for (Player calciatore: liCalciatori) {
             if (calciatore.getId() == id) {
                 c = calciatore;
             }
@@ -109,9 +109,9 @@ public class SquadraUtente implements Squadra, Serializable {
     }
 
     @Override
-    public Calciatore getPortiereTit() {
-        Calciatore portiere = null;
-        for (Calciatore calciatore: getTitolari()) {
+    public Player getPortiereTit() {
+        Player portiere = null;
+        for (Player calciatore: getTitolari()) {
             if (calciatore.getRuolo().equals("P")) {
                 portiere = calciatore;
             }

@@ -4,8 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
-import data.Calciatore;
-import data.Squadra;
+import data.Player;
+import data.Team;
 
 /**
  * The {@code LogicsPartita} interface defines methods related to the logic of a match.
@@ -28,7 +28,7 @@ public interface LogicsPartita {
      * @param s the team.
      * @return a list of minute numbers of goals.
      */
-    List<Integer> getMinGol(Squadra s);
+    List<Integer> getMinGol(Team s);
     
     /**
      * Adds a scorer to the specified team and returns the player who scored.
@@ -36,7 +36,7 @@ public interface LogicsPartita {
      * @param s the team.
      * @return the player who scored.
      */
-    Calciatore addScorer(Squadra s);
+    Player addScorer(Team s);
     
     /**
      * Applies sanctions or penalties during the match.

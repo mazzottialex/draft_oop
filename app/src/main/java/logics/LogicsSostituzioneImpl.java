@@ -8,19 +8,19 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import data.Calciatore;
-import data.Squadra;
+import data.Player;
+import data.Team;
 import gui.Sostituzione;
 
 /**
  * Implementation of the {@code LogicsSostituzione} interface for managing player substitutions.
  */
 public class LogicsSostituzioneImpl implements LogicsSostituzione {
-    private List<Calciatore> titolari;
-    private List<Calciatore> riserve;
-    private Calciatore entra;
-    private Calciatore esce;
-    private Squadra s;
+    private List<Player> titolari;
+    private List<Player> riserve;
+    private Player entra;
+    private Player esce;
+    private Team s;
     private Sostituzione gui;
 
     /**
@@ -29,7 +29,7 @@ public class LogicsSostituzioneImpl implements LogicsSostituzione {
      * @param s   the squadra (team) instance
      * @param gui the GUI instance for player substitutions
      */
-    public LogicsSostituzioneImpl(final Squadra s, final Sostituzione gui) {
+    public LogicsSostituzioneImpl(final Team s, final Sostituzione gui) {
         this.titolari = new ArrayList<>(s.getTitolari());
         this.riserve = new ArrayList<>(s.getRiserve());
         this.entra = null;
@@ -44,22 +44,22 @@ public class LogicsSostituzioneImpl implements LogicsSostituzione {
     }
 
     @Override
-    public List<Calciatore> getTitolari() {
+    public List<Player> getTitolari() {
         return titolari;
     }
 
     @Override
-    public List<Calciatore> getRiserve() {
+    public List<Player> getRiserve() {
         return riserve;
     }
 
     @Override
-    public void selezTit(final Calciatore c) {
+    public void selezTit(final Player c) {
         esce = c;
     }
 
     @Override
-    public void selezRis(final Calciatore c) {
+    public void selezRis(final Player c) {
         entra = c;
     }
 

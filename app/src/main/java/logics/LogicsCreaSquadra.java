@@ -3,9 +3,9 @@ package logics;
 import java.io.Serializable;
 //import java.util.*;
 import java.util.List;
-import data.Calciatore;
+import data.Player;
 import data.Modulo;
-import data.Squadra;
+import data.Team;
 import manageData.ExtractData;
 
 /**
@@ -20,7 +20,7 @@ public interface LogicsCreaSquadra extends Serializable {
      * 
      * @return the user's team
      */
-    Squadra getSquadra();
+    Team getSquadra();
 
     /**
      * 
@@ -70,7 +70,7 @@ public interface LogicsCreaSquadra extends Serializable {
      * @param n     the number of players
      * @return a list of n players of the requested position
      */
-    List<Calciatore> getRandom(String ruolo, int n);
+    List<Player> getRandom(String ruolo, int n);
 
     /**
      * 
@@ -88,13 +88,13 @@ public interface LogicsCreaSquadra extends Serializable {
      * 
      * @return the palyer selected to get into team formation
      */
-    Calciatore getCalciatoreSelect();
+    Player getCalciatoreSelect();
 
     /**
      * 
      * @param calciatore the palyer selected to get into team formation
      */
-    void setCalciatoreSelect(Calciatore calciatore);
+    void setCalciatoreSelect(Player calciatore);
 
     /**
      * 
@@ -124,7 +124,7 @@ public interface LogicsCreaSquadra extends Serializable {
      * 
      * @param calciatore player to add to the team
      */
-    void addPlayerInTeam(Calciatore calciatore);
+    void addPlayerInTeam(Player calciatore);
 
     /**
      * clear the team.
@@ -153,7 +153,7 @@ public interface LogicsCreaSquadra extends Serializable {
      * 
      * @return the list of starting players
      */
-    List<Calciatore> getTitolari();
+    List<Player> getTitolari();
 
     /**
      * 
@@ -171,13 +171,13 @@ public interface LogicsCreaSquadra extends Serializable {
      * 
      * @return the list of player already used
      */
-    List<Calciatore> getCalcUsciti();
+    List<Player> getCalcUsciti();
 
     /**
      * 
      * @param list the list of player already used
      */
-    void addCalcUsciti(List<Calciatore> list);
+    void addCalcUsciti(List<Player> list);
 
     /**
      * 

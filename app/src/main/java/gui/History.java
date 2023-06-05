@@ -6,22 +6,20 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import data.Squadra;
+import data.Team;
 import logics.LogicsHistory;
 import logics.LogicsHistoryImpl;
-import manageData.LogicsFile;
-import manageData.LogicsFileImpl;
 import javax.swing.JScrollPane;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 public class History extends Base {
+	private static final long serialVersionUID = 1L;
 	private LogicsHistory log;
 	public History(final String season, final Boolean online) {
 		log=new LogicsHistoryImpl(season, online);
@@ -44,7 +42,7 @@ public class History extends Base {
 		panelLi.setLayout(layout);
 		panelLi.setBackground(new Color(0, 64, 128));
 		int count=0;
-		for (Squadra team : log.getLiTeam()) {
+		for (Team team : log.getLiTeam()) {
 			JPanel panelTeam=new JPanel();
 			panelTeam.setBackground(getForeground());
 			JLabel lblLogo=new JLabel();

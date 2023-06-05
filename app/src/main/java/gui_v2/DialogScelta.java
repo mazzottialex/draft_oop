@@ -13,15 +13,15 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import data.Calciatore;
+import data.Player;
 import gui.utilsGUI;
 public class DialogScelta extends JDialog {
     private final JPanel contentPanel = new JPanel();
-    private Calciatore calciatore;
-    private Calciatore selezionato;
+    private Player calciatore;
+    private Player selezionato;
     private final JButton okButton;
-    private final List<Calciatore> li;
-    public DialogScelta(final Frame parent, final Boolean modale, final List<Calciatore> lista, final String ruolo)
+    private final List<Player> li;
+    public DialogScelta(final Frame parent, final Boolean modale, final List<Player> lista, final String ruolo)
     		throws FileNotFoundException, ClassNotFoundException, IOException {
         super(parent, modale);
         this.li = lista;
@@ -70,7 +70,7 @@ public class DialogScelta extends JDialog {
 	        }
         });
     }
-    public Calciatore getCalciatore() {
+    public Player getCalciatore() {
         return this.calciatore;
     }
 }

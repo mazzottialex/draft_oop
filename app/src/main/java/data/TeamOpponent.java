@@ -16,15 +16,15 @@ import manageData.ExtractDataImpl;
  * a list of substitutes, and a list of all players for a particular season.
  *
  */
-public class SquadraAvversaria implements Squadra {
+public class TeamOpponent implements Team {
     private static final long serialVersionUID = 1L;
 	private int id;
     private String nomeSquadra;
     private final String stemma;
     private Modulo modulo;
-    private List<Calciatore> liTitolari = new ArrayList<>();
-    private List<Calciatore> liRiserve = new ArrayList<>();
-    private List<Calciatore> liCalciatori;
+    private List<Player> liTitolari = new ArrayList<>();
+    private List<Player> liRiserve = new ArrayList<>();
+    private List<Player> liCalciatori;
 
 
     /**
@@ -38,7 +38,7 @@ public class SquadraAvversaria implements Squadra {
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    public SquadraAvversaria(final int id, final String nomeSquadra, final Modulo modulo, final List<Calciatore> li)
+    public TeamOpponent(final int id, final String nomeSquadra, final Modulo modulo, final List<Player> li)
     throws FileNotFoundException, IOException, ClassNotFoundException {
         this.id = id;
         this.nomeSquadra = nomeSquadra;
@@ -80,34 +80,34 @@ public class SquadraAvversaria implements Squadra {
     }
 
     @Override
-    public List<Calciatore> getTitolari() {
+    public List<Player> getTitolari() {
         return liTitolari;
     }
 
     @Override
-    public List<Calciatore> getTitolariDesc() {
+    public List<Player> getTitolariDesc() {
         return liTitolari.stream()
             .sorted((c1, c2) -> c1.getRuolo().compareTo(c2.getRuolo()))
             .collect(Collectors.toList());
     }
 
     @Override
-    public List<Calciatore> getRiserve() {
+    public List<Player> getRiserve() {
         return liRiserve;
     }
 
     @Override
-    public void setTitolari(final List<Calciatore> liTitolari) {
+    public void setTitolari(final List<Player> liTitolari) {
         this.liTitolari = liTitolari;
     }
 
     @Override
-    public void setRiserve(final List<Calciatore> liRiserve) {
+    public void setRiserve(final List<Player> liRiserve) {
         this.liRiserve = liRiserve;
     }
 
     @Override
-    public List<Calciatore> getLiCalciatori() {
+    public List<Player> getLiCalciatori() {
         return liCalciatori;
     }
 
@@ -128,9 +128,9 @@ public class SquadraAvversaria implements Squadra {
     }
 
     @Override
-    public Calciatore getCalciatoreById(final int id) {
-        Calciatore c = null;
-        for (Calciatore calciatore: liCalciatori) {
+    public Player getCalciatoreById(final int id) {
+        Player c = null;
+        for (Player calciatore: liCalciatori) {
             if (calciatore.getId() == id) {
                 c = calciatore;
             }
@@ -139,9 +139,9 @@ public class SquadraAvversaria implements Squadra {
     }
 
     @Override
-    public Calciatore getPortiereTit() {
-        Calciatore portiere = null;
-        for (Calciatore calciatore: getTitolari()) {
+    public Player getPortiereTit() {
+        Player portiere = null;
+        for (Player calciatore: getTitolari()) {
             if (calciatore.getRuolo().equals("P")) {
                 portiere = calciatore;
             }

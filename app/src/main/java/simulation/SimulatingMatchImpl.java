@@ -5,16 +5,16 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import data.Calciatore;
-import data.Squadra;
+import data.Player;
+import data.Team;
 import manageData.ExtractDataImpl;
 
 public class SimulatingMatchImpl implements SimulatingMatch {
     private SimulatingFunctions sf;
-    private Squadra s1;
-    private Squadra s2;
-    private Map<Calciatore, Double> voti1;
-    private Map<Calciatore, Double> voti2;
+    private Team s1;
+    private Team s2;
+    private Map<Player, Double> voti1;
+    private Map<Player, Double> voti2;
     private int golSubiti1;
     private int golSubiti2;
     private int autogol1;
@@ -41,7 +41,7 @@ public class SimulatingMatchImpl implements SimulatingMatch {
     private static final int MINUTES_REG = 90;
     private final static int MINUTES_SUPPL = 120;
 
-    public SimulatingMatchImpl(Squadra s1, Squadra s2)
+    public SimulatingMatchImpl(Team s1, Team s2)
     throws FileNotFoundException, ClassNotFoundException, IOException {
         sf = new SimulatingFunctionsImpl();
         this.s1 = s1;
@@ -132,28 +132,28 @@ public class SimulatingMatchImpl implements SimulatingMatch {
 
     // risultatoFinale
     @Override
-    public Map<Squadra, Integer> risultato()
+    public Map<Team, Integer> risultato()
     throws FileNotFoundException, ClassNotFoundException, IOException {
         int sq1 = (int) Math.round(Math.min(capacitaRealizzativa(SQUADRA1),
             (prestazioneOffensiva(SQUADRA1) - prestazioneDifensiva(SQUADRA2))));
         int sq2 = (int) Math.round(Math.min(capacitaRealizzativa(SQUADRA2),
             (prestazioneOffensiva(SQUADRA2) - prestazioneDifensiva(SQUADRA1))));
-        Map<Squadra, Integer> map = new HashMap < > ();
+        Map<Team, Integer> map = new HashMap < > ();
         map.put(this.s1, sq1 >= 0 ? sq1 : 0);
         map.put(this.s2, sq2 >= 0 ? sq2 : 0);
         return map;
     }
 
     @Override
-    public Map<Squadra, Integer> risultatoSuppl()
+    public Map<Team, Integer> risultatoSuppl()
     		throws FileNotFoundException, ClassNotFoundException, IOException {
         return risultatoSub(MINUTES_REG);
     }
 
     @Override
-    public Map<Squadra, Integer> risultatoSub(int minuto)
+    public Map<Team, Integer> risultatoSub(int minuto)
     		throws FileNotFoundException, ClassNotFoundException, IOException {
-        Map<Squadra, Integer> map = new HashMap<>();
+        Map<Team, Integer> map = new HashMap<>();
         if (minuto < MINUTES_REG) {
             map.put(s1,
                 (int)(risultato().get(s1) * (double)((MINUTES_REG - minuto) / MINUTES_REG)));

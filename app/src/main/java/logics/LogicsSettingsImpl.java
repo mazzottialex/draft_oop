@@ -1,13 +1,13 @@
 package logics;
 import java.util.List;
 
-import data.Calciatore;
-import data.Squadra;
-import data.SquadraUtente;
+import data.Player;
+import data.Team;
+import data.TeamUser;
 public class LogicsSettingsImpl implements LogicsSettings {
     private final String defaultLogo = "res/stemmi/bianco.png";
     private final String defaultTeamName = "Squadra 1";
-    private final List<Calciatore> li;
+    private final List<Player> li;
     private final List<String> liLogo=List.of("src/main/resources/stemmi/bianco.png",
     		"src/main/resources/stemmi/blu.png",
     		"src/main/resources/stemmi/giallo.png",
@@ -21,7 +21,7 @@ public class LogicsSettingsImpl implements LogicsSettings {
     private String logo;
     private String teamName;
 
-    public LogicsSettingsImpl(final List<Calciatore> li) {
+    public LogicsSettingsImpl(final List<Player> li) {
     	this.li=li;
     	this.logo=defaultLogo;
     	this.teamName=defaultTeamName;
@@ -48,7 +48,7 @@ public class LogicsSettingsImpl implements LogicsSettings {
 	}
 
 	@Override
-	public List<Calciatore> getLi() {
+	public List<Player> getLi() {
 		return li;
 	}
 	

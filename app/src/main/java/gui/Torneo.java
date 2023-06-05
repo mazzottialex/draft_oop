@@ -17,8 +17,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import data.Calciatore;
-import data.Squadra;
+import data.Player;
+import data.Team;
 import logics.LogicsRigoriImpl;
 import logics.LogicsTorneo;
 import logics.LogicsTorneoImpl;
@@ -70,7 +70,7 @@ public class Torneo extends Base {
     private final MyJLabel[] labelsp2 = new MyJLabel[NUM_TURN_4];
     private MyJLabel labelp1 = new MyJLabel();
     private MyJLabel labelp0 = new MyJLabel();
-    private List<Squadra> listAvversarie;
+    private List<Team> listAvversarie;
     private int risSquadraUte = 0;
     private int risSquadraAvv = 0;
     // boolean eliminatedThisTurn = false;
@@ -86,7 +86,7 @@ public class Torneo extends Base {
      * @throws ClassNotFoundException
      * @throws IOException
      */
-    public Torneo(final Squadra squadra, final List<Calciatore> li)
+    public Torneo(final Team squadra, final List<Player> li)
             throws FileNotFoundException, ClassNotFoundException, IOException {
         this.logTor = new LogicsTorneoImpl(squadra, li);
         this.listAvversarie = logTor.getListAvversari();
@@ -273,7 +273,7 @@ public class Torneo extends Base {
                     this.logTor.setSquadraAvv(this.listAvversarie.get(0));
                 } else if (ris1 == ris2) {
                     // rigori
-                    Squadra vinc = new LogicsRigoriImpl(this.logTor.getSquadraAvv(), this.listAvversarie.get(0))
+                    Team vinc = new LogicsRigoriImpl(this.logTor.getSquadraAvv(), this.listAvversarie.get(0))
                             .getWinner();
                     if (vinc.getNomeSquadra().equals(this.listAvversarie.get(0).getNomeSquadra())) {
                         this.logTor.setSquadraAvv(this.listAvversarie.get(0));
@@ -327,7 +327,7 @@ public class Torneo extends Base {
                     this.logTor.setSquadraAvv(this.listAvversarie.get(0));
                 } else if (ris1 == ris2) {
                     // rigori
-                    Squadra vinc = new LogicsRigoriImpl(this.logTor.getSquadraAvv(), this.listAvversarie.get(0))
+                    Team vinc = new LogicsRigoriImpl(this.logTor.getSquadraAvv(), this.listAvversarie.get(0))
                             .getWinner();
                     if (vinc.getNomeSquadra().equals(this.listAvversarie.get(0).getNomeSquadra())) {
                         this.logTor.setSquadraAvv(this.listAvversarie.get(0));

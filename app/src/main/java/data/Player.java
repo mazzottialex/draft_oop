@@ -7,7 +7,7 @@ import java.util.Vector;
 import utils.Pair;
 import utils.Triple;
 
-public class Calciatore implements Serializable{
+public class Player implements Serializable{
 
 	private static final long serialVersionUID = -557391519003956401L; //per serializzazione
 	private final int id;
@@ -31,7 +31,7 @@ public class Calciatore implements Serializable{
 	private Pair<Integer, Integer> ratingCartellino;
 	private Pair<Integer, Triple<Integer, Integer, Integer>> rating; //VAL, A-C-D
 
-	public Calciatore(int id, String nominativo, String ruolo, String squadra, int pg, int minuti, int gol, int tiri,
+	public Player(int id, String nominativo, String ruolo, String squadra, int pg, int minuti, int gol, int tiri,
 			int dribling, int assist, int passaggi, int passaggiChiave, int ammonizioni, int espulsioni, int rubati,
 			int tackle, int cleanSheet, int parate) {
 		this.id = id;
@@ -170,7 +170,7 @@ public class Calciatore implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Calciatore other = (Calciatore) obj;
+		Player other = (Player) obj;
 		return ammonizioni == other.ammonizioni && assist == other.assist && cleanSheet == other.cleanSheet
 				&& dribling == other.dribling && espulsioni == other.espulsioni && gol == other.gol && id == other.id
 				&& minuti == other.minuti && Objects.equals(nominativo, other.nominativo) && parate == other.parate

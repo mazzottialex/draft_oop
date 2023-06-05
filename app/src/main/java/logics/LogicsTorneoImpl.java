@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
-import data.Calciatore;
+import data.Player;
 import data.Modulo;
-import data.Squadra;
-import data.SquadraAvversaria;
-import data.SquadraUtente;
+import data.Team;
+import data.TeamOpponent;
+import data.TeamUser;
 //import data.SquadraUtente;
 import simulation.SimulatingMatchImpl;
 
@@ -27,14 +27,14 @@ public class LogicsTorneoImpl implements LogicsTorneo {
     private static final int NUM_AVVERSARI = 15;
     // private ManageData md;
     // private ExtractData ex;
-    private final Squadra miasquadra;
-    private List<Squadra> listSquadre;
+    private final Team miasquadra;
+    private List<Team> listSquadre;
     // private List<Integer> golFatti;
     private int numSquadre;
     private final Map<String, Integer> risultati;
     // private final List<Calciatore> li;
     private boolean eliminated;
-    private Squadra squadraAvv; // squadra al posto della squadra utente se vince
+    private Team squadraAvv; // squadra al posto della squadra utente se vince
     private final Map<String, Integer> risMatch; // ris della squadra al posto della squadra utente
     private String winner;
     private boolean elimThisTurn;
@@ -48,13 +48,13 @@ public class LogicsTorneoImpl implements LogicsTorneo {
      * @throws ClassNotFoundException
      * @throws IOException
      */
-    public LogicsTorneoImpl(final Squadra squadra, final List<Calciatore> li)
+    public LogicsTorneoImpl(final Team squadra, final List<Player> li)
             throws FileNotFoundException, ClassNotFoundException, IOException {
 
         this.listSquadre = new ArrayList<>();
         // this.golFatti = new ArrayList<>();
         // Creo la squadra dell'utente
-        this.miasquadra = new SquadraUtente(squadra.getNomeSquadra(), squadra.getStemma(), squadra.getModulo(),
+        this.miasquadra = new TeamUser(squadra.getNomeSquadra(), squadra.getStemma(), squadra.getModulo(),
                 squadra.getTitolari(), squadra.getRiserve());
         // this.miasquadra = squadra;
         // Creo le squadre avversarie (quelle esistenti in serie A)
@@ -81,7 +81,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
         this.numSquadre = 16;
         this.risultati = new HashMap<>();
         this.eliminated = false;
-        this.squadraAvv = new SquadraAvversaria(1, "aaa", Modulo.M442, li);
+        this.squadraAvv = new TeamOpponent(1, "aaa", Modulo.M442, li);
         this.risMatch = new HashMap<>();
         this.elimThisTurn = false;
     }
@@ -90,7 +90,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
      * {@inheritDoc}
      */
     @Override
-    public List<Squadra> getListAvversari() {
+    public List<Team> getListAvversari() {
         // return this.listSquadre;
         return List.copyOf(this.listSquadre);
     }
@@ -99,9 +99,9 @@ public class LogicsTorneoImpl implements LogicsTorneo {
      * {@inheritDoc}
      */
     @Override
-    public Squadra getMiaSquadra() {
+    public Team getMiaSquadra() {
         // return this.miasquadra;
-        final Squadra copy = new SquadraUtente(this.miasquadra.getNomeSquadra(), this.miasquadra.getStemma(),
+        final Team copy = new TeamUser(this.miasquadra.getNomeSquadra(), this.miasquadra.getStemma(),
                 this.miasquadra.getModulo(), this.miasquadra.getTitolari(), this.miasquadra.getRiserve());
         return copy;
     }
@@ -126,7 +126,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
      * {@inheritDoc}
      */
     @Override
-    public void setListAvversari(final List<Squadra> list) {
+    public void setListAvversari(final List<Team> list) {
         this.listSquadre = new ArrayList<>(list);
     }
 
@@ -135,14 +135,14 @@ public class LogicsTorneoImpl implements LogicsTorneo {
      */
     @Override
     public void simulaMatch() {
-        List<Squadra> newList = new ArrayList<>();
+        List<Team> newList = new ArrayList<>();
         final int numSquadre = this.getNumSquadre();
         Map<String, Integer> map = new HashMap<>(); // map per il risultato
         List<String> list = new ArrayList<>(); // lista per i nomi delle squadre che si sfidano
         String teamWin; // nome della squadra vincente
         String teamLose; // nome della squadra perdente
-        Map<Squadra, Integer> map2;
-        List<Squadra> l = new ArrayList<>(); // appoggio
+        Map<Team, Integer> map2;
+        List<Team> l = new ArrayList<>(); // appoggio
 
         switch (numSquadre) {
         case 16:
@@ -483,10 +483,10 @@ public class LogicsTorneoImpl implements LogicsTorneo {
      * {@inheritDoc}
      */
     @Override
-    public Squadra getSquadraAvv() {
+    public Team getSquadraAvv() {
         // return this.squadraAvv;
         try {
-            final SquadraAvversaria copy = new SquadraAvversaria(this.squadraAvv.getId(),
+            final TeamOpponent copy = new TeamOpponent(this.squadraAvv.getId(),
                     this.squadraAvv.getNomeSquadra(), this.squadraAvv.getModulo(), this.squadraAvv.getLiCalciatori());
             return copy;
         } catch (ClassNotFoundException | IOException e) {
@@ -499,10 +499,10 @@ public class LogicsTorneoImpl implements LogicsTorneo {
      * {@inheritDoc}
      */
     @Override
-    public void setSquadraAvv(final Squadra squadra) {
+    public void setSquadraAvv(final Team squadra) {
         // this.squadraAvv = squadra;
         try {
-            this.squadraAvv = new SquadraAvversaria(squadra.getId(), squadra.getNomeSquadra(), squadra.getModulo(),
+            this.squadraAvv = new TeamOpponent(squadra.getId(), squadra.getNomeSquadra(), squadra.getModulo(),
                     squadra.getLiCalciatori());
         } catch (ClassNotFoundException | IOException e) {
             // TODO Auto-generated catch block

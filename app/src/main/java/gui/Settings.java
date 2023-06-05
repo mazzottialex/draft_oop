@@ -7,13 +7,11 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
-import data.Calciatore;
-import gui_v2.Formazione;
+import data.Player;
 import logics.LogicsSettings;
 import logics.LogicsSettingsImpl;
 
@@ -22,9 +20,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 public class Settings extends Base {
-    private JTextField textFieldTeamName;
+    private static final long serialVersionUID = 1L;
+	private JTextField textFieldTeamName;
     private LogicsSettings log;
-    public Settings(List<Calciatore> li) {
+    public Settings(List<Player> li) {
     	log=new LogicsSettingsImpl(li);
         GridBagConstraints gbc = new GridBagConstraints();
         GridBagLayout layout = new GridBagLayout();

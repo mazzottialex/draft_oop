@@ -13,15 +13,15 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import data.Calciatore;
-import data.Squadra;
+import data.Player;
+import data.Team;
 import logics.LogicsHistory;
 import logics.LogicsHistoryImpl;
 public class ViewTeam extends Base {
     private final List<String> pos = List.of("A", "C", "D", "P");
     private final LogicsHistory log;
     private JPanel panelTeam = new JPanel();
-    public ViewTeam(Squadra team, String season, Boolean online) {
+    public ViewTeam(Team team, String season, Boolean online) {
     	log=new LogicsHistoryImpl(season, online);
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 2, 2);
@@ -63,7 +63,7 @@ public class ViewTeam extends Base {
         for (int i = 0; i < pos.size(); i++) {
             panelPosition = new JPanel();
             for (int j = 0; j < team.getModulo().getN(pos.get(i)); j++) {
-                Calciatore p = team.getTitolariDesc().get(count);
+                Player p = team.getTitolariDesc().get(count);
                 JPanel panel = (utilsGUI.getPanelCalciatore(p.getNominativo(), p.getRating().getX(), p.getRuolo(), true));
                 count++;
                 panelPosition.add(panel);
@@ -82,7 +82,7 @@ public class ViewTeam extends Base {
         panelPosition = new JPanel();
         panelPosition.setLayout(layout);
         for (int j = 0; j < 7; j++) {
-            Calciatore p = team.getRiserve().get(j);
+            Player p = team.getRiserve().get(j);
             if (j < 4)
                 gbc.gridy = 0;
             else

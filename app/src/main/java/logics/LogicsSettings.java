@@ -2,7 +2,7 @@ package logics;
 
 import java.util.List;
 
-import data.Calciatore;
+import data.Player;
 
 public interface LogicsSettings {
 
@@ -14,7 +14,7 @@ public interface LogicsSettings {
 
 	public void setTeamName(String teamName);
 	
-	public List<Calciatore> getLi();
+	public List<Player> getLi();
 	
 	public List<String> getLiLogo();
 }

@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Set;
 import java.util.HashSet;
-import data.Calciatore;
+import data.Player;
 import data.Modulo;
-import data.Squadra;
-import data.SquadraUtente;
+import data.Team;
+import data.TeamUser;
 import manageData.ExtractData;
 import manageData.ExtractDataImpl;
 
@@ -29,16 +29,16 @@ public class LogicsCreaSquadraImpl implements LogicsCreaSquadra {
     // private ManageData md;
     private ExtractData ex;
     private String namePlayer; // nome del calciatore selezionato per entrare in formazione
-    private Calciatore calciatoreSelect; // calciatore selezionato per entrare in formazione
+    private Player calciatoreSelect; // calciatore selezionato per entrare in formazione
     private String ruoloSelect; // ruolo del calciatore selezionato per entrrare in formazione
     private int posSelect; // posizione del calciatore selezionato per entrare in formazione
     private int ratingSelect; // rating del calciatore selezionato per entrare in formazione
-    private final List<Calciatore> liSquadra;
-    private final List<Calciatore> riserve;
+    private final List<Player> liSquadra;
+    private final List<Player> riserve;
     private final String nomeSquadra;
     private final String stemma;
     // private Squadra squadra;
-    private final List<Calciatore> calcUsciti;
+    private final List<Player> calcUsciti;
     private boolean clickModulo;
     private Random r = new Random();
 
@@ -52,13 +52,13 @@ public class LogicsCreaSquadraImpl implements LogicsCreaSquadra {
      * @throws ClassNotFoundException
      * @throws IOException
      */
-    public LogicsCreaSquadraImpl(final String nomeSquadra, final String stemma, final List<Calciatore> li)
+    public LogicsCreaSquadraImpl(final String nomeSquadra, final String stemma, final List<Player> li)
             throws FileNotFoundException, ClassNotFoundException, IOException {
         this.moduloSelect = Modulo.M343;
         // this.md = new ManageDataImpl(stagione);
         // this.md.LoadData();
         this.ex = new ExtractDataImpl(li); // (this.md.getLi());
-        this.calciatoreSelect = new Calciatore(0, null, null, null, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        this.calciatoreSelect = new Player(0, null, null, null, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         this.ruoloSelect = null;
         this.posSelect = -1;
         this.ratingSelect = 0;
@@ -78,8 +78,8 @@ public class LogicsCreaSquadraImpl implements LogicsCreaSquadra {
     /**
      * {@inheritDoc}
      */
-    public Squadra getSquadra() {
-        return new SquadraUtente(nomeSquadra, stemma, moduloSelect, liSquadra, riserve); // sistemare titolari e riserve
+    public Team getSquadra() {
+        return new TeamUser(nomeSquadra, stemma, moduloSelect, liSquadra, riserve); // sistemare titolari e riserve
     }
 
     /**
@@ -144,17 +144,17 @@ public class LogicsCreaSquadraImpl implements LogicsCreaSquadra {
      * {@inheritDoc}
      */
     @Override
-    public List<Calciatore> getRandom(final String ruolo, final int n) {
-        List<Calciatore> list = this.ex.getListaByRuolo(ruolo);
-        Set<Calciatore> set = new HashSet<>();
-        List<Calciatore> randomList = new ArrayList<>();
+    public List<Player> getRandom(final String ruolo, final int n) {
+        List<Player> list = this.ex.getListaByRuolo(ruolo);
+        Set<Player> set = new HashSet<>();
+        List<Player> randomList = new ArrayList<>();
         boolean test = false;
         // Random r = new Random();
         while (set.size() != n) {
             int random = r.nextInt(list.size());
-            Calciatore c = list.get(random);
+            Player c = list.get(random);
             test = false;
-            for (Calciatore uscito : this.calcUsciti) {
+            for (Player uscito : this.calcUsciti) {
                 if (c.equals(uscito)) {
                     test = true;
                 }
@@ -187,9 +187,9 @@ public class LogicsCreaSquadraImpl implements LogicsCreaSquadra {
      * {@inheritDoc}
      */
     @Override
-    public Calciatore getCalciatoreSelect() {
+    public Player getCalciatoreSelect() {
         // return this.calciatoreSelect;
-        final Calciatore copy = new Calciatore(this.calciatoreSelect.getId(), this.calciatoreSelect.getNominativo(),
+        final Player copy = new Player(this.calciatoreSelect.getId(), this.calciatoreSelect.getNominativo(),
                 this.calciatoreSelect.getRuolo(), this.calciatoreSelect.getSquadra(), this.calciatoreSelect.getPg(),
                 this.calciatoreSelect.getMinuti(), this.calciatoreSelect.getGol(), this.calciatoreSelect.getTiri(),
                 this.calciatoreSelect.getDribling(), this.calciatoreSelect.getAssist(),
@@ -206,8 +206,8 @@ public class LogicsCreaSquadraImpl implements LogicsCreaSquadra {
      * {@inheritDoc}
      */
     @Override
-    public void setCalciatoreSelect(final Calciatore calciatore) {
-        final Calciatore copy = new Calciatore(calciatore.getId(), calciatore.getNominativo(), calciatore.getRuolo(),
+    public void setCalciatoreSelect(final Player calciatore) {
+        final Player copy = new Player(calciatore.getId(), calciatore.getNominativo(), calciatore.getRuolo(),
                 calciatore.getSquadra(), calciatore.getPg(), calciatore.getMinuti(), calciatore.getGol(),
                 calciatore.getTiri(), calciatore.getDribling(), calciatore.getAssist(), calciatore.getPassaggi(),
                 calciatore.getPassaggiChiave(), calciatore.getAmmonizioni(), calciatore.getEspulsioni(),
@@ -254,7 +254,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreaSquadra {
      * {@inheritDoc}
      */
     @Override
-    public void addPlayerInTeam(final Calciatore calciatore) {
+    public void addPlayerInTeam(final Player calciatore) {
         if (!this.liSquadra.contains(calciatore)) {
             this.liSquadra.add(calciatore);
         }
@@ -299,7 +299,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreaSquadra {
      * {@inheritDoc}
      */
     @Override
-    public List<Calciatore> getTitolari() {
+    public List<Player> getTitolari() {
         // return this.liSquadra;
         return List.copyOf(this.liSquadra);
     }
@@ -324,7 +324,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreaSquadra {
      * {@inheritDoc}
      */
     @Override
-    public List<Calciatore> getCalcUsciti() {
+    public List<Player> getCalcUsciti() {
         // return this.calcUsciti;
         return List.copyOf(this.calcUsciti);
     }
@@ -333,7 +333,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreaSquadra {
      * {@inheritDoc}
      */
     @Override
-    public void addCalcUsciti(final List<Calciatore> list) {
+    public void addCalcUsciti(final List<Player> list) {
         this.calcUsciti.addAll(list);
     }
 

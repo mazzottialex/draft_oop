@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-import data.Squadra;
+import data.Team;
 //import data.SquadraAvversaria;
 
 /**
@@ -21,19 +21,19 @@ public interface LogicsTorneo extends Serializable {
      * 
      * @return the list of opposing teams
      */
-    List<Squadra> getListAvversari();
+    List<Team> getListAvversari();
 
     /**
      * 
      * @param list the list of opposing teams
      */
-    void setListAvversari(List<Squadra> list);
+    void setListAvversari(List<Team> list);
 
     /**
      * 
      * @return the user's team
      */
-    Squadra getMiaSquadra();
+    Team getMiaSquadra();
 
     /**
      * 
@@ -78,13 +78,13 @@ public interface LogicsTorneo extends Serializable {
      * 
      * @return the team against the user's team
      */
-    Squadra getSquadraAvv();
+    Team getSquadraAvv();
 
     /**
      * 
      * @param squadra the team against the user's team
      */
-    void setSquadraAvv(Squadra squadra);
+    void setSquadraAvv(Team squadra);
 
     /**
      * 

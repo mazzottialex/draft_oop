@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import data.Calciatore;
+import data.Player;
 import manageData.ManageData;
 import manageData.ManageDataImpl;
 import manageData.ManageStagioni;
@@ -12,7 +12,7 @@ import rating.CalcoloRating;
 import rating.CalcoloRatingImpl;
 public class LogicsHomeImpl implements LogicsHome {
 
-    private List<Calciatore> li;
+    private List<Player> li;
     private String season;
     private Boolean online;
     private final ManageStagioni ms;
@@ -66,7 +66,7 @@ public class LogicsHomeImpl implements LogicsHome {
         return true;
     }
     @Override
-    public List<Calciatore> getLi()
+    public List<Player> getLi()
     		throws FileNotFoundException, ClassNotFoundException, IOException {
         final CalcoloRating rat = new CalcoloRatingImpl(this.li);
         rat.updateRating();

@@ -2,7 +2,7 @@ package logics;
 
 import java.util.List;
 
-import data.Squadra;
+import data.Team;
 import manageData.LogicsFile;
 import manageData.LogicsFileImpl;
 
@@ -24,7 +24,7 @@ public class LogicsHistoryImpl implements LogicsHistory{
 		return this.online;
 	}
 	@Override
-	public List<Squadra> getLiTeam() {
+	public List<Team> getLiTeam() {
 		return file.LoadStorico();
 	}
 	

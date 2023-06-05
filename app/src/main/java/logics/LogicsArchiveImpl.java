@@ -2,7 +2,7 @@ package logics;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
-import data.Calciatore;
+import data.Player;
 import manageData.ExtractData;
 import manageData.ExtractDataImpl;
 public class LogicsArchiveImpl implements LogicsArchive {
@@ -13,7 +13,7 @@ public class LogicsArchiveImpl implements LogicsArchive {
 		this.online=online;
 	}
 	@Override
-	public List<Calciatore> liOrdered(List<Calciatore> li)
+	public List<Player> liOrdered(List<Player> li)
 			throws FileNotFoundException, ClassNotFoundException, IOException {
 		ExtractData ex =new ExtractDataImpl(li);
 		li=ex.getListOrdered(c->-c.getRating().getX());

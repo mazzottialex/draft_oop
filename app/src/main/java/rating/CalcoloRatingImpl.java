@@ -3,7 +3,7 @@ import static java.util.stream.Collectors.toList;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
-import data.Calciatore;
+import data.Player;
 import manageData.ExtractData;
 import manageData.ExtractDataImpl;
 import utils.Pair;
@@ -11,14 +11,14 @@ import utils.Triple;
 public class CalcoloRatingImpl implements CalcoloRating {
     private final Funzioni fun = new Funzioni();
     private final ExtractData ex;
-    private final List <Calciatore> li;
-    public CalcoloRatingImpl(final List<Calciatore> li) 
+    private final List <Player> li;
+    public CalcoloRatingImpl(final List<Player> li) 
     		throws FileNotFoundException, ClassNotFoundException, IOException {
         ex = new ExtractDataImpl(li);
         this.li = li;
     }
     @Override
-    public Pair<Integer, Triple<Integer, Integer, Integer>> getRating(final Calciatore calc) {
+    public Pair<Integer, Triple<Integer, Integer, Integer>> getRating(final Player calc) {
     	final String ruolo = calc.getRuolo();
         //per rating A
     	final int ratGol = fun.Logaritmica(calc.getGol(), 
@@ -66,7 +66,7 @@ public class CalcoloRatingImpl implements CalcoloRating {
         rat = (int)(0.8 * rat + 0.2 * ratMin);
         return new Pair<Integer, Triple<Integer, Integer, Integer>> (rat, new Triple<>(ratA, ratC, ratD));
     }
-    public Pair<Integer, Integer> getRatingCartellino(Calciatore calc) {
+    public Pair<Integer, Integer> getRatingCartellino(Player calc) {
         int ratAmm = 0;
         int ratEsp = 0;
         if (calc.getMinuti() != 0) {
@@ -82,7 +82,7 @@ public class CalcoloRatingImpl implements CalcoloRating {
         return new Pair<Integer, Integer>(ratAmm, ratEsp);
     }
 
-    public List<Calciatore> updateRating() {
+    public List<Player> updateRating() {
         return li.stream()
             .map(c-> {
                 c.setRating(this.getRating(c));c.setRatingCartellino(this.getRatingCartellino(c));
@@ -91,7 +91,7 @@ public class CalcoloRatingImpl implements CalcoloRating {
             .collect(toList());
     }
 
-    public List<Calciatore> getLi() {
+    public List<Player> getLi() {
         return li;
     }
 }

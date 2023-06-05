@@ -1,8 +1,8 @@
 package gui;
 
 
-import data.Calciatore;
-import data.Squadra;
+import data.Player;
+import data.Team;
 import logics.LogicsPartita;
 import logics.LogicsPartitaImpl;
 
@@ -42,14 +42,14 @@ public class Partita extends Base {
     private JButton next;
     private JPanel panel;
     private LogicsPartita logics;
-    private Squadra s1;
-    private Squadra s2;
+    private Team s1;
+    private Team s2;
     private boolean isRunning;
     private boolean ris;
     private int fineTempo;
-    private Squadra winner;
-    private ArrayList<Calciatore> tab1;
-    private ArrayList<Calciatore> tab2;
+    private Team winner;
+    private ArrayList<Player> tab1;
+    private ArrayList<Player> tab2;
     private boolean rigori;
     private Rigori guiRigori;
     private String string1 = "";
@@ -77,7 +77,7 @@ public class Partita extends Base {
      * @throws ClassNotFoundException If a class is not found.
      * @throws IOException If an I/O error occurs.
      */
-    public Partita(final Squadra s1, final Squadra s2) throws FileNotFoundException, ClassNotFoundException, IOException {
+    public Partita(final Team s1, final Team s2) throws FileNotFoundException, ClassNotFoundException, IOException {
         this.s1 = s1;
         this.s2 = s2;
         this.logics = new LogicsPartitaImpl(this.s1, this.s2);
@@ -374,7 +374,7 @@ public class Partita extends Base {
      * @param gol1 the number of penalties scored by the first team.
      * @param gol2 the number of penalties scored by the second team.
      */
-    public void setWinnerR(final Squadra s, final int gol1, final int gol2) {
+    public void setWinnerR(final Team s, final int gol1, final int gol2) {
         winner = s;
         jlScoreSq1.setText(score1 + " (" + gol1 + ")");
         jlScoreSq2.setText(score2 + " (" + gol2 + ")");
@@ -392,7 +392,7 @@ public class Partita extends Base {
     public void changeScore() throws FileNotFoundException, ClassNotFoundException, IOException {
         if (logics.getMinGol(s1).contains(progressBar.getValue())) {
             tab1.add(logics.addScorer(s1));
-            Calciatore calciatore = tab1.get(tab1.size() - 1);
+            Player calciatore = tab1.get(tab1.size() - 1);
             String autogol = "";
             if (!s1.getTitolari().contains(calciatore)) {
                 autogol = " (AG)";
@@ -405,7 +405,7 @@ public class Partita extends Base {
         }
         if (logics.getMinGol(s2).contains(progressBar.getValue())) {
             tab2.add(logics.addScorer(s2));
-            Calciatore calciatore = tab2.get(tab2.size() - 1);
+            Player calciatore = tab2.get(tab2.size() - 1);
             String autogol = "";
             if (!s2.getTitolari().contains(calciatore)) {
                 autogol = " (AG)";
@@ -431,7 +431,7 @@ public class Partita extends Base {
      *
      * @return The winning team.
      */
-    public Squadra getWinner() {
+    public Team getWinner() {
         return winner;
     }
 

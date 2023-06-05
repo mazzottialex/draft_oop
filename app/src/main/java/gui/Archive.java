@@ -16,13 +16,14 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import data.Calciatore;
+import data.Player;
 import logics.LogicsArchive;
 import logics.LogicsArchiveImpl;
 import java.awt.FlowLayout;
 
 public class Archive extends Base {
-    private JTable table;
+    private static final long serialVersionUID = 1L;
+	private JTable table;
     private final LogicsArchive log;
     private final TableModel tm = new DefaultTableModel(new String[] {
             "POSITION",
@@ -32,10 +33,10 @@ public class Archive extends Base {
             "MID",
             "DEF"
         }, 0);
-    public Archive(List<Calciatore> li, final String season, final Boolean online)
+    public Archive(List<Player> li, final String season, final Boolean online)
     		throws FileNotFoundException, ClassNotFoundException, IOException {
         log = new LogicsArchiveImpl(season, online);
-        List<Calciatore> liOrdered = log.liOrdered(li);
+        List<Player> liOrdered = log.liOrdered(li);
         liOrdered.stream().forEach(c -> ((DefaultTableModel) tm).addRow(c.toVector()));
         contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
         contentPane.setPreferredSize(new Dimension(450, 640));

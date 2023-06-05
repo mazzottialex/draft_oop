@@ -7,10 +7,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import data.Calciatore;
+import data.Player;
 import data.Modulo;
-import data.Squadra;
-import data.SquadraUtente;
+import data.Team;
+import data.TeamUser;
 import gui.Base;
 import gui.ViewTeam;
 import gui.utilsGUI;
@@ -28,12 +28,12 @@ import java.util.List;
 import javax.swing.SwingUtilities;
 
 public class Draft extends Base {
-    private List<Calciatore> liGiocatori;
+    private List<Player> liGiocatori;
     private final List<String> ruoli = List.of("A", "C", "D", "P");
     private final int nDraft = 5;
-    private final List<Calciatore> liTitolari = new ArrayList<>();
-    private final List<Calciatore> liRiserve = new ArrayList<>();
-    public Draft(final List<Calciatore> li, final Modulo mod, final String nomeSquadra, final String stemma) {
+    private final List<Player> liTitolari = new ArrayList<>();
+    private final List<Player> liRiserve = new ArrayList<>();
+    public Draft(final List<Player> li, final Modulo mod, final String nomeSquadra, final String stemma) {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 2, 2);
         GridBagLayout layout = new GridBagLayout();
@@ -74,7 +74,7 @@ public class Draft extends Base {
                             		liGiocatori.subList(nDraft * index, nDraft * (index + 1)), 
                             		liGiocatori.subList(nDraft * index, nDraft * (index + 1)).get(0).getRuolo());
                             dialog.setVisible(true);
-                            Calciatore c = dialog.getCalciatore();
+                            Player c = dialog.getCalciatore();
                             if (c != null) {
                                 panel.remove(btn);
                                 liTitolari.add(c);
@@ -126,7 +126,7 @@ public class Draft extends Base {
                         liGiocatori.subList(nDraft * index, nDraft * (index + 1)),
                         liGiocatori.subList(nDraft * index, nDraft * (index + 1)).get(0).getRuolo());
                         dialog.setVisible(true);
-                        Calciatore c = dialog.getCalciatore();
+                        Player c = dialog.getCalciatore();
                         if (c != null) {
                             panel.remove(btn);
                             liRiserve.add(c);
@@ -164,7 +164,7 @@ public class Draft extends Base {
         btnProsegui.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                Squadra squadra = new SquadraUtente(nomeSquadra, stemma, mod, liTitolari, liRiserve);
+                Team squadra = new TeamUser(nomeSquadra, stemma, mod, liTitolari, liRiserve);
                 LogicsFile logFile = new LogicsFileImpl();
                 logFile.SaveStorico(squadra);
                // changeJPanel(new ViewTeam(squadra, li));

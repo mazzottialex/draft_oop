@@ -18,8 +18,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import data.Calciatore;
-import data.Squadra;
+import data.Player;
+import data.Team;
 import logics.LogicsRigori;
 import logics.LogicsRigoriImpl;
 import utils.Pair;
@@ -32,8 +32,8 @@ public class Rigori extends Base {
      * 
      */
     private static final long serialVersionUID = 5140476454072046580L;
-    private Squadra s1;
-    private Squadra s2;
+    private Team s1;
+    private Team s2;
     private JLabel results1;
     private JLabel results2;
     private JLabel result;
@@ -42,11 +42,11 @@ public class Rigori extends Base {
     private int tiri1;
     private int tiri2;
     private int totTiri;
-    private Squadra winner;
+    private Team winner;
     private JButton chiudi;
     private LogicsRigori logics;
-    private Map<Integer, Pair<Calciatore, String>> rig1;
-    private Map<Integer, Pair<Calciatore, String>> rig2;
+    private Map<Integer, Pair<Player, String>> rig1;
+    private Map<Integer, Pair<Player, String>> rig2;
     private JPanel panel;
     private String str1;
     private String str2;
@@ -60,7 +60,7 @@ public class Rigori extends Base {
      * @param s2 The second team in the penalty shoot-out.
      * @param partita The `Partita` instance.
      */
-    public Rigori(final Squadra s1, final Squadra s2, final Partita partita) {
+    public Rigori(final Team s1, final Team s2, final Partita partita) {
         this.s1 = s1;
         this.s2 = s2;
         this.partita = partita;
@@ -209,7 +209,7 @@ public class Rigori extends Base {
      *
      * @return The winning team.
      */
-    public Squadra getWinner() {
+    public Team getWinner() {
         return winner;
     }
 

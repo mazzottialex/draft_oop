@@ -16,10 +16,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import data.Calciatore;
-import data.Squadra;
-import data.SquadraUtente;
-import data.TorneoColl;
+
+import data.Player;
+import data.Team;
+import data.TeamUser;
 import gui.Base;
 import gui.Partita;
 import gui.Start;
@@ -31,19 +31,19 @@ import logics.LogicsRigoriImpl;
 import simulation.SimulatingMatch;
 import simulation.SimulatingMatchImpl;
 public class TorneoV2 extends Base {
-    private List<Squadra> turnoDaSimul = new ArrayList<>();
-    private List<Pair<Squadra, Integer>> liRis = new ArrayList<>();
+    private List<Team> turnoDaSimul = new ArrayList<>();
+    private List<Pair<Team, Integer>> liRis = new ArrayList<>();
     private final int turni = 3;
     private final int nSquadre = (int) Math.pow(2, turni);
     private int count = 0;
     private TorneoColl tabellone;
     private static final int SIZE_INSETS = 5;
-    public TorneoV2(final Squadra squadra, final List<Calciatore> li) {
+    public TorneoV2(final Team squadra, final List<Player> li) {
         GridBagConstraints gbc = new GridBagConstraints();
         GridBagLayout layout = new GridBagLayout();
         contentPane.setLayout(layout);
         CreaSquadreAvversarie creaS = new CreaSquadreAvversarieImpl(li, nSquadre - 1);
-        List<Squadra> liSquadre = new ArrayList<>();
+        List<Team> liSquadre = new ArrayList<>();
         liSquadre.add(squadra);
         try {
             liSquadre.addAll(creaS.getSquadre());
@@ -61,7 +61,7 @@ public class TorneoV2 extends Base {
             }
         });
         btnSimula.addActionListener(new ActionListener() {
-            private List<Squadra> liSquadreVinc = new ArrayList<>();
+            private List<Team> liSquadreVinc = new ArrayList<>();
             @Override
             public void actionPerformed(final ActionEvent e) {
                 turnoDaSimul = tabellone.getLastLi();
@@ -70,7 +70,7 @@ public class TorneoV2 extends Base {
                     btnHome.setVisible(true);
                 }
                 if (turnoDaSimul.size() > 1) {
-                    if (turnoDaSimul.get(0) instanceof SquadraUtente) {
+                    if (turnoDaSimul.get(0) instanceof TeamUser) {
                         JButton btn = (JButton) e.getSource();
                         btn.setEnabled(false);
                         Partita partita;
@@ -84,8 +84,8 @@ public class TorneoV2 extends Base {
                                     liSquadreVinc.add(0, partita.getWinner());
                                     tabellone.addLi(liSquadreVinc);
                                     liSquadreVinc = new ArrayList<>();
-                                    liRis.add(0, new Pair<Squadra, Integer>(turnoDaSimul.get(0), partita.getGolS1()));
-                                    liRis.add(1, new Pair<Squadra, Integer>(turnoDaSimul.get(1), partita.getGolS2()));
+                                    liRis.add(0, new Pair<Team, Integer>(turnoDaSimul.get(0), partita.getGolS1()));
+                                    liRis.add(1, new Pair<Team, Integer>(turnoDaSimul.get(1), partita.getGolS2()));
                                     tabellone.setLiLastRisul(liRis);
                                     liRis = new ArrayList<>();
                                     contentPane.remove(count + 2);
@@ -102,12 +102,12 @@ public class TorneoV2 extends Base {
                             e1.printStackTrace();
                         }
                         for (int i = 0; i < turnoDaSimul.size() - 1; i = i + 2) {
-                            if (!(turnoDaSimul.get(i) instanceof SquadraUtente)) {
+                            if (!(turnoDaSimul.get(i) instanceof TeamUser)) {
                                 try {
                                     SimulatingMatch sim = new SimulatingMatchImpl(turnoDaSimul.get(i), turnoDaSimul.get(i + 1));
-                                    Iterator<Squadra> it = sim.risultato().keySet().iterator();
-                                    Squadra s1 = it.next();
-                                    Squadra s2 = it.next();
+                                    Iterator<Team> it = sim.risultato().keySet().iterator();
+                                    Team s1 = it.next();
+                                    Team s2 = it.next();
                                     int score1 = sim.risultato().get(s1);
                                     int score2 = sim.risultato().get(s2);
                                     if (score1 == score2) {
@@ -122,8 +122,8 @@ public class TorneoV2 extends Base {
                                     } else {
                                         liSquadreVinc.add(score1 > score2 ? s1 : s2);
                                     }
-                                    liRis.add(new Pair<Squadra, Integer>(s1, score1));
-                                    liRis.add(new Pair<Squadra, Integer>(s2, score2));
+                                    liRis.add(new Pair<Team, Integer>(s1, score1));
+                                    liRis.add(new Pair<Team, Integer>(s2, score2));
                                 } catch (ClassNotFoundException | IOException e1) {
                                     e1.printStackTrace();
                                 }
@@ -131,12 +131,12 @@ public class TorneoV2 extends Base {
                         }
                     } else {
                         for (int i = 0; i < turnoDaSimul.size() - 1; i = i + 2) {
-                            if (!(turnoDaSimul.get(i) instanceof SquadraUtente)) {
+                            if (!(turnoDaSimul.get(i) instanceof TeamUser)) {
                                 try {
                                     SimulatingMatch sim = new SimulatingMatchImpl(turnoDaSimul.get(i), turnoDaSimul.get(i + 1));
-                                    Iterator<Squadra> it = sim.risultato().keySet().iterator();
-                                    Squadra s1 = it.next();
-                                    Squadra s2 = it.next();
+                                    Iterator<Team> it = sim.risultato().keySet().iterator();
+                                    Team s1 = it.next();
+                                    Team s2 = it.next();
                                     int score1 = sim.risultato().get(s1);
                                     int score2 = sim.risultato().get(s2);
                                     if (score1 == score2) {
@@ -151,8 +151,8 @@ public class TorneoV2 extends Base {
                                     } else {
                                         liSquadreVinc.add(score1 > score2 ? s1 : s2);
                                     }
-                                    liRis.add(new Pair<Squadra, Integer>(s1, score1));
-                                    liRis.add(new Pair<Squadra, Integer>(s2, score2));
+                                    liRis.add(new Pair<Team, Integer>(s1, score1));
+                                    liRis.add(new Pair<Team, Integer>(s2, score2));
                                 } catch (ClassNotFoundException | IOException e1) {
                                     e1.printStackTrace();
                                 }
@@ -182,7 +182,7 @@ public class TorneoV2 extends Base {
         gbc.gridy = 0;
         contentPane.add(createPaneFase(tabellone.getLastLi()), gbc);
     }
-    private JPanel createPaneFase(final List<Squadra> li) {
+    private JPanel createPaneFase(final List<Team> li) {
         JPanel panelFase = new JPanel();
         for (int i = 0; i < li.size(); i++) {
             JPanel matchPanel = new JPanel();
@@ -200,13 +200,13 @@ public class TorneoV2 extends Base {
         }
         return panelFase;
     }
-    private JPanel createPaneFase2(final List<Pair<Squadra, Integer>> li) {
+    private JPanel createPaneFase2(final List<Pair<Team, Integer>> li) {
         JPanel panelFase = new JPanel();
         for (int i = 0; i < li.size(); i = i + 2) {
             int score1 = li.get(i).getY();
             int score2 = li.get(i + 1).getY();
-            Squadra s1 = li.get(i).getX();
-            Squadra s2 = li.get(i + 1).getX();
+            Team s1 = li.get(i).getX();
+            Team s2 = li.get(i + 1).getX();
             JPanel matchPanel = new JPanel();
             JLabel labelSquadra1;
             JLabel labelSquadra2;

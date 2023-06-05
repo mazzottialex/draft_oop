@@ -27,7 +27,7 @@ import javax.swing.JDialog;
 import java.util.HashMap;
 import java.util.ArrayList;
 //import javax.swing.*;
-import data.Calciatore;
+import data.Player;
 import data.Modulo;
 import logics.LogicsCreaSquadraImpl;
 import logics.LogicsCreaSquadra;
@@ -77,7 +77,7 @@ public class CreaSquadra extends Base {
     private JButton[] buttonsPlayer;
     private JPanel panelCalciatoriCenter;
     // private JButton buttonSelect;
-    private Map<JButton, List<Calciatore>> map; // serve per tenere in memoria i 5 calciatori disponibili
+    private Map<JButton, List<Player>> map; // serve per tenere in memoria i 5 calciatori disponibili
     private final Color panelColor = new Color(0, 64, 128);
 
     /**
@@ -90,7 +90,7 @@ public class CreaSquadra extends Base {
      * @throws ClassNotFoundException
      * @throws IOException
      */
-    public CreaSquadra(final String nomeSquadra, final String stemma, final List<Calciatore> li)
+    public CreaSquadra(final String nomeSquadra, final String stemma, final List<Player> li)
             throws FileNotFoundException, ClassNotFoundException, IOException {
         this.log = new LogicsCreaSquadraImpl(nomeSquadra, stemma, li);
         // inizializzo il bottone per i giocatori che seleziono
@@ -426,7 +426,7 @@ public class CreaSquadra extends Base {
     /* metodo che crea la list e la mette dentro Map<JButton, List<Calciatore> */
     private void choosePlayerFirstTime(final String ruolo, final int pos) {
 
-        List<Calciatore> list = this.log.getRandom(ruolo, NUM_PLAYER);
+        List<Player> list = this.log.getRandom(ruolo, NUM_PLAYER);
         // aggiungo per poi controllare che non ci siano doppioni
         // this.log.getCalcUsciti().addAll(list);
         this.log.addCalcUsciti(list);
@@ -452,7 +452,7 @@ public class CreaSquadra extends Base {
 
     /* metodo chiamato dopo che è gia stato chiamato choosePlayerFirstTime */
     private void choosePlayer(final String ruolo, final int pos) {
-        List<Calciatore> list = new ArrayList<>();
+        List<Player> list = new ArrayList<>();
         // list è uguale a quello che c'è dentro il Value della map
         switch (ruolo) {
         case "A":
@@ -477,7 +477,7 @@ public class CreaSquadra extends Base {
      * metodo per disegnare nel frameCalciatori i 5 calciatori che si possono
      * selezionare
      */
-    private void addPlayers(final String ruolo, final int pos, final List<Calciatore> list) {
+    private void addPlayers(final String ruolo, final int pos, final List<Player> list) {
         this.panelCalciatoriCenter.removeAll();
         this.panelCalciatoriCenter.repaint();
         // creo i 5 bottoni nel frame calciatori

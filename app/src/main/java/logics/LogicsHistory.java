@@ -2,10 +2,10 @@ package logics;
 
 import java.util.List;
 
-import data.Squadra;
+import data.Team;
 
 public interface LogicsHistory {
 	public String getSeason();
 	public Boolean getOnline();
-	public List<Squadra> getLiTeam();
+	public List<Team> getLiTeam();
 }

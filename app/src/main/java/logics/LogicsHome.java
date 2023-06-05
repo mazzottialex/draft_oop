@@ -2,7 +2,7 @@ package logics;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
-import data.Calciatore;
+import data.Player;
 
 /**
  * The LogicsHome interface provides methods for managing football seasons and retrieving player information
@@ -58,5 +58,5 @@ public interface LogicsHome {
      * @throws ClassNotFoundException if the class of a serialized object cannot be found
      * @throws IOException if an I/O error occurs during reading the data
      */
-	public List<Calciatore> getLi() throws FileNotFoundException, ClassNotFoundException, IOException;
+	public List<Player> getLi() throws FileNotFoundException, ClassNotFoundException, IOException;
 }

@@ -3,8 +3,8 @@ package logics;
 import java.util.ArrayList;
 import java.util.Map;
 
-import data.Calciatore;
-import data.Squadra;
+import data.Player;
+import data.Team;
 import utils.Pair;
 
 /**
@@ -17,7 +17,7 @@ public interface LogicsRigori {
      *
      * @return the list of penalty results
      */
-    ArrayList<Map<Integer, Pair<Calciatore, String>>> compute();
+    ArrayList<Map<Integer, Pair<Player, String>>> compute();
     
     /**
      * Returns the number of goals scored by team 1 in the penalty shoot-out.
@@ -38,5 +38,5 @@ public interface LogicsRigori {
      *
      * @return the winning team
      */
-    Squadra getWinner();
+    Team getWinner();
 }
