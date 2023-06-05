@@ -187,14 +187,14 @@ public class TorneoV2 extends Base {
         for (int i = 0; i < li.size(); i++) {
             JPanel matchPanel = new JPanel();
             if (tabellone.getLastLi().size() == 1) {
-                matchPanel.add(new JLabel("Vincitore: " + li.get(i).getNomeSquadra()));
+                matchPanel.add(new JLabel("Vincitore: " + li.get(i).getTeamName()));
                 JOptionPane.showMessageDialog(null, "Il vincitore del torneo è: "
-                + li.get(i).getNomeSquadra(), "Fine torneo", JOptionPane.INFORMATION_MESSAGE);
+                + li.get(i).getTeamName(), "Fine torneo", JOptionPane.INFORMATION_MESSAGE);
             } else if (tabellone.getLastLi().size() > 1) {
-                matchPanel.add(new JLabel(li.get(i).getNomeSquadra()));
+                matchPanel.add(new JLabel(li.get(i).getTeamName()));
                 matchPanel.add(new JLabel("-"));
                 i++;
-                matchPanel.add(new JLabel(li.get(i).getNomeSquadra()));
+                matchPanel.add(new JLabel(li.get(i).getTeamName()));
             }
             panelFase.add(matchPanel);
         }
@@ -210,8 +210,8 @@ public class TorneoV2 extends Base {
             JPanel matchPanel = new JPanel();
             JLabel labelSquadra1;
             JLabel labelSquadra2;
-            labelSquadra1 = new JLabel(s1.getNomeSquadra() + " " + score1);
-            labelSquadra2 = new JLabel(score2 + " " + s2.getNomeSquadra());
+            labelSquadra1 = new JLabel(s1.getTeamName() + " " + score1);
+            labelSquadra2 = new JLabel(score2 + " " + s2.getTeamName());
             if (score1 > score2) {
                 labelSquadra2.setForeground(Color.gray);
             } else {

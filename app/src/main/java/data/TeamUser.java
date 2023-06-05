@@ -5,41 +5,38 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 public class TeamUser implements Team, Serializable {
 
-	
 	private static final long serialVersionUID = 1L;
     private final int id;
-    private final String nomeSquadra;
-    private final String stemma;
+    private final String teamName;
+    private final String logo;
     private final Modulo modulo;
-    private final List<Player> liCalciatori;
-    private List<Player> liTitolari;
-    private List<Player> liRiserve;
+    private final List<Player> liPlayers;
+    private List<Player> liStarting;
+    private List<Player> liSubstitution;
 
-
-    public TeamUser(final String nomeSquadra, final String stemma, final Modulo modulo,
-        final List<Player> liTitolari, final List<Player> liRiserve) {
+    public TeamUser(final String teamName, final String logo, final Modulo modulo,
+        final List<Player> liStarting, final List<Player> liSubstitution) {
         this.id = 0;
-        this.nomeSquadra = nomeSquadra;
-        this.stemma = stemma;
+        this.teamName = teamName;
+        this.logo = logo;
         this.modulo = modulo;
-        this.liTitolari = liTitolari;
-        this.liRiserve = liRiserve;
-        this.liCalciatori = new ArrayList<>();
-        liCalciatori.addAll(liTitolari);
-        liCalciatori.addAll(liRiserve);
+        this.liStarting = liStarting;
+        this.liSubstitution = liSubstitution;
+        this.liPlayers = new ArrayList<>();
+        liPlayers.addAll(liStarting);
+        liPlayers.addAll(liSubstitution);
     }
 
     @Override
-    public String getNomeSquadra() {
-        return nomeSquadra;
+    public String getTeamName() {
+        return teamName;
     }
 
     @Override
-    public String getStemma() {
-        return stemma;
+    public String getLogo() {
+        return logo;
     }
 
     @Override
@@ -48,43 +45,43 @@ public class TeamUser implements Team, Serializable {
     }
 
     @Override
-    public List<Player> getLiCalciatori() {
-        return liCalciatori;
+    public List<Player> getLiPlayers() {
+        return liPlayers;
     }
 
     @Override
-    public List<Player> getTitolari() {
-        return liTitolari.stream()
+    public List<Player> getStarting() {
+        return liStarting.stream()
             .sorted((c1, c2) -> c2.getPos().compareTo(c1.getPos()))
             .collect(Collectors.toList());
     }
 
     @Override
-    public List<Player> getTitolariDesc() {
-        return liTitolari.stream()
+    public List<Player> getStartingDesc() {
+        return liStarting.stream()
             .sorted((c1, c2) -> c1.getPos().compareTo(c2.getPos()))
             .collect(Collectors.toList());
     }
 
     @Override
-    public List < Player > getRiserve() {
-        return this.liRiserve;
+    public List<Player> getSubstitution() {
+        return this.liSubstitution;
     }
 
     @Override
-    public void setTitolari(final List<Player> liTitolari) {
-        this.liTitolari = liTitolari;
+    public void setStarting(final List<Player> liStarting) {
+        this.liStarting = liStarting;
     }
 
     @Override
-    public void setRiserve(final List<Player> liRiserve) {
-        this.liRiserve = liRiserve;
+    public void setSubstitution(final List<Player> liSubstitution) {
+        this.liSubstitution = liSubstitution;
     }
 
     @Override
-    public int getValutazione() {
+    public int getRating() {
         return (int) Math.floor(
-            liTitolari.stream()
+            liStarting.stream()
             .map(c -> c.getRating()
                 .getX())
             .mapToDouble(c -> c)
@@ -98,29 +95,29 @@ public class TeamUser implements Team, Serializable {
     }
 
     @Override
-    public Player getCalciatoreById(final int id) {
+    public Player getPlayerById(final int id) {
         Player c = null;
-        for (Player calciatore: liCalciatori) {
-            if (calciatore.getId() == id) {
-                c = calciatore;
+        for (Player player: liPlayers) {
+            if (player.getId() == id) {
+                c = player;
             }
         }
         return c;
     }
 
     @Override
-    public Player getPortiereTit() {
-        Player portiere = null;
-        for (Player calciatore: getTitolari()) {
-            if (calciatore.getPos().equals("P")) {
-                portiere = calciatore;
+    public Player getStartingKeeper() {
+        Player keeper = null;
+        for (Player player: getStarting()) {
+            if (player.getPos().equals("P")) {
+            	keeper = player;
             }
         }
-        return portiere;
+        return keeper;
     }
     @Override
     public String toString() {
-        return "SquadraAvversaria [nomeSquadra=" + nomeSquadra + "]";
+        return "TeamUser [teamUser=" + teamName + "]";
     }
 }
 

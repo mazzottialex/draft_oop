@@ -46,18 +46,18 @@ public class History extends Base {
 			JPanel panelTeam=new JPanel();
 			panelTeam.setBackground(getForeground());
 			JLabel lblLogo=new JLabel();
-			ImageIcon img=new ImageIcon(team.getStemma());
+			ImageIcon img=new ImageIcon(team.getLogo());
 			Image image = img.getImage(); // transform it 
 			Image newImg = image.getScaledInstance(55, 60,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 			img = new ImageIcon(newImg);
 			lblLogo.setBackground(Color.white);
 			lblLogo.setIcon(img);
 			lblLogo.setBorder(new EmptyBorder(new Insets(5, 0, 5, 25)));
-			JLabel lblNomeSquadra=new JLabel(team.getNomeSquadra());
+			JLabel lblNomeSquadra=new JLabel(team.getTeamName());
 			lblNomeSquadra.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
 			lblNomeSquadra.setForeground(Color.white);
 			panelTeam.add(lblNomeSquadra);
-			JLabel lblRating=new JLabel("Valutazione: "+team.getValutazione());
+			JLabel lblRating=new JLabel("Valutazione: "+team.getRating());
 			lblRating.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
 			lblRating.setForeground(Color.white);
 			lblRating.setBorder(new EmptyBorder(new Insets(2, 25, 2, 25)));

@@ -2,7 +2,6 @@ package data;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -17,14 +16,15 @@ import manageData.ExtractDataImpl;
  *
  */
 public class TeamOpponent implements Team {
-    private static final long serialVersionUID = 1L;
-	private int id;
-    private String nomeSquadra;
-    private final String stemma;
-    private Modulo modulo;
-    private List<Player> liTitolari = new ArrayList<>();
-    private List<Player> liRiserve = new ArrayList<>();
-    private List<Player> liCalciatori;
+	
+	private static final long serialVersionUID = 1L;
+    private final int id;
+    private final String teamName;
+    private final String logo;
+    private final Modulo modulo;
+    private final List<Player> liPlayers;
+    private List<Player> liStarting;
+    private List<Player> liSubstitution;
 
 
     /**
@@ -38,16 +38,16 @@ public class TeamOpponent implements Team {
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    public TeamOpponent(final int id, final String nomeSquadra, final Modulo modulo, final List<Player> li)
+    public TeamOpponent(final int id, final String teamName, final Modulo modulo, final List<Player> li)
     throws FileNotFoundException, IOException, ClassNotFoundException {
         this.id = id;
-        this.nomeSquadra = nomeSquadra;
+        this.teamName = teamName;
         this.modulo = modulo;
-        this.liCalciatori = li;
+        this.liPlayers = li;
         ExtractData ed = new ExtractDataImpl(li);
-        this.liTitolari = ed.getTitolari(nomeSquadra, modulo);
-        this.liRiserve = ed.getRiserve(nomeSquadra, modulo);
-        this.stemma = this.setStemma();
+        this.liStarting = ed.getTitolari(teamName, modulo);
+        this.liSubstitution = ed.getRiserve(teamName, modulo);
+        this.logo = this.setStemma();
     }
 
     /**
@@ -65,13 +65,13 @@ public class TeamOpponent implements Team {
     }
 
     @Override
-    public int getId() {
-        return id;
+    public String getTeamName() {
+        return teamName;
     }
 
     @Override
-    public String getNomeSquadra() {
-        return nomeSquadra;
+    public String getLogo() {
+        return logo;
     }
 
     @Override
@@ -80,46 +80,41 @@ public class TeamOpponent implements Team {
     }
 
     @Override
-    public List<Player> getTitolari() {
-        return liTitolari;
+    public List<Player> getLiPlayers() {
+        return liPlayers;
     }
 
     @Override
-    public List<Player> getTitolariDesc() {
-        return liTitolari.stream()
+    public List<Player> getStarting() {
+        return liStarting;
+    }
+    
+    @Override
+    public List<Player> getStartingDesc() {
+        return liStarting.stream()
             .sorted((c1, c2) -> c1.getPos().compareTo(c2.getPos()))
             .collect(Collectors.toList());
     }
 
     @Override
-    public List<Player> getRiserve() {
-        return liRiserve;
+    public List<Player> getSubstitution() {
+        return this.liSubstitution;
     }
 
     @Override
-    public void setTitolari(final List<Player> liTitolari) {
-        this.liTitolari = liTitolari;
+    public void setStarting(final List<Player> liStarting) {
+        this.liStarting = liStarting;
     }
 
     @Override
-    public void setRiserve(final List<Player> liRiserve) {
-        this.liRiserve = liRiserve;
+    public void setSubstitution(final List<Player> liSubstitution) {
+        this.liSubstitution = liSubstitution;
     }
 
     @Override
-    public List<Player> getLiCalciatori() {
-        return liCalciatori;
-    }
-
-    @Override
-    public String getStemma() {
-        return this.stemma;
-    }
-
-    @Override
-    public int getValutazione() {
+    public int getRating() {
         return (int) Math.floor(
-            liTitolari.stream()
+            liStarting.stream()
             .map(c -> c.getRating()
                 .getX())
             .mapToDouble(c -> c)
@@ -128,30 +123,34 @@ public class TeamOpponent implements Team {
     }
 
     @Override
-    public Player getCalciatoreById(final int id) {
+    public int getId() {
+        return this.id;
+    }
+
+    @Override
+    public Player getPlayerById(final int id) {
         Player c = null;
-        for (Player calciatore: liCalciatori) {
-            if (calciatore.getId() == id) {
-                c = calciatore;
+        for (Player player: liPlayers) {
+            if (player.getId() == id) {
+                c = player;
             }
         }
         return c;
     }
 
     @Override
-    public Player getPortiereTit() {
-        Player portiere = null;
-        for (Player calciatore: getTitolari()) {
-            if (calciatore.getPos().equals("P")) {
-                portiere = calciatore;
+    public Player getStartingKeeper() {
+        Player keeper = null;
+        for (Player player: getStarting()) {
+            if (player.getPos().equals("P")) {
+            	keeper = player;
             }
         }
-        return portiere;
+        return keeper;
     }
-
     @Override
     public String toString() {
-        return nomeSquadra;
+        return "TeamOpponent [teamOpponent=" + teamName + "]";
     }
 
 }

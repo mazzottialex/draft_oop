@@ -82,7 +82,7 @@ public class Rigori extends Base {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 0;
-        panel.add(new JLabel(s1.getNomeSquadra(), SwingConstants.RIGHT), gbc);
+        panel.add(new JLabel(s1.getTeamName(), SwingConstants.RIGHT), gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 0;
@@ -92,7 +92,7 @@ public class Rigori extends Base {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 2;
         gbc.gridy = 0;
-        panel.add(new JLabel(s2.getNomeSquadra(), SwingConstants.LEFT), gbc);
+        panel.add(new JLabel(s2.getTeamName(), SwingConstants.LEFT), gbc);
 
         results1 = new JLabel();
 
@@ -201,7 +201,7 @@ public class Rigori extends Base {
      * @return The name of the winning team.
      */
     private String getNomeWinner() {
-        return winner.getNomeSquadra();
+        return winner.getTeamName();
     }
 
     /**

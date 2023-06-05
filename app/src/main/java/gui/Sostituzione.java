@@ -75,7 +75,7 @@ public class Sostituzione extends Base {
         for (int i = 0; i < ruoli.size(); i++) {
             panelPosizione = new JPanel();
             for (int j = 0; j < squadra.getModulo().getN(ruoli.get(i)); j++) {
-                Player c = squadra.getTitolari().get(count);
+                Player c = squadra.getStarting().get(count);
                 JPanel panel = (utilsGUI.getPanelCalciatore(c.getName(), c.getRating().getX(), c.getPos(), true));
                 panel.addMouseListener(new MouseAdapter() {
                     @Override
@@ -106,7 +106,7 @@ public class Sostituzione extends Base {
         panelPosizione = new JPanel();
         panelPosizione.setLayout(layout);
         for (int j = 0; j < riserve; j++) {
-            Player c = squadra.getRiserve().get(j);
+            Player c = squadra.getSubstitution().get(j);
             JPanel panel = (utilsGUI.getPanelCalciatore(c.getName(), c.getRating().getX(), c.getPos(), true));
             panel.addMouseListener(new MouseAdapter() {
                 @Override

@@ -66,7 +66,7 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
     }
 
     public int golSubitiFanta(Team s) throws FileNotFoundException, ClassNotFoundException, IOException {
-        ExtractData ed = new ExtractDataImpl(s.getTitolari());
+        ExtractData ed = new ExtractDataImpl(s.getStarting());
         Player portiere = ed.getListaByRuolo("P").get(0);
         double probCleanSheet = portiere.getCleanSheets() / (portiere.getMatchesPlayed() == 0 ? 1 : portiere.getMatchesPlayed());
         if (prob(0, 1) <= probCleanSheet) {
@@ -124,7 +124,7 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
 
     public static double catenaccioFanta(Team s, Map<Player, Double> votiDif)
             throws FileNotFoundException, ClassNotFoundException, IOException {
-        ExtractData ed = new ExtractDataImpl(s.getTitolari());
+        ExtractData ed = new ExtractDataImpl(s.getStarting());
         List<Player> difensori = ed.getListaByRuolo("D");
         double count = 0;
         double totVoti = 0;
@@ -154,7 +154,7 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
     public static Map<String, Double> votoModFanta(Team s, Map<Player, Double> mapVoti)
             throws FileNotFoundException, ClassNotFoundException, IOException {
         Map<String, Double> mapModVoti = new HashMap<>();
-        for (Player c : s.getTitolari()) {
+        for (Player c : s.getStarting()) {
             String ruolo = c.getPos();
             double voto = mapVoti.get(c) - SUB_VOTE;
             if (!mapModVoti.containsKey(ruolo)) {
@@ -181,7 +181,7 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
 
     public int golFattiFanta(Team s) throws FileNotFoundException, ClassNotFoundException, IOException {
         int gol = 0;
-        for (Player c: s.getTitolari()) {
+        for (Player c: s.getStarting()) {
             double probGol = c.getGoals() / (c.getMinutes() / MINUTES);
             double p = prob(0, 1);
             if (p <= Math.pow(probGol, 3)) {

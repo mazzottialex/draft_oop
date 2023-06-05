@@ -42,8 +42,8 @@ public class LogicsRigoriImpl implements LogicsRigori {
         super();
         this.s1 = s1;
         this.s2 = s2;
-        this.titolari1 = s1.getTitolari();
-        this.titolari2 = s2.getTitolari();
+        this.titolari1 = s1.getStarting();
+        this.titolari2 = s2.getStarting();
         this.gol1 = 0;
         this.gol2 = 0;
         this.tiri1 = 0;
@@ -65,7 +65,7 @@ public class LogicsRigoriImpl implements LogicsRigori {
             } else if ((tiri1 + tiri2) < totTiri || tiri1 != tiri2 || (tiri1 == tiri2 && gol1 == gol2)) {
                 if ((tiri1 + tiri2) % 2 == 0) {
                     if (titolari1.isEmpty()) {
-                        titolari1 = s1.getTitolari();
+                        titolari1 = s1.getStarting();
                     }
                     Player tiratore = titolari1.get(titolari1.size() - 1);
                     titolari1.remove(tiratore);
@@ -77,7 +77,7 @@ public class LogicsRigoriImpl implements LogicsRigori {
                     tiri1++;
                 } else {
                     if (titolari2.isEmpty()) {
-                        titolari2 = s2.getTitolari();
+                        titolari2 = s2.getStarting();
                     }
                     Player tiratore = titolari2.get(titolari2.size() - 1);
                     titolari2.remove(tiratore);
@@ -90,8 +90,8 @@ public class LogicsRigoriImpl implements LogicsRigori {
                 }
             }
         }
-        titolari1 = s1.getTitolari();
-        titolari2 = s2.getTitolari();
+        titolari1 = s1.getStarting();
+        titolari2 = s2.getStarting();
         list.add(map1);
         list.add(map2);
         return list;
@@ -106,7 +106,7 @@ public class LogicsRigoriImpl implements LogicsRigori {
      */
     private String rigore(final Player tiratore, final Team dif) {
         double tirRating = tiratore.getRating().getY().getX() * (MIN_MOD_RATING + new Random().nextDouble() * ADD_MOD_RATING);
-        double porRating = dif.getPortiereTit().getRating().getY().getZ()
+        double porRating = dif.getStartingKeeper().getRating().getY().getZ()
         		* (MIN_MOD_RATING + new Random().nextDouble() * ADD_MOD_RATING);
         double modPorRating = porRating * COST_MADE_PEN;
         if (tirRating > modPorRating) {

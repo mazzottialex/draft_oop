@@ -38,7 +38,7 @@ public class ViewTeam extends Base {
 
         panelTeam.add(btnArchive);
         JLabel lblLogo = new JLabel();
-        ImageIcon img = new ImageIcon(team.getStemma());
+        ImageIcon img = new ImageIcon(team.getLogo());
         Image image = img.getImage(); // transform it 
         Image newimg = image.getScaledInstance(55, 60, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
         img = new ImageIcon(newimg);
@@ -46,11 +46,11 @@ public class ViewTeam extends Base {
         lblLogo.setIcon(img);
         lblLogo.setBorder(new EmptyBorder(new Insets(2, 0, 2, 25)));
         panelTeam.add(lblLogo);
-        JLabel lblTeamName = new JLabel(team.getNomeSquadra());
+        JLabel lblTeamName = new JLabel(team.getTeamName());
         lblTeamName.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
         lblTeamName.setForeground(Color.white);
         panelTeam.add(lblTeamName);
-        JLabel lblRating = new JLabel("Valutazione: " + team.getValutazione());
+        JLabel lblRating = new JLabel("Valutazione: " + team.getRating());
         lblRating.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
         lblRating.setForeground(Color.white);
         lblRating.setBorder(new EmptyBorder(new Insets(2, 25, 2, 0)));
@@ -63,7 +63,7 @@ public class ViewTeam extends Base {
         for (int i = 0; i < pos.size(); i++) {
             panelPosition = new JPanel();
             for (int j = 0; j < team.getModulo().getN(pos.get(i)); j++) {
-                Player p = team.getTitolariDesc().get(count);
+                Player p = team.getStartingDesc().get(count);
                 JPanel panel = (utilsGUI.getPanelCalciatore(p.getName(), p.getRating().getX(), p.getPos(), true));
                 count++;
                 panelPosition.add(panel);
@@ -82,7 +82,7 @@ public class ViewTeam extends Base {
         panelPosition = new JPanel();
         panelPosition.setLayout(layout);
         for (int j = 0; j < 7; j++) {
-            Player p = team.getRiserve().get(j);
+            Player p = team.getSubstitution().get(j);
             if (j < 4)
                 gbc.gridy = 0;
             else

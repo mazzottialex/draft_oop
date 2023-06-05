@@ -129,7 +129,7 @@ public class LogicsPartitaImpl implements LogicsPartita {
     @Override
     public Player addScorer(final Team s) {
         double totGol = 0;
-        List<Player> titolari = s.getTitolari();
+        List<Player> titolari = s.getStarting();
         List<Double> golList = new ArrayList<>();
 
         for (Player calciatore: titolari) {
@@ -164,8 +164,8 @@ public class LogicsPartitaImpl implements LogicsPartita {
         } else {
             sq = s1;
         }
-        int random = new Random().nextInt(sq.getTitolari().size());
-        return sq.getTitolari().get(random);
+        int random = new Random().nextInt(sq.getStarting().size());
+        return sq.getStarting().get(random);
     }
 
     @Override

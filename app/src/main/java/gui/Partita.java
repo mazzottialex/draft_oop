@@ -91,12 +91,12 @@ public class Partita extends Base {
         //define components
         this.score1 = 0;
         this.score2 = 0;
-        this.jlNomeSq1 = new JLabel(s1.getNomeSquadra(), SwingConstants.RIGHT);
+        this.jlNomeSq1 = new JLabel(s1.getTeamName(), SwingConstants.RIGHT);
         this.jlScoreSq1 = new JLabel(String.valueOf(score1), SwingConstants.RIGHT);
         this.jlScoreSq1.setVerticalAlignment(SwingConstants.TOP);
         this.jlTabSq1 = new JLabel("", SwingConstants.RIGHT);
         this.jlTabSq1.setVerticalAlignment(SwingConstants.TOP);
-        this.jlNomeSq2 = new JLabel(s2.getNomeSquadra(), SwingConstants.LEFT);
+        this.jlNomeSq2 = new JLabel(s2.getTeamName(), SwingConstants.LEFT);
         this.jlScoreSq2 = new JLabel(String.valueOf(score2), SwingConstants.LEFT);
         this.jlScoreSq2.setVerticalAlignment(SwingConstants.TOP);
         this.jlTabSq2 = new JLabel("", SwingConstants.LEFT);
@@ -206,7 +206,7 @@ public class Partita extends Base {
                 stopProgress();
                 if (cambi <= 3) {
                     sost();
-                    if (!s1.getTitolari().equals(sub.getLogics().getTitolari())) {
+                    if (!s1.getStarting().equals(sub.getLogics().getTitolari())) {
 						update();
 						addCambio();
 						ris = true;
@@ -249,8 +249,8 @@ public class Partita extends Base {
      * Updates the team's line-up based on the performed substitution.
      */
     public void update() {
-        s1.setTitolari(sub.getLogics().getTitolari());
-        s1.setRiserve(sub.getLogics().getRiserve());
+        s1.setStarting(sub.getLogics().getTitolari());
+        s1.setSubstitution(sub.getLogics().getRiserve());
     }
 
     /**
@@ -309,7 +309,7 @@ public class Partita extends Base {
                     //jlScoreSq2.setText("2"); score2 = 2;
                     if (score1 != score2) {
                         winner = score1 > score2 ? s1 : s2;
-                        JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + winner.getNomeSquadra());
+                        JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + winner.getTeamName());
                         startStop.setEnabled(false);
                         jbSubs.setEnabled(false);
                         next.setEnabled(true);
@@ -328,7 +328,7 @@ public class Partita extends Base {
                     jbSubs.setEnabled(false);
                     if (score1 != score2) {
                         winner = score1 > score2 ? s1 : s2;
-                        JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + winner.getNomeSquadra());
+                        JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + winner.getTeamName());
                         startStop.setEnabled(false);
                         next.setEnabled(true);
                     } else {
@@ -394,7 +394,7 @@ public class Partita extends Base {
             tab1.add(logics.addScorer(s1));
             Player calciatore = tab1.get(tab1.size() - 1);
             String autogol = "";
-            if (!s1.getTitolari().contains(calciatore)) {
+            if (!s1.getStarting().contains(calciatore)) {
                 autogol = " (AG)";
             }
             string1 = string1 + Integer.toString(progressBar.getValue())
@@ -407,7 +407,7 @@ public class Partita extends Base {
             tab2.add(logics.addScorer(s2));
             Player calciatore = tab2.get(tab2.size() - 1);
             String autogol = "";
-            if (!s2.getTitolari().contains(calciatore)) {
+            if (!s2.getStarting().contains(calciatore)) {
                 autogol = " (AG)";
             }
             string2 = string2 + Integer.toString(progressBar.getValue())

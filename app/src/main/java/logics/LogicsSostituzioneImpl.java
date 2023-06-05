@@ -30,8 +30,8 @@ public class LogicsSostituzioneImpl implements LogicsSostituzione {
      * @param gui the GUI instance for player substitutions
      */
     public LogicsSostituzioneImpl(final Team s, final Sostituzione gui) {
-        this.titolari = new ArrayList<>(s.getTitolari());
-        this.riserve = new ArrayList<>(s.getRiserve());
+        this.titolari = new ArrayList<>(s.getStarting());
+        this.riserve = new ArrayList<>(s.getSubstitution());
         this.entra = null;
         this.esce = null;
         this.s = s;
@@ -82,8 +82,8 @@ public class LogicsSostituzioneImpl implements LogicsSostituzione {
                 int indexEsce = titolari.indexOf(esce);
                 titolari.set(indexEsce, entra);
                 riserve.remove(entra);
-                s.setTitolari(titolari);
-                s.setRiserve(riserve);
+                s.setStarting(titolari);
+                s.setSubstitution(riserve);
                 JOptionPane.showMessageDialog(null, "Sostituzione effettuata");
                 chiudiGUI();
             }

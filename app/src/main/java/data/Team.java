@@ -4,44 +4,44 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * The {@code Squadra} interface represents a team in a football (soccer) match.
+ * The interface represents a team in a football (soccer) match.
  */
 public interface Team extends Serializable{
 
     /**
-     * Returns a list of the starting players (titolari) for the team.
+     * Returns a list of the starting players for the team.
      *
-     * @return a list of Calciatore objects representing the starting players.
+     * @return a list of Player objects representing the starting players.
      */
-    List<Player> getTitolari();
+    List<Player> getStarting();
 
     /**
-     * Returns a list of the reserve players (riserve) for the team.
+     * Returns a list of the reserve players for the team.
      *
-     * @return a list of Calciatore objects representing the reserve players.
+     * @return a list of Player objects representing the reserve players.
      */
-    List<Player> getRiserve();
+    List<Player> getSubstitution();
 
     /**
      * Returns the name of the team.
      *
      * @return a string representing the name of the team.
      */
-    String getNomeSquadra();
+    String getTeamName();
 
     /**
      * Returns the emblem of the team.
      *
      * @return a string representing the emblem of the team.
      */
-    String getStemma();
+    String getLogo();
 
     /**
      * Returns the team's evaluation.
      *
      * @return an integer representing the team's evaluation.
      */
-    int getValutazione();
+    int getRating();
 
     /**
      * Returns the formation (modulo) of the team.
@@ -58,45 +58,45 @@ public interface Team extends Serializable{
     int getId();
 
     /**
-     * Returns a list of all the players (titolari and riserve) in the team.
+     * Returns a list of all the players in the team.
      *
-     * @return a list of Calciatore objects representing all the players in the team.
+     * @return a list of Player objects representing all the players in the team.
      */
-    List<Player> getLiCalciatori();
+    List<Player> getLiPlayers();
 
     /**
-     * Returns the player (calciatore) with the specified ID.
+     * Returns the player with the specified ID.
      *
      * @param id the ID of the player to retrieve.
-     * @return the Calciatore object with the specified ID.
+     * @return the Player object with the specified ID.
      */
-    Player getCalciatoreById(int id);
+    Player getPlayerById(int id);
 
     /**
-     * Returns the starting goalkeeper (portiere titolare) for the team.
+     * Returns the starting goalkeeper for the team.
      *
-     * @return the Calciatore object representing the starting goalkeeper.
+     * @return the Player object representing the starting goalkeeper.
      */
-    Player getPortiereTit();
+    Player getStartingKeeper();
 
     /**
-     * Sets the list of starting players (titolari) for the team.
+     * Sets the list of starting players for the team.
      *
-     * @param liTitolari a list of Calciatore objects representing the starting players.
+     * @param liStarting a list of Player objects representing the starting players.
      */
-    void setTitolari(List<Player> liTitolari);
+    void setStarting(List<Player> liStarting);
 
     /**
-     * Sets the list of reserve players (riserve) for the team.
+     * Sets the list of reserve players for the team.
      *
-     * @param liRiserve a list of Calciatore objects representing the reserve players.
+     * @param liSubstitution a list of Player objects representing the reserve players.
      */
-    void setRiserve(List<Player> liRiserve);
+    void setSubstitution(List<Player> liSubstitution);
 
     /**
-     * Returns a list of the starting players (titolari) in descending order.
+     * Returns a list of the starting players in descending order.
      *
-     * @return a list of Calciatore objects representing the starting players in descending order.
+     * @return a list of Player objects representing the starting players in descending order.
      */
-    List<Player> getTitolariDesc();
+    List<Player> getStartingDesc();
 }

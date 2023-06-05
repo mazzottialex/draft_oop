@@ -46,8 +46,8 @@ public class SimulatingMatchImpl implements SimulatingMatch {
         sf = new SimulatingFunctionsImpl();
         this.s1 = s1;
         this.s2 = s2;
-        voti1 = SimulatingFunctionsImpl.votiFanta(this.s1.getTitolari());
-        voti2 = SimulatingFunctionsImpl.votiFanta(this.s2.getTitolari());
+        voti1 = SimulatingFunctionsImpl.votiFanta(this.s1.getStarting());
+        voti2 = SimulatingFunctionsImpl.votiFanta(this.s2.getStarting());
         golSubiti1 = sf.golSubitiFanta(this.s1);
         golSubiti2 = sf.golSubitiFanta(this.s2);
         autogol1 = sf.autogolFanta(this.s1);
@@ -75,12 +75,12 @@ public class SimulatingMatchImpl implements SimulatingMatch {
         double pd = 0;
         switch (squadra) {
             case SQUADRA1:
-                pd = (votoDif1 + new ExtractDataImpl(s1.getTitolari()).getListaByRuolo("D").size() + catenaccio1 -
+                pd = (votoDif1 + new ExtractDataImpl(s1.getStarting()).getListaByRuolo("D").size() + catenaccio1 -
                     2 * golSubiti1 - 2 * autogol1 + 3 * rigoriParati1 - COST_SUB_DIFF) / COST_DIV_DIFF_OFF_CR;
                 break;
 
             case SQUADRA2:
-                pd = (votoDif2 + new ExtractDataImpl(s2.getTitolari()).getListaByRuolo("D").size() + catenaccio2 -
+                pd = (votoDif2 + new ExtractDataImpl(s2.getStarting()).getListaByRuolo("D").size() + catenaccio2 -
                     2 * golSubiti2 - 2 * autogol2 + 3 * rigoriParati2 - COST_SUB_DIFF) / COST_DIV_DIFF_OFF_CR;
                 break;
 
