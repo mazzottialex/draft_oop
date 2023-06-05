@@ -30,7 +30,7 @@ public class LogicsHomeImpl implements LogicsHome {
 		li=new ArrayList<>();
 		this.stagione=stagione;
 		this.online=online;
-		ms=new ManageStagioniImpl(online);
+		ms=new ManageStagioniImpl();
 	}
 	
 	

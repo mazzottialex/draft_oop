@@ -3,16 +3,17 @@ package logics;
 import java.net.URL;
 import java.net.URLConnection;
 
-import manageData.ManageStagioniImpl;
+import manageData.*;
 
 public class LogicStartImpl implements LogicStart {
-	private final ManageStagioniImpl ms;
+	private final ManageStagioni ms=new ManageStagioniImpl();
 	private final Boolean online;
 	
 	public LogicStartImpl() {
 		this.online=checkConnection();
-		ms=new ManageStagioniImpl(online);
-		ms.updateStagioni();
+		if(online) {
+			ms.updateStagioni();
+		}
 	}
 	
 	public Boolean getOnline() {
