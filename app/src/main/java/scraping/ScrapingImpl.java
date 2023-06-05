@@ -16,11 +16,11 @@ public class ScrapingImpl implements Scraping {
     private final String url = 
     		"https://www.kickest.it/it/serie-a/statistiche/giocatori/tabellone?iframe=yes";
     private final int nThread;
-    public ScrapingImpl() {
-        this.nThread = 7; //default
-    }
     public ScrapingImpl(final int nThread) {
         this.nThread = nThread;
+    }
+    public ScrapingImpl() {
+        this(7); //default
     }
     public List<Calciatore> getLista() {
         return li;
@@ -28,7 +28,7 @@ public class ScrapingImpl implements Scraping {
     public Boolean ReadTable(final String stagione) {
     	final List<Pair<RunnableScrapingData, Thread>> liThr = new ArrayList<>();
         for (int i = 0; i < nThread; i++) {
-        	final RunnableScrapingData runnable = new RunnableScrapingData(i, nThread, stagione);
+        	final RunnableScrapingData runnable = new RunnableScrapingData(i, nThread, stagione, false);
         	final Thread thr = new Thread(runnable);
             liThr.add(new Pair<>(runnable, thr));
             thr.start();
