@@ -1,15 +1,32 @@
 package gui;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.Toolkit;
+//import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.*;
+//import java.util.*;
 import java.util.List;
-
-import javax.swing.*;
+import java.util.Map;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.JDialog;
+import java.util.HashMap;
+import java.util.ArrayList;
+//import javax.swing.*;
 import data.Calciatore;
 import data.Modulo;
 import logics.LogicsCreaSquadraImpl;
@@ -29,16 +46,28 @@ import logics.LogicsCreasquadra;
 public class CreaSquadra extends Base {
 
     private static final long serialVersionUID = 1L;
-	private static final int MAX_FOR_ROW = 2;
-	private static final int NUM_PLAYER = 5;
-	
-	private LogicsCreasquadra log;
-	private final JFrame frameModulo;
-	private final JFrame frameCalciatori;
-	private final JPanel panelSud = new JPanel(new GridBagLayout()); //panel Sud del frame principale
-	private final JPanel panelCenter = new JPanel(new GridBagLayout()); // Panel Center del frame principale 
-	private final GridBagConstraints gbc = new GridBagConstraints();
-	private final JLabel lblmodSel;
+    private static final int MAX_FOR_ROW = 2;
+    private static final int NUM_PLAYER = 5;
+    private static final int NUM_INSETS_1 = 5;
+    private static final int NUM_INSETS_2 = 30;
+    private static final int LABEL_X = 5;
+    private static final int BOUNDS = 300;
+    private static final int DIALOG_X = 250;
+    private static final int DIALOG_Y = 100;
+    private static final int FRAME_X = 620;
+    private static final int FRAME_M_Y = 100;
+    private static final int FRAME_C_Y = 400;
+    private static final int GRAND2 = 200;
+    private static final int GRAND3 = 300;
+    private static final int GRAND35 = 350;
+    private static final int GRAND1 = 100;
+    private LogicsCreasquadra log;
+    private final JFrame frameModulo;
+    private final JFrame frameCalciatori;
+    private final JPanel panelSud = new JPanel(new GridBagLayout()); //panel Sud del frame principale
+    private final JPanel panelCenter = new JPanel(new GridBagLayout()); // Panel Center del frame principale 
+    private final GridBagConstraints gbc = new GridBagConstraints();
+    private final JLabel lblmodSel;
 	private JLabel lblmoduloSelect;
 	private final JButton buttonIniziaTorneo;
 	private JButton[] buttonsAtt;
@@ -49,6 +78,7 @@ public class CreaSquadra extends Base {
 	private JPanel panelCalciatoriCenter;
 	//private JButton buttonSelect;
 	private Map<JButton, List<Calciatore>> map; //serve per tenere in memoria i 5 calciatori disponibili 
+	private final Color panelColor = new Color(0, 64, 128);
 	
 	/**Constructor of CreaSquadra, add the necessary graphics components.
 	 * @param nomeSquadra the String that contains the name of the team
@@ -60,7 +90,6 @@ public class CreaSquadra extends Base {
 	 */
 	public CreaSquadra(final String nomeSquadra, final String stemma, final List<Calciatore> li) 
 			throws FileNotFoundException, ClassNotFoundException, IOException {
-			
 		this.log = new LogicsCreaSquadraImpl(nomeSquadra, stemma, li);
 		//inizializzo il bottone per i giocatori che seleziono
 		//this.buttonSelect = new JButton();
@@ -76,8 +105,8 @@ public class CreaSquadra extends Base {
 		gbc.gridy = 0;
 		lblmoduloSelect = new JLabel("" + log.getModulo());
 		panelSud.add(lblmoduloSelect, gbc);
-		gbc.insets = new Insets(30, 5, 30, 5);
-		gbc.gridx = 5;
+		gbc.insets = new Insets(NUM_INSETS_2, NUM_INSETS_1, NUM_INSETS_2, NUM_INSETS_1);
+		gbc.gridx = LABEL_X;
 		gbc.gridy = 0;
 		buttonIniziaTorneo = new JButton("Inizia Torneo");
 		buttonIniziaTorneo.addActionListener(new ActionListener() {
@@ -136,7 +165,7 @@ public class CreaSquadra extends Base {
 					});
 					prova.add(label);
 					prova.add(buttonOk);
-					prova.setBounds(300, 300, 250, 100);
+					prova.setBounds(BOUNDS, BOUNDS, DIALOG_X, DIALOG_Y);
 					prova.setVisible(true);
 				}
 			}
@@ -145,7 +174,7 @@ public class CreaSquadra extends Base {
 		// aggiungo il pannello sud al frame principale
 		contentPane.add(panelSud, BorderLayout.SOUTH);
 		// mi occupo del panelCenter del frame principale --> quello con i giocatori
-		this.panelCenter.setBackground(new Color(0, 64, 128));
+		this.panelCenter.setBackground(this.panelColor);
 		contentPane.add(panelCenter, BorderLayout.CENTER);
 		//disegno il modulo nel frame principale direttamente con questa funzione
 		changeModulo();
@@ -156,17 +185,17 @@ public class CreaSquadra extends Base {
 		this.frameModulo = new JFrame("Seleziona modulo: ");
 		this.frameCalciatori = new JFrame("Seleziona calciatori: ");
 		// dimensione fissa
-		this.frameModulo.setBounds(620, 100, 200, 300);
-		this.frameCalciatori.setBounds(620, 400, 200, 300);
+		this.frameModulo.setBounds(FRAME_X, FRAME_M_Y, GRAND2, GRAND3);
+		this.frameCalciatori.setBounds(FRAME_X, FRAME_C_Y, GRAND2, GRAND3);
 		//Mi occupo del frame Modulo
 		final JPanel panelModulo = new JPanel(new BorderLayout());
-		panelModulo.setBackground(new Color(0, 64, 128));
+		panelModulo.setBackground(this.panelColor);
 		this.frameModulo.add(panelModulo);
 		final JPanel panelModuloCenter = new JPanel(new GridBagLayout());
 		final JPanel panelModuloSouth = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		panelModuloCenter.setBackground(new Color(0, 64, 128));
-		panelModuloSouth.setBackground(new Color(0, 64, 128));
-		gbc.insets = new Insets(5, 5, 5, 5);
+		panelModuloCenter.setBackground(this.panelColor);
+		panelModuloSouth.setBackground(this.panelColor);
+		gbc.insets = new Insets(NUM_INSETS_1, NUM_INSETS_1, NUM_INSETS_1, NUM_INSETS_1);
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		// creo tanti bottoni quanti sono i moduli disponibili
@@ -181,7 +210,7 @@ public class CreaSquadra extends Base {
 					buttonSelect.add(log.getModuli().get(ind));
 				}
 			});
-			panelModuloCenter.add(buttons[i],gbc);
+			panelModuloCenter.add(buttons[i], gbc);
 			gbc.gridx++;
 			if (gbc.gridx == CreaSquadra.MAX_FOR_ROW) {
 				gbc.gridx = 0;
@@ -209,12 +238,12 @@ public class CreaSquadra extends Base {
 		panelModulo.add(panelModuloSouth, BorderLayout.SOUTH);
 		//Mi occupo del frame Calciatori
 		final JPanel panelCalciatori = new JPanel(new BorderLayout());
-		panelCalciatori.setBackground(new Color(0, 64, 128));
+		panelCalciatori.setBackground(this.panelColor);
 		this.frameCalciatori.add(panelCalciatori);
 		panelCalciatoriCenter = new JPanel(new GridBagLayout());
 		final JPanel panelCalciatoriSouth = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		panelCalciatoriCenter.setBackground(new Color(0, 64, 128));
-		panelCalciatoriSouth.setBackground(new Color(0, 64, 128));
+		panelCalciatoriCenter.setBackground(this.panelColor);
+		panelCalciatoriSouth.setBackground(this.panelColor);
 		final JButton buttonOkCalciatori = new JButton("OK");
 		buttonOkCalciatori.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
@@ -228,15 +257,13 @@ public class CreaSquadra extends Base {
 			}
 		});
 		panelCalciatoriSouth.add(buttonOkCalciatori);
-		
 		panelCalciatori.add(panelCalciatoriCenter, BorderLayout.CENTER);
 		panelCalciatori.add(panelCalciatoriSouth, BorderLayout.SOUTH);
-		
 		// Setto le impostazioni dei due frame aggiuntivi
 		this.frameModulo.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		this.frameCalciatori.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		this.frameModulo.setSize(300,300);
-		this.frameCalciatori.setSize(300,350);
+		this.frameModulo.setSize(GRAND3, GRAND3);
+		this.frameCalciatori.setSize(GRAND3, GRAND35);
 		this.frameModulo.setVisible(true);
 		this.frameCalciatori.setVisible(true);
 	}
@@ -245,15 +272,15 @@ public class CreaSquadra extends Base {
 	private void changeButtonModulo() {
 		//gbc.insets = new Insets(8,0,8,8);
 		gbc.gridx = 1;
-		gbc.gridy = 0;		
+		gbc.gridy = 0;
 		panelSud.remove(lblmoduloSelect);
 		lblmoduloSelect = new JLabel("" + log.getModulo());
 		panelSud.add(lblmoduloSelect, gbc);
-		panelSud.validate();		
+		panelSud.validate();
 	}
 	
 	/*metodo che ritorna la X del gbc*/
-	private int getGbcX(String s) {
+	private int getGbcX(final String s) {
 		switch (s) {
 		case "A":
 			if (this.log.getNumAtt() == 1) {
@@ -264,7 +291,7 @@ public class CreaSquadra extends Base {
 				return 0;
 			}
 		case "C":
-			return (this.log.getNumCen() == 3 && this.log.getNumDif() == 5) ? 1 : 0;
+			return (this.log.getNumCen() == 3 && this.log.getNumDif() == NUM_PLAYER) ? 1 : 0;
 		case "D":
 			return (this.log.getNumDif() == 3 && this.log.getNumCen() > 4) ? 1 : 0;	
 		case "P":
@@ -272,7 +299,7 @@ public class CreaSquadra extends Base {
 				return this.log.getNumCen() / 2;
 			} else if (this.log.getNumDif() == 3 && this.log.getNumCen() > 4) {
 				return 2;
-			} else if (this.log.getNumDif() == 5 || this.log.getNumDif() == 3) {
+			} else if (this.log.getNumDif() == NUM_PLAYER || this.log.getNumDif() == 3) {
 				return this.log.getNumDif() / 2;
 			} else {
 				return (this.log.getNumDif() / 2) - 1;
@@ -285,14 +312,13 @@ public class CreaSquadra extends Base {
 	
 	/* metodo che crea la disposizione dei giocatori nel frame principale */
 	private void changeModulo() {
-		this.panelCenter.removeAll();;
+		this.panelCenter.removeAll();
 		this.panelCenter.repaint();
 		this.buttonsAtt = new JButton[log.getNumAtt()];
 		this.buttonsCen = new JButton[log.getNumCen()];
 		this.buttonsDif = new JButton[log.getNumDif()];
-		this.buttonPor = new JButton("P");		
-		//gbc.insets = new Insets(40,20,40,20);	
-		gbc.insets = new Insets(30, 5, 30, 5);
+		this.buttonPor = new JButton("P");	
+		gbc.insets = new Insets(NUM_INSETS_2, NUM_INSETS_1, NUM_INSETS_2, NUM_INSETS_1);
 		//ATTACCO
 		gbc.gridx = this.getGbcX("A");
 		gbc.gridy = 0;
@@ -368,7 +394,7 @@ public class CreaSquadra extends Base {
 					}
 				}
 			});
-			this.panelCenter.add(this.buttonsDif[i],gbc);
+			this.panelCenter.add(this.buttonsDif[i], gbc);
 			gbc.gridx++;
 		}
 		//PORTIERE
@@ -379,7 +405,7 @@ public class CreaSquadra extends Base {
 		this.buttonPor.setPreferredSize(new Dimension(d.width * 2, d.height * 2));
 		this.buttonPor.setBackground(Color.YELLOW);
 		this.buttonPor.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(final ActionEvent e) {
 				if (log.getClickModulo()) {
 					if (map.get(buttonPor).isEmpty()) {
 						choosePlayerFirstTime("P", 0);
@@ -421,8 +447,8 @@ public class CreaSquadra extends Base {
 		default:
 			break;
 		}
-		addPlayers(ruolo, pos, list);		
-	}
+		addPlayers(ruolo, pos, list);
+		}
 	
 	/* metodo chiamato dopo che è gia stato chiamato choosePlayerFirstTime*/
 	private void choosePlayer(final String ruolo, final int pos) {
@@ -584,7 +610,7 @@ public class CreaSquadra extends Base {
 		});
 		moProva.add(label);
 		moProva.add(buttonOk);
-		moProva.setBounds(300, 300, 200, 100);
+		moProva.setBounds(GRAND3, GRAND3, GRAND2, GRAND1);
 		moProva.setVisible(true);
 	}
 }

@@ -25,7 +25,7 @@ public class ManageDataImpl implements ManageData {
         final Scraping scr = new ScrapingImpl();
         if (!scr.ReadTable(this.stagione))
             return false;
-        li = scr.getLista();
+        li = scr.getLiCalciatori();
         logFile.SaveData(li, stagione);
         return true;
     }
