@@ -4,40 +4,40 @@ package data;
  * Represents different football formations (modules).
  */
 public enum Modulo {
-	
-	/**
-	 * 343 formation.
-	 */
+
+    /**
+     * 343 formation.
+     */
     M343(3, 4, 3),
-    
+
     /**
-	 * 352 formation.
-	 */
+     * 352 formation.
+     */
     M352(3, 5, 2),
-    
+
     /**
-	 * 433 formation.
-	 */
+     * 433 formation.
+     */
     M433(4, 3, 3),
-    
+
     /**
-	 * 442 formation.
-	 */
+     * 442 formation.
+     */
     M442(4, 4, 2),
-    
+
     /**
-	 * 451 formation.
-	 */
+     * 451 formation.
+     */
     M451(4, 5, 1),
-    
+
     /**
-	 * 532 formation.
-	 */
+     * 532 formation.
+     */
     M532(5, 3, 2),
-    
+
     /**
-	 * 541 formation.
-	 */
+     * 541 formation.
+     */
     M541(5, 4, 1);
 
     private int dif;
@@ -92,18 +92,16 @@ public enum Modulo {
      */
     public int getN(final String ruolo) {
         if (ruolo == "P") {
-        	return 1;
+            return 1;
+        } else if (ruolo == "D") {
+            return dif;
+        } else if (ruolo == "C") {
+            return cen;
+        } else if (ruolo == "A") {
+            return att;
+        } else {
+            return 0;
         }
-        else if (ruolo == "D") {
-        	return dif;
-        }
-        else if (ruolo == "C") {
-        	return cen;
-        }
-        else if (ruolo == "A") {
-        	return att;
-        }
-        else return 0;
     }
 
     /**

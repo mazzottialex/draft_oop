@@ -1,4 +1,5 @@
 package gui;
+
 import javax.swing.*;
 
 import data.Calciatore;
@@ -13,11 +14,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Represents a football match GUI.
+ */
 public class Partita extends Base {
     private static final long serialVersionUID = 3533149128342164934L;
-
     private JPanel contentPane = new JPanel();
-
     private JProgressBar progressBar;
     private JLabel jlNomeSq1;
     private JLabel jlScoreSq1;
@@ -29,11 +31,9 @@ public class Partita extends Base {
     private JButton jbSubs;
     private JButton next;
     private JPanel panel;
-
     private LogicsPartita logics;
     private Squadra s1;
     private Squadra s2;
-
     private boolean isRunning;
     private boolean ris;
     private int fineTempo;
@@ -46,16 +46,28 @@ public class Partita extends Base {
     private String string2 = "";
     private String apri = "<html>";
     private String chiudi = "</html>";
-
     private int cambi;
     private Sostituzione sub;
-
     private Partita partita;
-
     private int score1;
     private int score2;
+    private static final int HALF_REG_TIME = 45;
+    private static final int IPADX_CENTER = 50;
+    private static final int GRID_5 = 5;
+    private static final int END_REG_TIME = 90;
+    private static final int END_SUPPL_TIME = 120;
+    private static final int HALF_SUPPL_TIME = 105;
 
-    public Partita(Squadra s1, Squadra s2) throws FileNotFoundException, ClassNotFoundException, IOException {
+    /**
+     * Creates a new instance of the Partita class.
+     *
+     * @param s1 The first team.
+     * @param s2 The second team.
+     * @throws FileNotFoundException If a file is not found.
+     * @throws ClassNotFoundException If a class is not found.
+     * @throws IOException If an I/O error occurs.
+     */
+    public Partita(final Squadra s1, final Squadra s2) throws FileNotFoundException, ClassNotFoundException, IOException {
         this.s1 = s1;
         this.s2 = s2;
         this.logics = new LogicsPartitaImpl(this.s1, this.s2);
@@ -88,7 +100,7 @@ public class Partita extends Base {
         this.progressBar.setStringPainted(true);
         this.progressBar.setString("Minuto 0°");
         this.ris = false;
-        this.fineTempo = 45;
+        this.fineTempo = HALF_REG_TIME;
         this.winner = null;
         this.tab1 = new ArrayList<>();
         this.tab2 = new ArrayList<>();
@@ -103,7 +115,7 @@ public class Partita extends Base {
 
         gbc.gridx = 1;
         gbc.gridy = 0;
-        gbc.ipadx = 50;
+        gbc.ipadx = IPADX_CENTER;
         panel.add(new JLabel("vs", SwingConstants.CENTER), gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -118,7 +130,7 @@ public class Partita extends Base {
 
         gbc.gridx = 1;
         gbc.gridy = 2;
-        gbc.ipadx = 50;
+        gbc.ipadx = IPADX_CENTER;
         panel.add(new JLabel("-", SwingConstants.CENTER), gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -142,7 +154,7 @@ public class Partita extends Base {
         gbc.gridx = 0;
         gbc.gridy = 4;
         gbc.gridwidth = 3;
-        gbc.ipady = 5;
+        gbc.ipady = GRID_5;
         panel.add(progressBar, gbc);
 
         JPanel southWest = new JPanel();
@@ -150,26 +162,26 @@ public class Partita extends Base {
         gbc.gridx = 0;
         gbc.gridy = 5;
         gbc.gridwidth = 1;
-        gbc.ipady = 5;
+        gbc.ipady = GRID_5;
         panel.add(southWest, gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 5;
         gbc.gridwidth = 1;
-        gbc.ipady = 5;
+        gbc.ipady = GRID_5;
         panel.add(startStop, gbc);
 
         JPanel southEast = new JPanel();
         southEast.add(next);
         gbc.gridx = 2;
-        gbc.gridy = 5;
+        gbc.gridy = GRID_5;
         panel.add(southEast, gbc);
 
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 
         startStop.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 if (isRunning) {
                     stopProgress();
                 } else {
@@ -180,7 +192,7 @@ public class Partita extends Base {
 
         jbSubs.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 stopProgress();
                 if (cambi <= 3) {
                     sost();
@@ -200,26 +212,38 @@ public class Partita extends Base {
 
         next.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 dispose();
             }
         });
     }
 
+    /**
+     * Initializes the substitution gui.
+     */
     private void sost() {
         sub = new Sostituzione(s1, this, cambi);
         sub.setVisible(true);
     }
 
+    /**
+     * Adds a substitution count.
+     */
     public void addCambio() {
         cambi++;
     }
 
+    /**
+     * Updates the team's line-up based on the performed substitution.
+     */
     public void update() {
         s1.setTitolari(sub.getLogics().getTitolari());
         s1.setRiserve(sub.getLogics().getRiserve());
     }
 
+    /**
+     * Starts the match progress.
+     */
     private void startProgress() {
         startStop.setText("Stop");
         isRunning = true;
@@ -268,7 +292,7 @@ public class Partita extends Base {
                 }
 
                 //Fine tempi reg
-                if (progressBar.getValue() == 90) {
+                if (progressBar.getValue() == END_REG_TIME) {
                     //jlScoreSq1.setText("2"); score1 = 2;
                     //jlScoreSq2.setText("2"); score2 = 2;
                     if (score1 != score2) {
@@ -278,7 +302,7 @@ public class Partita extends Base {
                         jbSubs.setEnabled(false);
                         next.setEnabled(true);
                     } else {
-                        fineTempo = 120;
+                        fineTempo = END_SUPPL_TIME;
                         progressBar.setMaximum(fineTempo);
                         ris = false;
                         JOptionPane.showMessageDialog(null, "Fine tempi regolamentari");
@@ -286,7 +310,7 @@ public class Partita extends Base {
                 }
 
                 //Fine tempi suppl
-                if (progressBar.getValue() == 120) {
+                if (progressBar.getValue() == END_SUPPL_TIME) {
                     //jlScoreSq1.setText("2"); score1 = 2;
                     //jlScoreSq2.setText("2"); score2 = 2;
                     jbSubs.setEnabled(false);
@@ -307,14 +331,14 @@ public class Partita extends Base {
                 }
 
                 //Fine 1° tempo
-                if (progressBar.getValue() == 45) {
-                    fineTempo = 90;
+                if (progressBar.getValue() == HALF_REG_TIME) {
+                    fineTempo = END_REG_TIME;
                     JOptionPane.showMessageDialog(null, "Fine primo tempo");
                 }
 
                 //Fine 1° tempo suppl
-                if (progressBar.getValue() == 105) {
-                    fineTempo = 120;
+                if (progressBar.getValue() == HALF_SUPPL_TIME) {
+                    fineTempo = END_SUPPL_TIME;
                     JOptionPane.showMessageDialog(null, "Fine primo tempo supplementare");
                 }
 
@@ -330,7 +354,15 @@ public class Partita extends Base {
         thread.start();
     }
 
-    public void setWinnerR(Squadra s, int gol1, int gol2) {
+    /**
+     * Sets the winner and the score, after the penalty shoot-out.
+     * Used in the class Rigori.
+     *
+     * @param s the winning team.
+     * @param gol1 the number of penalties scored by the first team.
+     * @param gol2 the number of penalties scored by the second team.
+     */
+    public void setWinnerR(final Squadra s, final int gol1, final int gol2) {
         winner = s;
         jlScoreSq1.setText(score1 + " (" + gol1 + ")");
         jlScoreSq2.setText(score2 + " (" + gol2 + ")");
@@ -338,6 +370,13 @@ public class Partita extends Base {
         next.setEnabled(true);
     }
 
+    /**
+     * Changes the score of the match.
+     *
+     * @throws FileNotFoundException If a file is not found.
+     * @throws ClassNotFoundException If a class is not found during deserialization.
+     * @throws IOException If an I/O exception occurs.
+     */
     public void changeScore() throws FileNotFoundException, ClassNotFoundException, IOException {
         if (logics.getMinGol(s1).contains(progressBar.getValue())) {
             tab1.add(logics.addScorer(s1));
@@ -346,7 +385,8 @@ public class Partita extends Base {
             if (!s1.getTitolari().contains(calciatore)) {
                 autogol = " (AG)";
             }
-            string1 = string1 + Integer.toString(progressBar.getValue()) + "' Gol: " + calciatore.getNominativo() + autogol + "<br>";
+            string1 = string1 + Integer.toString(progressBar.getValue()) +
+            		"' Gol: " + calciatore.getNominativo() + autogol + "<br>";
             jlTabSq1.setText(apri + string1 + chiudi);
             score1++;
             jlScoreSq1.setText(String.valueOf(score1));
@@ -358,33 +398,51 @@ public class Partita extends Base {
             if (!s2.getTitolari().contains(calciatore)) {
                 autogol = " (AG)";
             }
-            string2 = string2 + Integer.toString(progressBar.getValue()) + "' Gol: " + calciatore.getNominativo() + autogol + "<br>";
+            string2 = string2 + Integer.toString(progressBar.getValue()) +
+            		"' Gol: " + calciatore.getNominativo() + autogol + "<br>";
             jlTabSq2.setText(apri + string2 + chiudi);
             score2++;
             jlScoreSq2.setText(String.valueOf(score2));
         }
     }
 
+    /**
+     * Stops the match progress.
+     */
     private void stopProgress() {
         isRunning = false;
         startStop.setText("Play");
     }
 
+    /**
+     * Retrieves the winning team of the match.
+     *
+     * @return The winning team.
+     */
     public Squadra getWinner() {
         return winner;
     }
 
+    /**
+     * Retrieves the number of goals scored by the first team.
+     *
+     * @return The number of goals.
+     */
     public int getGolS1() {
         return score1;
     }
 
+    /**
+     * Retrieves the number of goals scored by the second team.
+     *
+     * @return The number of goals.
+     */
     public int getGolS2() {
         return score2;
     }
 
     /**
-     * Create the GUI and show it. As with all GUI code, this must run
-     * on the event-dispatching thread.
+     * Create the GUI and show it.
      */
     public void createAndShowGUI() {
         //Create and set up the content pane.
