@@ -1,22 +1,39 @@
 package gui;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.Toolkit;
+//import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.*;
+//import java.util.*;
 import java.util.List;
-
-import javax.swing.*;
+import java.util.Map;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.JDialog;
+import java.util.HashMap;
+import java.util.ArrayList;
+//import javax.swing.*;
 import data.Calciatore;
 import data.Modulo;
-import gui_v2.*;
 import logics.LogicsCreaSquadraImpl;
 import logics.LogicsCreasquadra;
-import manageData.LogicsFile;
-import manageData.LogicsFileImpl;
+//import manageData.LogicsFile;
+//import manageData.LogicsFileImpl;
+//import v2.gui.*;
 
 
 /**The GUI where the user chooses his team.
@@ -26,18 +43,31 @@ import manageData.LogicsFileImpl;
  * @author Davide Braccini
  *
  */
-public class CreaSquadra extends Base{
+public class CreaSquadra extends Base {
 
-	private final static int MAX_FOR_ROW = 2;
-	private final static int NUM_PLAYER = 5;
-	
-	private LogicsCreasquadra log;
-	private final JFrame frameModulo;
-	private final JFrame frameCalciatori;
-	private final JPanel panelSud = new JPanel(new GridBagLayout()); //panel Sud del frame principale
-	private final JPanel panelCenter = new JPanel(new GridBagLayout()); // Panel Center del frame principale 
-	private final GridBagConstraints gbc = new GridBagConstraints();
-	private final JLabel lblmodSel;
+    private static final long serialVersionUID = 1L;
+    private static final int MAX_FOR_ROW = 2;
+    private static final int NUM_PLAYER = 5;
+    private static final int NUM_INSETS_1 = 5;
+    private static final int NUM_INSETS_2 = 30;
+    private static final int LABEL_X = 5;
+    private static final int BOUNDS = 300;
+    private static final int DIALOG_X = 250;
+    private static final int DIALOG_Y = 100;
+    private static final int FRAME_X = 620;
+    private static final int FRAME_M_Y = 100;
+    private static final int FRAME_C_Y = 400;
+    private static final int GRAND2 = 200;
+    private static final int GRAND3 = 300;
+    private static final int GRAND35 = 350;
+    private static final int GRAND1 = 100;
+    private LogicsCreasquadra log;
+    private final JFrame frameModulo;
+    private final JFrame frameCalciatori;
+    private final JPanel panelSud = new JPanel(new GridBagLayout()); //panel Sud del frame principale
+    private final JPanel panelCenter = new JPanel(new GridBagLayout()); // Panel Center del frame principale 
+    private final GridBagConstraints gbc = new GridBagConstraints();
+    private final JLabel lblmodSel;
 	private JLabel lblmoduloSelect;
 	private final JButton buttonIniziaTorneo;
 	private JButton[] buttonsAtt;
@@ -46,66 +76,53 @@ public class CreaSquadra extends Base{
 	private JButton buttonPor;
 	private JButton[] buttonsPlayer;
 	private JPanel panelCalciatoriCenter;
-	private JButton buttonSelect;
+	//private JButton buttonSelect;
 	private Map<JButton, List<Calciatore>> map; //serve per tenere in memoria i 5 calciatori disponibili 
+	private final Color panelColor = new Color(0, 64, 128);
 	
-	
-	/**Constructor of CreaSquadra, add the necessary graphics components
+	/**Constructor of CreaSquadra, add the necessary graphics components.
 	 * @param nomeSquadra the String that contains the name of the team
 	 * @param stemma the String that contains the arms of the team
 	 * @param li the list of all the players in Serie A
-	 * @throws FileNotFoundException if...
-	 * @throws ClassNotFoundException if...
-	 * @throws IOException if...
+	 * @throws FileNotFoundException
+	 * @throws ClassNotFoundException
+	 * @throws IOException 
 	 */
-	public CreaSquadra(String nomeSquadra, String stemma, List<Calciatore> li) throws FileNotFoundException, ClassNotFoundException, IOException {
-		
-		
+	public CreaSquadra(final String nomeSquadra, final String stemma, final List<Calciatore> li) 
+			throws FileNotFoundException, ClassNotFoundException, IOException {
 		this.log = new LogicsCreaSquadraImpl(nomeSquadra, stemma, li);
-		
 		//inizializzo il bottone per i giocatori che seleziono
-		this.buttonSelect = new JButton();
-		
+		//this.buttonSelect = new JButton();
 		// Mi occupo del frame principale 
 		contentPane.setLayout(new BorderLayout());
-		
 		// utilizzo gbc per la disposizione a griglia nel panel sud del frame principale
-		gbc.insets = new Insets(8,0,8,8);
+		gbc.insets = new Insets(8, 0, 8, 8);
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		
 		lblmodSel = new JLabel("Modulo selezionato: ");
-		panelSud.add(lblmodSel,gbc);
-		
+		panelSud.add(lblmodSel, gbc);
 		gbc.gridx = 1;
 		gbc.gridy = 0;
-		
 		lblmoduloSelect = new JLabel("" + log.getModulo());
-		panelSud.add(lblmoduloSelect,gbc);
-		
-		gbc.insets = new Insets(30,5,30,5);
-		gbc.gridx = 5;
+		panelSud.add(lblmoduloSelect, gbc);
+		gbc.insets = new Insets(NUM_INSETS_2, NUM_INSETS_1, NUM_INSETS_2, NUM_INSETS_1);
+		gbc.gridx = LABEL_X;
 		gbc.gridy = 0;
-		
 		buttonIniziaTorneo = new JButton("Inizia Torneo");
 		buttonIniziaTorneo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-							
+			public void actionPerformed(final ActionEvent e) {	
 				if (log.teamComplete()) {
-					
 					/*
 					LogicsFile logFile=new LogicsFileImpl();
 					logFile.SaveStorico(log.getSquadra());
-
-					
 					changeJPanel(new TorneoV2(log.getSquadra(), li));
 					*/
-					
 					try {
 						Base tempTorneo = new Torneo(log.getSquadra(), li);
 						changeJPanel(tempTorneo);
-						JFrame topFrame = (JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, tempTorneo.getPanel());
-						final int initialScreenPercentage = 50;//75
+						JFrame topFrame = (JFrame) SwingUtilities.getAncestorOfClass(JFrame.class,
+								tempTorneo.getPanel());
+						final int initialScreenPercentage = 50; //75
 						Toolkit tk = Toolkit.getDefaultToolkit();
 						Dimension screenSize = tk.getScreenSize();
 						int height = screenSize.height * initialScreenPercentage / 100;
@@ -130,10 +147,8 @@ public class CreaSquadra extends Base{
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-					
 					frameCalciatori.setVisible(false);
 					frameModulo.setVisible(false);
-					
 				} else {
 					final JFrame err = new JFrame("ERRORE");
 					err.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -143,59 +158,46 @@ public class CreaSquadra extends Base{
 					final JLabel label = new JLabel("NON HAI COMPLETATO LA SQUADRA");
 					final JButton buttonOk = new JButton("OK");
 					buttonOk.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
+						public void actionPerformed(final ActionEvent e) {
 							WindowEvent close = new WindowEvent(prova, WindowEvent.WINDOW_CLOSING);
 							prova.dispatchEvent(close);
 						}
 					});
 					prova.add(label);
 					prova.add(buttonOk);
-					//err.add(prova);
-					//err.setBounds( 300, 300, 200, 200);
-					//err.setVisible(true);
-					prova.setBounds( 300, 300, 250, 100);
+					prova.setBounds(BOUNDS, BOUNDS, DIALOG_X, DIALOG_Y);
 					prova.setVisible(true);
 				}
-				
-				
 			}
 		});
-		panelSud.add(buttonIniziaTorneo,gbc);
-		
+		panelSud.add(buttonIniziaTorneo, gbc);
 		// aggiungo il pannello sud al frame principale
 		contentPane.add(panelSud, BorderLayout.SOUTH);
-		
-		
 		// mi occupo del panelCenter del frame principale --> quello con i giocatori
-		this.panelCenter.setBackground(new Color(0,64,128));
+		this.panelCenter.setBackground(this.panelColor);
 		contentPane.add(panelCenter, BorderLayout.CENTER);
-		
 		//disegno il modulo nel frame principale direttamente con questa funzione
 		changeModulo();
-		
 		// inizializzo la mappa 
 		this.map = new HashMap<>();
 		initMap();
-		
-		
 		// Creo 2 frame aggiuntivi, uno per modulo e uno per calciatori
 		this.frameModulo = new JFrame("Seleziona modulo: ");
 		this.frameCalciatori = new JFrame("Seleziona calciatori: ");
-		this.frameModulo.setBounds(this.getX() + 520, this.getY(), 200, 300);
-		this.frameCalciatori.setBounds(this.getX() + 520 ,this.getY() + 300, 200, 300);
-		
+		// dimensione fissa
+		this.frameModulo.setBounds(FRAME_X, FRAME_M_Y, GRAND2, GRAND3);
+		this.frameCalciatori.setBounds(FRAME_X, FRAME_C_Y, GRAND2, GRAND3);
 		//Mi occupo del frame Modulo
 		final JPanel panelModulo = new JPanel(new BorderLayout());
-		panelModulo.setBackground(new Color(0,64,128));
+		panelModulo.setBackground(this.panelColor);
 		this.frameModulo.add(panelModulo);
 		final JPanel panelModuloCenter = new JPanel(new GridBagLayout());
 		final JPanel panelModuloSouth = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		panelModuloCenter.setBackground(new Color(0,64,128));
-		panelModuloSouth.setBackground(new Color(0,64,128));
-		gbc.insets = new Insets(5,5,5,5);
+		panelModuloCenter.setBackground(this.panelColor);
+		panelModuloSouth.setBackground(this.panelColor);
+		gbc.insets = new Insets(NUM_INSETS_1, NUM_INSETS_1, NUM_INSETS_1, NUM_INSETS_1);
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		
 		// creo tanti bottoni quanti sono i moduli disponibili
 		JButton[] buttons = new JButton[log.getModuli().size()];
 		ArrayList<Modulo> buttonSelect = new ArrayList<>();
@@ -204,24 +206,23 @@ public class CreaSquadra extends Base{
 			int ind = i; 
 			// faccio in modo che alla pressione del bottono si salvi il modulo selezionato nell'array buttonSelect
 			buttons[i].addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
+				public void actionPerformed(final ActionEvent e) {
 					buttonSelect.add(log.getModuli().get(ind));
 				}
 			});
-			panelModuloCenter.add(buttons[i],gbc);
+			panelModuloCenter.add(buttons[i], gbc);
 			gbc.gridx++;
 			if (gbc.gridx == CreaSquadra.MAX_FOR_ROW) {
 				gbc.gridx = 0;
 				gbc.gridy++;
 			}
 		}
-		
 		// quando premo il tasto OK salvo nella variabile log.moduloSelct il modulo scelto
 		final JButton buttonOk = new JButton("OK");
 		buttonOk.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(final ActionEvent e) {
 				if (!buttonSelect.isEmpty()) {
-					log.setModulo(buttonSelect.get(buttonSelect.size()-1));
+					log.setModulo(buttonSelect.get(buttonSelect.size() - 1));
 				}
 				log.clearTeam();
 				//System.out.println(log.getModulo());
@@ -229,25 +230,23 @@ public class CreaSquadra extends Base{
 				changeModulo();
 				initMap();
 				frameModulo.setVisible(false);
+				log.setClickModulo(true);
 			}	
 		});
 		panelModuloSouth.add(buttonOk);	
-		
 		panelModulo.add(panelModuloCenter, BorderLayout.CENTER);
 		panelModulo.add(panelModuloSouth, BorderLayout.SOUTH);
-		
-		
 		//Mi occupo del frame Calciatori
 		final JPanel panelCalciatori = new JPanel(new BorderLayout());
-		panelCalciatori.setBackground(new Color(0,64,128));
+		panelCalciatori.setBackground(this.panelColor);
 		this.frameCalciatori.add(panelCalciatori);
 		panelCalciatoriCenter = new JPanel(new GridBagLayout());
 		final JPanel panelCalciatoriSouth = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		panelCalciatoriCenter.setBackground(new Color(0,64,128));
-		panelCalciatoriSouth.setBackground(new Color(0,64,128));
+		panelCalciatoriCenter.setBackground(this.panelColor);
+		panelCalciatoriSouth.setBackground(this.panelColor);
 		final JButton buttonOkCalciatori = new JButton("OK");
 		buttonOkCalciatori.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(final ActionEvent e) {
 				if (log.getposSelect() != -1) {
 					log.addPlayerInTeam(log.getCalciatoreSelect());
 					changeButtonPlayer(log.getRuoloSelect(), log.getposSelect());
@@ -258,33 +257,30 @@ public class CreaSquadra extends Base{
 			}
 		});
 		panelCalciatoriSouth.add(buttonOkCalciatori);
-		
 		panelCalciatori.add(panelCalciatoriCenter, BorderLayout.CENTER);
 		panelCalciatori.add(panelCalciatoriSouth, BorderLayout.SOUTH);
-		
 		// Setto le impostazioni dei due frame aggiuntivi
 		this.frameModulo.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		this.frameCalciatori.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		this.frameModulo.setSize(300,300);
-		this.frameCalciatori.setSize(300,350);
+		this.frameModulo.setSize(GRAND3, GRAND3);
+		this.frameCalciatori.setSize(GRAND3, GRAND35);
 		this.frameModulo.setVisible(true);
 		this.frameCalciatori.setVisible(true);
-			
 	}
 	
 	/*metodo per cambiare la label del framePrincipale*/
 	private void changeButtonModulo() {
 		//gbc.insets = new Insets(8,0,8,8);
 		gbc.gridx = 1;
-		gbc.gridy = 0;		
+		gbc.gridy = 0;
 		panelSud.remove(lblmoduloSelect);
 		lblmoduloSelect = new JLabel("" + log.getModulo());
-		panelSud.add(lblmoduloSelect,gbc);
-		panelSud.validate();		
+		panelSud.add(lblmoduloSelect, gbc);
+		panelSud.validate();
 	}
 	
 	/*metodo che ritorna la X del gbc*/
-	private int getGbcX(String s) {
+	private int getGbcX(final String s) {
 		switch (s) {
 		case "A":
 			if (this.log.getNumAtt() == 1) {
@@ -295,7 +291,7 @@ public class CreaSquadra extends Base{
 				return 0;
 			}
 		case "C":
-			return (this.log.getNumCen() == 3 && this.log.getNumDif() == 5) ? 1 : 0;
+			return (this.log.getNumCen() == 3 && this.log.getNumDif() == NUM_PLAYER) ? 1 : 0;
 		case "D":
 			return (this.log.getNumDif() == 3 && this.log.getNumCen() > 4) ? 1 : 0;	
 		case "P":
@@ -303,10 +299,10 @@ public class CreaSquadra extends Base{
 				return this.log.getNumCen() / 2;
 			} else if (this.log.getNumDif() == 3 && this.log.getNumCen() > 4) {
 				return 2;
-			} else if (this.log.getNumDif() == 5 || this.log.getNumDif() == 3) {
+			} else if (this.log.getNumDif() == NUM_PLAYER || this.log.getNumDif() == 3) {
 				return this.log.getNumDif() / 2;
 			} else {
-				return (this.log.getNumDif() / 2) -1;
+				return (this.log.getNumDif() / 2) - 1;
 			} 
 		default:
 			return 0;
@@ -316,80 +312,89 @@ public class CreaSquadra extends Base{
 	
 	/* metodo che crea la disposizione dei giocatori nel frame principale */
 	private void changeModulo() {
-		this.panelCenter.removeAll();;
+		this.panelCenter.removeAll();
 		this.panelCenter.repaint();
-		
 		this.buttonsAtt = new JButton[log.getNumAtt()];
 		this.buttonsCen = new JButton[log.getNumCen()];
 		this.buttonsDif = new JButton[log.getNumDif()];
-		this.buttonPor = new JButton("P");		
-		//gbc.insets = new Insets(40,20,40,20);	
-		gbc.insets = new Insets(30,5,30,5);
+		this.buttonPor = new JButton("P");	
+		gbc.insets = new Insets(NUM_INSETS_2, NUM_INSETS_1, NUM_INSETS_2, NUM_INSETS_1);
 		//ATTACCO
 		gbc.gridx = this.getGbcX("A");
 		gbc.gridy = 0;
 		gbc.ipady = 10;
-		for (int i=0; i<= log.getNumAtt() - 1; i++) {
+		for (int i = 0; i <= log.getNumAtt() - 1; i++) {
 			this.buttonsAtt[i] = new JButton("A");
 			Dimension d = this.buttonsAtt[i].getPreferredSize();
-			this.buttonsAtt[i].setPreferredSize(new Dimension(d.width*2,d.height*2));
+			this.buttonsAtt[i].setPreferredSize(new Dimension(d.width * 2, d.height * 2));
 			this.buttonsAtt[i].setBackground(Color.ORANGE);
 			final int ind = i;
 			this.buttonsAtt[i].addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					if (map.get(buttonsAtt[ind]).isEmpty()) {
-						choosePlayerFirstTime("A",ind);
+				public void actionPerformed(final ActionEvent e) {
+					if (log.getClickModulo()) {
+						if (map.get(buttonsAtt[ind]).isEmpty()) {
+							choosePlayerFirstTime("A", ind);
+						} else {
+							choosePlayer("A", ind);
+						}
 					} else {
-						choosePlayer("A",ind);
+						createJDialog();
 					}
 				}
 			});
-			this.panelCenter.add(this.buttonsAtt[i],gbc);
+			this.panelCenter.add(this.buttonsAtt[i], gbc);
 			gbc.gridx++;
 		}
 		//CENTROCAMPO
 		gbc.gridx = this.getGbcX("C");
 		gbc.gridy = gbc.gridy + 3;
 		gbc.ipady = 10;
-		for (int i=0; i<= log.getNumCen() - 1; i++) {
+		for (int i = 0; i <= log.getNumCen() - 1; i++) {
 			this.buttonsCen[i] = new JButton("C");
 			Dimension d = this.buttonsCen[i].getPreferredSize();
-			this.buttonsCen[i].setPreferredSize(new Dimension(d.width*2,d.height*2));
+			this.buttonsCen[i].setPreferredSize(new Dimension(d.width * 2, d.height * 2));
 			this.buttonsCen[i].setBackground(Color.GREEN);
 			final int ind = i;
 			this.buttonsCen[i].addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					if (map.get(buttonsCen[ind]).isEmpty()) {
-						choosePlayerFirstTime("C",ind);
+				public void actionPerformed(final ActionEvent e) {
+					if (log.getClickModulo()) {
+						if (map.get(buttonsCen[ind]).isEmpty()) {
+							choosePlayerFirstTime("C", ind);
+						} else {
+							choosePlayer("C", ind);
+						}
 					} else {
-						choosePlayer("C",ind);
+						createJDialog();
 					}
 				}
 			});
-			this.panelCenter.add(this.buttonsCen[i],gbc);
+			this.panelCenter.add(this.buttonsCen[i], gbc);
 			gbc.gridx++;
 		}
 		//DIFESA
 		gbc.gridx = this.getGbcX("D");
 		gbc.gridy = gbc.gridy + 3;
 		gbc.ipady = 10;
-		for (int i=0; i<= log.getNumDif() - 1; i++) {
+		for (int i = 0; i <= log.getNumDif() - 1; i++) {
 			this.buttonsDif[i] = new JButton("D");
 			Dimension d = this.buttonsDif[i].getPreferredSize();
-			this.buttonsDif[i].setPreferredSize(new Dimension(d.width*2,d.height*2));
+			this.buttonsDif[i].setPreferredSize(new Dimension(d.width * 2, d.height * 2));
 			this.buttonsDif[i].setBackground(Color.CYAN);
 			final int ind = i;
 			this.buttonsDif[i].addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					if (map.get(buttonsDif[ind]).isEmpty()) {
-						choosePlayerFirstTime("D",ind);
+				public void actionPerformed(final ActionEvent e) {
+					if (log.getClickModulo()) {
+						if (map.get(buttonsDif[ind]).isEmpty()) {
+							choosePlayerFirstTime("D", ind);
+						} else {
+							choosePlayer("D", ind);
+						}
 					} else {
-						choosePlayer("D",ind);
+						createJDialog();
 					}
-					
 				}
 			});
-			this.panelCenter.add(this.buttonsDif[i],gbc);
+			this.panelCenter.add(this.buttonsDif[i], gbc);
 			gbc.gridx++;
 		}
 		//PORTIERE
@@ -397,32 +402,34 @@ public class CreaSquadra extends Base{
 		gbc.gridy = gbc.gridy + 3;
 		this.buttonPor = new JButton("P");
 		Dimension d = this.buttonPor.getPreferredSize();
-		this.buttonPor.setPreferredSize(new Dimension(d.width*2,d.height*2));
+		this.buttonPor.setPreferredSize(new Dimension(d.width * 2, d.height * 2));
 		this.buttonPor.setBackground(Color.YELLOW);
 		this.buttonPor.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (map.get(buttonPor).isEmpty()) {
-					choosePlayerFirstTime("P",0);
+			public void actionPerformed(final ActionEvent e) {
+				if (log.getClickModulo()) {
+					if (map.get(buttonPor).isEmpty()) {
+						choosePlayerFirstTime("P", 0);
+					} else {
+						choosePlayer("P", 0);
+					}
 				} else {
-					choosePlayer("P",0);
+					createJDialog();
 				}
 			}
 		});
-		this.panelCenter.add(this.buttonPor,gbc);
-		
+		this.panelCenter.add(this.buttonPor, gbc);
 		this.panelCenter.validate();
 	}
 	
 	
 	
 	/* metodo che crea la list e la mette dentro Map<JButton, List<Calciatore>*/
-	private void choosePlayerFirstTime(String ruolo, int pos) {
+	private void choosePlayerFirstTime(final String ruolo, final int pos) {
 
 		List<Calciatore> list = this.log.getRandom(ruolo, NUM_PLAYER);
-		
 		// aggiungo per poi controllare che non ci siano doppioni
-		this.log.getCalcUsciti().addAll(list);
-		
+		//this.log.getCalcUsciti().addAll(list);
+		this.log.addCalcUsciti(list);
 		//Aggiungo la lista list nella mappa map
 		switch (ruolo) {
 		case "A":
@@ -437,16 +444,15 @@ public class CreaSquadra extends Base{
 		case "P":
 			map.put(buttonPor, list);
 			break;
+		default:
+			break;
 		}
-		
-		addPlayers(ruolo, pos, list);		
-	}
+		addPlayers(ruolo, pos, list);
+		}
 	
 	/* metodo chiamato dopo che è gia stato chiamato choosePlayerFirstTime*/
-	private void choosePlayer(String ruolo, int pos) {
-		
+	private void choosePlayer(final String ruolo, final int pos) {
 		List<Calciatore> list = new ArrayList<>();
-		
 		// list è uguale a quello che c'è dentro il Value della map
 		switch (ruolo) {
 		case "A":
@@ -461,16 +467,16 @@ public class CreaSquadra extends Base{
 		case "P":
 			list = map.get(buttonPor);
 			break;
-		}
-				
+		default:
+			break;
+		}	
 		addPlayers(ruolo, pos, list);
 	}
 	
 	/* metodo per disegnare nel frameCalciatori i 5 calciatori che si possono selezionare*/
-	private void addPlayers(String ruolo, int pos, List<Calciatore> list) {
+	private void addPlayers(final String ruolo, final int pos, final List<Calciatore> list) {
 		this.panelCalciatoriCenter.removeAll();
 		this.panelCalciatoriCenter.repaint();
-		
 		//creo i 5 bottoni nel frame calciatori 
 		this.buttonsPlayer = new JButton[CreaSquadra.NUM_PLAYER];
 		//gbc.insets = new Insets(5,5,5,5);
@@ -479,13 +485,13 @@ public class CreaSquadra extends Base{
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		for (int i = 0; i < this.buttonsPlayer.length; i++) {
-			this.buttonsPlayer[i] = new JButton("" + list.get(i).getNominativo() + " " + list.get(i).getRating().getX());
-			this.panelCalciatoriCenter.add(this.buttonsPlayer[i],gbc);
+			this.buttonsPlayer[i] = new JButton("" + list.get(i).getNominativo() + " "
+					+ list.get(i).getRating().getX());
+			this.panelCalciatoriCenter.add(this.buttonsPlayer[i], gbc);
 			this.buttonsPlayer[i].setBackground(getColorByRuolo(ruolo));
-			
 			final int ind = i;
 			this.buttonsPlayer[i].addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
+				public void actionPerformed(final ActionEvent e) {
 					log.setNameString(list.get(ind).getNominativo());
 					log.setCalciatoreSelect(list.get(ind));
 					log.setRuoloSelect(ruolo);
@@ -499,16 +505,13 @@ public class CreaSquadra extends Base{
 				gbc.gridy++;
 			}
 		}
-		
 		this.panelCalciatoriCenter.validate();
 	}
 	
-	
-	
 	/* metodo per cambiare la formazione nel frame principale
 	 * mettendo al posto dei vari bottoni il nome del calciatore scelto*/
-	private void changeButtonPlayer(String ruolo, int pos) {
-		String s = new String();
+	private void changeButtonPlayer(final String ruolo, final int pos) {
+		String s;
 		switch (ruolo) {
 		case "A":
 			s = textFormat(log.getNamePlayer() + " " + log.getRating());
@@ -539,14 +542,14 @@ public class CreaSquadra extends Base{
 				this.buttonPor.removeActionListener(this.buttonPor.getActionListeners()[0]);
 			}
 			break;
+		default:
+			break;
 		}
-	
 		this.panelCenter.validate();
-		
 	}
 	
 	/* metodo che ritorna il colore in base al ruolo*/
-	private Color getColorByRuolo(String ruolo) {
+	private Color getColorByRuolo(final String ruolo) {
 		switch (ruolo) {
 		case "A":
 			return Color.ORANGE;
@@ -562,34 +565,52 @@ public class CreaSquadra extends Base{
 	}
 	
 	/* metodo che formatta la stringa dei nomi dei giocatori*/
-	private String textFormat(String s) {	
+	private String textFormat(final String s) {	
 		String label = "<html>";
-		for (int i=0;i<s.length() - 2;i++) {
+		final int max = 14;
+		for (int i = 0; i < s.length() - 2; i++) {
 			label = label + s.charAt(i);
-			if ((i % 14 == 0) && (i!= 0)) {
+			if ((i % max == 0) && (i != 0)) {
 				label = label + "<br>";
 			}
 		}
-		label = label + s.charAt(s.length()-2) + s.charAt(s.length()-1);
+		label = label + s.charAt(s.length() - 2) + s.charAt(s.length() - 1);
 		return label;
 	}
 	
 	/* metodo per inizializzare la mappa all'inizio e quando si sceglie il modulo*/
 	private void initMap() {
 		this.map.clear();
-		
-		for (int i=0; i< log.getNumAtt(); i++) {
+		for (int i = 0; i < log.getNumAtt(); i++) {
 			this.map.put(this.buttonsAtt[i], new ArrayList<>());
 		}
-		for (int i=0; i< log.getNumCen(); i++) {
+		for (int i = 0; i < log.getNumCen(); i++) {
 			this.map.put(this.buttonsCen[i], new ArrayList<>());
 		}
-		for (int i=0; i< log.getNumDif(); i++) {
+		for (int i = 0; i < log.getNumDif(); i++) {
 			this.map.put(this.buttonsDif[i], new ArrayList<>());
 		}
 		this.map.put(buttonPor, new ArrayList<>());
-		
 		System.out.println(map);
 	}
 	
+	private void createJDialog() {
+		final JFrame mo = new JFrame("MODULO");
+		mo.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		final JDialog moProva = new JDialog(mo, "ERRORE");
+		moProva.setLayout(new FlowLayout());
+		moProva.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		final JLabel label = new JLabel("SELEZIONA UN MODULO");
+		final JButton buttonOk = new JButton("OK");
+		buttonOk.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent e) {
+				WindowEvent close = new WindowEvent(moProva, WindowEvent.WINDOW_CLOSING);
+				moProva.dispatchEvent(close);
+			}
+		});
+		moProva.add(label);
+		moProva.add(buttonOk);
+		moProva.setBounds(GRAND3, GRAND3, GRAND2, GRAND1);
+		moProva.setVisible(true);
+	}
 }

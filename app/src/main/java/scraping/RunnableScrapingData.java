@@ -8,6 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import data.Calciatore;
@@ -17,11 +19,13 @@ public class RunnableScrapingData implements Runnable {
     private final List<Calciatore> li = new ArrayList<>();
     private final String url;
     private Boolean flag = true;
-    public RunnableScrapingData(final int myId, final int nThread, final String stagione) {
+    private Boolean flagChrome;
+    public RunnableScrapingData(final int myId, final int nThread, final String stagione, final Boolean flagChrome) {
         this.myId = myId;
         this.nThread = nThread;
         this.url =
         		"https://www.kickest.it/it/serie-a/statistiche/giocatori/tabellone/" + stagione + "?iframe=yes";
+        this.flagChrome = flagChrome;
     }
     public List<Calciatore> getLi() {
         return li;
@@ -30,11 +34,19 @@ public class RunnableScrapingData implements Runnable {
         return flag;
     }
     public void run() {
-        //Nascondere pagine chrome
-    	final ChromeOptions options = new ChromeOptions();
-        options.addArguments("headless");
-        //Oggetto per creare il collegamento
-        final WebDriver driver = new ChromeDriver(options);
+    	final List<String> stagioni = new ArrayList<>();
+    	final WebDriver driver;
+    	if(flagChrome) {
+	    	final ChromeOptions options = new ChromeOptions();
+	        options.addArguments("headless");
+	        //Oggetto per creare il collegamento
+	        driver = new ChromeDriver(options);
+    	}
+    	else {
+    		final FirefoxOptions options = new FirefoxOptions();
+            options.addArguments("-headless");
+            driver = new FirefoxDriver(options);
+    	}
         driver.get(url);
         //Oggetto per eseguire operazioni sulla pagina
         final JavascriptExecutor js = (JavascriptExecutor) driver;

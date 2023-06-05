@@ -49,7 +49,7 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
 
     public static double prob(double min, double max) {
         Random random = new Random();
-        return random.nextDouble(max - min) + min;
+        return min + (max - min) * random.nextDouble();
     }
 
     public static double votoFanta(Calciatore c) {
@@ -68,7 +68,7 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
     public int golSubitiFanta(Squadra s) throws FileNotFoundException, ClassNotFoundException, IOException {
         ExtractData ed = new ExtractDataImpl(s.getTitolari());
         Calciatore portiere = ed.getListaByRuolo("P").get(0);
-        double probCleanSheet = portiere.getCleanSheet() / portiere.getPg();
+        double probCleanSheet = portiere.getCleanSheet() / (portiere.getPg() == 0 ? 1 : portiere.getPg());
         if (prob(0, 1) <= probCleanSheet) {
             return 0;
         } else {

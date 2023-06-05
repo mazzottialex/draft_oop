@@ -7,10 +7,16 @@ import java.awt.Insets;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.util.*;
+import java.util.Map;
 import java.util.Timer;
+import java.util.TimerTask;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import data.Calciatore;
 import data.Squadra;
@@ -18,6 +24,9 @@ import logics.LogicsRigori;
 import logics.LogicsRigoriImpl;
 import utils.Pair;
 
+/**
+ * Represents a penalty shoot-out GUI.
+ */
 public class Rigori extends Base {
     /**
      * 
@@ -36,14 +45,22 @@ public class Rigori extends Base {
     private Squadra winner;
     private JButton chiudi;
     private LogicsRigori logics;
-    private Map <Integer, Pair<Calciatore, String>> rig1;
-    private Map <Integer, Pair<Calciatore, String>> rig2;
+    private Map<Integer, Pair<Calciatore, String>> rig1;
+    private Map<Integer, Pair<Calciatore, String>> rig2;
     private JPanel panel;
     private String str1;
     private String str2;
     private Partita partita;
+    private static final int IPADX_CENTER = 50;
 
-    public Rigori(Squadra s1, Squadra s2, Partita partita) {
+    /**
+     * Creates a new instance of the `Rigori` class.
+     *
+     * @param s1 The first team in the penalty shoot-out.
+     * @param s2 The second team in the penalty shoot-out.
+     * @param partita The `Partita` instance.
+     */
+    public Rigori(final Squadra s1, final Squadra s2, final Partita partita) {
         this.s1 = s1;
         this.s2 = s2;
         this.partita = partita;
@@ -51,7 +68,6 @@ public class Rigori extends Base {
         gol2 = 0;
         tiri1 = 0;
         tiri2 = 0;
-
         totTiri = 0;
         logics = new LogicsRigoriImpl(s1, s2);
         rig1 = logics.compute().get(0);
@@ -70,7 +86,7 @@ public class Rigori extends Base {
 
         gbc.gridx = 1;
         gbc.gridy = 0;
-        gbc.ipadx = 50;
+        gbc.ipadx = IPADX_CENTER;
         panel.add(new JLabel("vs", SwingConstants.CENTER), gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -108,28 +124,31 @@ public class Rigori extends Base {
             inizia.setEnabled(false);
             start();
         });
+
         chiudi = new JButton("chiudi");
         chiudi.addActionListener(e -> {
             dispose();
             partita.setWinnerR(winner, gol1, gol2);
         });
         chiudi.setEnabled(false);
+
         add(inizia, BorderLayout.NORTH);
         add(chiudi, BorderLayout.SOUTH);
 
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-
         WindowListener windowListener = new WindowAdapter() {
             @Override
-            public void windowClosing(WindowEvent e) {
+            public void windowClosing(final WindowEvent e) {
                 dispose();
                 partita.setWinnerR(winner, gol1, gol2);
             }
         };
-
         addWindowListener(windowListener);
     }
 
+    /**
+     * Starts the penalty shoot-out.
+     */
     private void start() {
         Timer timer = new Timer();
         TimerTask timerTask = new TimerTask() {
@@ -176,15 +195,31 @@ public class Rigori extends Base {
         timer.scheduleAtFixedRate(timerTask, 0, 1000);
     }
 
+    /**
+     * Retrieves the name of the winning team.
+     *
+     * @return The name of the winning team.
+     */
     private String getNomeWinner() {
         return winner.getNomeSquadra();
     }
 
+    /**
+     * Retrieves the winning team.
+     *
+     * @return The winning team.
+     */
     public Squadra getWinner() {
         return winner;
     }
 
-    public void setWinner(int gol1, int gol2) {
+    /**
+     * Sets the winning team based on the number of goals scored.
+     *
+     * @param gol1 The number of goals scored by the first team.
+     * @param gol2 The number of goals scored by the second team.
+     */
+    public void setWinner(final int gol1, final int gol2) {
         if (gol1 > gol2) {
             winner = s1;
         } else {
@@ -192,6 +227,9 @@ public class Rigori extends Base {
         }
     }
 
+    /**
+     * Create the GUI and show it.
+     */
     public void createAndShowGUI() {
         add(panel);
         setVisible(true);

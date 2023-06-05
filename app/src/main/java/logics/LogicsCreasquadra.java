@@ -1,65 +1,66 @@
 package logics;
 
-import java.util.*;
-
+import java.io.Serializable;
+//import java.util.*;
+import java.util.List;
 import data.Calciatore;
 import data.Modulo;
 import data.Squadra;
 import manageData.ExtractData;
 
-/** Models the logic of team creation
+/** Models the logic of team creation.
  * @author Davide Braccini
  *
  */
-public interface LogicsCreasquadra {
+public interface LogicsCreasquadra extends Serializable {
 
 	/**
 	 * 
 	 * @return the user's team 
 	 */
-	public Squadra getSquadra();
+	Squadra getSquadra();
 	
 	/**
 	 * 
 	 * @return the module list
 	 */
-	public List<Modulo> getModuli();
+	List<Modulo> getModuli();
 	
 	/**
 	 * 
 	 * @param mod the module you want to set
 	 */
-	public void setModulo(Modulo mod);
+	void setModulo(Modulo mod);
 	
 	/**
 	 * 
 	 * @return the module of the team
 	 */
-	public Modulo getModulo();
+	Modulo getModulo();
 	
 	/**
 	 * 
 	 * @return the number of defenders
 	 */
-	public int getNumDif();
+	int getNumDif();
 	
 	/**
 	 * 
 	 * @return the number of midfielders
 	 */
-	public int getNumCen();
+	int getNumCen();
 	
 	/**
 	 * 
 	 * @return the number of attackers
 	 */
-	public int getNumAtt();
+	int getNumAtt();
 	
 	/**
 	 * 
 	 * @return the field ExtractData 
 	 */
-	public ExtractData getEx();
+	ExtractData getEx();
 	
 	/**
 	 * 
@@ -67,107 +68,126 @@ public interface LogicsCreasquadra {
 	 * @param n the number of players
 	 * @return a list of n players of the requested position
 	 */
-	public List<Calciatore> getRandom(String ruolo, int n);
+	List<Calciatore> getRandom(String ruolo, int n);
 	
 	/**
 	 * 
 	 * @return the name of the player
 	 */
-	public String getNamePlayer();
+	String getNamePlayer();
 	
 	/**
 	 * 
 	 * @param name the name of the player
 	 */
-	public void setNameString(String name);
+	void setNameString(String name);
 	
 	/**
 	 * 
 	 * @return the palyer selected to get into team formation
 	 */
-	public Calciatore getCalciatoreSelect();
+	Calciatore getCalciatoreSelect();
 	
 	/**
 	 * 
 	 * @param calciatore the palyer selected to get into team formation
 	 */
-	public void setCalciatoreSelect(Calciatore calciatore);
+	void setCalciatoreSelect(Calciatore calciatore);
 	
 	/**
 	 * 
 	 * @return the position of the player selected
 	 */
-	public String getRuoloSelect();
+	String getRuoloSelect();
 	
 	/**
 	 * 
 	 * @param ruolo the position of the player selected
 	 */
-	public void setRuoloSelect(String ruolo);
+	void setRuoloSelect(String ruolo);
 	
 	/**
 	 * 
 	 * @return the position in the array of the player selected
 	 */
-	public int getposSelect();
+	int getposSelect();
 	
 	/**
 	 * 
 	 * @param pos the position in the array of the player selected
 	 */
-	public void setposSelect(int pos);
+	void setposSelect(int pos);
 	
 	
 	/**
 	 * 
 	 * @param calciatore player to add to the team
 	 */
-	public void addPlayerInTeam(Calciatore calciatore);
+	void addPlayerInTeam(Calciatore calciatore);
 	
 	/**
-	 * clear the team
+	 * clear the team.
 	 */
-	public void clearTeam();
+	void clearTeam();
 	
 	/**
 	 * 
 	 * @return true if the team is complete, false otherwise
 	 */
-	public boolean teamComplete();
+	boolean teamComplete();
 	
 	/**
 	 * 
 	 * @return the name of the team
 	 */
-	public String getNomeSquadra();
+	String getNomeSquadra();
 	
 	/**
 	 * 
 	 * @return the arms
 	 */
-	public String getStemma();
+	String getStemma();
 	
 	/**
 	 * 
 	 * @return the list of starting players
 	 */
-	public List<Calciatore> getTitolari();
+	List<Calciatore> getTitolari();
 	
 	/**
 	 * 
 	 * @return the rating
 	 */
-	public int getRating();
+	int getRating();
 	
 	/**
 	 * 
 	 * @param rating the rating 
 	 */
-	public void setRating(int rating);
+	void setRating(int rating);
 	
 	/**
 	 * 
 	 * @return the list of player already used
 	 */
-	public List<Calciatore> getCalcUsciti();
+	List<Calciatore> getCalcUsciti();
+	
+	/**
+	 * 
+	 * @param list the list of player already used
+	 */
+	void addCalcUsciti(List<Calciatore> list);
+	
+	/**
+	 * 
+	 * @return true if the module was selected
+	 */
+	boolean getClickModulo();
+	
+	/**
+	 * 
+	 * @param click true if the module was selected
+	 */
+	void setClickModulo(boolean click);
+	
 }

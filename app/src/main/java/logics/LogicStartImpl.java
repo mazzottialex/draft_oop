@@ -11,7 +11,7 @@ public class LogicStartImpl implements LogicStart {
     private final String season;
     public LogicStartImpl() {
         this.online = checkConnection();
-        ms = new ManageStagioniImpl(online);
+        ms = new ManageStagioniImpl();
         ms.updateStagioni();
         LogicsFile lf=new LogicsFileImpl();
         this.season=lf.loadStagioni().get(0);

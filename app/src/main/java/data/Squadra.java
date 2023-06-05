@@ -1,108 +1,102 @@
 package data;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
- * Questa interfaccia rappresenta un oggetto Squadra.
- * Ogni squadra ha un id, un nome, uno stemma, un modulo, una lista di titolari,
- * una lista di riserve, una lista di tutti i calciatori di una certa annata e
- * una valutazione complessiva.
- *
+ * The {@code Squadra} interface represents a team in a football (soccer) match.
  */
-public interface Squadra {
-	
-	/**
-    * Restituisce la lista dei calciatori titolari della squadra nel
-    * seguente ordine: portire, difensori, centrocampisti e attaccanti.
-    *
-    * @return I calciatori titolari della squadra.
-    */
-	public List<Calciatore> getTitolari();
-	
-	/**
-     * Restituisce la lista dei calciatori che sono riserve della squadra.
-    *
-    * @return Le riserve della squadra.
-    */
-	public List<Calciatore> getRiserve();
-	
-	/**
-     * Restituisce il nome della squadra.
+public interface Squadra extends Serializable{
+
+    /**
+     * Returns a list of the starting players (titolari) for the team.
      *
-     * @return Il nome della squadra.
+     * @return a list of Calciatore objects representing the starting players.
      */
-	public String getNomeSquadra();
-	
-	/**
-     * Restituisce lo stemma della squadra.
+    List<Calciatore> getTitolari();
+
+    /**
+     * Returns a list of the reserve players (riserve) for the team.
      *
-     * @return Lo stemma della squadra.
+     * @return a list of Calciatore objects representing the reserve players.
      */
-	public String getStemma();
-	
-	/**
-     * Restituisce la valutazione complessiva della squadra.
+    List<Calciatore> getRiserve();
+
+    /**
+     * Returns the name of the team.
      *
-     * @return La valutazione della squadra.
+     * @return a string representing the name of the team.
      */
-	public int getValutazione();
-	
-	/**
-     * Restituisce il modulo usato dalla squadra.
+    String getNomeSquadra();
+
+    /**
+     * Returns the emblem of the team.
      *
-     * @return Il modulo della squadra.
+     * @return a string representing the emblem of the team.
      */
-	public Modulo getModulo();
-	
-	/**
-     * Restituisce l'id della squadra.
+    String getStemma();
+
+    /**
+     * Returns the team's evaluation.
      *
-     * @return L'id della squadra.
+     * @return an integer representing the team's evaluation.
      */
-	public int getId();
-	
-	/**
-     * Restituisce la lista di tutti i calciatori dell'annata selezionata.
+    int getValutazione();
+
+    /**
+     * Returns the formation (modulo) of the team.
      *
-     * @return I calciatori dell'annata prescelta squadra.
+     * @return a Modulo object representing the formation of the team.
      */
-	public List<Calciatore> getLiCalciatori();
-	
-	/**
-     * Restituisce un calciatore passandogli il suo id.
+    Modulo getModulo();
+
+    /**
+     * Returns the ID of the team.
      *
-     * @param id L'id del calciatore.
-     * @return Il calciatore con tale id.
+     * @return an integer representing the ID of the team.
      */
-	public Calciatore getCalciatoreById(int id);
-	
-	/**
-    * Restituisce il portiere titolare della squadra.
-    *
-    * @return Il calciatore di ruolo portire nella lista dei titolari.
-    */
-	public Calciatore getPortiereTit();
-	
-	/**
-     * Imposta i titolari della squadra.
+    int getId();
+
+    /**
+     * Returns a list of all the players (titolari and riserve) in the team.
      *
-     * @param liTitolari La nuova lista di titolari della squadra.
+     * @return a list of Calciatore objects representing all the players in the team.
      */
-	public void setTitolari(List<Calciatore> liTitolari);
-	
-	/**
-     * Imposta le riserve della squadra.
+    List<Calciatore> getLiCalciatori();
+
+    /**
+     * Returns the player (calciatore) with the specified ID.
      *
-     * @param liRiserve La nuova lista di riserve della squadra.
+     * @param id the ID of the player to retrieve.
+     * @return the Calciatore object with the specified ID.
      */
-	public void setRiserve(List<Calciatore> liRiserve);
-	
-	/**
-	    * Restituisce la lista dei calciatori titolari della squadra nel
-	    * seguente ordine: attaccanti, centrocampisti, difensori e portiere.
-	    *
-	    * @return I calciatori titolari della squadra con ordine inverso
-	    * rispetto a getTitolari().
-	    */
-	public List<Calciatore> getTitolariDesc();
+    Calciatore getCalciatoreById(int id);
+
+    /**
+     * Returns the starting goalkeeper (portiere titolare) for the team.
+     *
+     * @return the Calciatore object representing the starting goalkeeper.
+     */
+    Calciatore getPortiereTit();
+
+    /**
+     * Sets the list of starting players (titolari) for the team.
+     *
+     * @param liTitolari a list of Calciatore objects representing the starting players.
+     */
+    void setTitolari(List<Calciatore> liTitolari);
+
+    /**
+     * Sets the list of reserve players (riserve) for the team.
+     *
+     * @param liRiserve a list of Calciatore objects representing the reserve players.
+     */
+    void setRiserve(List<Calciatore> liRiserve);
+
+    /**
+     * Returns a list of the starting players (titolari) in descending order.
+     *
+     * @return a list of Calciatore objects representing the starting players in descending order.
+     */
+    List<Calciatore> getTitolariDesc();
 }

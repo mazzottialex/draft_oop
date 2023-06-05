@@ -66,7 +66,7 @@ public class Home extends Base {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 try {
-                    changeJPanel(new Impostazioni(log.getLi()));
+                    changeJPanel(new Settings(log.getLi()));
                 } catch (ClassNotFoundException | IOException e1) {
                     e1.printStackTrace();
                 }

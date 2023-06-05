@@ -2,19 +2,28 @@ package logics;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.*;
-
+//import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.ArrayList;
+import java.util.HashMap;
 import data.Calciatore;
+import data.Modulo;
 import data.Squadra;
+import data.SquadraAvversaria;
+import data.SquadraUtente;
+//import data.SquadraUtente;
 import simulation.SimulatingMatchImpl;
 
 /**
- * The class that manages the logic of the tournament
+ * The class that manages the logic of the tournament.
  * @author Davide Braccini
  *
  */
 public class LogicsTorneoImpl implements LogicsTorneo {
 
+	private static final long serialVersionUID = 1L;
+	private static final int NUM_AVVERSARI = 15;
 	//private ManageData md;
 	//private ExtractData ex;
 	private final Squadra miasquadra;
@@ -22,30 +31,30 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	//private List<Integer> golFatti;
 	private int numSquadre;
 	private final Map<String, Integer> risultati;
-	private final List<Calciatore> li;
+	//private final List<Calciatore> li;
 	private boolean eliminated;
 	private Squadra squadraAvv; // squadra al posto della squadra utente se vince 
 	private final Map<String, Integer> risMatch; // ris della squadra al posto della squadra utente
-	private String Winner;
+	private String winner;
 	private boolean elimThisTurn;
 	
 	/**
-	 * Constructor of LogicsTorneoImpl
+	 * Constructor of LogicsTorneoImpl.
 	 * @param squadra the user's team 
 	 * @param li the list of all the players in Serie A
-	 * @throws FileNotFoundException if ...
-	 * @throws ClassNotFoundException if ...
-	 * @throws IOException if ...
+	 * @throws FileNotFoundException 
+	 * @throws ClassNotFoundException 
+	 * @throws IOException 
 	 */
-	public LogicsTorneoImpl(Squadra squadra, List<Calciatore> li) throws FileNotFoundException, ClassNotFoundException, IOException {
-		this.li=li;
+	public LogicsTorneoImpl(final Squadra squadra, final List<Calciatore> li) 
+			throws FileNotFoundException, ClassNotFoundException, IOException {
+
 		this.listSquadre = new ArrayList<>();
 		//this.golFatti = new ArrayList<>();
-		
-		//Creo la squadr dell'utente
-		this.miasquadra = squadra;
-		//System.out.println(this.miasquadra);
-		
+		//Creo la squadra dell'utente
+		this.miasquadra = new SquadraUtente(squadra.getNomeSquadra(), squadra.getStemma(), 
+				squadra.getModulo(), squadra.getTitolari(), squadra.getRiserve());
+		//this.miasquadra = squadra;
 		// Creo le squadre avversarie (quelle esistenti in serie A)
 		/*
 		this.listSquadre.add(new SquadraAvversaria(0, "NAP", Modulo.M442, li)); 
@@ -65,15 +74,13 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 		this.listSquadre.add(new SquadraAvversaria(14, "SAL", Modulo.M442, li)); 
 		*/
 		//System.out.println(this.listSquadre);
-		CreaSquadreAvversarieImpl cs = new CreaSquadreAvversarieImpl(li, 15);
+		CreaSquadreAvversarieImpl cs = new CreaSquadreAvversarieImpl(li, NUM_AVVERSARI);
 		this.listSquadre.addAll(cs.getSquadre());
-		
 		this.numSquadre = 16;
 		this.risultati = new HashMap<>();
 		this.eliminated = false;
-		//this.squadraAvv = new Squadra(0, "aaa", Modulo.M442, li);
+		this.squadraAvv = new SquadraAvversaria(1, "aaa", Modulo.M442, li);
 		this.risMatch = new HashMap<>();
-		this.Winner = new String();
 		this.elimThisTurn = false;
 	}
 
@@ -82,7 +89,8 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	 */
 	@Override
 	public List<Squadra> getListAvversari() {
-		return this.listSquadre;
+		//return this.listSquadre;
+		return List.copyOf(this.listSquadre);
 	}
 
 	/**
@@ -90,7 +98,10 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	 */
 	@Override
 	public Squadra getMiaSquadra() {
-		return this.miasquadra;
+		//return this.miasquadra;
+		final Squadra copy = new SquadraUtente(this.miasquadra.getNomeSquadra(), this.miasquadra.getStemma(),
+				this.miasquadra.getModulo(), this.miasquadra.getTitolari(), this.miasquadra.getRiserve());
+		return copy;
 	}
 
 	/**
@@ -105,7 +116,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setNumSquadre(int numSquadre) {
+	public void setNumSquadre(final int numSquadre) {
 		this.numSquadre = numSquadre;
 	}
 
@@ -113,8 +124,8 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setListAvversari(List<Squadra> list) {
-		this.listSquadre = list;
+	public void setListAvversari(final List<Squadra> list) {
+		this.listSquadre = new ArrayList<>(list);
 	}
 
 	/**
@@ -126,19 +137,17 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 		final int numSquadre = this.getNumSquadre();
 		Map<String, Integer> map = new HashMap<>(); //map per il risultato
 		List<String> list = new ArrayList<>(); //lista per i nomi delle squadre che si sfidano
-		String teamWin = new String(); //nome della squadra vincente
-		String teamLose = new String(); //nome della squadra perdente
-		Map<Squadra, Integer> map2 = new HashMap<>();
+		String teamWin; //nome della squadra vincente
+		String teamLose; //nome della squadra perdente
+		Map<Squadra, Integer> map2;
 		List<Squadra> l = new ArrayList<>(); // appoggio
 
 		switch (numSquadre) {
 		case 16: 
-			
-			
 			for (int i = 1; i < numSquadre - 1; i = i + 2) {
 				try {
-
-					SimulatingMatchImpl s = new SimulatingMatchImpl(this.getListAvversari().get(i),this.getListAvversari().get(i+1));
+					SimulatingMatchImpl s = new SimulatingMatchImpl(this.getListAvversari().get(i), 
+							this.getListAvversari().get(i + 1));
 					map.clear();
 					map2 = s.risultato();
 					l.clear();
@@ -146,8 +155,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 					map.put(l.get(0).getNomeSquadra(), map2.get(l.get(0)));
 					map.put(l.get(1).getNomeSquadra(), map2.get(l.get(1)));
 					l.clear();
-					list.addAll(map.keySet());		
-
+					list.addAll(map.keySet());
 					if (map.get(list.get(0)).equals(map.get(list.get(1)))) { //== map.get(list.get(1))) {
 						map.clear();
 						map2 = s.risultatoSuppl();
@@ -157,17 +165,18 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 						l.clear();
 						//map = s.risultatoSuppl2();
 						list.clear();
-					}			
+					}
 					list.addAll(map.keySet());
 					if (map.get(list.get(0)) > map.get(list.get(1))) {
 						teamWin = list.get(0);
-					} else if (map.get(list.get(0)) < map.get(list.get(1))){
+					} else if (map.get(list.get(0)) < map.get(list.get(1))) {
 						teamWin = list.get(1);
 					} else {
-						LogicsRigoriImpl r = new LogicsRigoriImpl(this.getListAvversari().get(i), this.getListAvversari().get(i+1));
+						LogicsRigoriImpl r = new LogicsRigoriImpl(this.getListAvversari().get(i), 
+								this.getListAvversari().get(i + 1));
 						teamWin = r.getWinner().getNomeSquadra();
 						if (teamWin.equals(this.getListAvversari().get(i).getNomeSquadra())) {
-							teamLose = this.getListAvversari().get(i+1).getNomeSquadra();
+							teamLose = this.getListAvversari().get(i + 1).getNomeSquadra();
 						} else {
 							teamLose = this.getListAvversari().get(i).getNomeSquadra();
 						}
@@ -183,11 +192,10 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 					if (this.getListAvversari().get(i).getNomeSquadra().equals(teamWin)) {
 						newList.add(this.getListAvversari().get(i));
 					} else {
-						newList.add(this.getListAvversari().get(i+1));
+						newList.add(this.getListAvversari().get(i + 1));
 					}
 					list.clear();
 					this.risultati.putAll(map);
-
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				} catch (ClassNotFoundException e) {
@@ -195,17 +203,16 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-
 			}
 			this.setListAvversari(newList);
 			this.setNumSquadre(8);
 			break;
 		case 8:
 			this.risultati.clear();
-						
 			if (this.getEliminated() && !this.getElimThisTurn()) {
 				try {
-					SimulatingMatchImpl s = new SimulatingMatchImpl(this.squadraAvv,this.getListAvversari().get(0));
+					SimulatingMatchImpl s = new SimulatingMatchImpl(this.squadraAvv, 
+							this.getListAvversari().get(0)); 
 					map2 = s.risultato();
 					l.clear();
 					l.addAll(map2.keySet());
@@ -213,20 +220,17 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 					this.risMatch.put(l.get(1).getNomeSquadra(), map2.get(l.get(1)));
 					int r1 = map2.get(l.get(0));
 					int r2 = map2.get(l.get(1));
-					//l.clear();
-					if (this.risMatch.get(l.get(0).getNomeSquadra()).equals(this.risMatch.get(l.get(1).getNomeSquadra()))) {
+					if (this.risMatch.get(l.get(0).getNomeSquadra()).equals(
+							this.risMatch.get(l.get(1).getNomeSquadra()))) {
 						map2 = s.risultatoSuppl();
 						l.clear();
 						l.addAll(map2.keySet());
 						this.risMatch.clear();
-						this.risMatch.put(l.get(0).getNomeSquadra(), map2.get(l.get(0))+r1);
-						this.risMatch.put(l.get(1).getNomeSquadra(), map2.get(l.get(1))+r2);
+						this.risMatch.put(l.get(0).getNomeSquadra(), map2.get(l.get(0)) + r1);
+						this.risMatch.put(l.get(1).getNomeSquadra(), map2.get(l.get(1)) + r2);
 						l.clear();
 					}
-					//this.risMatch = s.risultato2();
-					
-					
-					
+					//this.risMatch = s.risultato2();	
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -238,10 +242,10 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 					e.printStackTrace();
 				}
 			}
-			
 			for (int i = 1; i < numSquadre - 1; i = i + 2) {
 				try {
-					SimulatingMatchImpl s = new SimulatingMatchImpl(this.getListAvversari().get(i),this.getListAvversari().get(i+1));
+					SimulatingMatchImpl s = new SimulatingMatchImpl(this.getListAvversari().get(i), 
+							this.getListAvversari().get(i + 1));
 					map.clear();
 					map2 = s.risultato();
 					l.clear();
@@ -259,17 +263,17 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 						l.clear();
 						list.clear();
 					}
-					
 					list.addAll(map.keySet());
 					if (map.get(list.get(0)) > map.get(list.get(1))) {
 						teamWin = list.get(0);
-					} else if (map.get(list.get(0)) < map.get(list.get(1))){
+					} else if (map.get(list.get(0)) < map.get(list.get(1))) {
 						teamWin = list.get(1);
 					} else {
-						LogicsRigoriImpl r = new LogicsRigoriImpl(this.getListAvversari().get(i), this.getListAvversari().get(i+1));
+						LogicsRigoriImpl r = new LogicsRigoriImpl(this.getListAvversari().get(i), 
+								this.getListAvversari().get(i + 1));
 						teamWin = r.getWinner().getNomeSquadra();
 						if (teamWin.equals(this.getListAvversari().get(i).getNomeSquadra())) {
-							teamLose = this.getListAvversari().get(i+1).getNomeSquadra();
+							teamLose = this.getListAvversari().get(i + 1).getNomeSquadra();
 						} else {
 							teamLose = this.getListAvversari().get(i).getNomeSquadra();
 						}
@@ -285,11 +289,10 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 					if (this.getListAvversari().get(i).getNomeSquadra().equals(teamWin)) {
 						newList.add(this.getListAvversari().get(i));
 					} else {
-						newList.add(this.getListAvversari().get(i+1));
+						newList.add(this.getListAvversari().get(i + 1));
 					}
 					list.clear();
 					this.risultati.putAll(map);
-
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				} catch (ClassNotFoundException e) {
@@ -303,10 +306,10 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 			break;
 		case 4:
 			this.risultati.clear();
-			
 			if (this.getEliminated() && !this.getElimThisTurn()) {
 				try {
-					SimulatingMatchImpl s = new SimulatingMatchImpl(this.squadraAvv,this.getListAvversari().get(0));
+					SimulatingMatchImpl s = new SimulatingMatchImpl(this.squadraAvv, 
+							this.getListAvversari().get(0));
 					//this.risMatch = s.risultato2();
 					map2 = s.risultato();
 					l.clear();
@@ -316,13 +319,14 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 					//l.clear();
 					int r1 = map2.get(l.get(0));
 					int r2 = map2.get(l.get(1));
-					if (this.risMatch.get(l.get(0).getNomeSquadra()).equals(this.risMatch.get(l.get(1).getNomeSquadra()))) {
+					if (this.risMatch.get(l.get(0).getNomeSquadra()).equals(
+							this.risMatch.get(l.get(1).getNomeSquadra()))) {
 						map2 = s.risultatoSuppl();
 						l.clear();
 						l.addAll(map2.keySet());
 						this.risMatch.clear();
-						this.risMatch.put(l.get(0).getNomeSquadra(), map2.get(l.get(0))+r1);
-						this.risMatch.put(l.get(1).getNomeSquadra(), map2.get(l.get(1))+r2);
+						this.risMatch.put(l.get(0).getNomeSquadra(), map2.get(l.get(0)) + r1);
+						this.risMatch.put(l.get(1).getNomeSquadra(), map2.get(l.get(1)) + r2);
 						l.clear();
 					}
 				} catch (FileNotFoundException e) {
@@ -336,9 +340,9 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 					e.printStackTrace();
 				}
 			}
-			
 			try {
-				SimulatingMatchImpl s  = new SimulatingMatchImpl(this.getListAvversari().get(1),this.getListAvversari().get(2));
+				SimulatingMatchImpl s  = new SimulatingMatchImpl(this.getListAvversari().get(1), 
+						this.getListAvversari().get(2));
 				map.clear();
 				map2 = s.risultato();
 				l.clear();
@@ -356,14 +360,14 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 					l.clear();
 					list.clear();
 				}
-				
 				list.addAll(map.keySet());
 				if (map.get(list.get(0)) > map.get(list.get(1))) {
 					teamWin = list.get(0);
-				} else if (map.get(list.get(0)) < map.get(list.get(1))){
+				} else if (map.get(list.get(0)) < map.get(list.get(1))) {
 					teamWin = list.get(1);
 				} else {
-					LogicsRigoriImpl r = new LogicsRigoriImpl(this.getListAvversari().get(1), this.getListAvversari().get(2));
+					LogicsRigoriImpl r = new LogicsRigoriImpl(this.getListAvversari().get(1), 
+							this.getListAvversari().get(2));
 					teamWin = r.getWinner().getNomeSquadra();
 					if (teamWin.equals(this.getListAvversari().get(1).getNomeSquadra())) {
 						teamLose = this.getListAvversari().get(2).getNomeSquadra();
@@ -392,17 +396,16 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
-			}			
-			
+			}
 			this.setListAvversari(newList);	
 			this.setNumSquadre(2);
 			break;
 		case 2:
 			this.risultati.clear();
-			
 			if (this.getEliminated() && !this.getElimThisTurn()) {
 				try {
-					SimulatingMatchImpl s = new SimulatingMatchImpl(this.squadraAvv,this.getListAvversari().get(0));
+					SimulatingMatchImpl s = new SimulatingMatchImpl(this.squadraAvv, 
+							this.getListAvversari().get(0));
 					map2 = s.risultato();
 					l.clear();
 					l.addAll(map2.keySet());
@@ -412,26 +415,26 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 					int r1 = map2.get(l.get(0));
 					int r2 = map2.get(l.get(1));
 					if (r1 > r2) {
-						this.Winner = l.get(0).getNomeSquadra();
+						this.winner = l.get(0).getNomeSquadra();
 					} else if (r2 > r1) {
-						this.Winner = l.get(1).getNomeSquadra();
+						this.winner = l.get(1).getNomeSquadra();
 					} else {
 						map2 = s.risultatoSuppl();
 						l.clear();
 						l.addAll(map2.keySet());
 						this.risMatch.clear();
-						this.risMatch.put(l.get(0).getNomeSquadra(), map2.get(l.get(0))+r1);
-						this.risMatch.put(l.get(1).getNomeSquadra(), map2.get(l.get(1))+r2);
-						
+						this.risMatch.put(l.get(0).getNomeSquadra(), map2.get(l.get(0)) + r1);
+						this.risMatch.put(l.get(1).getNomeSquadra(), map2.get(l.get(1)) + r2);
 						int p1 = map2.get(l.get(0));
 						int p2 = map2.get(l.get(1));
 						if (p1 > p2) {
-							this.Winner = l.get(0).getNomeSquadra();
+							this.winner = l.get(0).getNomeSquadra();
 						} else if (p2 > p1) {
-							this.Winner = l.get(1).getNomeSquadra();
+							this.winner = l.get(1).getNomeSquadra();
 							//l.clear();
 						} else {
-							this.Winner = new LogicsRigoriImpl(this.squadraAvv,this.getListAvversari().get(0)).getWinner().getNomeSquadra();
+							this.winner = new LogicsRigoriImpl(this.squadraAvv, 
+						        this.getListAvversari().get(0)).getWinner().getNomeSquadra();
 						}
 					}
 				} catch (FileNotFoundException e) {
@@ -445,11 +448,11 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 					e.printStackTrace();
 				}
 			}
-			
 			this.setNumSquadre(1);
 			break;
+		default:
+			break;
 		}
-		
 	}
 
 	/**
@@ -457,7 +460,8 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	 */
 	@Override
 	public Map<String, Integer> getRisultati() {
-		return this.risultati;
+		//return this.risultati;
+		return Map.copyOf(this.risultati);
 	}
 
 	/**
@@ -472,24 +476,40 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setEliminated(boolean eliminated) {
+	public void setEliminated(final boolean eliminated) {
 		this.eliminated = eliminated;
 	}
 
 	/**
 	 * {@inheritDoc}
-	 */
+	 * */
 	@Override
 	public Squadra getSquadraAvv() {
-		return this.squadraAvv;
+		//return this.squadraAvv;
+		try {
+			final SquadraAvversaria copy = new SquadraAvversaria(this.squadraAvv.getId(), 
+					this.squadraAvv.getNomeSquadra(), this.squadraAvv.getModulo(), 
+					this.squadraAvv.getLiCalciatori());
+			return copy;
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setSquadraAvv(Squadra squadra) {
-		this.squadraAvv = squadra;
+	public void setSquadraAvv(final Squadra squadra) {
+		//this.squadraAvv = squadra;
+		try {
+			this.squadraAvv = new SquadraAvversaria(squadra.getId(), squadra.getNomeSquadra(),
+					squadra.getModulo(), squadra.getLiCalciatori());
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -497,7 +517,8 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	 */
 	@Override
 	public Map<String, Integer> getRisMatch() {
-		return this.risMatch;
+		//return this.risMatch;
+		return Map.copyOf(this.risMatch);
 	}
 
 	/**
@@ -505,7 +526,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	 */
 	@Override
 	public String getWinner() {
-		return this.Winner;
+		return this.winner;
 	}
 
 	/**
@@ -520,7 +541,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setElimThisTurn(boolean b) {
+	public void setElimThisTurn(final boolean b) {
 		this.elimThisTurn = b;
 	}
 

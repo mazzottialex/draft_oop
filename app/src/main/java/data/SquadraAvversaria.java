@@ -5,17 +5,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
+
 import manageData.ExtractData;
 import manageData.ExtractDataImpl;
 
 /** 
- * Questa classe rappresenta un oggetto SquadraAvversaria ed implementa Squadra.
- * Ogni squadra avversaria ha un id, un nome, uno stemma, un modulo, una lista di titolari,
- * una lista di riserve e una lista di tutti i calciatori di una certa annata.
+ * This class represents an opposing team and implements the {@code Squadra} interface.
+ * Each opposing team has an ID, a name, an emblem, a formation, a list of starters,
+ * a list of substitutes, and a list of all players for a particular season.
  *
  */
 public class SquadraAvversaria implements Squadra {
-    private int id;
+    private static final long serialVersionUID = 1L;
+	private int id;
     private String nomeSquadra;
     private final String stemma;
     private Modulo modulo;
@@ -25,17 +28,17 @@ public class SquadraAvversaria implements Squadra {
 
 
     /**
-     * Costruttore della classe SquadraAvversaria.
+     * Constructor for the {@code SquadraAvversaria} class.
      * 
-     * @param id			L'id della squadra.
-     * @param nomeSquadra	Il nome della squadra.
-     * @param modulo		Il modulo della squadra.
-     * @param li			La lista di calciatori di una certa annata.
+     * @param id            The ID of the team.
+     * @param nomeSquadra   The name of the team.
+     * @param modulo        The formation of the team.
+     * @param li            The list of players for a particular season.
      * @throws FileNotFoundException
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    public SquadraAvversaria(int id, String nomeSquadra, Modulo modulo, List <Calciatore> li)
+    public SquadraAvversaria(final int id, final String nomeSquadra, final Modulo modulo, final List<Calciatore> li)
     throws FileNotFoundException, IOException, ClassNotFoundException {
         this.id = id;
         this.nomeSquadra = nomeSquadra;
@@ -47,6 +50,11 @@ public class SquadraAvversaria implements Squadra {
         this.stemma = this.setStemma();
     }
 
+    /**
+     * Sets the emblem for the opposing team.
+     *
+     * @return The emblem filename.
+     */
     private String setStemma() {
         final List<String> liStemmi = List.of("arancione.png", "azzurro.png",
             "bianco.png", "blu.png", "giallo.png", "nero.png", "rosso.png",
@@ -80,7 +88,7 @@ public class SquadraAvversaria implements Squadra {
     public List<Calciatore> getTitolariDesc() {
         return liTitolari.stream()
             .sorted((c1, c2) -> c1.getRuolo().compareTo(c2.getRuolo()))
-            .toList();
+            .collect(Collectors.toList());
     }
 
     @Override
@@ -89,12 +97,12 @@ public class SquadraAvversaria implements Squadra {
     }
 
     @Override
-    public void setTitolari(List <Calciatore> liTitolari) {
+    public void setTitolari(final List<Calciatore> liTitolari) {
         this.liTitolari = liTitolari;
     }
 
     @Override
-    public void setRiserve(List <Calciatore> liRiserve) {
+    public void setRiserve(final List<Calciatore> liRiserve) {
         this.liRiserve = liRiserve;
     }
 
@@ -120,7 +128,7 @@ public class SquadraAvversaria implements Squadra {
     }
 
     @Override
-    public Calciatore getCalciatoreById(int id) {
+    public Calciatore getCalciatoreById(final int id) {
         Calciatore c = null;
         for (Calciatore calciatore: liCalciatori) {
             if (calciatore.getId() == id) {

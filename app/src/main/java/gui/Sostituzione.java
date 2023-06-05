@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import data.Calciatore;
@@ -20,8 +21,10 @@ import data.Squadra;
 import logics.LogicsSostituzione;
 import logics.LogicsSostituzioneImpl;
 
+/**
+ * Represents a GUI for substituting players.
+ */
 public class Sostituzione extends Base {
-
     /**
      * 
      */
@@ -32,13 +35,27 @@ public class Sostituzione extends Base {
     private static JPanel panelTit;
     private static JPanel panelRis;
     private int riserve;
+    private static final int RISERVE = 7;
+    private static final int INSETS_5 = 5;
+    private static final int GRID_5 = 5;
+    private static final int GRID_6 = 6;
+    private static final int GRID_7 = 7;
 
-    public Sostituzione(Squadra squadra, Partita superGui, int cambiFatti) {
+    /**
+     * Creates a new instance of the `Sostituzione` class.
+     *
+     * @param squadra The team for which substitutions are being made.
+     * @param superGui The `Partita` instance.
+     * @param cambiFatti The number of substitutions already made.
+     */
+    public Sostituzione(final Squadra squadra, final Partita superGui, final int cambiFatti) {
         logics = new LogicsSostituzioneImpl(squadra, this);
-        this.riserve = 7 - cambiFatti;
+        this.riserve = RISERVE - cambiFatti;
+        panelTit = null;
+        panelRis = null;
 
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 2, 2);
+        gbc.insets = new Insets(INSETS_5, INSETS_5, 2, 2);
         GridBagLayout layout = new GridBagLayout();
         contentPane.setLayout(layout);
         panelSquadra.setBackground(getForeground());
@@ -62,7 +79,7 @@ public class Sostituzione extends Base {
                 JPanel panel = (utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRating().getX(), c.getRuolo(), true));
                 panel.addMouseListener(new MouseAdapter() {
                     @Override
-                    public void mouseClicked(MouseEvent e) {
+                    public void mouseClicked(final MouseEvent e) {
                         if (panelTit != null) {
                             panelTit.setBackground(null);
                         }
@@ -81,9 +98,9 @@ public class Sostituzione extends Base {
         lblPanchina.setForeground(Color.white);
         lblPanchina.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
         gbc.insets = new Insets(10, 0, 0, 0);
-        gbc.gridy = 5;
+        gbc.gridy = GRID_5;
         contentPane.add(lblPanchina, gbc);
-        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.insets = new Insets(INSETS_5, INSETS_5, INSETS_5, INSETS_5);
 
         //panchinari
         panelPosizione = new JPanel();
@@ -93,7 +110,7 @@ public class Sostituzione extends Base {
             JPanel panel = (utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRating().getX(), c.getRuolo(), true));
             panel.addMouseListener(new MouseAdapter() {
                 @Override
-                public void mouseClicked(MouseEvent e) {
+                public void mouseClicked(final MouseEvent e) {
                     if (panelRis != null) {
                         panelRis.setBackground(null);
                     }
@@ -104,15 +121,26 @@ public class Sostituzione extends Base {
             });
             panelPosizione.add(panel);
         }
-        gbc.gridy = 6;
+        gbc.gridy = GRID_6;
         contentPane.add(panelPosizione, gbc);
 
         JButton sostituisci = new JButton("Sostitutisci");
         sostituisci.addActionListener(e -> {
-            logics.sub(panelTit.getParent(), panelRis.getParent(), panelTit, panelRis);
-            dispose();
+            if (panelTit == null || panelRis == null) {
+                JOptionPane.showMessageDialog(null, "Bisogna selezionare due giocatori: uno tra i titolari e uno tra le riserve, che devono avere lo stesso ruolo");
+        	    if (panelTit != null) {
+                    panelTit.setBackground(null);
+                }
+        	    if (panelRis != null) {
+                    panelRis.setBackground(null);
+                }
+            } else {
+                logics.sub(panelTit.getParent(), panelRis.getParent(), panelTit, panelRis);
+            }
+            panelTit = null;
+            panelRis = null;
         });
-        gbc.gridy = 7;
+        gbc.gridy = GRID_7;
         contentPane.add(sostituisci, gbc);
 
         addWindowListener(new WindowAdapter() {
@@ -124,10 +152,18 @@ public class Sostituzione extends Base {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
+    /**
+     * Closes the `Sostituzione` window.
+     */
     public void chiudi() {
         this.dispose();
     }
 
+    /**
+     * Retrieves the `LogicsSostituzione` instance associated with the `Sostituzione` object.
+     *
+     * @return The `LogicsSostituzione` instance.
+     */
     public LogicsSostituzione getLogics() {
         return logics;
     }

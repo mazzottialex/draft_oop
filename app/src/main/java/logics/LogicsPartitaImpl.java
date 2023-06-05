@@ -12,22 +12,31 @@ import data.Squadra;
 import simulation.SimulatingMatch;
 import simulation.SimulatingMatchImpl;
 
+/**
+ * The {@code LogicsPartitaImpl} class implements the {@code LogicsPartita} interface and provides the logic for a match.
+ */
 public class LogicsPartitaImpl implements LogicsPartita {
     private Squadra s1;
     private Squadra s2;
     private List<Integer> list1;
     private List<Integer> list2;
-    private final static int REG = 0;
-    private final static int SUPPL = 90;
-
+    private static final int REG = 0;
+    private static final int SUPPL = 90;
     private SimulatingMatch sim;
-
     private static final int MINUTES_REG = 90;
-    private final static int MINUTES_SUPPL = 120;
-
+    private static final int MINUTES_SUPPL = 120;
     private static final double OWNGOAL_RATE = 2.904040404040404;
 
-    public LogicsPartitaImpl(Squadra s1, Squadra s2) throws FileNotFoundException, ClassNotFoundException, IOException {
+    /**
+     * Constructs a new instance of {@code LogicsPartitaImpl} with the given teams.
+     *
+     * @param s1 the first team
+     * @param s2 the second team
+     * @throws FileNotFoundException if the file is not found
+     * @throws ClassNotFoundException if the class is not found
+     * @throws IOException if an I/O error occurs
+     */
+    public LogicsPartitaImpl(final Squadra s1, final Squadra s2) throws FileNotFoundException, ClassNotFoundException, IOException {
         super();
         this.s1 = s1;
         this.s2 = s2;
@@ -35,7 +44,7 @@ public class LogicsPartitaImpl implements LogicsPartita {
     }
 
     @Override
-    public void scorers(int tempo) throws FileNotFoundException, ClassNotFoundException, IOException {
+    public void scorers(final int tempo) throws FileNotFoundException, ClassNotFoundException, IOException {
         if (tempo == REG) {
             do {
                 list1 = getNumGol(sim.risultato().get(s1), tempo);
@@ -55,7 +64,7 @@ public class LogicsPartitaImpl implements LogicsPartita {
     }
 
     @Override
-    public List<Integer> getMinGol(Squadra s) {
+    public List<Integer> getMinGol(final Squadra s) {
         if (s == s1) {
             return list1;
         } else if (s == s2) {
@@ -64,7 +73,15 @@ public class LogicsPartitaImpl implements LogicsPartita {
         return null;
     }
 
-    public static <T> boolean containsAny(List<T> l1, List<T> l2) {
+    /**
+     * Checks if any element from the first list is contained in the second list.
+     *
+     * @param l1 the first list
+     * @param l2 the second list
+     * @param <T> the type of elements in the lists
+     * @return {@code true} if any element from the first list is contained in the second list, {@code false} otherwise
+     */
+    public static <T> boolean containsAny(final List<T> l1, final List<T> l2) {
         for (T elem: l1) {
             if (l2.contains(elem)) {
                 return true;
@@ -73,7 +90,14 @@ public class LogicsPartitaImpl implements LogicsPartita {
         return false;
     }
 
-    public List<Integer> getNumGol(int g, int tempo) {
+    /**
+     * Generates a list of goal minutes based on the number of goals and the time period.
+     *
+     * @param g the number of goals
+     * @param tempo the time period
+     * @return a list of goal minutes
+     */
+    public List<Integer> getNumGol(final int g, final int tempo) {
         List<Integer> list = new ArrayList<>();
         Random r = new Random();
         int min;
@@ -103,7 +127,7 @@ public class LogicsPartitaImpl implements LogicsPartita {
     }
 
     @Override
-    public Calciatore addScorer(Squadra s) {
+    public Calciatore addScorer(final Squadra s) {
         double totGol = 0;
         List<Calciatore> titolari = s.getTitolari();
         List<Double> golList = new ArrayList<>();
@@ -115,7 +139,7 @@ public class LogicsPartitaImpl implements LogicsPartita {
         }
 
         double autogol = (totGol * OWNGOAL_RATE) / 100;
-        double random = new Random().nextDouble(totGol + autogol);
+        double random = new Random().nextDouble() * (totGol + autogol);
 
         double cumulativeProbability = 0.0;
         for (int i = 0; i < titolari.size(); i++) {
@@ -127,7 +151,13 @@ public class LogicsPartitaImpl implements LogicsPartita {
         return getAutogol(s);
     }
 
-    public Calciatore getAutogol(Squadra s) {
+    /**
+     * Generates an own goal scorer from the opposing team.
+     *
+     * @param s the team
+     * @return the scorer
+     */
+    public Calciatore getAutogol(final Squadra s) {
         Squadra sq;
         if (s == s1) {
             sq = s2;

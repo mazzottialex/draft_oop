@@ -10,11 +10,15 @@ import data.Calciatore;
 import data.Squadra;
 import utils.Pair;
 
+/**
+ * The {@code LogicsRigoriImpl} class implements the {@code LogicsRigori} interface
+ * and defines the logic for penalty shoot-outs.
+ */
 public class LogicsRigoriImpl implements LogicsRigori {
     private Squadra s1;
     private Squadra s2;
-    private List < Calciatore > titolari1;
-    private List < Calciatore > titolari2;
+    private List<Calciatore> titolari1;
+    private List<Calciatore> titolari2;
     private int gol1;
     private int gol2;
     private int tiri1;
@@ -24,8 +28,17 @@ public class LogicsRigoriImpl implements LogicsRigori {
     private Map<Integer, Pair<Calciatore, String>> map1;
     private Map<Integer, Pair<Calciatore, String>> map2;
     private ArrayList<Map<Integer, Pair<Calciatore, String>>> list;
+    private static final double MIN_MOD_RATING = 0.8;
+    private static final double ADD_MOD_RATING = 0.4;
+    private static final double COST_MADE_PEN = 0.75; //costante rigori fatti nei shootout
 
-    public LogicsRigoriImpl(Squadra s1, Squadra s2) {
+    /**
+     * Constructs a new {@code LogicsRigoriImpl} object with the specified teams.
+     *
+     * @param s1 the first team
+     * @param s2 the second team
+     */
+    public LogicsRigoriImpl(final Squadra s1, final Squadra s2) {
         super();
         this.s1 = s1;
         this.s2 = s2;
@@ -45,8 +58,9 @@ public class LogicsRigoriImpl implements LogicsRigori {
     @Override
     public ArrayList<Map<Integer, Pair<Calciatore, String>>> compute() {
         while (continua) {
-            if ((((tiri1 + tiri2) >= totTiri) && tiri1 == tiri2 && gol1 != gol2) ||
-                ((tiri1 + tiri2) < totTiri && ((((totTiri / 2) - tiri1) + gol1) < gol2 || (((totTiri / 2) - tiri2) + gol2) < gol1))) {
+            if ((((tiri1 + tiri2) >= totTiri) && tiri1 == tiri2 && gol1 != gol2)
+                        || ((tiri1 + tiri2) < totTiri && ((((totTiri / 2) - tiri1) + gol1) < gol2
+                		|| (((totTiri / 2) - tiri2) + gol2) < gol1))) {
                 continua = false;
             } else if ((tiri1 + tiri2) < totTiri || tiri1 != tiri2 || (tiri1 == tiri2 && gol1 == gol2)) {
                 if ((tiri1 + tiri2) % 2 == 0) {
@@ -56,7 +70,7 @@ public class LogicsRigoriImpl implements LogicsRigori {
                     Calciatore tiratore = titolari1.get(titolari1.size() - 1);
                     titolari1.remove(tiratore);
                     String res = rigore(tiratore, s2);
-                    map1.put(tiri1, new Pair < > (tiratore, res));
+                    map1.put(tiri1, new Pair<>(tiratore, res));
                     if (res.equals("Gol")) {
                         gol1++;
                     }
@@ -68,7 +82,7 @@ public class LogicsRigoriImpl implements LogicsRigori {
                     Calciatore tiratore = titolari2.get(titolari2.size() - 1);
                     titolari2.remove(tiratore);
                     String res = rigore(tiratore, s1);
-                    map2.put(tiri2, new Pair < > (tiratore, res));
+                    map2.put(tiri2, new Pair<>(tiratore, res));
                     if (res.equals("Gol")) {
                         gol2++;
                     }
@@ -83,10 +97,18 @@ public class LogicsRigoriImpl implements LogicsRigori {
         return list;
     }
 
-    private String rigore(Calciatore tiratore, Squadra dif) {
-        double tirRating = tiratore.getRating().getY().getX() * (0.8 + new Random().nextDouble(0.4));
-        double porRating = dif.getPortiereTit().getRating().getY().getZ() * (0.8 + new Random().nextDouble(0.4));
-        double modPorRating = porRating * 0.75 /*costante rigori fatti nei shootout*/ ;
+    /**
+     * Simulates a penalty kick by a player against a goalkeeper.
+     *
+     * @param tiratore the player taking the penalty kick
+     * @param dif the defending team (goalkeeper's team)
+     * @return the result of the penalty kick ("Gol" for a goal, "Sbagliato" for a miss)
+     */
+    private String rigore(final Calciatore tiratore, final Squadra dif) {
+        double tirRating = tiratore.getRating().getY().getX() * (MIN_MOD_RATING + new Random().nextDouble() * ADD_MOD_RATING);
+        double porRating = dif.getPortiereTit().getRating().getY().getZ()
+        		* (MIN_MOD_RATING + new Random().nextDouble() * ADD_MOD_RATING);
+        double modPorRating = porRating * COST_MADE_PEN;
         if (tirRating > modPorRating) {
             return "Gol";
         } else {

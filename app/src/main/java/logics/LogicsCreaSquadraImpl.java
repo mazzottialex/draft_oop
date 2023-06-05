@@ -2,8 +2,12 @@ package logics;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.*;
-
+//import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Set;
+import java.util.HashSet;
 import data.Calciatore;
 import data.Modulo;
 import data.Squadra;
@@ -12,14 +16,14 @@ import manageData.ExtractData;
 import manageData.ExtractDataImpl;
 
 /**
- * The class that handles the team creation logic
+ * The class that handles the team creation logic.
  * @author Davide Braccini
  *
  */
 public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 
-	private final static int NUM_PLAYER_IN_TEAM = 11;  
-	
+	private static final long serialVersionUID = 1L;
+	private static final int NUM_PLAYER_IN_TEAM = 11;
 	private Modulo moduloSelect;
 	//private ManageData md;
 	private ExtractData ex;
@@ -32,25 +36,26 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	private final List<Calciatore> riserve;
 	private final String nomeSquadra;
 	private final String stemma;
-	private Squadra squadra;
+	//private Squadra squadra;
 	private final List<Calciatore> calcUsciti;
-	
+	private boolean clickModulo;
+	private Random r = new Random();
 	/**
-	 * Constructor of LogicsCreaSquadraImpl
+	 * Constructor of LogicsCreaSquadraImpl.
 	 * @param nomeSquadra the name of the team
 	 * @param stemma the arms
 	 * @param li the list of all the players in Serie A
-	 * @throws FileNotFoundException if...
-	 * @throws ClassNotFoundException if...
-	 * @throws IOException if...
+	 * @throws FileNotFoundException 
+	 * @throws ClassNotFoundException
+	 * @throws IOException
 	 */
-	public LogicsCreaSquadraImpl(String nomeSquadra, String stemma, List<Calciatore> li) throws FileNotFoundException, ClassNotFoundException, IOException {
+	public LogicsCreaSquadraImpl(final String nomeSquadra, final String stemma, final List<Calciatore> li) 
+			throws FileNotFoundException, ClassNotFoundException, IOException {
 		this.moduloSelect = Modulo.M343;
 		//this.md = new ManageDataImpl(stagione);
 		//this.md.LoadData();
 		this.ex = new ExtractDataImpl(li); //(this.md.getLi());
-		this.namePlayer = new String();
-		this.calciatoreSelect = new Calciatore(0,null,null,null,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+		this.calciatoreSelect = new Calciatore(0, null, null, null, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 		this.ruoloSelect = null;
 		this.posSelect = -1;
 		this.ratingSelect = 0;
@@ -64,7 +69,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 		riserve.addAll(this.getRandom("C", 2));
 		riserve.addAll(this.getRandom("A", 2));
 		this.calcUsciti.addAll(riserve);
-		
+		this.clickModulo = false;
 	}
 	
 	/**
@@ -89,7 +94,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setModulo(Modulo mod) {
+	public void setModulo(final Modulo mod) {
 		this.moduloSelect = mod;
 	}
 
@@ -136,12 +141,12 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<Calciatore> getRandom(String ruolo, int n) {
+	public List<Calciatore> getRandom(final String ruolo, final int n) {
 		List<Calciatore> list = this.ex.getListaByRuolo(ruolo);
 		Set<Calciatore> set = new HashSet<>();
 		List<Calciatore> randomList = new ArrayList<>();
 		boolean test = false;
-		Random r = new Random();
+		//Random r = new Random();
 		while (set.size() != n) {
 			int random = r.nextInt(list.size());
 			Calciatore c = list.get(random);
@@ -171,7 +176,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setNameString(String name) {
+	public void setNameString(final String name) {
 		this.namePlayer = name;
 	}
 
@@ -180,15 +185,39 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	 */
 	@Override
 	public Calciatore getCalciatoreSelect() {
-		return this.calciatoreSelect;
+		//return this.calciatoreSelect;
+		final Calciatore copy = new Calciatore(this.calciatoreSelect.getId(), this.calciatoreSelect.getNominativo(), 
+				this.calciatoreSelect.getRuolo(), this.calciatoreSelect.getSquadra(), 
+				this.calciatoreSelect.getPg(), this.calciatoreSelect.getMinuti(), 
+				this.calciatoreSelect.getGol(), this.calciatoreSelect.getTiri(), 
+				this.calciatoreSelect.getDribling(), this.calciatoreSelect.getAssist(), 
+				this.calciatoreSelect.getPassaggi(), this.calciatoreSelect.getPassaggiChiave(), 
+				this.calciatoreSelect.getAmmonizioni(), this.calciatoreSelect.getEspulsioni(), 
+				this.calciatoreSelect.getRubati(), this.calciatoreSelect.getTackle(), 
+				this.calciatoreSelect.getCleanSheet(), this.calciatoreSelect.getParate());
+		copy.setRating(this.calciatoreSelect.getRating());
+		copy.setRatingCartellino(this.calciatoreSelect.getRatingCartellino());
+		return copy;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setCalciatoreSelect(Calciatore calciatore) {
-		this.calciatoreSelect = calciatore;
+	public void setCalciatoreSelect(final Calciatore calciatore) {
+		final Calciatore copy = new Calciatore(calciatore.getId(), calciatore.getNominativo(), 
+				calciatore.getRuolo(), calciatore.getSquadra(), 
+				calciatore.getPg(), calciatore.getMinuti(), 
+				calciatore.getGol(), calciatore.getTiri(), 
+				calciatore.getDribling(), calciatore.getAssist(), 
+				calciatore.getPassaggi(), calciatore.getPassaggiChiave(), 
+				calciatore.getAmmonizioni(), calciatore.getEspulsioni(), 
+				calciatore.getRubati(), calciatore.getTackle(), 
+				calciatore.getCleanSheet(), calciatore.getParate());
+		copy.setRating(calciatore.getRating());
+		copy.setRatingCartellino(calciatore.getRatingCartellino());
+		this.calciatoreSelect = copy;
+		//this.calciatoreSelect = calciatore;
 	}
 
 	/**
@@ -203,7 +232,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setRuoloSelect(String ruolo) {
+	public void setRuoloSelect(final String ruolo) {
 		this.ruoloSelect = ruolo;
 	}
 
@@ -219,7 +248,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setposSelect(int pos) {
+	public void setposSelect(final int pos) {
 		this.posSelect = pos;
 	}
 
@@ -227,8 +256,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void addPlayerInTeam(Calciatore calciatore) {
-		
+	public void addPlayerInTeam(final Calciatore calciatore) {
 		if (!this.liSquadra.contains(calciatore)) {
 			this.liSquadra.add(calciatore);
 		}
@@ -274,7 +302,8 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	 */
 	@Override
 	public List<Calciatore> getTitolari() {
-		return this.liSquadra;
+		//return this.liSquadra;
+		return List.copyOf(this.liSquadra);
 	}
 
 	/**
@@ -289,7 +318,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setRating(int rating) {
+	public void setRating(final int rating) {
 		this.ratingSelect = rating;
 	}
 
@@ -298,7 +327,32 @@ public class LogicsCreaSquadraImpl implements LogicsCreasquadra {
 	 */
 	@Override
 	public List<Calciatore> getCalcUsciti() {
-		return this.calcUsciti;
+		//return this.calcUsciti;
+		return List.copyOf(this.calcUsciti);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void addCalcUsciti(final List<Calciatore> list) {
+		this.calcUsciti.addAll(list);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean getClickModulo() {
+		return this.clickModulo;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setClickModulo(final boolean click) {
+		this.clickModulo = click;
 	}
 
 }

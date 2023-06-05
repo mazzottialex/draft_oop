@@ -3,8 +3,13 @@ package data;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 
 public class SquadraUtente implements Squadra, Serializable {
+
+	
+	private static final long serialVersionUID = 1L;
     private final int id;
     private final String nomeSquadra;
     private final String stemma;
@@ -12,6 +17,7 @@ public class SquadraUtente implements Squadra, Serializable {
     private final List<Calciatore> liCalciatori;
     private List<Calciatore> liTitolari;
     private List<Calciatore> liRiserve;
+
 
     public SquadraUtente(final String nomeSquadra, final String stemma, final Modulo modulo,
         final List<Calciatore> liTitolari, final List<Calciatore> liRiserve) {
@@ -50,27 +56,31 @@ public class SquadraUtente implements Squadra, Serializable {
     public List<Calciatore> getTitolari() {
         return liTitolari.stream()
             .sorted((c1, c2) -> c2.getRuolo().compareTo(c1.getRuolo()))
-            .toList();
+            .collect(Collectors.toList());
     }
 
     @Override
     public List<Calciatore> getTitolariDesc() {
         return liTitolari.stream()
             .sorted((c1, c2) -> c1.getRuolo().compareTo(c2.getRuolo()))
-            .toList();
+            .collect(Collectors.toList());
     }
+
     @Override
-    public List<Calciatore> getRiserve() {
+    public List < Calciatore > getRiserve() {
         return this.liRiserve;
     }
+
     @Override
     public void setTitolari(final List<Calciatore> liTitolari) {
         this.liTitolari = liTitolari;
     }
+
     @Override
     public void setRiserve(final List<Calciatore> liRiserve) {
         this.liRiserve = liRiserve;
     }
+
     @Override
     public int getValutazione() {
         return (int) Math.floor(
@@ -81,10 +91,12 @@ public class SquadraUtente implements Squadra, Serializable {
             .average()
             .orElse(0));
     }
+
     @Override
     public int getId() {
         return this.id;
     }
+
     @Override
     public Calciatore getCalciatoreById(final int id) {
         Calciatore c = null;
@@ -95,6 +107,7 @@ public class SquadraUtente implements Squadra, Serializable {
         }
         return c;
     }
+
     @Override
     public Calciatore getPortiereTit() {
         Calciatore portiere = null;
@@ -110,3 +123,4 @@ public class SquadraUtente implements Squadra, Serializable {
         return "SquadraAvversaria [nomeSquadra=" + nomeSquadra + "]";
     }
 }
+

@@ -11,6 +11,7 @@ import manageData.ManageStagioniImpl;
 import rating.CalcoloRating;
 import rating.CalcoloRatingImpl;
 public class LogicsHomeImpl implements LogicsHome {
+
     private List<Calciatore> li;
     private String season;
     private Boolean online;
@@ -19,7 +20,7 @@ public class LogicsHomeImpl implements LogicsHome {
         li = new ArrayList<>();
         this.season = season;
         this.online = online;
-        ms = new ManageStagioniImpl(online);
+        ms = new ManageStagioniImpl();
         loadStagione(season);
     }
     @Override
@@ -71,4 +72,5 @@ public class LogicsHomeImpl implements LogicsHome {
         rat.updateRating();
         return rat.getLi();
     }
+
 }
