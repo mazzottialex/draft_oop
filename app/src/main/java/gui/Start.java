@@ -21,8 +21,6 @@ public class Start extends Base {
      * Sets up the GUI components and event listeners
      */
     public Start() {
-        season = log.getFirstSeason();
-        online = log.getOnline();
         GridBagLayout gridBagLayout = new GridBagLayout();
         contentPane.setLayout(gridBagLayout);
         ImageIcon img = new ImageIcon("src/main/resources/icon.png");
@@ -53,7 +51,7 @@ public class Start extends Base {
             }
             @Override
             public void mouseClicked(MouseEvent e) {
-                changeJPanel(new Home(season, online));
+                changeJPanel(new Home(log.getFirstSeason(), log.getOnline()));
             }
         });
         contentPane.add(labelIcon);

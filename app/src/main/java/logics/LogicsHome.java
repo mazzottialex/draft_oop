@@ -9,6 +9,18 @@ import data.Calciatore;
  */
 public interface LogicsHome {
 	/**
+     * Returns the current season
+     *
+     * @return the current season
+     */
+    public String getSeason();
+    /**
+     * Returns the online status
+     *
+     * @return the online status
+     */
+    public Boolean getOnline();
+	/**
      * Sets the current season
      *
      * @param stagione the season to set
@@ -20,7 +32,7 @@ public interface LogicsHome {
      *
      * @return a list of available seasons
      */
-	public List<String> getSeason();
+	public List<String> getLiSeasons();
 	
 	/**
      * Loads the data for the specified season

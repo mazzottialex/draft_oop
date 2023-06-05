@@ -8,10 +8,13 @@ import manageData.ManageStagioniImpl;
 public class LogicStartImpl implements LogicStart {
     private final ManageStagioniImpl ms;
     private final Boolean online;
+    private final String season;
     public LogicStartImpl() {
         this.online = checkConnection();
         ms = new ManageStagioniImpl(online);
         ms.updateStagioni();
+        LogicsFile lf=new LogicsFileImpl();
+        this.season=lf.loadStagioni().get(0);
     }
     @Override
     public Boolean getOnline() {
@@ -19,8 +22,7 @@ public class LogicStartImpl implements LogicStart {
     }
     @Override
 	public String getFirstSeason() {
-		LogicsFile lf=new LogicsFileImpl();
-    	return lf.loadStagioni().get(0);
+    	return this.season;
 	}
     private Boolean checkConnection() {
         try {

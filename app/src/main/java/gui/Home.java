@@ -30,14 +30,11 @@ public class Home extends Base {
 	/**
      * Constructs a new Home object
      *
-     * @param season_ the selected season as a String
+     * @param season the selected season as a String
      * @param online    the online status as a Boolean value
      */
-    public Home(final String season_, final Boolean online) {
-        this.season = season_;
-        this.online = online;
-        log = new LogicsHomeImpl(season, online);
-        log.loadStagione(season);
+    public Home(final String seasonDefault, final Boolean online) {
+        log = new LogicsHomeImpl(seasonDefault, online);
         GridBagConstraints gbc = new GridBagConstraints();
         GridBagLayout layout = new GridBagLayout();
         contentPane.setLayout(layout);
@@ -86,7 +83,7 @@ public class Home extends Base {
         JLabel lblSeasonSelected = new JLabel("Season selected:");
         lblSeasonSelected.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
         panelSelectioned.add(lblSeasonSelected);
-        JLabel lblSeason = new JLabel(season);
+        JLabel lblSeason = new JLabel(log.getSeason());
         lblSeason.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
         panelSelectioned.add(lblSeason);
         gbc.gridx = 0;
@@ -103,15 +100,15 @@ public class Home extends Base {
         btnLoad.setBackground(getForeground());
         btnLoad.setRolloverEnabled(true);
         btnLoad.setFocusPainted(false);
-        String[] array = log.getSeason().toArray(new String[log.getSeason().size()]);
+        String[] array = log.getLiSeasons().toArray(new String[log.getLiSeasons().size()]);
         JComboBox<String> comboBoxLoad = new JComboBox<>(array);
         comboBoxLoad.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
         btnLoad.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                season = comboBoxLoad.getItemAt(comboBoxLoad.getSelectedIndex());
-                if (log.loadStagione(season)) {
-                    lblSeason.setText(season);
+                log.setSeason(comboBoxLoad.getItemAt(comboBoxLoad.getSelectedIndex())); 
+                if (log.loadStagione(log.getSeason())) {
+                    lblSeason.setText(log.getSeason());
                 } else
                     JOptionPane.showMessageDialog(null, "Loading error...");
             }
@@ -127,7 +124,7 @@ public class Home extends Base {
         JButton btnDownload = new JButton("Download season");
         JLabel labelWarning = new JLabel("");
         JComboBox<String> comboBoxDownload = new JComboBox<>(array);
-        if (!online) {
+        if (!log.getOnline()) {
             btnDownload.setEnabled(false);
             comboBoxDownload.setEnabled(false);
             labelWarning = new JLabel("Offline mode");
@@ -146,9 +143,9 @@ public class Home extends Base {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Wait a few seconds");
-                season = comboBoxDownload.getItemAt(comboBoxDownload.getSelectedIndex());
-                if (log.downloadSeason(season)) {
-                    lblSeason.setText(season);
+                log.setSeason(comboBoxLoad.getItemAt(comboBoxLoad.getSelectedIndex())); 
+                if (log.downloadSeason(log.getSeason())) {
+                    lblSeason.setText(log.getSeason());
                     JOptionPane.showMessageDialog(null, "Download completed");
                 } else
                     JOptionPane.showMessageDialog(null, "Errore nel caricamento");
@@ -165,9 +162,9 @@ public class Home extends Base {
         JButton btnArchivio = utilsGUI.standardButton("Archivio");
         btnArchivio.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 try {
-                    changeJPanel(new Archivio(log.getLi(), season, online));
+                    changeJPanel(new Archivio(log.getLi(), log.getSeason(), log.getOnline()));
                 } catch (ClassNotFoundException | IOException e1) {
                     e1.printStackTrace();
                 }
@@ -180,8 +177,8 @@ public class Home extends Base {
         JButton btnStorico = utilsGUI.standardButton("Storico");
         btnStorico.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                changeJPanel(new Storico(season, online));
+            public void actionPerformed(final ActionEvent e) {
+                changeJPanel(new Storico(log.getSeason(), log.getOnline()));
             }
         });
         gbc.gridy = 6;

@@ -10,8 +10,6 @@ import java.awt.Color;
 public class Base extends JFrame {
     private static final long serialVersionUID = 1L;
     protected JPanel contentPane;
-    protected Boolean online;
-    protected String season;
 
     /**
      * Constructs a new Base object

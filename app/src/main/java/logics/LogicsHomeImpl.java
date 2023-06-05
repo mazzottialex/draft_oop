@@ -12,27 +12,36 @@ import rating.CalcoloRating;
 import rating.CalcoloRatingImpl;
 public class LogicsHomeImpl implements LogicsHome {
     private List<Calciatore> li;
-    private String stagione;
+    private String season;
     private Boolean online;
     private final ManageStagioni ms;
-    public LogicsHomeImpl(final String stagione, final Boolean online) { //di default
+    public LogicsHomeImpl(final String season, final Boolean online) { //di default
         li = new ArrayList<>();
-        this.stagione = stagione;
+        this.season = season;
         this.online = online;
         ms = new ManageStagioniImpl(online);
+        loadStagione(season);
     }
     @Override
-    public void setSeason(final String stagione) {
-        this.stagione = stagione;
+    public String getSeason() {
+    	return this.season;
     }
     @Override
-    public List<String> getSeason() {
+    public Boolean getOnline() {
+    	return this.online;
+    }
+    @Override
+    public void setSeason(final String season) {
+        this.season = season;
+    }
+    @Override
+    public List<String> getLiSeasons() {
         return ms.getStagioni();
     }
     @Override
-    public Boolean loadStagione(final String stagione) {
-        final ManageData md = new ManageDataImpl(stagione);
-        this.stagione = stagione;
+    public Boolean loadStagione(final String season) {
+        final ManageData md = new ManageDataImpl(season);
+        this.season = season;
         try {
             md.LoadData();
         } catch (ClassNotFoundException | IOException e) {
@@ -42,9 +51,9 @@ public class LogicsHomeImpl implements LogicsHome {
         return true;
     }
     @Override
-    public Boolean downloadSeason(final String stagione) {
-        final ManageData md = new ManageDataImpl(stagione);
-        this.stagione = stagione;
+    public Boolean downloadSeason(final String season) {
+        final ManageData md = new ManageDataImpl(season);
+        this.season = season;
         try {
             if (!md.DownloadData())
                 return false;
