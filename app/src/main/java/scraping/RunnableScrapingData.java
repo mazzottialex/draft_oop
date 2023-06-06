@@ -12,11 +12,11 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import data.Calciatore;
+import data.Player;
 public class RunnableScrapingData implements Runnable {
     private final int myId;
     private final int nThread;
-    private final List<Calciatore> li = new ArrayList<>();
+    private final List<Player> li = new ArrayList<>();
     private final String url;
     private Boolean flag = true;
     private Boolean flagChrome;
@@ -27,7 +27,7 @@ public class RunnableScrapingData implements Runnable {
         		"https://www.kickest.it/it/serie-a/statistiche/giocatori/tabellone/" + stagione + "?iframe=yes";
         this.flagChrome = flagChrome;
     }
-    public List<Calciatore> getLi() {
+    public List<Player> getLi() {
         return li;
     }
     public Boolean check() {
@@ -73,7 +73,7 @@ public class RunnableScrapingData implements Runnable {
                         		driver.findElements(By.tagName("tr")).get(j).findElements(By.tagName("td"));
                     	final String ruolo = riga.get(2).getText().substring(0, 1); //ruolo
                         if (ruolo.equals("P"))
-                            li.add(new Calciatore(
+                            li.add(new Player(
                                 (i - 1) * 15 + (j - 1), //id 	Integer.parseInt(riga.get(0).getText())
                                 riga.get(1).getText(), //nome
                                 ruolo, //ruolo
@@ -94,7 +94,7 @@ public class RunnableScrapingData implements Runnable {
                                 Integer.parseInt(riga.get(25).getText()) //parate
                             ));
                         else
-                            li.add(new Calciatore(
+                            li.add(new Player(
                                 (i - 1) * 15 + (j - 1), //id 	Integer.parseInt(riga.get(0).getText())
                                 riga.get(1).getText(), //nome
                                 ruolo, //ruolo

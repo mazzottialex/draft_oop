@@ -16,8 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import data.Calciatore;
-import data.Squadra;
+import data.Player;
+import data.Team;
 import logics.LogicsSostituzione;
 import logics.LogicsSostituzioneImpl;
 
@@ -48,7 +48,7 @@ public class Sostituzione extends Base {
      * @param superGui The {@code Partita} instance.
      * @param cambiFatti The number of substitutions already made.
      */
-    public Sostituzione(final Squadra squadra, final Partita superGui, final int cambiFatti) {
+    public Sostituzione(final Team squadra, final Partita superGui, final int cambiFatti) {
         logics = new LogicsSostituzioneImpl(squadra, this);
         this.riserve = RISERVE - cambiFatti;
         panelTit = null;
@@ -75,8 +75,8 @@ public class Sostituzione extends Base {
         for (int i = 0; i < ruoli.size(); i++) {
             panelPosizione = new JPanel();
             for (int j = 0; j < squadra.getModulo().getN(ruoli.get(i)); j++) {
-                Calciatore c = squadra.getTitolari().get(count);
-                JPanel panel = (utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRating().getX(), c.getRuolo(), true));
+                Player c = squadra.getStarting().get(count);
+                JPanel panel = (utilsGUI.getPanelCalciatore(c.getName(), c.getRating().getX(), c.getPos(), true));
                 panel.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(final MouseEvent e) {
@@ -106,8 +106,8 @@ public class Sostituzione extends Base {
         panelPosizione = new JPanel();
         panelPosizione.setLayout(layout);
         for (int j = 0; j < riserve; j++) {
-            Calciatore c = squadra.getRiserve().get(j);
-            JPanel panel = (utilsGUI.getPanelCalciatore(c.getNominativo(), c.getRating().getX(), c.getRuolo(), true));
+            Player c = squadra.getSubstitution().get(j);
+            JPanel panel = (utilsGUI.getPanelCalciatore(c.getName(), c.getRating().getX(), c.getPos(), true));
             panel.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(final MouseEvent e) {

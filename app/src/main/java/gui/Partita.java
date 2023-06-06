@@ -1,8 +1,8 @@
 package gui;
 
 
-import data.Calciatore;
-import data.Squadra;
+import data.Player;
+import data.Team;
 import logics.LogicsPartita;
 import logics.LogicsPartitaImpl;
 
@@ -42,14 +42,14 @@ public class Partita extends Base {
     private JButton next;
     private JPanel panel;
     private LogicsPartita logics;
-    private Squadra s1;
-    private Squadra s2;
+    private Team s1;
+    private Team s2;
     private boolean isRunning;
     private boolean ris;
     private int fineTempo;
-    private Squadra winner;
-    private ArrayList<Calciatore> tab1;
-    private ArrayList<Calciatore> tab2;
+    private Team winner;
+    private ArrayList<Player> tab1;
+    private ArrayList<Player> tab2;
     private boolean rigori;
     private Rigori guiRigori;
     private String string1 = "";
@@ -77,7 +77,7 @@ public class Partita extends Base {
      * @throws ClassNotFoundException If a class is not found.
      * @throws IOException If an I/O error occurs.
      */
-    public Partita(final Squadra s1, final Squadra s2) throws FileNotFoundException, ClassNotFoundException, IOException {
+    public Partita(final Team s1, final Team s2) throws FileNotFoundException, ClassNotFoundException, IOException {
         this.s1 = s1;
         this.s2 = s2;
         this.logics = new LogicsPartitaImpl(this.s1, this.s2);
@@ -91,12 +91,12 @@ public class Partita extends Base {
         //define components
         this.score1 = 0;
         this.score2 = 0;
-        this.jlNomeSq1 = new JLabel(s1.getNomeSquadra(), SwingConstants.RIGHT);
+        this.jlNomeSq1 = new JLabel(s1.getTeamName(), SwingConstants.RIGHT);
         this.jlScoreSq1 = new JLabel(String.valueOf(score1), SwingConstants.RIGHT);
         this.jlScoreSq1.setVerticalAlignment(SwingConstants.TOP);
         this.jlTabSq1 = new JLabel("", SwingConstants.RIGHT);
         this.jlTabSq1.setVerticalAlignment(SwingConstants.TOP);
-        this.jlNomeSq2 = new JLabel(s2.getNomeSquadra(), SwingConstants.LEFT);
+        this.jlNomeSq2 = new JLabel(s2.getTeamName(), SwingConstants.LEFT);
         this.jlScoreSq2 = new JLabel(String.valueOf(score2), SwingConstants.LEFT);
         this.jlScoreSq2.setVerticalAlignment(SwingConstants.TOP);
         this.jlTabSq2 = new JLabel("", SwingConstants.LEFT);
@@ -206,7 +206,7 @@ public class Partita extends Base {
                 stopProgress();
                 if (cambi <= 3) {
                     sost();
-                    if (!s1.getTitolari().equals(sub.getLogics().getTitolari())) {
+                    if (!s1.getStarting().equals(sub.getLogics().getTitolari())) {
 						update();
 						addCambio();
 						ris = true;
@@ -249,8 +249,8 @@ public class Partita extends Base {
      * Updates the team's line-up based on the performed substitution.
      */
     public void update() {
-        s1.setTitolari(sub.getLogics().getTitolari());
-        s1.setRiserve(sub.getLogics().getRiserve());
+        s1.setStarting(sub.getLogics().getTitolari());
+        s1.setSubstitution(sub.getLogics().getRiserve());
     }
 
     /**
@@ -309,7 +309,7 @@ public class Partita extends Base {
                     //jlScoreSq2.setText("2"); score2 = 2;
                     if (score1 != score2) {
                         winner = score1 > score2 ? s1 : s2;
-                        JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + winner.getNomeSquadra());
+                        JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + winner.getTeamName());
                         startStop.setEnabled(false);
                         jbSubs.setEnabled(false);
                         next.setEnabled(true);
@@ -328,7 +328,7 @@ public class Partita extends Base {
                     jbSubs.setEnabled(false);
                     if (score1 != score2) {
                         winner = score1 > score2 ? s1 : s2;
-                        JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + winner.getNomeSquadra());
+                        JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + winner.getTeamName());
                         startStop.setEnabled(false);
                         next.setEnabled(true);
                     } else {
@@ -374,7 +374,7 @@ public class Partita extends Base {
      * @param gol1 the number of penalties scored by the first team.
      * @param gol2 the number of penalties scored by the second team.
      */
-    public void setWinnerR(final Squadra s, final int gol1, final int gol2) {
+    public void setWinnerR(final Team s, final int gol1, final int gol2) {
         winner = s;
         jlScoreSq1.setText(score1 + " (" + gol1 + ")");
         jlScoreSq2.setText(score2 + " (" + gol2 + ")");
@@ -392,26 +392,26 @@ public class Partita extends Base {
     public void changeScore() throws FileNotFoundException, ClassNotFoundException, IOException {
         if (logics.getMinGol(s1).contains(progressBar.getValue())) {
             tab1.add(logics.addScorer(s1));
-            Calciatore calciatore = tab1.get(tab1.size() - 1);
+            Player calciatore = tab1.get(tab1.size() - 1);
             String autogol = "";
-            if (!s1.getTitolari().contains(calciatore)) {
+            if (!s1.getStarting().contains(calciatore)) {
                 autogol = " (AG)";
             }
             string1 = string1 + Integer.toString(progressBar.getValue())
-                    + "' Gol: " + calciatore.getNominativo() + autogol + "<br>";
+                    + "' Gol: " + calciatore.getName() + autogol + "<br>";
             jlTabSq1.setText(apri + string1 + chiudi);
             score1++;
             jlScoreSq1.setText(String.valueOf(score1));
         }
         if (logics.getMinGol(s2).contains(progressBar.getValue())) {
             tab2.add(logics.addScorer(s2));
-            Calciatore calciatore = tab2.get(tab2.size() - 1);
+            Player calciatore = tab2.get(tab2.size() - 1);
             String autogol = "";
-            if (!s2.getTitolari().contains(calciatore)) {
+            if (!s2.getStarting().contains(calciatore)) {
                 autogol = " (AG)";
             }
             string2 = string2 + Integer.toString(progressBar.getValue())
-                    + "' Gol: " + calciatore.getNominativo() + autogol + "<br>";
+                    + "' Gol: " + calciatore.getName() + autogol + "<br>";
             jlTabSq2.setText(apri + string2 + chiudi);
             score2++;
             jlScoreSq2.setText(String.valueOf(score2));
@@ -431,7 +431,7 @@ public class Partita extends Base {
      *
      * @return The winning team.
      */
-    public Squadra getWinner() {
+    public Team getWinner() {
         return winner;
     }
 

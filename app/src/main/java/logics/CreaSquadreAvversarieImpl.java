@@ -9,10 +9,10 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-import data.Calciatore;
+import data.Player;
 import data.Modulo;
-import data.Squadra;
-import data.SquadraAvversaria;
+import data.Team;
+import data.TeamOpponent;
 
 /**
  * The {@code CreaSquadreAvversarieImpl} class implements the {@code CreaSquadreAvversarie} interface
@@ -21,7 +21,7 @@ import data.SquadraAvversaria;
 public class CreaSquadreAvversarieImpl implements CreaSquadreAvversarie {
 
     private int numero;
-    private List<Calciatore> li;
+    private List<Player> li;
     private List<String> squadre;
 
     /**
@@ -30,7 +30,7 @@ public class CreaSquadreAvversarieImpl implements CreaSquadreAvversarie {
      * @param calciatori the list of players.
      * @param numero the number of teams to create.
      */
-    public CreaSquadreAvversarieImpl(final List<Calciatore> calciatori, final int numero) {
+    public CreaSquadreAvversarieImpl(final List<Player> calciatori, final int numero) {
         this.numero = numero;
         this.li = calciatori;
         this.squadre = raccogliSquadre(calciatori);
@@ -42,10 +42,10 @@ public class CreaSquadreAvversarieImpl implements CreaSquadreAvversarie {
      * @param calciatori the list of players.
      * @return a list of unique team names.
      */
-    public static List<String> raccogliSquadre(final List<Calciatore> calciatori) {
+    public static List<String> raccogliSquadre(final List<Player> calciatori) {
         Set<String> squadreSet = new HashSet<>();
-        for (Calciatore calciatore: calciatori) {
-            squadreSet.add(calciatore.getSquadra());
+        for (Player calciatore: calciatori) {
+            squadreSet.add(calciatore.getTeam());
         }
         return new ArrayList<>(squadreSet);
     }
@@ -61,13 +61,13 @@ public class CreaSquadreAvversarieImpl implements CreaSquadreAvversarie {
      * @throws ClassNotFoundException if the class is not found.
      * @throws IOException if an I/O error occurs.
      */
-    public List<Squadra> selezionaSquadreCasuali(final List<String> squadre, final Modulo modulo, final int numeroSquadre)
+    public List<Team> selezionaSquadreCasuali(final List<String> squadre, final Modulo modulo, final int numeroSquadre)
     throws FileNotFoundException, ClassNotFoundException, IOException {
         Collections.shuffle(squadre); // Mescola l'ordine delle squadre
         int id = 1;
-        List<Squadra> listSquadre = new ArrayList<>();
+        List<Team> listSquadre = new ArrayList<>();
         for (String s: squadre) {
-            listSquadre.add(new SquadraAvversaria(id, s, modulo, li));
+            listSquadre.add(new TeamOpponent(id, s, modulo, li));
             id++;
         }
         return listSquadre.subList(0, Math.min(numeroSquadre, squadre.size()));
@@ -86,7 +86,7 @@ public class CreaSquadreAvversarieImpl implements CreaSquadreAvversarie {
     }
 
     @Override
-    public List<Squadra> getSquadre() throws FileNotFoundException, ClassNotFoundException, IOException {
+    public List<Team> getSquadre() throws FileNotFoundException, ClassNotFoundException, IOException {
         return selezionaSquadreCasuali(squadre, selezionaModulo(), numero);
     }
 }

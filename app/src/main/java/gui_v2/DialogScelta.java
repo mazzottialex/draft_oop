@@ -1,4 +1,4 @@
-package v2.gui;
+package gui_v2;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -13,15 +13,15 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import data.Calciatore;
+import data.Player;
 import gui.utilsGUI;
 public class DialogScelta extends JDialog {
     private final JPanel contentPanel = new JPanel();
-    private Calciatore calciatore;
-    private Calciatore selezionato;
+    private Player calciatore;
+    private Player selezionato;
     private final JButton okButton;
-    private final List<Calciatore> li;
-    public DialogScelta(final Frame parent, final Boolean modale, final List<Calciatore> lista, final String ruolo)
+    private final List<Player> li;
+    public DialogScelta(final Frame parent, final Boolean modale, final List<Player> lista, final String ruolo)
     		throws FileNotFoundException, ClassNotFoundException, IOException {
         super(parent, modale);
         this.li = lista;
@@ -32,7 +32,7 @@ public class DialogScelta extends JDialog {
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         List<JButton> liBtn = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            JButton btnCalciatore = utilsGUI.getButtonCalciatore(this.li.get(i).getNominativo(), this.li.get(i).getRuolo());
+            JButton btnCalciatore = utilsGUI.getButtonCalciatore(this.li.get(i).getName(), this.li.get(i).getPos());
             liBtn.add(btnCalciatore);
             btnCalciatore.addActionListener(new ActionListener() {
                 @Override
@@ -70,7 +70,7 @@ public class DialogScelta extends JDialog {
 	        }
         });
     }
-    public Calciatore getCalciatore() {
+    public Player getCalciatore() {
         return this.calciatore;
     }
 }

@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import data.Calciatore;
-import data.Squadra;
+import data.Player;
+import data.Team;
 import manageData.ExtractData;
 import manageData.ExtractDataImpl;
 
@@ -52,23 +52,23 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
         return min + (max - min) * random.nextDouble();
     }
 
-    public static double votoFanta(Calciatore c) {
-        double k = RUOLO_COEFFICIENT_MAP.getOrDefault(c.getRuolo(), 0.0);
+    public static double votoFanta(Player c) {
+        double k = RUOLO_COEFFICIENT_MAP.getOrDefault(c.getPos(), 0.0);
         return k * c.getRating().getX() * prob(0.8, 1.2);
     }
 
-    public static Map<Calciatore, Double> votiFanta(List<Calciatore> titolari) {
-        Map<Calciatore, Double> map = new LinkedHashMap<>();
-        for (Calciatore c: titolari) {
+    public static Map<Player, Double> votiFanta(List<Player> titolari) {
+        Map<Player, Double> map = new LinkedHashMap<>();
+        for (Player c: titolari) {
             map.put(c, votoFanta(c));
         }
         return map;
     }
 
-    public int golSubitiFanta(Squadra s) throws FileNotFoundException, ClassNotFoundException, IOException {
-        ExtractData ed = new ExtractDataImpl(s.getTitolari());
-        Calciatore portiere = ed.getListaByRuolo("P").get(0);
-        double probCleanSheet = portiere.getCleanSheet() / (portiere.getPg() == 0 ? 1 : portiere.getPg());
+    public int golSubitiFanta(Team s) throws FileNotFoundException, ClassNotFoundException, IOException {
+        ExtractData ed = new ExtractDataImpl(s.getStarting());
+        Player portiere = ed.getListaByRuolo("P").get(0);
+        double probCleanSheet = portiere.getCleanSheets() / (portiere.getMatchesPlayed() == 0 ? 1 : portiere.getMatchesPlayed());
         if (prob(0, 1) <= probCleanSheet) {
             return 0;
         } else {
@@ -89,7 +89,7 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
         }
     }
 
-    public int autogolFanta(Squadra s) throws FileNotFoundException, ClassNotFoundException, IOException {
+    public int autogolFanta(Team s) throws FileNotFoundException, ClassNotFoundException, IOException {
         int ag = 0;
         for (int i = 0; i < golSubitiFanta(s); i++) {
             if (prob(0, 100) <= OWNGOAL_RATE) {
@@ -99,7 +99,7 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
         return ag;
     }
 
-    public int rigoriParatiFanta(Squadra s)
+    public int rigoriParatiFanta(Team s)
     throws FileNotFoundException, ClassNotFoundException, IOException {
         int r = 0;
         int rp = 0;
@@ -122,15 +122,15 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
         return rp;
     }
 
-    public static double catenaccioFanta(Squadra s, Map<Calciatore, Double> votiDif)
+    public static double catenaccioFanta(Team s, Map<Player, Double> votiDif)
             throws FileNotFoundException, ClassNotFoundException, IOException {
-        ExtractData ed = new ExtractDataImpl(s.getTitolari());
-        List<Calciatore> difensori = ed.getListaByRuolo("D");
+        ExtractData ed = new ExtractDataImpl(s.getStarting());
+        List<Player> difensori = ed.getListaByRuolo("D");
         double count = 0;
         double totVoti = 0;
         if (difensori.size() >= 3) {
             double threshold = difensori.size() == 3 ? THRESHOLD_3_DIF : THRESHOLD_4_5_DIF;
-            for (Calciatore c : difensori) {
+            for (Player c : difensori) {
                 if (votiDif.get(c) >= threshold) {
                     totVoti += votiDif.get(c);
                 } else {
@@ -151,11 +151,11 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
         return count;
     }
 
-    public static Map<String, Double> votoModFanta(Squadra s, Map<Calciatore, Double> mapVoti)
+    public static Map<String, Double> votoModFanta(Team s, Map<Player, Double> mapVoti)
             throws FileNotFoundException, ClassNotFoundException, IOException {
         Map<String, Double> mapModVoti = new HashMap<>();
-        for (Calciatore c : s.getTitolari()) {
-            String ruolo = c.getRuolo();
+        for (Player c : s.getStarting()) {
+            String ruolo = c.getPos();
             double voto = mapVoti.get(c) - SUB_VOTE;
             if (!mapModVoti.containsKey(ruolo)) {
                 mapModVoti.put(ruolo, voto);
@@ -168,21 +168,21 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
     }
 
 
-    public double votoDifFanta(Squadra s, Map<String, Double> v)
+    public double votoDifFanta(Team s, Map<String, Double> v)
     throws FileNotFoundException, ClassNotFoundException, IOException {
         return (MOD_VOTE_DIF_D * (v.get("P") + v.get("D"))) + (MOD_VOTE_DIF_C * v.get("D")) +
             (MOD_VOTE_DIF_A * v.get("A"));
     }
 
-    public double votoOffFanta(Squadra s, Map<String, Double> v)
+    public double votoOffFanta(Team s, Map<String, Double> v)
     throws FileNotFoundException, ClassNotFoundException, IOException {
         return (MOD_VOTE_OFF_D * (v.get("D"))) + (MOD_VOTE_OFF_C * v.get("D")) + (MOD_VOTE_OFF_A * v.get("A"));
     }
 
-    public int golFattiFanta(Squadra s) throws FileNotFoundException, ClassNotFoundException, IOException {
+    public int golFattiFanta(Team s) throws FileNotFoundException, ClassNotFoundException, IOException {
         int gol = 0;
-        for (Calciatore c: s.getTitolari()) {
-            double probGol = c.getGol() / (c.getMinuti() / MINUTES);
+        for (Player c: s.getStarting()) {
+            double probGol = c.getGoals() / (c.getMinutes() / MINUTES);
             double p = prob(0, 1);
             if (p <= Math.pow(probGol, 3)) {
                 gol += 3;
@@ -196,7 +196,7 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
         return gol;
     }
 
-    public int differenzaRigoriFattiSbagliatiFanta(Squadra s)
+    public int differenzaRigoriFattiSbagliatiFanta(Team s)
     throws FileNotFoundException, ClassNotFoundException, IOException {
         int r = 0;
         int rs = 0;

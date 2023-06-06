@@ -4,7 +4,7 @@ import java.awt.Component;
 import java.awt.Container;
 import java.util.List;
 
-import data.Calciatore;
+import data.Player;
 
 /**
  * The {@code LogicsSostituzione} interface for managing player substitutions.
@@ -16,28 +16,28 @@ public interface LogicsSostituzione {
      *
      * @return the list of starting players
      */
-    List<Calciatore> getTitolari();
+    List<Player> getTitolari();
     
     /**
      * Retrieves the list of substitute players (riserve).
      *
      * @return the list of substitute players
      */
-    List<Calciatore> getRiserve();
+    List<Player> getRiserve();
     
     /**
      * Selects a player from the starting lineup (titolari).
      *
      * @param c the player to be selected
      */
-    void selezTit(Calciatore c);
+    void selezTit(Player c);
     
     /**
      * Selects a player from the substitute bench (riserve).
      *
      * @param c the player to be selected
      */
-    void selezRis(Calciatore c);
+    void selezRis(Player c);
     
     /**
      * Substitutes a player by swapping their positions in the GUI containers.

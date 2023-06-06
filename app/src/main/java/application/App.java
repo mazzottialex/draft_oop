@@ -13,11 +13,11 @@ import java.util.List;
 
 import javax.swing.SwingUtilities;
 
-import data.Calciatore;
+import data.Player;
 import data.Modulo;
-import data.Squadra;
-import data.SquadraAvversaria;
-import data.SquadraUtente;
+import data.Team;
+import data.TeamOpponent;
+import data.TeamUser;
 import gui.Partita;
 import gui.Rigori;
 import gui.Start;

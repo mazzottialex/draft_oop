@@ -1,11 +1,11 @@
 package rating;
 import java.util.List;
-import data.Calciatore;
+import data.Player;
 import utils.Pair;
 import utils.Triple;
 public interface CalcoloRating {
-    public Pair<Integer, Triple<Integer, Integer, Integer>> getRating(Calciatore calc);
-    public Pair<Integer, Integer> getRatingCartellino(Calciatore calc);
-    public List<Calciatore> updateRating();
-    public List<Calciatore> getLi();
+    public Pair<Integer, Triple<Integer, Integer, Integer>> getRating(Player calc);
+    public Pair<Integer, Integer> getRatingCard(Player calc);
+    public List<Player> updateRating();
+    public List<Player> getLi();
 }

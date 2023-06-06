@@ -11,18 +11,18 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import data.Calciatore;
-import data.Squadra;
+import data.Player;
+import data.Team;
 public class LogicsFileImpl implements LogicsFile {
     public LogicsFileImpl(){}
     @SuppressWarnings("unchecked")
     @Override
-    public List<Calciatore> LoadData(String stagione) throws FileNotFoundException, IOException, ClassNotFoundException {
-        List<Calciatore> li = new ArrayList<>();
+    public List<Player> LoadData(String stagione) throws FileNotFoundException, IOException, ClassNotFoundException {
+        List<Player> li = new ArrayList<>();
         try (final InputStream file = new FileInputStream("src/main/resources/backup" + stagione + ".txt");
         		final InputStream bstream = new BufferedInputStream(file);
         		final ObjectInputStream ostream = new ObjectInputStream(file);) {
-            li = (List<Calciatore>) ostream.readObject();
+            li = (List<Player>) ostream.readObject();
             ostream.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -31,7 +31,7 @@ public class LogicsFileImpl implements LogicsFile {
     }
 
     @Override
-    public Boolean SaveData(List<Calciatore> li, String stagione) {
+    public Boolean SaveData(List<Player> li, String stagione) {
         try (final OutputStream file = new FileOutputStream("src/main/resources/backup" + stagione + ".txt");
         		final OutputStream bstream = new BufferedOutputStream(file);
         		final ObjectOutputStream ostream = new ObjectOutputStream(file);) {
@@ -75,10 +75,10 @@ public class LogicsFileImpl implements LogicsFile {
     }
     @SuppressWarnings("unchecked")
     @Override
-    public List<Squadra> LoadStorico() {
-        List<Squadra> li = new ArrayList<>();
+    public List<Team> LoadStorico() {
+        List<Team> li = new ArrayList<>();
         try (final InputStream file = new FileInputStream("src/main/resources/storico.txt"); final InputStream bstream = new BufferedInputStream(file); final ObjectInputStream ostream = new ObjectInputStream(file);) {
-            li = (List<Squadra>) ostream.readObject();
+            li = (List<Team>) ostream.readObject();
             ostream.close();
         } catch (final Exception e) {
             return new ArrayList<>();
@@ -87,8 +87,8 @@ public class LogicsFileImpl implements LogicsFile {
         return li;
     }
     @Override
-    public Boolean SaveStorico(final Squadra s) {
-        List<Squadra> li = LoadStorico();
+    public Boolean SaveStorico(final Team s) {
+        List<Team> li = LoadStorico();
         li.add(s);
         try (final OutputStream file = new FileOutputStream("src/main/resources/storico.txt"); final OutputStream bstream = new BufferedOutputStream(file); final ObjectOutputStream ostream = new ObjectOutputStream(file);) {
             ostream.writeObject(li);

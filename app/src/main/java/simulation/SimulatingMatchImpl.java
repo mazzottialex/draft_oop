@@ -5,16 +5,16 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import data.Calciatore;
-import data.Squadra;
+import data.Player;
+import data.Team;
 import manageData.ExtractDataImpl;
 
 public class SimulatingMatchImpl implements SimulatingMatch {
     private SimulatingFunctions sf;
-    private Squadra s1;
-    private Squadra s2;
-    private Map<Calciatore, Double> voti1;
-    private Map<Calciatore, Double> voti2;
+    private Team s1;
+    private Team s2;
+    private Map<Player, Double> voti1;
+    private Map<Player, Double> voti2;
     private int golSubiti1;
     private int golSubiti2;
     private int autogol1;
@@ -41,13 +41,13 @@ public class SimulatingMatchImpl implements SimulatingMatch {
     private static final int MINUTES_REG = 90;
     private final static int MINUTES_SUPPL = 120;
 
-    public SimulatingMatchImpl(Squadra s1, Squadra s2)
+    public SimulatingMatchImpl(Team s1, Team s2)
     throws FileNotFoundException, ClassNotFoundException, IOException {
         sf = new SimulatingFunctionsImpl();
         this.s1 = s1;
         this.s2 = s2;
-        voti1 = SimulatingFunctionsImpl.votiFanta(this.s1.getTitolari());
-        voti2 = SimulatingFunctionsImpl.votiFanta(this.s2.getTitolari());
+        voti1 = SimulatingFunctionsImpl.votiFanta(this.s1.getStarting());
+        voti2 = SimulatingFunctionsImpl.votiFanta(this.s2.getStarting());
         golSubiti1 = sf.golSubitiFanta(this.s1);
         golSubiti2 = sf.golSubitiFanta(this.s2);
         autogol1 = sf.autogolFanta(this.s1);
@@ -75,12 +75,12 @@ public class SimulatingMatchImpl implements SimulatingMatch {
         double pd = 0;
         switch (squadra) {
             case SQUADRA1:
-                pd = (votoDif1 + new ExtractDataImpl(s1.getTitolari()).getListaByRuolo("D").size() + catenaccio1 -
+                pd = (votoDif1 + new ExtractDataImpl(s1.getStarting()).getListaByRuolo("D").size() + catenaccio1 -
                     2 * golSubiti1 - 2 * autogol1 + 3 * rigoriParati1 - COST_SUB_DIFF) / COST_DIV_DIFF_OFF_CR;
                 break;
 
             case SQUADRA2:
-                pd = (votoDif2 + new ExtractDataImpl(s2.getTitolari()).getListaByRuolo("D").size() + catenaccio2 -
+                pd = (votoDif2 + new ExtractDataImpl(s2.getStarting()).getListaByRuolo("D").size() + catenaccio2 -
                     2 * golSubiti2 - 2 * autogol2 + 3 * rigoriParati2 - COST_SUB_DIFF) / COST_DIV_DIFF_OFF_CR;
                 break;
 
@@ -132,28 +132,28 @@ public class SimulatingMatchImpl implements SimulatingMatch {
 
     // risultatoFinale
     @Override
-    public Map<Squadra, Integer> risultato()
+    public Map<Team, Integer> risultato()
     throws FileNotFoundException, ClassNotFoundException, IOException {
         int sq1 = (int) Math.round(Math.min(capacitaRealizzativa(SQUADRA1),
             (prestazioneOffensiva(SQUADRA1) - prestazioneDifensiva(SQUADRA2))));
         int sq2 = (int) Math.round(Math.min(capacitaRealizzativa(SQUADRA2),
             (prestazioneOffensiva(SQUADRA2) - prestazioneDifensiva(SQUADRA1))));
-        Map<Squadra, Integer> map = new HashMap < > ();
+        Map<Team, Integer> map = new HashMap < > ();
         map.put(this.s1, sq1 >= 0 ? sq1 : 0);
         map.put(this.s2, sq2 >= 0 ? sq2 : 0);
         return map;
     }
 
     @Override
-    public Map<Squadra, Integer> risultatoSuppl()
+    public Map<Team, Integer> risultatoSuppl()
     		throws FileNotFoundException, ClassNotFoundException, IOException {
         return risultatoSub(MINUTES_REG);
     }
 
     @Override
-    public Map<Squadra, Integer> risultatoSub(int minuto)
+    public Map<Team, Integer> risultatoSub(int minuto)
     		throws FileNotFoundException, ClassNotFoundException, IOException {
-        Map<Squadra, Integer> map = new HashMap<>();
+        Map<Team, Integer> map = new HashMap<>();
         if (minuto < MINUTES_REG) {
             map.put(s1,
                 (int)(risultato().get(s1) * (double)((MINUTES_REG - minuto) / MINUTES_REG)));

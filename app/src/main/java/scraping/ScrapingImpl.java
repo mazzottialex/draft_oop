@@ -9,11 +9,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import data.Calciatore;
+import data.Player;
 import utils.Pair;
 
 public class ScrapingImpl implements Scraping {
-    private final List<Calciatore> li = new ArrayList<>();
+    private final List<Player> li = new ArrayList<>();
     private List<String> stagioni = new ArrayList<>();
     private final String url = 
     		"https://www.kickest.it/it/serie-a/statistiche/giocatori/tabellone?iframe=yes";
@@ -33,7 +33,7 @@ public class ScrapingImpl implements Scraping {
     public ScrapingImpl() {
         this(7); //default
     }
-    public List<Calciatore> getLiCalciatori() {
+    public List<Player> getLiCalciatori() {
         return li;
     }
     public List<String> getStagioni() {

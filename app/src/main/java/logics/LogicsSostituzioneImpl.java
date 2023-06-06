@@ -7,19 +7,19 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import data.Calciatore;
-import data.Squadra;
+import data.Player;
+import data.Team;
 import gui.Sostituzione;
 
 /**
  * Implementation of the {@code LogicsSostituzione} interface for managing player substitutions.
  */
 public class LogicsSostituzioneImpl implements LogicsSostituzione {
-    private List<Calciatore> titolari;
-    private List<Calciatore> riserve;
-    private Calciatore entra;
-    private Calciatore esce;
-    private Squadra s;
+    private List<Player> titolari;
+    private List<Player> riserve;
+    private Player entra;
+    private Player esce;
+    private Team s;
     private Sostituzione gui;
 
     /**
@@ -28,9 +28,9 @@ public class LogicsSostituzioneImpl implements LogicsSostituzione {
      * @param s   the {@code Squadra} (team) instance
      * @param gui the GUI instance for player substitutions
      */
-    public LogicsSostituzioneImpl(final Squadra s, final Sostituzione gui) {
-        this.titolari = new ArrayList<>(s.getTitolari());
-        this.riserve = new ArrayList<>(s.getRiserve());
+    public LogicsSostituzioneImpl(final Team s, final Sostituzione gui) {
+        this.titolari = new ArrayList<>(s.getStarting());
+        this.riserve = new ArrayList<>(s.getSubstitution());
         this.entra = null;
         this.esce = null;
         this.s = s;
@@ -43,28 +43,28 @@ public class LogicsSostituzioneImpl implements LogicsSostituzione {
     }
 
     @Override
-    public List<Calciatore> getTitolari() {
+    public List<Player> getTitolari() {
         return titolari;
     }
 
     @Override
-    public List<Calciatore> getRiserve() {
+    public List<Player> getRiserve() {
         return riserve;
     }
 
     @Override
-    public void selezTit(final Calciatore c) {
+    public void selezTit(final Player c) {
         esce = c;
     }
 
     @Override
-    public void selezRis(final Calciatore c) {
+    public void selezRis(final Player c) {
         entra = c;
     }
 
     @Override
     public void sub(final Container parent1, final Container parent2, final Component component1, final Component component2) {
-        if (esce.getRuolo().equals(entra.getRuolo())) {
+        if (esce.getPos().equals(entra.getPos())) {
             int index1 = getComponentIndex(parent1, component1);
             int index2 = getComponentIndex(parent2, component2);
             if (index1 != -1 && index2 != -1) {
@@ -81,8 +81,8 @@ public class LogicsSostituzioneImpl implements LogicsSostituzione {
                 int indexEsce = titolari.indexOf(esce);
                 titolari.set(indexEsce, entra);
                 riserve.remove(entra);
-                s.setTitolari(titolari);
-                s.setRiserve(riserve);
+                s.setStarting(titolari);
+                s.setSubstitution(riserve);
                 JOptionPane.showMessageDialog(null, "Sostituzione effettuata");
                 chiudiGUI();
             }

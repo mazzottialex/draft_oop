@@ -7,8 +7,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import data.Calciatore;
-import data.Squadra;
+import data.Player;
+import data.Team;
 import simulation.SimulatingMatch;
 import simulation.SimulatingMatchImpl;
 
@@ -16,8 +16,8 @@ import simulation.SimulatingMatchImpl;
  * The {@code LogicsPartitaImpl} class implements the {@code LogicsPartita} interface and provides the logic for a match.
  */
 public class LogicsPartitaImpl implements LogicsPartita {
-    private Squadra s1;
-    private Squadra s2;
+    private Team s1;
+    private Team s2;
     private List<Integer> list1;
     private List<Integer> list2;
     private static final int REG = 0;
@@ -36,7 +36,7 @@ public class LogicsPartitaImpl implements LogicsPartita {
      * @throws ClassNotFoundException if the class is not found
      * @throws IOException if an I/O error occurs
      */
-    public LogicsPartitaImpl(final Squadra s1, final Squadra s2) throws FileNotFoundException, ClassNotFoundException, IOException {
+    public LogicsPartitaImpl(final Team s1, final Team s2) throws FileNotFoundException, ClassNotFoundException, IOException {
         super();
         this.s1 = s1;
         this.s2 = s2;
@@ -64,7 +64,7 @@ public class LogicsPartitaImpl implements LogicsPartita {
     }
 
     @Override
-    public List<Integer> getMinGol(final Squadra s) {
+    public List<Integer> getMinGol(final Team s) {
         if (s == s1) {
             return list1;
         } else if (s == s2) {
@@ -127,13 +127,13 @@ public class LogicsPartitaImpl implements LogicsPartita {
     }
 
     @Override
-    public Calciatore addScorer(final Squadra s) {
+    public Player addScorer(final Team s) {
         double totGol = 0;
-        List<Calciatore> titolari = s.getTitolari();
+        List<Player> titolari = s.getStarting();
         List<Double> golList = new ArrayList<>();
 
-        for (Calciatore calciatore: titolari) {
-            double gol = calciatore.getGol();
+        for (Player calciatore: titolari) {
+            double gol = calciatore.getGoals();
             golList.add(gol);
             totGol += gol;
         }
@@ -157,15 +157,15 @@ public class LogicsPartitaImpl implements LogicsPartita {
      * @param s the team
      * @return the scorer
      */
-    public Calciatore getAutogol(final Squadra s) {
-        Squadra sq;
+    public Player getAutogol(final Team s) {
+        Team sq;
         if (s == s1) {
             sq = s2;
         } else {
             sq = s1;
         }
-        int random = new Random().nextInt(sq.getTitolari().size());
-        return sq.getTitolari().get(random);
+        int random = new Random().nextInt(sq.getStarting().size());
+        return sq.getStarting().get(random);
     }
 
     @Override

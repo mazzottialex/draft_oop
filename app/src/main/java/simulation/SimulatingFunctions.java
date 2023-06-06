@@ -4,28 +4,28 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Map;
 
-import data.Squadra;
+import data.Team;
 
 public interface SimulatingFunctions {
 
-    public int golSubitiFanta(Squadra s)
+    public int golSubitiFanta(Team s)
     		throws FileNotFoundException, ClassNotFoundException, IOException;
 
-    public int autogolFanta(Squadra s)
+    public int autogolFanta(Team s)
     		throws FileNotFoundException, ClassNotFoundException, IOException;
 
-    public int rigoriParatiFanta(Squadra s)
+    public int rigoriParatiFanta(Team s)
     		throws FileNotFoundException, ClassNotFoundException, IOException;
 
-    public int differenzaRigoriFattiSbagliatiFanta(Squadra s)
+    public int differenzaRigoriFattiSbagliatiFanta(Team s)
     		throws FileNotFoundException, ClassNotFoundException, IOException;
 
-    public double votoDifFanta(Squadra s, Map<String, Double> v)
+    public double votoDifFanta(Team s, Map<String, Double> v)
     		throws FileNotFoundException, ClassNotFoundException, IOException;
 
-    public double votoOffFanta(Squadra s, Map<String, Double> v)
+    public double votoOffFanta(Team s, Map<String, Double> v)
     		throws FileNotFoundException, ClassNotFoundException, IOException;
 
-    public int golFattiFanta(Squadra s)
+    public int golFattiFanta(Team s)
     		throws FileNotFoundException, ClassNotFoundException, IOException;
 }

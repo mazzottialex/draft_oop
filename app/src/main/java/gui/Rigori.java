@@ -18,8 +18,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import data.Calciatore;
-import data.Squadra;
+import data.Player;
+import data.Team;
 import logics.LogicsRigori;
 import logics.LogicsRigoriImpl;
 import utils.Pair;
@@ -32,8 +32,8 @@ public class Rigori extends Base {
      * 
      */
     private static final long serialVersionUID = 5140476454072046580L;
-    private Squadra s1;
-    private Squadra s2;
+    private Team s1;
+    private Team s2;
     private JLabel results1;
     private JLabel results2;
     private JLabel result;
@@ -42,11 +42,11 @@ public class Rigori extends Base {
     private int tiri1;
     private int tiri2;
     private int totTiri;
-    private Squadra winner;
+    private Team winner;
     private JButton chiudi;
     private LogicsRigori logics;
-    private Map<Integer, Pair<Calciatore, String>> rig1;
-    private Map<Integer, Pair<Calciatore, String>> rig2;
+    private Map<Integer, Pair<Player, String>> rig1;
+    private Map<Integer, Pair<Player, String>> rig2;
     private JPanel panel;
     private String str1;
     private String str2;
@@ -60,7 +60,7 @@ public class Rigori extends Base {
      * @param s2 The second team in the penalty shoot-out.
      * @param partita The {@code Partita} instance.
      */
-    public Rigori(final Squadra s1, final Squadra s2, final Partita partita) {
+    public Rigori(final Team s1, final Team s2, final Partita partita) {
         this.s1 = s1;
         this.s2 = s2;
         this.partita = partita;
@@ -82,7 +82,7 @@ public class Rigori extends Base {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 0;
-        panel.add(new JLabel(s1.getNomeSquadra(), SwingConstants.RIGHT), gbc);
+        panel.add(new JLabel(s1.getTeamName(), SwingConstants.RIGHT), gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 0;
@@ -92,7 +92,7 @@ public class Rigori extends Base {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 2;
         gbc.gridy = 0;
-        panel.add(new JLabel(s2.getNomeSquadra(), SwingConstants.LEFT), gbc);
+        panel.add(new JLabel(s2.getTeamName(), SwingConstants.LEFT), gbc);
 
         results1 = new JLabel();
 
@@ -165,7 +165,7 @@ public class Rigori extends Base {
                     if (totTiri % 2 == 0) {
                         if (rig1.containsKey(tiri1)) {
                             String res = rig1.get(tiri1).getY();
-                            String tiratore = rig1.get(tiri1).getX().getNominativo();
+                            String tiratore = rig1.get(tiri1).getX().getName();
                             String resultLabel = tiratore + ": " + res;
                             str1 = str1 + resultLabel + "<br>";
                             results1.setText("<html>" + str1 + "</html>");
@@ -177,7 +177,7 @@ public class Rigori extends Base {
                     } else {
                         if (rig2.containsKey(tiri2)) {
                             String res = rig2.get(tiri2).getY();
-                            String tiratore = rig2.get(tiri2).getX().getNominativo();
+                            String tiratore = rig2.get(tiri2).getX().getName();
                             String resultLabel = tiratore + ": " + res;
                             str2 = str2 + resultLabel + "<br>";
                             results2.setText("<html>" + str2 + "</html>");
@@ -201,7 +201,7 @@ public class Rigori extends Base {
      * @return The name of the winning team.
      */
     private String getNomeWinner() {
-        return winner.getNomeSquadra();
+        return winner.getTeamName();
     }
 
     /**
@@ -209,7 +209,7 @@ public class Rigori extends Base {
      *
      * @return The winning team.
      */
-    public Squadra getWinner() {
+    public Team getWinner() {
         return winner;
     }
 

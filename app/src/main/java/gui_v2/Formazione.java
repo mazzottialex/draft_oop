@@ -1,4 +1,4 @@
-package v2.gui;
+package gui_v2;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import data.Calciatore;
+import data.Player;
 import data.Modulo;
 import gui.Base;
 import gui.utilsGUI;
@@ -24,7 +24,7 @@ public class Formazione extends Base {
     private Modulo modulo;
     private LogicsFormazione log;
     private final static int N_MODULI = 5;
-    public Formazione(final List<Calciatore> li, final String nomeSquadra, final String stemma) {
+    public Formazione(final List<Player> li, final String nomeSquadra, final String stemma) {
         log = new LogicsFormazioneImpl();
         GridBagConstraints gbc = new GridBagConstraints();
         GridBagLayout layout = new GridBagLayout();

@@ -3,11 +3,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import data.Calciatore;
+import data.Player;
 import scraping.Scraping;
 import scraping.ScrapingImpl;
 public class ManageDataImpl implements ManageData {
-    private List<Calciatore> li;
+    private List<Player> li;
     private final LogicsFile logFile;
     private final String stagione;
     public ManageDataImpl(final String stagione) {
@@ -15,7 +15,7 @@ public class ManageDataImpl implements ManageData {
         logFile = new LogicsFileImpl();
         this.stagione = stagione;
     }
-    public List<Calciatore> getLi() {
+    public List<Player> getLi() {
         return li;
     }
     public void LoadData() throws FileNotFoundException, ClassNotFoundException, IOException {
