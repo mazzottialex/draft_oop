@@ -6,8 +6,8 @@ import java.util.List;
 import data.Player;
 import manageData.ManageData;
 import manageData.ManageDataImpl;
-import manageData.ManageStagioni;
-import manageData.ManageStagioniImpl;
+import manageData.ManageSeason;
+import manageData.ManageSeasonImpl;
 import rating.AnalysisRating;
 import rating.AnalysisRatingImpl;
 public class LogicsHomeImpl implements LogicsHome {
@@ -15,12 +15,12 @@ public class LogicsHomeImpl implements LogicsHome {
     private List<Player> li;
     private String season;
     private Boolean online;
-    private final ManageStagioni ms;
+    private final ManageSeason ms;
     public LogicsHomeImpl(final String season, final Boolean online) { //di default
         li = new ArrayList<>();
         this.season = season;
         this.online = online;
-        ms = new ManageStagioniImpl();
+        ms = new ManageSeasonImpl();
         loadStagione(season);
     }
     @Override
@@ -37,15 +37,15 @@ public class LogicsHomeImpl implements LogicsHome {
     }
     @Override
     public List<String> getLiSeasons() {
-        return ms.getStagioni();
+        return ms.getSeason();
     }
     @Override
     public Boolean loadStagione(final String season) {
         final ManageData md = new ManageDataImpl(season);
         this.season = season;
         try {
-            md.LoadData();
-        } catch (ClassNotFoundException | IOException e) {
+            md.loadData();
+        } catch (Exception e) {
             return false;
         }
         this.li = md.getLi();
@@ -55,12 +55,8 @@ public class LogicsHomeImpl implements LogicsHome {
     public Boolean downloadSeason(final String season) {
         final ManageData md = new ManageDataImpl(season);
         this.season = season;
-        try {
-            if (!md.DownloadData())
-                return false;
-        } catch (ClassNotFoundException | IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        if (!md.downloadData()) {
+            return false;
         }
         this.li = md.getLi();
         return true;

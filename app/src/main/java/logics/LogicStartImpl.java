@@ -4,17 +4,17 @@ import java.net.URLConnection;
 
 import manageData.LogicsFile;
 import manageData.LogicsFileImpl;
-import manageData.ManageStagioniImpl;
+import manageData.ManageSeasonImpl;
 public class LogicStartImpl implements LogicStart {
-    private final ManageStagioniImpl ms;
+    private final ManageSeasonImpl ms;
     private final Boolean online;
     private final String season;
     public LogicStartImpl() {
         this.online = checkConnection();
-        ms = new ManageStagioniImpl();
-        ms.updateStagioni();
+        ms = new ManageSeasonImpl();
+        ms.updateSeason();
         LogicsFile lf=new LogicsFileImpl();
-        this.season=lf.loadStagioni().get(0);
+        this.season=lf.loadSeason().get(0);
     }
     @Override
     public Boolean getOnline() {
