@@ -9,6 +9,9 @@ import data.Player;
 import data.Team;
 import manageData.ExtractDataImpl;
 
+/**
+ * Implementation of the {@code SimulatingMatch} interface that simulates a match between two teams.
+ */
 public class SimulatingMatchImpl implements SimulatingMatch {
     private SimulatingFunctions sf;
     private Team t1;
@@ -39,6 +42,15 @@ public class SimulatingMatchImpl implements SimulatingMatch {
     private static final int MINUTES_REG = 90;
     private final static int MINUTES_EXTRA = 120;
 
+    /**
+     * Constructs a new {@code SimulatingMatchImpl} object with the specified teams.
+     *
+     * @param t1 the first team
+     * @param t2 the second team
+     * @throws FileNotFoundException    if the data file is not found
+     * @throws ClassNotFoundException   if the class is not found during deserialization
+     * @throws IOException              if an I/O error occurs during data extraction
+     */
     public SimulatingMatchImpl(Team t1, Team t2)
     throws FileNotFoundException, ClassNotFoundException, IOException {
         sf = new SimulatingFunctionsImpl();
@@ -66,7 +78,6 @@ public class SimulatingMatchImpl implements SimulatingMatch {
         scoredPenalties2 = sf.getDeltaScoredSavedPenalties(t2);
     }
 
-    // prestazioneDifensiva, se squadra == 1 -> s1; se squadra == 2 -> s2
     @Override
     public double defensivePerformance(Team team)
     		throws FileNotFoundException, ClassNotFoundException, IOException {
@@ -81,7 +92,6 @@ public class SimulatingMatchImpl implements SimulatingMatch {
         return dp;
     }
 
-    // capacitaRealizzativa
     @Override
     public double scoringAbility(Team team)
     		throws FileNotFoundException, ClassNotFoundException, IOException {
@@ -94,7 +104,6 @@ public class SimulatingMatchImpl implements SimulatingMatch {
         return sa;
     }
 
-    // prestazioneOffensiva
     @Override
     public double offensivePerformance(Team team)
     		throws FileNotFoundException, ClassNotFoundException, IOException {
@@ -107,7 +116,6 @@ public class SimulatingMatchImpl implements SimulatingMatch {
         return op;
     }
 
-    // risultatoFinale
     @Override
     public Map<Team, Integer> result()
     throws FileNotFoundException, ClassNotFoundException, IOException {
