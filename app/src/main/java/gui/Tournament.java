@@ -78,7 +78,7 @@ public class Tournament extends Base {
     private final Color panelColor = new Color(0, 64, 128);
 
     /**
-     * Constructor of Torneo, add the necessary graphics components.
+     * Constructor of Tournament, add the necessary graphics components.
      * 
      * @param squadra the user's team
      * @param li      the list of all the players in Serie A

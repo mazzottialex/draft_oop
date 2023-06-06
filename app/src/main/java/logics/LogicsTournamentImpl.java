@@ -40,7 +40,7 @@ public class LogicsTournamentImpl implements LogicsTournament {
     private boolean elimThisTurn;
 
     /**
-     * Constructor of LogicsTorneoImpl.
+     * Constructor of LogicsTournamentImpl.
      * 
      * @param squadra the user's team
      * @param li      the list of all the players in Serie A

@@ -10,7 +10,7 @@ import data.Team;
 //import data.SquadraAvversaria;
 
 /**
- * The interface that models the logic of Torneo.
+ * The interface that models the logic of Tournament.
  * 
  * @author Davide Braccini
  *

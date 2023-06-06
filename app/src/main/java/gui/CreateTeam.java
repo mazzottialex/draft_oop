@@ -81,7 +81,7 @@ public class CreateTeam extends Base {
     private final Color panelColor = new Color(0, 64, 128);
 
     /**
-     * Constructor of CreaSquadra, add the necessary graphics components.
+     * Constructor of CreateTeam, add the necessary graphics components.
      * 
      * @param nomeSquadra the String that contains the name of the team
      * @param stemma      the String that contains the arms of the team

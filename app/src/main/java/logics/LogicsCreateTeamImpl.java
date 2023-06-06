@@ -43,7 +43,7 @@ public class LogicsCreateTeamImpl implements LogicsCreateTeam {
     private Random r = new Random();
 
     /**
-     * Constructor of LogicsCreaSquadraImpl.
+     * Constructor of LogicsCreateTeamImpl.
      * 
      * @param nomeSquadra the name of the team
      * @param stemma      the arms
