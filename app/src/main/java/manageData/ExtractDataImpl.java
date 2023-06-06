@@ -1,6 +1,4 @@
 package manageData;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -14,8 +12,7 @@ import data.Player;
 import data.Module;
 public class ExtractDataImpl implements ExtractData {
     private final List<Player> li;
-    public ExtractDataImpl(final List<Player> li)
-    		throws FileNotFoundException, IOException, ClassNotFoundException {
+    public ExtractDataImpl(final List<Player> li) {
         this.li = li;
     }
     @Override

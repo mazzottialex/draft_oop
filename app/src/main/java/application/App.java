@@ -23,8 +23,8 @@ import gui.Shootout;
 import gui.Start;
 import manageData.ManageData;
 import manageData.ManageDataImpl;
-import rating.CalcoloRating;
-import rating.CalcoloRatingImpl;
+import rating.AnalysisRating;
+import rating.AnalysisRatingImpl;
 //import v2.gui.TorneoV2;
 
 public class App {

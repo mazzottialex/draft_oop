@@ -1,7 +1,7 @@
 package utils;
 import java.io.Serializable;
 /*
- * A standard generic Pair<X,Y>, with getters, hashCode, equals, and toString well implemented. 
+ * A standard generic Triplr<X,Y,Z>, with getters, hashCode, equals, and toString well implemented. 
  */
 public class Triple<X,Y,Z> implements Serializable {
     private final X x;

@@ -25,7 +25,7 @@ public class LogicsHistoryImpl implements LogicsHistory{
 	}
 	@Override
 	public List<Team> getLiTeam() {
-		return file.LoadStorico();
+		return file.loadHistory();
 	}
 	
 	

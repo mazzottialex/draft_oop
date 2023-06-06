@@ -1,10 +1,29 @@
 package manageData;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+
 import java.util.List;
 import data.Player;
+
+/**
+ * Interface for managing player data
+ */
 public interface ManageData {
-	public List<Player> getLi();
-	public void LoadData() throws FileNotFoundException, ClassNotFoundException, IOException;
-	public Boolean DownloadData() throws FileNotFoundException, ClassNotFoundException, IOException;
+    /**
+     * Retrieves the list of players
+     *
+     * @return The list of players
+     */
+    public List<Player> getLi();
+
+    /**
+     * Loads the data of players
+     * @throws Exception 
+     */
+    public void loadData() throws Exception;
+
+    /**
+     * Downloads the data of players
+     *
+     * @return True if the data download is successful, false otherwise
+     */
+    public Boolean downloadData();
 }

@@ -9,9 +9,18 @@ import java.awt.geom.RoundRectangle2D;
 
 import javax.swing.border.AbstractBorder;
 
+/**
+ * 
+ * A custom border implementation that adds rounded corners to a component.
+ * Stack Overflow post:
+ * https://stackoverflow.com/questions/25796572/simplest-code-to-round-corners-of-jlabel-in-java
+ *
+*/
+
 public class RoundedBorder extends AbstractBorder {
 
-    private final Color color;
+	private static final long serialVersionUID = 1L;
+	private final Color color;
     private final int gap;
 
     public RoundedBorder(Color c, int g) {
