@@ -89,7 +89,7 @@ public class Triple<X, Y, Z> implements Serializable {
             if (other.y != null) {
                 return false;
             }
-        } else if (!y.equals(other.y)){
+        } else if (!y.equals(other.y)) {
             return false;
         }
         if (z == null) {

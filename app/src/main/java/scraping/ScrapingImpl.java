@@ -18,11 +18,11 @@ import utils.Pair;
 public class ScrapingImpl implements Scraping {
     private final List<Player> li = new ArrayList<>();
     private List<String> stagioni = new ArrayList<>();
-    private final String url = 
-    		"https://www.kickest.it/it/serie-a/statistiche/giocatori/tabellone?iframe=yes";
+    private final String url = "https://www.kickest.it/it/serie-a/statistiche/giocatori/tabellone?iframe=yes";
     private final int nThread;
-    private Boolean flagChrome=false;
-    private Boolean flagFirefox=false;
+    private Boolean flagChrome = false;
+    private Boolean flagFirefox = false;
+    private static final int DEFAULT = 7;
     
     /**
      * Constructs a ScrapingImpl object with the specified number of threads
@@ -32,34 +32,33 @@ public class ScrapingImpl implements Scraping {
     public ScrapingImpl(final int nThread) {
         this.nThread = nThread;
         //if(checkBrowser("google-chrome")) {
-        	flagChrome=true;
+        	flagChrome = true;
         //}
         System.out.print(checkBrowser("firefox"));
         	//flagFirefox=true;
         //}
-
     }
-    
+
     /**
-     * Constructs a ScrapingImpl object with a default number of threads (7)
+     * Constructs a ScrapingImpl object with a default number of threads (7).
      */
     public ScrapingImpl() {
-        this(7); //default
+        this(DEFAULT); //default
     }
-    
+
     @Override
     public List<Player> getLiPlayer() {
         return li;
     }
-    
+
     @Override
     public List<String> getLiSeason() {
         return stagioni;
     }
-    
+
     @Override
     public Boolean readTable(final String season) {
-    	if(flagChrome || flagFirefox) {
+    	if (flagChrome || flagFirefox) {
 	    	final List<Pair<RunnableScrapingData, Thread>> liThr = new ArrayList<>();
 	        for (int i = 0; i < nThread; i++) {
 	        	final RunnableScrapingData runnable = new RunnableScrapingData(i, nThread, season, flagChrome);
@@ -80,30 +79,29 @@ public class ScrapingImpl implements Scraping {
 	            li.addAll(el.getX().getLi());
 	        }
 	        	return true;
-    	}
-    	else
+    	} else {
     		return false;
+    	}
     }
-    
+
     @Override
     public Boolean readTable() {
     	final String defaultStagione = "2022-2023";
         return this.readTable(defaultStagione);
     }
-    
+
     @Override
     public Boolean readSeason() {
-    	if(flagChrome || flagFirefox) {
+    	if (flagChrome || flagFirefox) {
 	    	//Nascondere pagine chrome
 	    	final List<String> stagioni = new ArrayList<>();
 	    	final WebDriver driver;
-	    	if(flagChrome) {
+	    	if (flagChrome) {
 		    	final ChromeOptions options = new ChromeOptions();
 		        options.addArguments("headless");
 		        //Oggetto per creare il collegamento
 		        driver = new ChromeDriver(options);
-	    	}
-	    	else {
+	    	} else {
 	    		final FirefoxOptions options = new FirefoxOptions();
 	            options.addArguments("-headless");
 	            driver = new FirefoxDriver(options);
@@ -120,33 +118,32 @@ public class ScrapingImpl implements Scraping {
 	        driver.quit();
 	        this.stagioni = stagioni;
 	        return true;
-    	}
-    	else
+    	} else {
     		return false;
+    	}
     }
-    
+
     /**
-     * Checks if the specified browser is installed on the system
+     * Checks if the specified browser is available on the current operating system.
      *
-     * @param browser The name of browser
+     * @param browser the browser to check (e.g., "google-chrome" or "firefox")
+     * @return {@code true} if the browser is available, {@code false} otherwise
      */
     private static boolean checkBrowser(final String browser) {
         String os = System.getProperty("os.name").toLowerCase();
         if (os.contains("win")) {
             String path1 = null;
             String path2 = null;
-        	if(browser.equals(new String("google-chrome"))) {
+        	if (browser.equals(new String("google-chrome"))) {
             	path1 = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\Chrome.exe";
             	path2 = "C:\\Program Files\\Google\\Chrome\\Application\\Chrome.exe";
-            }
-        	else if(browser.equals(new String("firefox"))){
+            } else if (browser.equals(new String("firefox"))){
         		path1 = "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe";
             	path2 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
         	}
-            if(new File(path1).exists() || new File(path2).exists()) {
+            if (new File(path1).exists() || new File(path2).exists()) {
             	return true;
             }
-        	
         } else if (os.contains("nix") || os.contains("nux") || os.contains("mac")) {
             // Linux
             String[] istruzione = { "which", browser }; //cerca browser tra i programmi

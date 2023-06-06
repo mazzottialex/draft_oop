@@ -24,7 +24,23 @@ public class RunnableScrapingData implements Runnable {
     private final String url;
     private Boolean flag = true;
     private Boolean flagChrome;
-    
+    private static final int PG = 7;
+    private static final int MINUTES = 9;
+    private static final int GOALS = 10;
+    private static final int SHOOTS = 11;
+    private static final int DRIBLINGS = 14;
+    private static final int ASSISTS = 15;
+    private static final int PASSES = 16;
+    private static final int KEY_PASSES = 17;
+    private static final int YELLOW_CARDS = 20;
+    private static final int RED_CARDS = 21;
+    private static final int STEALS = 22;
+    private static final int TACKLE = 23;
+    private static final int CLEAN_SHEET = 24;
+    private static final int SAVEDS = 25;
+    private static final int COST_ID = 15;
+    private static final int SECONDS = 30;
+
     /**
      * Creates an instance of RunnableScrapingData
      *
@@ -40,7 +56,7 @@ public class RunnableScrapingData implements Runnable {
         		"https://www.kickest.it/it/serie-a/statistiche/giocatori/tabellone/" + season + "?iframe=yes";
         this.flagChrome = flagChrome;
     }
-    
+
     /**
      * Returns the list of players.
      *
@@ -49,7 +65,7 @@ public class RunnableScrapingData implements Runnable {
     public List<Player> getLi() {
         return li;
     }
-    
+
     /**
      * Check if it finishes correctly
      *
@@ -58,19 +74,18 @@ public class RunnableScrapingData implements Runnable {
     public Boolean check() {
         return flag;
     }
-    
+
     /**
      * Executes the thread
      */
     public void run() {
     	final WebDriver driver;
-    	if(flagChrome) {
+    	if (flagChrome) {
 	    	final ChromeOptions options = new ChromeOptions();
 	        options.addArguments("headless");
 	        //Oggetto per creare il collegamento
 	        driver = new ChromeDriver(options);
-    	}
-    	else {
+    	} else {
     		final FirefoxOptions options = new FirefoxOptions();
             options.addArguments("-headless");
             driver = new FirefoxDriver(options);
@@ -79,7 +94,8 @@ public class RunnableScrapingData implements Runnable {
         //Oggetto per eseguire operazioni sulla pagina
         final JavascriptExecutor js = (JavascriptExecutor) driver;
         //Attende che la pagina carichi la tabella
-        final WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30).getSeconds()); //aspetta 30 sec per caricare la tabella
+        //aspetta 30 sec per caricare la tabella
+        final WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(SECONDS).getSeconds());
         try {
             wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("tr")));
         } catch (org.openqa.selenium.TimeoutException e) {
@@ -88,8 +104,9 @@ public class RunnableScrapingData implements Runnable {
         if (this.flag) {
         	int last = Integer.parseInt(driver.findElement(By.className("paginationjs-last")).getText());
         	final int pagine = (int) Math.ceil((last) / nThread) + 1;
-            if (pagine * (myId + 1) < last)
-                last = pagine * (myId + 1);
+            if (pagine * (myId + 1) < last) {
+            	last = pagine * (myId + 1);
+            }
             for (Integer i = 1; i < last + 1; i++) {
                 js.executeScript("document.querySelector('[data-num=\"" + i.toString() + "\"]').click()");
                 if (i > myId * pagine) {
@@ -100,48 +117,49 @@ public class RunnableScrapingData implements Runnable {
                     	final List<WebElement> riga =
                         		driver.findElements(By.tagName("tr")).get(j).findElements(By.tagName("td"));
                     	final String ruolo = riga.get(2).getText().substring(0, 1); //ruolo
-                        if (ruolo.equals("P"))
+                        if (ruolo.equals("P")) {
                             li.add(new Player(
-                                (i - 1) * 15 + (j - 1), //id 	Integer.parseInt(riga.get(0).getText())
+                                (i - 1) * COST_ID + (j - 1), //id 	Integer.parseInt(riga.get(0).getText())
                                 riga.get(1).getText(), //nome
                                 ruolo, //ruolo
                                 riga.get(3).getText(), //squadra
-                                Integer.parseInt(riga.get(7).getText()), //pg
-                                Integer.parseInt(riga.get(9).getText()), //minuti
+                                Integer.parseInt(riga.get(PG).getText()), //pg
+                                Integer.parseInt(riga.get(MINUTES).getText()), //minuti
                                 0, //gol
                                 0, //tiri
                                 0, //dribling
                                 0, //assist
                                 0, //passaggi
                                 0, //passaggiChiave
-                                Integer.parseInt(riga.get(20).getText()), //ammonizioni
-                                Integer.parseInt(riga.get(21).getText()), //espulsioni
+                                Integer.parseInt(riga.get(YELLOW_CARDS).getText()), //ammonizioni
+                                Integer.parseInt(riga.get(RED_CARDS).getText()), //espulsioni
                                 0, //rubati
                                 0, //tackle
-                                Integer.parseInt(riga.get(24).getText()), //cleanSheet
-                                Integer.parseInt(riga.get(25).getText()) //parate
+                                Integer.parseInt(riga.get(TACKLE).getText()), //cleanSheet
+                                Integer.parseInt(riga.get(SAVEDS).getText()) //parate
                             ));
-                        else
+                        } else {
                             li.add(new Player(
-                                (i - 1) * 15 + (j - 1), //id 	Integer.parseInt(riga.get(0).getText())
+                                (i - 1) * COST_ID + (j - 1), //id 	Integer.parseInt(riga.get(0).getText())
                                 riga.get(1).getText(), //nome
                                 ruolo, //ruolo
                                 riga.get(3).getText(), //squadra
-                                Integer.parseInt(riga.get(7).getText()), //pg
-                                Integer.parseInt(riga.get(9).getText()), //minuti
-                                Integer.parseInt(riga.get(10).getText()), //gol
-                                Integer.parseInt(riga.get(11).getText()), //tiri
-                                Integer.parseInt(riga.get(14).getText()), //dribling
-                                Integer.parseInt(riga.get(15).getText()), //assist
-                                Integer.parseInt(riga.get(16).getText()), //passaggi
-                                Integer.parseInt(riga.get(17).getText()), //passaggiChiave
-                                Integer.parseInt(riga.get(20).getText()), //ammonizioni
-                                Integer.parseInt(riga.get(21).getText()), //espulsioni
-                                Integer.parseInt(riga.get(22).getText()), //rubati
-                                Integer.parseInt(riga.get(23).getText()), //tackle
-                                Integer.parseInt(riga.get(24).getText()), //cleanSheet
+                                Integer.parseInt(riga.get(PG).getText()), //pg
+                                Integer.parseInt(riga.get(MINUTES).getText()), //minuti
+                                Integer.parseInt(riga.get(GOALS).getText()), //gol
+                                Integer.parseInt(riga.get(SHOOTS).getText()), //tiri
+                                Integer.parseInt(riga.get(DRIBLINGS).getText()), //dribling
+                                Integer.parseInt(riga.get(ASSISTS).getText()), //assist
+                                Integer.parseInt(riga.get(PASSES).getText()), //passaggi
+                                Integer.parseInt(riga.get(KEY_PASSES).getText()), //passaggiChiave
+                                Integer.parseInt(riga.get(YELLOW_CARDS).getText()), //ammonizioni
+                                Integer.parseInt(riga.get(RED_CARDS).getText()), //espulsioni
+                                Integer.parseInt(riga.get(STEALS).getText()), //rubati
+                                Integer.parseInt(riga.get(TACKLE).getText()), //tackle
+                                Integer.parseInt(riga.get(CLEAN_SHEET).getText()), //cleanSheet
                                 0 //parate
                             ));
+                        }
                     }
                 }
             }
