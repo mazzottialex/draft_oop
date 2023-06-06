@@ -13,6 +13,10 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import data.Player;
+
+/**
+ * A class that represents a thread for scraping player data
+ */
 public class RunnableScrapingData implements Runnable {
     private final int myId;
     private final int nThread;
@@ -20,21 +24,45 @@ public class RunnableScrapingData implements Runnable {
     private final String url;
     private Boolean flag = true;
     private Boolean flagChrome;
-    public RunnableScrapingData(final int myId, final int nThread, final String stagione, final Boolean flagChrome) {
+    
+    /**
+     * Creates an instance of RunnableScrapingData
+     *
+     * @param myId       The ID of the current thread
+     * @param nThread    The total number of threads
+     * @param season   The season to scrape data for
+     * @param flagChrome A flag indicating whether to use the Chrome or Firefox driver
+     */
+    public RunnableScrapingData(final int myId, final int nThread, final String season, final Boolean flagChrome) {
         this.myId = myId;
         this.nThread = nThread;
         this.url =
-        		"https://www.kickest.it/it/serie-a/statistiche/giocatori/tabellone/" + stagione + "?iframe=yes";
+        		"https://www.kickest.it/it/serie-a/statistiche/giocatori/tabellone/" + season + "?iframe=yes";
         this.flagChrome = flagChrome;
     }
+    
+    /**
+     * Returns the list of players.
+     *
+     * @return The list of players.
+     */
     public List<Player> getLi() {
         return li;
     }
+    
+    /**
+     * Check if it finishes correctly
+     *
+     * @return True if the flag is correctly, False otherwise
+     */
     public Boolean check() {
         return flag;
     }
+    
+    /**
+     * Executes the thread
+     */
     public void run() {
-    	final List<String> stagioni = new ArrayList<>();
     	final WebDriver driver;
     	if(flagChrome) {
 	    	final ChromeOptions options = new ChromeOptions();

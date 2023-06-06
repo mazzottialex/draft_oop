@@ -12,6 +12,9 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import data.Player;
 import utils.Pair;
 
+/**
+ * Implementation of the Scraping interface for data scraping
+ */
 public class ScrapingImpl implements Scraping {
     private final List<Player> li = new ArrayList<>();
     private List<String> stagioni = new ArrayList<>();
@@ -20,6 +23,12 @@ public class ScrapingImpl implements Scraping {
     private final int nThread;
     private Boolean flagChrome=false;
     private Boolean flagFirefox=false;
+    
+    /**
+     * Constructs a ScrapingImpl object with the specified number of threads
+     *
+     * @param nThread The number of threads to use for scraping
+     */
     public ScrapingImpl(final int nThread) {
         this.nThread = nThread;
         if(checkBrowser("google-chrome")) {
@@ -30,20 +39,30 @@ public class ScrapingImpl implements Scraping {
         }
 
     }
+    
+    /**
+     * Constructs a ScrapingImpl object with a default number of threads (7)
+     */
     public ScrapingImpl() {
         this(7); //default
     }
-    public List<Player> getLiCalciatori() {
+    
+    @Override
+    public List<Player> getLiPlayer() {
         return li;
     }
-    public List<String> getStagioni() {
+    
+    @Override
+    public List<String> getLiSeason() {
         return stagioni;
     }
-    public Boolean ReadTable(final String stagione) {
+    
+    @Override
+    public Boolean readTable(final String season) {
     	if(flagChrome || flagFirefox) {
 	    	final List<Pair<RunnableScrapingData, Thread>> liThr = new ArrayList<>();
 	        for (int i = 0; i < nThread; i++) {
-	        	final RunnableScrapingData runnable = new RunnableScrapingData(i, nThread, stagione, flagChrome);
+	        	final RunnableScrapingData runnable = new RunnableScrapingData(i, nThread, season, flagChrome);
 	        	final Thread thr = new Thread(runnable);
 	            liThr.add(new Pair<>(runnable, thr));
 	            thr.start();
@@ -65,11 +84,15 @@ public class ScrapingImpl implements Scraping {
     	else
     		return false;
     }
-    public Boolean ReadTable() {
+    
+    @Override
+    public Boolean readTable() {
     	final String defaultStagione = "2022-2023";
-        return this.ReadTable(defaultStagione);
+        return this.readTable(defaultStagione);
     }
-    public Boolean readStagioni() {
+    
+    @Override
+    public Boolean readSeason() {
     	if(flagChrome || flagFirefox) {
 	    	//Nascondere pagine chrome
 	    	final List<String> stagioni = new ArrayList<>();
@@ -101,9 +124,14 @@ public class ScrapingImpl implements Scraping {
     	else
     		return false;
     }
+    
+    /**
+     * Checks if the specified browser is installed on the system
+     *
+     * @param browser The name of browser
+     */
     private static boolean checkBrowser(final String browser) {
         String os = System.getProperty("os.name").toLowerCase();
-
         if (os.contains("win")) {
             // Windows
             String pathprogrammi = System.getenv("ProgramFiles");
