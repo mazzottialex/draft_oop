@@ -21,7 +21,7 @@ import simulation.SimulatingMatchImpl;
  * @author Davide Braccini
  *
  */
-public class LogicsTorneoImpl implements LogicsTorneo {
+public class LogicsTournamentImpl implements LogicsTournament {
 
     private static final long serialVersionUID = 1L;
     private static final int NUM_AVVERSARI = 15;
@@ -40,15 +40,15 @@ public class LogicsTorneoImpl implements LogicsTorneo {
     private boolean elimThisTurn;
 
     /**
-     * Constructor of LogicsTorneoImpl.
+     * Constructor of LogicsTournamentImpl.
      * 
      * @param squadra the user's team
      * @param li      the list of all the players in Serie A
-     * @throws FileNotFoundException
-     * @throws ClassNotFoundException
-     * @throws IOException
+     * @throws FileNotFoundException if the file is not found
+     * @throws ClassNotFoundException if the class is not found
+     * @throws IOException an I/O error occurs
      */
-    public LogicsTorneoImpl(final Team squadra, final List<Player> li)
+    public LogicsTournamentImpl(final Team squadra, final List<Player> li)
             throws FileNotFoundException, ClassNotFoundException, IOException {
 
         this.listSquadre = new ArrayList<>();

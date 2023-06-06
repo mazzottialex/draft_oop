@@ -20,8 +20,8 @@ import javax.swing.border.EmptyBorder;
 import data.Player;
 import data.Team;
 import logics.LogicsShootoutImpl;
-import logics.LogicsTorneo;
-import logics.LogicsTorneoImpl;
+import logics.LogicsTournament;
+import logics.LogicsTournamentImpl;
 import utils.RoundedBorder;
 
 /**
@@ -30,7 +30,7 @@ import utils.RoundedBorder;
  * @author Davide Braccini
  *
  */
-public class Torneo extends Base {
+public class Tournament extends Base {
 
     private static final long serialVersionUID = 1L;
     private static final int NUM_TURN_1 = 16;
@@ -47,7 +47,7 @@ public class Torneo extends Base {
     private static final int NUM_TEXT_SINGLE = 7;
     private static final int NUM_TEXT_DOUBLE = 14;
     private static final int ROUND = 20;
-    private final LogicsTorneo logTor;
+    private final LogicsTournament logTor;
     private final JPanel panelSud = new JPanel(new FlowLayout(FlowLayout.RIGHT));
     private final GridLayout gl = new GridLayout(6, 1);
     private final JPanel panelCenter = new JPanel(gl);
@@ -78,17 +78,17 @@ public class Torneo extends Base {
     private final Color panelColor = new Color(0, 64, 128);
 
     /**
-     * Constructor of Torneo, add the necessary graphics components.
+     * Constructor of Tournament, add the necessary graphics components.
      * 
      * @param squadra the user's team
      * @param li      the list of all the players in Serie A
-     * @throws FileNotFoundException
-     * @throws ClassNotFoundException
-     * @throws IOException
+     * @throws FileNotFoundException if the file is not found
+     * @throws ClassNotFoundException if the class is not found
+     * @throws IOException an I/O error occurs
      */
-    public Torneo(final Team squadra, final List<Player> li)
+    public Tournament(final Team squadra, final List<Player> li)
             throws FileNotFoundException, ClassNotFoundException, IOException {
-        this.logTor = new LogicsTorneoImpl(squadra, li);
+        this.logTor = new LogicsTournamentImpl(squadra, li);
         this.listAvversarie = logTor.getListAvversari();
         this.contentPane.setLayout(new BorderLayout());
         // Aggiungo il bottone Simula nel panelSud

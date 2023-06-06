@@ -21,7 +21,7 @@ import manageData.ExtractDataImpl;
  * @author Davide Braccini
  *
  */
-public class LogicsCreaSquadraImpl implements LogicsCreaSquadra {
+public class LogicsCreateTeamImpl implements LogicsCreateTeam {
 
     private static final long serialVersionUID = 1L;
     private static final int NUM_PLAYER_IN_TEAM = 11;
@@ -43,16 +43,16 @@ public class LogicsCreaSquadraImpl implements LogicsCreaSquadra {
     private Random r = new Random();
 
     /**
-     * Constructor of LogicsCreaSquadraImpl.
+     * Constructor of LogicsCreateTeamImpl.
      * 
      * @param nomeSquadra the name of the team
      * @param stemma      the arms
      * @param li          the list of all the players in Serie A
-     * @throws FileNotFoundException
-     * @throws ClassNotFoundException
-     * @throws IOException
+     * @throws FileNotFoundException if the file is not found
+     * @throws ClassNotFoundException if the class is not found
+     * @throws IOException an I/O error occurs
      */
-    public LogicsCreaSquadraImpl(final String nomeSquadra, final String stemma, final List<Player> li)
+    public LogicsCreateTeamImpl(final String nomeSquadra, final String stemma, final List<Player> li)
             throws FileNotFoundException, ClassNotFoundException, IOException {
         this.moduloSelect = Module.M343;
         // this.md = new ManageDataImpl(stagione);
@@ -273,7 +273,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreaSquadra {
      */
     @Override
     public boolean teamComplete() {
-        if (this.liSquadra.size() == LogicsCreaSquadraImpl.NUM_PLAYER_IN_TEAM) {
+        if (this.liSquadra.size() == LogicsCreateTeamImpl.NUM_PLAYER_IN_TEAM) {
             return true;
         }
         return false;

@@ -29,8 +29,8 @@ import java.util.ArrayList;
 //import javax.swing.*;
 import data.Player;
 import data.Module;
-import logics.LogicsCreaSquadraImpl;
-import logics.LogicsCreaSquadra;
+import logics.LogicsCreateTeamImpl;
+import logics.LogicsCreateTeam;
 //import manageData.LogicsFile;
 //import manageData.LogicsFileImpl;
 //import v2.gui.*;
@@ -43,7 +43,7 @@ import logics.LogicsCreaSquadra;
  * @author Davide Braccini
  *
  */
-public class CreaSquadra extends Base {
+public class CreateTeam extends Base {
 
     private static final long serialVersionUID = 1L;
     private static final int MAX_FOR_ROW = 2;
@@ -61,7 +61,7 @@ public class CreaSquadra extends Base {
     private static final int GRAND3 = 300;
     private static final int GRAND35 = 350;
     private static final int GRAND1 = 100;
-    private LogicsCreaSquadra log;
+    private LogicsCreateTeam log;
     private final JFrame frameModulo;
     private final JFrame frameCalciatori;
     private final JPanel panelSud = new JPanel(new GridBagLayout()); // panel Sud del frame principale
@@ -81,18 +81,18 @@ public class CreaSquadra extends Base {
     private final Color panelColor = new Color(0, 64, 128);
 
     /**
-     * Constructor of CreaSquadra, add the necessary graphics components.
+     * Constructor of CreateTeam, add the necessary graphics components.
      * 
      * @param nomeSquadra the String that contains the name of the team
      * @param stemma      the String that contains the arms of the team
      * @param li          the list of all the players in Serie A
-     * @throws FileNotFoundException
-     * @throws ClassNotFoundException
-     * @throws IOException
+     * @throws FileNotFoundException if the file is not found
+     * @throws ClassNotFoundException if the class is not found
+     * @throws IOException an I/O error occurs
      */
-    public CreaSquadra(final String nomeSquadra, final String stemma, final List<Player> li)
+    public CreateTeam(final String nomeSquadra, final String stemma, final List<Player> li)
             throws FileNotFoundException, ClassNotFoundException, IOException {
-        this.log = new LogicsCreaSquadraImpl(nomeSquadra, stemma, li);
+        this.log = new LogicsCreateTeamImpl(nomeSquadra, stemma, li);
         // inizializzo il bottone per i giocatori che seleziono
         // this.buttonSelect = new JButton();
         // Mi occupo del frame principale
@@ -120,7 +120,7 @@ public class CreaSquadra extends Base {
                      * TorneoV2(log.getSquadra(), li));
                      */
                     try {
-                        Base tempTorneo = new Torneo(log.getSquadra(), li);
+                        Base tempTorneo = new Tournament(log.getSquadra(), li);
                         changeJPanel(tempTorneo);
                         JFrame topFrame = (JFrame) SwingUtilities.getAncestorOfClass(JFrame.class,
                                 tempTorneo.getPanel());
@@ -214,7 +214,7 @@ public class CreaSquadra extends Base {
             });
             panelModuloCenter.add(buttons[i], gbc);
             gbc.gridx++;
-            if (gbc.gridx == CreaSquadra.MAX_FOR_ROW) {
+            if (gbc.gridx == CreateTeam.MAX_FOR_ROW) {
                 gbc.gridx = 0;
                 gbc.gridy++;
             }
@@ -481,7 +481,7 @@ public class CreaSquadra extends Base {
         this.panelCalciatoriCenter.removeAll();
         this.panelCalciatoriCenter.repaint();
         // creo i 5 bottoni nel frame calciatori
-        this.buttonsPlayer = new JButton[CreaSquadra.NUM_PLAYER];
+        this.buttonsPlayer = new JButton[CreateTeam.NUM_PLAYER];
         // gbc.insets = new Insets(5,5,5,5);
         // gbc.ipadx = 30;
         // gbc.ipady = 40;
@@ -503,7 +503,7 @@ public class CreaSquadra extends Base {
                 }
             });
             gbc.gridx++;
-            if (gbc.gridx == CreaSquadra.MAX_FOR_ROW) {
+            if (gbc.gridx == CreateTeam.MAX_FOR_ROW) {
                 gbc.gridx = 0;
                 gbc.gridy++;
             }
