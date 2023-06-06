@@ -40,7 +40,7 @@ public class SimulatingMatchImpl implements SimulatingMatch {
     private static final double COST_SUB_OFF = 5; // da aumentare a 7
     private static final double COST_DIV_DEF_OFF_CR = 5;
     private static final int MINUTES_REG = 90;
-    private final static int MINUTES_EXTRA = 120;
+    private static final int MINUTES_EXTRA = 120;
 
     /**
      * Constructs a new {@code SimulatingMatchImpl} object with the specified teams.
@@ -51,7 +51,7 @@ public class SimulatingMatchImpl implements SimulatingMatch {
      * @throws ClassNotFoundException   if the class is not found during deserialization
      * @throws IOException              if an I/O error occurs during data extraction
      */
-    public SimulatingMatchImpl(Team t1, Team t2)
+    public SimulatingMatchImpl(final Team t1, final Team t2)
     throws FileNotFoundException, ClassNotFoundException, IOException {
         sf = new SimulatingFunctionsImpl();
         this.t1 = t1;
@@ -79,22 +79,22 @@ public class SimulatingMatchImpl implements SimulatingMatch {
     }
 
     @Override
-    public double defensivePerformance(Team team)
-    		throws FileNotFoundException, ClassNotFoundException, IOException {
+    public double defensivePerformance(final Team team)
+            throws FileNotFoundException, ClassNotFoundException, IOException {
         double dp = 0;
         if (team == t1) {
-            dp = (defensiveRatings1 + new ExtractDataImpl(t1.getStarting()).getListByPos("D").size() + lockdownDefense1 -
-                    2 * concededGoals1 - 2 * owngoals1 + 3 * savedPenalties1 - COST_SUB_DEF) / COST_DIV_DEF_OFF_CR;
+            dp = (defensiveRatings1 + new ExtractDataImpl(t1.getStarting()).getListByPos("D").size() + lockdownDefense1
+                    - 2 * concededGoals1 - 2 * owngoals1 + 3 * savedPenalties1 - COST_SUB_DEF) / COST_DIV_DEF_OFF_CR;
         } else if (team == t2) {
-            dp = (defensiveRatings2 + new ExtractDataImpl(t2.getStarting()).getListByPos("D").size() + lockdownDefense2 -
-                    2 * concededGoals2 - 2 * owngoals2 + 3 * savedPenalties2 - COST_SUB_DEF) / COST_DIV_DEF_OFF_CR;
+            dp = (defensiveRatings2 + new ExtractDataImpl(t2.getStarting()).getListByPos("D").size() + lockdownDefense2
+                    - 2 * concededGoals2 - 2 * owngoals2 + 3 * savedPenalties2 - COST_SUB_DEF) / COST_DIV_DEF_OFF_CR;
         }
         return dp;
     }
 
     @Override
-    public double scoringAbility(Team team)
-    		throws FileNotFoundException, ClassNotFoundException, IOException {
+    public double scoringAbility(final Team team)
+            throws FileNotFoundException, ClassNotFoundException, IOException {
         double sa = 0;
         if (team == t1) {
             sa = scoredGoals1 + owngoals2 + scoredPenalties1;
@@ -105,8 +105,8 @@ public class SimulatingMatchImpl implements SimulatingMatch {
     }
 
     @Override
-    public double offensivePerformance(Team team)
-    		throws FileNotFoundException, ClassNotFoundException, IOException {
+    public double offensivePerformance(final Team team)
+            throws FileNotFoundException, ClassNotFoundException, IOException {
         double op = 0;
         if (team == t1) {
             op = (offensiveRatings1 + (scoringAbility(team) / 2) - COST_SUB_OFF) / COST_DIV_DEF_OFF_CR;
@@ -118,7 +118,7 @@ public class SimulatingMatchImpl implements SimulatingMatch {
 
     @Override
     public Map<Team, Integer> result()
-    throws FileNotFoundException, ClassNotFoundException, IOException {
+            throws FileNotFoundException, ClassNotFoundException, IOException {
         int team1 = (int) Math.round(Math.min(scoringAbility(t1),
             (offensivePerformance(t1) - defensivePerformance(t2))));
         int team2 = (int) Math.round(Math.min(scoringAbility(t2),
@@ -131,26 +131,25 @@ public class SimulatingMatchImpl implements SimulatingMatch {
 
     @Override
     public Map<Team, Integer> resultExtra()
-    		throws FileNotFoundException, ClassNotFoundException, IOException {
+            throws FileNotFoundException, ClassNotFoundException, IOException {
         return resultSub(MINUTES_REG);
     }
 
     @Override
-    public Map<Team, Integer> resultSub(int minute)
-    		throws FileNotFoundException, ClassNotFoundException, IOException {
+    public Map<Team, Integer> resultSub(final int minute)
+            throws FileNotFoundException, ClassNotFoundException, IOException {
         Map<Team, Integer> map = new HashMap<>();
         if (minute < MINUTES_REG) {
             map.put(t1,
-                (int)(result().get(t1) * (double)((MINUTES_REG - minute) / MINUTES_REG)));
-            map.put(t2, (int)(result().get(t1) *
-                (double)((MINUTES_REG - minute) / MINUTES_REG)));
+                (int) (result().get(t1) * (double) ((MINUTES_REG - minute) / MINUTES_REG)));
+            map.put(t2, (int)(result().get(t1)
+                * (double) ((MINUTES_REG - minute) / MINUTES_REG)));
         } else {
             map.put(t1,
-                (int)(result().get(t1) * (double)((MINUTES_EXTRA - MINUTES_REG - minute) / MINUTES_REG)));
-            map.put(t2, (int)(result().get(t1) *
-                (double)((MINUTES_EXTRA - MINUTES_REG - minute) / MINUTES_REG)));
+                (int) (result().get(t1) * (double) ((MINUTES_EXTRA - MINUTES_REG - minute) / MINUTES_REG)));
+            map.put(t2, (int)(result().get(t1)
+                * (double) ((MINUTES_EXTRA - MINUTES_REG - minute) / MINUTES_REG)));
         }
         return map;
     }
-
 }

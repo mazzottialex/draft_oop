@@ -10,8 +10,8 @@ import data.Team;
  * Implementation of the {@code SimulatingMatch} interface that simulates a match between two teams.
  */
 public interface SimulatingMatch {
-	
-	/**
+
+    /**
      * Calculates the defensive performance of a team.
      *
      * @param team the team for which to calculate the defensive performance
@@ -21,7 +21,7 @@ public interface SimulatingMatch {
      * @throws IOException              if an I/O error occurs during data extraction
      */
     double defensivePerformance(Team team)
-    		throws FileNotFoundException, ClassNotFoundException, IOException;
+            throws FileNotFoundException, ClassNotFoundException, IOException;
 
     /**
      * Calculates the scoring ability of a team.
@@ -33,7 +33,7 @@ public interface SimulatingMatch {
      * @throws IOException              if an I/O error occurs during data extraction
      */
     double scoringAbility(Team team)
-    		throws FileNotFoundException, ClassNotFoundException, IOException;
+            throws FileNotFoundException, ClassNotFoundException, IOException;
 
     /**
      * Calculates the offensive performance of a team.
@@ -45,7 +45,7 @@ public interface SimulatingMatch {
      * @throws IOException              if an I/O error occurs during data extraction
      */
     double offensivePerformance(Team team)
-    		throws FileNotFoundException, ClassNotFoundException, IOException;
+            throws FileNotFoundException, ClassNotFoundException, IOException;
 
     /**
      * Simulates the match and returns the result as a map of teams to their scores.
@@ -56,7 +56,7 @@ public interface SimulatingMatch {
      * @throws IOException              if an I/O error occurs during data extraction
      */
     Map<Team, Integer> result()
-    		throws FileNotFoundException, ClassNotFoundException, IOException;
+            throws FileNotFoundException, ClassNotFoundException, IOException;
 
     /**
      * Simulates the match and returns the result of the extra-time as a map of teams to their scores.
@@ -67,7 +67,7 @@ public interface SimulatingMatch {
      * @throws IOException              if an I/O error occurs during data extraction
      */
     Map<Team, Integer> resultExtra()
-    		throws FileNotFoundException, ClassNotFoundException, IOException;
+            throws FileNotFoundException, ClassNotFoundException, IOException;
 
     /**
      * Simulates the match from a given minute and returns the result as a map of teams to their scores.
@@ -79,5 +79,5 @@ public interface SimulatingMatch {
      * @throws IOException              if an I/O error occurs during data extraction
      */
     Map<Team, Integer> resultSub(int minute)
-    		throws FileNotFoundException, ClassNotFoundException, IOException;
+            throws FileNotFoundException, ClassNotFoundException, IOException;
 }

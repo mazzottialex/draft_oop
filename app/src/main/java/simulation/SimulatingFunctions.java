@@ -11,7 +11,7 @@ import data.Team;
  */
 public interface SimulatingFunctions {
 
-	/**
+    /**
      * Retrieves the number of fantasy goals conceded by the specified team.
      *
      * @param t the team
