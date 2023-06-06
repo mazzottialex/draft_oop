@@ -17,7 +17,7 @@ import manageData.ExtractDataImpl;
  */
 public class TeamOpponent implements Team {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     private final int id;
     private final String teamName;
     private final String logo;

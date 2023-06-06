@@ -110,7 +110,7 @@ public class TeamUser implements Team, Serializable {
         Player keeper = null;
         for (Player player: getStarting()) {
             if (player.getPos().equals("P")) {
-            	keeper = player;
+                keeper = player;
             }
         }
         return keeper;
@@ -120,4 +120,3 @@ public class TeamUser implements Team, Serializable {
         return "TeamUser [teamUser=" + teamName + "]";
     }
 }
-
