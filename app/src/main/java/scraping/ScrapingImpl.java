@@ -34,7 +34,7 @@ public class ScrapingImpl implements Scraping {
         //if(checkBrowser("google-chrome")) {
         	flagChrome=true;
         //}
-        //else if(checkBrowser("firefox")) {
+        System.out.print(checkBrowser("firefox"));
         	//flagFirefox=true;
         //}
 
@@ -133,10 +133,20 @@ public class ScrapingImpl implements Scraping {
     private static boolean checkBrowser(final String browser) {
         String os = System.getProperty("os.name").toLowerCase();
         if (os.contains("win")) {
-            // Windows
-            String pathprogrammi = System.getenv("ProgramFiles");
-            String pathBrowser = pathprogrammi + "\\" + browser + "\\" + browser + ".exe";
-            return new File(pathBrowser).exists();
+            String path1 = null;
+            String path2 = null;
+        	if(browser.equals(new String("google-chrome"))) {
+            	path1 = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\Chrome.exe";
+            	path2 = "C:\\Program Files\\Google\\Chrome\\Application\\Chrome.exe";
+            }
+        	else if(browser.equals(new String("firefox"))){
+        		path1 = "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe";
+            	path2 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
+        	}
+            if(new File(path1).exists() || new File(path2).exists()) {
+            	return true;
+            }
+        	
         } else if (os.contains("nix") || os.contains("nux") || os.contains("mac")) {
             // Linux
             String[] istruzione = { "which", browser }; //cerca browser tra i programmi
