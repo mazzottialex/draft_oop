@@ -7,21 +7,21 @@ import java.util.Map;
 import data.Team;
 
 public interface SimulatingMatch {
-    public double prestazioneDifensiva(int squadra)
+    double defensivePerformance(Team team)
     		throws FileNotFoundException, ClassNotFoundException, IOException;
 
-    public double capacitaRealizzativa(int squadra)
+    double scoringAbility(Team team)
     		throws FileNotFoundException, ClassNotFoundException, IOException;
 
-    public double prestazioneOffensiva(int squadra)
+    double offensivePerformance(Team team)
     		throws FileNotFoundException, ClassNotFoundException, IOException;
 
-    public Map<Team, Integer> risultato()
+    Map<Team, Integer> result()
     		throws FileNotFoundException, ClassNotFoundException, IOException;
 
-    public Map<Team, Integer> risultatoSuppl()
+    Map<Team, Integer> resultExtra()
     		throws FileNotFoundException, ClassNotFoundException, IOException;
 
-    public Map<Team, Integer> risultatoSub(int minuto)
+    Map<Team, Integer> resultSub(int minute)
     		throws FileNotFoundException, ClassNotFoundException, IOException;
 }

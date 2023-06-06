@@ -105,14 +105,14 @@ public class TorneoV2 extends Base {
                             if (!(turnoDaSimul.get(i) instanceof TeamUser)) {
                                 try {
                                     SimulatingMatch sim = new SimulatingMatchImpl(turnoDaSimul.get(i), turnoDaSimul.get(i + 1));
-                                    Iterator<Team> it = sim.risultato().keySet().iterator();
+                                    Iterator<Team> it = sim.result().keySet().iterator();
                                     Team s1 = it.next();
                                     Team s2 = it.next();
-                                    int score1 = sim.risultato().get(s1);
-                                    int score2 = sim.risultato().get(s2);
+                                    int score1 = sim.result().get(s1);
+                                    int score2 = sim.result().get(s2);
                                     if (score1 == score2) {
-                                        score1 = sim.risultatoSuppl().get(s1);
-                                        score2 = sim.risultatoSuppl().get(s2);
+                                        score1 = sim.resultExtra().get(s1);
+                                        score2 = sim.resultExtra().get(s2);
                                         if (score1 == score2) {
                                             LogicsShootout rigori = new LogicsShootoutImpl(s1, s2);
                                             liSquadreVinc.add(rigori.getWinner());
@@ -134,14 +134,14 @@ public class TorneoV2 extends Base {
                             if (!(turnoDaSimul.get(i) instanceof TeamUser)) {
                                 try {
                                     SimulatingMatch sim = new SimulatingMatchImpl(turnoDaSimul.get(i), turnoDaSimul.get(i + 1));
-                                    Iterator<Team> it = sim.risultato().keySet().iterator();
+                                    Iterator<Team> it = sim.result().keySet().iterator();
                                     Team s1 = it.next();
                                     Team s2 = it.next();
-                                    int score1 = sim.risultato().get(s1);
-                                    int score2 = sim.risultato().get(s2);
+                                    int score1 = sim.result().get(s1);
+                                    int score2 = sim.result().get(s2);
                                     if (score1 == score2) {
-                                        score1 = sim.risultatoSuppl().get(s1);
-                                        score2 = sim.risultatoSuppl().get(s2);
+                                        score1 = sim.resultExtra().get(s1);
+                                        score2 = sim.resultExtra().get(s2);
                                         if (score1 == score2) {
                                             LogicsShootout rigori = new LogicsShootoutImpl(s1, s2);
                                             liSquadreVinc.add(rigori.getWinner());

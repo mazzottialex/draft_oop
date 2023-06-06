@@ -11,159 +11,136 @@ import manageData.ExtractDataImpl;
 
 public class SimulatingMatchImpl implements SimulatingMatch {
     private SimulatingFunctions sf;
-    private Team s1;
-    private Team s2;
-    private Map<Player, Double> voti1;
-    private Map<Player, Double> voti2;
-    private int golSubiti1;
-    private int golSubiti2;
-    private int autogol1;
-    private int autogol2;
-    private int rigoriParati1;
-    private int rigoriParati2;
-    private double catenaccio1;
-    private double catenaccio2;
-    private Map<String, Double> votiMod1;
-    private Map<String, Double> votiMod2;
-    private double votoDif1;
-    private double votoDif2;
-    private double votoOff1;
-    private double votoOff2;
-    private int golFatti1;
-    private int golFatti2;
-    private int rigoriFatti1;
-    private int rigoriFatti2;
-    private static final double COST_SUB_DIFF = 14; // da aumentare di 1
-    private static final double COST_SUB_OFF = 5; // da aumentare di 2
-    private static final double COST_DIV_DIFF_OFF_CR = 5;
-    private static final int SQUADRA1 = 1;
-    private static final int SQUADRA2 = 2;
+    private Team t1;
+    private Team t2;
+    private Map<Player, Double> ratings1;
+    private Map<Player, Double> ratings2;
+    private int concededGoals1;
+    private int concededGoals2;
+    private int owngoals1;
+    private int owngoals2;
+    private int savedPenalties1;
+    private int savedPenalties2;
+    private double lockdownDefense1;
+    private double lockdownDefense2;
+    private Map<String, Double> modifiedRatings1;
+    private Map<String, Double> modifiedRatings2;
+    private double defensiveRatings1;
+    private double defensiveRatings2;
+    private double offensiveRatings1;
+    private double offensiveRatings2;
+    private int scoredGoals1;
+    private int scoredGoals2;
+    private int scoredPenalties1;
+    private int scoredPenalties2;
+    private static final double COST_SUB_DEF = 14; // da aumentare a 15
+    private static final double COST_SUB_OFF = 5; // da aumentare a 7
+    private static final double COST_DIV_DEF_OFF_CR = 5;
     private static final int MINUTES_REG = 90;
-    private final static int MINUTES_SUPPL = 120;
+    private final static int MINUTES_EXTRA = 120;
 
-    public SimulatingMatchImpl(Team s1, Team s2)
+    public SimulatingMatchImpl(Team t1, Team t2)
     throws FileNotFoundException, ClassNotFoundException, IOException {
         sf = new SimulatingFunctionsImpl();
-        this.s1 = s1;
-        this.s2 = s2;
-        voti1 = SimulatingFunctionsImpl.getFantasyRantings(this.s1.getStarting());
-        voti2 = SimulatingFunctionsImpl.getFantasyRantings(this.s2.getStarting());
-        golSubiti1 = sf.getFantasyConcededGoals(this.s1);
-        golSubiti2 = sf.getFantasyConcededGoals(this.s2);
-        autogol1 = sf.getFantasyOwngoals(this.s1);
-        autogol2 = sf.getFantasyOwngoals(this.s2);
-        rigoriParati1 = sf.getFantasySavedPenalties(this.s1);
-        rigoriParati2 = sf.getFantasySavedPenalties(this.s2);
-        catenaccio1 = SimulatingFunctionsImpl.getLockdownDefenseRating(this.s1, voti1);
-        catenaccio2 = SimulatingFunctionsImpl.getLockdownDefenseRating(this.s2, voti2);
-        votiMod1 = SimulatingFunctionsImpl.modifiedFantasyRatings(this.s1, voti1);
-        votiMod2 = SimulatingFunctionsImpl.modifiedFantasyRatings(this.s2, voti2);
-        votoDif1 = sf.getFantasyDefensiveRating(s1, votiMod1);
-        votoDif2 = sf.getFantasyDefensiveRating(s2, votiMod2);
-        votoOff1 = sf.getFantasyOffensiveRating(s1, votiMod1);
-        votoOff2 = sf.getFantasyOffensiveRating(s2, votiMod2);
-        golFatti1 = sf.getFantasyScoredGoals(s1);
-        golFatti2 = sf.getFantasyScoredGoals(s2);
-        rigoriFatti1 = sf.getDeltaScoredSavedPenalties(s1);
-        rigoriFatti2 = sf.getDeltaScoredSavedPenalties(s2);
+        this.t1 = t1;
+        this.t2 = t2;
+        ratings1 = SimulatingFunctionsImpl.getFantasyRantings(this.t1.getStarting());
+        ratings2 = SimulatingFunctionsImpl.getFantasyRantings(this.t2.getStarting());
+        concededGoals1 = sf.getFantasyConcededGoals(this.t1);
+        concededGoals2 = sf.getFantasyConcededGoals(this.t2);
+        owngoals1 = sf.getFantasyOwngoals(this.t1);
+        owngoals2 = sf.getFantasyOwngoals(this.t2);
+        savedPenalties1 = sf.getFantasySavedPenalties(this.t1);
+        savedPenalties2 = sf.getFantasySavedPenalties(this.t2);
+        lockdownDefense1 = SimulatingFunctionsImpl.getLockdownDefenseRating(this.t1, ratings1);
+        lockdownDefense2 = SimulatingFunctionsImpl.getLockdownDefenseRating(this.t2, ratings2);
+        modifiedRatings1 = SimulatingFunctionsImpl.modifiedFantasyRatings(this.t1, ratings1);
+        modifiedRatings2 = SimulatingFunctionsImpl.modifiedFantasyRatings(this.t2, ratings2);
+        defensiveRatings1 = sf.getFantasyDefensiveRating(t1, modifiedRatings1);
+        defensiveRatings2 = sf.getFantasyDefensiveRating(t2, modifiedRatings2);
+        offensiveRatings1 = sf.getFantasyOffensiveRating(t1, modifiedRatings1);
+        offensiveRatings2 = sf.getFantasyOffensiveRating(t2, modifiedRatings2);
+        scoredGoals1 = sf.getFantasyScoredGoals(t1);
+        scoredGoals2 = sf.getFantasyScoredGoals(t2);
+        scoredPenalties1 = sf.getDeltaScoredSavedPenalties(t1);
+        scoredPenalties2 = sf.getDeltaScoredSavedPenalties(t2);
     }
 
     // prestazioneDifensiva, se squadra == 1 -> s1; se squadra == 2 -> s2
     @Override
-    public double prestazioneDifensiva(int squadra)
+    public double defensivePerformance(Team team)
     		throws FileNotFoundException, ClassNotFoundException, IOException {
-        double pd = 0;
-        switch (squadra) {
-            case SQUADRA1:
-                pd = (votoDif1 + new ExtractDataImpl(s1.getStarting()).getListByPos("D").size() + catenaccio1 -
-                    2 * golSubiti1 - 2 * autogol1 + 3 * rigoriParati1 - COST_SUB_DIFF) / COST_DIV_DIFF_OFF_CR;
-                break;
-
-            case SQUADRA2:
-                pd = (votoDif2 + new ExtractDataImpl(s2.getStarting()).getListByPos("D").size() + catenaccio2 -
-                    2 * golSubiti2 - 2 * autogol2 + 3 * rigoriParati2 - COST_SUB_DIFF) / COST_DIV_DIFF_OFF_CR;
-                break;
-
-            default:
-                break;
+        double dp = 0;
+        if (team == t1) {
+            dp = (defensiveRatings1 + new ExtractDataImpl(t1.getStarting()).getListByPos("D").size() + lockdownDefense1 -
+                    2 * concededGoals1 - 2 * owngoals1 + 3 * savedPenalties1 - COST_SUB_DEF) / COST_DIV_DEF_OFF_CR;
+        } else if (team == t2) {
+            dp = (defensiveRatings2 + new ExtractDataImpl(t2.getStarting()).getListByPos("D").size() + lockdownDefense2 -
+                    2 * concededGoals2 - 2 * owngoals2 + 3 * savedPenalties2 - COST_SUB_DEF) / COST_DIV_DEF_OFF_CR;
         }
-        return pd;
+        return dp;
     }
 
     // capacitaRealizzativa
     @Override
-    public double capacitaRealizzativa(int squadra)
+    public double scoringAbility(Team team)
     		throws FileNotFoundException, ClassNotFoundException, IOException {
-        double cr = 0;
-        switch (squadra) {
-            case SQUADRA1:
-                cr = golFatti1 + autogol2 + rigoriFatti1;
-                break;
-                
-            case SQUADRA2:
-                cr = golFatti2 + autogol1 + rigoriFatti2;
-                break;
-
-            default:
-                break;
+        double sa = 0;
+        if (team == t1) {
+            sa = scoredGoals1 + owngoals2 + scoredPenalties1;
+        } else if (team == t2) {
+            sa = scoredGoals2 + owngoals1 + scoredPenalties2;
         }
-        return cr;
+        return sa;
     }
 
     // prestazioneOffensiva
     @Override
-    public double prestazioneOffensiva(int squadra)
+    public double offensivePerformance(Team team)
     		throws FileNotFoundException, ClassNotFoundException, IOException {
-        double po = 0;
-        switch (squadra) {
-            case SQUADRA1:
-                po = (votoOff1 + (capacitaRealizzativa(squadra) / 2) - COST_SUB_OFF) / COST_DIV_DIFF_OFF_CR;
-                break;
-                
-            case SQUADRA2:
-                po = (votoOff2 + (capacitaRealizzativa(squadra) / 2) - COST_SUB_OFF) / COST_DIV_DIFF_OFF_CR;
-                break;
-
-            default:
-                break;
+        double op = 0;
+        if (team == t1) {
+            op = (offensiveRatings1 + (scoringAbility(team) / 2) - COST_SUB_OFF) / COST_DIV_DEF_OFF_CR;
+        } else if (team == t2) {
+            op = (offensiveRatings2 + (scoringAbility(team) / 2) - COST_SUB_OFF) / COST_DIV_DEF_OFF_CR;
         }
-        return po;
+        return op;
     }
 
     // risultatoFinale
     @Override
-    public Map<Team, Integer> risultato()
+    public Map<Team, Integer> result()
     throws FileNotFoundException, ClassNotFoundException, IOException {
-        int sq1 = (int) Math.round(Math.min(capacitaRealizzativa(SQUADRA1),
-            (prestazioneOffensiva(SQUADRA1) - prestazioneDifensiva(SQUADRA2))));
-        int sq2 = (int) Math.round(Math.min(capacitaRealizzativa(SQUADRA2),
-            (prestazioneOffensiva(SQUADRA2) - prestazioneDifensiva(SQUADRA1))));
-        Map<Team, Integer> map = new HashMap < > ();
-        map.put(this.s1, sq1 >= 0 ? sq1 : 0);
-        map.put(this.s2, sq2 >= 0 ? sq2 : 0);
+        int team1 = (int) Math.round(Math.min(scoringAbility(t1),
+            (offensivePerformance(t1) - defensivePerformance(t2))));
+        int team2 = (int) Math.round(Math.min(scoringAbility(t2),
+            (offensivePerformance(t2) - defensivePerformance(t1))));
+        Map<Team, Integer> map = new HashMap<>();
+        map.put(this.t1, team1 >= 0 ? team1 : 0);
+        map.put(this.t2, team2 >= 0 ? team2 : 0);
         return map;
     }
 
     @Override
-    public Map<Team, Integer> risultatoSuppl()
+    public Map<Team, Integer> resultExtra()
     		throws FileNotFoundException, ClassNotFoundException, IOException {
-        return risultatoSub(MINUTES_REG);
+        return resultSub(MINUTES_REG);
     }
 
     @Override
-    public Map<Team, Integer> risultatoSub(int minuto)
+    public Map<Team, Integer> resultSub(int minute)
     		throws FileNotFoundException, ClassNotFoundException, IOException {
         Map<Team, Integer> map = new HashMap<>();
-        if (minuto < MINUTES_REG) {
-            map.put(s1,
-                (int)(risultato().get(s1) * (double)((MINUTES_REG - minuto) / MINUTES_REG)));
-            map.put(s2, (int)(risultato().get(s1) *
-                (double)((MINUTES_REG - minuto) / MINUTES_REG)));
+        if (minute < MINUTES_REG) {
+            map.put(t1,
+                (int)(result().get(t1) * (double)((MINUTES_REG - minute) / MINUTES_REG)));
+            map.put(t2, (int)(result().get(t1) *
+                (double)((MINUTES_REG - minute) / MINUTES_REG)));
         } else {
-            map.put(s1,
-                (int)(risultato().get(s1) * (double)((MINUTES_SUPPL - MINUTES_REG - minuto) / MINUTES_REG)));
-            map.put(s2, (int)(risultato().get(s1) *
-                (double)((MINUTES_SUPPL - MINUTES_REG - minuto) / MINUTES_REG)));
+            map.put(t1,
+                (int)(result().get(t1) * (double)((MINUTES_EXTRA - MINUTES_REG - minute) / MINUTES_REG)));
+            map.put(t2, (int)(result().get(t1) *
+                (double)((MINUTES_EXTRA - MINUTES_REG - minute) / MINUTES_REG)));
         }
         return map;
     }

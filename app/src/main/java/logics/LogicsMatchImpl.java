@@ -47,18 +47,18 @@ public class LogicsMatchImpl implements LogicsMatch {
     public void scorers(final int time) throws FileNotFoundException, ClassNotFoundException, IOException {
         if (time == REG) {
             do {
-                list1 = getGoalsNum(sim.risultato().get(t1), time);
-                list2 = getGoalsNum(sim.risultato().get(t2), time);
+                list1 = getGoalsNum(sim.result().get(t1), time);
+                list2 = getGoalsNum(sim.result().get(t2), time);
             } while (containsAny(list1, list2));
         } else if (time == EXTRA) {
             do {
-                list1 = getGoalsNum(sim.risultatoSuppl().get(t1), time);
-                list2 = getGoalsNum(sim.risultatoSuppl().get(t2), time);
+                list1 = getGoalsNum(sim.resultExtra().get(t1), time);
+                list2 = getGoalsNum(sim.resultExtra().get(t2), time);
             } while (containsAny(list1, list2));
         } else {
             do {
-                list1 = getGoalsNum(sim.risultatoSub(time).get(t1), time);
-                list2 = getGoalsNum(sim.risultatoSub(time).get(t2), time);
+                list1 = getGoalsNum(sim.resultSub(time).get(t1), time);
+                list2 = getGoalsNum(sim.resultSub(time).get(t2), time);
             } while (containsAny(list1, list2));
         }
     }
