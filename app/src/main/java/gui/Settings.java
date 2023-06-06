@@ -90,7 +90,7 @@ public class Settings extends Base {
                 if (!textFieldTeamName.getText().equals(new String("")))
                     log.setTeamName(textFieldTeamName.getText());
                 try {
-					changeJPanel(new CreaSquadra(log.getTeamName(), log.getLogo(), log.getLi()));
+					changeJPanel(new CreateTeam(log.getTeamName(), log.getLogo(), log.getLi()));
 				} catch (ClassNotFoundException | IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

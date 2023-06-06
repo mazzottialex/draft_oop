@@ -15,7 +15,7 @@ import data.Team;
  * @author Davide Braccini
  *
  */
-public interface LogicsTorneo extends Serializable {
+public interface LogicsTournament extends Serializable {
 
     /**
      * 

@@ -14,7 +14,7 @@ import manageData.ExtractData;
  * @author Davide Braccini
  *
  */
-public interface LogicsCreaSquadra extends Serializable {
+public interface LogicsCreateTeam extends Serializable {
 
     /**
      * 
