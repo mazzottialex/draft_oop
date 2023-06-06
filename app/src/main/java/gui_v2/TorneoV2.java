@@ -26,8 +26,8 @@ import gui.Start;
 import gui.utilsGUI;
 import logics.CreateOpponentTeams;
 import logics.CreateOpponentTeamsImpl;
-import logics.LogicsRigori;
-import logics.LogicsRigoriImpl;
+import logics.LogicsShootout;
+import logics.LogicsShootoutImpl;
 import simulation.SimulatingMatch;
 import simulation.SimulatingMatchImpl;
 public class TorneoV2 extends Base {
@@ -114,7 +114,7 @@ public class TorneoV2 extends Base {
                                         score1 = sim.risultatoSuppl().get(s1);
                                         score2 = sim.risultatoSuppl().get(s2);
                                         if (score1 == score2) {
-                                            LogicsRigori rigori = new LogicsRigoriImpl(s1, s2);
+                                            LogicsShootout rigori = new LogicsShootoutImpl(s1, s2);
                                             liSquadreVinc.add(rigori.getWinner());
                                         } else {
                                             liSquadreVinc.add(score1 > score2 ? s1 : s2);
@@ -143,7 +143,7 @@ public class TorneoV2 extends Base {
                                         score1 = sim.risultatoSuppl().get(s1);
                                         score2 = sim.risultatoSuppl().get(s2);
                                         if (score1 == score2) {
-                                            LogicsRigori rigori = new LogicsRigoriImpl(s1, s2);
+                                            LogicsShootout rigori = new LogicsShootoutImpl(s1, s2);
                                             liSquadreVinc.add(rigori.getWinner());
                                         } else {
                                             liSquadreVinc.add(score1 > score2 ? s1 : s2);

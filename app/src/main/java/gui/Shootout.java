@@ -20,8 +20,8 @@ import javax.swing.SwingConstants;
 
 import data.Player;
 import data.Team;
-import logics.LogicsRigori;
-import logics.LogicsRigoriImpl;
+import logics.LogicsShootout;
+import logics.LogicsShootoutImpl;
 import utils.Pair;
 
 /**
@@ -44,7 +44,7 @@ public class Shootout extends Base {
     private int totShoots;
     private Team winner;
     private JButton closeButton;
-    private LogicsRigori logics;
+    private LogicsShootout logics;
     private Map<Integer, Pair<Player, String>> shoootout1;
     private Map<Integer, Pair<Player, String>> shootout2;
     private JPanel panel;
@@ -69,7 +69,7 @@ public class Shootout extends Base {
         shoots1 = 0;
         shoots2 = 0;
         totShoots = 0;
-        logics = new LogicsRigoriImpl(t1, t2);
+        logics = new LogicsShootoutImpl(t1, t2);
         shoootout1 = logics.compute().get(0);
         shootout2 = logics.compute().get(1);
         string1 = "";

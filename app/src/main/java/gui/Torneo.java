@@ -19,7 +19,7 @@ import javax.swing.border.EmptyBorder;
 
 import data.Player;
 import data.Team;
-import logics.LogicsRigoriImpl;
+import logics.LogicsShootoutImpl;
 import logics.LogicsTorneo;
 import logics.LogicsTorneoImpl;
 import utils.RoundedBorder;
@@ -273,7 +273,7 @@ public class Torneo extends Base {
                     this.logTor.setSquadraAvv(this.listAvversarie.get(0));
                 } else if (ris1 == ris2) {
                     // rigori
-                    Team vinc = new LogicsRigoriImpl(this.logTor.getSquadraAvv(), this.listAvversarie.get(0))
+                    Team vinc = new LogicsShootoutImpl(this.logTor.getSquadraAvv(), this.listAvversarie.get(0))
                             .getWinner();
                     if (vinc.getTeamName().equals(this.listAvversarie.get(0).getTeamName())) {
                         this.logTor.setSquadraAvv(this.listAvversarie.get(0));
@@ -327,7 +327,7 @@ public class Torneo extends Base {
                     this.logTor.setSquadraAvv(this.listAvversarie.get(0));
                 } else if (ris1 == ris2) {
                     // rigori
-                    Team vinc = new LogicsRigoriImpl(this.logTor.getSquadraAvv(), this.listAvversarie.get(0))
+                    Team vinc = new LogicsShootoutImpl(this.logTor.getSquadraAvv(), this.listAvversarie.get(0))
                             .getWinner();
                     if (vinc.getTeamName().equals(this.listAvversarie.get(0).getTeamName())) {
                         this.logTor.setSquadraAvv(this.listAvversarie.get(0));
