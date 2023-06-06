@@ -8,27 +8,27 @@ import data.Player;
 import data.Team;
 
 /**
- * The {@code LogicsPartita} interface defines methods related to the logic of a match.
+ * The {@code LogicsMatch} interface defines methods related to the logic of a match.
  */
-public interface LogicsPartita {
+public interface LogicsMatch {
 	
 	/**
      * Calculates the scorers for a given time period in the match.
      *
-     * @param tempo the time period in the match.
+     * @param time the time period in the match.
      * @throws FileNotFoundException if the file is not found.
      * @throws ClassNotFoundException if the class is not found.
      * @throws IOException if an I/O error occurs.
      */
-    void scorers(int tempo) throws FileNotFoundException, ClassNotFoundException, IOException;
+    void scorers(int time) throws FileNotFoundException, ClassNotFoundException, IOException;
     
     /**
      * Returns a list of minute numbers corresponding to the goals scored by the specified team.
      *
-     * @param s the team.
+     * @param t the team.
      * @return a list of minute numbers of goals.
      */
-    List<Integer> getMinGol(Team s);
+    List<Integer> getGoalsMinutes(Team t);
     
     /**
      * Adds a scorer to the specified team and returns the player who scored.
@@ -37,9 +37,4 @@ public interface LogicsPartita {
      * @return the player who scored.
      */
     Player addScorer(Team s);
-    
-    /**
-     * Applies sanctions or penalties during the match.
-     */
-    void sanctions();
 }

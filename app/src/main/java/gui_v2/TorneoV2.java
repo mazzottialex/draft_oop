@@ -24,10 +24,10 @@ import gui.Base;
 import gui.Match;
 import gui.Start;
 import gui.utilsGUI;
-import logics.CreaSquadreAvversarie;
-import logics.CreaSquadreAvversarieImpl;
-import logics.LogicsRigori;
-import logics.LogicsRigoriImpl;
+import logics.CreateOpponentTeams;
+import logics.CreateOpponentTeamsImpl;
+import logics.LogicsShootout;
+import logics.LogicsShootoutImpl;
 import simulation.SimulatingMatch;
 import simulation.SimulatingMatchImpl;
 public class TorneoV2 extends Base {
@@ -42,11 +42,11 @@ public class TorneoV2 extends Base {
         GridBagConstraints gbc = new GridBagConstraints();
         GridBagLayout layout = new GridBagLayout();
         contentPane.setLayout(layout);
-        CreaSquadreAvversarie creaS = new CreaSquadreAvversarieImpl(li, nSquadre - 1);
+        CreateOpponentTeams creaS = new CreateOpponentTeamsImpl(li, nSquadre - 1);
         List<Team> liSquadre = new ArrayList<>();
         liSquadre.add(squadra);
         try {
-            liSquadre.addAll(creaS.getSquadre());
+            liSquadre.addAll(creaS.getTeams());
         } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
         }
@@ -114,7 +114,7 @@ public class TorneoV2 extends Base {
                                         score1 = sim.risultatoSuppl().get(s1);
                                         score2 = sim.risultatoSuppl().get(s2);
                                         if (score1 == score2) {
-                                            LogicsRigori rigori = new LogicsRigoriImpl(s1, s2);
+                                            LogicsShootout rigori = new LogicsShootoutImpl(s1, s2);
                                             liSquadreVinc.add(rigori.getWinner());
                                         } else {
                                             liSquadreVinc.add(score1 > score2 ? s1 : s2);
@@ -143,7 +143,7 @@ public class TorneoV2 extends Base {
                                         score1 = sim.risultatoSuppl().get(s1);
                                         score2 = sim.risultatoSuppl().get(s2);
                                         if (score1 == score2) {
-                                            LogicsRigori rigori = new LogicsRigoriImpl(s1, s2);
+                                            LogicsShootout rigori = new LogicsShootoutImpl(s1, s2);
                                             liSquadreVinc.add(rigori.getWinner());
                                         } else {
                                             liSquadreVinc.add(score1 > score2 ? s1 : s2);

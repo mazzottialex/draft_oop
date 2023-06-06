@@ -9,62 +9,62 @@ import javax.swing.JOptionPane;
 
 import data.Player;
 import data.Team;
-import gui.Sostituzione;
+import gui.Substitution;
 
 /**
- * Implementation of the {@code LogicsSostituzione} interface for managing player substitutions.
+ * Implementation of the {@code LogicsSubstitution} interface for managing player substitutions.
  */
-public class LogicsSostituzioneImpl implements LogicsSostituzione {
-    private List<Player> titolari;
-    private List<Player> riserve;
-    private Player entra;
-    private Player esce;
-    private Team s;
-    private Sostituzione gui;
+public class LogicsSubstitutionImpl implements LogicsSubstitution {
+    private List<Player> starters;
+    private List<Player> substitutes;
+    private Player subOn;
+    private Player subOff;
+    private Team t;
+    private Substitution gui;
 
     /**
-     * Constructs a new instance of {@code LogicsSostituzioneImpl}.
+     * Constructs a new instance of {@code LogicsSubstitutionImpl}.
      *
-     * @param s   the {@code Squadra} (team) instance
+     * @param t   the {@code Team} instance
      * @param gui the GUI instance for player substitutions
      */
-    public LogicsSostituzioneImpl(final Team s, final Sostituzione gui) {
-        this.titolari = new ArrayList<>(s.getStarting());
-        this.riserve = new ArrayList<>(s.getSubstitution());
-        this.entra = null;
-        this.esce = null;
-        this.s = s;
+    public LogicsSubstitutionImpl(final Team t, final Substitution gui) {
+        this.starters = new ArrayList<>(t.getStarting());
+        this.substitutes = new ArrayList<>(t.getSubstitution());
+        this.subOn = null;
+        this.subOff = null;
+        this.t = t;
         this.gui = gui;
     }
 
     @Override
-    public void chiudiGUI() {
+    public void closeGui() {
         gui.chiudi();
     }
 
     @Override
-    public List<Player> getTitolari() {
-        return titolari;
+    public List<Player> getStarters() {
+        return starters;
     }
 
     @Override
-    public List<Player> getRiserve() {
-        return riserve;
+    public List<Player> getSubstitutes() {
+        return substitutes;
     }
 
     @Override
-    public void selezTit(final Player c) {
-        esce = c;
+    public void selectStarter(final Player p) {
+        subOff = p;
     }
 
     @Override
-    public void selezRis(final Player c) {
-        entra = c;
+    public void selectSubstitute(final Player p) {
+        subOn = p;
     }
 
     @Override
     public void sub(final Container parent1, final Container parent2, final Component component1, final Component component2) {
-        if (esce.getPos().equals(entra.getPos())) {
+        if (subOff.getPos().equals(subOn.getPos())) {
             int index1 = getComponentIndex(parent1, component1);
             int index2 = getComponentIndex(parent2, component2);
             if (index1 != -1 && index2 != -1) {
@@ -78,13 +78,13 @@ public class LogicsSostituzioneImpl implements LogicsSostituzione {
                 // Resetta la selezione dei pannelli
                 component1.setBackground(null);
                 component2.setBackground(null);
-                int indexEsce = titolari.indexOf(esce);
-                titolari.set(indexEsce, entra);
-                riserve.remove(entra);
-                s.setStarting(titolari);
-                s.setSubstitution(riserve);
+                int indexEsce = starters.indexOf(subOff);
+                starters.set(indexEsce, subOn);
+                substitutes.remove(subOn);
+                t.setStarting(starters);
+                t.setSubstitution(substitutes);
                 JOptionPane.showMessageDialog(null, "Sostituzione effettuata");
-                chiudiGUI();
+                closeGui();
             }
         } else {
             JOptionPane.showMessageDialog(null, "I due giocatori selezionati devono avere lo stesso ruolo");

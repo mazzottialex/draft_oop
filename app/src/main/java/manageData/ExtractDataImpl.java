@@ -28,7 +28,7 @@ public class ExtractDataImpl implements ExtractData {
     @Override
     public Optional<Player> getPlayerByName(final String name) {
         return li.stream()
-            .filter(c -> c.getName().equals(name))
+            .filter(p -> p.getName().equals(name))
             .findFirst();
     }
     //RUOLI: P, D, C, A
@@ -42,15 +42,15 @@ public class ExtractDataImpl implements ExtractData {
     public List<Player> getRandomByPos(final String pos, int n) {
         List<Player> listaRuolo = getListByPos(pos);
         Random rnd = new Random();
-        Set<Integer> posizioni = new HashSet<>();
+        Set<Integer> position = new HashSet<>();
         for (int i = 0; i < n; i++) {
             int num;
             do {
                 num = rnd.nextInt(listaRuolo.size());
-            } while (posizioni.contains(num));
-            posizioni.add(num);
+            } while (position.contains(num));
+            position.add(num);
         }
-        return posizioni.stream()
+        return position.stream()
             .map(p -> listaRuolo.get(p))
             .collect(Collectors.toList());
     }
@@ -58,8 +58,8 @@ public class ExtractDataImpl implements ExtractData {
     @Override
     public int getTopByAttribute(final Function <Player, Integer> attr) {
         return li.stream()
-            .map(c -> attr.apply(c))
-            .max((c1, c2) -> c1 - c2)
+            .map(p -> attr.apply(p))
+            .max((p1, p2) -> p1 - p2)
             .orElse(0);
     }
     //per ammonizioni e espulsioni
@@ -67,49 +67,49 @@ public class ExtractDataImpl implements ExtractData {
     public int getTopByAttribute(final Function<Player, Integer> f1, 
     		final Function <Player, Integer> f2) {
         return li.stream()
-            .map(c -> {
-                if (f1.apply(c) != 0 && f2.apply(c) > 100) {
-                    return f2.apply(c) / f1.apply(c);
+            .map(p -> {
+                if (f1.apply(p) != 0 && f2.apply(p) > 100) {
+                    return f2.apply(p) / f1.apply(p);
                 } else
                     return 100;
             })
-            .max((c1, c2) -> c1 - c2)
+            .max((p1, p2) -> p1 - p2)
             .orElse(0);
     }
     @Override
     public List<Player> getListOrdered(final Function<Player, Integer> attr) {
         return li.stream()
-            .sorted((c1, c2) -> attr.apply(c1) - attr.apply(c2))
+            .sorted((p1, p2) -> attr.apply(p1) - attr.apply(p2))
             .collect(Collectors.toList());
     }
     @Override
     public List<Player> getStartingByTeamByPos(final String squadra, 
-    		final String ruolo, final Module modulo) {
+    		final String pos, final Module module) {
         int n = 1;
-        switch (ruolo) {
+        switch (pos) {
             case "D":
-                n = modulo.getNumDif();
+                n = module.getNumDif();
                 break;
             case "C":
-                n = modulo.getNumCen();
+                n = module.getNumCen();
                 break;
             case "A":
-                n = modulo.getNumAtt();
+                n = module.getNumAtt();
                 break;
             default: //compreso il case "P" perché per il ruolo portiere n=1
                 break;
         }
-        final List <Player> lista = getPlayerByTeam(squadra).stream()
-            .filter(c -> c.getPos().equals(ruolo))
+        final List <Player> list = getPlayerByTeam(squadra).stream()
+            .filter(c -> c.getPos().equals(pos))
             .sorted((c1, c2) -> c2.getRating().getX() - c1.getRating().getX())
             .limit(n)
             .collect(Collectors.toList());
-        return lista;
+        return list;
     }
 
     @Override
     public List<Player> getSubstitutionByTeamByPos(final String team, 
-    		final String pos, final Module modulo) {
+    		final String pos, final Module module) {
         int n = 2;
         int m = 1;
         switch (pos) {
@@ -117,24 +117,24 @@ public class ExtractDataImpl implements ExtractData {
                 n = 1;
                 break;
             case "D":
-                m = modulo.getNumDif();
+                m = module.getNumDif();
                 break;
             case "C":
-                m = modulo.getNumCen();
+                m = module.getNumCen();
                 break;
             case "A":
-                m = modulo.getNumAtt();
+                m = module.getNumAtt();
                 break;
             default:
                 break;
         }
-        List<Player> lista = getPlayerByTeam(team).stream()
+        List<Player> list = getPlayerByTeam(team).stream()
             .filter(c -> c.getPos().equals(pos))
             .sorted((c1, c2) -> c2.getRating().getX() - c1.getRating().getX())
             .skip(m)
             .limit(n)
             .collect(Collectors.toList());
-        return lista;
+        return list;
     }
 
     @Override
@@ -157,35 +157,39 @@ public class ExtractDataImpl implements ExtractData {
         return lr;
     }
 
+    @Override
     public List<String> getPlayerName(final String team) {
         return getPlayerByTeam(team)
             .stream()
-            .map(c -> c.getName())
+            .map(p -> p.getName())
             .collect(Collectors.toList());
     }
 
+    @Override
     public List<String> getNameStarting(final String team, final Module modulo) {
         return getStarting(team, modulo)
             .stream()
-            .map(c -> c.getName())
+            .map(p -> p.getName())
             .collect(Collectors.toList());
     }
 
+    @Override
     public List<String> getNameSubstitution(final String team, final Module modulo) {
         return getSubstitution(team, modulo)
             .stream()
-            .map(c -> c.getName())
+            .map(p -> p.getName())
             .collect(Collectors.toList());
     }
 
-    // ruolo, nome, rating
+    @Override
     public List<?> tsr(final String team, final Module modulo) {
         return getStarting(team, modulo)
             .stream()
             .map(c -> c.toVector())
             .collect(Collectors.toList());
     }
-
+    
+    @Override
     public List<Player> getRandom(final int nA, final int nC, final int nD, final int nP) {
     	final List<Player> li = new ArrayList<>();
         li.addAll(getRandomByPos("A", nA));
@@ -219,6 +223,7 @@ public class ExtractDataImpl implements ExtractData {
         }
         return li;
     }
+    
     @Override
     public Optional<Player> getPlayerById(final int id) {
         return li.stream()

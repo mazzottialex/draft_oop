@@ -7,37 +7,37 @@ import java.util.List;
 import data.Player;
 
 /**
- * The {@code LogicsSostituzione} interface for managing player substitutions.
+ * The {@code LogicsSubstitution} interface for managing player substitutions.
  */
-public interface LogicsSostituzione {
+public interface LogicsSubstitution {
 	
 	/**
-     * Retrieves the list of starting players (titolari).
+     * Retrieves the list of starting players.
      *
      * @return the list of starting players
      */
-    List<Player> getTitolari();
+    List<Player> getStarters();
     
     /**
-     * Retrieves the list of substitute players (riserve).
+     * Retrieves the list of substitute players.
      *
      * @return the list of substitute players
      */
-    List<Player> getRiserve();
+    List<Player> getSubstitutes();
     
     /**
-     * Selects a player from the starting lineup (titolari).
+     * Selects a player from the starting lineup.
      *
-     * @param c the player to be selected
+     * @param p the player to be selected
      */
-    void selezTit(Player c);
+    void selectStarter(Player p);
     
     /**
-     * Selects a player from the substitute bench (riserve).
+     * Selects a player from the substitute bench.
      *
-     * @param c the player to be selected
+     * @param p the player to be selected
      */
-    void selezRis(Player c);
+    void selectSubstitute(Player p);
     
     /**
      * Substitutes a player by swapping their positions in the GUI containers.
@@ -52,5 +52,5 @@ public interface LogicsSostituzione {
     /**
      * Closes the GUI for player substitutions.
      */
-    void chiudiGUI();
+    void closeGui();
 }

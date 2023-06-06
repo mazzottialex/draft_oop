@@ -54,7 +54,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
         this.listSquadre = new ArrayList<>();
         // this.golFatti = new ArrayList<>();
         // Creo la squadra dell'utente
-        this.miasquadra = new TeamUser(squadra.getTeamName(), squadra.getLogo(), squadra.getModulo(),
+        this.miasquadra = new TeamUser(squadra.getTeamName(), squadra.getLogo(), squadra.getModule(),
                 squadra.getStarting(), squadra.getSubstitution());
         // this.miasquadra = squadra;
         // Creo le squadre avversarie (quelle esistenti in serie A)
@@ -76,8 +76,8 @@ public class LogicsTorneoImpl implements LogicsTorneo {
          * this.listSquadre.add(new SquadraAvversaria(14, "SAL", Modulo.M442, li));
          */
         // System.out.println(this.listSquadre);
-        CreaSquadreAvversarieImpl cs = new CreaSquadreAvversarieImpl(li, NUM_AVVERSARI);
-        this.listSquadre.addAll(cs.getSquadre());
+        CreateOpponentTeamsImpl cs = new CreateOpponentTeamsImpl(li, NUM_AVVERSARI);
+        this.listSquadre.addAll(cs.getTeams());
         this.numSquadre = 16;
         this.risultati = new HashMap<>();
         this.eliminated = false;
@@ -102,7 +102,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
     public Team getMiaSquadra() {
         // return this.miasquadra;
         final Team copy = new TeamUser(this.miasquadra.getTeamName(), this.miasquadra.getLogo(),
-                this.miasquadra.getModulo(), this.miasquadra.getStarting(), this.miasquadra.getSubstitution());
+                this.miasquadra.getModule(), this.miasquadra.getStarting(), this.miasquadra.getSubstitution());
         return copy;
     }
 
@@ -174,7 +174,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
                     } else if (map.get(list.get(0)) < map.get(list.get(1))) {
                         teamWin = list.get(1);
                     } else {
-                        LogicsRigoriImpl r = new LogicsRigoriImpl(this.getListAvversari().get(i),
+                        LogicsShootoutImpl r = new LogicsShootoutImpl(this.getListAvversari().get(i),
                                 this.getListAvversari().get(i + 1));
                         teamWin = r.getWinner().getTeamName();
                         if (teamWin.equals(this.getListAvversari().get(i).getTeamName())) {
@@ -183,12 +183,12 @@ public class LogicsTorneoImpl implements LogicsTorneo {
                             teamLose = this.getListAvversari().get(i).getTeamName();
                         }
                         map.clear();
-                        if (r.getGol1() > r.getGol2()) {
-                            map.put(teamWin, r.getGol1());
-                            map.put(teamLose, r.getGol2());
+                        if (r.getGoals1() > r.getGoals2()) {
+                            map.put(teamWin, r.getGoals1());
+                            map.put(teamLose, r.getGoals2());
                         } else {
-                            map.put(teamWin, r.getGol2());
-                            map.put(teamLose, r.getGol1());
+                            map.put(teamWin, r.getGoals2());
+                            map.put(teamLose, r.getGoals1());
                         }
                     }
                     if (this.getListAvversari().get(i).getTeamName().equals(teamWin)) {
@@ -270,7 +270,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
                     } else if (map.get(list.get(0)) < map.get(list.get(1))) {
                         teamWin = list.get(1);
                     } else {
-                        LogicsRigoriImpl r = new LogicsRigoriImpl(this.getListAvversari().get(i),
+                        LogicsShootoutImpl r = new LogicsShootoutImpl(this.getListAvversari().get(i),
                                 this.getListAvversari().get(i + 1));
                         teamWin = r.getWinner().getTeamName();
                         if (teamWin.equals(this.getListAvversari().get(i).getTeamName())) {
@@ -279,12 +279,12 @@ public class LogicsTorneoImpl implements LogicsTorneo {
                             teamLose = this.getListAvversari().get(i).getTeamName();
                         }
                         map.clear();
-                        if (r.getGol1() > r.getGol2()) {
-                            map.put(teamWin, r.getGol1());
-                            map.put(teamLose, r.getGol2());
+                        if (r.getGoals1() > r.getGoals2()) {
+                            map.put(teamWin, r.getGoals1());
+                            map.put(teamLose, r.getGoals2());
                         } else {
-                            map.put(teamWin, r.getGol2());
-                            map.put(teamLose, r.getGol1());
+                            map.put(teamWin, r.getGoals2());
+                            map.put(teamLose, r.getGoals1());
                         }
                     }
                     if (this.getListAvversari().get(i).getTeamName().equals(teamWin)) {
@@ -366,7 +366,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
                 } else if (map.get(list.get(0)) < map.get(list.get(1))) {
                     teamWin = list.get(1);
                 } else {
-                    LogicsRigoriImpl r = new LogicsRigoriImpl(this.getListAvversari().get(1),
+                    LogicsShootoutImpl r = new LogicsShootoutImpl(this.getListAvversari().get(1),
                             this.getListAvversari().get(2));
                     teamWin = r.getWinner().getTeamName();
                     if (teamWin.equals(this.getListAvversari().get(1).getTeamName())) {
@@ -375,12 +375,12 @@ public class LogicsTorneoImpl implements LogicsTorneo {
                         teamLose = this.getListAvversari().get(1).getTeamName();
                     }
                     map.clear();
-                    if (r.getGol1() > r.getGol2()) {
-                        map.put(teamWin, r.getGol1());
-                        map.put(teamLose, r.getGol2());
+                    if (r.getGoals1() > r.getGoals2()) {
+                        map.put(teamWin, r.getGoals1());
+                        map.put(teamLose, r.getGoals2());
                     } else {
-                        map.put(teamWin, r.getGol2());
-                        map.put(teamLose, r.getGol1());
+                        map.put(teamWin, r.getGoals2());
+                        map.put(teamLose, r.getGoals1());
                     }
                 }
                 if (this.getListAvversari().get(1).getTeamName().equals(teamWin)) {
@@ -432,7 +432,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
                             this.winner = l.get(1).getTeamName();
                             // l.clear();
                         } else {
-                            this.winner = new LogicsRigoriImpl(this.squadraAvv, this.getListAvversari().get(0))
+                            this.winner = new LogicsShootoutImpl(this.squadraAvv, this.getListAvversari().get(0))
                                     .getWinner().getTeamName();
                         }
                     }
@@ -487,7 +487,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
         // return this.squadraAvv;
         try {
             final TeamOpponent copy = new TeamOpponent(this.squadraAvv.getId(),
-                    this.squadraAvv.getTeamName(), this.squadraAvv.getModulo(), this.squadraAvv.getLiPlayers());
+                    this.squadraAvv.getTeamName(), this.squadraAvv.getModule(), this.squadraAvv.getLiPlayers());
             return copy;
         } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
@@ -502,7 +502,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
     public void setSquadraAvv(final Team squadra) {
         // this.squadraAvv = squadra;
         try {
-            this.squadraAvv = new TeamOpponent(squadra.getId(), squadra.getTeamName(), squadra.getModulo(),
+            this.squadraAvv = new TeamOpponent(squadra.getId(), squadra.getTeamName(), squadra.getModule(),
                     squadra.getLiPlayers());
         } catch (ClassNotFoundException | IOException e) {
             // TODO Auto-generated catch block

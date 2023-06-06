@@ -62,7 +62,7 @@ public class ViewTeam extends Base {
         int count = 0;
         for (int i = 0; i < pos.size(); i++) {
             panelPosition = new JPanel();
-            for (int j = 0; j < team.getModulo().getN(pos.get(i)); j++) {
+            for (int j = 0; j < team.getModule().getN(pos.get(i)); j++) {
                 Player p = team.getStartingDesc().get(count);
                 JPanel panel = (utilsGUI.getPanelCalciatore(p.getName(), p.getRating().getX(), p.getPos(), true));
                 count++;

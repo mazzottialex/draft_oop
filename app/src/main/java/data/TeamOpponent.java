@@ -10,7 +10,7 @@ import manageData.ExtractData;
 import manageData.ExtractDataImpl;
 
 /** 
- * This class represents an opposing team and implements the {@code Squadra} interface.
+ * This class represents an opposing team and implements the {@code Team} interface.
  * Each opposing team has an ID, a name, an emblem, a formation, a list of starters,
  * a list of substitutes, and a list of all players for a particular season.
  *
@@ -21,32 +21,32 @@ public class TeamOpponent implements Team {
     private final int id;
     private final String teamName;
     private final String logo;
-    private final Module modulo;
+    private final Module module;
     private final List<Player> liPlayers;
     private List<Player> liStarting;
     private List<Player> liSubstitution;
 
 
     /**
-     * Constructor for the {@code SquadraAvversaria} class.
+     * Constructor for the {@code TeamOpponent} class.
      * 
      * @param id            The ID of the team.
      * @param nomeSquadra   The name of the team.
-     * @param modulo        The formation of the team.
+     * @param module        The formation of the team.
      * @param li            The list of players for a particular season.
      * @throws FileNotFoundException
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    public TeamOpponent(final int id, final String teamName, final Module modulo, final List<Player> li)
+    public TeamOpponent(final int id, final String teamName, final Module module, final List<Player> li)
     throws FileNotFoundException, IOException, ClassNotFoundException {
         this.id = id;
         this.teamName = teamName;
-        this.modulo = modulo;
+        this.module = module;
         this.liPlayers = li;
         ExtractData ed = new ExtractDataImpl(li);
-        this.liStarting = ed.getStarting(teamName, modulo);
-        this.liSubstitution = ed.getSubstitution(teamName, modulo);
+        this.liStarting = ed.getStarting(teamName, module);
+        this.liSubstitution = ed.getSubstitution(teamName, module);
         this.logo = this.setStemma();
     }
 
@@ -75,8 +75,8 @@ public class TeamOpponent implements Team {
     }
 
     @Override
-    public Module getModulo() {
-        return modulo;
+    public Module getModule() {
+        return module;
     }
 
     @Override
@@ -92,7 +92,7 @@ public class TeamOpponent implements Team {
     @Override
     public List<Player> getStartingDesc() {
         return liStarting.stream()
-            .sorted((c1, c2) -> c1.getPos().compareTo(c2.getPos()))
+            .sorted((p1, p2) -> p1.getPos().compareTo(p2.getPos()))
             .collect(Collectors.toList());
     }
 
@@ -115,9 +115,9 @@ public class TeamOpponent implements Team {
     public int getRating() {
         return (int) Math.floor(
             liStarting.stream()
-            .map(c -> c.getRating()
+            .map(p -> p.getRating()
                 .getX())
-            .mapToDouble(c -> c)
+            .mapToDouble(p -> p)
             .average()
             .orElse(0));
     }
@@ -129,24 +129,24 @@ public class TeamOpponent implements Team {
 
     @Override
     public Player getPlayerById(final int id) {
-        Player c = null;
+        Player p = null;
         for (Player player: liPlayers) {
             if (player.getId() == id) {
-                c = player;
+                p = player;
             }
         }
-        return c;
+        return p;
     }
 
     @Override
     public Player getStartingKeeper() {
-        Player keeper = null;
+        Player gk = null;
         for (Player player: getStarting()) {
             if (player.getPos().equals("P")) {
-            	keeper = player;
+            	gk = player;
             }
         }
-        return keeper;
+        return gk;
     }
     @Override
     public String toString() {

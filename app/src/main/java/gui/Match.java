@@ -3,8 +3,8 @@ package gui;
 
 import data.Player;
 import data.Team;
-import logics.LogicsPartita;
-import logics.LogicsPartitaImpl;
+import logics.LogicsMatch;
+import logics.LogicsMatchImpl;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -41,7 +41,7 @@ public class Match extends Base {
     private JButton subsButton;
     private JButton goAheadButton;
     private JPanel panel;
-    private LogicsPartita logics;
+    private LogicsMatch logics;
     private Team t1;
     private Team t2;
     private boolean isRunning;
@@ -51,13 +51,13 @@ public class Match extends Base {
     private ArrayList<Player> report1;
     private ArrayList<Player> report2;
     private boolean shootsout;
-    private Rigori shootsoutGui;
+    private Shootout shootsoutGui;
     private String string1 = "";
     private String string2 = "";
     private String htmlOpen = "<html>";
     private String htmlClose = "</html>";
     private int substitutions;
-    private Sostituzione subGui;
+    private Substitution subGui;
     private Match match;
     private int score1;
     private int score2;
@@ -80,7 +80,7 @@ public class Match extends Base {
     public Match(final Team t1, final Team t2) throws FileNotFoundException, ClassNotFoundException, IOException {
         this.t1 = t1;
         this.t2 = t2;
-        this.logics = new LogicsPartitaImpl(this.t1, this.t2);
+        this.logics = new LogicsMatchImpl(this.t1, this.t2);
         match = this;
 
         // Define the panel to hold the components
@@ -206,7 +206,7 @@ public class Match extends Base {
                 stopProgress();
                 if (substitutions <= 3) {
                     makeSub();
-                    if (!t1.getStarting().equals(subGui.getLogics().getTitolari())) {
+                    if (!t1.getStarting().equals(subGui.getLogics().getStarters())) {
 						updateTeam();
 						addSub();
 						changeResult = true;
@@ -231,10 +231,10 @@ public class Match extends Base {
     }
 
     /**
-     * Initializes the substitution gui {@code Sostituzione}
+     * Initializes the substitution gui {@code Substitution}
      */
     private void makeSub() {
-        subGui = new Sostituzione(t1, this, substitutions);
+        subGui = new Substitution(t1, this, substitutions);
         subGui.setVisible(true);
     }
 
@@ -249,8 +249,8 @@ public class Match extends Base {
      * Updates the team's line-up based on the performed substitution.
      */
     public void updateTeam() {
-        t1.setStarting(subGui.getLogics().getTitolari());
-        t1.setSubstitution(subGui.getLogics().getRiserve());
+        t1.setStarting(subGui.getLogics().getStarters());
+        t1.setSubstitution(subGui.getLogics().getSubstitutes());
     }
 
     /**
@@ -284,8 +284,6 @@ public class Match extends Base {
                             } catch (ClassNotFoundException | IOException e) {
                                 e.printStackTrace();
                             }
-                            // chiama funzione per ammonizioni / espulsioni
-                            logics.sanctions();
                             //Abilita bottone sostituzioni
                             if (progressBar.getValue() > 0 && substitutions < 3) {
                                 subsButton.setEnabled(true);
@@ -335,7 +333,7 @@ public class Match extends Base {
                         JOptionPane.showMessageDialog(null, "Fine tempi supplementari. Si va ai calci di rigore");
                         startStopButton.setEnabled(false);
                         shootsout = true;
-                        shootsoutGui = new Rigori(t1, t2, match);
+                        shootsoutGui = new Shootout(t1, t2, match);
                         SwingUtilities.invokeLater(() -> {
                             shootsoutGui.createAndShowGUI();
                         });
@@ -368,7 +366,7 @@ public class Match extends Base {
 
     /**
      * Sets the winner and the score, after the penalty shoot-out.
-     * Used in the class {@code Rigori}.
+     * Used in the class {@code Shootout}.
      *
      * @param team the winning team.
      * @param goal1 the number of penalties scored by the first team.
@@ -390,7 +388,7 @@ public class Match extends Base {
      * @throws IOException If an I/O exception occurs.
      */
     public void changeScore() throws FileNotFoundException, ClassNotFoundException, IOException {
-        if (logics.getMinGol(t1).contains(progressBar.getValue())) {
+        if (logics.getGoalsMinutes(t1).contains(progressBar.getValue())) {
             report1.add(logics.addScorer(t1));
             Player player = report1.get(report1.size() - 1);
             String owngoal = "";
@@ -403,7 +401,7 @@ public class Match extends Base {
             score1++;
             labelScoreTeam1.setText(String.valueOf(score1));
         }
-        if (logics.getMinGol(t2).contains(progressBar.getValue())) {
+        if (logics.getGoalsMinutes(t2).contains(progressBar.getValue())) {
             report2.add(logics.addScorer(t2));
             Player player = report2.get(report2.size() - 1);
             String owngoal = "";

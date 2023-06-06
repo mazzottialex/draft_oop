@@ -8,9 +8,9 @@ import data.Team;
 import utils.Pair;
 
 /**
- * The {@code LogicsRigori} interface defines the logic for penalty shoot-outs.
+ * The {@code LogicsShootout} interface defines the logic for penalty shoot-outs.
  */
-public interface LogicsRigori {
+public interface LogicsShootout {
 	
 	/**
      * Computes the penalty shoot-out and returns the list of penalty results.
@@ -24,14 +24,14 @@ public interface LogicsRigori {
      *
      * @return the number of goals scored by team 1
      */
-    int getGol1();
+    int getGoals1();
     
     /**
      * Returns the number of goals scored by team 2 in the penalty shoot-out.
      *
      * @return the number of goals scored by team 2
      */
-    int getGol2();
+    int getGoals2();
     
     /**
      * Returns the winner of the penalty shoot-out.
