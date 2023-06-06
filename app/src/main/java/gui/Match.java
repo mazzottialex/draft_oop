@@ -206,7 +206,7 @@ public class Match extends Base {
                 stopProgress();
                 if (substitutions <= 3) {
                     makeSub();
-                    if (!t1.getStarting().equals(subGui.getLogics().getTitolari())) {
+                    if (!t1.getStarting().equals(subGui.getLogics().getStarters())) {
 						updateTeam();
 						addSub();
 						changeResult = true;
@@ -249,8 +249,8 @@ public class Match extends Base {
      * Updates the team's line-up based on the performed substitution.
      */
     public void updateTeam() {
-        t1.setStarting(subGui.getLogics().getTitolari());
-        t1.setSubstitution(subGui.getLogics().getRiserve());
+        t1.setStarting(subGui.getLogics().getStarters());
+        t1.setSubstitution(subGui.getLogics().getSubstitutes());
     }
 
     /**
@@ -284,8 +284,6 @@ public class Match extends Base {
                             } catch (ClassNotFoundException | IOException e) {
                                 e.printStackTrace();
                             }
-                            // chiama funzione per ammonizioni / espulsioni
-                            logics.sanctions();
                             //Abilita bottone sostituzioni
                             if (progressBar.getValue() > 0 && substitutions < 3) {
                                 subsButton.setEnabled(true);

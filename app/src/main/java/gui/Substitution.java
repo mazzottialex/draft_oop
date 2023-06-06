@@ -18,8 +18,8 @@ import javax.swing.JPanel;
 
 import data.Player;
 import data.Team;
-import logics.LogicsSostituzione;
-import logics.LogicsSostituzioneImpl;
+import logics.LogicsSubstitution;
+import logics.LogicsSubstitutionImpl;
 
 /**
  * Represents a GUI for substituting players.
@@ -31,7 +31,7 @@ public class Substitution extends Base {
     private static final long serialVersionUID = 5244133982320404420L;
     private final List<String> roles = List.of("P", "D", "C", "A");
     private JPanel panelTeam = new JPanel();
-    private LogicsSostituzione logics;
+    private LogicsSubstitution logics;
     private static JPanel panelStarters;
     private static JPanel panelSubstitutes;
     private int substitutes;
@@ -49,7 +49,7 @@ public class Substitution extends Base {
      * @param substitutionsMade The number of substitutions already made.
      */
     public Substitution(final Team team, final Match matchGui, final int substitutionsMade) {
-        logics = new LogicsSostituzioneImpl(team, this);
+        logics = new LogicsSubstitutionImpl(team, this);
         this.substitutes = SUBSTITUTES - substitutionsMade;
         panelStarters = null;
         panelSubstitutes = null;
@@ -85,7 +85,7 @@ public class Substitution extends Base {
                         }
                         panelStarters = panel;
                         panelStarters.setBackground(Color.YELLOW);
-                        logics.selezTit(p);
+                        logics.selectStarter(p);
                     }
                 });
                 panelPosition.add(panel);
@@ -116,7 +116,7 @@ public class Substitution extends Base {
                     }
                     panelSubstitutes = panel;
                     panelSubstitutes.setBackground(Color.YELLOW);
-                    logics.selezRis(p);
+                    logics.selectSubstitute(p);
                 }
             });
             panelPosition.add(panel);
@@ -160,11 +160,11 @@ public class Substitution extends Base {
     }
 
     /**
-     * Retrieves the {@code LogicsSostituzione} instance associated with the {@code Substitution} object.
+     * Retrieves the {@code LogicsSubstitution} instance associated with the {@code Substitution} object.
      *
-     * @return The {@code LogicsSostituzione} instance.
+     * @return The {@code LogicsSubstitution} instance.
      */
-    public LogicsSostituzione getLogics() {
+    public LogicsSubstitution getLogics() {
         return logics;
     }
 }

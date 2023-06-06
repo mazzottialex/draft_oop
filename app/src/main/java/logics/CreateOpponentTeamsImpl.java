@@ -51,7 +51,7 @@ public class CreateOpponentTeamsImpl implements CreateOpponentTeams {
     }
 
     /**
-     * Selects random teams from the given list of teams and returns a list of SquadraAvversaria objects.
+     * Selects random teams from the given list of teams and returns a list of {@code TeamOpponent} objects.
      *
      * @param teams the list of teams.
      * @param module the team formation.
