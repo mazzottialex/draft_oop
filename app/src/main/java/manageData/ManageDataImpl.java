@@ -23,9 +23,9 @@ public class ManageDataImpl implements ManageData {
     }
     public Boolean DownloadData() throws FileNotFoundException, ClassNotFoundException, IOException {
         final Scraping scr = new ScrapingImpl();
-        if (!scr.ReadTable(this.stagione))
+        if (!scr.readTable(this.stagione))
             return false;
-        li = scr.getLiCalciatori();
+        li = scr.getLiPlayer();
         logFile.SaveData(li, stagione);
         return true;
     }

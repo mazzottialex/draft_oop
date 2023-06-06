@@ -8,8 +8,8 @@ import manageData.ManageData;
 import manageData.ManageDataImpl;
 import manageData.ManageStagioni;
 import manageData.ManageStagioniImpl;
-import rating.CalcoloRating;
-import rating.CalcoloRatingImpl;
+import rating.AnalysisRating;
+import rating.AnalysisRatingImpl;
 public class LogicsHomeImpl implements LogicsHome {
 
     private List<Player> li;
@@ -68,9 +68,7 @@ public class LogicsHomeImpl implements LogicsHome {
     @Override
     public List<Player> getLi()
     		throws FileNotFoundException, ClassNotFoundException, IOException {
-        final CalcoloRating rat = new CalcoloRatingImpl(this.li);
-        rat.updateRating();
-        return rat.getLi();
+        final AnalysisRating rat = new AnalysisRatingImpl(this.li);
+        return rat.updateRating();
     }
-
 }

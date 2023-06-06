@@ -18,11 +18,11 @@ public class ManageStagioniImpl extends Thread implements ManageStagioni {
         this.start();
     }
     public void run() {
-    	if (!s.readStagioni()) {
+    	if (!s.readSeason()) {
             checkFlag=false;
     	}
     	else {
-    		li = s.getStagioni();
+    		li = s.getLiSeason();
             file.SaveStagioni(li);
             checkFlag = true;
     	}
