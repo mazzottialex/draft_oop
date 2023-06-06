@@ -127,11 +127,12 @@ public class Substitution extends Base {
         JButton makeSubButton = new JButton("Sostitutisci");
         makeSubButton.addActionListener(e -> {
             if (panelStarters == null || panelSubstitutes == null) {
-                JOptionPane.showMessageDialog(null, "Bisogna selezionare due giocatori: uno tra i titolari e uno tra le riserve, che devono avere lo stesso ruolo");
-        	    if (panelStarters != null) {
+                JOptionPane.showMessageDialog(null, "Bisogna selezionare due giocatori: "
+                    + "uno tra i titolari e uno tra le riserve, che devono avere lo stesso ruolo");
+                if (panelStarters != null) {
                     panelStarters.setBackground(null);
                 }
-        	    if (panelSubstitutes != null) {
+                if (panelSubstitutes != null) {
                     panelSubstitutes.setBackground(null);
                 }
             } else {

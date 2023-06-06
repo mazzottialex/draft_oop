@@ -79,7 +79,7 @@ public class CreateOpponentTeamsImpl implements CreateOpponentTeams {
      * @return a randomly selected team formation.
      */
     public static Module selectModule() {
-        List<Module> module = new ArrayList<>(List.of(Module.values()));
+        List < Module > module = new ArrayList<>(List.of(Module.values()));
         Random random = new Random();
         int index = random.nextInt(module.size());
         return module.get(index);

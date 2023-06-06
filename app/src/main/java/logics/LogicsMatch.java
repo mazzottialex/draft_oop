@@ -11,8 +11,8 @@ import data.Team;
  * The {@code LogicsMatch} interface defines methods related to the logic of a match.
  */
 public interface LogicsMatch {
-	
-	/**
+
+    /**
      * Calculates the scorers for a given time period in the match.
      *
      * @param time the time period in the match.
@@ -21,7 +21,7 @@ public interface LogicsMatch {
      * @throws IOException if an I/O error occurs.
      */
     void scorers(int time) throws FileNotFoundException, ClassNotFoundException, IOException;
-    
+
     /**
      * Returns a list of minute numbers corresponding to the goals scored by the specified team.
      *
@@ -29,7 +29,7 @@ public interface LogicsMatch {
      * @return a list of minute numbers of goals.
      */
     List<Integer> getGoalsMinutes(Team t);
-    
+
     /**
      * Adds a scorer to the specified team and returns the player who scored.
      *

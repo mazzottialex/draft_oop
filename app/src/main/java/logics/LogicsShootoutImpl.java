@@ -60,7 +60,7 @@ public class LogicsShootoutImpl implements LogicsShootout {
         while (goAhead) {
             if ((((shoots1 + shoots2) >= totShoots) && shoots1 == shoots2 && goals1 != goals2)
                         || ((shoots1 + shoots2) < totShoots && ((((totShoots / 2) - shoots1) + goals1) < goals2
-                		|| (((totShoots / 2) - shoots2) + goals2) < goals1))) {
+                        || (((totShoots / 2) - shoots2) + goals2) < goals1))) {
                 goAhead = false;
             } else if ((shoots1 + shoots2) < totShoots || shoots1 != shoots2 || (shoots1 == shoots2 && goals1 == goals2)) {
                 if ((shoots1 + shoots2) % 2 == 0) {
@@ -105,7 +105,8 @@ public class LogicsShootoutImpl implements LogicsShootout {
      * @return the result of the penalty kick ("Gol" for a goal, "Sbagliato" for a miss)
      */
     private String rigore(final Player shooter, final Team oppositeTeam) {
-        double shooterRating = shooter.getRating().getY().getX() * (MINIMUM_MODIFIER_RATING + new Random().nextDouble() * ADD_MODIFIER_RATING);
+        double shooterRating = shooter.getRating().getY().getX()
+        		* (MINIMUM_MODIFIER_RATING + new Random().nextDouble() * ADD_MODIFIER_RATING);
         double gkRating = oppositeTeam.getStartingKeeper().getRating().getY().getZ()
         		* (MINIMUM_MODIFIER_RATING + new Random().nextDouble() * ADD_MODIFIER_RATING);
         double modGkRating = gkRating * CONVERSION_RATE_SHOOTOUT;

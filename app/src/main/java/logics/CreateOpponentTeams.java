@@ -12,8 +12,8 @@ import data.Team;
  */
 
 public interface CreateOpponentTeams {
-	
-	/**
+
+    /**
      * Returns a list of opposing teams.
      *
      * @return The list of opposing teams.

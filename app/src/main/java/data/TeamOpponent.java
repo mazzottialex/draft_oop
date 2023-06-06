@@ -16,7 +16,7 @@ import manageData.ExtractDataImpl;
  *
  */
 public class TeamOpponent implements Team {
-	
+
 	private static final long serialVersionUID = 1L;
     private final int id;
     private final String teamName;
@@ -31,7 +31,7 @@ public class TeamOpponent implements Team {
      * Constructor for the {@code TeamOpponent} class.
      * 
      * @param id            The ID of the team.
-     * @param nomeSquadra   The name of the team.
+     * @param teamName   The name of the team.
      * @param module        The formation of the team.
      * @param li            The list of players for a particular season.
      * @throws FileNotFoundException
@@ -88,7 +88,7 @@ public class TeamOpponent implements Team {
     public List<Player> getStarting() {
         return liStarting;
     }
-    
+
     @Override
     public List<Player> getStartingDesc() {
         return liStarting.stream()
@@ -148,9 +148,9 @@ public class TeamOpponent implements Team {
         }
         return gk;
     }
+
     @Override
     public String toString() {
         return "TeamOpponent [teamOpponent=" + teamName + "]";
     }
-
 }

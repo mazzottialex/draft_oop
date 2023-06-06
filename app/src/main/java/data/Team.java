@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * The interface represents a team in a football (soccer) match.
  */
-public interface Team extends Serializable{
+public interface Team extends Serializable {
 
     /**
      * Returns a list of the starting players for the team.
