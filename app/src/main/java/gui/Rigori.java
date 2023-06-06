@@ -54,11 +54,11 @@ public class Rigori extends Base {
     private static final int IPADX_CENTER = 50;
 
     /**
-     * Creates a new instance of the `Rigori` class.
+     * Creates a new instance of the {@code Rigori} class.
      *
      * @param s1 The first team in the penalty shoot-out.
      * @param s2 The second team in the penalty shoot-out.
-     * @param partita The `Partita` instance.
+     * @param partita The {@code Partita} instance.
      */
     public Rigori(final Squadra s1, final Squadra s2, final Partita partita) {
         this.s1 = s1;

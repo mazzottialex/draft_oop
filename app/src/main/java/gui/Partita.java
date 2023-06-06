@@ -69,7 +69,7 @@ public class Partita extends Base {
     private static final int HALF_SUPPL_TIME = 105;
 
     /**
-     * Creates a new instance of the Partita class.
+     * Creates a new instance of the {@code Partita} class.
      *
      * @param s1 The first team.
      * @param s2 The second team.
@@ -231,7 +231,7 @@ public class Partita extends Base {
     }
 
     /**
-     * Initializes the substitution gui.
+     * Initializes the substitution gui {@code Sostituzione}
      */
     private void sost() {
         sub = new Sostituzione(s1, this, cambi);
@@ -368,7 +368,7 @@ public class Partita extends Base {
 
     /**
      * Sets the winner and the score, after the penalty shoot-out.
-     * Used in the class Rigori.
+     * Used in the class {@code Rigori}.
      *
      * @param s the winning team.
      * @param gol1 the number of penalties scored by the first team.
