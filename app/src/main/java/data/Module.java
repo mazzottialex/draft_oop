@@ -3,7 +3,7 @@ package data;
 /**
  * Represents different football formations (modules).
  */
-public enum Modulo {
+public enum Module {
 
     /**
      * 343 formation.
@@ -45,13 +45,13 @@ public enum Modulo {
     private int att;
 
     /**
-     * Constructs a Modulo enum value with the specified number of defenders, midfielders, and attackers.
+     * Constructs a {@code Module} enum value with the specified number of defenders, midfielders, and forwards.
      *
      * @param dif The number of defenders.
      * @param cen The number of midfielders.
      * @param att The number of attackers.
      */
-    Modulo(final int dif, final int cen, final int att) {
+    Module(final int dif, final int cen, final int att) {
         this.dif = dif;
         this.cen = cen;
         this.att = att;

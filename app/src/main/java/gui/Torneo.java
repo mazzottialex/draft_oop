@@ -98,9 +98,9 @@ public class Torneo extends Base {
                 // eliminatedThisTurn = false;
                 logTor.setElimThisTurn(false);
                 if (!logTor.getEliminated()) {
-                    Partita p;
+                    Match p;
                     try {
-                        p = new Partita(logTor.getMiaSquadra(), logTor.getListAvversari().get(0));
+                        p = new Match(logTor.getMiaSquadra(), logTor.getListAvversari().get(0));
                         buttonSimula.setVisible(false);
                         p.createAndShowGUI();
                         p.addWindowListener(new WindowAdapter() {
@@ -112,8 +112,8 @@ public class Torneo extends Base {
                                     // eliminatedThisTurn = true;
                                     logTor.setElimThisTurn(true);
                                 }
-                                risSquadraUte = p.getGolS1();
-                                risSquadraAvv = p.getGolS2();
+                                risSquadraUte = p.getGoalT1();
+                                risSquadraAvv = p.getGoalT2();
                                 try {
                                     logTor.simulaMatch();
                                     createLevel();

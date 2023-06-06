@@ -7,14 +7,14 @@ import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import data.Modulo;
+import data.Module;
 
 public class LogicsFormazioneImpl implements LogicsFormazione {
 	public LogicsFormazioneImpl() {
 	}
 	
-	public List<Modulo> getRandomMod(int n){
-		List<Modulo> li=Arrays.asList(Modulo.values());
+	public List<Module> getRandomMod(int n){
+		List<Module> li=Arrays.asList(Module.values());
 		Random rnd = new Random();
 		Set<Integer> posizioni = new HashSet<>();
 		for(int i=0; i<n; i++) {

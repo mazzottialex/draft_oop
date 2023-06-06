@@ -28,7 +28,7 @@ import java.util.HashMap;
 import java.util.ArrayList;
 //import javax.swing.*;
 import data.Player;
-import data.Modulo;
+import data.Module;
 import logics.LogicsCreaSquadraImpl;
 import logics.LogicsCreaSquadra;
 //import manageData.LogicsFile;
@@ -201,7 +201,7 @@ public class CreaSquadra extends Base {
         gbc.gridy = 0;
         // creo tanti bottoni quanti sono i moduli disponibili
         JButton[] buttons = new JButton[log.getModuli().size()];
-        ArrayList<Modulo> buttonSelect = new ArrayList<>();
+        ArrayList<Module> buttonSelect = new ArrayList<>();
         for (int i = 0; i <= buttons.length - 1; i++) {
             buttons[i] = new JButton("" + log.getModuli().get(i));
             int ind = i;

@@ -50,7 +50,7 @@ public class Rigori extends Base {
     private JPanel panel;
     private String str1;
     private String str2;
-    private Partita partita;
+    private Match partita;
     private static final int IPADX_CENTER = 50;
 
     /**
@@ -60,7 +60,7 @@ public class Rigori extends Base {
      * @param s2 The second team in the penalty shoot-out.
      * @param partita The {@code Partita} instance.
      */
-    public Rigori(final Team s1, final Team s2, final Partita partita) {
+    public Rigori(final Team s1, final Team s2, final Match partita) {
         this.s1 = s1;
         this.s2 = s2;
         this.partita = partita;

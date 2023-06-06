@@ -9,7 +9,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.HashSet;
 import data.Player;
-import data.Modulo;
+import data.Module;
 import data.Team;
 import data.TeamUser;
 import manageData.ExtractData;
@@ -25,7 +25,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreaSquadra {
 
     private static final long serialVersionUID = 1L;
     private static final int NUM_PLAYER_IN_TEAM = 11;
-    private Modulo moduloSelect;
+    private Module moduloSelect;
     // private ManageData md;
     private ExtractData ex;
     private String namePlayer; // nome del calciatore selezionato per entrare in formazione
@@ -54,7 +54,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreaSquadra {
      */
     public LogicsCreaSquadraImpl(final String nomeSquadra, final String stemma, final List<Player> li)
             throws FileNotFoundException, ClassNotFoundException, IOException {
-        this.moduloSelect = Modulo.M343;
+        this.moduloSelect = Module.M343;
         // this.md = new ManageDataImpl(stagione);
         // this.md.LoadData();
         this.ex = new ExtractDataImpl(li); // (this.md.getLi());
@@ -85,9 +85,9 @@ public class LogicsCreaSquadraImpl implements LogicsCreaSquadra {
     /**
      * {@inheritDoc}
      */
-    public List<Modulo> getModuli() {
-        List<Modulo> list = new ArrayList<>();
-        for (Modulo m : Modulo.values()) {
+    public List<Module> getModuli() {
+        List<Module> list = new ArrayList<>();
+        for (Module m : Module.values()) {
             list.add(m);
         }
         return list;
@@ -97,7 +97,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreaSquadra {
      * {@inheritDoc}
      */
     @Override
-    public void setModulo(final Modulo mod) {
+    public void setModulo(final Module mod) {
         this.moduloSelect = mod;
     }
 
@@ -105,7 +105,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreaSquadra {
      * {@inheritDoc}
      */
     @Override
-    public Modulo getModulo() {
+    public Module getModulo() {
         return this.moduloSelect;
     }
 

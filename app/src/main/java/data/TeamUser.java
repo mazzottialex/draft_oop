@@ -11,12 +11,12 @@ public class TeamUser implements Team, Serializable {
     private final int id;
     private final String teamName;
     private final String logo;
-    private final Modulo modulo;
+    private final Module modulo;
     private final List<Player> liPlayers;
     private List<Player> liStarting;
     private List<Player> liSubstitution;
 
-    public TeamUser(final String teamName, final String logo, final Modulo modulo,
+    public TeamUser(final String teamName, final String logo, final Module modulo,
         final List<Player> liStarting, final List<Player> liSubstitution) {
         this.id = 0;
         this.teamName = teamName;
@@ -40,7 +40,7 @@ public class TeamUser implements Team, Serializable {
     }
 
     @Override
-    public Modulo getModulo() {
+    public Module getModulo() {
         return modulo;
     }
 

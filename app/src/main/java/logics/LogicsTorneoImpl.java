@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
 import data.Player;
-import data.Modulo;
+import data.Module;
 import data.Team;
 import data.TeamOpponent;
 import data.TeamUser;
@@ -81,7 +81,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
         this.numSquadre = 16;
         this.risultati = new HashMap<>();
         this.eliminated = false;
-        this.squadraAvv = new TeamOpponent(1, "aaa", Modulo.M442, li);
+        this.squadraAvv = new TeamOpponent(1, "aaa", Module.M442, li);
         this.risMatch = new HashMap<>();
         this.elimThisTurn = false;
     }

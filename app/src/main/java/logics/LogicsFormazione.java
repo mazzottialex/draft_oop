@@ -1,6 +1,6 @@
 package logics;
 import java.util.List;
-import data.Modulo;
+import data.Module;
 public interface LogicsFormazione {
-	public List<Modulo> getRandomMod(int n);
+	public List<Module> getRandomMod(int n);
 }

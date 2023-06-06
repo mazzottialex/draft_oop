@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import data.Player;
-import data.Modulo;
+import data.Module;
 import data.Team;
 import data.TeamUser;
 import gui.Base;
@@ -33,7 +33,7 @@ public class Draft extends Base {
     private final int nDraft = 5;
     private final List<Player> liTitolari = new ArrayList<>();
     private final List<Player> liRiserve = new ArrayList<>();
-    public Draft(final List<Player> li, final Modulo mod, final String nomeSquadra, final String stemma) {
+    public Draft(final List<Player> li, final Module mod, final String nomeSquadra, final String stemma) {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 2, 2);
         GridBagLayout layout = new GridBagLayout();

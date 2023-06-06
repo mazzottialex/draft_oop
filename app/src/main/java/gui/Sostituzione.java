@@ -48,7 +48,7 @@ public class Sostituzione extends Base {
      * @param superGui The {@code Partita} instance.
      * @param cambiFatti The number of substitutions already made.
      */
-    public Sostituzione(final Team squadra, final Partita superGui, final int cambiFatti) {
+    public Sostituzione(final Team squadra, final Match superGui, final int cambiFatti) {
         logics = new LogicsSostituzioneImpl(squadra, this);
         this.riserve = RISERVE - cambiFatti;
         panelTit = null;

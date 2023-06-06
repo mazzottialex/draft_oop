@@ -13,14 +13,14 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import data.Modulo;
+import data.Module;
 
 public class DialogSceltaFormazione extends JDialog {
     private final JPanel contentPanel = new JPanel();
-    private Modulo modulo;
-    private Modulo selezionato;
+    private Module modulo;
+    private Module selezionato;
     private final JButton okButton;
-    public DialogSceltaFormazione(final Frame parent, final Boolean modale, final List < Modulo > liModuli) throws FileNotFoundException, ClassNotFoundException, IOException {
+    public DialogSceltaFormazione(final Frame parent, final Boolean modale, final List < Module > liModuli) throws FileNotFoundException, ClassNotFoundException, IOException {
         super(parent, modale);
         setBounds(100, 100, 700, 300);
         setMinimumSize(getSize());
@@ -67,7 +67,7 @@ public class DialogSceltaFormazione extends JDialog {
         	}
         });  
     }
-    public Modulo getModulo() {
+    public Module getModulo() {
         return this.modulo;
     }
 }
