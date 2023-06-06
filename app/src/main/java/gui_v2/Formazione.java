@@ -53,7 +53,12 @@ public class Formazione extends Base {
                         btnProsegui.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(final ActionEvent e) {
-                                changeJPanel(new Draft(li, modulo, nomeSquadra, stemma));
+                                try {
+									changeJPanel(new Draft(li, modulo, nomeSquadra, stemma));
+								} catch (IOException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
                             }
                         });
                         gbc.gridy = 1;

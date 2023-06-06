@@ -145,7 +145,7 @@ public class LogicsCreaSquadraImpl implements LogicsCreaSquadra {
      */
     @Override
     public List<Player> getRandom(final String ruolo, final int n) {
-        List<Player> list = this.ex.getListByRole(ruolo);
+        List<Player> list = this.ex.getListByPos(ruolo);
         Set<Player> set = new HashSet<>();
         List<Player> randomList = new ArrayList<>();
         boolean test = false;

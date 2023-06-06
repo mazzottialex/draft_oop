@@ -93,7 +93,7 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
     @Override
     public int getFantasyConcededGoals(Team t) throws FileNotFoundException, ClassNotFoundException, IOException {
         ExtractData ed = new ExtractDataImpl(t.getStarting());
-        Player gk = ed.getListByRole("P").get(0);
+        Player gk = ed.getListByPos("P").get(0);
         double probCleanSheet = gk.getCleanSheets() / (gk.getMatchesPlayed() == 0 ? 1 : gk.getMatchesPlayed());
         if (prob(0, 1) <= probCleanSheet) {
             return 0;
@@ -162,8 +162,15 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
      */
     public static double getLockdownDefenseRating(Team t, Map<Player, Double> defendersRatings)
             throws FileNotFoundException, ClassNotFoundException, IOException {
+<<<<<<< HEAD
         ExtractData ed = new ExtractDataImpl(t.getStarting());
         List<Player> defenders = ed.getListByRole("D");
+=======
+        ExtractData ed = new ExtractDataImpl(s.getStarting());
+
+        List<Player> difensori = ed.getListByPos("D");
+
+>>>>>>> b27a96f40b226a33c83a55e9ebafb6e495c3211b
         double count = 0;
         double totRatings = 0;
         if (defenders.size() >= 3) {

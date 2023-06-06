@@ -75,12 +75,12 @@ public class SimulatingMatchImpl implements SimulatingMatch {
         double pd = 0;
         switch (squadra) {
             case SQUADRA1:
-                pd = (votoDif1 + new ExtractDataImpl(s1.getStarting()).getListByRole("D").size() + catenaccio1 -
+                pd = (votoDif1 + new ExtractDataImpl(s1.getStarting()).getListByPos("D").size() + catenaccio1 -
                     2 * golSubiti1 - 2 * autogol1 + 3 * rigoriParati1 - COST_SUB_DIFF) / COST_DIV_DIFF_OFF_CR;
                 break;
 
             case SQUADRA2:
-                pd = (votoDif2 + new ExtractDataImpl(s2.getStarting()).getListByRole("D").size() + catenaccio2 -
+                pd = (votoDif2 + new ExtractDataImpl(s2.getStarting()).getListByPos("D").size() + catenaccio2 -
                     2 * golSubiti2 - 2 * autogol2 + 3 * rigoriParati2 - COST_SUB_DIFF) / COST_DIV_DIFF_OFF_CR;
                 break;
 
