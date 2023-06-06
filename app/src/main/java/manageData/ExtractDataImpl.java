@@ -9,7 +9,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import data.Player;
-import data.Modulo;
+import data.Module;
 public class ExtractDataImpl implements ExtractData {
     private final List<Player> li;
     public ExtractDataImpl(final List<Player> li) {
@@ -84,7 +84,7 @@ public class ExtractDataImpl implements ExtractData {
     }
     @Override
     public List<Player> getTitolariBySquadraByRuolo(final String squadra, 
-    		final String ruolo, final Modulo modulo) {
+    		final String ruolo, final Module modulo) {
         int n = 1;
         switch (ruolo) {
             case "D":
@@ -109,7 +109,7 @@ public class ExtractDataImpl implements ExtractData {
 
     @Override
     public List<Player> getRiserveBySquadraByRuolo(final String squadra, 
-    		final String ruolo, final Modulo modulo) {
+    		final String ruolo, final Module modulo) {
         int n = 2;
         int m = 1;
         switch (ruolo) {
@@ -138,7 +138,7 @@ public class ExtractDataImpl implements ExtractData {
     }
 
     @Override
-    public List<Player> getTitolari(final String squadra, final Modulo modulo) {
+    public List<Player> getTitolari(final String squadra, final Module modulo) {
     	final List<Player> lt = new ArrayList<>();
         lt.addAll(getTitolariBySquadraByRuolo(squadra, "P", modulo));
         lt.addAll(getTitolariBySquadraByRuolo(squadra, "D", modulo));
@@ -148,7 +148,7 @@ public class ExtractDataImpl implements ExtractData {
     }
 
     @Override
-    public List<Player> getRiserve(final String squadra, final Modulo modulo) {
+    public List<Player> getRiserve(final String squadra, final Module modulo) {
         final List<Player> lr = new ArrayList<>();
         lr.addAll(getRiserveBySquadraByRuolo(squadra, "P", modulo));
         lr.addAll(getRiserveBySquadraByRuolo(squadra, "D", modulo));
@@ -164,14 +164,14 @@ public class ExtractDataImpl implements ExtractData {
             .collect(Collectors.toList());
     }
 
-    public List<String> getNomeTitolari(final String squadra, final Modulo modulo) {
+    public List<String> getNomeTitolari(final String squadra, final Module modulo) {
         return getTitolari(squadra, modulo)
             .stream()
             .map(c -> c.getName())
             .collect(Collectors.toList());
     }
 
-    public List<String> getNomeRiserve(final String squadra, final Modulo modulo) {
+    public List<String> getNomeRiserve(final String squadra, final Module modulo) {
         return getRiserve(squadra, modulo)
             .stream()
             .map(c -> c.getName())
@@ -179,7 +179,7 @@ public class ExtractDataImpl implements ExtractData {
     }
 
     // ruolo, nome, rating
-    public List<?> tsr(final String squadra, final Modulo modulo) {
+    public List<?> tsr(final String squadra, final Module modulo) {
         return getTitolari(squadra, modulo)
             .stream()
             .map(c -> c.toVector())

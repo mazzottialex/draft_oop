@@ -21,7 +21,7 @@ public class TeamOpponent implements Team {
     private final int id;
     private final String teamName;
     private final String logo;
-    private final Modulo modulo;
+    private final Module modulo;
     private final List<Player> liPlayers;
     private List<Player> liStarting;
     private List<Player> liSubstitution;
@@ -38,7 +38,7 @@ public class TeamOpponent implements Team {
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    public TeamOpponent(final int id, final String teamName, final Modulo modulo, final List<Player> li)
+    public TeamOpponent(final int id, final String teamName, final Module modulo, final List<Player> li)
     throws FileNotFoundException, IOException, ClassNotFoundException {
         this.id = id;
         this.teamName = teamName;
@@ -75,7 +75,7 @@ public class TeamOpponent implements Team {
     }
 
     @Override
-    public Modulo getModulo() {
+    public Module getModulo() {
         return modulo;
     }
 

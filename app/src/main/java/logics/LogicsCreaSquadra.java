@@ -4,7 +4,7 @@ import java.io.Serializable;
 //import java.util.*;
 import java.util.List;
 import data.Player;
-import data.Modulo;
+import data.Module;
 import data.Team;
 import manageData.ExtractData;
 
@@ -26,19 +26,19 @@ public interface LogicsCreaSquadra extends Serializable {
      * 
      * @return the module list
      */
-    List<Modulo> getModuli();
+    List<Module> getModuli();
 
     /**
      * 
      * @param mod the module you want to set
      */
-    void setModulo(Modulo mod);
+    void setModulo(Module mod);
 
     /**
      * 
      * @return the module of the team
      */
-    Modulo getModulo();
+    Module getModulo();
 
     /**
      * 

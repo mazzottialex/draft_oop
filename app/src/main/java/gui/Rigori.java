@@ -50,17 +50,17 @@ public class Rigori extends Base {
     private JPanel panel;
     private String str1;
     private String str2;
-    private Partita partita;
+    private Match partita;
     private static final int IPADX_CENTER = 50;
 
     /**
-     * Creates a new instance of the `Rigori` class.
+     * Creates a new instance of the {@code Rigori} class.
      *
      * @param s1 The first team in the penalty shoot-out.
      * @param s2 The second team in the penalty shoot-out.
-     * @param partita The `Partita` instance.
+     * @param partita The {@code Partita} instance.
      */
-    public Rigori(final Team s1, final Team s2, final Partita partita) {
+    public Rigori(final Team s1, final Team s2, final Match partita) {
         this.s1 = s1;
         this.s2 = s2;
         this.partita = partita;

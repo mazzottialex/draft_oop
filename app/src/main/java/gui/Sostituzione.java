@@ -42,13 +42,13 @@ public class Sostituzione extends Base {
     private static final int GRID_7 = 7;
 
     /**
-     * Creates a new instance of the `Sostituzione` class.
+     * Creates a new instance of the {@code Sostituzione} class.
      *
      * @param squadra The team for which substitutions are being made.
-     * @param superGui The `Partita` instance.
+     * @param superGui The {@code Partita} instance.
      * @param cambiFatti The number of substitutions already made.
      */
-    public Sostituzione(final Team squadra, final Partita superGui, final int cambiFatti) {
+    public Sostituzione(final Team squadra, final Match superGui, final int cambiFatti) {
         logics = new LogicsSostituzioneImpl(squadra, this);
         this.riserve = RISERVE - cambiFatti;
         panelTit = null;
@@ -145,7 +145,7 @@ public class Sostituzione extends Base {
 
         addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(WindowEvent e) {
+            public void windowClosing(final WindowEvent e) {
                 dispose();
             }
         });
@@ -153,16 +153,16 @@ public class Sostituzione extends Base {
     }
 
     /**
-     * Closes the `Sostituzione` window.
+     * Closes the {@code Sostituzione} window.
      */
     public void chiudi() {
         this.dispose();
     }
 
     /**
-     * Retrieves the `LogicsSostituzione` instance associated with the `Sostituzione` object.
+     * Retrieves the {@code LogicsSostituzione} instance associated with the {@code Sostituzione} object.
      *
-     * @return The `LogicsSostituzione` instance.
+     * @return The {@code LogicsSostituzione} instance.
      */
     public LogicsSostituzione getLogics() {
         return logics;

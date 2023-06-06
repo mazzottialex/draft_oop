@@ -1,6 +1,5 @@
 package logics;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.util.ArrayList;
@@ -26,7 +25,7 @@ public class LogicsSostituzioneImpl implements LogicsSostituzione {
     /**
      * Constructs a new instance of {@code LogicsSostituzioneImpl}.
      *
-     * @param s   the squadra (team) instance
+     * @param s   the {@code Squadra} (team) instance
      * @param gui the GUI instance for player substitutions
      */
     public LogicsSostituzioneImpl(final Team s, final Sostituzione gui) {

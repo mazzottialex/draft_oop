@@ -21,7 +21,7 @@ import data.Player;
 import data.Team;
 import data.TeamUser;
 import gui.Base;
-import gui.Partita;
+import gui.Match;
 import gui.Start;
 import gui.utilsGUI;
 import logics.CreaSquadreAvversarie;
@@ -73,9 +73,9 @@ public class TorneoV2 extends Base {
                     if (turnoDaSimul.get(0) instanceof TeamUser) {
                         JButton btn = (JButton) e.getSource();
                         btn.setEnabled(false);
-                        Partita partita;
+                        Match partita;
                         try {
-                            partita = new Partita(turnoDaSimul.get(0), turnoDaSimul.get(1));
+                            partita = new Match(turnoDaSimul.get(0), turnoDaSimul.get(1));
                             partita.createAndShowGUI();
                             partita.addWindowListener(new WindowAdapter() {
                                 @Override
@@ -84,8 +84,8 @@ public class TorneoV2 extends Base {
                                     liSquadreVinc.add(0, partita.getWinner());
                                     tabellone.addLi(liSquadreVinc);
                                     liSquadreVinc = new ArrayList<>();
-                                    liRis.add(0, new Pair<Team, Integer>(turnoDaSimul.get(0), partita.getGolS1()));
-                                    liRis.add(1, new Pair<Team, Integer>(turnoDaSimul.get(1), partita.getGolS2()));
+                                    liRis.add(0, new Pair<Team, Integer>(turnoDaSimul.get(0), partita.getGoalT1()));
+                                    liRis.add(1, new Pair<Team, Integer>(turnoDaSimul.get(1), partita.getGoalT2()));
                                     tabellone.setLiLastRisul(liRis);
                                     liRis = new ArrayList<>();
                                     contentPane.remove(count + 2);

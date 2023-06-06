@@ -14,11 +14,11 @@ import java.util.List;
 import javax.swing.SwingUtilities;
 
 import data.Player;
-import data.Modulo;
+import data.Module;
 import data.Team;
 import data.TeamOpponent;
 import data.TeamUser;
-import gui.Partita;
+import gui.Match;
 import gui.Rigori;
 import gui.Start;
 import manageData.ManageData;

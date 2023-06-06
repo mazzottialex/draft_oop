@@ -10,7 +10,7 @@ import java.util.Random;
 import java.util.Set;
 
 import data.Player;
-import data.Modulo;
+import data.Module;
 import data.Team;
 import data.TeamOpponent;
 
@@ -61,7 +61,7 @@ public class CreaSquadreAvversarieImpl implements CreaSquadreAvversarie {
      * @throws ClassNotFoundException if the class is not found.
      * @throws IOException if an I/O error occurs.
      */
-    public List<Team> selezionaSquadreCasuali(final List<String> squadre, final Modulo modulo, final int numeroSquadre)
+    public List<Team> selezionaSquadreCasuali(final List<String> squadre, final Module modulo, final int numeroSquadre)
     throws FileNotFoundException, ClassNotFoundException, IOException {
         Collections.shuffle(squadre); // Mescola l'ordine delle squadre
         int id = 1;
@@ -78,8 +78,8 @@ public class CreaSquadreAvversarieImpl implements CreaSquadreAvversarie {
      *
      * @return a randomly selected team formation.
      */
-    public static Modulo selezionaModulo() {
-        List<Modulo> modulo = new ArrayList<>(List.of(Modulo.values()));
+    public static Module selezionaModulo() {
+        List<Module> modulo = new ArrayList<>(List.of(Module.values()));
         Random random = new Random();
         int index = random.nextInt(modulo.size());
         return modulo.get(index);

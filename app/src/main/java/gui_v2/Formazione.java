@@ -14,14 +14,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import data.Player;
-import data.Modulo;
+import data.Module;
 import gui.Base;
 import gui.utilsGUI;
 import logics.LogicsFormazione;
 import logics.LogicsFormazioneImpl;
 public class Formazione extends Base {
-    private List<Modulo> liModuli;
-    private Modulo modulo;
+    private List<Module> liModuli;
+    private Module modulo;
     private LogicsFormazione log;
     private final static int N_MODULI = 5;
     public Formazione(final List<Player> li, final String nomeSquadra, final String stemma) {

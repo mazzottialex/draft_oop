@@ -48,7 +48,7 @@ public interface Team extends Serializable{
      *
      * @return a Modulo object representing the formation of the team.
      */
-    Modulo getModulo();
+    Module getModulo();
 
     /**
      * Returns the ID of the team.
