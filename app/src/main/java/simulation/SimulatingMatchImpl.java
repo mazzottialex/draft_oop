@@ -142,12 +142,12 @@ public class SimulatingMatchImpl implements SimulatingMatch {
         if (minute < MINUTES_REG) {
             map.put(t1,
                 (int) (result().get(t1) * (double) ((MINUTES_REG - minute) / MINUTES_REG)));
-            map.put(t2, (int)(result().get(t1)
+            map.put(t2, (int) (result().get(t1)
                 * (double) ((MINUTES_REG - minute) / MINUTES_REG)));
         } else {
             map.put(t1,
                 (int) (result().get(t1) * (double) ((MINUTES_EXTRA - MINUTES_REG - minute) / MINUTES_REG)));
-            map.put(t2, (int)(result().get(t1)
+            map.put(t2, (int) (result().get(t1)
                 * (double) ((MINUTES_EXTRA - MINUTES_REG - minute) / MINUTES_REG)));
         }
         return map;

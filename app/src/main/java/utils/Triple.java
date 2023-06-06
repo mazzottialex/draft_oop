@@ -3,10 +3,14 @@ import java.io.Serializable;
 
 /**
  * A standard generic Triple<X, Y, Z>, with getters, hashCode, equals, and toString well implemented.
+ * 
+ * @param <X> the type of the first value in the pair
+ * @param <Y> the type of the second value in the pair
+ * @param <Z> the type of the third value in the pair
  */
 public class Triple<X, Y, Z> implements Serializable {
     private static final long serialVersionUID = 1L;
-	private final X x;
+    private final X x;
     private final Y y;
     private final Z z;
 
@@ -85,8 +89,9 @@ public class Triple<X, Y, Z> implements Serializable {
             if (other.y != null) {
                 return false;
             }
-        } else if (!y.equals(other.y))
+        } else if (!y.equals(other.y)){
             return false;
+        }
         if (z == null) {
             if (other.z != null) {
                 return false;

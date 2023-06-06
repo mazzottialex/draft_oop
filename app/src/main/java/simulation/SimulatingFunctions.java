@@ -21,7 +21,7 @@ public interface SimulatingFunctions {
      * @throws IOException              if an I/O error occurs
      */
     int getFantasyConcededGoals(Team t)
-    		throws FileNotFoundException, ClassNotFoundException, IOException;
+            throws FileNotFoundException, ClassNotFoundException, IOException;
 
     /**
      * Retrieves the number of fantasy own goals scored by the specified team.
@@ -33,7 +33,7 @@ public interface SimulatingFunctions {
      * @throws IOException              if an I/O error occurs
      */
     int getFantasyOwngoals(Team t)
-    		throws FileNotFoundException, ClassNotFoundException, IOException;
+            throws FileNotFoundException, ClassNotFoundException, IOException;
 
     /**
      * Retrieves the number of fantasy saved penalties by the specified team.
@@ -45,7 +45,7 @@ public interface SimulatingFunctions {
      * @throws IOException              if an I/O error occurs
      */
     int getFantasySavedPenalties(Team t)
-    		throws FileNotFoundException, ClassNotFoundException, IOException;
+            throws FileNotFoundException, ClassNotFoundException, IOException;
 
     /**
      * Retrieves the difference between the number of scored and saved fantasy penalties by the specified team.
@@ -57,7 +57,7 @@ public interface SimulatingFunctions {
      * @throws IOException              if an I/O error occurs
      */
     int getDeltaScoredSavedPenalties(Team t)
-    		throws FileNotFoundException, ClassNotFoundException, IOException;
+            throws FileNotFoundException, ClassNotFoundException, IOException;
 
     /**
      * Retrieves the fantasy defensive rating of the specified team based on the provided values.
@@ -70,7 +70,7 @@ public interface SimulatingFunctions {
      * @throws IOException              if an I/O error occurs
      */
     double getFantasyDefensiveRating(Team t, Map<String, Double> v)
-    		throws FileNotFoundException, ClassNotFoundException, IOException;
+            throws FileNotFoundException, ClassNotFoundException, IOException;
 
     /**
      * Retrieves the fantasy offensive rating of the specified team based on the provided values.
@@ -83,7 +83,7 @@ public interface SimulatingFunctions {
      * @throws IOException              if an I/O error occurs
      */
     double getFantasyOffensiveRating(Team t, Map<String, Double> v)
-    		throws FileNotFoundException, ClassNotFoundException, IOException;
+            throws FileNotFoundException, ClassNotFoundException, IOException;
 
     /**
      * Retrieves the number of fantasy goals scored by the specified team.
@@ -95,5 +95,5 @@ public interface SimulatingFunctions {
      * @throws IOException              if an I/O error occurs
      */
     int getFantasyScoredGoals(Team t)
-    		throws FileNotFoundException, ClassNotFoundException, IOException;
+            throws FileNotFoundException, ClassNotFoundException, IOException;
 }
