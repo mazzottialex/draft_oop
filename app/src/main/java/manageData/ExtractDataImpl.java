@@ -16,9 +16,9 @@ public class ExtractDataImpl implements ExtractData {
         this.li = li;
     }
     @Override
-    public List<Player> getCalciatoreBySquadra(final String squadra) {
+    public List<Player> getPlayerByTeam(final String team) {
         return li.stream()
-            .filter(c -> c.getTeam().equals(squadra))
+            .filter(c -> c.getTeam().equals(team))
             .collect(Collectors.toList());
     }
     @Override
@@ -26,21 +26,21 @@ public class ExtractDataImpl implements ExtractData {
         return li;
     }
     @Override
-    public Optional<Player> getCalciatoreByName(final String name) {
+    public Optional<Player> getPlayerByName(final String name) {
         return li.stream()
             .filter(c -> c.getName().equals(name))
             .findFirst();
     }
     //RUOLI: P, D, C, A
     @Override
-    public List<Player> getListaByRuolo(final String ruolo) {
+    public List<Player> getListByPos(final String pos) {
         return li.stream()
-            .filter(c -> c.getPos().equals(ruolo))
+            .filter(c -> c.getPos().equals(pos))
             .collect(Collectors.toList());
     }
     @Override
-    public List<Player> getRandomByRuolo(final String ruolo, int n) {
-        List<Player> listaRuolo = getListaByRuolo(ruolo);
+    public List<Player> getRandomByPos(final String pos, int n) {
+        List<Player> listaRuolo = getListByPos(pos);
         Random rnd = new Random();
         Set<Integer> posizioni = new HashSet<>();
         for (int i = 0; i < n; i++) {
@@ -83,7 +83,7 @@ public class ExtractDataImpl implements ExtractData {
             .collect(Collectors.toList());
     }
     @Override
-    public List<Player> getTitolariBySquadraByRuolo(final String squadra, 
+    public List<Player> getStartingByTeamByPos(final String squadra, 
     		final String ruolo, final Module modulo) {
         int n = 1;
         switch (ruolo) {
@@ -99,7 +99,7 @@ public class ExtractDataImpl implements ExtractData {
             default: //compreso il case "P" perché per il ruolo portiere n=1
                 break;
         }
-        final List <Player> lista = getCalciatoreBySquadra(squadra).stream()
+        final List <Player> lista = getPlayerByTeam(squadra).stream()
             .filter(c -> c.getPos().equals(ruolo))
             .sorted((c1, c2) -> c2.getRating().getX() - c1.getRating().getX())
             .limit(n)
@@ -108,11 +108,11 @@ public class ExtractDataImpl implements ExtractData {
     }
 
     @Override
-    public List<Player> getRiserveBySquadraByRuolo(final String squadra, 
-    		final String ruolo, final Module modulo) {
+    public List<Player> getSubstitutionByTeamByPos(final String team, 
+    		final String pos, final Module modulo) {
         int n = 2;
         int m = 1;
-        switch (ruolo) {
+        switch (pos) {
             case "P":
                 n = 1;
                 break;
@@ -128,8 +128,8 @@ public class ExtractDataImpl implements ExtractData {
             default:
                 break;
         }
-        List<Player> lista = getCalciatoreBySquadra(squadra).stream()
-            .filter(c -> c.getPos().equals(ruolo))
+        List<Player> lista = getPlayerByTeam(team).stream()
+            .filter(c -> c.getPos().equals(pos))
             .sorted((c1, c2) -> c2.getRating().getX() - c1.getRating().getX())
             .skip(m)
             .limit(n)
@@ -138,49 +138,49 @@ public class ExtractDataImpl implements ExtractData {
     }
 
     @Override
-    public List<Player> getTitolari(final String squadra, final Module modulo) {
+    public List<Player> getStarting(final String team, final Module modulo) {
     	final List<Player> lt = new ArrayList<>();
-        lt.addAll(getTitolariBySquadraByRuolo(squadra, "P", modulo));
-        lt.addAll(getTitolariBySquadraByRuolo(squadra, "D", modulo));
-        lt.addAll(getTitolariBySquadraByRuolo(squadra, "C", modulo));
-        lt.addAll(getTitolariBySquadraByRuolo(squadra, "A", modulo));
+        lt.addAll(getStartingByTeamByPos(team, "P", modulo));
+        lt.addAll(getStartingByTeamByPos(team, "D", modulo));
+        lt.addAll(getStartingByTeamByPos(team, "C", modulo));
+        lt.addAll(getStartingByTeamByPos(team, "A", modulo));
         return lt;
     }
 
     @Override
-    public List<Player> getRiserve(final String squadra, final Module modulo) {
+    public List<Player> getSubstitution(final String team, final Module modulo) {
         final List<Player> lr = new ArrayList<>();
-        lr.addAll(getRiserveBySquadraByRuolo(squadra, "P", modulo));
-        lr.addAll(getRiserveBySquadraByRuolo(squadra, "D", modulo));
-        lr.addAll(getRiserveBySquadraByRuolo(squadra, "C", modulo));
-        lr.addAll(getRiserveBySquadraByRuolo(squadra, "A", modulo));
+        lr.addAll(getSubstitutionByTeamByPos(team, "P", modulo));
+        lr.addAll(getSubstitutionByTeamByPos(team, "D", modulo));
+        lr.addAll(getSubstitutionByTeamByPos(team, "C", modulo));
+        lr.addAll(getSubstitutionByTeamByPos(team, "A", modulo));
         return lr;
     }
 
-    public List<String> getNomeCalciatori(final String squadra) {
-        return getCalciatoreBySquadra(squadra)
+    public List<String> getPlayerName(final String team) {
+        return getPlayerByTeam(team)
             .stream()
             .map(c -> c.getName())
             .collect(Collectors.toList());
     }
 
-    public List<String> getNomeTitolari(final String squadra, final Module modulo) {
-        return getTitolari(squadra, modulo)
+    public List<String> getNameStarting(final String team, final Module modulo) {
+        return getStarting(team, modulo)
             .stream()
             .map(c -> c.getName())
             .collect(Collectors.toList());
     }
 
-    public List<String> getNomeRiserve(final String squadra, final Module modulo) {
-        return getRiserve(squadra, modulo)
+    public List<String> getNameSubstitution(final String team, final Module modulo) {
+        return getSubstitution(team, modulo)
             .stream()
             .map(c -> c.getName())
             .collect(Collectors.toList());
     }
 
     // ruolo, nome, rating
-    public List<?> tsr(final String squadra, final Module modulo) {
-        return getTitolari(squadra, modulo)
+    public List<?> tsr(final String team, final Module modulo) {
+        return getStarting(team, modulo)
             .stream()
             .map(c -> c.toVector())
             .collect(Collectors.toList());
@@ -188,39 +188,39 @@ public class ExtractDataImpl implements ExtractData {
 
     public List<Player> getRandom(final int nA, final int nC, final int nD, final int nP) {
     	final List<Player> li = new ArrayList<>();
-        li.addAll(getRandomByRuolo("A", nA));
-        li.addAll(getRandomByRuolo("C", nC));
-        li.addAll(getRandomByRuolo("D", nD));
-        li.addAll(getRandomByRuolo("P", nP));
+        li.addAll(getRandomByPos("A", nA));
+        li.addAll(getRandomByPos("C", nC));
+        li.addAll(getRandomByPos("D", nD));
+        li.addAll(getRandomByPos("P", nP));
         Player c;
         for (int i = 0; i < 5; i++) {
             do {
-                c = getRandomByRuolo("P", 1).get(0);
+                c = getRandomByPos("P", 1).get(0);
             } while (li.contains(c));
             li.add(c);
         }
         for (int i = 0; i < 10; i++) {
             do {
-                c = getRandomByRuolo("D", 2).get(0);
+                c = getRandomByPos("D", 2).get(0);
             } while (li.contains(c));
             li.add(c);
         }
         for (int i = 0; i < 10; i++) {
             do {
-                c = getRandomByRuolo("C", 2).get(0);
+                c = getRandomByPos("C", 2).get(0);
             } while (li.contains(c));
             li.add(c);
         }
         for (int i = 0; i < 10; i++) {
             do {
-                c = getRandomByRuolo("A", 2).get(0);
+                c = getRandomByPos("A", 2).get(0);
             } while (li.contains(c));
             li.add(c);
         }
         return li;
     }
     @Override
-    public Optional<Player> getCalciatoreById(final int id) {
+    public Optional<Player> getPlayerById(final int id) {
         return li.stream()
             .filter(c -> c.getId() == id)
             .findFirst();

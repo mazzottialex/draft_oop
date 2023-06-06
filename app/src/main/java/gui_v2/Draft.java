@@ -33,20 +33,16 @@ public class Draft extends Base {
     private final int nDraft = 5;
     private final List<Player> liTitolari = new ArrayList<>();
     private final List<Player> liRiserve = new ArrayList<>();
-    public Draft(final List<Player> li, final Module mod, final String nomeSquadra, final String stemma) {
+    public Draft(final List<Player> li, final Module mod, final String nomeSquadra, final String stemma) throws IOException {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 2, 2);
         GridBagLayout layout = new GridBagLayout();
         contentPane.setLayout(layout);
         List<JButton> liBtn = new ArrayList<>();
         ExtractData ex;
-        try {
-            ex = new ExtractDataImpl(li);
-            liGiocatori = ex.getRandom(mod.getNumAtt() * nDraft,
-            		mod.getNumCen() * nDraft, mod.getNumDif() * nDraft, nDraft);
-        } catch (ClassNotFoundException | IOException e) {
-            e.printStackTrace();
-        }
+        ex = new ExtractDataImpl(li);
+		liGiocatori = ex.getRandom(mod.getNumAtt() * nDraft,
+				mod.getNumCen() * nDraft, mod.getNumDif() * nDraft, nDraft);
         JPanel panelGiocatore;
         JPanel panelPosizione;
         JButton btnProsegui = utilsGUI.standardButton("Prosegui");
@@ -166,7 +162,7 @@ public class Draft extends Base {
             public void actionPerformed(final ActionEvent e) {
                 Team squadra = new TeamUser(nomeSquadra, stemma, mod, liTitolari, liRiserve);
                 LogicsFile logFile = new LogicsFileImpl();
-                logFile.SaveStorico(squadra);
+                logFile.saveHistory(squadra);
                // changeJPanel(new ViewTeam(squadra, li));
             }
         });

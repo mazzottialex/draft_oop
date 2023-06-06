@@ -67,7 +67,7 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
 
     public int golSubitiFanta(Team s) throws FileNotFoundException, ClassNotFoundException, IOException {
         ExtractData ed = new ExtractDataImpl(s.getStarting());
-        Player portiere = ed.getListaByRuolo("P").get(0);
+        Player portiere = ed.getListByPos("P").get(0);
         double probCleanSheet = portiere.getCleanSheets() / (portiere.getMatchesPlayed() == 0 ? 1 : portiere.getMatchesPlayed());
         if (prob(0, 1) <= probCleanSheet) {
             return 0;
@@ -125,7 +125,7 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
     public static double catenaccioFanta(Team s, Map<Player, Double> votiDif)
             throws FileNotFoundException, ClassNotFoundException, IOException {
         ExtractData ed = new ExtractDataImpl(s.getStarting());
-        List<Player> difensori = ed.getListaByRuolo("D");
+        List<Player> difensori = ed.getListByPos("D");
         double count = 0;
         double totVoti = 0;
         if (difensori.size() >= 3) {
