@@ -76,8 +76,8 @@ public class LogicsTorneoImpl implements LogicsTorneo {
          * this.listSquadre.add(new SquadraAvversaria(14, "SAL", Modulo.M442, li));
          */
         // System.out.println(this.listSquadre);
-        CreaSquadreAvversarieImpl cs = new CreaSquadreAvversarieImpl(li, NUM_AVVERSARI);
-        this.listSquadre.addAll(cs.getSquadre());
+        CreateOpponentTeamsImpl cs = new CreateOpponentTeamsImpl(li, NUM_AVVERSARI);
+        this.listSquadre.addAll(cs.getTeams());
         this.numSquadre = 16;
         this.risultati = new HashMap<>();
         this.eliminated = false;

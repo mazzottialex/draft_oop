@@ -24,8 +24,8 @@ import gui.Base;
 import gui.Match;
 import gui.Start;
 import gui.utilsGUI;
-import logics.CreaSquadreAvversarie;
-import logics.CreaSquadreAvversarieImpl;
+import logics.CreateOpponentTeams;
+import logics.CreateOpponentTeamsImpl;
 import logics.LogicsRigori;
 import logics.LogicsRigoriImpl;
 import simulation.SimulatingMatch;
@@ -42,11 +42,11 @@ public class TorneoV2 extends Base {
         GridBagConstraints gbc = new GridBagConstraints();
         GridBagLayout layout = new GridBagLayout();
         contentPane.setLayout(layout);
-        CreaSquadreAvversarie creaS = new CreaSquadreAvversarieImpl(li, nSquadre - 1);
+        CreateOpponentTeams creaS = new CreateOpponentTeamsImpl(li, nSquadre - 1);
         List<Team> liSquadre = new ArrayList<>();
         liSquadre.add(squadra);
         try {
-            liSquadre.addAll(creaS.getSquadre());
+            liSquadre.addAll(creaS.getTeams());
         } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
         }
