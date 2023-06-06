@@ -3,8 +3,8 @@ package gui;
 
 import data.Player;
 import data.Team;
-import logics.LogicsPartita;
-import logics.LogicsPartitaImpl;
+import logics.LogicsMatch;
+import logics.LogicsMatchImpl;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -41,7 +41,7 @@ public class Match extends Base {
     private JButton subsButton;
     private JButton goAheadButton;
     private JPanel panel;
-    private LogicsPartita logics;
+    private LogicsMatch logics;
     private Team t1;
     private Team t2;
     private boolean isRunning;
@@ -80,7 +80,7 @@ public class Match extends Base {
     public Match(final Team t1, final Team t2) throws FileNotFoundException, ClassNotFoundException, IOException {
         this.t1 = t1;
         this.t2 = t2;
-        this.logics = new LogicsPartitaImpl(this.t1, this.t2);
+        this.logics = new LogicsMatchImpl(this.t1, this.t2);
         match = this;
 
         // Define the panel to hold the components
@@ -390,7 +390,7 @@ public class Match extends Base {
      * @throws IOException If an I/O exception occurs.
      */
     public void changeScore() throws FileNotFoundException, ClassNotFoundException, IOException {
-        if (logics.getMinGol(t1).contains(progressBar.getValue())) {
+        if (logics.getGoalsMinutes(t1).contains(progressBar.getValue())) {
             report1.add(logics.addScorer(t1));
             Player player = report1.get(report1.size() - 1);
             String owngoal = "";
@@ -403,7 +403,7 @@ public class Match extends Base {
             score1++;
             labelScoreTeam1.setText(String.valueOf(score1));
         }
-        if (logics.getMinGol(t2).contains(progressBar.getValue())) {
+        if (logics.getGoalsMinutes(t2).contains(progressBar.getValue())) {
             report2.add(logics.addScorer(t2));
             Player player = report2.get(report2.size() - 1);
             String owngoal = "";
