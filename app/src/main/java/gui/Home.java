@@ -143,7 +143,7 @@ public class Home extends Base {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Wait a few seconds");
-                log.setSeason(comboBoxLoad.getItemAt(comboBoxLoad.getSelectedIndex())); 
+                log.setSeason(comboBoxDownload.getItemAt(comboBoxDownload.getSelectedIndex())); 
                 if (log.downloadSeason(log.getSeason())) {
                     lblSeason.setText(log.getSeason());
                     JOptionPane.showMessageDialog(null, "Download completed");

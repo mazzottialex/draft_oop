@@ -31,12 +31,12 @@ public class ScrapingImpl implements Scraping {
      */
     public ScrapingImpl(final int nThread) {
         this.nThread = nThread;
-        if(checkBrowser("google-chrome")) {
+        //if(checkBrowser("google-chrome")) {
         	flagChrome=true;
-        }
-        else if(checkBrowser("firefox")) {
-        	flagFirefox=true;
-        }
+        //}
+        //else if(checkBrowser("firefox")) {
+        	//flagFirefox=true;
+        //}
 
     }
     
