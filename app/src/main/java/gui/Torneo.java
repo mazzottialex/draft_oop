@@ -82,9 +82,9 @@ public class Torneo extends Base {
      * 
      * @param squadra the user's team
      * @param li      the list of all the players in Serie A
-     * @throws FileNotFoundException
-     * @throws ClassNotFoundException
-     * @throws IOException
+     * @throws FileNotFoundException if the file is not found
+     * @throws ClassNotFoundException if the class is not found
+     * @throws IOException an I/O error occurs
      */
     public Torneo(final Team squadra, final List<Player> li)
             throws FileNotFoundException, ClassNotFoundException, IOException {
