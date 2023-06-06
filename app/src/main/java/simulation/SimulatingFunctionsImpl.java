@@ -13,19 +13,25 @@ import data.Team;
 import manageData.ExtractData;
 import manageData.ExtractDataImpl;
 
+/**
+ * Implementation of the {@link SimulatingFunctions} interface that provides
+ * simulation functions for fantasy football.
+ */
 public class SimulatingFunctionsImpl implements SimulatingFunctions {
+
+    // Constants for simulation calculations
     private static final double OWNGOAL_RATE = 2.904040404040404; // percentuale di autogol su gol
-    private static final double PENALITY_RATE = 0.2875; // rigori per partita
-    private static final double MISSED_PENALITIES_RATE = 22.82608695652174; // percentuale rigori sbagliati
+    private static final double PENALTY_RATE = 0.2875; // rigori per partita
+    private static final double MISSED_PENALTIES_RATE = 22.82608695652174; // percentuale rigori sbagliati
     private static final double COST_VOTE_P = 0.0746835443037975; // costante calcolo voto portiere
     private static final double COST_VOTE_D = 0.0721518987341772; // costante calcolo voto difensore
     private static final double COST_VOTE_C = 0.0753086419753086; // costante calcolo voto centrocampista
     private static final double COST_VOTE_A = 0.0729411764705882; // costante calcolo voto attaccante
-    private static final int GOL_1 = 51;
-    private static final int GOL_2 = 77;
-    private static final int GOL_3 = 90;
-    private static final int GOL_4 = 96;
-    private static final int GOL_5 = 99;
+    private static final int GOaL_1 = 51;
+    private static final int GOAL_2 = 77;
+    private static final int GOAL_3 = 90;
+    private static final int GOAL_4 = 96;
+    private static final int GOAL_5 = 99;
     private static final double THRESHOLD_3_DIF = 6.5;
     private static final double THRESHOLD_4_5_DIF = 6;
     private static final double BONUS_4_DIF = 1;
@@ -38,188 +44,237 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
     private static final double MOD_VOTE_OFF_C = 4;
     private static final double MOD_VOTE_OFF_A = 2.5;
     private static final double MINUTES = 90;
-    private static final Map<String, Double> RUOLO_COEFFICIENT_MAP = new HashMap<>();
+    private static final Map<String, Double> ROLE_COEFFICIENT_MAP = new HashMap<>();
 
     static {
-        RUOLO_COEFFICIENT_MAP.put("P", COST_VOTE_P);
-        RUOLO_COEFFICIENT_MAP.put("D", COST_VOTE_D);
-        RUOLO_COEFFICIENT_MAP.put("C", COST_VOTE_C);
-        RUOLO_COEFFICIENT_MAP.put("A", COST_VOTE_A);
+        ROLE_COEFFICIENT_MAP.put("P", COST_VOTE_P);
+        ROLE_COEFFICIENT_MAP.put("D", COST_VOTE_D);
+        ROLE_COEFFICIENT_MAP.put("C", COST_VOTE_C);
+        ROLE_COEFFICIENT_MAP.put("A", COST_VOTE_A);
     }
 
+    /**
+     * Generates a random number within the specified range.
+     *
+     * @param min The minimum value (inclusive).
+     * @param max The maximum value (exclusive).
+     * @return A random number between min and max.
+     */
     public static double prob(double min, double max) {
         Random random = new Random();
         return min + (max - min) * random.nextDouble();
     }
 
-    public static double votoFanta(Player c) {
-        double k = RUOLO_COEFFICIENT_MAP.getOrDefault(c.getPos(), 0.0);
-        return k * c.getRating().getX() * prob(0.8, 1.2);
+    /**
+     * Calculates the fantasy rating for a player.
+     *
+     * @param p The player.
+     * @return The fantasy rating for the player.
+     */
+    public static double getFantasyPlayerRating(Player p) {
+        double k = ROLE_COEFFICIENT_MAP.getOrDefault(p.getPos(), 0.0);
+        return k * p.getRating().getX() * prob(0.8, 1.2);
     }
 
-    public static Map<Player, Double> votiFanta(List<Player> titolari) {
+    /**
+     * Calculates the fantasy ratings for a list of players (starters).
+     *
+     * @param starters The list of players.
+     * @return A map containing each player and their corresponding fantasy rating.
+     */
+    public static Map<Player, Double> getFantasyRantings(List<Player> starters) {
         Map<Player, Double> map = new LinkedHashMap<>();
-        for (Player c: titolari) {
-            map.put(c, votoFanta(c));
+        for (Player p: starters) {
+            map.put(p, getFantasyPlayerRating(p));
         }
         return map;
     }
 
-    public int golSubitiFanta(Team s) throws FileNotFoundException, ClassNotFoundException, IOException {
-        ExtractData ed = new ExtractDataImpl(s.getStarting());
-
-        Player portiere = ed.getListByPos("P").get(0);
-
-        double probCleanSheet = portiere.getCleanSheets() / (portiere.getMatchesPlayed() == 0 ? 1 : portiere.getMatchesPlayed());
+    @Override
+    public int getFantasyConcededGoals(Team t) throws FileNotFoundException, ClassNotFoundException, IOException {
+        ExtractData ed = new ExtractDataImpl(t.getStarting());
+        Player gk = ed.getListByPos("P").get(0);
+        double probCleanSheet = gk.getCleanSheets() / (gk.getMatchesPlayed() == 0 ? 1 : gk.getMatchesPlayed());
         if (prob(0, 1) <= probCleanSheet) {
             return 0;
         } else {
-            int gol = 1;
+            int goals = 1;
             int p = (int)(1 + (prob(0, 1) * 100));
-            if (p > GOL_1 && p <= GOL_2) {
-                gol = 2;
-            } else if (p > GOL_2 && p <= GOL_3) {
-                gol = 3;
-            } else if (p > GOL_3 && p <= GOL_4) {
-                gol = 4;
-            } else if (p > GOL_4 && p <= GOL_5) {
-                gol = 5;
-            } else if (p > GOL_5) {
-                gol = 6;
+            if (p > GOaL_1 && p <= GOAL_2) {
+                goals = 2;
+            } else if (p > GOAL_2 && p <= GOAL_3) {
+                goals = 3;
+            } else if (p > GOAL_3 && p <= GOAL_4) {
+                goals = 4;
+            } else if (p > GOAL_4 && p <= GOAL_5) {
+                goals = 5;
+            } else if (p > GOAL_5) {
+                goals = 6;
             }
-            return gol;
+            return goals;
         }
     }
 
-    public int autogolFanta(Team s) throws FileNotFoundException, ClassNotFoundException, IOException {
-        int ag = 0;
-        for (int i = 0; i < golSubitiFanta(s); i++) {
+    @Override
+    public int getFantasyOwngoals(Team t) throws FileNotFoundException, ClassNotFoundException, IOException {
+        int og = 0;
+        for (int i = 0; i < getFantasyConcededGoals(t); i++) {
             if (prob(0, 100) <= OWNGOAL_RATE) {
-                ag++;
+                og++;
             }
         }
-        return ag;
+        return og;
     }
 
-    public int rigoriParatiFanta(Team s)
+    @Override
+    public int getFantasySavedPenalties(Team t)
     throws FileNotFoundException, ClassNotFoundException, IOException {
-        int r = 0;
-        int rp = 0;
-        double p = prob(0, 1);
-        if (p <= Math.pow(PENALITY_RATE, 3)) {
-            r = 3;
-        } else if (p > Math.pow(PENALITY_RATE, 3) &&
-            p <= Math.pow(PENALITY_RATE, 2) + Math.pow(PENALITY_RATE, 3)) {
-            r = 2;
-        } else if (p > Math.pow(PENALITY_RATE, 2) + Math.pow(PENALITY_RATE, 3) &&
-            p <= PENALITY_RATE + Math.pow(PENALITY_RATE, 2) + Math.pow(PENALITY_RATE, 3)) {
-            r = 1;
+        int penalties = 0;
+        int savedPenalties = 0;
+        double prob = prob(0, 1);
+        if (prob <= Math.pow(PENALTY_RATE, 3)) {
+            penalties = 3;
+        } else if (prob > Math.pow(PENALTY_RATE, 3) &&
+            prob <= Math.pow(PENALTY_RATE, 2) + Math.pow(PENALTY_RATE, 3)) {
+            penalties = 2;
+        } else if (prob > Math.pow(PENALTY_RATE, 2) + Math.pow(PENALTY_RATE, 3) &&
+            prob <= PENALTY_RATE + Math.pow(PENALTY_RATE, 2) + Math.pow(PENALTY_RATE, 3)) {
+            penalties = 1;
         }
-        for (int i = 0; i < r; i++) {
-            p = prob(0, 1);
-            if (p <= MISSED_PENALITIES_RATE) {
-                rp++;
+        for (int i = 0; i < penalties; i++) {
+            prob = prob(0, 1);
+            if (prob <= MISSED_PENALTIES_RATE) {
+                savedPenalties++;
             }
         }
-        return rp;
+        return savedPenalties;
     }
 
-    public static double catenaccioFanta(Team s, Map<Player, Double> votiDif)
+    /**
+     * Calculates the "lockdown defense" rating for a team based on the ratings of its defenders.
+     *
+     * @param t                the team for which to calculate the defense rating
+     * @param defendersRatings a map containing the defenders and their corresponding fantasy ratings
+     * @return the lockdown defense rating for the team
+     * @throws FileNotFoundException    if the data file is not found
+     * @throws ClassNotFoundException   if the class is not found during deserialization
+     * @throws IOException              if an I/O error occurs during data extraction
+     */
+    public static double getLockdownDefenseRating(Team t, Map<Player, Double> defendersRatings)
             throws FileNotFoundException, ClassNotFoundException, IOException {
+<<<<<<< HEAD
+        ExtractData ed = new ExtractDataImpl(t.getStarting());
+        List<Player> defenders = ed.getListByRole("D");
+=======
         ExtractData ed = new ExtractDataImpl(s.getStarting());
 
         List<Player> difensori = ed.getListByPos("D");
 
+>>>>>>> b27a96f40b226a33c83a55e9ebafb6e495c3211b
         double count = 0;
-        double totVoti = 0;
-        if (difensori.size() >= 3) {
-            double threshold = difensori.size() == 3 ? THRESHOLD_3_DIF : THRESHOLD_4_5_DIF;
-            for (Player c : difensori) {
-                if (votiDif.get(c) >= threshold) {
-                    totVoti += votiDif.get(c);
+        double totRatings = 0;
+        if (defenders.size() >= 3) {
+            double threshold = defenders.size() == 3 ? THRESHOLD_3_DIF : THRESHOLD_4_5_DIF;
+            for (Player c : defenders) {
+                if (defendersRatings.get(c) >= threshold) {
+                    totRatings += defendersRatings.get(c);
                 } else {
-                    totVoti = 0;
+                    totRatings = 0;
                     break;
                 }
             }
-            if (totVoti != 0) {
-                if (difensori.size() == 3) {
-                    count = totVoti - (difensori.size() * THRESHOLD_3_DIF);
-                } else if (difensori.size() == 4) {
-                    count = BONUS_4_DIF + totVoti - (difensori.size() * THRESHOLD_4_5_DIF);
-                } else if (difensori.size() == 5) {
-                    count = BONUS_5_DIF + totVoti - (difensori.size() * THRESHOLD_4_5_DIF);
+            if (totRatings != 0) {
+                if (defenders.size() == 3) {
+                    count = totRatings - (defenders.size() * THRESHOLD_3_DIF);
+                } else if (defenders.size() == 4) {
+                    count = BONUS_4_DIF + totRatings - (defenders.size() * THRESHOLD_4_5_DIF);
+                } else if (defenders.size() == 5) {
+                    count = BONUS_5_DIF + totRatings - (defenders.size() * THRESHOLD_4_5_DIF);
                 }
             }
         }
         return count;
     }
 
-    public static Map<String, Double> votoModFanta(Team s, Map<Player, Double> mapVoti)
+    /**
+     * Modifies the fantasy ratings of players in a team based on certain criteria.
+     *
+     * @param t          the team for which to modify the ratings
+     * @param mapRatings a map containing the players and their corresponding fantasy ratings
+     * @return a map of role to modified ratings for the team
+     * @throws FileNotFoundException    if the data file is not found
+     * @throws ClassNotFoundException   if the class is not found during deserialization
+     * @throws IOException              if an I/O error occurs during data extraction
+     */
+    public static Map<String, Double> modifiedFantasyRatings(Team t, Map<Player, Double> mapRatings)
             throws FileNotFoundException, ClassNotFoundException, IOException {
-        Map<String, Double> mapModVoti = new HashMap<>();
-        for (Player c : s.getStarting()) {
-            String ruolo = c.getPos();
-            double voto = mapVoti.get(c) - SUB_VOTE;
-            if (!mapModVoti.containsKey(ruolo)) {
-                mapModVoti.put(ruolo, voto);
+        Map<String, Double> mapModifiedRatings = new HashMap<>();
+        for (Player p : t.getStarting()) {
+            String role = p.getPos();
+            double rating = mapRatings.get(p) - SUB_VOTE;
+            if (!mapModifiedRatings.containsKey(role)) {
+                mapModifiedRatings.put(role, rating);
             } else {
-                double old = mapModVoti.get(ruolo);
-                mapModVoti.put(ruolo, old + voto);
+                double old = mapModifiedRatings.get(role);
+                mapModifiedRatings.put(role, old + rating);
             }
         }
-        return mapModVoti;
+        return mapModifiedRatings;
     }
 
 
-    public double votoDifFanta(Team s, Map<String, Double> v)
+    @Override
+    public double getFantasyDefensiveRating(Team t, Map<String, Double> v)
     throws FileNotFoundException, ClassNotFoundException, IOException {
         return (MOD_VOTE_DIF_D * (v.get("P") + v.get("D"))) + (MOD_VOTE_DIF_C * v.get("D")) +
             (MOD_VOTE_DIF_A * v.get("A"));
     }
 
-    public double votoOffFanta(Team s, Map<String, Double> v)
+    @Override
+    public double getFantasyOffensiveRating(Team t, Map<String, Double> v)
     throws FileNotFoundException, ClassNotFoundException, IOException {
         return (MOD_VOTE_OFF_D * (v.get("D"))) + (MOD_VOTE_OFF_C * v.get("D")) + (MOD_VOTE_OFF_A * v.get("A"));
     }
 
-    public int golFattiFanta(Team s) throws FileNotFoundException, ClassNotFoundException, IOException {
-        int gol = 0;
-        for (Player c: s.getStarting()) {
-            double probGol = c.getGoals() / (c.getMinutes() / MINUTES);
-            double p = prob(0, 1);
-            if (p <= Math.pow(probGol, 3)) {
-                gol += 3;
-            } else if (p > Math.pow(probGol, 3) && p <= Math.pow(probGol, 2) + Math.pow(probGol, 3)) {
-                gol += 2;
-            } else if (p > Math.pow(probGol, 2) + Math.pow(probGol, 3) &&
-                p <= probGol + Math.pow(probGol, 2) + Math.pow(probGol, 3)) {
-                gol += 1;
+    @Override
+    public int getFantasyScoredGoals(Team t) throws FileNotFoundException, ClassNotFoundException, IOException {
+        int goal = 0;
+        for (Player p: t.getStarting()) {
+            double probGoal = p.getGoals() / (p.getMinutes() / MINUTES);
+            double prob = prob(0, 1);
+            if (prob <= Math.pow(probGoal, 3)) {
+                goal += 3;
+            } else if (prob > Math.pow(probGoal, 3) && prob <= Math.pow(probGoal, 2) + Math.pow(probGoal, 3)) {
+                goal += 2;
+            } else if (prob > Math.pow(probGoal, 2) + Math.pow(probGoal, 3) &&
+                prob <= probGoal + Math.pow(probGoal, 2) + Math.pow(probGoal, 3)) {
+                goal += 1;
             }
         }
-        return gol;
+        return goal;
     }
 
-    public int differenzaRigoriFattiSbagliatiFanta(Team s)
+    @Override
+    public int getDeltaScoredSavedPenalties(Team t)
     throws FileNotFoundException, ClassNotFoundException, IOException {
-        int r = 0;
-        int rs = 0;
-        double p = prob(0, 1);
-        if (p <= Math.pow(PENALITY_RATE, 3)) {
-            r = 3;
-        } else if (p > Math.pow(PENALITY_RATE, 3) &&
-            p <= Math.pow(PENALITY_RATE, 2) + Math.pow(PENALITY_RATE, 3)) {
-            r = 2;
-        } else if (p > Math.pow(PENALITY_RATE, 2) + Math.pow(PENALITY_RATE, 3) &&
-            p <= PENALITY_RATE + Math.pow(PENALITY_RATE, 2) + Math.pow(PENALITY_RATE, 3)) {
-            r = 1;
+        int penalties = 0;
+        int missedPenalties = 0;
+        double prob = prob(0, 1);
+        if (prob <= Math.pow(PENALTY_RATE, 3)) {
+            penalties = 3;
+        } else if (prob > Math.pow(PENALTY_RATE, 3) &&
+            prob <= Math.pow(PENALTY_RATE, 2) + Math.pow(PENALTY_RATE, 3)) {
+            penalties = 2;
+        } else if (prob > Math.pow(PENALTY_RATE, 2) + Math.pow(PENALTY_RATE, 3) &&
+            prob <= PENALTY_RATE + Math.pow(PENALTY_RATE, 2) + Math.pow(PENALTY_RATE, 3)) {
+            penalties = 1;
         }
-        for (int i = 0; i < r; i++) {
-            p = prob(0, 1);
-            if (p <= MISSED_PENALITIES_RATE) {
-                rs++;
+        for (int i = 0; i < penalties; i++) {
+            prob = prob(0, 1);
+            if (prob <= MISSED_PENALTIES_RATE) {
+                missedPenalties++;
             }
         }
-        return (r - rs) - rs;
+        return (penalties - missedPenalties) - missedPenalties;
     }
 }

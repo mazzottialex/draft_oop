@@ -46,26 +46,26 @@ public class SimulatingMatchImpl implements SimulatingMatch {
         sf = new SimulatingFunctionsImpl();
         this.s1 = s1;
         this.s2 = s2;
-        voti1 = SimulatingFunctionsImpl.votiFanta(this.s1.getStarting());
-        voti2 = SimulatingFunctionsImpl.votiFanta(this.s2.getStarting());
-        golSubiti1 = sf.golSubitiFanta(this.s1);
-        golSubiti2 = sf.golSubitiFanta(this.s2);
-        autogol1 = sf.autogolFanta(this.s1);
-        autogol2 = sf.autogolFanta(this.s2);
-        rigoriParati1 = sf.rigoriParatiFanta(this.s1);
-        rigoriParati2 = sf.rigoriParatiFanta(this.s2);
-        catenaccio1 = SimulatingFunctionsImpl.catenaccioFanta(this.s1, voti1);
-        catenaccio2 = SimulatingFunctionsImpl.catenaccioFanta(this.s2, voti2);
-        votiMod1 = SimulatingFunctionsImpl.votoModFanta(this.s1, voti1);
-        votiMod2 = SimulatingFunctionsImpl.votoModFanta(this.s2, voti2);
-        votoDif1 = sf.votoDifFanta(s1, votiMod1);
-        votoDif2 = sf.votoDifFanta(s2, votiMod2);
-        votoOff1 = sf.votoOffFanta(s1, votiMod1);
-        votoOff2 = sf.votoOffFanta(s2, votiMod2);
-        golFatti1 = sf.golFattiFanta(s1);
-        golFatti2 = sf.golFattiFanta(s2);
-        rigoriFatti1 = sf.differenzaRigoriFattiSbagliatiFanta(s1);
-        rigoriFatti2 = sf.differenzaRigoriFattiSbagliatiFanta(s2);
+        voti1 = SimulatingFunctionsImpl.getFantasyRantings(this.s1.getStarting());
+        voti2 = SimulatingFunctionsImpl.getFantasyRantings(this.s2.getStarting());
+        golSubiti1 = sf.getFantasyConcededGoals(this.s1);
+        golSubiti2 = sf.getFantasyConcededGoals(this.s2);
+        autogol1 = sf.getFantasyOwngoals(this.s1);
+        autogol2 = sf.getFantasyOwngoals(this.s2);
+        rigoriParati1 = sf.getFantasySavedPenalties(this.s1);
+        rigoriParati2 = sf.getFantasySavedPenalties(this.s2);
+        catenaccio1 = SimulatingFunctionsImpl.getLockdownDefenseRating(this.s1, voti1);
+        catenaccio2 = SimulatingFunctionsImpl.getLockdownDefenseRating(this.s2, voti2);
+        votiMod1 = SimulatingFunctionsImpl.modifiedFantasyRatings(this.s1, voti1);
+        votiMod2 = SimulatingFunctionsImpl.modifiedFantasyRatings(this.s2, voti2);
+        votoDif1 = sf.getFantasyDefensiveRating(s1, votiMod1);
+        votoDif2 = sf.getFantasyDefensiveRating(s2, votiMod2);
+        votoOff1 = sf.getFantasyOffensiveRating(s1, votiMod1);
+        votoOff2 = sf.getFantasyOffensiveRating(s2, votiMod2);
+        golFatti1 = sf.getFantasyScoredGoals(s1);
+        golFatti2 = sf.getFantasyScoredGoals(s2);
+        rigoriFatti1 = sf.getDeltaScoredSavedPenalties(s1);
+        rigoriFatti2 = sf.getDeltaScoredSavedPenalties(s2);
     }
 
     // prestazioneDifensiva, se squadra == 1 -> s1; se squadra == 2 -> s2

@@ -12,17 +12,17 @@ import scraping.ScrapingImpl;
 public class ManageDataImpl implements ManageData {
     private List<Player> li;
     private final LogicsFile logFile;
-    private final String stagione;
+    private final String season;
     
     /**
      * Constructs a new instance of ManageDataImpl with the specified season
      *
-     * @param stagione The season for which to manage the data.
+     * @param season The season for which to manage the data.
      */
-    public ManageDataImpl(final String stagione) {
+    public ManageDataImpl(final String season) {
         li = new ArrayList<>();
         logFile = new LogicsFileImpl();
-        this.stagione = stagione;
+        this.season = season;
     }
     
     @Override
@@ -32,16 +32,16 @@ public class ManageDataImpl implements ManageData {
     
     @Override
     public void loadData() throws Exception{
-        li = logFile.loadData(stagione);
+        li = logFile.loadData(season);
     }
     
     @Override
     public Boolean downloadData() {
         final Scraping scr = new ScrapingImpl();
-        if (!scr.readTable(this.stagione))
+        if (!scr.readTable(this.season))
             return false;
         li = scr.getLiPlayer();
-        logFile.saveData(li, stagione);
+        logFile.saveData(li, season);
         return true;
     }
 }
