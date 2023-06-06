@@ -45,8 +45,8 @@ public class TeamOpponent implements Team {
         this.module = module;
         this.liPlayers = li;
         ExtractData ed = new ExtractDataImpl(li);
-        this.liStarting = ed.getTitolari(teamName, module);
-        this.liSubstitution = ed.getRiserve(teamName, module);
+        this.liStarting = ed.getStarters(teamName, module);
+        this.liSubstitution = ed.getSubstitutes(teamName, module);
         this.logo = this.setStemma();
     }
 
