@@ -162,15 +162,8 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
      */
     public static double getLockdownDefenseRating(Team t, Map<Player, Double> defendersRatings)
             throws FileNotFoundException, ClassNotFoundException, IOException {
-<<<<<<< HEAD
         ExtractData ed = new ExtractDataImpl(t.getStarting());
-        List<Player> defenders = ed.getListByRole("D");
-=======
-        ExtractData ed = new ExtractDataImpl(s.getStarting());
-
-        List<Player> difensori = ed.getListByPos("D");
-
->>>>>>> b27a96f40b226a33c83a55e9ebafb6e495c3211b
+        List<Player> defenders = ed.getListByPos("D");
         double count = 0;
         double totRatings = 0;
         if (defenders.size() >= 3) {
