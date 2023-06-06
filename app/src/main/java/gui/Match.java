@@ -51,13 +51,13 @@ public class Match extends Base {
     private ArrayList<Player> report1;
     private ArrayList<Player> report2;
     private boolean shootsout;
-    private Rigori shootsoutGui;
+    private Shootout shootsoutGui;
     private String string1 = "";
     private String string2 = "";
     private String htmlOpen = "<html>";
     private String htmlClose = "</html>";
     private int substitutions;
-    private Sostituzione subGui;
+    private Substitution subGui;
     private Match match;
     private int score1;
     private int score2;
@@ -231,10 +231,10 @@ public class Match extends Base {
     }
 
     /**
-     * Initializes the substitution gui {@code Sostituzione}
+     * Initializes the substitution gui {@code Substitution}
      */
     private void makeSub() {
-        subGui = new Sostituzione(t1, this, substitutions);
+        subGui = new Substitution(t1, this, substitutions);
         subGui.setVisible(true);
     }
 
@@ -335,7 +335,7 @@ public class Match extends Base {
                         JOptionPane.showMessageDialog(null, "Fine tempi supplementari. Si va ai calci di rigore");
                         startStopButton.setEnabled(false);
                         shootsout = true;
-                        shootsoutGui = new Rigori(t1, t2, match);
+                        shootsoutGui = new Shootout(t1, t2, match);
                         SwingUtilities.invokeLater(() -> {
                             shootsoutGui.createAndShowGUI();
                         });
@@ -368,7 +368,7 @@ public class Match extends Base {
 
     /**
      * Sets the winner and the score, after the penalty shoot-out.
-     * Used in the class {@code Rigori}.
+     * Used in the class {@code Shootout}.
      *
      * @param team the winning team.
      * @param goal1 the number of penalties scored by the first team.

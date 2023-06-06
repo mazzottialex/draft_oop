@@ -54,7 +54,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
         this.listSquadre = new ArrayList<>();
         // this.golFatti = new ArrayList<>();
         // Creo la squadra dell'utente
-        this.miasquadra = new TeamUser(squadra.getTeamName(), squadra.getLogo(), squadra.getModulo(),
+        this.miasquadra = new TeamUser(squadra.getTeamName(), squadra.getLogo(), squadra.getModule(),
                 squadra.getStarting(), squadra.getSubstitution());
         // this.miasquadra = squadra;
         // Creo le squadre avversarie (quelle esistenti in serie A)
@@ -102,7 +102,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
     public Team getMiaSquadra() {
         // return this.miasquadra;
         final Team copy = new TeamUser(this.miasquadra.getTeamName(), this.miasquadra.getLogo(),
-                this.miasquadra.getModulo(), this.miasquadra.getStarting(), this.miasquadra.getSubstitution());
+                this.miasquadra.getModule(), this.miasquadra.getStarting(), this.miasquadra.getSubstitution());
         return copy;
     }
 
@@ -487,7 +487,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
         // return this.squadraAvv;
         try {
             final TeamOpponent copy = new TeamOpponent(this.squadraAvv.getId(),
-                    this.squadraAvv.getTeamName(), this.squadraAvv.getModulo(), this.squadraAvv.getLiPlayers());
+                    this.squadraAvv.getTeamName(), this.squadraAvv.getModule(), this.squadraAvv.getLiPlayers());
             return copy;
         } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
@@ -502,7 +502,7 @@ public class LogicsTorneoImpl implements LogicsTorneo {
     public void setSquadraAvv(final Team squadra) {
         // this.squadraAvv = squadra;
         try {
-            this.squadraAvv = new TeamOpponent(squadra.getId(), squadra.getTeamName(), squadra.getModulo(),
+            this.squadraAvv = new TeamOpponent(squadra.getId(), squadra.getTeamName(), squadra.getModule(),
                     squadra.getLiPlayers());
         } catch (ClassNotFoundException | IOException e) {
             // TODO Auto-generated catch block

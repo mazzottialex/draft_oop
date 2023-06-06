@@ -40,7 +40,7 @@ public class TeamUser implements Team, Serializable {
     }
 
     @Override
-    public Module getModulo() {
+    public Module getModule() {
         return modulo;
     }
 

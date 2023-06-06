@@ -19,7 +19,7 @@ import data.Team;
 import data.TeamOpponent;
 import data.TeamUser;
 import gui.Match;
-import gui.Rigori;
+import gui.Shootout;
 import gui.Start;
 import manageData.ManageData;
 import manageData.ManageDataImpl;

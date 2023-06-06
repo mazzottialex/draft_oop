@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 
 import data.Player;
 import data.Team;
-import gui.Sostituzione;
+import gui.Substitution;
 
 /**
  * Implementation of the {@code LogicsSostituzione} interface for managing player substitutions.
@@ -20,7 +20,7 @@ public class LogicsSostituzioneImpl implements LogicsSostituzione {
     private Player entra;
     private Player esce;
     private Team s;
-    private Sostituzione gui;
+    private Substitution gui;
 
     /**
      * Constructs a new instance of {@code LogicsSostituzioneImpl}.
@@ -28,7 +28,7 @@ public class LogicsSostituzioneImpl implements LogicsSostituzione {
      * @param s   the {@code Squadra} (team) instance
      * @param gui the GUI instance for player substitutions
      */
-    public LogicsSostituzioneImpl(final Team s, final Sostituzione gui) {
+    public LogicsSostituzioneImpl(final Team s, final Substitution gui) {
         this.titolari = new ArrayList<>(s.getStarting());
         this.riserve = new ArrayList<>(s.getSubstitution());
         this.entra = null;

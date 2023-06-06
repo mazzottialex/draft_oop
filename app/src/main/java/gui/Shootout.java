@@ -27,53 +27,53 @@ import utils.Pair;
 /**
  * Represents a penalty shoot-out GUI.
  */
-public class Rigori extends Base {
+public class Shootout extends Base {
     /**
      * 
      */
     private static final long serialVersionUID = 5140476454072046580L;
-    private Team s1;
-    private Team s2;
+    private Team t1;
+    private Team t2;
     private JLabel results1;
     private JLabel results2;
-    private JLabel result;
-    private int gol1;
-    private int gol2;
-    private int tiri1;
-    private int tiri2;
-    private int totTiri;
+    private JLabel finalScore;
+    private int goal1;
+    private int goal2;
+    private int shoots1;
+    private int shoots2;
+    private int totShoots;
     private Team winner;
-    private JButton chiudi;
+    private JButton closeButton;
     private LogicsRigori logics;
-    private Map<Integer, Pair<Player, String>> rig1;
-    private Map<Integer, Pair<Player, String>> rig2;
+    private Map<Integer, Pair<Player, String>> shoootout1;
+    private Map<Integer, Pair<Player, String>> shootout2;
     private JPanel panel;
-    private String str1;
-    private String str2;
-    private Match partita;
+    private String string1;
+    private String string2;
+    private Match match;
     private static final int IPADX_CENTER = 50;
 
     /**
-     * Creates a new instance of the {@code Rigori} class.
+     * Creates a new instance of the {@code Shootout} class.
      *
-     * @param s1 The first team in the penalty shoot-out.
-     * @param s2 The second team in the penalty shoot-out.
-     * @param partita The {@code Partita} instance.
+     * @param t1 The first team in the penalty shoot-out.
+     * @param t2 The second team in the penalty shoot-out.
+     * @param match The {@code Match} instance.
      */
-    public Rigori(final Team s1, final Team s2, final Match partita) {
-        this.s1 = s1;
-        this.s2 = s2;
-        this.partita = partita;
-        gol1 = 0;
-        gol2 = 0;
-        tiri1 = 0;
-        tiri2 = 0;
-        totTiri = 0;
-        logics = new LogicsRigoriImpl(s1, s2);
-        rig1 = logics.compute().get(0);
-        rig2 = logics.compute().get(1);
-        str1 = "";
-        str2 = "";
+    public Shootout(final Team t1, final Team t2, final Match match) {
+        this.t1 = t1;
+        this.t2 = t2;
+        this.match = match;
+        goal1 = 0;
+        goal2 = 0;
+        shoots1 = 0;
+        shoots2 = 0;
+        totShoots = 0;
+        logics = new LogicsRigoriImpl(t1, t2);
+        shoootout1 = logics.compute().get(0);
+        shootout2 = logics.compute().get(1);
+        string1 = "";
+        string2 = "";
 
         this.panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -82,7 +82,7 @@ public class Rigori extends Base {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 0;
-        panel.add(new JLabel(s1.getTeamName(), SwingConstants.RIGHT), gbc);
+        panel.add(new JLabel(t1.getTeamName(), SwingConstants.RIGHT), gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 0;
@@ -92,7 +92,7 @@ public class Rigori extends Base {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 2;
         gbc.gridy = 0;
-        panel.add(new JLabel(s2.getTeamName(), SwingConstants.LEFT), gbc);
+        panel.add(new JLabel(t2.getTeamName(), SwingConstants.LEFT), gbc);
 
         results1 = new JLabel();
 
@@ -110,37 +110,37 @@ public class Rigori extends Base {
         //        gbc.ipady = 200;
         panel.add(results2, gbc);
 
-        result = new JLabel();
-        result.setHorizontalAlignment(SwingConstants.CENTER);
+        finalScore = new JLabel();
+        finalScore.setHorizontalAlignment(SwingConstants.CENTER);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.gridwidth = 3;
-        panel.add(result, gbc);
+        panel.add(finalScore, gbc);
 
-        JButton inizia = new JButton("inizia");
-        inizia.addActionListener(e -> {
-            inizia.setEnabled(false);
+        JButton startButton = new JButton("inizia");
+        startButton.addActionListener(e -> {
+            startButton.setEnabled(false);
             start();
         });
 
-        chiudi = new JButton("chiudi");
-        chiudi.addActionListener(e -> {
+        closeButton = new JButton("chiudi");
+        closeButton.addActionListener(e -> {
             dispose();
-            partita.setWinnerR(winner, gol1, gol2);
+            match.setWinnerR(winner, goal1, goal2);
         });
-        chiudi.setEnabled(false);
+        closeButton.setEnabled(false);
 
-        add(inizia, BorderLayout.NORTH);
-        add(chiudi, BorderLayout.SOUTH);
+        add(startButton, BorderLayout.NORTH);
+        add(closeButton, BorderLayout.SOUTH);
 
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         WindowListener windowListener = new WindowAdapter() {
             @Override
             public void windowClosing(final WindowEvent e) {
                 dispose();
-                partita.setWinnerR(winner, gol1, gol2);
+                match.setWinnerR(winner, goal1, goal2);
             }
         };
         addWindowListener(windowListener);
@@ -154,40 +154,40 @@ public class Rigori extends Base {
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                if (!rig1.containsKey(tiri1) && !rig2.containsKey(tiri2)) {
-                    chiudi.setEnabled(true);
-                    result.setText(gol1 + " - " + gol2);
-                    setWinner(gol1, gol2);
-                    partita.setWinnerR(winner, gol1, gol2);
-                    JOptionPane.showMessageDialog(null, "Tiri di rigore terminati. Squadra vincente: " + getNomeWinner());
+                if (!shoootout1.containsKey(shoots1) && !shootout2.containsKey(shoots2)) {
+                    closeButton.setEnabled(true);
+                    finalScore.setText(goal1 + " - " + goal2);
+                    setWinner(goal1, goal2);
+                    match.setWinnerR(winner, goal1, goal2);
+                    JOptionPane.showMessageDialog(null, "Tiri di rigore terminati. Squadra vincente: " + getWinnerName());
                     timer.cancel();
                 } else {
-                    if (totTiri % 2 == 0) {
-                        if (rig1.containsKey(tiri1)) {
-                            String res = rig1.get(tiri1).getY();
-                            String tiratore = rig1.get(tiri1).getX().getName();
-                            String resultLabel = tiratore + ": " + res;
-                            str1 = str1 + resultLabel + "<br>";
-                            results1.setText("<html>" + str1 + "</html>");
+                    if (totShoots % 2 == 0) {
+                        if (shoootout1.containsKey(shoots1)) {
+                            String res = shoootout1.get(shoots1).getY();
+                            String shooter = shoootout1.get(shoots1).getX().getName();
+                            String resultLabel = shooter + ": " + res;
+                            string1 = string1 + resultLabel + "<br>";
+                            results1.setText("<html>" + string1 + "</html>");
                             if (res.equals("Gol")) {
-                                gol1++;
+                                goal1++;
                             }
-                            tiri1++;
+                            shoots1++;
                         }
                     } else {
-                        if (rig2.containsKey(tiri2)) {
-                            String res = rig2.get(tiri2).getY();
-                            String tiratore = rig2.get(tiri2).getX().getName();
-                            String resultLabel = tiratore + ": " + res;
-                            str2 = str2 + resultLabel + "<br>";
-                            results2.setText("<html>" + str2 + "</html>");
+                        if (shootout2.containsKey(shoots2)) {
+                            String res = shootout2.get(shoots2).getY();
+                            String shooter = shootout2.get(shoots2).getX().getName();
+                            String resultLabel = shooter + ": " + res;
+                            string2 = string2 + resultLabel + "<br>";
+                            results2.setText("<html>" + string2 + "</html>");
                             if (res.equals("Gol")) {
-                                gol2++;
+                                goal2++;
                             }
-                            tiri2++;
+                            shoots2++;
                         }
                     }
-                    totTiri = tiri1 + tiri2;
+                    totShoots = shoots1 + shoots2;
                 }
             }
         };
@@ -200,7 +200,7 @@ public class Rigori extends Base {
      *
      * @return The name of the winning team.
      */
-    private String getNomeWinner() {
+    private String getWinnerName() {
         return winner.getTeamName();
     }
 
@@ -221,9 +221,9 @@ public class Rigori extends Base {
      */
     public void setWinner(final int gol1, final int gol2) {
         if (gol1 > gol2) {
-            winner = s1;
+            winner = t1;
         } else {
-            winner = s2;
+            winner = t2;
         }
     }
 
