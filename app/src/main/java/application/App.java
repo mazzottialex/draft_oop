@@ -9,7 +9,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -38,9 +37,9 @@ public class App {
     }
 
     @SuppressWarnings("unchecked")
-	public static void main(String[] args) throws FileNotFoundException, ClassNotFoundException, IOException {
+	public static void main(String[] args) throws Exception {
    
-
+/*
     	EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -51,7 +50,7 @@ public class App {
 				}
 			}
 
-		});
+		});*/
     	
 /*
     	ManageData md = new ManageDataImpl("2022-2023");
@@ -63,29 +62,34 @@ public class App {
     	Torneo t= new Torneo(nap, li);
     	t.setVisible(true);
 
-    	*//*
+    	*/
     	ManageData md = new ManageDataImpl("2022-2023");
-		md.LoadData();
-		List<Calciatore> li = md.getLi();
-		CalcoloRating cr = new CalcoloRatingImpl(li);
+		md.loadData();
+		List<Player> li = md.getLi();
+		AnalysisRating cr = new AnalysisRatingImpl(li);
 		li = cr.updateRating();
-		Squadra nap = new SquadraAvversaria(0, "NAP", Modulo.M442, li);	
-		Squadra ut = new SquadraUtente(null, null, Modulo.M442, nap.getTitolari(), nap.getRiserve());
-		Squadra laz = new SquadraAvversaria(0, "LAZ", Modulo.M442, li);
+		Team nap = new TeamOpponent(0, "NAP", Module.M442, li);	
+		Team ut = new TeamUser(null, null, Module.M442, nap.getStarting(), nap.getSubstitution());
+		Team laz = new TeamOpponent(0, "LAZ", Module.M442, li);
 
 		SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-					try {
-						Partita p = new Partita(ut, laz);
-						p.createAndShowGUI();
-					} catch (ClassNotFoundException | IOException e) {
-						e.printStackTrace();
-					}
+					
+						Match p;
+						try {
+							p = new Match(ut, laz);
+							p.createAndShowGUI();
+						} catch (ClassNotFoundException | IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+					
 //					Rigori r = new Rigori(nap, laz, null);
 //					r.createAndShowGUI();
             }
 		});
-		*/
+		
     }
 }

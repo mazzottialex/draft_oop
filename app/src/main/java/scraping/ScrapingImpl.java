@@ -13,7 +13,7 @@ import data.Player;
 import utils.Pair;
 
 /**
- * Implementation of the Scraping interface for data scraping
+ * Implementation of the Scraping interface for data scraping.
  */
 public class ScrapingImpl implements Scraping {
     private final List<Player> li = new ArrayList<>();
@@ -23,19 +23,19 @@ public class ScrapingImpl implements Scraping {
     private Boolean flagChrome = false;
     private Boolean flagFirefox = false;
     private static final int DEFAULT = 7;
-    
+
     /**
-     * Constructs a ScrapingImpl object with the specified number of threads
+     * Constructs a ScrapingImpl object with the specified number of threads.
      *
      * @param nThread The number of threads to use for scraping
      */
     public ScrapingImpl(final int nThread) {
         this.nThread = nThread;
         //if(checkBrowser("google-chrome")) {
-        	flagChrome = true;
+            flagChrome = true;
         //}
         System.out.print(checkBrowser("firefox"));
-        	//flagFirefox=true;
+            //flagFirefox=true;
         //}
     }
 
@@ -58,30 +58,30 @@ public class ScrapingImpl implements Scraping {
 
     @Override
     public Boolean readTable(final String season) {
-    	if (flagChrome || flagFirefox) {
-	    	final List<Pair<RunnableScrapingData, Thread>> liThr = new ArrayList<>();
-	        for (int i = 0; i < nThread; i++) {
-	        	final RunnableScrapingData runnable = new RunnableScrapingData(i, nThread, season, flagChrome);
-	        	final Thread thr = new Thread(runnable);
-	            liThr.add(new Pair<>(runnable, thr));
-	            thr.start();
-	        }
-	        for (Pair<RunnableScrapingData, Thread> el: liThr) {
-	            try {
-	                el.getY().join();
-	            } catch (InterruptedException e) {
-	                e.printStackTrace();
-	                return false;
-	            }
-	            if (!el.getX().check()) {
-	                return false;
-	            }
-	            li.addAll(el.getX().getLi());
-	        }
-	        	return true;
+        if (flagChrome || flagFirefox) {
+            final List<Pair<RunnableScrapingData, Thread>> liThr = new ArrayList<>();
+            for (int i = 0; i < nThread; i++) {
+                final RunnableScrapingData runnable = new RunnableScrapingData(i, nThread, season, flagChrome);
+                final Thread thr = new Thread(runnable);
+                liThr.add(new Pair<>(runnable, thr));
+                thr.start();
+            }
+            for (Pair<RunnableScrapingData, Thread> el: liThr) {
+                try {
+                    el.getY().join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+                if (!el.getX().check()) {
+                    return false;
+                }
+                li.addAll(el.getX().getLi());
+            }
+        	    return true;
     	} else {
     		return false;
-    	}
+	    }
     }
 
     @Override
@@ -137,7 +137,7 @@ public class ScrapingImpl implements Scraping {
         	if (browser.equals(new String("google-chrome"))) {
             	path1 = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\Chrome.exe";
             	path2 = "C:\\Program Files\\Google\\Chrome\\Application\\Chrome.exe";
-            } else if (browser.equals(new String("firefox"))){
+            } else if (browser.equals(new String("firefox"))) {
         		path1 = "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe";
             	path2 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
         	}

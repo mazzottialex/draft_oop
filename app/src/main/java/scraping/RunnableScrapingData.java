@@ -15,7 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import data.Player;
 
 /**
- * A class that represents a thread for scraping player data
+ * A class that represents a thread for scraping player data.
  */
 public class RunnableScrapingData implements Runnable {
     private final int myId;
@@ -42,7 +42,7 @@ public class RunnableScrapingData implements Runnable {
     private static final int SECONDS = 30;
 
     /**
-     * Creates an instance of RunnableScrapingData
+     * Creates an instance of RunnableScrapingData.
      *
      * @param myId       The ID of the current thread
      * @param nThread    The total number of threads
@@ -67,7 +67,7 @@ public class RunnableScrapingData implements Runnable {
     }
 
     /**
-     * Check if it finishes correctly
+     * Check if it finishes correctly.
      *
      * @return True if the flag is correctly, False otherwise
      */
@@ -76,7 +76,7 @@ public class RunnableScrapingData implements Runnable {
     }
 
     /**
-     * Executes the thread
+     * Executes the thread.
      */
     public void run() {
     	final WebDriver driver;
