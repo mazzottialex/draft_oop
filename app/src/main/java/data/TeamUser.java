@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Represents a user-defined team.
+ * Implements the {@code Team} interface.
+ * Provides methods to manage the team's players, formation, and ratings.
+ */
 public final class TeamUser implements Team, Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -16,6 +21,15 @@ public final class TeamUser implements Team, Serializable {
     private List<Player> liStarting;
     private List<Player> liSubstitution;
 
+    /**
+     * Constructs a new user team with the specified team name, logo, formation, starting players, and substitution players.
+     *
+     * @param teamName       the name of the team
+     * @param logo           the logo of the team
+     * @param modulo         the formation module of the team
+     * @param liStarting     the list of starting players
+     * @param liSubstitution the list of substitution players
+     */
     public TeamUser(final String teamName, final String logo, final Module modulo,
         final List<Player> liStarting, final List<Player> liSubstitution) {
         this.id = 0;

@@ -56,9 +56,10 @@ public class Player implements Serializable {
      * @param cleanSheets     the number of clean sheets achieved by the player (goalkeeper) during the season
      * @param saves           the number of saves made by the player (goalkeeper) during the season
      */
-    public Player(int id, String name, String pos, String team, int matchesPlayed, int minutes, int goals, int shots,
-        int dribbles, int assists, int passes, int keyPasses, int yellowCards, int redCards, int ballsRecovered, int tacklesWon,
-        int cleanSheets, int saves) {
+    public Player(final int id, final String name, final String pos, final String team, final int matchesPlayed,
+            final int minutes, final int goals, final int shots, final int dribbles, final int assists, final int passes,
+            final int keyPasses, final int yellowCards, final int redCards, final int ballsRecovered, final int tacklesWon,
+            final int cleanSheets, final int saves) {
         this.id = id;
         this.name = name;
         this.pos = pos;
@@ -266,7 +267,7 @@ public class Player implements Serializable {
      *
      * @param cardRating the card rating to set
      */
-    public void setCardRating(Pair<Integer, Integer> cardRating) {
+    public void setCardRating(final Pair<Integer, Integer> cardRating) {
         this.cardRating = cardRating;
     }
 
@@ -275,7 +276,7 @@ public class Player implements Serializable {
      *
      * @param overallRating the overall rating to set
      */
-    public void setRating(Pair<Integer, Triple<Integer, Integer, Integer>> overallRating) {
+    public void setRating(final Pair<Integer, Triple<Integer, Integer, Integer>> overallRating) {
         this.rating = overallRating;
     }
 
@@ -302,7 +303,7 @@ public class Player implements Serializable {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }

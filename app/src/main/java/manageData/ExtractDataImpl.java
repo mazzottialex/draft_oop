@@ -84,7 +84,7 @@ public final class ExtractDataImpl implements ExtractData {
 
     @Override
     public int getTopByAttribute(final Function<Player, Integer> f1, 
-    		final Function<Player, Integer> f2) {
+            final Function<Player, Integer> f2) {
         return li.stream()
             .map(p -> {
                 if (f1.apply(p) != 0 && f2.apply(p) > TOP) {
@@ -106,7 +106,7 @@ public final class ExtractDataImpl implements ExtractData {
 
     @Override
     public List<Player> getStartingByTeamByPos(final String team, 
-    		final String pos, final Module module) {
+            final String pos, final Module module) {
         int n = 1;
         switch (pos) {
             case "D":
@@ -131,7 +131,7 @@ public final class ExtractDataImpl implements ExtractData {
 
     @Override
     public List<Player> getSubstitutionByTeamByPos(final String team, 
-    		final String pos, final Module module) {
+            final String pos, final Module module) {
         int n = 2;
         int m = 1;
         switch (pos) {
@@ -161,7 +161,7 @@ public final class ExtractDataImpl implements ExtractData {
 
     @Override
     public List<Player> getStarting(final String team, final Module module) {
-    	final List<Player> lSt = new ArrayList<>();
+        final List<Player> lSt = new ArrayList<>();
         lSt.addAll(getStartingByTeamByPos(team, "P", module));
         lSt.addAll(getStartingByTeamByPos(team, "D", module));
         lSt.addAll(getStartingByTeamByPos(team, "C", module));
