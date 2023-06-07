@@ -90,7 +90,7 @@ public class Home extends Base {
         gbc.insets = new Insets(140, 0, 80, 0);
         contentPane.add(btnStart, gbc);
         JPanel panelSelectioned = new JPanel();
-        panelSelectioned.setPreferredSize(new Dimension(70, 40));
+        panelSelectioned.setPreferredSize(new Dimension(70, 30));
         JLabel lblSeasonSelected = new JLabel("Season selected:");
         lblSeasonSelected.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
         panelSelectioned.add(lblSeasonSelected);
