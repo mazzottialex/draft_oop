@@ -39,7 +39,7 @@ public class App {
     @SuppressWarnings("unchecked")
 	public static void main(String[] args) throws Exception {
    
-/*
+
     	EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -50,7 +50,7 @@ public class App {
 				}
 			}
 
-		});*/
+		});
     	
 /*
     	ManageData md = new ManageDataImpl("2022-2023");
@@ -62,7 +62,7 @@ public class App {
     	Torneo t= new Torneo(nap, li);
     	t.setVisible(true);
 
-    	*/
+    	
     	ManageData md = new ManageDataImpl("2022-2023");
 		md.loadData();
 		List<Player> li = md.getLi();
@@ -90,6 +90,6 @@ public class App {
 //					r.createAndShowGUI();
             }
 		});
-		
+		*/
     }
 }
