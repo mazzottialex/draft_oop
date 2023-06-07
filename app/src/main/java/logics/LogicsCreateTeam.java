@@ -192,7 +192,7 @@ public interface LogicsCreateTeam extends Serializable {
     void setClickModulo(boolean click);
 
     /**
-     * Save the team in file History
+     * Save the team in file History.
      */
-    public void saveTeam();
+    void saveTeam();
 }

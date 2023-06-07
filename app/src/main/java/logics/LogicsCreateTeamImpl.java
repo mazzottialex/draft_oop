@@ -12,7 +12,11 @@ import data.Player;
 import data.Module;
 import data.Team;
 import data.TeamUser;
-import manageData.*;
+import manageData.ExtractData;
+import manageData.ExtractDataImpl;
+import manageData.LogicsFile;
+import manageData.LogicsFileImpl;
+//import manageData.*;
 /**
  * The class that handles the team creation logic.
  * 
@@ -356,7 +360,7 @@ public class LogicsCreateTeamImpl implements LogicsCreateTeam {
      */
     @Override
     public void saveTeam() {
-    	LogicsFile logFile=new LogicsFileImpl();
+        LogicsFile logFile = new LogicsFileImpl();
         logFile.saveHistory(this.getSquadra());
     }
 }
