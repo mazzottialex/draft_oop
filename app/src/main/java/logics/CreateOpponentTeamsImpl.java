@@ -42,7 +42,7 @@ public class CreateOpponentTeamsImpl implements CreateOpponentTeams {
      * @param players the list of players.
      * @return a list of unique team names.
      */
-    public static List<String> findTeams(final List<Player> players) {
+    private static List<String> findTeams(final List<Player> players) {
         Set<String> teamsSet = new HashSet<>();
         for (Player p: players) {
             teamsSet.add(p.getTeam());
@@ -61,7 +61,7 @@ public class CreateOpponentTeamsImpl implements CreateOpponentTeams {
      * @throws ClassNotFoundException if the class is not found.
      * @throws IOException if an I/O error occurs.
      */
-    public List<Team> selezionaSquadreCasuali(final List<String> teams, final Module module, final int totTeams)
+    private List<Team> selectRandomTeams(final List<String> teams, final Module module, final int totTeams)
     throws FileNotFoundException, ClassNotFoundException, IOException {
         Collections.shuffle(teams); // Mescola l'ordine delle squadre
         int id = 1;
@@ -78,15 +78,15 @@ public class CreateOpponentTeamsImpl implements CreateOpponentTeams {
      *
      * @return a randomly selected team formation.
      */
-    public static Module selectModule() {
+    private static Module selectModule() {
         List < Module > module = new ArrayList<>(List.of(Module.values()));
         Random random = new Random();
-        int index = random.nextInt(module.size());
-        return module.get(index);
+//        int index = random.nextInt(module.size());
+        return module.get(random.nextInt(module.size()));
     }
 
     @Override
     public List<Team> getTeams() throws FileNotFoundException, ClassNotFoundException, IOException {
-        return selezionaSquadreCasuali(teams, selectModule(), totTeams);
+        return selectRandomTeams(teams, selectModule(), totTeams);
     }
 }

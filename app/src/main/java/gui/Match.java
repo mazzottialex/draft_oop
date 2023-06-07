@@ -80,42 +80,44 @@ public class Match extends Base {
     public Match(final Team t1, final Team t2) throws FileNotFoundException, ClassNotFoundException, IOException {
         this.t1 = t1;
         this.t2 = t2;
-        this.logics = new LogicsMatchImpl(this.t1, this.t2);
+        logics = new LogicsMatchImpl(this.t1, this.t2);
         match = this;
 
         // Define the panel to hold the components
-        this.panel = new JPanel(new GridBagLayout());
+        panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
 
         //define components
-        this.score1 = 0;
-        this.score2 = 0;
-        this.labelNameTeam1 = new JLabel(t1.getTeamName(), SwingConstants.RIGHT);
-        this.labelScoreTeam1 = new JLabel(String.valueOf(score1), SwingConstants.RIGHT);
-        this.labelScoreTeam1.setVerticalAlignment(SwingConstants.TOP);
-        this.labelReportTeam1 = new JLabel("", SwingConstants.RIGHT);
-        this.labelReportTeam1.setVerticalAlignment(SwingConstants.TOP);
-        this.labelNameTeam2 = new JLabel(t2.getTeamName(), SwingConstants.LEFT);
-        this.labelScoreTeam2 = new JLabel(String.valueOf(score2), SwingConstants.LEFT);
-        this.labelScoreTeam2.setVerticalAlignment(SwingConstants.TOP);
-        this.labelReportTeam2 = new JLabel("", SwingConstants.LEFT);
-        this.labelReportTeam2.setVerticalAlignment(SwingConstants.TOP);
-        this.startStopButton = new JButton("Play");
-        this.subsButton = new JButton("Subs");
-        this.subsButton.setEnabled(false);
-        this.goAheadButton = new JButton("Avanti");
-        this.goAheadButton.setEnabled(false);
-        this.progressBar = new JProgressBar(0, 90);
-        this.progressBar.setStringPainted(true);
-        this.progressBar.setString("Minuto 0°");
-        this.changeResult = false;
-        this.fullTime = HALF_REG_TIME;
-        this.winner = null;
-        this.report1 = new ArrayList<>();
-        this.report2 = new ArrayList<>();
-        this.shootsout = false;
-        this.substitutions = 0;
+        score1 = 0;
+        score2 = 0;
+        labelNameTeam1 = new JLabel(t1.getTeamName(), SwingConstants.RIGHT);
+        labelScoreTeam1 = new JLabel(String.valueOf(score1), SwingConstants.RIGHT);
+        labelScoreTeam1.setVerticalAlignment(SwingConstants.TOP);
+        labelReportTeam1 = new JLabel("", SwingConstants.RIGHT);
+        labelReportTeam1.setVerticalAlignment(SwingConstants.TOP);
+        labelNameTeam2 = new JLabel(t2.getTeamName(), SwingConstants.LEFT);
+        labelScoreTeam2 = new JLabel(String.valueOf(score2), SwingConstants.LEFT);
+        labelScoreTeam2.setVerticalAlignment(SwingConstants.TOP);
+        labelReportTeam2 = new JLabel("", SwingConstants.LEFT);
+        labelReportTeam2.setVerticalAlignment(SwingConstants.TOP);
+        startStopButton = new JButton("Play");
+        subsButton = new JButton("Subs");
+        subsButton.setEnabled(false);
+        goAheadButton = new JButton("Avanti");
+        goAheadButton.setEnabled(false);
+        progressBar = new JProgressBar(0, 90);
+        progressBar.setStringPainted(true);
+        progressBar.setString("Minuto 0°");
+        changeResult = false;
+        fullTime = HALF_REG_TIME;
+        winner = null;
+        report1 = new ArrayList<>();
+        report2 = new ArrayList<>();
+        shootsout = false;
+        substitutions = 0;
+        shootsoutGui = null;
+        subGui = null;
 
         // Put constraints on different buttons
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -278,7 +280,6 @@ public class Match extends Base {
                             if (progressBar.getValue() > 0 && substitutions < 3) {
                                 subsButton.setEnabled(true);
                             }
-
                             if (shootsout) {
                                 winner = shootsoutGui.getWinner();
                             }
