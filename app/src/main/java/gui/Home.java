@@ -34,7 +34,13 @@ public class Home extends Base {
      * @param online    the online status as a Boolean value
      */
     public Home(final String seasonDefault, final Boolean online) {
-        log = new LogicsHomeImpl(seasonDefault, online);
+    	JButton btnDownload = new JButton("Download season");
+    	log = new LogicsHomeImpl(seasonDefault, online);
+        if(!log.checkBrowser()) {
+        	btnDownload.setEnabled(false);
+        	JOptionPane.showMessageDialog(null, "Google Chrome or Firefox not installed,"
+        			+ "or not correctly installed (read README)");
+        }
         GridBagConstraints gbc = new GridBagConstraints();
         GridBagLayout layout = new GridBagLayout();
         contentPane.setLayout(layout);
@@ -121,7 +127,6 @@ public class Home extends Base {
         JPanel panelDownLoad = new JPanel();
         panelDownLoad.setBackground(new Color(240, 240, 240));
         panelDownLoad.setLayout(new BoxLayout(panelDownLoad, BoxLayout.X_AXIS));
-        JButton btnDownload = new JButton("Download season");
         JLabel labelWarning = new JLabel("");
         JComboBox<String> comboBoxDownload = new JComboBox<>(array);
         if (!log.getOnline()) {

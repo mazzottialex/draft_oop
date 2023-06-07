@@ -39,6 +39,8 @@ public class ScrapingImpl implements Scraping {
         else if(checkBrowser(BROWSER_FIREFOX)) {
             flagFirefox = true;
         }
+        flagChrome = false;
+        flagChrome = false;
     }
 
     /**
@@ -124,6 +126,14 @@ public class ScrapingImpl implements Scraping {
     	}
     }
 
+    @Override
+    public Boolean checkBrowsers() {
+    	if(flagChrome || flagFirefox) {
+    		return true;
+    	}
+    	return false;
+    }
+    
     /**
      * Checks if the specified browser is available on the current operating system.
      *

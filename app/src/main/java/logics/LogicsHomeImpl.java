@@ -10,6 +10,8 @@ import manageData.ManageSeason;
 import manageData.ManageSeasonImpl;
 import rating.AnalysisRating;
 import rating.AnalysisRatingImpl;
+import scraping.Scraping;
+import scraping.ScrapingImpl;
 public class LogicsHomeImpl implements LogicsHome {
 
     private List<Player> li;
@@ -66,5 +68,9 @@ public class LogicsHomeImpl implements LogicsHome {
     		throws FileNotFoundException, ClassNotFoundException, IOException {
         final AnalysisRating rat = new AnalysisRatingImpl(this.li);
         return rat.updateRating();
+    }
+    @Override
+    public Boolean checkBrowser() {
+    	return new ScrapingImpl().checkBrowsers();
     }
 }

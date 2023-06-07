@@ -59,4 +59,11 @@ public interface LogicsHome {
      * @throws IOException if an I/O error occurs during reading the data
      */
 	public List<Player> getLi() throws FileNotFoundException, ClassNotFoundException, IOException;
+	
+	/**
+     * Check if browser Chrome or/and Firefox are installed on file system
+     * 
+     * @return True if Chrome or/and Firefox are correctly installed, False otherwise
+     */
+	public Boolean checkBrowser();
 }
