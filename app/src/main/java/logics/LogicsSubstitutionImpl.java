@@ -14,7 +14,7 @@ import gui.Substitution;
 /**
  * Implementation of the {@code LogicsSubstitution} interface for managing player substitutions.
  */
-public class LogicsSubstitutionImpl implements LogicsSubstitution {
+public final class LogicsSubstitutionImpl implements LogicsSubstitution {
     private List<Player> starters;
     private List<Player> substitutes;
     private Player subOn;
@@ -113,9 +113,8 @@ public class LogicsSubstitutionImpl implements LogicsSubstitution {
         return -1;
     }
 
-	@Override
-	public boolean done() {
-		return done;
-	}
-
+    @Override
+    public boolean done() {
+        return done;
+    }
 }

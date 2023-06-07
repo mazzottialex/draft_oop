@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @param <Y> the type of the second value in the pair
  * @param <Z> the type of the third value in the pair
  */
-public class Triple<X, Y, Z> implements Serializable {
+public final class Triple<X, Y, Z> implements Serializable {
     private static final long serialVersionUID = 1L;
     private final X x;
     private final Y y;

@@ -14,7 +14,7 @@ import data.Module;
 /**
  * This class implements the {@code ExtractData} interface and provides methods to extract and manipulate player data.
  */
-public class ExtractDataImpl implements ExtractData {
+public final class ExtractDataImpl implements ExtractData {
 
     private static final long serialVersionUID = 1L;
     private final List<Player> li;

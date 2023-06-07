@@ -2,6 +2,7 @@ package logics;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -15,8 +16,9 @@ import simulation.SimulatingMatchImpl;
 /**
  * The {@code LogicsMatchImpl} class implements the {@code LogicsMatch} interface and provides the logic for a match.
  */
-public class LogicsMatchImpl implements LogicsMatch {
-    private Team t1;
+public final class LogicsMatchImpl implements LogicsMatch, Serializable {
+    private static final long serialVersionUID = -180921977203150416L;
+	private Team t1;
     private Team t2;
     private List<Integer> list1;
     private List<Integer> list2;
@@ -114,8 +116,7 @@ public class LogicsMatchImpl implements LogicsMatch {
         for (int i = 0; i < goal; i++) {
             int min;
             do {
-                min = new Random().nextInt(random) + 1;
-                min += time;
+                min = new Random().nextInt(random) + 1 + time;
             } while (list.contains(min));
             list.add(min);
         }
@@ -129,16 +130,12 @@ public class LogicsMatchImpl implements LogicsMatch {
         double totGoals = 0;
         List<Player> starters = t.getStarting();
         List<Double> goalList = new ArrayList<>();
-
         for (Player p: starters) {
             double goals = p.getGoals();
             goalList.add(goals);
             totGoals += goals;
         }
-
         double owngoals = (totGoals * OWNGOAL_RATE) / 100;
-        double random = new Random().nextDouble() * (totGoals + owngoals);
-
         double cumulativeProbability = 0.0;
         for (int i = 0; i < starters.size(); i++) {
             cumulativeProbability += goalList.get(i);

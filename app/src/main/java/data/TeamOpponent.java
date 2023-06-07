@@ -15,7 +15,7 @@ import manageData.ExtractDataImpl;
  * a list of substitutes, and a list of all players for a particular season.
  *
  */
-public class TeamOpponent implements Team {
+public final class TeamOpponent implements Team {
 
     private static final long serialVersionUID = 1L;
     private final int id;

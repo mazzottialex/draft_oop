@@ -15,9 +15,9 @@ import utils.Pair;
  * The {@code LogicsShootoutImpl} class implements the {@code LogicsShootout} interface
  * and defines the logic for penalty shoot-outs.
  */
-public class LogicsShootoutImpl implements LogicsShootout, Serializable {
+public final class LogicsShootoutImpl implements LogicsShootout, Serializable {
     private static final long serialVersionUID = -5675711964921406918L;
-	private Team t1;
+    private Team t1;
     private Team t2;
     private List<Player> starters1;
     private List<Player> starters2;
@@ -108,9 +108,9 @@ public class LogicsShootoutImpl implements LogicsShootout, Serializable {
      */
     private String rigore(final Player shooter, final Team oppositeTeam) {
         double shooterRating = shooter.getRating().getY().getX()
-        		* (MINIMUM_MODIFIER_RATING + new Random().nextDouble() * ADD_MODIFIER_RATING);
+                * (MINIMUM_MODIFIER_RATING + new Random().nextDouble() * ADD_MODIFIER_RATING);
         double gkRating = oppositeTeam.getStartingKeeper().getRating().getY().getZ()
-        		* (MINIMUM_MODIFIER_RATING + new Random().nextDouble() * ADD_MODIFIER_RATING);
+                * (MINIMUM_MODIFIER_RATING + new Random().nextDouble() * ADD_MODIFIER_RATING);
         double modGkRating = gkRating * CONVERSION_RATE_SHOOTOUT;
         if (shooterRating > modGkRating) {
             return "Gol";

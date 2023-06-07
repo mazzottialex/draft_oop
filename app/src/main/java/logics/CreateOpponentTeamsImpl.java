@@ -18,7 +18,7 @@ import data.TeamOpponent;
  * The {@code CreateOpponentTeamsImpl} class implements the {@code CreateOpponentTeams} interface
  * and provides the functionality to create opposing teams.
  */
-public class CreateOpponentTeamsImpl implements CreateOpponentTeams {
+public final class CreateOpponentTeamsImpl implements CreateOpponentTeams {
 
     private int totTeams;
     private List<Player> li;
@@ -79,7 +79,7 @@ public class CreateOpponentTeamsImpl implements CreateOpponentTeams {
      * @return a randomly selected team formation.
      */
     private static Module selectModule() {
-        List < Module > module = new ArrayList<>(List.of(Module.values()));
+        List<Module> module = new ArrayList<>(List.of(Module.values()));
         return module.get(new Random().nextInt(module.size()));
     }
 

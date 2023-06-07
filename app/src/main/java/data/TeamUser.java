@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TeamUser implements Team, Serializable {
+public final class TeamUser implements Team, Serializable {
 
     private static final long serialVersionUID = 1L;
     private final int id;

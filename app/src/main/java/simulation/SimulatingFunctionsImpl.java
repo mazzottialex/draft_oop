@@ -17,7 +17,7 @@ import manageData.ExtractDataImpl;
  * Implementation of the {@link SimulatingFunctions} interface that provides
  * simulation functions for fantasy football.
  */
-public class SimulatingFunctionsImpl implements SimulatingFunctions {
+public final class SimulatingFunctionsImpl implements SimulatingFunctions {
 
     // Constants for simulation calculations
     private static final double OWNGOAL_RATE = 2.904040404040404; // percentuale di autogol su gol

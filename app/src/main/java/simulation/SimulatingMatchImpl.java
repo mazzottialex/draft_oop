@@ -12,7 +12,7 @@ import manageData.ExtractDataImpl;
 /**
  * Implementation of the {@code SimulatingMatch} interface that simulates a match between two teams.
  */
-public class SimulatingMatchImpl implements SimulatingMatch {
+public final class SimulatingMatchImpl implements SimulatingMatch {
     private SimulatingFunctions sf;
     private Team t1;
     private Team t2;

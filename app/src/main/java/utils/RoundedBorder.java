@@ -15,7 +15,7 @@ import javax.swing.border.AbstractBorder;
  *
  * Source: Stack Overflow post: https://stackoverflow.com/questions/25796572/simplest-code-to-round-corners-of-jlabel-in-java
  */
-public class RoundedBorder extends AbstractBorder {
+public final class RoundedBorder extends AbstractBorder {
 
     private static final long serialVersionUID = 1L;
     private final Color color;
