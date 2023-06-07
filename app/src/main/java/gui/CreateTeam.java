@@ -125,7 +125,7 @@ public class CreateTeam extends Base {
                         changeJPanel(tempTorneo);
                         JFrame topFrame = (JFrame) SwingUtilities.getAncestorOfClass(JFrame.class,
                                 tempTorneo.getPanel());
-                        final int initialScreenPercentage = 85; // 75
+                        final int initialScreenPercentage = 70; // 75
                         Toolkit tk = Toolkit.getDefaultToolkit();
                         Dimension screenSize = tk.getScreenSize();
                         int height = screenSize.height * initialScreenPercentage / 100;
@@ -597,7 +597,7 @@ public class CreateTeam extends Base {
             this.map.put(this.buttonsDif[i], new ArrayList<>());
         }
         this.map.put(buttonPor, new ArrayList<>());
-        System.out.println(map);
+        //System.out.println(map);
     }
 
     private void createJDialog() {
