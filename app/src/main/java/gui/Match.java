@@ -11,6 +11,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
@@ -218,6 +220,18 @@ public class Match extends Base implements Serializable {
                 dispose();
             }
         });
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(final WindowEvent e) {
+            	stopProgress();
+            	winner = t2;
+            	score1 = 0;
+            	score2 = 3;
+                dispose();
+            }
+        });
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -383,7 +397,7 @@ public class Match extends Base implements Serializable {
      * @throws ClassNotFoundException If a class is not found during deserialization.
      * @throws IOException If an I/O exception occurs.
      */
-    public void changeScore() throws FileNotFoundException, ClassNotFoundException, IOException {
+    private void changeScore() throws FileNotFoundException, ClassNotFoundException, IOException {
         if (logics.getGoalsMinutes(t1).contains(progressBar.getValue())) {
             report1.add(logics.addScorer(t1));
             Player player = report1.get(report1.size() - 1);
