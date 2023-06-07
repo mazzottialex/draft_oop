@@ -1,5 +1,6 @@
 package logics;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,8 +15,9 @@ import utils.Pair;
  * The {@code LogicsShootoutImpl} class implements the {@code LogicsShootout} interface
  * and defines the logic for penalty shoot-outs.
  */
-public class LogicsShootoutImpl implements LogicsShootout {
-    private Team t1;
+public class LogicsShootoutImpl implements LogicsShootout, Serializable {
+    private static final long serialVersionUID = -5675711964921406918L;
+	private Team t1;
     private Team t2;
     private List<Player> starters1;
     private List<Player> starters2;
@@ -42,17 +44,17 @@ public class LogicsShootoutImpl implements LogicsShootout {
         super();
         this.t1 = t1;
         this.t2 = t2;
-        this.starters1 = t1.getStarting();
-        this.starters2 = t2.getStarting();
-        this.goals1 = 0;
-        this.goals2 = 0;
-        this.shoots1 = 0;
-        this.shoots2 = 0;
-        this.totShoots = 10;
-        this.goAhead = true;
-        this.list = new ArrayList<>();
-        this.map1 = new HashMap<>();
-        this.map2 = new HashMap<>();
+        starters1 = t1.getStarting();
+        starters2 = t2.getStarting();
+        goals1 = 0;
+        goals2 = 0;
+        shoots1 = 0;
+        shoots2 = 0;
+        totShoots = 10;
+        goAhead = true;
+        list = new ArrayList<>();
+        map1 = new HashMap<>();
+        map2 = new HashMap<>();
     }
 
     @Override

@@ -99,25 +99,22 @@ public class LogicsMatchImpl implements LogicsMatch {
      */
     public List<Integer> getGoalsNum(final int g, final int time) {
         List<Integer> list = new ArrayList<>();
-        Random r = new Random();
-        int min;
         int goal = g;
         int random = MINUTES_REG;
         if (time == EXTRA) {
             goal = ((MINUTES_EXTRA - MINUTES_REG) * g) / MINUTES_REG;
             random = MINUTES_EXTRA - MINUTES_REG;
-        } else if (time != EXTRA && time != REG) {
-            if (time < MINUTES_REG) {
-                goal = ((MINUTES_REG - time) * g) / MINUTES_REG;
-                random = MINUTES_REG - time;
-            } else {
-                goal = ((MINUTES_EXTRA - time) * g) / MINUTES_REG;
-                random = MINUTES_EXTRA - time;
-            }
+        } else if (time < MINUTES_REG) {
+            goal = ((MINUTES_REG - time) * g) / MINUTES_REG;
+            random = MINUTES_REG - time;
+        } else if (time > MINUTES_REG) {
+            goal = ((MINUTES_EXTRA - time) * g) / MINUTES_REG;
+            random = MINUTES_EXTRA - time;
         }
         for (int i = 0; i < goal; i++) {
+            int min;
             do {
-                min = r.nextInt(random) + 1;
+                min = new Random().nextInt(random) + 1;
                 min += time;
             } while (list.contains(min));
             list.add(min);
@@ -125,6 +122,7 @@ public class LogicsMatchImpl implements LogicsMatch {
         Collections.sort(list);
         return list;
     }
+
 
     @Override
     public Player addScorer(final Team t) {
@@ -144,7 +142,7 @@ public class LogicsMatchImpl implements LogicsMatch {
         double cumulativeProbability = 0.0;
         for (int i = 0; i < starters.size(); i++) {
             cumulativeProbability += goalList.get(i);
-            if (random <= cumulativeProbability) {
+            if (new Random().nextDouble() * (totGoals + owngoals) <= cumulativeProbability) {
                 return starters.get(i);
             }
         }
@@ -164,7 +162,6 @@ public class LogicsMatchImpl implements LogicsMatch {
         } else {
             t = t1;
         }
-        int random = new Random().nextInt(t.getStarting().size());
-        return t.getStarting().get(random);
+        return t.getStarting().get(new Random().nextInt(t.getStarting().size()));
     }
 }

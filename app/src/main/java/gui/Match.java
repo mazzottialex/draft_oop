@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -27,7 +28,7 @@ import javax.swing.SwingUtilities;
 /**
  * Represents a football match GUI.
  */
-public class Match extends Base {
+public class Match extends Base implements Serializable {
     private static final long serialVersionUID = 3533149128342164934L;
     private JPanel contentPane = new JPanel();
     private JProgressBar progressBar;
@@ -229,10 +230,12 @@ public class Match extends Base {
 			substitutions++;
 		}
         if (substitutions == 3) {
-            JPanel panel = (JPanel) subsButton.getParent();
-            subsButton.setEnabled(false);
-            panel.revalidate();
-            panel.repaint();
+            if (subsButton.getParent() instanceof JPanel) {
+				JPanel panel = (JPanel) subsButton.getParent();
+				subsButton.setEnabled(false);
+				panel.revalidate();
+				panel.repaint();
+			}
         }
 		changeResult = false;
     }

@@ -59,9 +59,7 @@ public class TeamOpponent implements Team {
         final List<String> liStemmi = List.of("arancione.png", "azzurro.png",
             "bianco.png", "blu.png", "giallo.png", "nero.png", "rosso.png",
             "verde.png", "viola.png");
-        Random rnd = new Random();
-        int pos = rnd.nextInt(liStemmi.size());
-        return liStemmi.get(pos);
+        return liStemmi.get(new Random().nextInt(liStemmi.size()));
     }
 
     @Override

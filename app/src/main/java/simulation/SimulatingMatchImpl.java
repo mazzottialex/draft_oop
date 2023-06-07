@@ -140,15 +140,11 @@ public class SimulatingMatchImpl implements SimulatingMatch {
             throws FileNotFoundException, ClassNotFoundException, IOException {
         Map<Team, Integer> map = new HashMap<>();
         if (minute < MINUTES_REG) {
-            map.put(t1,
-                (int) (result().get(t1) * (double) ((MINUTES_REG - minute) / MINUTES_REG)));
-            map.put(t2, (int) (result().get(t1)
-                * (double) ((MINUTES_REG - minute) / MINUTES_REG)));
+            map.put(t1, (int) (result().get(t1) * (double) ((MINUTES_REG - minute) / MINUTES_REG)));
+            map.put(t2, (int) (result().get(t1) * (double) ((MINUTES_REG - minute) / MINUTES_REG)));
         } else {
-            map.put(t1,
-                (int) (result().get(t1) * (double) ((MINUTES_EXTRA - minute) / MINUTES_REG)));
-            map.put(t2, (int) (result().get(t1)
-                * (double) ((MINUTES_EXTRA - minute) / MINUTES_REG)));
+            map.put(t1, (int) (result().get(t1) * (double) ((MINUTES_EXTRA - minute) / MINUTES_REG)));
+            map.put(t2, (int) (result().get(t1) * (double) ((MINUTES_EXTRA - minute) / MINUTES_REG)));
         }
         return map;
     }

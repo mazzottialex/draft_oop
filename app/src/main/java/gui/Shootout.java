@@ -7,6 +7,7 @@ import java.awt.Insets;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.Serializable;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -27,7 +28,7 @@ import utils.Pair;
 /**
  * Represents a penalty shoot-out GUI.
  */
-public class Shootout extends Base {
+public class Shootout extends Base implements Serializable {
     /**
      * 
      */

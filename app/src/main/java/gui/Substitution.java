@@ -32,6 +32,8 @@ public class Substitution extends Base {
     private final List<String> roles = List.of("P", "D", "C", "A");
     private JPanel panelTeam = new JPanel();
     private LogicsSubstitution logics;
+    private Team team;
+    private Match matchGui;
     private static JPanel panelStarters;
     private static JPanel panelSubstitutes;
     private int substitutes;
@@ -49,12 +51,17 @@ public class Substitution extends Base {
      * @param substitutionsMade The number of substitutions already made.
      */
     public Substitution(final Team team, final Match matchGui, final int substitutionsMade) {
-        logics = new LogicsSubstitutionImpl(team, this);
+        this.team = team;
+        this.matchGui = matchGui;
         this.substitutes = SUBSTITUTES - substitutionsMade;
-        panelStarters = null;
+        initialize();
+    }
+    
+    private void initialize() {
+    	logics = new LogicsSubstitutionImpl(team, this);
+    	panelStarters = null;
         panelSubstitutes = null;
-
-        GridBagConstraints gbc = new GridBagConstraints();
+    	GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(INSETS_5, INSETS_5, 2, 2);
         GridBagLayout layout = new GridBagLayout();
         contentPane.setLayout(layout);

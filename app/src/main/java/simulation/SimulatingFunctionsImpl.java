@@ -66,8 +66,7 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
      * @return A random number between min and max.
      */
     public static double prob(final double min, final double max) {
-        Random random = new Random();
-        return min + (max - min) * random.nextDouble();
+        return min + (max - min) * new Random().nextDouble();
     }
 
     /**
@@ -99,7 +98,7 @@ public class SimulatingFunctionsImpl implements SimulatingFunctions {
     public int getFantasyConcededGoals(final Team t) throws FileNotFoundException, ClassNotFoundException, IOException {
         ExtractData ed = new ExtractDataImpl(t.getStarting());
         Player gk = ed.getListByPos("P").get(0);
-        double probCleanSheet = gk.getCleanSheets() / (gk.getMatchesPlayed() == 0 ? 1 : gk.getMatchesPlayed());
+        double probCleanSheet = (double) gk.getCleanSheets() / (gk.getMatchesPlayed() == 0 ? 1 : gk.getMatchesPlayed());
         if (prob(0, 1) <= probCleanSheet) {
             return 0;
         } else {

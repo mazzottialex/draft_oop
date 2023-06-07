@@ -80,9 +80,7 @@ public class CreateOpponentTeamsImpl implements CreateOpponentTeams {
      */
     private static Module selectModule() {
         List < Module > module = new ArrayList<>(List.of(Module.values()));
-        Random random = new Random();
-//        int index = random.nextInt(module.size());
-        return module.get(random.nextInt(module.size()));
+        return module.get(new Random().nextInt(module.size()));
     }
 
     @Override
