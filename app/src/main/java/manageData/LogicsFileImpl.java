@@ -53,7 +53,7 @@ public class LogicsFileImpl implements LogicsFile {
     @Override
     public List<String> loadSeason() {
         List<String> ls = new ArrayList<>();
-        try (InputStream file = new FileInputStream("src/main/resources/backupStagioni.txt");
+        try (InputStream file = new FileInputStream("src/main/resources/backupSeasons.txt");
         		InputStream bstream = new BufferedInputStream(file);
         		ObjectInputStream ostream = new ObjectInputStream(file);) {
             String str;
@@ -69,7 +69,7 @@ public class LogicsFileImpl implements LogicsFile {
 
     @Override
     public Boolean saveSeason(final List<String> li) {
-        try (OutputStream file = new FileOutputStream("src/main/resources/backupStagioni.txt");
+        try (OutputStream file = new FileOutputStream("src/main/resources/backupSeasons.txt");
         		OutputStream bstream = new BufferedOutputStream(file);
         		ObjectOutputStream ostream = new ObjectOutputStream(file);) {
             li.forEach(s -> {
@@ -90,7 +90,7 @@ public class LogicsFileImpl implements LogicsFile {
     @Override
     public List<Team> loadHistory() {
         List<Team> li = new ArrayList<>();
-        try (InputStream file = new FileInputStream("src/main/resources/storico.txt");
+        try (InputStream file = new FileInputStream("src/main/resources/history.txt");
         		InputStream bstream = new BufferedInputStream(file);
         		ObjectInputStream ostream = new ObjectInputStream(file);) {
             li = (List<Team>) ostream.readObject();
@@ -106,7 +106,7 @@ public class LogicsFileImpl implements LogicsFile {
     public Boolean saveHistory(final Team s) {
         List<Team> li = loadHistory();
         li.add(s);
-        try (OutputStream file = new FileOutputStream("src/main/resources/storico.txt");
+        try (OutputStream file = new FileOutputStream("src/main/resources/history.txt");
         		OutputStream bstream = new BufferedOutputStream(file);
         		ObjectOutputStream ostream = new ObjectOutputStream(file);) {
             ostream.writeObject(li);

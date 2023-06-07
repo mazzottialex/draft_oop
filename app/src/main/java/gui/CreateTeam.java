@@ -121,7 +121,7 @@ public class CreateTeam extends Base {
                      */
                     try {
                         Base tempTorneo = new Tournament(log.getSquadra(), li);
-                        log.SaveTeam();
+                        log.saveTeam();
                         changeJPanel(tempTorneo);
                         JFrame topFrame = (JFrame) SwingUtilities.getAncestorOfClass(JFrame.class,
                                 tempTorneo.getPanel());

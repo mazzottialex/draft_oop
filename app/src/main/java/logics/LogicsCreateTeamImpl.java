@@ -351,6 +351,10 @@ public class LogicsCreateTeamImpl implements LogicsCreateTeam {
         this.clickModulo = click;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void saveTeam() {
     	LogicsFile logFile=new LogicsFileImpl();
         logFile.saveHistory(this.getSquadra());
