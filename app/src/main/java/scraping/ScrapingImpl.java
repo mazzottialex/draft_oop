@@ -22,7 +22,9 @@ public class ScrapingImpl implements Scraping {
     private final int nThread;
     private Boolean flagChrome = false;
     private Boolean flagFirefox = false;
-    private static final int DEFAULT = 7;
+    private static final int DEFAULT_THREAD = 7;
+    private static final String BROWSER_CHROME = "google-chrome";
+    private static final String BROWSER_FIREFOX = "firefox";
 
     /**
      * Constructs a ScrapingImpl object with the specified number of threads.
@@ -31,19 +33,19 @@ public class ScrapingImpl implements Scraping {
      */
     public ScrapingImpl(final int nThread) {
         this.nThread = nThread;
-        //if(checkBrowser("google-chrome")) {
+        if(checkBrowser(BROWSER_CHROME)) {
             flagChrome = true;
-        //}
-        System.out.print(checkBrowser("firefox"));
-            //flagFirefox=true;
-        //}
+        }
+        else if(checkBrowser(BROWSER_FIREFOX)) {
+            flagFirefox = true;
+        }
     }
 
     /**
      * Constructs a ScrapingImpl object with a default number of threads (7).
      */
     public ScrapingImpl() {
-        this(DEFAULT); //default
+        this(DEFAULT_THREAD); //default
     }
 
     @Override
@@ -93,7 +95,6 @@ public class ScrapingImpl implements Scraping {
     @Override
     public Boolean readSeason() {
     	if (flagChrome || flagFirefox) {
-	    	//Nascondere pagine chrome
 	    	final List<String> stagioni = new ArrayList<>();
 	    	final WebDriver driver;
 	    	if (flagChrome) {
@@ -134,10 +135,10 @@ public class ScrapingImpl implements Scraping {
         if (os.contains("win")) {
             String path1 = null;
             String path2 = null;
-        	if (browser.equals(new String("google-chrome"))) {
+        	if (browser.equals(BROWSER_CHROME)) {
             	path1 = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\Chrome.exe";
             	path2 = "C:\\Program Files\\Google\\Chrome\\Application\\Chrome.exe";
-            } else if (browser.equals(new String("firefox"))) {
+            } else if (browser.equals(BROWSER_FIREFOX)) {
         		path1 = "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe";
             	path2 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
         	}
