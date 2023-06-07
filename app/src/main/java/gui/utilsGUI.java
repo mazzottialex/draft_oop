@@ -9,26 +9,38 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+/**
+ * Some function that help to program GUI
+ */
 public class utilsGUI {
-    public static JPanel getPanelCalciatore(final String calciatore,
-        final Integer valutazione, final String ruolo, final Boolean icon) {
+	/**
+	 * Returns a JPanel for displaying information about a football player.
+	 * 
+	 * @param name the name of the football player
+	 * @param rating the evaluation of the player
+	 * @param role the role of the player
+	 * @param icon specifies whether to display the player's icon
+	 * @return a JPanel containing the player information
+	 */
+    public static JPanel getPanelCalciatore(final String name,
+        final Integer rating, final String role, final Boolean icon) {
         String file = "";
-        if (ruolo.equals("P"))
+        if (role.equals("P"))
             file = "src/main/resources/portiere.png";
-        else if (ruolo.equals("D"))
+        else if (role.equals("D"))
             file = "src/main/resources/difensore.png";
-        else if (ruolo.equals("C"))
+        else if (role.equals("C"))
             file = "src/main/resources/centrocampista.png";
-        else if (ruolo.equals("A"))
+        else if (role.equals("A"))
             file = "src/main/resources/attaccante.png";
         GridBagConstraints gbc = new GridBagConstraints();
         GridBagLayout layout = new GridBagLayout();
         JPanel panelGiocatore = new JPanel();
         panelGiocatore.setLayout(layout);
         panelGiocatore.setBorder(new EmptyBorder(0, 5, 0, 5));
-        JLabel lblNome = new JLabel(calciatore);
+        JLabel lblNome = new JLabel(name);
         lblNome.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
-        JLabel lblValutazione = new JLabel(valutazione.toString());
+        JLabel lblValutazione = new JLabel(rating.toString());
         lblNome.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
         JLabel lblIcona = new JLabel();
         ImageIcon img = new ImageIcon(file);
@@ -45,22 +57,30 @@ public class utilsGUI {
         panelGiocatore.add(lblValutazione, gbc);
         return panelGiocatore;
     }
-    public static JButton getButtonCalciatore(final String calciatore, final String ruolo) {
+    
+    /**
+     * Returns a JButton for displaying a football player.
+     * 
+     * @param name the name of the football player
+     * @param role the role of the player
+     * @return a JButton displaying the player
+     */
+    public static JButton getButtonCalciatore(final String name, final String role) {
         String file = "";
-        if (ruolo.equals("P"))
+        if (role.equals("P"))
             file = "src/main/resources/portiere.png";
-        else if (ruolo.equals("D"))
+        else if (role.equals("D"))
             file = "src/main/resources/difensore.png";
-        else if (ruolo.equals("C"))
+        else if (role.equals("C"))
             file = "src/main/resources/centrocampista.png";
-        else if (ruolo.equals("A"))
+        else if (role.equals("A"))
             file = "src/main/resources/attaccante.png";
         GridBagConstraints gbc = new GridBagConstraints();
         GridBagLayout layout = new GridBagLayout();
         JButton buttonCalciatore = new JButton();
         buttonCalciatore.setLayout(layout);
         buttonCalciatore.setBackground(new Color(240, 240, 240));
-        JLabel lblNome = new JLabel(calciatore);
+        JLabel lblNome = new JLabel(name);
         lblNome.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
         JLabel lblIcona = new JLabel();
         ImageIcon img = new ImageIcon(file);
@@ -74,6 +94,13 @@ public class utilsGUI {
         buttonCalciatore.add(lblNome, gbc);
         return buttonCalciatore;
     }
+    
+    /**
+     * Returns a standard JButton with the given label.
+     * 
+     * @param s the text of the button
+     * @return a standard JButton
+     */
     public static JButton standardButton(final String s) {
         JButton btn = new JButton(s);
         btn.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));

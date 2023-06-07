@@ -11,7 +11,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import data.Player;
 import utils.Pair;
-
 /**
  * Implementation of the Scraping interface for data scraping.
  */
@@ -81,7 +80,7 @@ public final class ScrapingImpl implements Scraping {
                 li.addAll(el.getX().getLi());
             }
             return true;
-            }
+        }
         else {
         	return false;
         }

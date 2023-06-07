@@ -17,14 +17,23 @@ import data.Player;
 import data.Team;
 import logics.LogicsHistory;
 import logics.LogicsHistoryImpl;
+/**
+ * Represents a GUI for view a Team and its rating
+ */
 public class ViewTeam extends Base {
-    private final List<String> pos = List.of("A", "C", "D", "P");
+    private static final long serialVersionUID = 1L;
+	private final List<String> pos = List.of("A", "C", "D", "P");
     private final LogicsHistory log;
-    private JPanel panelTeam = new JPanel();
+    private static final Insets INSETS_1 = new Insets(5, 5, 2, 2);
+	private static final Insets INSETS_2 = new Insets(2, 0, 2, 25);
+	private static final Insets INSETS_3 = new Insets(2, 25, 2, 0);
+	private static final Insets INSETS_4 = new Insets(10, 0, 0, 0);
+	private static final Insets INSETS_5 = new Insets(5, 5, 5, 5);
+    private final JPanel panelTeam = new JPanel();
     public ViewTeam(Team team, String season, Boolean online) {
     	log=new LogicsHistoryImpl(season, online);
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 2, 2);
+        gbc.insets = INSETS_1;
         GridBagLayout layout = new GridBagLayout();
         getPanel().setLayout(layout);
         panelTeam.setBackground(getForeground());
@@ -44,7 +53,7 @@ public class ViewTeam extends Base {
         img = new ImageIcon(newimg);
         lblLogo.setBackground(Color.white);
         lblLogo.setIcon(img);
-        lblLogo.setBorder(new EmptyBorder(new Insets(2, 0, 2, 25)));
+        lblLogo.setBorder(new EmptyBorder(INSETS_2));
         panelTeam.add(lblLogo);
         JLabel lblTeamName = new JLabel(team.getTeamName());
         lblTeamName.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
@@ -53,7 +62,7 @@ public class ViewTeam extends Base {
         JLabel lblRating = new JLabel("Valutazione: " + team.getRating());
         lblRating.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
         lblRating.setForeground(Color.white);
-        lblRating.setBorder(new EmptyBorder(new Insets(2, 25, 2, 0)));
+        lblRating.setBorder(new EmptyBorder(INSETS_3));
         panelTeam.add(lblRating);
         gbc.gridy = 0;
         getPanel().add(panelTeam, gbc);
@@ -74,21 +83,24 @@ public class ViewTeam extends Base {
         JLabel lblPanchina = new JLabel("PANCHINA");
         lblPanchina.setForeground(Color.white);
         lblPanchina.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
-        gbc.insets = new Insets(10, 0, 0, 0);
+        gbc.insets = INSETS_4;
         gbc.gridy = 5;
         //contentPane.add(lblPanchina, gbc);
-        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.insets = INSETS_5;
         //panchinari
         panelPosition = new JPanel();
         panelPosition.setLayout(layout);
         for (int j = 0; j < 7; j++) {
             Player p = team.getSubstitution().get(j);
-            if (j < 4)
+            if (j < 4) {
                 gbc.gridy = 0;
-            else
+            }
+            else {
                 gbc.gridy = 1;
             panelPosition.add(utilsGUI.getPanelCalciatore(p.getName(),
             		p.getRating().getX(), p.getPos(), false), gbc);
+        
+            }
         }
         gbc.gridy = 6;
         getPanel().add(panelPosition, gbc);
