@@ -114,12 +114,11 @@ public class RunnableScrapingData implements Runnable {
                     WebElement table = driver.findElement(By.tagName("tbody"));
                     final int nRighe = table.findElements(By.tagName("tr")).size();
                     for (int j = 1; j < nRighe + 1; j++) {
-                        final List < WebElement > riga =
+                        final List<WebElement> riga =
                             driver.findElements(By.tagName("tr")).get(j).findElements(By.tagName("td"));
                         final String ruolo = riga.get(2).getText().substring(0, 1); //ruolo
                         if (ruolo.equals("P")) {
-                            li.add(new Player(
-                                (i - 1) * COST_ID + (j - 1), //id 	Integer.parseInt(riga.get(0).getText())
+                            li.add(new Player((i - 1) * COST_ID + (j - 1), //id 	Integer.parseInt(riga.get(0).getText())
                                 riga.get(1).getText(), //nome
                                 ruolo, //ruolo
                                 riga.get(3).getText(), //squadra

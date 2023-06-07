@@ -1,7 +1,5 @@
 package rating;
 import static java.util.stream.Collectors.toList;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.List;
 import data.Player;
 import manageData.ExtractData;
@@ -10,11 +8,11 @@ import utils.Pair;
 import utils.Triple;
 
 /**
- * Implementation of the AnalysisRating interface for calculating player ratings
+ * Implementation of the AnalysisRating interface for calculating player ratings.
  */
-public class AnalysisRatingImpl implements AnalysisRating {
-    private final Function fun = new Function();
-    private final ExtractData ex;
+public final class AnalysisRatingImpl implements AnalysisRating {
+	private final Function fun = new Function();
+	private final ExtractData ex;
     private final List<Player> li;
     private static final int MAX = 100;
     private static final int MIN = 50;
@@ -32,9 +30,8 @@ public class AnalysisRatingImpl implements AnalysisRating {
     private static final int CARDS = 90;
     private static final double COST_RAT = 0.8;
     private static final double COST_RAT_MIN = 0.2;
-    
     /**
-     * Constructs an AnalysisRatingImpl object with the given player list
+     * Constructs an AnalysisRatingImpl object with the given player list.
      *
      * @param li The list of players
      * @throws FileNotFoundException If the file is not found
@@ -45,20 +42,18 @@ public class AnalysisRatingImpl implements AnalysisRating {
         ex = new ExtractDataImpl(li);
         this.li = li;
     }
-    
     @Override
-	public List<Player> updateRating() {
-        return li.stream()
-            .map(c -> {
+    public List<Player> updateRating() {
+    	return li.stream()
+    			.map(c -> {
                 c.setRating(this.getRating(c));
                 c.setCardRating(this.getRatingCard(c));
                 return c;
             })
             .collect(toList());
     }
-    
     /**
-     * Calculates the overall rating and detailed rating components for the given player
+     * Calculates the overall rating and detailed rating components for the given player.
      *
      * @param p The player for which to calculate the rating
      * @return A Pair object containing the overall rating and a Triple object with the detailed rating components
@@ -92,14 +87,14 @@ public class AnalysisRatingImpl implements AnalysisRating {
         //per rating totale
         int rat = MIN;
         //per specifico ruolo
-        if (ruolo.equals("A"))
+        if (ruolo.equals("A")) {
             rat = (int) Math.ceil(COST_MAX * ratA + COST_MIN * ratD);
-        else if (ruolo.equals("C")) {
+    	} else if (ruolo.equals("C")) {
             ratC *= COST_MIDF;
             rat = (int) Math.ceil(COST_MED * ratA + COST_MED * ratD);
-        } else if (ruolo.equals("D"))
+        } else if (ruolo.equals("D")) {
             rat = (int) Math.ceil(COST_MIN * ratA + COST_MAX * ratD);
-        else if (ruolo.equals("P")) {
+        } else if (ruolo.equals("P")) {
         	final int ratParate = fun.logarithmic(p.getSaves(), 
             		ex.getTopByAttribute(c -> c.getSaves()), MIN, MAX_SAVED);
             ratD = (ratParate + ratCS) / 2;
@@ -109,16 +104,15 @@ public class AnalysisRatingImpl implements AnalysisRating {
         final int ratMin = fun.logarithmic(p.getMinutes(),
         		ex.getTopByAttribute(c -> c.getMinutes()), 10, MIN, MAX);
         rat = (int) (COST_RAT * rat + COST_RAT_MIN * ratMin);
-        return new Pair<Integer, Triple<Integer, Integer, Integer>> (rat, new Triple<>(ratA, ratC, ratD));
+        return new Pair<Integer, Triple<Integer, Integer, Integer>>(rat, new Triple<>(ratA, ratC, ratD));
     }
-    
     /**
-     * Calculates the card rating for the given player
+     * Calculates the card rating for the given player.
      *
      * @param p The player for which to calculate the card rating
      * @return A Pair object containing the card rating
      */
-    private Pair<Integer, Integer> getRatingCard(Player p) {
+    private Pair<Integer, Integer> getRatingCard(final Player p) {
         int ratAmm = 0;
         int ratEsp = 0;
         if (p.getMinutes() != 0) {

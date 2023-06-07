@@ -15,7 +15,7 @@ import utils.Pair;
 /**
  * Implementation of the Scraping interface for data scraping.
  */
-public class ScrapingImpl implements Scraping {
+public final class ScrapingImpl implements Scraping {
     private final List<Player> li = new ArrayList<>();
     private List<String> stagioni = new ArrayList<>();
     private final String url = "https://www.kickest.it/it/serie-a/statistiche/giocatori/tabellone?iframe=yes";
@@ -33,13 +33,13 @@ public class ScrapingImpl implements Scraping {
      */
     public ScrapingImpl(final int nThread) {
         this.nThread = nThread;
-        if(checkBrowser(BROWSER_CHROME)) {
+        if (checkBrowser(BROWSER_CHROME)) {
             flagChrome = true;
-        }
-        else if(checkBrowser(BROWSER_FIREFOX)) {
+        } else if (checkBrowser(BROWSER_FIREFOX)) {
             flagFirefox = true;
         }
     }
+
 
     /**
      * Constructs a ScrapingImpl object with a default number of threads (7).
@@ -80,9 +80,10 @@ public class ScrapingImpl implements Scraping {
                 }
                 li.addAll(el.getX().getLi());
             }
-                return true;
-        } else {
-    	    return false;
+            return true;
+            }
+        else {
+        	return false;
         }
     }
 
@@ -126,12 +127,11 @@ public class ScrapingImpl implements Scraping {
 
     @Override
     public Boolean checkBrowsers() {
-    	if(flagChrome || flagFirefox) {
+    	if (flagChrome || flagFirefox) {
     		return true;
     	}
     	return false;
     }
-    
     /**
      * Checks if the specified browser is available on the current operating system.
      *
