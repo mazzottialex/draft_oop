@@ -23,7 +23,7 @@ public class ExtractDataImpl implements ExtractData {
     /**
      * Constructs an {@code ExtractDataImpl} object with the given list of players.
      *
-     * @param players the list of players
+     * @param li the list of players
      */
     public ExtractDataImpl(final List<Player> li) {
         this.li = li;
@@ -88,8 +88,9 @@ public class ExtractDataImpl implements ExtractData {
             .map(p -> {
                 if (f1.apply(p) != 0 && f2.apply(p) > TOP) {
                     return f2.apply(p) / f1.apply(p);
-                } else
+                } else {
                     return TOP;
+                }
             })
             .max((p1, p2) -> p1 - p2)
             .orElse(0);
