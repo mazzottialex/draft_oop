@@ -141,7 +141,7 @@ public final class TeamOpponent implements Team {
         Player gk = null;
         for (Player player: getStarting()) {
             if (player.getPos().equals("P")) {
-            	gk = player;
+                gk = player;
             }
         }
         return gk;
