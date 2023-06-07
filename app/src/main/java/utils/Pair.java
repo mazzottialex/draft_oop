@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @param <X> the type of the first value in the pair
  * @param <Y> the type of the second value in the pair
  */
-public class Pair<X, Y> implements Serializable {
+public final class Pair<X, Y> implements Serializable {
     private static final long serialVersionUID = 1L;
     private final X x;
     private final Y y;
