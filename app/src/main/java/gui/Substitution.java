@@ -50,7 +50,7 @@ public class Substitution extends Base {
      */
     public Substitution(final Team team, final Match matchGui, final int substitutionsMade) {
         logics = new LogicsSubstitutionImpl(team, this);
-        this.substitutes = SUBSTITUTES - substitutionsMade + 1;
+        this.substitutes = SUBSTITUTES - substitutionsMade;
         panelStarters = null;
         panelSubstitutes = null;
 

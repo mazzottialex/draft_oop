@@ -115,7 +115,7 @@ public class Match extends Base {
         this.report1 = new ArrayList<>();
         this.report2 = new ArrayList<>();
         this.shootsout = false;
-        this.substitutions = 1;
+        this.substitutions = 0;
 
         // Put constraints on different buttons
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -204,20 +204,8 @@ public class Match extends Base {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 stopProgress();
-                if (substitutions <= 3) {
-                    makeSub();
-//                    if (true/*!t1.getStarting().equals(subGui.getLogics().getStarters())*/) {
-//                    	System.out.println(substitutions);
-//						updateTeam();
-//					}
-					if (substitutions == 3) {
-                        JButton button = (JButton) e.getSource();
-                        JPanel panel = (JPanel) button.getParent();
-                        button.setEnabled(false);
-                        panel.revalidate();
-                        panel.repaint();
-                    }
-                }
+                subGui = new Substitution(t1, match, substitutions);
+                subGui.setVisible(true);
             }
         });
 
@@ -230,20 +218,21 @@ public class Match extends Base {
     }
 
     /**
-     * Initializes the substitution gui {@code Substitution}
-     */
-    private void makeSub() {
-        subGui = new Substitution(t1, this, substitutions);
-        subGui.setVisible(true);
-    }
-
-    /**
-     * Adds a substitution count.
+     * Adds a substitution count disable substitutions button.
      */
     public void addSub() {
-        substitutions++;
+        int s = t1.getSubstitution().size();
         updateTeam();
-        changeResult = false;
+        if (s == t1.getSubstitution().size()) {
+			substitutions++;
+		}
+        if (substitutions == 3) {
+            JPanel panel = (JPanel) subsButton.getParent();
+            subsButton.setEnabled(false);
+            panel.revalidate();
+            panel.repaint();
+        }
+		changeResult = false;
     }
 
     /**
@@ -266,7 +255,6 @@ public class Match extends Base {
                 if (!changeResult) {
                     try {
                         logics.scorers(progressBar.getValue());
-                        System.out.println("siuuuum");
                         changeResult = true;
                     } catch (ClassNotFoundException | IOException e) {
                         e.printStackTrace();
@@ -460,7 +448,6 @@ public class Match extends Base {
         //Create and set up the content pane.
         add(contentPane);
         contentPane.add(panel);
-
         //Display the window.
         pack();
         setVisible(true);
