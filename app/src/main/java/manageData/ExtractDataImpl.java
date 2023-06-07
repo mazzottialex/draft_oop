@@ -16,6 +16,7 @@ import data.Module;
  */
 public class ExtractDataImpl implements ExtractData {
 
+    private static final long serialVersionUID = 1L;
     private final List<Player> li;
     private static final int PARAMETER = 10;
     private static final int TOP = 100;

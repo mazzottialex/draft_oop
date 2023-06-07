@@ -1,4 +1,5 @@
 package manageData;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -8,7 +9,7 @@ import data.Module;
 /**
  * This interface {@code ExtractData} provides methods for extracting data.
  */
-public interface ExtractData {
+public interface ExtractData extends Serializable {
 
     /**
      * Retrieves a list of players belonging to a specific team.
