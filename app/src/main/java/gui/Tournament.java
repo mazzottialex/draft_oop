@@ -44,8 +44,8 @@ public class Tournament extends Base {
     private static final int GAP_P2 = 300;
     private static final int BORDER_R_P1 = 450;
     private static final int BORDER_T = 20;
-    private static final int NUM_TEXT_SINGLE = 7;
-    private static final int NUM_TEXT_DOUBLE = 14;
+    private static final int NUM_TEXT_SINGLE = 9;
+    private static final int NUM_TEXT_DOUBLE = 20;
     private static final int ROUND = 20;
     private final LogicsTournament logTor;
     private final JPanel panelSud = new JPanel(new FlowLayout(FlowLayout.RIGHT));
