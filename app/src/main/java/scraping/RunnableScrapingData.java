@@ -53,7 +53,7 @@ public class RunnableScrapingData implements Runnable {
         this.myId = myId;
         this.nThread = nThread;
         this.url =
-        		"https://www.kickest.it/it/serie-a/statistiche/giocatori/tabellone/" + season + "?iframe=yes";
+            "https://www.kickest.it/it/serie-a/statistiche/giocatori/tabellone/" + season + "?iframe=yes";
         this.flagChrome = flagChrome;
     }
 
@@ -79,17 +79,17 @@ public class RunnableScrapingData implements Runnable {
      * Executes the thread.
      */
     public void run() {
-    	final WebDriver driver;
-    	if (flagChrome) {
-	    	final ChromeOptions options = new ChromeOptions();
-	        options.addArguments("headless");
-	        //Oggetto per creare il collegamento
-	        driver = new ChromeDriver(options);
-    	} else {
-    		final FirefoxOptions options = new FirefoxOptions();
+        final WebDriver driver;
+        if (flagChrome) {
+            final ChromeOptions options = new ChromeOptions();
+            options.addArguments("headless");
+            //Oggetto per creare il collegamento
+            driver = new ChromeDriver(options);
+        } else {
+            final FirefoxOptions options = new FirefoxOptions();
             options.addArguments("-headless");
             driver = new FirefoxDriver(options);
-    	}
+        }
         driver.get(url);
         //Oggetto per eseguire operazioni sulla pagina
         final JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -102,10 +102,10 @@ public class RunnableScrapingData implements Runnable {
             this.flag = false;
         }
         if (this.flag) {
-        	int last = Integer.parseInt(driver.findElement(By.className("paginationjs-last")).getText());
-        	final int pagine = (int) Math.ceil((last) / nThread) + 1;
+            int last = Integer.parseInt(driver.findElement(By.className("paginationjs-last")).getText());
+            final int pagine = (int) Math.ceil((last) / nThread) + 1;
             if (pagine * (myId + 1) < last) {
-            	last = pagine * (myId + 1);
+                last = pagine * (myId + 1);
             }
             for (Integer i = 1; i < last + 1; i++) {
                 js.executeScript("document.querySelector('[data-num=\"" + i.toString() + "\"]').click()");
@@ -114,9 +114,9 @@ public class RunnableScrapingData implements Runnable {
                     WebElement table = driver.findElement(By.tagName("tbody"));
                     final int nRighe = table.findElements(By.tagName("tr")).size();
                     for (int j = 1; j < nRighe + 1; j++) {
-                    	final List<WebElement> riga =
-                        		driver.findElements(By.tagName("tr")).get(j).findElements(By.tagName("td"));
-                    	final String ruolo = riga.get(2).getText().substring(0, 1); //ruolo
+                        final List < WebElement > riga =
+                            driver.findElements(By.tagName("tr")).get(j).findElements(By.tagName("td"));
+                        final String ruolo = riga.get(2).getText().substring(0, 1); //ruolo
                         if (ruolo.equals("P")) {
                             li.add(new Player(
                                 (i - 1) * COST_ID + (j - 1), //id 	Integer.parseInt(riga.get(0).getText())

@@ -78,49 +78,49 @@ public class ScrapingImpl implements Scraping {
                 }
                 li.addAll(el.getX().getLi());
             }
-        	    return true;
-    	} else {
-    		return false;
-	    }
+                return true;
+        } else {
+    	    return false;
+        }
     }
 
     @Override
     public Boolean readTable() {
-    	final String defaultStagione = "2022-2023";
+        final String defaultStagione = "2022-2023";
         return this.readTable(defaultStagione);
     }
 
     @Override
     public Boolean readSeason() {
-    	if (flagChrome || flagFirefox) {
-	    	//Nascondere pagine chrome
-	    	final List<String> stagioni = new ArrayList<>();
-	    	final WebDriver driver;
-	    	if (flagChrome) {
-		    	final ChromeOptions options = new ChromeOptions();
-		        options.addArguments("headless");
-		        //Oggetto per creare il collegamento
-		        driver = new ChromeDriver(options);
-	    	} else {
-	    		final FirefoxOptions options = new FirefoxOptions();
-	            options.addArguments("-headless");
-	            driver = new FirefoxDriver(options);
-	    	}
-	        driver.get(this.url);
-	        //Oggetto per eseguire operazioni sulla pagina
-	        final JavascriptExecutor js = (JavascriptExecutor) driver;
-	        js.executeScript("document.querySelector('[data-id=\"selectPickerSeasons\"]').click()");
-	        driver.findElement(By.tagName("ul")).findElements(By.tagName("li"))
-	            .stream()
-	            .map(el -> el.getText())
-	            .map(str -> str.replace("/", "-"))
-	            .forEach(el -> stagioni.add(el));
-	        driver.quit();
-	        this.stagioni = stagioni;
-	        return true;
-    	} else {
-    		return false;
-    	}
+        if (flagChrome || flagFirefox) {
+	        //Nascondere pagine chrome
+	        final List<String> stagioni = new ArrayList<>();
+	        final WebDriver driver;
+	        if (flagChrome) {
+                final ChromeOptions options = new ChromeOptions();
+                options.addArguments("headless");
+                //Oggetto per creare il collegamento
+                driver = new ChromeDriver(options);
+	        } else {
+	        	final FirefoxOptions options = new FirefoxOptions();
+	        	options.addArguments("-headless");
+	        	driver = new FirefoxDriver(options);
+	        }
+            driver.get(this.url);
+            //Oggetto per eseguire operazioni sulla pagina
+            final JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("document.querySelector('[data-id=\"selectPickerSeasons\"]').click()");
+            driver.findElement(By.tagName("ul")).findElements(By.tagName("li"))
+                .stream()
+                .map(el -> el.getText())
+                .map(str -> str.replace("/", "-"))
+                .forEach(el -> stagioni.add(el));
+            driver.quit();
+            this.stagioni = stagioni;
+            return true;
+        } else {
+        	return false;
+        }
     }
 
     /**
@@ -134,15 +134,15 @@ public class ScrapingImpl implements Scraping {
         if (os.contains("win")) {
             String path1 = null;
             String path2 = null;
-        	if (browser.equals(new String("google-chrome"))) {
-            	path1 = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\Chrome.exe";
-            	path2 = "C:\\Program Files\\Google\\Chrome\\Application\\Chrome.exe";
+            if (browser.equals(new String("google-chrome"))) {
+                path1 = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\Chrome.exe";
+                path2 = "C:\\Program Files\\Google\\Chrome\\Application\\Chrome.exe";
             } else if (browser.equals(new String("firefox"))) {
-        		path1 = "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe";
-            	path2 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
-        	}
+                path1 = "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe";
+                path2 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
+            }
             if (new File(path1).exists() || new File(path2).exists()) {
-            	return true;
+                return true;
             }
         } else if (os.contains("nix") || os.contains("nux") || os.contains("mac")) {
             // Linux

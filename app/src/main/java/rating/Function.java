@@ -46,7 +46,7 @@ public class Function {
      * @param max The maximum rating value
      * @return The computed logarithmic rating
      */
-    public int logarithmic(final int x, final int top, final int min, final int max) {       
+    public int logarithmic(final int x, final int top, final int min, final int max) {
         //parametro a, velocit� funzione logaritmica, con a piccolo (es: 0.1) lenta, con a grande (es: 100) veloce
         double a = SPEED_PARAMETER;
         int b = n * x / top;
