@@ -21,6 +21,7 @@ public class LogicsSubstitutionImpl implements LogicsSubstitution {
     private Player subOff;
     private Team t;
     private Substitution gui;
+    private boolean done;
 
     /**
      * Constructs a new instance of {@code LogicsSubstitutionImpl}.
@@ -29,12 +30,14 @@ public class LogicsSubstitutionImpl implements LogicsSubstitution {
      * @param gui the GUI instance for player substitutions
      */
     public LogicsSubstitutionImpl(final Team t, final Substitution gui) {
-        this.starters = new ArrayList<>(t.getStarting());
-        this.substitutes = new ArrayList<>(t.getSubstitution());
-        this.subOn = null;
-        this.subOff = null;
+        starters = new ArrayList<>(t.getStarting());
+        substitutes = new ArrayList<>(t.getSubstitution());
+        subOn = null;
+        subOff = null;
         this.t = t;
         this.gui = gui;
+        done = false;
+        
     }
 
     @Override
@@ -83,6 +86,7 @@ public class LogicsSubstitutionImpl implements LogicsSubstitution {
                 substitutes.remove(subOn);
                 t.setStarting(starters);
                 t.setSubstitution(substitutes);
+                done = true;
                 JOptionPane.showMessageDialog(null, "Sostituzione effettuata");
                 closeGui();
             }
@@ -108,5 +112,10 @@ public class LogicsSubstitutionImpl implements LogicsSubstitution {
         }
         return -1;
     }
+
+	@Override
+	public boolean done() {
+		return done;
+	}
 
 }

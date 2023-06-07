@@ -53,4 +53,6 @@ public interface LogicsSubstitution {
      * Closes the GUI for player substitutions.
      */
     void closeGui();
+    
+    boolean done();
 }

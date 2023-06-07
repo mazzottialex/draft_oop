@@ -115,7 +115,7 @@ public class Match extends Base {
         this.report1 = new ArrayList<>();
         this.report2 = new ArrayList<>();
         this.shootsout = false;
-        this.substitutions = 0;
+        this.substitutions = 1;
 
         // Put constraints on different buttons
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -206,11 +206,10 @@ public class Match extends Base {
                 stopProgress();
                 if (substitutions <= 3) {
                     makeSub();
-                    if (!t1.getStarting().equals(subGui.getLogics().getStarters())) {
-						updateTeam();
-						addSub();
-						changeResult = true;
-					}
+//                    if (true/*!t1.getStarting().equals(subGui.getLogics().getStarters())*/) {
+//                    	System.out.println(substitutions);
+//						updateTeam();
+//					}
 					if (substitutions == 3) {
                         JButton button = (JButton) e.getSource();
                         JPanel panel = (JPanel) button.getParent();
@@ -243,6 +242,8 @@ public class Match extends Base {
      */
     public void addSub() {
         substitutions++;
+        updateTeam();
+        changeResult = false;
     }
 
     /**
@@ -265,6 +266,7 @@ public class Match extends Base {
                 if (!changeResult) {
                     try {
                         logics.scorers(progressBar.getValue());
+                        System.out.println("siuuuum");
                         changeResult = true;
                     } catch (ClassNotFoundException | IOException e) {
                         e.printStackTrace();
