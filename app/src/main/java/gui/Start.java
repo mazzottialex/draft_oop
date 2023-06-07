@@ -51,7 +51,7 @@ public class Start extends Base {
             }
             @Override
             public void mouseClicked(MouseEvent e) {
-                changeJPanel(new Home(log.getFirstSeason(), log.getOnline()));
+                changeJPanel(new Home(log.getFirstSeason(), log.getOnline(), true));
             }
         });
         contentPane.add(labelIcon);

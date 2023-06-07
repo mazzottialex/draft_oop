@@ -33,7 +33,7 @@ public class History extends Base {
 		btnHome.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				changeJPanel(new Home(log.getSeason(), log.getOnline()));
+				changeJPanel(new Home(log.getSeason(), log.getOnline(), false));
 			}
 		});
 		panelBtn.add(btnHome);

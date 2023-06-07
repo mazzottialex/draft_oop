@@ -26,22 +26,21 @@ import javax.swing.JComboBox;
 public class Home extends Base {
     private static final long serialVersionUID = 1L;
 	private final LogicsHome log;
-	
 	/**
      * Constructs a new Home object
      *
      * @param season the selected season as a String
      * @param online    the online status as a Boolean value
      */
-    public Home(final String seasonDefault, final Boolean online) {
+    public Home(final String seasonDefault, final Boolean online, final Boolean first) {
     	JButton btnDownload = utilsGUI.standardButton("Download season:");
     	log = new LogicsHomeImpl(seasonDefault, online);
-        if(!log.checkBrowser()) {
+        if(!log.checkBrowser() && first == true) {
         	btnDownload.setEnabled(false);
         	JOptionPane.showMessageDialog(null, "Google Chrome or Firefox not installed,"
         			+ "or not correctly installed (read README)");
         }
-        if (!log.getOnline()) {
+        if (!log.getOnline() && first == true) {
         	JOptionPane.showMessageDialog(null, "You are in offline mode,"
         			+ " check your connection and restart the application for online mode");
             btnDownload.setEnabled(false);

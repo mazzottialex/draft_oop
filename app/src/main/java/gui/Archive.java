@@ -50,7 +50,7 @@ public class Archive extends Base {
         btnHome.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                changeJPanel(new Home(log.getSeason(), log.getOnline()));
+                changeJPanel(new Home(log.getSeason(), log.getOnline(), false));
             }
         });
         panel.add(btnHome);
