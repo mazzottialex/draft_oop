@@ -22,7 +22,9 @@ public class ScrapingImpl implements Scraping {
     private final int nThread;
     private Boolean flagChrome = false;
     private Boolean flagFirefox = false;
-    private static final int DEFAULT = 7;
+    private static final int DEFAULT_THREAD = 7;
+    private static final String BROWSER_CHROME = "google-chrome";
+    private static final String BROWSER_FIREFOX = "firefox";
 
     /**
      * Constructs a ScrapingImpl object with the specified number of threads.
@@ -31,19 +33,19 @@ public class ScrapingImpl implements Scraping {
      */
     public ScrapingImpl(final int nThread) {
         this.nThread = nThread;
-        //if(checkBrowser("google-chrome")) {
+        if(checkBrowser(BROWSER_CHROME)) {
             flagChrome = true;
-        //}
-        System.out.print(checkBrowser("firefox"));
-            //flagFirefox=true;
-        //}
+        }
+        else if(checkBrowser(BROWSER_FIREFOX)) {
+            flagFirefox = true;
+        }
     }
 
     /**
      * Constructs a ScrapingImpl object with a default number of threads (7).
      */
     public ScrapingImpl() {
-        this(DEFAULT); //default
+        this(DEFAULT_THREAD); //default
     }
 
     @Override
@@ -92,35 +94,34 @@ public class ScrapingImpl implements Scraping {
 
     @Override
     public Boolean readSeason() {
-        if (flagChrome || flagFirefox) {
-	        //Nascondere pagine chrome
-	        final List<String> stagioni = new ArrayList<>();
-	        final WebDriver driver;
-	        if (flagChrome) {
-                final ChromeOptions options = new ChromeOptions();
-                options.addArguments("headless");
-                //Oggetto per creare il collegamento
-                driver = new ChromeDriver(options);
-	        } else {
-	        	final FirefoxOptions options = new FirefoxOptions();
-	        	options.addArguments("-headless");
-	        	driver = new FirefoxDriver(options);
-	        }
-            driver.get(this.url);
-            //Oggetto per eseguire operazioni sulla pagina
-            final JavascriptExecutor js = (JavascriptExecutor) driver;
-            js.executeScript("document.querySelector('[data-id=\"selectPickerSeasons\"]').click()");
-            driver.findElement(By.tagName("ul")).findElements(By.tagName("li"))
-                .stream()
-                .map(el -> el.getText())
-                .map(str -> str.replace("/", "-"))
-                .forEach(el -> stagioni.add(el));
-            driver.quit();
-            this.stagioni = stagioni;
-            return true;
-        } else {
-        	return false;
-        }
+    	if (flagChrome || flagFirefox) {
+	    	final List<String> stagioni = new ArrayList<>();
+	    	final WebDriver driver;
+	    	if (flagChrome) {
+		    	final ChromeOptions options = new ChromeOptions();
+		        options.addArguments("headless");
+		        //Oggetto per creare il collegamento
+		        driver = new ChromeDriver(options);
+	    	} else {
+	    		final FirefoxOptions options = new FirefoxOptions();
+	            options.addArguments("-headless");
+	            driver = new FirefoxDriver(options);
+	    	}
+	        driver.get(this.url);
+	        //Oggetto per eseguire operazioni sulla pagina
+	        final JavascriptExecutor js = (JavascriptExecutor) driver;
+	        js.executeScript("document.querySelector('[data-id=\"selectPickerSeasons\"]').click()");
+	        driver.findElement(By.tagName("ul")).findElements(By.tagName("li"))
+	            .stream()
+	            .map(el -> el.getText())
+	            .map(str -> str.replace("/", "-"))
+	            .forEach(el -> stagioni.add(el));
+	        driver.quit();
+	        this.stagioni = stagioni;
+	        return true;
+    	} else {
+    		return false;
+    	}
     }
 
     /**
@@ -134,13 +135,14 @@ public class ScrapingImpl implements Scraping {
         if (os.contains("win")) {
             String path1 = null;
             String path2 = null;
-            if (browser.equals(new String("google-chrome"))) {
-                path1 = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\Chrome.exe";
-                path2 = "C:\\Program Files\\Google\\Chrome\\Application\\Chrome.exe";
-            } else if (browser.equals(new String("firefox"))) {
-                path1 = "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe";
-                path2 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
-            }
+        	if (browser.equals(BROWSER_CHROME)) {
+            	path1 = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\Chrome.exe";
+            	path2 = "C:\\Program Files\\Google\\Chrome\\Application\\Chrome.exe";
+            } else if (browser.equals(BROWSER_FIREFOX)) {
+        		path1 = "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe";
+            	path2 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
+        	}
+
             if (new File(path1).exists() || new File(path2).exists()) {
                 return true;
             }

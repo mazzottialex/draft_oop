@@ -124,7 +124,7 @@ public class CreateTeam extends Base {
                         changeJPanel(tempTorneo);
                         JFrame topFrame = (JFrame) SwingUtilities.getAncestorOfClass(JFrame.class,
                                 tempTorneo.getPanel());
-                        final int initialScreenPercentage = 50; // 75
+                        final int initialScreenPercentage = 85; // 75
                         Toolkit tk = Toolkit.getDefaultToolkit();
                         Dimension screenSize = tk.getScreenSize();
                         int height = screenSize.height * initialScreenPercentage / 100;
