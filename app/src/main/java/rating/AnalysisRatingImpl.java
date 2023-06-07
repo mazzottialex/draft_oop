@@ -15,7 +15,7 @@ import utils.Triple;
 public class AnalysisRatingImpl implements AnalysisRating {
     private final Function fun = new Function();
     private final ExtractData ex;
-    private final List <Player> li;
+    private final List<Player> li;
     
     /**
      * Constructs an AnalysisRatingImpl object with the given player list

@@ -34,12 +34,17 @@ public class Home extends Base {
      * @param online    the online status as a Boolean value
      */
     public Home(final String seasonDefault, final Boolean online) {
-    	JButton btnDownload = new JButton("Download season");
+    	JButton btnDownload = utilsGUI.standardButton("Download season:");
     	log = new LogicsHomeImpl(seasonDefault, online);
         if(!log.checkBrowser()) {
         	btnDownload.setEnabled(false);
         	JOptionPane.showMessageDialog(null, "Google Chrome or Firefox not installed,"
         			+ "or not correctly installed (read README)");
+        }
+        if (!log.getOnline()) {
+        	JOptionPane.showMessageDialog(null, "You are in offline mode,"
+        			+ " check your connection and restart the application for online mode");
+            btnDownload.setEnabled(false);
         }
         GridBagConstraints gbc = new GridBagConstraints();
         GridBagLayout layout = new GridBagLayout();
@@ -81,6 +86,7 @@ public class Home extends Base {
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.ipady = 10;
+        gbc.gridwidth=2;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(140, 0, 80, 0);
         contentPane.add(btnStart, gbc);
@@ -96,16 +102,7 @@ public class Home extends Base {
         gbc.gridy = 1;
         gbc.insets = new Insets(8, 0, 8, 0);
         contentPane.add(panelSelectioned, gbc);
-        JPanel panelLoad = new JPanel();
-        panelLoad.setBackground(new Color(240, 240, 240));
-        panelLoad.setLayout(new BoxLayout(panelLoad, BoxLayout.X_AXIS));
-        JButton btnLoad = new JButton("Choose a season:");
-        btnLoad.setHorizontalAlignment(SwingConstants.RIGHT);
-        btnLoad.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
-        btnLoad.setBorderPainted(false);
-        btnLoad.setBackground(getForeground());
-        btnLoad.setRolloverEnabled(true);
-        btnLoad.setFocusPainted(false);
+        JButton btnLoad = utilsGUI.standardButton("Choose a season:");
         String[] array = log.getLiSeasons().toArray(new String[log.getLiSeasons().size()]);
         JComboBox<String> comboBoxLoad = new JComboBox<>(array);
         comboBoxLoad.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
@@ -119,30 +116,16 @@ public class Home extends Base {
                     JOptionPane.showMessageDialog(null, "Loading error...");
             }
         });
-        panelLoad.add(btnLoad);
-        panelLoad.add(comboBoxLoad);
+        JComboBox<String> comboBoxDownload = new JComboBox<>(array);
+        gbc.gridwidth=1;
         gbc.gridx = 0;
         gbc.gridy = 2;
-        contentPane.add(panelLoad, gbc);
-        JPanel panelDownLoad = new JPanel();
-        panelDownLoad.setBackground(new Color(240, 240, 240));
-        panelDownLoad.setLayout(new BoxLayout(panelDownLoad, BoxLayout.X_AXIS));
-        JLabel labelWarning = new JLabel("");
-        JComboBox<String> comboBoxDownload = new JComboBox<>(array);
-        if (!log.getOnline()) {
-            btnDownload.setEnabled(false);
-            comboBoxDownload.setEnabled(false);
-            labelWarning = new JLabel("Offline mode");
-            labelWarning.setForeground(Color.yellow);
-            labelWarning.setFont(new Font("DejaVu Sans", Font.ITALIC, 12));
-        }
-        btnDownload.setHorizontalAlignment(SwingConstants.RIGHT);
-        btnDownload.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
-        btnDownload.setBorderPainted(false);
-        btnDownload.setBackground(getForeground());
-        btnDownload.setRolloverEnabled(true);
-        btnDownload.setFocusPainted(false);
-        panelDownLoad.add(btnDownload);
+        contentPane.add(btnLoad, gbc);
+        gbc.gridx = 1;
+        contentPane.add(comboBoxLoad, gbc);
+        gbc.gridx=0;
+        gbc.gridy=3;
+        contentPane.add(btnDownload,gbc);
         comboBoxDownload.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
         btnDownload.addActionListener(new ActionListener() {
             @Override
@@ -153,19 +136,15 @@ public class Home extends Base {
                     lblSeason.setText(log.getSeason());
                     JOptionPane.showMessageDialog(null, "Download completed");
                 } else
-                    JOptionPane.showMessageDialog(null, "Errore nel caricamento");
+                    JOptionPane.showMessageDialog(null, "Error loading...");
             }
         });
-        panelDownLoad.add(comboBoxDownload);
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        //gbc.anchor=100;
-        contentPane.add(panelDownLoad, gbc);
-        gbc.gridx = 0;
-        gbc.gridy = 4;
-        contentPane.add(labelWarning, gbc);
-        JButton btnArchivio = utilsGUI.standardButton("Archivio");
-        btnArchivio.addActionListener(new ActionListener() {
+        gbc.gridx=1;
+        gbc.gridy=3;
+        contentPane.add(comboBoxDownload,gbc);
+        gbc.gridwidth=2;
+        JButton btnArchive = utilsGUI.standardButton("Archive");
+        btnArchive.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 try {
@@ -177,16 +156,16 @@ public class Home extends Base {
         });
         gbc.fill = GridBagConstraints.NONE;
         gbc.gridx = 0;
-        gbc.gridy = 5;
-        contentPane.add(btnArchivio, gbc);
-        JButton btnStorico = utilsGUI.standardButton("Storico");
-        btnStorico.addActionListener(new ActionListener() {
+        gbc.gridy = 4;
+        contentPane.add(btnArchive, gbc);
+        JButton btnHistory = utilsGUI.standardButton("History");
+        btnHistory.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 changeJPanel(new History(log.getSeason(), log.getOnline()));
             }
         });
-        gbc.gridy = 6;
-        contentPane.add(btnStorico, gbc);
+        gbc.gridy = 5;
+        contentPane.add(btnHistory, gbc);
     }
 }

@@ -39,8 +39,6 @@ public class ScrapingImpl implements Scraping {
         else if(checkBrowser(BROWSER_FIREFOX)) {
             flagFirefox = true;
         }
-        flagChrome = false;
-        flagChrome = false;
     }
 
     /**
