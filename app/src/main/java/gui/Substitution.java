@@ -50,7 +50,7 @@ public class Substitution extends Base {
      */
     public Substitution(final Team team, final Match matchGui, final int substitutionsMade) {
         logics = new LogicsSubstitutionImpl(team, this);
-        this.substitutes = SUBSTITUTES - substitutionsMade;
+        this.substitutes = SUBSTITUTES - substitutionsMade + 1;
         panelStarters = null;
         panelSubstitutes = null;
 
@@ -137,6 +137,9 @@ public class Substitution extends Base {
                 }
             } else {
                 logics.sub(panelStarters.getParent(), panelSubstitutes.getParent(), panelStarters, panelSubstitutes);
+                if (logics.done()) {
+					matchGui.addSub();
+				}
             }
             panelStarters = null;
             panelSubstitutes = null;

@@ -80,15 +80,15 @@ public class ScrapingImpl implements Scraping {
                 }
                 li.addAll(el.getX().getLi());
             }
-        	    return true;
-    	} else {
-    		return false;
-	    }
+                return true;
+        } else {
+    	    return false;
+        }
     }
 
     @Override
     public Boolean readTable() {
-    	final String defaultStagione = "2022-2023";
+        final String defaultStagione = "2022-2023";
         return this.readTable(defaultStagione);
     }
 
@@ -150,8 +150,9 @@ public class ScrapingImpl implements Scraping {
         		path1 = "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe";
             	path2 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
         	}
+
             if (new File(path1).exists() || new File(path2).exists()) {
-            	return true;
+                return true;
             }
         } else if (os.contains("nix") || os.contains("nux") || os.contains("mac")) {
             // Linux
