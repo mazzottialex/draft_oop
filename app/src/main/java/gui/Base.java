@@ -3,31 +3,33 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Insets;
 
 /**
  * The Base class, provides a base window for the other GUI
  */
 public class Base extends JFrame {
     private static final long serialVersionUID = 1L;
-    protected JPanel contentPane;
-
+    private JPanel contentPane;
+    private static final int WIDTH = 500;
+    private static final int HEIGHT = 700;
+    private static final Color COLOR_BG = new Color(0, 64, 128);
     /**
-     * Constructs a new Base object
+     * Constructs a new Base object.
      */
     public Base() {
         setTitle("DRAFT");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 500, 700);
+        setBounds(100, 100, WIDTH, HEIGHT);
         setMinimumSize(getSize());
-        setBackground(new Color(0, 64, 128));
         contentPane = new JPanel();
-        contentPane.setBackground(new Color(0, 64, 128));
+        contentPane.setBackground(COLOR_BG);
         contentPane.setLayout(new BorderLayout());
         add(contentPane);
     }
 
     /**
-     * Returns the content pane of the base window
+     * Returns the content pane of the base window.
      *
      * @return the JPanel content pane
      */
@@ -36,7 +38,7 @@ public class Base extends JFrame {
     }
 
     /**
-     * Changes the current JPanel with a new JPanel
+     * Changes the current JPanel with a new JPanel.
      *
      * @param newPanel the new Base object containing the new JPanel
      */

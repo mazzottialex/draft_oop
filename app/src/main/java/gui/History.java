@@ -18,64 +18,73 @@ import javax.swing.JScrollPane;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+
+/**
+ * Represents a GUI for Hystory of teams created.
+ */
 public class History extends Base {
 	private static final long serialVersionUID = 1L;
 	private LogicsHistory log;
+	private static final int PANEL_DIM = 50;
+	private static final Color COLOR_PANEL = new Color(0, 64, 128);
+	private static final int SCALED_IMAGE = 55;
+	private static final Insets INSETS_1 = new Insets(5, 0, 5, 25);
+	private static final Insets INSETS_2 = new Insets(2, 25, 2, 25);
 	public History(final String season, final Boolean online) {
 		log=new LogicsHistoryImpl(season, online);
-		GridBagConstraints gbc=new GridBagConstraints();
-		GridBagLayout layout=new GridBagLayout();
-		contentPane.setLayout(new BorderLayout());
-		JButton btnHome=utilsGUI.standardButton("Home");
-		JPanel panelBtn=new JPanel();
+		GridBagConstraints gbc = new GridBagConstraints();
+		GridBagLayout layout = new GridBagLayout();
+		getPanel().setLayout(new BorderLayout());
+		JButton btnHome = utilsGUI.standardButton("Home");
+		JPanel panelBtn = new JPanel();
 		panelBtn.setBackground(getBackground());
-		panelBtn.setPreferredSize(new Dimension(50, 50));
+		panelBtn.setPreferredSize(new Dimension(PANEL_DIM, PANEL_DIM));
 		btnHome.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(final ActionEvent e) {
 				changeJPanel(new Home(log.getSeason(), log.getOnline(), false));
 			}
 		});
 		panelBtn.add(btnHome);
-		contentPane.add(panelBtn, BorderLayout.NORTH);
+		getPanel().add(panelBtn, BorderLayout.NORTH);
 		JPanel panelLi = new JPanel();
 		panelLi.setLayout(layout);
-		panelLi.setBackground(new Color(0, 64, 128));
-		int count=0;
+		panelLi.setBackground(COLOR_PANEL);
+		int count = 0;
 		for (Team team : log.getLiTeam()) {
-			JPanel panelTeam=new JPanel();
+			JPanel panelTeam = new JPanel();
 			panelTeam.setBackground(getForeground());
-			JLabel lblLogo=new JLabel();
-			ImageIcon img=new ImageIcon(team.getLogo());
-			Image image = img.getImage(); // transform it 
-			Image newImg = image.getScaledInstance(55, 60,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+			JLabel lblLogo = new JLabel();
+			ImageIcon img = new ImageIcon(team.getLogo());
+			Image image = img.getImage();
+			Image newImg = image.getScaledInstance(SCALED_IMAGE, SCALED_IMAGE,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 			img = new ImageIcon(newImg);
 			lblLogo.setBackground(Color.white);
 			lblLogo.setIcon(img);
-			lblLogo.setBorder(new EmptyBorder(new Insets(5, 0, 5, 25)));
-			JLabel lblNomeSquadra=new JLabel(team.getTeamName());
+			lblLogo.setBorder(new EmptyBorder(INSETS_1));
+			JLabel lblNomeSquadra = new JLabel(team.getTeamName());
 			lblNomeSquadra.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
 			lblNomeSquadra.setForeground(Color.white);
 			panelTeam.add(lblNomeSquadra);
-			JLabel lblRating=new JLabel("Valutazione: "+team.getRating());
+			JLabel lblRating = new JLabel("Valutazione: "+team.getRating());
 			lblRating.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
 			lblRating.setForeground(Color.white);
-			lblRating.setBorder(new EmptyBorder(new Insets(2, 25, 2, 25)));
+			lblRating.setBorder(new EmptyBorder(INSETS_2));
 			panelTeam.add(lblRating);
 			panelTeam.add(lblRating);
 			JButton btnVedi=utilsGUI.standardButton("Vedi");
 			btnVedi.addActionListener(new ActionListener() {	
 				@Override
-				public void actionPerformed(ActionEvent e) {
+				public void actionPerformed(final ActionEvent e) {
 					changeJPanel(new ViewTeam(team, log.getSeason(), log.getOnline()));	
 				}
 			});
 			panelTeam.add(btnVedi);
-			gbc.gridy=count;
+			gbc.gridy = count;
 			panelLi.add(panelTeam, gbc);
 			count++;
 		}
-		JScrollPane scrollPane=new JScrollPane(panelLi);
-		contentPane.add(scrollPane, BorderLayout.CENTER);
+		JScrollPane scrollPane = new JScrollPane(panelLi);
+		getPanel().add(scrollPane, BorderLayout.CENTER);
 	}
 }

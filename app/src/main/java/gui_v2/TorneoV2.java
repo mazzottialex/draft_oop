@@ -41,7 +41,7 @@ public class TorneoV2 extends Base {
     public TorneoV2(final Team squadra, final List<Player> li) {
         GridBagConstraints gbc = new GridBagConstraints();
         GridBagLayout layout = new GridBagLayout();
-        contentPane.setLayout(layout);
+        getPanel().setLayout(layout);
         CreateOpponentTeams creaS = new CreateOpponentTeamsImpl(li, nSquadre - 1);
         List<Team> liSquadre = new ArrayList<>();
         liSquadre.add(squadra);
@@ -88,14 +88,14 @@ public class TorneoV2 extends Base {
                                     liRis.add(1, new Pair<Team, Integer>(turnoDaSimul.get(1), partita.getGoalT2()));
                                     tabellone.setLiLastRisul(liRis);
                                     liRis = new ArrayList<>();
-                                    contentPane.remove(count + 2);
+                                    getPanel().remove(count + 2);
                                     gbc.gridy = turni - count;
-                                    contentPane.add(createPaneFase2(tabellone.getLiLastRisul()), gbc);
+                                    getPanel().add(createPaneFase2(tabellone.getLiLastRisul()), gbc);
                                     count++;
                                     gbc.gridy = turni - count;
-                                    contentPane.add(createPaneFase(tabellone.getLastLi()), gbc);
-                                    contentPane.revalidate();
-                                    contentPane.repaint();
+                                    getPanel().add(createPaneFase(tabellone.getLastLi()), gbc);
+                                    getPanel().revalidate();
+                                    getPanel().repaint();
                                 };
                             });
                         } catch (ClassNotFoundException | IOException e1) {
@@ -162,25 +162,25 @@ public class TorneoV2 extends Base {
                         liSquadreVinc = new ArrayList<>();
                         tabellone.setLiLastRisul(liRis);
                         liRis = new ArrayList<>();
-                        contentPane.remove(count + 2);
+                        getPanel().remove(count + 2);
                         gbc.gridy = turni - count;
-                        contentPane.add(createPaneFase2(tabellone.getLiLastRisul()), gbc);
+                        getPanel().add(createPaneFase2(tabellone.getLiLastRisul()), gbc);
                         count++;
                         gbc.gridy = turni - count;
-                        contentPane.add(createPaneFase(tabellone.getLastLi()), gbc);
-                        contentPane.revalidate();
-                        contentPane.repaint();
+                        getPanel().add(createPaneFase(tabellone.getLastLi()), gbc);
+                        getPanel().revalidate();
+                        getPanel().repaint();
                     }
                 }
             }
         });
         gbc.insets = new Insets(SIZE_INSETS, SIZE_INSETS, SIZE_INSETS, SIZE_INSETS);
         gbc.gridy = turni + 2;
-        contentPane.add(btnSimula, gbc);
+        getPanel().add(btnSimula, gbc);
         gbc.gridy = turni + 2;
-        contentPane.add(btnHome, gbc);
+        getPanel().add(btnHome, gbc);
         gbc.gridy = 0;
-        contentPane.add(createPaneFase(tabellone.getLastLi()), gbc);
+        getPanel().add(createPaneFase(tabellone.getLastLi()), gbc);
     }
     private JPanel createPaneFase(final List<Team> li) {
         JPanel panelFase = new JPanel();

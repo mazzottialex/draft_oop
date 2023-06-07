@@ -28,7 +28,7 @@ public class Formazione extends Base {
         log = new LogicsFormazioneImpl();
         GridBagConstraints gbc = new GridBagConstraints();
         GridBagLayout layout = new GridBagLayout();
-        contentPane.setLayout(layout);
+        getPanel().setLayout(layout);
         JButton btnScegli = utilsGUI.standardButton("Scegli Modulo");
         liModuli = log.getRandomMod(N_MODULI);
         btnScegli.addActionListener(new ActionListener() {
@@ -71,6 +71,6 @@ public class Formazione extends Base {
                 panel.repaint();
             }
         });
-        contentPane.add(btnScegli);
+        getPanel().add(btnScegli);
     }
 }

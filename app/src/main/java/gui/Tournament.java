@@ -90,7 +90,7 @@ public class Tournament extends Base {
             throws FileNotFoundException, ClassNotFoundException, IOException {
         this.logTor = new LogicsTournamentImpl(squadra, li);
         this.listAvversarie = logTor.getListAvversari();
-        this.contentPane.setLayout(new BorderLayout());
+        this.getPanel().setLayout(new BorderLayout());
         // Aggiungo il bottone Simula nel panelSud
         buttonSimula = new JButton("Simula");
         buttonSimula.addActionListener(new ActionListener() {
@@ -205,9 +205,9 @@ public class Tournament extends Base {
         this.panelCenter.setBackground(this.panelColor);
         this.panelNord.setBackground(Color.white);
         // this.panelNord.setBounds(200, 300, 200, 300);
-        this.contentPane.add(panelSud, BorderLayout.SOUTH);
-        this.contentPane.add(panelCenter, BorderLayout.CENTER);
-        this.contentPane.add(panelNord, BorderLayout.NORTH);
+        this.getPanel().add(panelSud, BorderLayout.SOUTH);
+        this.getPanel().add(panelCenter, BorderLayout.CENTER);
+        this.getPanel().add(panelNord, BorderLayout.NORTH);
     }
 
     private void createLevel() {
@@ -390,7 +390,7 @@ public class Tournament extends Base {
             label.setOpaque(true);
             this.panelNord.add(label);
             buttonSimula.setVisible(false);
-            contentPane.validate();
+            getPanel().validate();
             this.logTor.setNumSquadre(0);
             this.panelNord.validate();
             this.p0.validate();

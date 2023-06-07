@@ -96,7 +96,7 @@ public class CreateTeam extends Base {
         // inizializzo il bottone per i giocatori che seleziono
         // this.buttonSelect = new JButton();
         // Mi occupo del frame principale
-        contentPane.setLayout(new BorderLayout());
+        getPanel().setLayout(new BorderLayout());
         // utilizzo gbc per la disposizione a griglia nel panel sud del frame principale
         gbc.insets = new Insets(8, 0, 8, 8);
         gbc.gridx = 0;
@@ -174,10 +174,10 @@ public class CreateTeam extends Base {
         });
         panelSud.add(buttonIniziaTorneo, gbc);
         // aggiungo il pannello sud al frame principale
-        contentPane.add(panelSud, BorderLayout.SOUTH);
+        getPanel().add(panelSud, BorderLayout.SOUTH);
         // mi occupo del panelCenter del frame principale --> quello con i giocatori
         this.panelCenter.setBackground(this.panelColor);
-        contentPane.add(panelCenter, BorderLayout.CENTER);
+        getPanel().add(panelCenter, BorderLayout.CENTER);
         // disegno il modulo nel frame principale direttamente con questa funzione
         changeModulo();
         // inizializzo la mappa

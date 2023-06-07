@@ -12,62 +12,65 @@ import java.io.IOException;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import logics.LogicsHome;
 import logics.LogicsHomeImpl;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
 /**
- * The Home class represents the home screen of the application
+ * The Home class represents the home screen of the application.
  */
 public class Home extends Base {
     private static final long serialVersionUID = 1L;
 	private final LogicsHome log;
+	private static final int BUTTON_WIDTH = 150;
+	private static final int BUTTON_HEIGHT = 40;
+	private static final int SCALED_IMAGE_1 = 160;
+	private static final int SCALED_IMAGE_2 = 250;
 	/**
      * Constructs a new Home object
      *
-     * @param season the selected season as a String
-     * @param online    the online status as a Boolean value
+     * @param seasonDefault the selected season as a String
+     * @param online the online status as a Boolean value
+     * @param first true if home is called by Start, False otherwise
      */
     public Home(final String seasonDefault, final Boolean online, final Boolean first) {
     	JButton btnDownload = utilsGUI.standardButton("Download season:");
     	log = new LogicsHomeImpl(seasonDefault, online);
-        if(!log.checkBrowser() && first == true) {
+        if (!log.checkBrowser() && first) {
         	btnDownload.setEnabled(false);
         	JOptionPane.showMessageDialog(null, "Google Chrome or Firefox not installed,"
         			+ "or not correctly installed (read README)");
         }
-        if (!log.getOnline() && first == true) {
+        if (!log.getOnline() && first) {
         	JOptionPane.showMessageDialog(null, "You are in offline mode,"
         			+ " check your connection and restart the application for online mode");
             btnDownload.setEnabled(false);
         }
         GridBagConstraints gbc = new GridBagConstraints();
         GridBagLayout layout = new GridBagLayout();
-        contentPane.setLayout(layout);
+        getPanel().setLayout(layout);
         JButton btnStart = new JButton();
         ImageIcon img = new ImageIcon("src/main/resources/start.png");
         Image image = img.getImage(); 
-        Image newimg = image.getScaledInstance(250, 250, java.awt.Image.SCALE_SMOOTH);
+        Image newimg = image.getScaledInstance(SCALED_IMAGE_2, SCALED_IMAGE_2, java.awt.Image.SCALE_SMOOTH);
         img = new ImageIcon(newimg);
         btnStart.setBorderPainted(false);
         btnStart.setFocusPainted(false);
         btnStart.setIcon(img);
         btnStart.setBackground(getForeground());
-        btnStart.setPreferredSize(new Dimension(150, 40));
+        btnStart.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         btnStart.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
+            public void mouseEntered(final java.awt.event.MouseEvent evt) {
                 btnStart.setBackground(Color.GREEN);
-                Image newimg = image.getScaledInstance(160, 160, java.awt.Image.SCALE_SMOOTH);
+                Image newimg = image.getScaledInstance(SCALED_IMAGE_1, SCALED_IMAGE_1, java.awt.Image.SCALE_SMOOTH);
                 ImageIcon img = new ImageIcon(newimg);
                 btnStart.setIcon(img);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+            public void mouseExited(final java.awt.event.MouseEvent evt) {
                 btnStart.setBackground(new Color(0, 64, 128));
-                Image newimg = image.getScaledInstance(250, 250, java.awt.Image.SCALE_SMOOTH);
+                Image newimg = image.getScaledInstance(SCALED_IMAGE_2, SCALED_IMAGE_2, java.awt.Image.SCALE_SMOOTH);
                 ImageIcon img = new ImageIcon(newimg);
                 btnStart.setIcon(img);
             }
@@ -88,7 +91,7 @@ public class Home extends Base {
         gbc.gridwidth=2;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(140, 0, 80, 0);
-        contentPane.add(btnStart, gbc);
+        getPanel().add(btnStart, gbc);
         JPanel panelSelectioned = new JPanel();
         panelSelectioned.setPreferredSize(new Dimension(70, 30));
         JLabel lblSeasonSelected = new JLabel("Season selected:");
@@ -100,7 +103,7 @@ public class Home extends Base {
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.insets = new Insets(8, 0, 8, 0);
-        contentPane.add(panelSelectioned, gbc);
+        getPanel().add(panelSelectioned, gbc);
         JButton btnLoad = utilsGUI.standardButton("Choose a season:");
         String[] array = log.getLiSeasons().toArray(new String[log.getLiSeasons().size()]);
         JComboBox<String> comboBoxLoad = new JComboBox<>(array);
@@ -119,12 +122,12 @@ public class Home extends Base {
         gbc.gridwidth=1;
         gbc.gridx = 0;
         gbc.gridy = 2;
-        contentPane.add(btnLoad, gbc);
+        getPanel().add(btnLoad, gbc);
         gbc.gridx = 1;
-        contentPane.add(comboBoxLoad, gbc);
+        getPanel().add(comboBoxLoad, gbc);
         gbc.gridx=0;
         gbc.gridy=3;
-        contentPane.add(btnDownload,gbc);
+        getPanel().add(btnDownload,gbc);
         comboBoxDownload.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
         btnDownload.addActionListener(new ActionListener() {
             @Override
@@ -140,7 +143,7 @@ public class Home extends Base {
         });
         gbc.gridx=1;
         gbc.gridy=3;
-        contentPane.add(comboBoxDownload,gbc);
+        getPanel().add(comboBoxDownload,gbc);
         gbc.gridwidth=2;
         JButton btnArchive = utilsGUI.standardButton("Archive");
         btnArchive.addActionListener(new ActionListener() {
@@ -156,7 +159,7 @@ public class Home extends Base {
         gbc.fill = GridBagConstraints.NONE;
         gbc.gridx = 0;
         gbc.gridy = 4;
-        contentPane.add(btnArchive, gbc);
+        getPanel().add(btnArchive, gbc);
         JButton btnHistory = utilsGUI.standardButton("History");
         btnHistory.addActionListener(new ActionListener() {
             @Override
@@ -165,6 +168,6 @@ public class Home extends Base {
             }
         });
         gbc.gridy = 5;
-        contentPane.add(btnHistory, gbc);
+        getPanel().add(btnHistory, gbc);
     }
 }

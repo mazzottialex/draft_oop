@@ -27,7 +27,7 @@ public class Settings extends Base {
     	log=new LogicsSettingsImpl(li);
         GridBagConstraints gbc = new GridBagConstraints();
         GridBagLayout layout = new GridBagLayout();
-        contentPane.setLayout(layout);
+        getPanel().setLayout(layout);
         JLabel lblTeamName = new JLabel("Team name:");
         lblTeamName.setForeground(Color.white);
         lblTeamName.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
@@ -35,13 +35,13 @@ public class Settings extends Base {
         gbc.gridy = 0;
         gbc.gridwidth = 1;
         gbc.insets = new Insets(10, 5, 10, 5);
-        contentPane.add(lblTeamName, gbc);
+        getPanel().add(lblTeamName, gbc);
         textFieldTeamName = new JTextField();
         textFieldTeamName.setColumns(10);
         textFieldTeamName.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
         gbc.gridx = 1;
         gbc.gridy = 0;
-        contentPane.add(textFieldTeamName, gbc);
+        getPanel().add(textFieldTeamName, gbc);
         JLabel lblChooseLogo = new JLabel("Logo:");
         lblChooseLogo.setForeground(Color.white);
         lblChooseLogo.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
@@ -78,11 +78,11 @@ public class Settings extends Base {
         gbc.gridwidth = 0;
         gbc.gridx = 0;
         gbc.gridy = 1;
-        contentPane.add(lblChooseLogo, gbc);
+        getPanel().add(lblChooseLogo, gbc);
         gbc.insets = new Insets(5, 2, 5, 2);
         gbc.gridx = 0;
         gbc.gridy = 2;
-        contentPane.add(panelLogo, gbc);
+        getPanel().add(panelLogo, gbc);
         JButton btnContinue = utilsGUI.standardButton("Continue");
         btnContinue.addActionListener(new ActionListener() {
             @Override
@@ -100,6 +100,6 @@ public class Settings extends Base {
         gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.insets = new Insets(45, 2, 5, 2);
-        contentPane.add(btnContinue, gbc);
+        getPanel().add(btnContinue, gbc);
     }
 }

@@ -38,12 +38,12 @@ public class Archive extends Base {
         log = new LogicsArchiveImpl(season, online);
         List<Player> liOrdered = log.liOrdered(li);
         liOrdered.stream().forEach(c -> ((DefaultTableModel) tm).addRow(c.toVector()));
-        contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        contentPane.setPreferredSize(new Dimension(450, 640));
+        getPanel().setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        getPanel().setPreferredSize(new Dimension(450, 640));
         JPanel panel = new JPanel();
         panel.setPreferredSize(new Dimension(400, 40));
         panel.setBackground(getForeground());
-        contentPane.add(panel);
+        getPanel().add(panel);
         panel.setLayout(null);
         JButton btnHome = utilsGUI.standardButton("Home");
         btnHome.setBounds(10, 8, 80, 28);
@@ -62,7 +62,7 @@ public class Archive extends Base {
         table = new JTable(tm);
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setPreferredSize(new Dimension(420, 580));
-        contentPane.add(scrollPane);
+        getPanel().add(scrollPane);
         TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tm);
         sorter.setComparator(0, new Comparator<Object>() {
             @Override

@@ -26,7 +26,7 @@ public class ViewTeam extends Base {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 2, 2);
         GridBagLayout layout = new GridBagLayout();
-        contentPane.setLayout(layout);
+        getPanel().setLayout(layout);
         panelTeam.setBackground(getForeground());
         JButton btnArchive = utilsGUI.standardButton("Archive");
         btnArchive.addActionListener(new ActionListener() {
@@ -56,7 +56,7 @@ public class ViewTeam extends Base {
         lblRating.setBorder(new EmptyBorder(new Insets(2, 25, 2, 0)));
         panelTeam.add(lblRating);
         gbc.gridy = 0;
-        contentPane.add(panelTeam, gbc);
+        getPanel().add(panelTeam, gbc);
         JPanel panelPosition = new JPanel();
         panelPosition.setLayout(layout);
         int count = 0;
@@ -69,7 +69,7 @@ public class ViewTeam extends Base {
                 panelPosition.add(panel);
             }
             gbc.gridy = i + 1;
-            contentPane.add(panelPosition, gbc);
+            getPanel().add(panelPosition, gbc);
         }
         JLabel lblPanchina = new JLabel("PANCHINA");
         lblPanchina.setForeground(Color.white);
@@ -91,6 +91,6 @@ public class ViewTeam extends Base {
             		p.getRating().getX(), p.getPos(), false), gbc);
         }
         gbc.gridy = 6;
-        contentPane.add(panelPosition, gbc);
+        getPanel().add(panelPosition, gbc);
     }
 }

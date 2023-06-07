@@ -37,7 +37,7 @@ public class Draft extends Base {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 2, 2);
         GridBagLayout layout = new GridBagLayout();
-        contentPane.setLayout(layout);
+        getPanel().setLayout(layout);
         List<JButton> liBtn = new ArrayList<>();
         ExtractData ex;
         ex = new ExtractDataImpl(li);
@@ -91,14 +91,14 @@ public class Draft extends Base {
                 panelPosizione.add(btnScegli);
             }
             gbc.gridy = i;
-            contentPane.add(panelPosizione, gbc);
+            getPanel().add(panelPosizione, gbc);
         }
         JLabel lblPanchina = new JLabel("PANCHINA");
         lblPanchina.setForeground(Color.white);
         lblPanchina.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
         gbc.insets = new Insets(20, 0, 0, 0);
         gbc.gridy = 4;
-        contentPane.add(lblPanchina, gbc);
+        getPanel().add(lblPanchina, gbc);
         gbc.insets = new Insets(10, 10, 10, 10);
         //panchinari
         panelPosizione = new JPanel();
@@ -148,11 +148,11 @@ public class Draft extends Base {
             }
             panelPosizione.add(panelGiocatore, gbc);
             gbc.gridy = 5;
-            contentPane.add(panelPosizione, gbc);
+            getPanel().add(panelPosizione, gbc);
         }
         gbc.insets = new Insets(10, 0, 0, 0);
         gbc.gridy = 6;
-        contentPane.add(btnProsegui, gbc);
+        getPanel().add(btnProsegui, gbc);
         btnProsegui.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
         btnProsegui.setBackground(Color.white);
         btnProsegui.setRolloverEnabled(true);
