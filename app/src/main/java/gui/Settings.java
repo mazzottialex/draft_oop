@@ -19,12 +19,24 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+/**
+ * Represents a GUI for Setting.
+ */
 public class Settings extends Base {
     private static final long serialVersionUID = 1L;
-	private JTextField textFieldTeamName;
-    private LogicsSettings log;
-    public Settings(List<Player> li) {
-    	log=new LogicsSettingsImpl(li);
+	private final JTextField textFieldTeamName;
+    private final LogicsSettings log;
+    private static final Insets INSETS_1 = new Insets(10, 5, 10, 5);
+	private static final Insets INSETS_2 = new Insets(2, 2, 2, 2);
+	private static final Insets INSETS_3 = new Insets(25, 2, 5, 2);
+	private static final Insets INSETS_4 = new Insets(5, 2, 5, 2);
+	private static final Insets INSETS_5 = new Insets(45, 2, 5, 2);
+    private static final int SCALE_IMG_1 = 65;
+	/**
+     * Constructs a new Settings object.
+     */
+	public Settings(final List<Player> li) {
+    	log = new LogicsSettingsImpl(li);
         GridBagConstraints gbc = new GridBagConstraints();
         GridBagLayout layout = new GridBagLayout();
         getPanel().setLayout(layout);
@@ -34,7 +46,7 @@ public class Settings extends Base {
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 1;
-        gbc.insets = new Insets(10, 5, 10, 5);
+        gbc.insets = INSETS_1;
         getPanel().add(lblTeamName, gbc);
         textFieldTeamName = new JTextField();
         textFieldTeamName.setColumns(10);
@@ -54,7 +66,7 @@ public class Settings extends Base {
             String url = log.getLiLogo().get(i);
             ImageIcon img = new ImageIcon(url);
             Image image = img.getImage();
-            Image newimg = image.getScaledInstance(65, 70, java.awt.Image.SCALE_SMOOTH); 
+            Image newimg = image.getScaledInstance(SCALE_IMG_1, SCALE_IMG_1, java.awt.Image.SCALE_SMOOTH); 
             img = new ImageIcon(newimg);
             btnLogo.setBackground(Color.white);
             btnLogo.setIcon(img);
@@ -62,11 +74,11 @@ public class Settings extends Base {
             btnLogo.setFocusPainted(false);
             gbc.gridx = i % 3;
             gbc.gridy = i / 3;
-            gbc.insets = new Insets(2, 2, 2, 2);
+            gbc.insets = INSETS_2;
             panelLogo.add(btnLogo, gbc);
             btnLogo.addActionListener(new ActionListener() {
                 @Override
-                public void actionPerformed(ActionEvent e) {
+                public void actionPerformed(final ActionEvent e) {
                     JButton btn = (JButton) e.getSource();
                     liButton.forEach(b -> b.setBackground(Color.white));
                     btn.setBackground(new Color(0, 64, 128));
@@ -74,21 +86,22 @@ public class Settings extends Base {
                 }
             });
         };
-        gbc.insets = new Insets(25, 2, 5, 2);
+        gbc.insets = INSETS_3;
         gbc.gridwidth = 0;
         gbc.gridx = 0;
         gbc.gridy = 1;
         getPanel().add(lblChooseLogo, gbc);
-        gbc.insets = new Insets(5, 2, 5, 2);
+        gbc.insets = INSETS_4;
         gbc.gridx = 0;
         gbc.gridy = 2;
         getPanel().add(panelLogo, gbc);
         JButton btnContinue = utilsGUI.standardButton("Continue");
         btnContinue.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                if (!textFieldTeamName.getText().equals(new String("")))
+            public void actionPerformed(final ActionEvent e) {
+                if (!textFieldTeamName.getText().equals(new String(""))) {
                     log.setTeamName(textFieldTeamName.getText());
+                }
                 try {
 					changeJPanel(new CreateTeam(log.getTeamName(), log.getLogo(), log.getLi()));
 				} catch (ClassNotFoundException | IOException e1) {
@@ -99,7 +112,7 @@ public class Settings extends Base {
         });
         gbc.gridx = 0;
         gbc.gridy = 3;
-        gbc.insets = new Insets(45, 2, 5, 2);
+        gbc.insets = INSETS_5;
         getPanel().add(btnContinue, gbc);
     }
 }

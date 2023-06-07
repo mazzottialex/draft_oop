@@ -5,7 +5,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 
 /**
- * The Base class, provides a base window for the other GUI
+ * The Base class, provides a base window for the other GUI.
  */
 public class Base extends JFrame {
     private static final long serialVersionUID = 1L;

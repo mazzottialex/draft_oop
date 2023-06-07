@@ -10,7 +10,7 @@ import utils.Triple;
 /**
  * Represents a {@code Player} in a football team.
  */
-public class Player implements Serializable {
+public final class Player implements Serializable {
 
     private static final long serialVersionUID = -557391519003956401L;
     private final int id;

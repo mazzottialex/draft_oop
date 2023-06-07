@@ -18,7 +18,7 @@ import data.Team;
 import logics.LogicsHistory;
 import logics.LogicsHistoryImpl;
 /**
- * Represents a GUI for view a Team and its rating
+ * Represents a GUI for view a Team and its rating.
  */
 public class ViewTeam extends Base {
     private static final long serialVersionUID = 1L;
@@ -29,9 +29,17 @@ public class ViewTeam extends Base {
 	private static final Insets INSETS_3 = new Insets(2, 25, 2, 0);
 	private static final Insets INSETS_4 = new Insets(10, 0, 0, 0);
 	private static final Insets INSETS_5 = new Insets(5, 5, 5, 5);
+	private static final int SCALE_IMG_1 = 55;
     private final JPanel panelTeam = new JPanel();
-    public ViewTeam(Team team, String season, Boolean online) {
-    	log=new LogicsHistoryImpl(season, online);
+    /**
+     * Constructs a new ViewTeam object.
+     * 
+     * @param team team of GUI
+     * @param season the season selected
+     * @param online online status
+     */
+    public ViewTeam(final Team team, final String season, final Boolean online) {
+    	log = new LogicsHistoryImpl(season, online);
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = INSETS_1;
         GridBagLayout layout = new GridBagLayout();
@@ -49,7 +57,7 @@ public class ViewTeam extends Base {
         JLabel lblLogo = new JLabel();
         ImageIcon img = new ImageIcon(team.getLogo());
         Image image = img.getImage(); // transform it 
-        Image newimg = image.getScaledInstance(55, 60, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+        Image newimg = image.getScaledInstance(SCALE_IMG_1, SCALE_IMG_1, java.awt.Image.SCALE_SMOOTH);
         img = new ImageIcon(newimg);
         lblLogo.setBackground(Color.white);
         lblLogo.setIcon(img);
@@ -97,9 +105,8 @@ public class ViewTeam extends Base {
             }
             else {
                 gbc.gridy = 1;
-            panelPosition.add(utilsGUI.getPanelCalciatore(p.getName(),
-            		p.getRating().getX(), p.getPos(), false), gbc);
-        
+                panelPosition.add(utilsGUI.getPanelCalciatore(p.getName(),
+            	p.getRating().getX(), p.getPos(), false), gbc);
             }
         }
         gbc.gridy = 6;

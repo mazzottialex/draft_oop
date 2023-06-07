@@ -23,13 +23,22 @@ import javax.swing.JComboBox;
  */
 public class Home extends Base {
     private static final long serialVersionUID = 1L;
-	private final LogicsHome log;
-	private static final int BUTTON_WIDTH = 150;
+    private final LogicsHome log;
+    private static final int BUTTON_WIDTH = 150;
 	private static final int BUTTON_HEIGHT = 40;
 	private static final int SCALED_IMAGE_1 = 160;
 	private static final int SCALED_IMAGE_2 = 250;
+	private static final Insets BUTTON_INSETS = new Insets(140, 0, 80, 0);
+	private static final Insets PANEL_INSETS = new Insets(8, 0, 8, 0);
+	private static final int PANEL_WIDTH = 70;
+	private static final int PANEL_HEIGHT = 30;
+	private static final int FONT_SIZE = 14;
+	private static final String START_IMAGE_PATH = "src/main/resources/start.png";
+	private static final Color BACKGROUND_COLOR = new Color(0, 64, 128);
+	private static final Color BACKGROUND_COLOR_2 = Color.GREEN;
+
 	/**
-     * Constructs a new Home object
+     * Constructs a new Home object.
      *
      * @param seasonDefault the selected season as a String
      * @param online the online status as a Boolean value
@@ -52,7 +61,7 @@ public class Home extends Base {
         GridBagLayout layout = new GridBagLayout();
         getPanel().setLayout(layout);
         JButton btnStart = new JButton();
-        ImageIcon img = new ImageIcon("src/main/resources/start.png");
+        ImageIcon img = new ImageIcon(START_IMAGE_PATH);
         Image image = img.getImage(); 
         Image newimg = image.getScaledInstance(SCALED_IMAGE_2, SCALED_IMAGE_2, java.awt.Image.SCALE_SMOOTH);
         img = new ImageIcon(newimg);
@@ -63,13 +72,13 @@ public class Home extends Base {
         btnStart.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         btnStart.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(final java.awt.event.MouseEvent evt) {
-                btnStart.setBackground(Color.GREEN);
+                btnStart.setBackground(BACKGROUND_COLOR_2);
                 Image newimg = image.getScaledInstance(SCALED_IMAGE_1, SCALED_IMAGE_1, java.awt.Image.SCALE_SMOOTH);
                 ImageIcon img = new ImageIcon(newimg);
                 btnStart.setIcon(img);
             }
             public void mouseExited(final java.awt.event.MouseEvent evt) {
-                btnStart.setBackground(new Color(0, 64, 128));
+                btnStart.setBackground(BACKGROUND_COLOR);
                 Image newimg = image.getScaledInstance(SCALED_IMAGE_2, SCALED_IMAGE_2, java.awt.Image.SCALE_SMOOTH);
                 ImageIcon img = new ImageIcon(newimg);
                 btnStart.setIcon(img);
@@ -88,63 +97,65 @@ public class Home extends Base {
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.ipady = 10;
-        gbc.gridwidth=2;
+        gbc.gridwidth = 2;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(140, 0, 80, 0);
+        gbc.insets = BUTTON_INSETS;
         getPanel().add(btnStart, gbc);
         JPanel panelSelectioned = new JPanel();
-        panelSelectioned.setPreferredSize(new Dimension(70, 30));
+        panelSelectioned.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         JLabel lblSeasonSelected = new JLabel("Season selected:");
-        lblSeasonSelected.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+        lblSeasonSelected.setFont(new Font("DejaVu Sans", Font.PLAIN, FONT_SIZE));
         panelSelectioned.add(lblSeasonSelected);
         JLabel lblSeason = new JLabel(log.getSeason());
-        lblSeason.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+        lblSeason.setFont(new Font("DejaVu Sans", Font.PLAIN, FONT_SIZE));
         panelSelectioned.add(lblSeason);
         gbc.gridx = 0;
         gbc.gridy = 1;
-        gbc.insets = new Insets(8, 0, 8, 0);
+        gbc.insets = PANEL_INSETS;
         getPanel().add(panelSelectioned, gbc);
         JButton btnLoad = utilsGUI.standardButton("Choose a season:");
         String[] array = log.getLiSeasons().toArray(new String[log.getLiSeasons().size()]);
         JComboBox<String> comboBoxLoad = new JComboBox<>(array);
-        comboBoxLoad.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+        comboBoxLoad.setFont(new Font("DejaVu Sans", Font.PLAIN, FONT_SIZE));
         btnLoad.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 log.setSeason(comboBoxLoad.getItemAt(comboBoxLoad.getSelectedIndex())); 
                 if (log.loadStagione(log.getSeason())) {
                     lblSeason.setText(log.getSeason());
-                } else
+                } else {
                     JOptionPane.showMessageDialog(null, "Loading error...");
+                }
             }
         });
         JComboBox<String> comboBoxDownload = new JComboBox<>(array);
-        gbc.gridwidth=1;
+        gbc.gridwidth = 1;
         gbc.gridx = 0;
         gbc.gridy = 2;
         getPanel().add(btnLoad, gbc);
         gbc.gridx = 1;
         getPanel().add(comboBoxLoad, gbc);
-        gbc.gridx=0;
-        gbc.gridy=3;
-        getPanel().add(btnDownload,gbc);
-        comboBoxDownload.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        getPanel().add(btnDownload, gbc);
+        comboBoxDownload.setFont(new Font("DejaVu Sans", Font.PLAIN, FONT_SIZE));
         btnDownload.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Wait a few seconds");
                 log.setSeason(comboBoxDownload.getItemAt(comboBoxDownload.getSelectedIndex())); 
                 if (log.downloadSeason(log.getSeason())) {
                     lblSeason.setText(log.getSeason());
                     JOptionPane.showMessageDialog(null, "Download completed");
-                } else
+                } else {
                     JOptionPane.showMessageDialog(null, "Error loading...");
+                }
             }
         });
-        gbc.gridx=1;
-        gbc.gridy=3;
+        gbc.gridx = 1;
+        gbc.gridy = 3;
         getPanel().add(comboBoxDownload,gbc);
-        gbc.gridwidth=2;
+        gbc.gridwidth = 2;
         JButton btnArchive = utilsGUI.standardButton("Archive");
         btnArchive.addActionListener(new ActionListener() {
             @Override

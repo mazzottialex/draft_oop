@@ -20,10 +20,12 @@ import data.Player;
 import logics.LogicsArchive;
 import logics.LogicsArchiveImpl;
 import java.awt.FlowLayout;
-
+/**
+ * Represents a GUI for Archive of players list.
+ */
 public class Archive extends Base {
     private static final long serialVersionUID = 1L;
-	private JTable table;
+    private final JTable table;
     private final LogicsArchive log;
     private final TableModel tm = new DefaultTableModel(new String[] {
             "POSITION",
@@ -33,20 +35,43 @@ public class Archive extends Base {
             "MID",
             "DEF"
         }, 0);
-    public Archive(List<Player> li, final String season, final Boolean online)
+    private static final int PANEL_WIDTH = 450;
+    private static final int PANEL_HEIGHT = 640;
+    private static final int BUTTON_WIDTH = 80;
+    private static final int BUTTON_HEIGHT = 28;
+    private static final int LABEL_X = 262;
+    private static final int LABEL_Y = 11;
+    private static final int LABEL_WIDTH = 77;
+    private static final int LABEL_HEIGHT = 17;
+    private static final int TABLE_WIDTH = 420;
+    private static final int TABLE_HEIGHT = 580;
+    private static final int GAP = 5;
+    private static final int PANEL_WIDTH2 = 400;
+    private static final int PANEL_HEIGHT2 = 40;
+    /**
+     * Constructs a new Archive object.
+     * 
+     * @param li      the list of players
+     * @param season  the season
+     * @param online  indicates whether it is an online archive
+     * @throws FileNotFoundException    if a file is not found
+     * @throws ClassNotFoundException   if a class is not found
+     * @throws IOException               if an I/O error occurs
+     */
+    public Archive(final List<Player> li, final String season, final Boolean online)
     		throws FileNotFoundException, ClassNotFoundException, IOException {
         log = new LogicsArchiveImpl(season, online);
         List<Player> liOrdered = log.liOrdered(li);
         liOrdered.stream().forEach(c -> ((DefaultTableModel) tm).addRow(c.toVector()));
-        getPanel().setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        getPanel().setPreferredSize(new Dimension(450, 640));
+        getPanel().setLayout(new FlowLayout(FlowLayout.CENTER, GAP, GAP));
+        getPanel().setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         JPanel panel = new JPanel();
-        panel.setPreferredSize(new Dimension(400, 40));
+        panel.setPreferredSize(new Dimension(PANEL_WIDTH2, PANEL_HEIGHT2));
         panel.setBackground(getForeground());
         getPanel().add(panel);
         panel.setLayout(null);
         JButton btnHome = utilsGUI.standardButton("Home");
-        btnHome.setBounds(10, 8, 80, 28);
+        btnHome.setBounds(10, 8, BUTTON_WIDTH, BUTTON_HEIGHT);
         btnHome.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
@@ -55,18 +80,18 @@ public class Archive extends Base {
         });
         panel.add(btnHome);
         JLabel lblNewLabel = new JLabel(log.getSeason());
-        lblNewLabel.setBounds(262, 11, 77, 17);
+        lblNewLabel.setBounds(LABEL_X, LABEL_Y, LABEL_WIDTH, LABEL_HEIGHT);
         lblNewLabel.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
         lblNewLabel.setForeground(Color.white);
         panel.add(lblNewLabel);
         table = new JTable(tm);
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setPreferredSize(new Dimension(420, 580));
+        scrollPane.setPreferredSize(new Dimension(TABLE_WIDTH, TABLE_HEIGHT));
         getPanel().add(scrollPane);
         TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tm);
         sorter.setComparator(0, new Comparator<Object>() {
             @Override
-            public int compare(Object o1, Object o2) {
+            public int compare(final Object o1, final Object o2) {
                 return 0;
             }
         });
