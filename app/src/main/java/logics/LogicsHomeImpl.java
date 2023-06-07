@@ -12,12 +12,22 @@ import rating.AnalysisRating;
 import rating.AnalysisRatingImpl;
 import scraping.Scraping;
 import scraping.ScrapingImpl;
-public class LogicsHomeImpl implements LogicsHome {
 
+/**
+ * This class represents the implementation of home logic operations.
+ */
+public class LogicsHomeImpl implements LogicsHome {
     private List<Player> li;
     private String season;
     private Boolean online;
     private final ManageSeason ms;
+    /**
+     * 
+     * Constructs a new instance of LogicsHomeImpl with the specified season and online status.
+     *
+     * @param season the season
+     * @param online the online status
+     */
     public LogicsHomeImpl(final String season, final Boolean online) { //di default
         li = new ArrayList<>();
         this.season = season;

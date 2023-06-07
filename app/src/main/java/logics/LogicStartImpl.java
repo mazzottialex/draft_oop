@@ -5,10 +5,17 @@ import java.net.URLConnection;
 import manageData.LogicsFile;
 import manageData.LogicsFileImpl;
 import manageData.ManageSeasonImpl;
+/**
+ * The LogicStartImpl class represents the implementation of starting logic operations.
+ */
 public class LogicStartImpl implements LogicStart {
     private final ManageSeasonImpl ms;
     private final Boolean online;
     private final String season;
+    
+    /**
+     * Constructs a new instance of LogicStartImpl.
+     */
     public LogicStartImpl() {
         this.online = checkConnection();
         ms = new ManageSeasonImpl();
