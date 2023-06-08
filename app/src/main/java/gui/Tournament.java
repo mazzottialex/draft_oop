@@ -404,15 +404,18 @@ public class Tournament extends Base {
 
     /* metodo che formatta la stringa dei nomi dei giocatori */
     private String textFormat(final int max, final String s) {
-        String label = "<html>";
-        for (int i = 0; i < s.length() - 2; i++) {
-            label = label + s.charAt(i);
-            if ((i % max == 0) && (i != 0)) {
-                label = label + "<br>";
+        if (s.length() > 1) {
+            String label = "<html>";
+            for (int i = 0; i < s.length() - 2; i++) {
+                label = label + s.charAt(i);
+                if ((i % max == 0) && (i != 0)) {
+                    label = label + "<br>";
+                }
             }
+            label = label + s.charAt(s.length() - 2) + s.charAt(s.length() - 1);
+            return label;
         }
-        label = label + s.charAt(s.length() - 2) + s.charAt(s.length() - 1);
-        return label;
+        return s;
     }
 
     /**
