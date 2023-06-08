@@ -17,7 +17,7 @@ import utils.Pair;
 public final class ScrapingImpl implements Scraping {
     private final List<Player> li = new ArrayList<>();
     private List<String> stagioni = new ArrayList<>();
-    private final static String URL = "https://www.kickest.it/it/serie-a/statistiche/giocatori/tabellone?iframe=yes";
+    private static final String URL = "https://www.kickest.it/it/serie-a/statistiche/giocatori/tabellone?iframe=yes";
     private final int nThread;
     private Boolean flagChrome = false;
     private Boolean flagFirefox = false;
