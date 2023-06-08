@@ -50,7 +50,7 @@ public class Draft extends Base {
         //titolari
         for (int i = 0; i < ruoli.size(); i++) {
             panelPosizione = new JPanel();
-            for (int j = 0; j < mod.getN(ruoli.get(i)); j++) {
+            for (int j = 0; j < mod.getPlayersNumberByRole(ruoli.get(i)); j++) {
                 panelPosizione.setLayout(layout);
                 panelGiocatore = new JPanel();
                 panelGiocatore.setLayout(layout);

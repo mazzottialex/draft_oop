@@ -90,14 +90,14 @@ public enum Module {
      * @param ruolo The role of the player (e.g., "P", "D", "C", "A").
      * @return The number of players for the given role.
      */
-    public int getN(final String ruolo) {
-        if (ruolo == "P") {
+    public int getPlayersNumberByRole(final String ruolo) {
+        if (ruolo.equals("P")) {
             return 1;
-        } else if (ruolo == "D") {
+        } else if (ruolo.equals("D")) {
             return dif;
-        } else if (ruolo == "C") {
+        } else if (ruolo.equals("C")) {
             return cen;
-        } else if (ruolo == "A") {
+        } else if (ruolo.equals("A")) {
             return att;
         } else {
             return 0;

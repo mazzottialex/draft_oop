@@ -34,8 +34,8 @@ public class Substitution extends Base {
     private LogicsSubstitution logics;
     private Team team;
     private Match matchGui;
-    private static JPanel panelStarters;
-    private static JPanel panelSubstitutes;
+    private JPanel panelStarters;
+    private JPanel panelSubstitutes;
     private int substitutes;
     private static final int SUBSTITUTES = 7;
     private static final int INSETS_5 = 5;
@@ -81,7 +81,7 @@ public class Substitution extends Base {
         int count = 0;
         for (int i = 0; i < roles.size(); i++) {
             panelPosition = new JPanel();
-            for (int j = 0; j < team.getModule().getN(roles.get(i)); j++) {
+            for (int j = 0; j < team.getModule().getPlayersNumberByRole(roles.get(i)); j++) {
                 Player p = team.getStarting().get(count);
                 JPanel panel = (utilsGUI.getPanelCalciatore(p.getName(), p.getRating().getX(), p.getPos(), true));
                 panel.addMouseListener(new MouseAdapter() {
