@@ -79,10 +79,10 @@ public class History extends Base {
             panelTeam.add(lblRating);
             panelTeam.add(lblRating);
             JButton btnVedi = UtilsGUI.standardButton("Vedi");
-            btnVedi.addActionListener(new ActionListener() {    
+            btnVedi.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(final ActionEvent e) {
-                    changeJPanel(new ViewTeam(team, log.getSeason(), log.getOnline()));    
+                    changeJPanel(new ViewTeam(team, log.getSeason(), log.getOnline()));
                 }
             });
             panelTeam.add(btnVedi);

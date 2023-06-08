@@ -27,7 +27,7 @@ import logics.LogicsHistoryImpl;
 public class ViewTeam extends Base {
     private static final long serialVersionUID = 1L;
     private final List<String> pos = List.of("A", "C", "D", "P");
-    private transient final LogicsHistory log;
+    private final transient LogicsHistory log;
     private static final Insets INSETS_1 = new Insets(5, 5, 2, 2);
     private static final Insets INSETS_2 = new Insets(2, 0, 2, 25);
     private static final Insets INSETS_3 = new Insets(2, 25, 2, 0);

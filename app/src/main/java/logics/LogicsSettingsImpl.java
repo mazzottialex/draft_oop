@@ -7,8 +7,8 @@ import data.Player;
  * The LogicsSettingsImpl class represents the implementation of settings logic operations in a team management system.
  */
 public final class LogicsSettingsImpl implements LogicsSettings {
-    private final static String DEFAULT_LOGO = "res/stemmi/bianco.png";
-    private final static String defaultTeamName = "Squadra 1";
+    private static final String DEFAULT_LOGO = "res/stemmi/bianco.png";
+    private static final String DEFAULT_TEAM_NAME = "Squadra 1";
     private final List<Player> li;
     private final List<String> liLogo = List.of(
             "src/main/resources/stemmi/bianco.png",
@@ -32,7 +32,7 @@ public final class LogicsSettingsImpl implements LogicsSettings {
     public LogicsSettingsImpl(final List<Player> li) {
         this.li = li;
         this.logo = DEFAULT_LOGO;
-        this.teamName = defaultTeamName;
+        this.teamName = DEFAULT_TEAM_NAME;
     }
     @Override
     public String getLogo() {
