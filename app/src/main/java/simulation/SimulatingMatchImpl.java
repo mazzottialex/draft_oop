@@ -39,8 +39,8 @@ public final class SimulatingMatchImpl implements SimulatingMatch {
     private static final double COST_SUB_DEF = 14; // da aumentare a 15
     private static final double COST_SUB_OFF = 5; // da aumentare a 7
     private static final double COST_DIV_DEF_OFF_CR = 5;
-    private static final int MINUTES_REG = 90;
-    private static final int MINUTES_EXTRA = 120;
+    private static final int END_REG = 90;
+    private static final int END_EXTRA = 120;
 
     /**
      * Constructs a new {@code SimulatingMatchImpl} object with the specified teams.
@@ -132,19 +132,19 @@ public final class SimulatingMatchImpl implements SimulatingMatch {
     @Override
     public Map<Team, Integer> resultExtra()
             throws FileNotFoundException, ClassNotFoundException, IOException {
-        return resultSub(MINUTES_REG);
+        return resultSub(END_REG);
     }
 
     @Override
     public Map<Team, Integer> resultSub(final int minute)
             throws FileNotFoundException, ClassNotFoundException, IOException {
         Map<Team, Integer> map = new HashMap<>();
-        if (minute < MINUTES_REG) {
-            map.put(t1, (int) (result().get(t1) * (double) ((MINUTES_REG - minute) / MINUTES_REG)));
-            map.put(t2, (int) (result().get(t1) * (double) ((MINUTES_REG - minute) / MINUTES_REG)));
+        if (minute < END_REG) {
+            map.put(t1, (int) (((double) result().get(t1)) * (END_REG - minute) / END_REG));
+            map.put(t2, (int) (((double) result().get(t2)) * (END_REG - minute) / END_REG));
         } else {
-            map.put(t1, (int) (result().get(t1) * (double) ((MINUTES_EXTRA - minute) / MINUTES_REG)));
-            map.put(t2, (int) (result().get(t1) * (double) ((MINUTES_EXTRA - minute) / MINUTES_REG)));
+            map.put(t1, (int) (((double) result().get(t1)) * (END_EXTRA - minute) / END_REG));
+            map.put(t2, (int) (((double) result().get(t2)) * (END_EXTRA - minute) / END_REG));
         }
         return map;
     }

@@ -22,11 +22,11 @@ public final class LogicsMatchImpl implements LogicsMatch, Serializable {
     private Team t2;
     private List<Integer> list1;
     private List<Integer> list2;
-    private static final int REG = 0;
-    private static final int EXTRA = 90;
+    private static final int START_REG = 0;
+    private static final int START_EXTRA = 90;
     private SimulatingMatch sim;
-    private static final int MINUTES_REG = 90;
-    private static final int MINUTES_EXTRA = 120;
+    private static final int END_REG = 90;
+    private static final int END_EXTRA = 120;
     private static final double OWNGOAL_RATE = 2.904040404040404;
 
     /**
@@ -42,17 +42,17 @@ public final class LogicsMatchImpl implements LogicsMatch, Serializable {
         super();
         this.t1 = t1;
         this.t2 = t2;
-        this.sim = new SimulatingMatchImpl(t1, t2);
+        sim = new SimulatingMatchImpl(t1, t2);
     }
 
     @Override
     public void scorers(final int time) throws FileNotFoundException, ClassNotFoundException, IOException {
-        if (time == REG) {
+        if (time == START_REG) {
             do {
                 list1 = getGoalsNum(sim.result().get(t1), time);
                 list2 = getGoalsNum(sim.result().get(t2), time);
             } while (containsAny(list1, list2));
-        } else if (time == EXTRA) {
+        } else if (time == START_EXTRA) {
             do {
                 list1 = getGoalsNum(sim.resultExtra().get(t1), time);
                 list2 = getGoalsNum(sim.resultExtra().get(t2), time);
@@ -83,7 +83,7 @@ public final class LogicsMatchImpl implements LogicsMatch, Serializable {
      * @param <T> the type of elements in the lists
      * @return {@code true} if any element from the first list is contained in the second list, {@code false} otherwise
      */
-    public static <T> boolean containsAny(final List<T> l1, final List<T> l2) {
+    private static <T> boolean containsAny(final List<T> l1, final List<T> l2) {
         for (T elem: l1) {
             if (l2.contains(elem)) {
                 return true;
@@ -95,35 +95,23 @@ public final class LogicsMatchImpl implements LogicsMatch, Serializable {
     /**
      * Generates a list of goal minutes based on the number of goals and the time period.
      *
-     * @param g the number of goals
+     * @param goal the number of goals
      * @param time the time period
      * @return a list of goal minutes
      */
-    public List<Integer> getGoalsNum(final int g, final int time) {
+    private List<Integer> getGoalsNum(final int goal, final int time) {
         List<Integer> list = new ArrayList<>();
-        int goal = g;
-        int random = MINUTES_REG;
-        if (time == EXTRA) {
-            goal = ((MINUTES_EXTRA - MINUTES_REG) * g) / MINUTES_REG;
-            random = MINUTES_EXTRA - MINUTES_REG;
-        } else if (time < MINUTES_REG) {
-            goal = ((MINUTES_REG - time) * g) / MINUTES_REG;
-            random = MINUTES_REG - time;
-        } else if (time > MINUTES_REG) {
-            goal = ((MINUTES_EXTRA - time) * g) / MINUTES_REG;
-            random = MINUTES_EXTRA - time;
-        }
+        int remainingTime = time <= END_REG ? END_REG - time : END_EXTRA - time;
         for (int i = 0; i < goal; i++) {
             int min;
             do {
-                min = new Random().nextInt(random) + 1 + time;
+                min = new Random().nextInt(remainingTime) + 1 + time;
             } while (list.contains(min));
             list.add(min);
         }
         Collections.sort(list);
         return list;
     }
-
 
     @Override
     public Player addScorer(final Team t) {
@@ -152,7 +140,7 @@ public final class LogicsMatchImpl implements LogicsMatch, Serializable {
      * @param team the team
      * @return the scorer
      */
-    public Player getAutogol(final Team team) {
+    private Player getAutogol(final Team team) {
         Team t;
         if (team == t1) {
             t = t2;

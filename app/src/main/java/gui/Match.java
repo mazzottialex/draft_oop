@@ -1,6 +1,5 @@
 package gui;
 
-
 import data.Player;
 import data.Team;
 import logics.LogicsMatch;
@@ -44,7 +43,7 @@ public class Match extends Base implements Serializable {
     private JButton subsButton;
     private JButton goAheadButton;
     private JPanel panel;
-    private final transient LogicsMatch logics;
+    private transient LogicsMatch logics;
     private Team t1;
     private Team t2;
     private boolean isRunning;
@@ -83,7 +82,6 @@ public class Match extends Base implements Serializable {
     public Match(final Team t1, final Team t2) throws FileNotFoundException, ClassNotFoundException, IOException {
         this.t1 = t1;
         this.t2 = t2;
-        logics = new LogicsMatchImpl(this.t1, this.t2);
         match = this;
 
         // Define the panel to hold the components
@@ -253,7 +251,6 @@ public class Match extends Base implements Serializable {
 				e.printStackTrace();
 			}
         }
-		changeResult = false;
     }
 
     /**
@@ -262,6 +259,7 @@ public class Match extends Base implements Serializable {
     public void updateTeam() {
         t1.setStarting(subGui.getLogics().getStarters());
         t1.setSubstitution(subGui.getLogics().getSubstitutes());
+        changeResult = false;
     }
 
     /**
@@ -275,6 +273,7 @@ public class Match extends Base implements Serializable {
             public void run() {
                 if (!changeResult) {
                     try {
+                    	logics = new LogicsMatchImpl(t1, t2);
                         logics.scorers(progressBar.getValue());
                         changeResult = true;
                     } catch (ClassNotFoundException | IOException e) {
