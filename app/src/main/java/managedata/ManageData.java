@@ -1,4 +1,4 @@
-package manageData;
+package managedata;
 
 import java.util.List;
 import data.Player;

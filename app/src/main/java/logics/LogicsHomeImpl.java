@@ -4,19 +4,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import data.Player;
-import manageData.ManageData;
-import manageData.ManageDataImpl;
-import manageData.ManageSeason;
-import manageData.ManageSeasonImpl;
+import managedata.ManageData;
+import managedata.ManageDataImpl;
+import managedata.ManageSeason;
+import managedata.ManageSeasonImpl;
 import rating.AnalysisRating;
 import rating.AnalysisRatingImpl;
-import scraping.Scraping;
 import scraping.ScrapingImpl;
 
 /**
  * This class represents the implementation of home logic operations.
  */
-public class LogicsHomeImpl implements LogicsHome {
+public final class LogicsHomeImpl implements LogicsHome {
     private List<Player> li;
     private String season;
     private Boolean online;

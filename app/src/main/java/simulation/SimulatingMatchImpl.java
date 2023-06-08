@@ -7,7 +7,7 @@ import java.util.Map;
 
 import data.Player;
 import data.Team;
-import manageData.ExtractDataImpl;
+import managedata.ExtractDataImpl;
 
 /**
  * Implementation of the {@code SimulatingMatch} interface that simulates a match between two teams.

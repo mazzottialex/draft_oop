@@ -1,4 +1,4 @@
-package manageData;
+package managedata;
 import java.util.ArrayList;
 import java.util.List;
 import data.Player;
@@ -9,7 +9,7 @@ import scraping.ScrapingImpl;
  * Implementation of the {@code ManageData} interface.
  * Manages the data of players for a specific season.
  */
-public class ManageDataImpl implements ManageData {
+public final class ManageDataImpl implements ManageData {
 
     private List<Player> li;
     private final LogicsFile logFile;

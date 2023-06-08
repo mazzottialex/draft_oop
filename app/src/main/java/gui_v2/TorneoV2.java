@@ -23,7 +23,7 @@ import data.TeamUser;
 import gui.Base;
 import gui.Match;
 import gui.Start;
-import gui.utilsGUI;
+import gui.UtilsGUI;
 import logics.CreateOpponentTeams;
 import logics.CreateOpponentTeamsImpl;
 import logics.LogicsShootout;
@@ -51,8 +51,8 @@ public class TorneoV2 extends Base {
             e.printStackTrace();
         }
         tabellone = new TorneoColl(liSquadre);
-        JButton btnSimula = utilsGUI.standardButton("Simula");
-        JButton btnHome = utilsGUI.standardButton("Torna alla Home");
+        JButton btnSimula = UtilsGUI.standardButton("Simula");
+        JButton btnHome = UtilsGUI.standardButton("Torna alla Home");
         btnHome.setVisible(false);
         btnHome.addActionListener(new ActionListener() {
             @Override

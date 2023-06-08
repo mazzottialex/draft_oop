@@ -3,24 +3,29 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import data.Player;
-import manageData.ExtractData;
-import manageData.ExtractDataImpl;
+import managedata.ExtractData;
+import managedata.ExtractDataImpl;
 /**
  * Implementation of the LogicsArchive interface.
  */
 public final class LogicsArchiveImpl implements LogicsArchive {
-	private final String season;
+    private final String season;
 	private final Boolean online;
-	public LogicsArchiveImpl(String season, Boolean online) {
+	/**
+     * Constructs a new instance of LogicsArchiveImpl.
+     * 
+     * @param season the season
+     * @param online the online status
+     */
+    public LogicsArchiveImpl(final String season, final Boolean online) {
 		this.season = season;
 		this.online = online;
 	}
 	@Override
-	public List<Player> liOrdered(List<Player> li)
+	public List<Player> liOrdered(final List<Player> li)
 			throws FileNotFoundException, ClassNotFoundException, IOException {
 		ExtractData ex = new ExtractDataImpl(li);
-		li=ex.getListOrdered(c -> -c.getRating().getX());
-		return li;
+		return ex.getListOrdered(c -> -c.getRating().getX());
 	}
 	@Override
 	public String getSeason() {

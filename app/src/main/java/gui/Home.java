@@ -25,8 +25,8 @@ public class Home extends Base {
     private static final long serialVersionUID = 1L;
     private final LogicsHome log;
     private static final int BUTTON_WIDTH = 150;
-	private static final int BUTTON_HEIGHT = 40;
-	private static final int SCALED_IMAGE_1 = 160;
+    private static final int BUTTON_HEIGHT = 40;
+    private static final int SCALED_IMAGE_1 = 160;
 	private static final int SCALED_IMAGE_2 = 250;
 	private static final Insets BUTTON_INSETS = new Insets(140, 0, 80, 0);
 	private static final Insets PANEL_INSETS = new Insets(8, 0, 8, 0);
@@ -36,7 +36,8 @@ public class Home extends Base {
 	private static final String START_IMAGE_PATH = "src/main/resources/start.png";
 	private static final Color BACKGROUND_COLOR = new Color(0, 64, 128);
 	private static final Color BACKGROUND_COLOR_2 = Color.GREEN;
-
+	private static final int GRID_Y = 5;
+	
 	/**
      * Constructs a new Home object.
      *
@@ -45,7 +46,7 @@ public class Home extends Base {
      * @param first true if home is called by Start, False otherwise
      */
     public Home(final String seasonDefault, final Boolean online, final Boolean first) {
-    	JButton btnDownload = utilsGUI.standardButton("Download season:");
+    	JButton btnDownload = UtilsGUI.standardButton("Download season:");
     	log = new LogicsHomeImpl(seasonDefault, online);
         if (!log.checkBrowser() && first) {
         	btnDownload.setEnabled(false);
@@ -113,7 +114,7 @@ public class Home extends Base {
         gbc.gridy = 1;
         gbc.insets = PANEL_INSETS;
         getPanel().add(panelSelectioned, gbc);
-        JButton btnLoad = utilsGUI.standardButton("Choose a season:");
+        JButton btnLoad = UtilsGUI.standardButton("Choose a season:");
         String[] array = log.getLiSeasons().toArray(new String[log.getLiSeasons().size()]);
         JComboBox<String> comboBoxLoad = new JComboBox<>(array);
         comboBoxLoad.setFont(new Font("DejaVu Sans", Font.PLAIN, FONT_SIZE));
@@ -154,9 +155,9 @@ public class Home extends Base {
         });
         gbc.gridx = 1;
         gbc.gridy = 3;
-        getPanel().add(comboBoxDownload,gbc);
+        getPanel().add(comboBoxDownload, gbc);
         gbc.gridwidth = 2;
-        JButton btnArchive = utilsGUI.standardButton("Archive");
+        JButton btnArchive = UtilsGUI.standardButton("Archive");
         btnArchive.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
@@ -171,14 +172,14 @@ public class Home extends Base {
         gbc.gridx = 0;
         gbc.gridy = 4;
         getPanel().add(btnArchive, gbc);
-        JButton btnHistory = utilsGUI.standardButton("History");
+        JButton btnHistory = UtilsGUI.standardButton("History");
         btnHistory.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 changeJPanel(new History(log.getSeason(), log.getOnline()));
             }
         });
-        gbc.gridy = 5;
+        gbc.gridy = GRID_Y;
         getPanel().add(btnHistory, gbc);
     }
 }

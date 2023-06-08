@@ -16,7 +16,7 @@ import javax.swing.SwingUtilities;
 import data.Player;
 import data.Module;
 import gui.Base;
-import gui.utilsGUI;
+import gui.UtilsGUI;
 import logics.LogicsFormazione;
 import logics.LogicsFormazioneImpl;
 public class Formazione extends Base {
@@ -29,7 +29,7 @@ public class Formazione extends Base {
         GridBagConstraints gbc = new GridBagConstraints();
         GridBagLayout layout = new GridBagLayout();
         getPanel().setLayout(layout);
-        JButton btnScegli = utilsGUI.standardButton("Scegli Modulo");
+        JButton btnScegli = UtilsGUI.standardButton("Scegli Modulo");
         liModuli = log.getRandomMod(N_MODULI);
         btnScegli.addActionListener(new ActionListener() {
             @Override
@@ -49,7 +49,7 @@ public class Formazione extends Base {
                         gbc.gridy = 0;
                         gbc.insets = new Insets(10, 0, 10, 0);
                         panel.add(lblModulo, gbc);
-                        JButton btnProsegui = utilsGUI.standardButton("Prosegui");
+                        JButton btnProsegui = UtilsGUI.standardButton("Prosegui");
                         btnProsegui.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(final ActionEvent e) {

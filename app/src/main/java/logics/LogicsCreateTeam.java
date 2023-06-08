@@ -6,7 +6,7 @@ import java.util.List;
 import data.Player;
 import data.Module;
 import data.Team;
-import manageData.ExtractData;
+import managedata.ExtractData;
 
 /**
  * Models the logic of team creation.

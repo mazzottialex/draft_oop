@@ -80,8 +80,7 @@ public final class ScrapingImpl implements Scraping {
                 li.addAll(el.getX().getLi());
             }
             return true;
-        }
-        else {
+        } else {
         	return false;
         }
     }

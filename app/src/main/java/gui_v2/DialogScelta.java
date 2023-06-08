@@ -14,7 +14,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import data.Player;
-import gui.utilsGUI;
+import gui.UtilsGUI;
 public class DialogScelta extends JDialog {
     private final JPanel contentPanel = new JPanel();
     private Player calciatore;
@@ -32,7 +32,7 @@ public class DialogScelta extends JDialog {
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         List<JButton> liBtn = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            JButton btnCalciatore = utilsGUI.getButtonCalciatore(this.li.get(i).getName(), this.li.get(i).getPos());
+            JButton btnCalciatore = UtilsGUI.getButtonCalciatore(this.li.get(i).getName(), this.li.get(i).getPos());
             liBtn.add(btnCalciatore);
             btnCalciatore.addActionListener(new ActionListener() {
                 @Override

@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import manageData.ExtractData;
-import manageData.ExtractDataImpl;
+import managedata.ExtractData;
+import managedata.ExtractDataImpl;
 
 /** 
  * This class represents an opposing team and implements the {@code Team} interface.

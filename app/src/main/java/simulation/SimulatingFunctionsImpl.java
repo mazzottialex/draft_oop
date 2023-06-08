@@ -10,8 +10,8 @@ import java.util.Random;
 
 import data.Player;
 import data.Team;
-import manageData.ExtractData;
-import manageData.ExtractDataImpl;
+import managedata.ExtractData;
+import managedata.ExtractDataImpl;
 
 /**
  * Implementation of the {@link SimulatingFunctions} interface that provides

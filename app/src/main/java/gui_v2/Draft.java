@@ -13,11 +13,12 @@ import data.Team;
 import data.TeamUser;
 import gui.Base;
 import gui.ViewTeam;
-import gui.utilsGUI;
-import manageData.ExtractData;
-import manageData.ExtractDataImpl;
-import manageData.LogicsFile;
-import manageData.LogicsFileImpl;
+import gui.UtilsGUI;
+import managedata.ExtractData;
+import managedata.ExtractDataImpl;
+import managedata.LogicsFile;
+import managedata.LogicsFileImpl;
+
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
@@ -45,7 +46,7 @@ public class Draft extends Base {
 				mod.getNumCen() * nDraft, mod.getNumDif() * nDraft, nDraft);
         JPanel panelGiocatore;
         JPanel panelPosizione;
-        JButton btnProsegui = utilsGUI.standardButton("Prosegui");
+        JButton btnProsegui = UtilsGUI.standardButton("Prosegui");
         btnProsegui.setVisible(false);
         //titolari
         for (int i = 0; i < ruoli.size(); i++) {
@@ -74,7 +75,7 @@ public class Draft extends Base {
                             if (c != null) {
                                 panel.remove(btn);
                                 liTitolari.add(c);
-                                panel.add(utilsGUI.getPanelCalciatore(c.getName(), 
+                                panel.add(UtilsGUI.getPanelCalciatore(c.getName(), 
                                 		c.getRating().getX(), c.getPos(), true));
                                 if (liTitolari.size() >= 11 && liRiserve.size() >= 7) {
                                     btnProsegui.setVisible(true);
@@ -126,7 +127,7 @@ public class Draft extends Base {
                         if (c != null) {
                             panel.remove(btn);
                             liRiserve.add(c);
-                            panel.add(utilsGUI.getPanelCalciatore(c.getName(), 
+                            panel.add(UtilsGUI.getPanelCalciatore(c.getName(), 
                             c.getRating().getX(), c.getPos(), false));
                             if (liTitolari.size() >= 11 && liRiserve.size() >= 7) {
                                 btnProsegui.setVisible(true);

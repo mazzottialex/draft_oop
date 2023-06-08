@@ -48,6 +48,8 @@ public class Archive extends Base {
     private static final int GAP = 5;
     private static final int PANEL_WIDTH2 = 400;
     private static final int PANEL_HEIGHT2 = 40;
+    private static final int FONT_DIM = 14;
+
     /**
      * Constructs a new Archive object.
      * 
@@ -59,7 +61,7 @@ public class Archive extends Base {
      * @throws IOException               if an I/O error occurs
      */
     public Archive(final List<Player> li, final String season, final Boolean online)
-    		throws FileNotFoundException, ClassNotFoundException, IOException {
+            throws FileNotFoundException, ClassNotFoundException, IOException {
         log = new LogicsArchiveImpl(season, online);
         List<Player> liOrdered = log.liOrdered(li);
         liOrdered.stream().forEach(c -> ((DefaultTableModel) tm).addRow(c.toVector()));
@@ -70,7 +72,7 @@ public class Archive extends Base {
         panel.setBackground(getForeground());
         getPanel().add(panel);
         panel.setLayout(null);
-        JButton btnHome = utilsGUI.standardButton("Home");
+        JButton btnHome = UtilsGUI.standardButton("Home");
         btnHome.setBounds(10, 8, BUTTON_WIDTH, BUTTON_HEIGHT);
         btnHome.addActionListener(new ActionListener() {
             @Override
@@ -81,7 +83,7 @@ public class Archive extends Base {
         panel.add(btnHome);
         JLabel lblNewLabel = new JLabel(log.getSeason());
         lblNewLabel.setBounds(LABEL_X, LABEL_Y, LABEL_WIDTH, LABEL_HEIGHT);
-        lblNewLabel.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
+        lblNewLabel.setFont(new Font("DejaVu Sans", Font.PLAIN, FONT_DIM));
         lblNewLabel.setForeground(Color.white);
         panel.add(lblNewLabel);
         table = new JTable(tm);

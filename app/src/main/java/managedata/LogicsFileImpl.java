@@ -1,4 +1,4 @@
-package manageData;
+package managedata;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
@@ -16,10 +16,10 @@ import data.Team;
 /**
  * Implementation of the LogicsFile interface
  */
-public class LogicsFileImpl implements LogicsFile {
+public final class LogicsFileImpl implements LogicsFile {
 
     /**
-     * Constructs a new instance of LogicsFileImpl
+     * Constructs a new instance of LogicsFileImpl.
      */
     public LogicsFileImpl() { }
     @SuppressWarnings("unchecked")

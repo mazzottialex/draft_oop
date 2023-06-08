@@ -2,8 +2,6 @@ package logics;
 import java.util.List;
 
 import data.Player;
-import data.Team;
-import data.TeamUser;
 
 /**
  * The LogicsSettingsImpl class represents the implementation of settings logic operations in a team management system.
@@ -32,13 +30,13 @@ public class LogicsSettingsImpl implements LogicsSettings {
      * @param li the list of players
      */
     public LogicsSettingsImpl(final List<Player> li) {
-    	this.li=li;
-    	this.logo=defaultLogo;
-    	this.teamName=defaultTeamName;
+    	this.li = li;
+    	this.logo = defaultLogo;
+    	this.teamName = defaultTeamName;
     }
     
     @Override
-	public String getLogo() {
+    public String getLogo() {
 		return logo;
 	}
     
