@@ -39,6 +39,7 @@ public final class SimulatingMatchImpl implements SimulatingMatch {
     private static final double COST_SUB_DEF = 14; // da aumentare a 15
     private static final double COST_SUB_OFF = 5; // da aumentare a 7
     private static final double COST_DIV_DEF_OFF_CR = 5;
+    private static final int START = 0;
     private static final int END_REG = 90;
     private static final int END_EXTRA = 120;
 
@@ -56,18 +57,18 @@ public final class SimulatingMatchImpl implements SimulatingMatch {
         sf = new SimulatingFunctionsImpl();
         this.t1 = t1;
         this.t2 = t2;
-        ratings1 = SimulatingFunctionsImpl.getFantasyRantings(this.t1.getStarting());
-        ratings2 = SimulatingFunctionsImpl.getFantasyRantings(this.t2.getStarting());
+        ratings1 = sf.getFantasyRantings(this.t1.getStarting());
+        ratings2 = sf.getFantasyRantings(this.t2.getStarting());
         concededGoals1 = sf.getFantasyConcededGoals(this.t1);
         concededGoals2 = sf.getFantasyConcededGoals(this.t2);
         owngoals1 = sf.getFantasyOwngoals(this.t1);
         owngoals2 = sf.getFantasyOwngoals(this.t2);
         savedPenalties1 = sf.getFantasySavedPenalties(this.t1);
         savedPenalties2 = sf.getFantasySavedPenalties(this.t2);
-        lockdownDefense1 = SimulatingFunctionsImpl.getLockdownDefenseRating(this.t1, ratings1);
-        lockdownDefense2 = SimulatingFunctionsImpl.getLockdownDefenseRating(this.t2, ratings2);
-        modifiedRatings1 = SimulatingFunctionsImpl.modifiedFantasyRatings(this.t1, ratings1);
-        modifiedRatings2 = SimulatingFunctionsImpl.modifiedFantasyRatings(this.t2, ratings2);
+        lockdownDefense1 = sf.getLockdownDefenseRating(this.t1, ratings1);
+        lockdownDefense2 = sf.getLockdownDefenseRating(this.t2, ratings2);
+        modifiedRatings1 = sf.modifiedFantasyRatings(this.t1, ratings1);
+        modifiedRatings2 = sf.modifiedFantasyRatings(this.t2, ratings2);
         defensiveRatings1 = sf.getFantasyDefensiveRating(t1, modifiedRatings1);
         defensiveRatings2 = sf.getFantasyDefensiveRating(t2, modifiedRatings2);
         offensiveRatings1 = sf.getFantasyOffensiveRating(t1, modifiedRatings1);
@@ -78,8 +79,16 @@ public final class SimulatingMatchImpl implements SimulatingMatch {
         scoredPenalties2 = sf.getDeltaScoredSavedPenalties(t2);
     }
 
-    @Override
-    public double defensivePerformance(final Team team)
+    /**
+     * Calculates the defensive performance of a team.
+     *
+     * @param team the team for which to calculate the defensive performance
+     * @return the defensive performance value
+     * @throws FileNotFoundException    if the data file is not found
+     * @throws ClassNotFoundException   if the class is not found during deserialization
+     * @throws IOException              if an I/O error occurs during data extraction
+     */
+    private double defensivePerformance(final Team team)
             throws FileNotFoundException, ClassNotFoundException, IOException {
         double dp = 0;
         if (team == t1) {
@@ -92,8 +101,16 @@ public final class SimulatingMatchImpl implements SimulatingMatch {
         return dp;
     }
 
-    @Override
-    public double scoringAbility(final Team team)
+    /**
+     * Calculates the scoring ability of a team.
+     *
+     * @param team the team for which to calculate the scoring ability
+     * @return the scoring ability value
+     * @throws FileNotFoundException    if the data file is not found
+     * @throws ClassNotFoundException   if the class is not found during deserialization
+     * @throws IOException              if an I/O error occurs during data extraction
+     */
+    private double scoringAbility(final Team team)
             throws FileNotFoundException, ClassNotFoundException, IOException {
         double sa = 0;
         if (team == t1) {
@@ -104,8 +121,16 @@ public final class SimulatingMatchImpl implements SimulatingMatch {
         return sa;
     }
 
-    @Override
-    public double offensivePerformance(final Team team)
+    /**
+     * Calculates the offensive performance of a team.
+     *
+     * @param team the team for which to calculate the offensive performance
+     * @return the offensive performance value
+     * @throws FileNotFoundException    if the data file is not found
+     * @throws ClassNotFoundException   if the class is not found during deserialization
+     * @throws IOException              if an I/O error occurs during data extraction
+     */
+    private double offensivePerformance(final Team team)
             throws FileNotFoundException, ClassNotFoundException, IOException {
         double op = 0;
         if (team == t1) {
@@ -117,35 +142,26 @@ public final class SimulatingMatchImpl implements SimulatingMatch {
     }
 
     @Override
-    public Map<Team, Integer> result()
+    public Map<Team, Integer> result(final int minute)
             throws FileNotFoundException, ClassNotFoundException, IOException {
         int team1 = (int) Math.round(Math.min(scoringAbility(t1),
             (offensivePerformance(t1) - defensivePerformance(t2))));
         int team2 = (int) Math.round(Math.min(scoringAbility(t2),
             (offensivePerformance(t2) - defensivePerformance(t1))));
         Map<Team, Integer> map = new HashMap<>();
-        map.put(this.t1, team1 >= 0 ? team1 : 0);
-        map.put(this.t2, team2 >= 0 ? team2 : 0);
-        return map;
-    }
-
-    @Override
-    public Map<Team, Integer> resultExtra()
-            throws FileNotFoundException, ClassNotFoundException, IOException {
-        return resultSub(END_REG);
-    }
-
-    @Override
-    public Map<Team, Integer> resultSub(final int minute)
-            throws FileNotFoundException, ClassNotFoundException, IOException {
-        Map<Team, Integer> map = new HashMap<>();
-        if (minute < END_REG) {
-            map.put(t1, (int) (((double) result().get(t1)) * (END_REG - minute) / END_REG));
-            map.put(t2, (int) (((double) result().get(t2)) * (END_REG - minute) / END_REG));
+        if (minute == START) {
+            map.put(this.t1, team1 >= 0 ? team1 : 0);
+            map.put(this.t2, team2 >= 0 ? team2 : 0);
+            return map;
         } else {
-            map.put(t1, (int) (((double) result().get(t1)) * (END_EXTRA - minute) / END_REG));
-            map.put(t2, (int) (((double) result().get(t2)) * (END_EXTRA - minute) / END_REG));
+            if (minute < END_REG) {
+                map.put(t1, (int) (((double) team1 >= 0 ? team1 : 0) * (END_REG - minute) / END_REG));
+                map.put(t2, (int) (((double) team2 >= 0 ? team2 : 0) * (END_REG - minute) / END_REG));
+            } else {
+                map.put(t1, (int) (((double) team1 >= 0 ? team1 : 0) * (END_EXTRA - minute) / END_REG));
+                map.put(t2, (int) (((double) team2 >= 0 ? team2 : 0) * (END_EXTRA - minute) / END_REG));
+            }
+            return map;
         }
-        return map;
     }
 }

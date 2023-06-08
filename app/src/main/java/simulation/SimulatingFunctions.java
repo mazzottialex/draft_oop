@@ -2,8 +2,10 @@ package simulation;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
+import data.Player;
 import data.Team;
 
 /**
@@ -96,4 +98,30 @@ public interface SimulatingFunctions {
      */
     int getFantasyScoredGoals(Team t)
             throws FileNotFoundException, ClassNotFoundException, IOException;
+
+    /**
+     * Calculates the fantasy ratings for a list of players (starters).
+     *
+     * @param starting The list of players.
+     * @return A map containing each player and their corresponding fantasy rating.
+     */
+    Map<Player, Double> getFantasyRantings(List<Player> starting);
+
+    /**
+     * Calculates the "lockdown defense" rating for a team based on the ratings of its defenders.
+     *
+     * @param t1                the team for which to calculate the defense rating
+     * @param ratings1 a map containing the defenders and their corresponding fantasy ratings
+     * @return the lockdown defense rating for the team
+     */
+    double getLockdownDefenseRating(Team t1, Map<Player, Double> ratings1);
+
+    /**
+     * Modifies the fantasy ratings of players in a team based on certain criteria.
+     *
+     * @param t2          the team for which to modify the ratings
+     * @param ratings2 a map containing the players and their corresponding fantasy ratings
+     * @return a map of role to modified ratings for the team
+     */
+    Map<String, Double> modifiedFantasyRatings(Team t2, Map<Player, Double> ratings2);
 }

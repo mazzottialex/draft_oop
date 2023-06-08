@@ -38,6 +38,8 @@ public class LogicsTournamentImpl implements LogicsTournament {
     private final Map<String, Integer> risMatch; // ris della squadra al posto della squadra utente
     private String winner;
     private boolean elimThisTurn;
+    private static final int START_REG = 0;
+    private static final int START_EXTRA = 90;
 
     /**
      * Constructor of LogicsTournamentImpl.
@@ -151,7 +153,7 @@ public class LogicsTournamentImpl implements LogicsTournament {
                     SimulatingMatchImpl s = new SimulatingMatchImpl(this.getListAvversari().get(i),
                             this.getListAvversari().get(i + 1));
                     map.clear();
-                    map2 = s.result();
+                    map2 = s.result(START_REG);
                     l.clear();
                     l.addAll(map2.keySet());
                     map.put(l.get(0).getTeamName(), map2.get(l.get(0)));
@@ -160,7 +162,7 @@ public class LogicsTournamentImpl implements LogicsTournament {
                     list.addAll(map.keySet());
                     if (map.get(list.get(0)).equals(map.get(list.get(1)))) { // == map.get(list.get(1))) {
                         map.clear();
-                        map2 = s.resultExtra();
+                        map2 = s.result(START_EXTRA);
                         l.addAll(map2.keySet());
                         map.put(l.get(0).getTeamName(), map2.get(l.get(0)));
                         map.put(l.get(1).getTeamName(), map2.get(l.get(1)));
@@ -214,7 +216,7 @@ public class LogicsTournamentImpl implements LogicsTournament {
             if (this.getEliminated() && !this.getElimThisTurn()) {
                 try {
                     SimulatingMatchImpl s = new SimulatingMatchImpl(this.squadraAvv, this.getListAvversari().get(0));
-                    map2 = s.result();
+                    map2 = s.result(START_REG);
                     l.clear();
                     l.addAll(map2.keySet());
                     this.risMatch.put(l.get(0).getTeamName(), map2.get(l.get(0)));
@@ -223,7 +225,7 @@ public class LogicsTournamentImpl implements LogicsTournament {
                     int r2 = map2.get(l.get(1));
                     if (this.risMatch.get(l.get(0).getTeamName())
                             .equals(this.risMatch.get(l.get(1).getTeamName()))) {
-                        map2 = s.resultExtra();
+                        map2 = s.result(START_EXTRA);
                         l.clear();
                         l.addAll(map2.keySet());
                         this.risMatch.clear();
@@ -248,7 +250,7 @@ public class LogicsTournamentImpl implements LogicsTournament {
                     SimulatingMatchImpl s = new SimulatingMatchImpl(this.getListAvversari().get(i),
                             this.getListAvversari().get(i + 1));
                     map.clear();
-                    map2 = s.result();
+                    map2 = s.result(START_REG);
                     l.clear();
                     l.addAll(map2.keySet());
                     map.put(l.get(0).getTeamName(), map2.get(l.get(0)));
@@ -257,7 +259,7 @@ public class LogicsTournamentImpl implements LogicsTournament {
                     list.addAll(map.keySet());
                     if (map.get(list.get(0)).equals(map.get(list.get(1)))) {
                         map.clear();
-                        map2 = s.resultExtra();
+                        map2 = s.result(START_EXTRA);
                         l.addAll(map2.keySet());
                         map.put(l.get(0).getTeamName(), map2.get(l.get(0)));
                         map.put(l.get(1).getTeamName(), map2.get(l.get(1)));
@@ -311,7 +313,7 @@ public class LogicsTournamentImpl implements LogicsTournament {
                 try {
                     SimulatingMatchImpl s = new SimulatingMatchImpl(this.squadraAvv, this.getListAvversari().get(0));
                     // this.risMatch = s.risultato2();
-                    map2 = s.result();
+                    map2 = s.result(START_REG);
                     l.clear();
                     l.addAll(map2.keySet());
                     this.risMatch.put(l.get(0).getTeamName(), map2.get(l.get(0)));
@@ -321,7 +323,7 @@ public class LogicsTournamentImpl implements LogicsTournament {
                     int r2 = map2.get(l.get(1));
                     if (this.risMatch.get(l.get(0).getTeamName())
                             .equals(this.risMatch.get(l.get(1).getTeamName()))) {
-                        map2 = s.resultExtra();
+                        map2 = s.result(START_EXTRA);
                         l.clear();
                         l.addAll(map2.keySet());
                         this.risMatch.clear();
@@ -344,7 +346,7 @@ public class LogicsTournamentImpl implements LogicsTournament {
                 SimulatingMatchImpl s = new SimulatingMatchImpl(this.getListAvversari().get(1),
                         this.getListAvversari().get(2));
                 map.clear();
-                map2 = s.result();
+                map2 = s.result(START_REG);
                 l.clear();
                 l.addAll(map2.keySet());
                 map.put(l.get(0).getTeamName(), map2.get(l.get(0)));
@@ -353,7 +355,7 @@ public class LogicsTournamentImpl implements LogicsTournament {
                 list.addAll(map.keySet());
                 if (map.get(list.get(0)).equals(map.get(list.get(1)))) {
                     map.clear();
-                    map2 = s.resultExtra();
+                    map2 = s.result(START_EXTRA);
                     l.addAll(map2.keySet());
                     map.put(l.get(0).getTeamName(), map2.get(l.get(0)));
                     map.put(l.get(1).getTeamName(), map2.get(l.get(1)));
@@ -405,7 +407,7 @@ public class LogicsTournamentImpl implements LogicsTournament {
             if (this.getEliminated() && !this.getElimThisTurn()) {
                 try {
                     SimulatingMatchImpl s = new SimulatingMatchImpl(this.squadraAvv, this.getListAvversari().get(0));
-                    map2 = s.result();
+                    map2 = s.result(START_REG);
                     l.clear();
                     l.addAll(map2.keySet());
                     this.risMatch.put(l.get(0).getTeamName(), map2.get(l.get(0)));
@@ -418,7 +420,7 @@ public class LogicsTournamentImpl implements LogicsTournament {
                     } else if (r2 > r1) {
                         this.winner = l.get(1).getTeamName();
                     } else {
-                        map2 = s.resultExtra();
+                        map2 = s.result(START_EXTRA);
                         l.clear();
                         l.addAll(map2.keySet());
                         this.risMatch.clear();

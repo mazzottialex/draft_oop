@@ -240,7 +240,7 @@ public class Match extends Base implements Serializable {
         updateTeam();
         if (s == t1.getSubstitution().size()) {
             substitutions++;
-	    }
+        }
         if (substitutions == 3) {
             try {
                 JPanel panel = (JPanel) subsButton.getParent();
@@ -248,7 +248,7 @@ public class Match extends Base implements Serializable {
                 panel.revalidate();
                 panel.repaint();
             } catch (Exception e) {
-            	e.printStackTrace();
+                e.printStackTrace();
             }
         }
     }
@@ -273,7 +273,7 @@ public class Match extends Base implements Serializable {
             public void run() {
                 if (!changeResult) {
                     try {
-                    	logics = new LogicsMatchImpl(t1, t2);
+                        logics = new LogicsMatchImpl(t1, t2);
                         logics.scorers(progressBar.getValue());
                         changeResult = true;
                     } catch (ClassNotFoundException | IOException e) {
