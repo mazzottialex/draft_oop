@@ -24,16 +24,20 @@ import javax.swing.JTextField;
  */
 public class Settings extends Base {
     private static final long serialVersionUID = 1L;
-	private final JTextField textFieldTeamName;
+    private final JTextField textFieldTeamName;
     private final LogicsSettings log;
     private static final Insets INSETS_1 = new Insets(10, 5, 10, 5);
-	private static final Insets INSETS_2 = new Insets(2, 2, 2, 2);
+    private static final Insets INSETS_2 = new Insets(2, 2, 2, 2);
 	private static final Insets INSETS_3 = new Insets(25, 2, 5, 2);
 	private static final Insets INSETS_4 = new Insets(5, 2, 5, 2);
 	private static final Insets INSETS_5 = new Insets(45, 2, 5, 2);
     private static final int SCALE_IMG_1 = 65;
+    private static final Color COLOR_BG = new Color(0, 64, 128);
+
 	/**
      * Constructs a new Settings object.
+     * 
+     * @param li list of players
      */
 	public Settings(final List<Player> li) {
     	log = new LogicsSettingsImpl(li);
@@ -81,7 +85,7 @@ public class Settings extends Base {
                 public void actionPerformed(final ActionEvent e) {
                     JButton btn = (JButton) e.getSource();
                     liButton.forEach(b -> b.setBackground(Color.white));
-                    btn.setBackground(new Color(0, 64, 128));
+                    btn.setBackground(COLOR_BG);
                     log.setLogo(url);
                 }
             });
@@ -95,7 +99,7 @@ public class Settings extends Base {
         gbc.gridx = 0;
         gbc.gridy = 2;
         getPanel().add(panelLogo, gbc);
-        JButton btnContinue = utilsGUI.standardButton("Continue");
+        JButton btnContinue = UtilsGUI.standardButton("Continue");
         btnContinue.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {

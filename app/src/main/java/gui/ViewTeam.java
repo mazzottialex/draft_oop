@@ -22,7 +22,7 @@ import logics.LogicsHistoryImpl;
  */
 public class ViewTeam extends Base {
     private static final long serialVersionUID = 1L;
-	private final List<String> pos = List.of("A", "C", "D", "P");
+    private final List<String> pos = List.of("A", "C", "D", "P");
     private final LogicsHistory log;
     private static final Insets INSETS_1 = new Insets(5, 5, 2, 2);
 	private static final Insets INSETS_2 = new Insets(2, 0, 2, 25);
@@ -30,6 +30,9 @@ public class ViewTeam extends Base {
 	private static final Insets INSETS_4 = new Insets(10, 0, 0, 0);
 	private static final Insets INSETS_5 = new Insets(5, 5, 5, 5);
 	private static final int SCALE_IMG_1 = 55;
+	private static final int GRID_Y = 5;
+	private static final int GRID_Y_2 = 6;
+	private static final int N_SUB = 7;
     private final JPanel panelTeam = new JPanel();
     /**
      * Constructs a new ViewTeam object.
@@ -45,7 +48,7 @@ public class ViewTeam extends Base {
         GridBagLayout layout = new GridBagLayout();
         getPanel().setLayout(layout);
         panelTeam.setBackground(getForeground());
-        JButton btnArchive = utilsGUI.standardButton("Archive");
+        JButton btnArchive = UtilsGUI.standardButton("Archive");
         btnArchive.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
@@ -81,7 +84,7 @@ public class ViewTeam extends Base {
             panelPosition = new JPanel();
             for (int j = 0; j < team.getModule().getN(pos.get(i)); j++) {
                 Player p = team.getStartingDesc().get(count);
-                JPanel panel = (utilsGUI.getPanelCalciatore(p.getName(), p.getRating().getX(), p.getPos(), true));
+                JPanel panel = (UtilsGUI.getPanelCalciatore(p.getName(), p.getRating().getX(), p.getPos(), true));
                 count++;
                 panelPosition.add(panel);
             }
@@ -92,24 +95,23 @@ public class ViewTeam extends Base {
         lblPanchina.setForeground(Color.white);
         lblPanchina.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
         gbc.insets = INSETS_4;
-        gbc.gridy = 5;
+        gbc.gridy = GRID_Y;
         //contentPane.add(lblPanchina, gbc);
         gbc.insets = INSETS_5;
         //panchinari
         panelPosition = new JPanel();
         panelPosition.setLayout(layout);
-        for (int j = 0; j < 7; j++) {
+        for (int j = 0; j < N_SUB; j++) {
             Player p = team.getSubstitution().get(j);
             if (j < 4) {
                 gbc.gridy = 0;
-            }
-            else {
+            } else {
                 gbc.gridy = 1;
-                panelPosition.add(utilsGUI.getPanelCalciatore(p.getName(),
+                panelPosition.add(UtilsGUI.getPanelCalciatore(p.getName(),
             	p.getRating().getX(), p.getPos(), false), gbc);
             }
         }
-        gbc.gridy = 6;
+        gbc.gridy = GRID_Y_2;
         getPanel().add(panelPosition, gbc);
     }
 }

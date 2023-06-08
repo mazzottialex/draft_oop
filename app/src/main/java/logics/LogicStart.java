@@ -8,11 +8,11 @@ public interface LogicStart {
 	 *
 	 * @return the online status. True indicates online status, False offline status
 	 */
-	public Boolean getOnline();
+	Boolean getOnline();
 	/**
 	 * Returns the first season from File backupSeason.txt.
 	 *
 	 * @return the first season as a String. 
 	 */
-	public String getFirstSeason();
+	String getFirstSeason();
 }

@@ -23,7 +23,7 @@ import java.awt.Dimension;
  * Represents a GUI for History of teams created.
  */
 public class History extends Base {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 	private LogicsHistory log;
 	private static final int PANEL_DIM = 50;
 	private static final Color COLOR_PANEL = new Color(0, 64, 128);
@@ -40,7 +40,7 @@ public class History extends Base {
 		GridBagConstraints gbc = new GridBagConstraints();
 		GridBagLayout layout = new GridBagLayout();
 		getPanel().setLayout(new BorderLayout());
-		JButton btnHome = utilsGUI.standardButton("Home");
+		JButton btnHome = UtilsGUI.standardButton("Home");
 		JPanel panelBtn = new JPanel();
 		panelBtn.setBackground(getBackground());
 		panelBtn.setPreferredSize(new Dimension(PANEL_DIM, PANEL_DIM));
@@ -77,7 +77,7 @@ public class History extends Base {
 			lblRating.setBorder(new EmptyBorder(INSETS_2));
 			panelTeam.add(lblRating);
 			panelTeam.add(lblRating);
-			JButton btnVedi = utilsGUI.standardButton("Vedi");
+			JButton btnVedi = UtilsGUI.standardButton("Vedi");
 			btnVedi.addActionListener(new ActionListener() {	
 				@Override
 				public void actionPerformed(final ActionEvent e) {

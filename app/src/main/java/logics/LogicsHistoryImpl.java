@@ -3,13 +3,13 @@ package logics;
 import java.util.List;
 
 import data.Team;
-import manageData.LogicsFile;
-import manageData.LogicsFileImpl;
+import managedata.LogicsFile;
+import managedata.LogicsFileImpl;
 
 /**
  * This class represents the implementation of historical logic operations on team data.
  */
-public class LogicsHistoryImpl implements LogicsHistory {
+public final class LogicsHistoryImpl implements LogicsHistory {
     private final String season;
     private final Boolean online;
     private LogicsFile file = new LogicsFileImpl();
@@ -37,7 +37,5 @@ public class LogicsHistoryImpl implements LogicsHistory {
 	public List<Team> getLiTeam() {
 		return file.loadHistory();
 	}
-	
-	
-
 }
+

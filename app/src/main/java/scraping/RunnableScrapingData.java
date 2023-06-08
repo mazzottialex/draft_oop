@@ -13,7 +13,6 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import data.Player;
-
 /**
  * A class that represents a thread for scraping player data.
  */
@@ -118,7 +117,7 @@ public class RunnableScrapingData implements Runnable {
                             driver.findElements(By.tagName("tr")).get(j).findElements(By.tagName("td"));
                         final String ruolo = riga.get(2).getText().substring(0, 1); //ruolo
                         if (ruolo.equals("P")) {
-                            li.add(new Player((i - 1) * COST_ID + (j - 1), //id 	Integer.parseInt(riga.get(0).getText())
+                        	li.add(new Player((i - 1) * COST_ID + (j - 1), //id
                                 riga.get(1).getText(), //nome
                                 ruolo, //ruolo
                                 riga.get(3).getText(), //squadra

@@ -224,8 +224,8 @@ public class Match extends Base implements Serializable {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(final WindowEvent e) {
-            	stopProgress();
-            	winner = t2;
+                stopProgress();
+                winner = t2;
             	score1 = 0;
             	score2 = 3;
                 dispose();

@@ -1,4 +1,4 @@
-package manageData;
+package managedata;
 import java.util.ArrayList;
 import java.util.List;
 import scraping.Scraping;
@@ -8,14 +8,14 @@ import scraping.ScrapingImpl;
  * Implementation of the {@code ManageSeason} interface.
  * Manages the seasons data and updates it using web scraping.
  */
-public class ManageSeasonImpl extends Thread implements ManageSeason {
+public final class ManageSeasonImpl extends Thread implements ManageSeason {
     private final LogicsFile file = new LogicsFileImpl();
     private final Scraping s;
     private List<String> li = new ArrayList<>();
     private Boolean checkFlag = false;
 
     /**
-     * Constructs a new instance of {@code ManageSeasonImpl}
+     * Constructs a new instance of ManageSeasonImpl.
      */
     public ManageSeasonImpl() {
         this.s = new ScrapingImpl();

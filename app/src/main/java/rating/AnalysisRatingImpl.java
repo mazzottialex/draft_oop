@@ -2,8 +2,8 @@ package rating;
 import static java.util.stream.Collectors.toList;
 import java.util.List;
 import data.Player;
-import manageData.ExtractData;
-import manageData.ExtractDataImpl;
+import managedata.ExtractData;
+import managedata.ExtractDataImpl;
 import utils.Pair;
 import utils.Triple;
 

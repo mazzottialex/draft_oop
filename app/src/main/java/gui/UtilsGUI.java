@@ -12,20 +12,20 @@ import javax.swing.border.EmptyBorder;
 /**
  * Some function that help to program GUI.
  */
-public class utilsGUI {
+public final class UtilsGUI {
     private static final int FONT_DIM = 14;
     private static final int SCALE_IMG_1 = 70;
-	private static final int SCALE_IMG_2 = 90;
-	private static final int EMPTY_BORD = 5;
+    private static final int SCALE_IMG_2 = 90;
+    private static final int EMPTY_BORD = 5;
 	private static final Color BACKGROUND = new Color(240, 240, 240);
-	private utilsGUI() {
+	private UtilsGUI() {
         // no istanziabile
     }
 	/**
 	 * Returns a JPanel for displaying information about a football player.
 	 * 
 	 * @param name the name of the football player
-	 * @param rating the evaluation of the player
+     * @param rating the evaluation of the player
 	 * @param role the role of the player
 	 * @param icon specifies whether to display the player's icon
 	 * @return a JPanel containing the player information

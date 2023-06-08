@@ -2,7 +2,6 @@ package logics;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-//import java.util.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
@@ -12,11 +11,10 @@ import data.Player;
 import data.Module;
 import data.Team;
 import data.TeamUser;
-import manageData.ExtractData;
-import manageData.ExtractDataImpl;
-import manageData.LogicsFile;
-import manageData.LogicsFileImpl;
-//import manageData.*;
+import managedata.ExtractData;
+import managedata.ExtractDataImpl;
+import managedata.LogicsFile;
+import managedata.LogicsFileImpl;
 /**
  * The class that handles the team creation logic.
  * 

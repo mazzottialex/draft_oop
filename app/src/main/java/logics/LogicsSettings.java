@@ -25,23 +25,23 @@ public interface LogicsSettings {
 	 * Retrieves the teamName.
 	 * @return the teamName
 	 */
-	public String getTeamName();
+	String getTeamName();
 
 	/**
 	 * Sets the team name.
 	 * @param teamName the name to set
 	 */
-	public void setTeamName(String teamName);
+	void setTeamName(String teamName);
 	
 	/**
 	 * Retrieves the list of players.
 	 * @return the List of players
 	 */
-	public List<Player> getLi();
+	List<Player> getLi();
 	
 	/**
 	 * Retrieves the list of logo.
 	 * @return the List of logo
 	 */
-	public List<String> getLiLogo();
+	List<String> getLiLogo();
 }
