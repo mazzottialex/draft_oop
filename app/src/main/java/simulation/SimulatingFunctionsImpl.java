@@ -14,7 +14,7 @@ import managedata.ExtractData;
 import managedata.ExtractDataImpl;
 
 /**
- * Implementation of the {@link SimulatingFunctions} interface that provides
+ * Implementation of the {@code SimulatingFunctions} interface that provides
  * simulation functions for fantasy football.
  */
 public final class SimulatingFunctionsImpl implements SimulatingFunctions {
@@ -57,6 +57,11 @@ public final class SimulatingFunctionsImpl implements SimulatingFunctions {
         ROLE_COEFFICIENT_MAP.put("C", COST_VOTE_C);
         ROLE_COEFFICIENT_MAP.put("A", COST_VOTE_A);
     }
+
+    /**
+     * Constructs a new instance of the {@code SimulatingFunctionsImpl} class.
+     */
+    public SimulatingFunctionsImpl() { }
 
     /**
      * Generates a random number within the specified range.
