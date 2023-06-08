@@ -14,7 +14,7 @@ import data.Player;
 import data.Team;
 
 /**
- * Implementation of the LogicsFile interface
+ * Implementation of the LogicsFile interface.
  */
 public final class LogicsFileImpl implements LogicsFile {
 
@@ -27,8 +27,8 @@ public final class LogicsFileImpl implements LogicsFile {
     public List<Player> loadData(final String season) {
         List<Player> li = new ArrayList<>();
         try (InputStream file = new FileInputStream("src/main/resources/backup" + season + ".txt");
-        		InputStream bstream = new BufferedInputStream(file);
-        		ObjectInputStream ostream = new ObjectInputStream(file);) {
+                InputStream bstream = new BufferedInputStream(file);
+                ObjectInputStream ostream = new ObjectInputStream(file);) {
             li = (List<Player>) ostream.readObject();
             ostream.close();
         } catch (Exception e) {
@@ -40,8 +40,8 @@ public final class LogicsFileImpl implements LogicsFile {
     @Override
     public Boolean saveData(final List<Player> li, final String season) {
         try (OutputStream file = new FileOutputStream("src/main/resources/backup" + season + ".txt");
-        		OutputStream bstream = new BufferedOutputStream(file);
-        		ObjectOutputStream ostream = new ObjectOutputStream(file);) {
+                OutputStream bstream = new BufferedOutputStream(file);
+                ObjectOutputStream ostream = new ObjectOutputStream(file);) {
             ostream.writeObject(li);
             ostream.close();
         } catch (final Exception e) {
@@ -54,8 +54,8 @@ public final class LogicsFileImpl implements LogicsFile {
     public List<String> loadSeason() {
         List<String> ls = new ArrayList<>();
         try (InputStream file = new FileInputStream("src/main/resources/backupSeasons.txt");
-        		InputStream bstream = new BufferedInputStream(file);
-        		ObjectInputStream ostream = new ObjectInputStream(file);) {
+                InputStream bstream = new BufferedInputStream(file);
+                ObjectInputStream ostream = new ObjectInputStream(file);) {
             String str;
             while ((str = ostream.readUTF()) != null) {
                 ls.add(str);
@@ -70,8 +70,8 @@ public final class LogicsFileImpl implements LogicsFile {
     @Override
     public Boolean saveSeason(final List<String> li) {
         try (OutputStream file = new FileOutputStream("src/main/resources/backupSeasons.txt");
-        		OutputStream bstream = new BufferedOutputStream(file);
-        		ObjectOutputStream ostream = new ObjectOutputStream(file);) {
+                OutputStream bstream = new BufferedOutputStream(file);
+                ObjectOutputStream ostream = new ObjectOutputStream(file);) {
             li.forEach(s -> {
                 try {
                     ostream.writeUTF(s);
@@ -91,14 +91,13 @@ public final class LogicsFileImpl implements LogicsFile {
     public List<Team> loadHistory() {
         List<Team> li = new ArrayList<>();
         try (InputStream file = new FileInputStream("src/main/resources/history.txt");
-        		InputStream bstream = new BufferedInputStream(file);
-        		ObjectInputStream ostream = new ObjectInputStream(file);) {
+                InputStream bstream = new BufferedInputStream(file);
+                ObjectInputStream ostream = new ObjectInputStream(file);) {
             li = (List<Team>) ostream.readObject();
             ostream.close();
         } catch (final Exception e) {
             return new ArrayList<>();
         }
-
         return li;
     }
 
@@ -107,8 +106,8 @@ public final class LogicsFileImpl implements LogicsFile {
         List<Team> li = loadHistory();
         li.add(s);
         try (OutputStream file = new FileOutputStream("src/main/resources/history.txt");
-        		OutputStream bstream = new BufferedOutputStream(file);
-        		ObjectOutputStream ostream = new ObjectOutputStream(file);) {
+                OutputStream bstream = new BufferedOutputStream(file);
+                ObjectOutputStream ostream = new ObjectOutputStream(file);) {
             ostream.writeObject(li);
             ostream.close();
         } catch (final Exception e) {

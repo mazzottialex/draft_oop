@@ -61,7 +61,7 @@ public class CreateTeam extends Base {
     private static final int GRAND3 = 300;
     private static final int GRAND35 = 350;
     private static final int GRAND1 = 100;
-    private LogicsCreateTeam log;
+    private final transient LogicsCreateTeam log;
     private final JFrame frameModulo;
     private final JFrame frameCalciatori;
     private final JPanel panelSud = new JPanel(new GridBagLayout()); // panel Sud del frame principale

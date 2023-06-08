@@ -47,7 +47,7 @@ public class Tournament extends Base {
     private static final int NUM_TEXT_SINGLE = 9;
     private static final int NUM_TEXT_DOUBLE = 20;
     private static final int ROUND = 20;
-    private final LogicsTournament logTor;
+    private final transient LogicsTournament logTor;
     private final JPanel panelSud = new JPanel(new FlowLayout(FlowLayout.RIGHT));
     private final GridLayout gl = new GridLayout(6, 1);
     private final JPanel panelCenter = new JPanel(gl);

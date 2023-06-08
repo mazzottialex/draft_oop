@@ -11,7 +11,7 @@ public interface Scraping {
      *
      * @return The list of players
      */
-	List<Player> getLiPlayer();
+    List<Player> getLiPlayer();
     /**
      * Returns the list of seasons.
      *

@@ -213,7 +213,7 @@ public final class ExtractDataImpl implements ExtractData {
 
     @Override
     public List<Player> getRandom(final int nA, final int nC, final int nD, final int nP) {
-    	final List<Player> li = new ArrayList<>();
+        final List<Player> li = new ArrayList<>();
         li.addAll(getRandomByPos("A", nA));
         li.addAll(getRandomByPos("C", nC));
         li.addAll(getRandomByPos("D", nD));

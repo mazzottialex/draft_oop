@@ -1,4 +1,5 @@
 package gui;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -9,53 +10,55 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import logics.LogicsHome;
-import logics.LogicsHomeImpl;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+import logics.LogicsHome;
+import logics.LogicsHomeImpl;
 
 /**
  * The Home class represents the home screen of the application.
  */
 public class Home extends Base {
     private static final long serialVersionUID = 1L;
-    private final LogicsHome log;
+    private final transient LogicsHome log;
     private static final int BUTTON_WIDTH = 150;
     private static final int BUTTON_HEIGHT = 40;
     private static final int SCALED_IMAGE_1 = 160;
-	private static final int SCALED_IMAGE_2 = 250;
-	private static final Insets BUTTON_INSETS = new Insets(140, 0, 80, 0);
-	private static final Insets PANEL_INSETS = new Insets(8, 0, 8, 0);
-	private static final int PANEL_WIDTH = 70;
-	private static final int PANEL_HEIGHT = 30;
-	private static final int FONT_SIZE = 14;
-	private static final String START_IMAGE_PATH = "src/main/resources/start.png";
-	private static final Color BACKGROUND_COLOR = new Color(0, 64, 128);
-	private static final Color BACKGROUND_COLOR_2 = Color.GREEN;
-	private static final int GRID_Y = 5;
-	
-	/**
+    private static final int SCALED_IMAGE_2 = 250;
+    private static final Insets BUTTON_INSETS = new Insets(140, 0, 80, 0);
+    private static final Insets PANEL_INSETS = new Insets(8, 0, 8, 0);
+    private static final int PANEL_WIDTH = 70;
+    private static final int PANEL_HEIGHT = 30;
+    private static final int FONT_SIZE = 14;
+    private static final String START_IMAGE_PATH = "src/main/resources/start.png";
+    private static final Color BACKGROUND_COLOR = new Color(0, 64, 128);
+    private static final Color BACKGROUND_COLOR_2 = Color.GREEN;
+    private static final int GRID_Y = 5;
+
+    /**
      * Constructs a new Home object.
      *
      * @param seasonDefault the selected season as a String
-     * @param online the online status as a Boolean value
-     * @param first true if home is called by Start, False otherwise
+     * @param online        the online status as a Boolean value
+     * @param first         true if home is called by Start, False otherwise
      */
     public Home(final String seasonDefault, final Boolean online, final Boolean first) {
-    	JButton btnDownload = UtilsGUI.standardButton("Download season:");
-    	log = new LogicsHomeImpl(seasonDefault, online);
+        JButton btnDownload = UtilsGUI.standardButton("Download season:");
+        log = new LogicsHomeImpl(seasonDefault, online);
         if (!log.checkBrowser() && first) {
-        	btnDownload.setEnabled(false);
-        	JOptionPane.showMessageDialog(null, "Google Chrome or Firefox not installed,"
-        			+ "or not correctly installed (read README)");
+            btnDownload.setEnabled(false);
+            JOptionPane.showMessageDialog(null,
+                    "Google Chrome or Firefox not installed, or not correctly installed (read README)");
         }
         if (!log.getOnline() && first) {
-        	JOptionPane.showMessageDialog(null, "You are in offline mode,"
-        			+ " check your connection and restart the application for online mode");
+            JOptionPane.showMessageDialog(null,
+                    "You are in offline mode, check your connection and restart the application for online mode");
             btnDownload.setEnabled(false);
         }
         GridBagConstraints gbc = new GridBagConstraints();
@@ -63,7 +66,7 @@ public class Home extends Base {
         getPanel().setLayout(layout);
         JButton btnStart = new JButton();
         ImageIcon img = new ImageIcon(START_IMAGE_PATH);
-        Image image = img.getImage(); 
+        Image image = img.getImage();
         Image newimg = image.getScaledInstance(SCALED_IMAGE_2, SCALED_IMAGE_2, java.awt.Image.SCALE_SMOOTH);
         img = new ImageIcon(newimg);
         btnStart.setBorderPainted(false);
@@ -78,6 +81,7 @@ public class Home extends Base {
                 ImageIcon img = new ImageIcon(newimg);
                 btnStart.setIcon(img);
             }
+
             public void mouseExited(final java.awt.event.MouseEvent evt) {
                 btnStart.setBackground(BACKGROUND_COLOR);
                 Image newimg = image.getScaledInstance(SCALED_IMAGE_2, SCALED_IMAGE_2, java.awt.Image.SCALE_SMOOTH);
@@ -121,7 +125,7 @@ public class Home extends Base {
         btnLoad.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                log.setSeason(comboBoxLoad.getItemAt(comboBoxLoad.getSelectedIndex())); 
+                log.setSeason(comboBoxLoad.getItemAt(comboBoxLoad.getSelectedIndex()));
                 if (log.loadStagione(log.getSeason())) {
                     lblSeason.setText(log.getSeason());
                 } else {
@@ -144,7 +148,7 @@ public class Home extends Base {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Wait a few seconds");
-                log.setSeason(comboBoxDownload.getItemAt(comboBoxDownload.getSelectedIndex())); 
+                log.setSeason(comboBoxDownload.getItemAt(comboBoxDownload.getSelectedIndex()));
                 if (log.downloadSeason(log.getSeason())) {
                     lblSeason.setText(log.getSeason());
                     JOptionPane.showMessageDialog(null, "Download completed");

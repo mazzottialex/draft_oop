@@ -13,7 +13,7 @@ import java.awt.event.MouseListener;
  */
 public class Start extends Base {
     private static final long serialVersionUID = 1L;
-    private final LogicStart log = new LogicStartImpl();
+    private final transient LogicStart log = new LogicStartImpl();
     private static final int SCALE_IMG_1 = 120;
     private static final int SCALE_IMG_2 = 180;
     /**

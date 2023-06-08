@@ -4,7 +4,7 @@ import java.util.List;
 
 import data.Team;
 /**
- * The LogicsHistory interface for view logics that manage the history of the teams
+ * The LogicsHistory interface for view logics that manage the history of the teams.
  */
 public interface LogicsHistory {
     /**
@@ -12,19 +12,19 @@ public interface LogicsHistory {
      *
      * @return the season
      */
-	String getSeason();
-	
-	/**
+    String getSeason();
+
+    /**
      * Gets the online status.
      *
      * @return true if online, false if offline
      */
-	Boolean getOnline();
-	
-	/**
+    Boolean getOnline();
+
+    /**
      * Retrieves the list of teams from the history.
      *
      * @return the list of teams
      */
-	List<Team> getLiTeam();
+    List<Team> getLiTeam();
 }

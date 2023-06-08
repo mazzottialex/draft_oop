@@ -44,7 +44,7 @@ public class Match extends Base implements Serializable {
     private JButton subsButton;
     private JButton goAheadButton;
     private JPanel panel;
-    private LogicsMatch logics;
+    private final transient LogicsMatch logics;
     private Team t1;
     private Team t2;
     private boolean isRunning;
@@ -226,8 +226,8 @@ public class Match extends Base implements Serializable {
             public void windowClosing(final WindowEvent e) {
                 stopProgress();
                 winner = t2;
-            	score1 = 0;
-            	score2 = 3;
+                score1 = 0;
+                score2 = 3;
                 dispose();
             }
         });
@@ -241,7 +241,7 @@ public class Match extends Base implements Serializable {
         int s = t1.getSubstitution().size();
         updateTeam();
         if (s == t1.getSubstitution().size()) {
-			substitutions++;
+            substitutions++;
 		}
         if (substitutions == 3) {
             try {

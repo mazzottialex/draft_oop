@@ -18,7 +18,7 @@ import simulation.SimulatingMatchImpl;
  */
 public final class LogicsMatchImpl implements LogicsMatch, Serializable {
     private static final long serialVersionUID = -180921977203150416L;
-	private Team t1;
+    private Team t1;
     private Team t2;
     private List<Integer> list1;
     private List<Integer> list2;

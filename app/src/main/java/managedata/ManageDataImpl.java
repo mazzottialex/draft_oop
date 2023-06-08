@@ -40,7 +40,7 @@ public final class ManageDataImpl implements ManageData {
     public Boolean downloadData() {
         final Scraping scr = new ScrapingImpl();
         if (!scr.readTable(this.season)) {
-        	return false;
+            return false;
         }
         li = scr.getLiPlayer();
         logFile.saveData(li, season);

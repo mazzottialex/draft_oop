@@ -36,11 +36,11 @@ public final class LogicsHomeImpl implements LogicsHome {
     }
     @Override
     public String getSeason() {
-    	return this.season;
+        return this.season;
     }
     @Override
     public Boolean getOnline() {
-    	return this.online;
+        return this.online;
     }
     @Override
     public void setSeason(final String season) {
@@ -74,12 +74,12 @@ public final class LogicsHomeImpl implements LogicsHome {
     }
     @Override
     public List<Player> getLi()
-    		throws FileNotFoundException, ClassNotFoundException, IOException {
+            throws FileNotFoundException, ClassNotFoundException, IOException {
         final AnalysisRating rat = new AnalysisRatingImpl(this.li);
         return rat.updateRating();
     }
     @Override
     public Boolean checkBrowser() {
-    	return new ScrapingImpl().checkBrowsers();
+        return new ScrapingImpl().checkBrowsers();
     }
 }

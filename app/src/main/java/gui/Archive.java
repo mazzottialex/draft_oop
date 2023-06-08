@@ -26,7 +26,7 @@ import java.awt.FlowLayout;
 public class Archive extends Base {
     private static final long serialVersionUID = 1L;
     private final JTable table;
-    private final LogicsArchive log;
+    private final transient LogicsArchive log;
     private final TableModel tm = new DefaultTableModel(new String[] {
             "POSITION",
             "PLAYERS",

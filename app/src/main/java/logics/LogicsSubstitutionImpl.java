@@ -37,7 +37,6 @@ public final class LogicsSubstitutionImpl implements LogicsSubstitution {
         this.t = t;
         this.gui = gui;
         done = false;
-        
     }
 
     @Override

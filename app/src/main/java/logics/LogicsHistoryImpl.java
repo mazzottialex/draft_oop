@@ -24,18 +24,18 @@ public final class LogicsHistoryImpl implements LogicsHistory {
         this.season = season;
         this.online = online;
     }
-	@Override
-	public String getSeason() {
-		return this.season;
-	}
+    @Override
+    public String getSeason() {
+        return this.season;
+    }
 
-	@Override
-	public Boolean getOnline() {
-		return this.online;
-	}
-	@Override
-	public List<Team> getLiTeam() {
-		return file.loadHistory();
-	}
+    @Override
+    public Boolean getOnline() {
+        return this.online;
+    }
+    @Override
+    public List<Team> getLiTeam() {
+        return file.loadHistory();
+    }
 }
 

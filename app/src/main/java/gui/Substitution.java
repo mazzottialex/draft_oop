@@ -10,12 +10,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.List;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
 import data.Player;
 import data.Team;
 import logics.LogicsSubstitution;
@@ -25,13 +23,10 @@ import logics.LogicsSubstitutionImpl;
  * Represents a GUI for substituting players.
  */
 public class Substitution extends Base {
-    /**
-     * 
-     */
     private static final long serialVersionUID = 5244133982320404420L;
     private final List<String> roles = List.of("P", "D", "C", "A");
     private JPanel panelTeam = new JPanel();
-    private LogicsSubstitution logics;
+    private transient LogicsSubstitution logics;
     private Team team;
     private Match matchGui;
     private static JPanel panelStarters;
@@ -56,12 +51,12 @@ public class Substitution extends Base {
         this.substitutes = SUBSTITUTES - substitutionsMade;
         initialize();
     }
-    
+
     private void initialize() {
-    	logics = new LogicsSubstitutionImpl(team, this);
-    	panelStarters = null;
+        logics = new LogicsSubstitutionImpl(team, this);
+        panelStarters = null;
         panelSubstitutes = null;
-    	GridBagConstraints gbc = new GridBagConstraints();
+        GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(INSETS_5, INSETS_5, 2, 2);
         GridBagLayout layout = new GridBagLayout();
         getPanel().setLayout(layout);
@@ -75,15 +70,15 @@ public class Substitution extends Base {
         gbc.gridy = 0;
         getPanel().add(panelTeam, gbc);
 
-        //titolari
-        JPanel panelPosition = new JPanel();
-        panelPosition.setLayout(layout);
+        // titolari
+        JPanel panelPosition;
         int count = 0;
         for (int i = 0; i < roles.size(); i++) {
             panelPosition = new JPanel();
+            panelPosition.setLayout(layout);
             for (int j = 0; j < team.getModule().getN(roles.get(i)); j++) {
                 Player p = team.getStarting().get(count);
-                JPanel panel = (UtilsGUI.getPanelCalciatore(p.getName(), p.getRating().getX(), p.getPos(), true));
+                JPanel panel = UtilsGUI.getPanelCalciatore(p.getName(), p.getRating().getX(), p.getPos(), true);
                 panel.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(final MouseEvent e) {
@@ -101,6 +96,7 @@ public class Substitution extends Base {
             gbc.gridy = i + 1;
             getPanel().add(panelPosition, gbc);
         }
+
         JLabel labelBench = new JLabel("Riserve");
         labelBench.setForeground(Color.white);
         labelBench.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
@@ -109,12 +105,12 @@ public class Substitution extends Base {
         getPanel().add(labelBench, gbc);
         gbc.insets = new Insets(INSETS_5, INSETS_5, INSETS_5, INSETS_5);
 
-        //panchinari
+        // panchinari
         panelPosition = new JPanel();
         panelPosition.setLayout(layout);
         for (int j = 0; j < substitutes; j++) {
             Player p = team.getSubstitution().get(j);
-            JPanel panel = (UtilsGUI.getPanelCalciatore(p.getName(), p.getRating().getX(), p.getPos(), true));
+            JPanel panel = UtilsGUI.getPanelCalciatore(p.getName(), p.getRating().getX(), p.getPos(), true);
             panel.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(final MouseEvent e) {
@@ -135,7 +131,7 @@ public class Substitution extends Base {
         makeSubButton.addActionListener(e -> {
             if (panelStarters == null || panelSubstitutes == null) {
                 JOptionPane.showMessageDialog(null, "Bisogna selezionare due giocatori: "
-                    + "uno tra i titolari e uno tra le riserve, che devono avere lo stesso ruolo");
+                        + "uno tra i titolari e uno tra le riserve, che devono avere lo stesso ruolo");
                 if (panelStarters != null) {
                     panelStarters.setBackground(null);
                 }
@@ -145,8 +141,8 @@ public class Substitution extends Base {
             } else {
                 logics.sub(panelStarters.getParent(), panelSubstitutes.getParent(), panelStarters, panelSubstitutes);
                 if (logics.done()) {
-					matchGui.addSub();
-				}
+                    matchGui.addSub();
+                }
             }
             panelStarters = null;
             panelSubstitutes = null;

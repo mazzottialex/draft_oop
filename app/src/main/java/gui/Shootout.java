@@ -45,7 +45,7 @@ public class Shootout extends Base implements Serializable {
     private int totShoots;
     private Team winner;
     private JButton closeButton;
-    private LogicsShootout logics;
+    private final transient LogicsShootout logics;
     private Map<Integer, Pair<Player, String>> shoootout1;
     private Map<Integer, Pair<Player, String>> shootout2;
     private JPanel panel;
