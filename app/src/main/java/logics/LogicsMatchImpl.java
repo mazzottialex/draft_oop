@@ -87,7 +87,7 @@ public final class LogicsMatchImpl implements LogicsMatch, Serializable {
      */
     private List<Integer> getGoalsNum(final int goal, final int time) {
         List<Integer> list = new ArrayList<>();
-        int remainingTime = time <= END_REG ? END_REG - time : END_EXTRA - time;
+        int remainingTime = time < END_REG ? END_REG - time : END_EXTRA - time;
         for (int i = 0; i < goal; i++) {
             int min;
             do {

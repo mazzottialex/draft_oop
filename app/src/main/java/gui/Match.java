@@ -312,8 +312,8 @@ public class Match extends Base implements Serializable {
 
                 //Fine tempi reg
                 if (progressBar.getValue() == END_REG_TIME) {
-                    //jlScoreSq1.setText("2"); score1 = 2;
-                    //jlScoreSq2.setText("2"); score2 = 2;
+//                	labelScoreTeam1.setText("2"); score1 = 2;
+//                	labelScoreTeam2.setText("2"); score2 = 2;
                     if (score1 != score2) {
                         winner = score1 > score2 ? t1 : t2;
                         JOptionPane.showMessageDialog(null, "Partita finita. Ha vinto " + winner.getTeamName());
@@ -330,8 +330,8 @@ public class Match extends Base implements Serializable {
 
                 //Fine tempi suppl
                 if (progressBar.getValue() == END_EXTRA_TIME) {
-                    //jlScoreSq1.setText("2"); score1 = 2;
-                    //jlScoreSq2.setText("2"); score2 = 2;
+                    //labelScoreTeam1.setText("2"); score1 = 2;
+                    //labelScoreTeam2.setText("2"); score2 = 2;
                     subsButton.setEnabled(false);
                     if (score1 != score2) {
                         winner = score1 > score2 ? t1 : t2;
