@@ -240,16 +240,16 @@ public class Match extends Base implements Serializable {
         updateTeam();
         if (s == t1.getSubstitution().size()) {
             substitutions++;
-		}
+	    }
         if (substitutions == 3) {
             try {
-				JPanel panel = (JPanel) subsButton.getParent();
-				subsButton.setEnabled(false);
-				panel.revalidate();
-				panel.repaint();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+                JPanel panel = (JPanel) subsButton.getParent();
+                subsButton.setEnabled(false);
+                panel.revalidate();
+                panel.repaint();
+            } catch (Exception e) {
+            	e.printStackTrace();
+            }
         }
     }
 
