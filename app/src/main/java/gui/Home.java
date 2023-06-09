@@ -11,12 +11,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import javax.swing.*;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import logics.LogicsHome;
 import logics.LogicsHomeImpl;
@@ -147,14 +150,22 @@ public class Home extends Base {
         btnDownload.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Wait a few seconds");
-                log.setSeason(comboBoxDownload.getItemAt(comboBoxDownload.getSelectedIndex()));
-                if (log.downloadSeason(log.getSeason())) {
-                    lblSeason.setText(log.getSeason());
-                    JOptionPane.showMessageDialog(null, "Download completed");
-                } else {
-                    JOptionPane.showMessageDialog(null, "Error loading...");
-                }
+                JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(btnDownload);
+                
+            	DialogNThread dialog = new DialogNThread(parent);
+    			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+    			dialog.setVisible(true);
+    			int nThread = dialog.getNThread();
+    			if( nThread > 0) {
+	            	JOptionPane.showMessageDialog(null, "Wait a few seconds");
+	                log.setSeason(comboBoxDownload.getItemAt(comboBoxDownload.getSelectedIndex()));
+	                if (log.downloadSeason(log.getSeason())) {
+	                    lblSeason.setText(log.getSeason());
+	                    JOptionPane.showMessageDialog(null, "Download completed");
+	                } else {
+	                    JOptionPane.showMessageDialog(null, "Error loading...");
+	                }
+    			}
             }
         });
         gbc.gridx = 1;
