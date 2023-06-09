@@ -106,7 +106,7 @@ public final class ScrapingImpl implements Scraping {
                 options.addArguments("-headless");
                 driver = new FirefoxDriver(options);
             }
-            driver.get(this.URL);
+            driver.get(URL);
             //Oggetto per eseguire operazioni sulla pagina
             final JavascriptExecutor js = (JavascriptExecutor) driver;
             js.executeScript("document.querySelector('[data-id=\"selectPickerSeasons\"]').click()");

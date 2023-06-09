@@ -51,7 +51,6 @@ public final class AnalysisRatingImpl implements AnalysisRating {
         return li.stream()
                 .map(c -> {
                     c.setRating(this.getRating(c));
-                    c.setCardRating(this.getRatingCard(c));
                     return c;
                 })
                 .collect(toList());

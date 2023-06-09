@@ -116,6 +116,7 @@ public class RunnableScrapingData implements Runnable {
                         final List<WebElement> riga =
                             driver.findElements(By.tagName("tr")).get(j).findElements(By.tagName("td"));
                         final String ruolo = riga.get(2).getText().substring(0, 1); //ruolo
+                        // a 0 i cartellini perchè non gestiti da partita
                         if (ruolo.equals("P")) {
                             li.add(new Player((i - 1) * COST_ID + (j - 1), //id
                                 riga.get(1).getText(), //nome
@@ -129,8 +130,8 @@ public class RunnableScrapingData implements Runnable {
                                 0, //assist
                                 0, //passaggi
                                 0, //passaggiChiave
-                                Integer.parseInt(riga.get(YELLOW_CARDS).getText()), //ammonizioni
-                                Integer.parseInt(riga.get(RED_CARDS).getText()), //espulsioni
+                                0, //Integer.parseInt(riga.get(YELLOW_CARDS).getText()), ammonizioni
+                                0, //Integer.parseInt(riga.get(RED_CARDS).getText()), espulsioni
                                 0, //rubati
                                 0, //tackle
                                 Integer.parseInt(riga.get(TACKLE).getText()), //cleanSheet
@@ -150,8 +151,8 @@ public class RunnableScrapingData implements Runnable {
                                 Integer.parseInt(riga.get(ASSISTS).getText()), //assist
                                 Integer.parseInt(riga.get(PASSES).getText()), //passaggi
                                 Integer.parseInt(riga.get(KEY_PASSES).getText()), //passaggiChiave
-                                Integer.parseInt(riga.get(YELLOW_CARDS).getText()), //ammonizioni
-                                Integer.parseInt(riga.get(RED_CARDS).getText()), //espulsioni
+                                0, //Integer.parseInt(riga.get(YELLOW_CARDS).getText()), ammonizioni
+                                0, //Integer.parseInt(riga.get(RED_CARDS).getText()), espulsioni
                                 Integer.parseInt(riga.get(STEALS).getText()), //rubati
                                 Integer.parseInt(riga.get(TACKLE).getText()), //tackle
                                 Integer.parseInt(riga.get(CLEAN_SHEET).getText()), //cleanSheet
