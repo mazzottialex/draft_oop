@@ -1,5 +1,6 @@
 package managedata;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -109,24 +110,21 @@ public final class ExtractDataImpl implements ExtractData {
             final String pos, final Module module) {
         int n = 1;
         switch (pos) {
-            case "D":
-                n = module.getNumDif();
-                break;
-            case "C":
-                n = module.getNumCen();
-                break;
-            case "A":
-                n = module.getNumAtt();
-                break;
-            default: //compreso il case "P" perché per il ruolo portiere n=1
-                break;
-        }
-        final List<Player> list = getPlayerByTeam(team).stream()
+        case "D":
+            n = module.getNumDif();
+            break;
+        case "C":
+            n = module.getNumCen();
+            break;
+        case "A":
+            n = module.getNumAtt();
+            break;
+    }
+    return getPlayerByTeam(team).stream()
             .filter(p -> p.getPos().equals(pos))
-            .sorted((p1, p2) -> p2.getRating().getX() - p1.getRating().getX())
+            .sorted(Comparator.comparingInt(p -> ((Player) p).getRating().getX()).reversed())
             .limit(n)
             .collect(Collectors.toList());
-        return list;
     }
 
     @Override
@@ -135,28 +133,28 @@ public final class ExtractDataImpl implements ExtractData {
         int n = 2;
         int m = 1;
         switch (pos) {
-            case "P":
-                n = 1;
-                break;
-            case "D":
-                m = module.getNumDif();
-                break;
-            case "C":
-                m = module.getNumCen();
-                break;
-            case "A":
-                m = module.getNumAtt();
-                break;
-            default:
-                break;
-        }
-        List<Player> list = getPlayerByTeam(team).stream()
+        case "P":
+            n = 1;
+            break;
+        case "D":
+            n = module.getNumDif();
+            m = module.getNumDif();
+            break;
+        case "C":
+            n = module.getNumCen();
+            m = module.getNumCen();
+            break;
+        case "A":
+            n = module.getNumAtt();
+            m = module.getNumAtt();
+            break;
+    }
+    return getPlayerByTeam(team).stream()
             .filter(p -> p.getPos().equals(pos))
-            .sorted((p1, p2) -> p2.getRating().getX() - p1.getRating().getX())
+            .sorted(Comparator.comparingInt(p -> ((Player) p).getRating().getX()).reversed())
             .skip(m)
             .limit(n)
             .collect(Collectors.toList());
-        return list;
     }
 
     @Override
@@ -255,11 +253,10 @@ public final class ExtractDataImpl implements ExtractData {
 
     @Override
     public List<String> findTeams() {
-        Set<String> teamsSet = new HashSet<>();
-        for (Player p: li) {
-            teamsSet.add(p.getTeam());
-        }
-        return new ArrayList<>(teamsSet);
+        return li.stream()
+                .map(p -> p.getTeam())
+                .distinct()
+                .collect(Collectors.toList());
     }
 
     @Override
