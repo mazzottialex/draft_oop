@@ -40,11 +40,6 @@ public final class LogicsSubstitutionImpl implements LogicsSubstitution {
     }
 
     @Override
-    public void closeGui() {
-        gui.chiudi();
-    }
-
-    @Override
     public List<Player> getStarters() {
         return starters;
     }
@@ -87,7 +82,7 @@ public final class LogicsSubstitutionImpl implements LogicsSubstitution {
                 t.setSubstitution(substitutes);
                 done = true;
                 JOptionPane.showMessageDialog(null, "Sostituzione effettuata");
-                closeGui();
+                gui.chiudi();
             }
         } else {
             JOptionPane.showMessageDialog(null, "I due giocatori selezionati devono avere lo stesso ruolo");
