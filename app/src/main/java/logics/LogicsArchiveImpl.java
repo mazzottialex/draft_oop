@@ -4,8 +4,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
-import com.beust.jcommander.internal.Console;
-
 import data.Player;
 import managedata.ExtractData;
 import managedata.ExtractDataImpl;

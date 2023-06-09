@@ -322,12 +322,12 @@ public final class Player implements Serializable {
             && tacklesWon == other.tacklesWon && shots == other.shots && ballsRecovered == other.ballsRecovered;
     }
 
-	@Override
-	public String toString() {
-		return "" + id + ", \"" + name + "\", \"" + pos + "\", \"" + team + "\", "
-				+ matchesPlayed + ", " + minutes + ", " + goals + ", " + shots + ", "
-				+ dribbles + ", " + assists + ", " + passes + ", " + keyPasses
-				+ ", " + yellowCards + ", " + redCards + ", " + ballsRecovered
-				+ ", " + tacklesWon + ", " + cleanSheets + ", " + saves ;
-	}
+    @Override
+    public String toString() {
+        return "" + id + ", \"" + name + "\", \"" + pos + "\", \"" + team + "\", "
+                + matchesPlayed + ", " + minutes + ", " + goals + ", " + shots + ", "
+                + dribbles + ", " + assists + ", " + passes + ", " + keyPasses
+                + ", " + yellowCards + ", " + redCards + ", " + ballsRecovered
+                + ", " + tacklesWon + ", " + cleanSheets + ", " + saves;
+    }
 }

@@ -2,6 +2,7 @@ package data;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -15,7 +16,7 @@ import managedata.ExtractDataImpl;
  * a list of substitutes, and a list of all players for a particular season.
  *
  */
-public final class TeamOpponent implements Team {
+public final class TeamOpponent implements Team, Serializable {
 
     private static final long serialVersionUID = 1L;
     private final int id;
