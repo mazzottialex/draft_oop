@@ -18,33 +18,22 @@ public final class ScrapingImpl implements Scraping {
     private final List<Player> li = new ArrayList<>();
     private List<String> stagioni = new ArrayList<>();
     private static final String URL = "https://www.kickest.it/it/serie-a/statistiche/giocatori/tabellone?iframe=yes";
-    private final int nThread;
     private Boolean flagChrome = false;
     private Boolean flagFirefox = false;
     private static final int DEFAULT_THREAD = 7;
     private static final String BROWSER_CHROME = "google-chrome";
     private static final String BROWSER_FIREFOX = "firefox";
+    private static final String DEFAULT_STAGIONE = "2022-2023";
 
     /**
      * Constructs a ScrapingImpl object with the specified number of threads.
-     *
-     * @param nThread The number of threads to use for scraping
      */
-    public ScrapingImpl(final int nThread) {
-        this.nThread = nThread;
+    public ScrapingImpl() {
         if (checkBrowser(BROWSER_CHROME)) {
             flagChrome = true;
         } else if (checkBrowser(BROWSER_FIREFOX)) {
             flagFirefox = true;
         }
-    }
-
-
-    /**
-     * Constructs a ScrapingImpl object with a default number of threads (7).
-     */
-    public ScrapingImpl() {
-        this(DEFAULT_THREAD); //default
     }
 
     @Override
@@ -58,7 +47,7 @@ public final class ScrapingImpl implements Scraping {
     }
 
     @Override
-    public Boolean readTable(final String season) {
+    public Boolean readTable(final String season, final int nThread) {
         if (flagChrome || flagFirefox) {
             final List<Pair<RunnableScrapingData, Thread>> liThr = new ArrayList<>();
             for (int i = 0; i < nThread; i++) {
@@ -87,8 +76,7 @@ public final class ScrapingImpl implements Scraping {
 
     @Override
     public Boolean readTable() {
-        final String defaultStagione = "2022-2023";
-        return this.readTable(defaultStagione);
+        return this.readTable(DEFAULT_STAGIONE, DEFAULT_THREAD);
     }
 
     @Override

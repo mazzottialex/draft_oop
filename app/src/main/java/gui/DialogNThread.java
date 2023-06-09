@@ -22,13 +22,13 @@ public class DialogNThread extends JDialog {
 
 	public DialogNThread(Frame parent) {
 		super(parent, true);
-		setBounds(200, 200, 250, 200);
+		setBounds(200, 200, 350, 150);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		Integer[] arr= {1,2,3,4,5,6,7,8,9,10,11,12};
 		JComboBox<Integer> comboBox = new JComboBox<>(arr);
-		JLabel labelThread = new JLabel("Scegli numero di thread: ");
+		JLabel labelThread = new JLabel("Choose thread number for scraping: ");
 		labelThread.setFont(new Font("DejaVu Sans", Font.PLAIN, FONT_DIM));
 		comboBox.setFont(new Font("DejaVu Sans", Font.PLAIN, FONT_DIM));
 		contentPanel.add(labelThread);

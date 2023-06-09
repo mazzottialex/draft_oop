@@ -46,9 +46,10 @@ public interface LogicsHome {
      * Downloads the data for the specified season.
      *
      * @param season the season to download
+     * @param nThread number of thread
      * @return true if the data is successfully downloaded, false otherwise
      */
-    Boolean downloadSeason(String season);
+    Boolean downloadSeason(String season, int nThread);
 
     /**
      * Retrieves a list of players for the current season.

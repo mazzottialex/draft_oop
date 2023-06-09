@@ -37,9 +37,9 @@ public final class ManageDataImpl implements ManageData {
     }
 
     @Override
-    public Boolean downloadData() {
+    public Boolean downloadData(int nThread) {
         final Scraping scr = new ScrapingImpl();
-        if (!scr.readTable(this.season)) {
+        if (!scr.readTable(this.season, nThread)) {
             return false;
         }
         li = scr.getLiPlayer();

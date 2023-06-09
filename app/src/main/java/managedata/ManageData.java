@@ -22,8 +22,9 @@ public interface ManageData {
 
     /**
      * Downloads the data of players.
+     * @param nThread number of thread
      *
      * @return True if the data download is successful, false otherwise
      */
-    Boolean downloadData();
+    Boolean downloadData(int nThread);
 }

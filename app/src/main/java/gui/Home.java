@@ -159,11 +159,11 @@ public class Home extends Base {
     			if( nThread > 0) {
 	            	JOptionPane.showMessageDialog(null, "Wait a few seconds");
 	                log.setSeason(comboBoxDownload.getItemAt(comboBoxDownload.getSelectedIndex()));
-	                if (log.downloadSeason(log.getSeason())) {
+	                if (log.downloadSeason(log.getSeason(), nThread)) {
 	                    lblSeason.setText(log.getSeason());
 	                    JOptionPane.showMessageDialog(null, "Download completed");
 	                } else {
-	                    JOptionPane.showMessageDialog(null, "Error loading...");
+	                    JOptionPane.showMessageDialog(null, "Error loading... decrease number of thread");
 	                }
     			}
             }
