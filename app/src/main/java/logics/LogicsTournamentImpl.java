@@ -12,6 +12,7 @@ import data.Module;
 import data.Team;
 import data.TeamOpponent;
 import data.TeamUser;
+import managedata.CreateOpponentTeamsImpl;
 //import data.SquadraUtente;
 import simulation.SimulatingMatchImpl;
 

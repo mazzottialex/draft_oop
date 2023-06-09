@@ -1,4 +1,4 @@
-package logics;
+package managedata;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

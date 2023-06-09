@@ -168,4 +168,18 @@ public interface ExtractData extends Serializable {
      * @return An optional containing the player if found, or an empty optional if not found
      */
     Optional<Player> getPlayerById(int id);
+
+    /**
+     * Collects the unique team names from the given list of players.
+     *
+     * @return a list of unique team names.
+     */
+    List<String> findTeams();
+
+    /**
+     * Selects a random team formation.
+     *
+     * @return a randomly selected team formation.
+     */
+    Module selectModule();
 }

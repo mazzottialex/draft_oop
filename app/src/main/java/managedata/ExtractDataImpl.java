@@ -252,4 +252,19 @@ public final class ExtractDataImpl implements ExtractData {
             .filter(p -> p.getId() == id)
             .findFirst();
     }
+
+    @Override
+    public List<String> findTeams() {
+        Set<String> teamsSet = new HashSet<>();
+        for (Player p: li) {
+            teamsSet.add(p.getTeam());
+        }
+        return new ArrayList<>(teamsSet);
+    }
+
+    @Override
+    public Module selectModule() {
+        List<Module> module = new ArrayList<>(List.of(Module.values()));
+        return module.get(new Random().nextInt(module.size()));
+    }
 }
