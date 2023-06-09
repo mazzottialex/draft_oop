@@ -63,7 +63,7 @@ public final class LogicsHomeImpl implements LogicsHome {
         return true;
     }
     @Override
-    public Boolean downloadSeason(final String season, int nThread) {
+    public Boolean downloadSeason(final String season, final int nThread) {
         final ManageData md = new ManageDataImpl(season);
         this.season = season;
         if (!md.downloadData(nThread)) {

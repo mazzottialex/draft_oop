@@ -10,7 +10,6 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-
 import javax.swing.*;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,7 +19,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-
 import logics.LogicsHome;
 import logics.LogicsHomeImpl;
 
@@ -151,12 +149,11 @@ public class Home extends Base {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(btnDownload);
-                
-            	DialogNThread dialog = new DialogNThread(parent);
+                DialogNThread dialog = new DialogNThread(parent);
     			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
     			dialog.setVisible(true);
     			int nThread = dialog.getNThread();
-    			if( nThread > 0) {
+    			if (nThread > 0) {
 	            	JOptionPane.showMessageDialog(null, "Wait a few seconds");
 	                log.setSeason(comboBoxDownload.getItemAt(comboBoxDownload.getSelectedIndex()));
 	                if (log.downloadSeason(log.getSeason(), nThread)) {

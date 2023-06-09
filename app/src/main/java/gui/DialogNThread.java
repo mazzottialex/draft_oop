@@ -12,59 +12,69 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
+/**
+ * A dialog for selecting the number of threads for scraping.
+ */
 public class DialogNThread extends JDialog {
 
-	private final JPanel contentPanel = new JPanel();
+    private static final long serialVersionUID = 1L;
+    private final JPanel contentPanel = new JPanel();
     private static final int FONT_DIM = 14;
-    private int nThread=0;
+    private static final int PANEL_X = 200;
+    private static final int PANEL_Y = 200;
+    private static final int PANEL_WIDTH = 350;
+    private static final int PANEL_HEIGHT = 150;
+    private static final Integer[] ARRAY = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
 
-	public DialogNThread(Frame parent) {
-		super(parent, true);
-		setBounds(200, 200, 350, 150);
-		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setLayout(new FlowLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		Integer[] arr= {1,2,3,4,5,6,7,8,9,10,11,12};
-		JComboBox<Integer> comboBox = new JComboBox<>(arr);
-		JLabel labelThread = new JLabel("Choose thread number for scraping: ");
-		labelThread.setFont(new Font("DejaVu Sans", Font.PLAIN, FONT_DIM));
-		comboBox.setFont(new Font("DejaVu Sans", Font.PLAIN, FONT_DIM));
-		contentPanel.add(labelThread);
-		contentPanel.add(comboBox);
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
-				okButton.addActionListener(new ActionListener() {			
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						nThread = comboBox.getItemAt(comboBox.getSelectedIndex());
-						dispose();
-					}
-				});
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.addActionListener(new ActionListener() {
-					
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						dispose();
-					}
-				});
-				buttonPane.add(cancelButton);
-			}
-		}
-	}
-	public int getNThread() {
-		return this.nThread;
-	}
+    private int nThread = 0;
+
+    /**
+     * Creates the dialog.
+     * 
+     * @param parent The parent frame of the dialog.
+     */
+    public DialogNThread(Frame parent) {
+        super(parent, true);
+        setBounds(PANEL_X, PANEL_Y, PANEL_WIDTH, PANEL_HEIGHT);
+        getContentPane().setLayout(new BorderLayout());
+        contentPanel.setLayout(new FlowLayout());
+        JComboBox<Integer> comboBox = new JComboBox<>(ARRAY);
+        JLabel labelThread = new JLabel("Choose thread number for scraping: ");
+        labelThread.setFont(new Font("DejaVu Sans", Font.PLAIN, FONT_DIM));
+        comboBox.setFont(new Font("DejaVu Sans", Font.PLAIN, FONT_DIM));
+        contentPanel.add(labelThread);
+        contentPanel.add(comboBox);
+        getContentPane().add(contentPanel, BorderLayout.CENTER);
+        JPanel buttonPane = new JPanel();
+        buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        getContentPane().add(buttonPane, BorderLayout.SOUTH);
+        JButton okButton = new JButton("OK");
+        okButton.setActionCommand("OK");
+        okButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                nThread = comboBox.getItemAt(comboBox.getSelectedIndex());
+                dispose();
+            }
+        });
+        buttonPane.add(okButton);
+        getRootPane().setDefaultButton(okButton);
+        JButton cancelButton = new JButton("Cancel");
+        cancelButton.addActionListener(new ActionListener() {
+           @Override
+           public void actionPerformed(final ActionEvent e) {
+                dispose();
+           }
+        });
+        buttonPane.add(cancelButton);
+    }
+    /**
+     * Returns the selected number of threads.
+     * 
+     * @return The selected number of threads.
+     */
+    public int getNThread() {
+        return this.nThread;
+    }
 }

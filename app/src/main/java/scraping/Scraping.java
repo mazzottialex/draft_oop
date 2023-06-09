@@ -26,7 +26,7 @@ public interface Scraping {
      * @param nThread number of thread
      * @return True if the table was successfully read, False otherwise
      */
-    public Boolean readTable(final String season, final int nThread);
+    Boolean readTable(String season, int nThread);
 
     /**
      * Reads the table for the default season and updates the player list.
