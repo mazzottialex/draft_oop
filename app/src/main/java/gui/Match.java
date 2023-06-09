@@ -367,7 +367,7 @@ public class Match extends Base implements Serializable {
      * @param goal1 the number of penalties scored by the first team.
      * @param goal2 the number of penalties scored by the second team.
      */
-    public void setWinnerR(final Team team, final int goal1, final int goal2) {
+    public void setWinnerSh(final Team team, final int goal1, final int goal2) {
         winner = team;
         labelScoreTeam1.setText(score1 + " (" + goal1 + ")");
         labelScoreTeam2.setText(score2 + " (" + goal2 + ")");

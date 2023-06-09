@@ -129,7 +129,7 @@ public class Shootout extends Base implements Serializable {
         closeButton = new JButton("chiudi");
         closeButton.addActionListener(e -> {
             dispose();
-            match.setWinnerR(winner, goal1, goal2);
+            match.setWinnerSh(winner, goal1, goal2);
         });
         closeButton.setEnabled(false);
 
@@ -141,7 +141,7 @@ public class Shootout extends Base implements Serializable {
             @Override
             public void windowClosing(final WindowEvent e) {
                 dispose();
-                match.setWinnerR(winner, goal1, goal2);
+                match.setWinnerSh(winner, goal1, goal2);
             }
         };
         addWindowListener(windowListener);
@@ -159,7 +159,7 @@ public class Shootout extends Base implements Serializable {
                     closeButton.setEnabled(true);
                     finalScore.setText(goal1 + " - " + goal2);
                     setWinner(goal1, goal2);
-                    match.setWinnerR(winner, goal1, goal2);
+                    match.setWinnerSh(winner, goal1, goal2);
                     JOptionPane.showMessageDialog(null, "Tiri di rigore terminati. Squadra vincente: " + getWinnerName());
                     timer.cancel();
                 } else {
