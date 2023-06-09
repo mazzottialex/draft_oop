@@ -50,11 +50,6 @@ public interface LogicsSubstitution {
     void sub(Container parent1, Container parent2, Component component1, Component component2);
 
     /**
-     * Closes the GUI for player substitutions.
-     */
-    void closeGui();
-
-    /**
      * Checks if the substitution is done.
      *
      * @return {@code true} if the task is done, {@code false} otherwise
