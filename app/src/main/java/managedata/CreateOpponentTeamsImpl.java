@@ -1,13 +1,10 @@
-package logics;
+package managedata;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
-import java.util.Set;
 
 import data.Player;
 import data.Module;
@@ -23,6 +20,7 @@ public final class CreateOpponentTeamsImpl implements CreateOpponentTeams {
     private int totTeams;
     private List<Player> li;
     private List<String> teams;
+    private ExtractData ed;
 
     /**
      * Constructs a {@code CreateOpponentTeamsImpl} object with the specified list of players and team count.
@@ -33,21 +31,8 @@ public final class CreateOpponentTeamsImpl implements CreateOpponentTeams {
     public CreateOpponentTeamsImpl(final List<Player> players, final int totTeams) {
         this.totTeams = totTeams;
         this.li = players;
-        this.teams = findTeams(players);
-    }
-
-    /**
-     * Collects the unique team names from the given list of players.
-     *
-     * @param players the list of players.
-     * @return a list of unique team names.
-     */
-    private static List<String> findTeams(final List<Player> players) {
-        Set<String> teamsSet = new HashSet<>();
-        for (Player p: players) {
-            teamsSet.add(p.getTeam());
-        }
-        return new ArrayList<>(teamsSet);
+        ed = new ExtractDataImpl(players);
+        teams = ed.findTeams();
     }
 
     /**
@@ -73,18 +58,8 @@ public final class CreateOpponentTeamsImpl implements CreateOpponentTeams {
         return teamsList.subList(0, Math.min(totTeams, teams.size()));
     }
 
-    /**
-     * Selects a random team formation.
-     *
-     * @return a randomly selected team formation.
-     */
-    private static Module selectModule() {
-        List<Module> module = new ArrayList<>(List.of(Module.values()));
-        return module.get(new Random().nextInt(module.size()));
-    }
-
     @Override
     public List<Team> getTeams() throws FileNotFoundException, ClassNotFoundException, IOException {
-        return selectRandomTeams(teams, selectModule(), totTeams);
+        return selectRandomTeams(teams, ed.selectModule(), totTeams);
     }
 }

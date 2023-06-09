@@ -22,8 +22,6 @@ public final class LogicsMatchImpl implements LogicsMatch, Serializable {
     private Team t2;
     private List<Integer> list1;
     private List<Integer> list2;
-    private static final int START_REG = 0;
-    private static final int START_EXTRA = 90;
     private SimulatingMatch sim;
     private static final int END_REG = 90;
     private static final int END_EXTRA = 120;
@@ -47,22 +45,10 @@ public final class LogicsMatchImpl implements LogicsMatch, Serializable {
 
     @Override
     public void scorers(final int time) throws FileNotFoundException, ClassNotFoundException, IOException {
-        if (time == START_REG) {
-            do {
-                list1 = getGoalsNum(sim.result().get(t1), time);
-                list2 = getGoalsNum(sim.result().get(t2), time);
-            } while (containsAny(list1, list2));
-        } else if (time == START_EXTRA) {
-            do {
-                list1 = getGoalsNum(sim.resultExtra().get(t1), time);
-                list2 = getGoalsNum(sim.resultExtra().get(t2), time);
-            } while (containsAny(list1, list2));
-        } else {
-            do {
-                list1 = getGoalsNum(sim.resultSub(time).get(t1), time);
-                list2 = getGoalsNum(sim.resultSub(time).get(t2), time);
-            } while (containsAny(list1, list2));
-        }
+        do {
+            list1 = getGoalsNum(sim.result(time).get(t1), time);
+            list2 = getGoalsNum(sim.result(time).get(t2), time);
+        } while (containsAny(list1, list2));
     }
 
     @Override
@@ -101,7 +87,7 @@ public final class LogicsMatchImpl implements LogicsMatch, Serializable {
      */
     private List<Integer> getGoalsNum(final int goal, final int time) {
         List<Integer> list = new ArrayList<>();
-        int remainingTime = time <= END_REG ? END_REG - time : END_EXTRA - time;
+        int remainingTime = time < END_REG ? END_REG - time : END_EXTRA - time;
         for (int i = 0; i < goal; i++) {
             int min;
             do {

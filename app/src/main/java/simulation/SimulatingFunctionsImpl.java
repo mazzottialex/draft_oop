@@ -14,7 +14,7 @@ import managedata.ExtractData;
 import managedata.ExtractDataImpl;
 
 /**
- * Implementation of the {@link SimulatingFunctions} interface that provides
+ * Implementation of the {@code SimulatingFunctions} interface that provides
  * simulation functions for fantasy football.
  */
 public final class SimulatingFunctionsImpl implements SimulatingFunctions {
@@ -59,13 +59,18 @@ public final class SimulatingFunctionsImpl implements SimulatingFunctions {
     }
 
     /**
+     * Constructs a new instance of the {@code SimulatingFunctionsImpl} class.
+     */
+    public SimulatingFunctionsImpl() { }
+
+    /**
      * Generates a random number within the specified range.
      *
      * @param min The minimum value (inclusive).
      * @param max The maximum value (exclusive).
      * @return A random number between min and max.
      */
-    public static double prob(final double min, final double max) {
+    public double prob(final double min, final double max) {
         return min + (max - min) * new Random().nextDouble();
     }
 
@@ -75,18 +80,13 @@ public final class SimulatingFunctionsImpl implements SimulatingFunctions {
      * @param p The player.
      * @return The fantasy rating for the player.
      */
-    public static double getFantasyPlayerRating(final Player p) {
+    public double getFantasyPlayerRating(final Player p) {
         double k = ROLE_COEFFICIENT_MAP.getOrDefault(p.getPos(), 0.0);
         return k * p.getRating().getX() * prob(MOD_MIN, MOD_MAX);
     }
 
-    /**
-     * Calculates the fantasy ratings for a list of players (starters).
-     *
-     * @param starters The list of players.
-     * @return A map containing each player and their corresponding fantasy rating.
-     */
-    public static Map<Player, Double> getFantasyRantings(final List<Player> starters) {
+    @Override
+    public Map<Player, Double> getFantasyRantings(final List<Player> starters) {
         Map<Player, Double> map = new LinkedHashMap<>();
         for (Player p: starters) {
             map.put(p, getFantasyPlayerRating(p));
@@ -154,18 +154,8 @@ public final class SimulatingFunctionsImpl implements SimulatingFunctions {
         return savedPenalties;
     }
 
-    /**
-     * Calculates the "lockdown defense" rating for a team based on the ratings of its defenders.
-     *
-     * @param t                the team for which to calculate the defense rating
-     * @param defendersRatings a map containing the defenders and their corresponding fantasy ratings
-     * @return the lockdown defense rating for the team
-     * @throws FileNotFoundException    if the data file is not found
-     * @throws ClassNotFoundException   if the class is not found during deserialization
-     * @throws IOException              if an I/O error occurs during data extraction
-     */
-    public static double getLockdownDefenseRating(final Team t, final Map<Player, Double> defendersRatings)
-            throws FileNotFoundException, ClassNotFoundException, IOException {
+    @Override
+    public double getLockdownDefenseRating(final Team t, final Map<Player, Double> defendersRatings) {
         ExtractData ed = new ExtractDataImpl(t.getStarting());
         final List<Player> defenders = ed.getListByPos("D");
         double count = 0;
@@ -193,18 +183,8 @@ public final class SimulatingFunctionsImpl implements SimulatingFunctions {
         return count;
     }
 
-    /**
-     * Modifies the fantasy ratings of players in a team based on certain criteria.
-     *
-     * @param t          the team for which to modify the ratings
-     * @param mapRatings a map containing the players and their corresponding fantasy ratings
-     * @return a map of role to modified ratings for the team
-     * @throws FileNotFoundException    if the data file is not found
-     * @throws ClassNotFoundException   if the class is not found during deserialization
-     * @throws IOException              if an I/O error occurs during data extraction
-     */
-    public static Map<String, Double> modifiedFantasyRatings(final Team t, final Map<Player, Double> mapRatings)
-            throws FileNotFoundException, ClassNotFoundException, IOException {
+    @Override
+    public Map<String, Double> modifiedFantasyRatings(final Team t, final Map<Player, Double> mapRatings) {
         Map<String, Double> mapModifiedRatings = new HashMap<>();
         for (Player p : t.getStarting()) {
             String role = p.getPos();
