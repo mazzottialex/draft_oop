@@ -14,18 +14,20 @@ import org.junit.Before;
 import org.junit.Test;
 
 import data.Player;
+import managedata.ExtractData;
+import managedata.ExtractDataImpl;
 import rating.AnalysisRatingImpl;
+import rating.Function;
 
 public class AnalysisRatingTest {
 
     private AnalysisRatingImpl analysisRating;
-    private final List<Player> li= new ArrayList<>();
-
+    private final List<Player> li = new ArrayList<>();
+    private Function fun = new Function();
+    private ExtractData ex;
+    
     @Before
     public void setUp() {
-        // Creazione di una lista di giocatori per i test
-        //li = new ArrayList<>();
-        //                     id  nome      pos  squadra
         li.add(new Player(0, "Danilo", "D", "JUV", 37, 3182, 3, 32, 7, 3, 1764, 19, 0, 0, 109, 92, 20, 0));
         li.add(new Player(1, "G. Di Lorenzo", "D", "NAP", 37, 3257, 3, 31, 11, 4, 1966, 47, 0, 0, 59, 60, 18, 0));
         li.add(new Player(2, "Kim Min-Jae", "D", "NAP", 35, 3054, 2, 8, 4, 2, 2548, 10, 0, 0, 71, 55, 15, 0));
@@ -39,6 +41,7 @@ public class AnalysisRatingTest {
         li.add(new Player(10, "R. Leao", "A", "MIL", 35, 2429, 15, 92, 70, 8, 552, 49, 0, 0, 22, 8, 9, 0));
         li.add(new Player(23, "I. Provedel", "P", "LAZ", 38, 3412, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 100));
         li.add(new Player(51, "A. Meret", "P", "NAP", 34, 3060, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 69));
+        ex = new ExtractDataImpl(li);
     }
 
     @Test
@@ -55,4 +58,21 @@ public class AnalysisRatingTest {
         }
     }
     
+    @Test
+    public void testFunction() {
+        assertEquals(fun.linear(50, 100, 0, 100), 50);
+        
+        assertTrue(fun.linear(0, 100, 0, 100) == fun.logarithmic(0, 100, 0, 100)  );
+        
+        assertTrue(fun.linear(100, 100, 0, 100) == fun.logarithmic(100, 100, 0, 100) );
+        
+        assertTrue(fun.linear(50, 100, 0, 100)<fun.logarithmic(50, 100, 0, 100));
+    }
+    
+    @Test
+    public void testExtract() {
+    	assertEquals(ex.getTopByAttribute(c -> c.getGoals()), 26);
+    	System.out.print(ex.getTopByAttribute(c -> c.getRedCards(), c -> c.getMinutes()));
+    	assertEquals(ex.getTopByAttribute(c -> c.getGoals(), c -> c.getMinutes()), 0);
+    }
 }
