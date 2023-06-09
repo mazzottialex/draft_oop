@@ -119,6 +119,8 @@ public final class ExtractDataImpl implements ExtractData {
         case "A":
             n = module.getNumAtt();
             break;
+        default:
+            break;
     }
     return getPlayerByTeam(team).stream()
             .filter(p -> p.getPos().equals(pos))
@@ -147,6 +149,8 @@ public final class ExtractDataImpl implements ExtractData {
         case "A":
             n = module.getNumAtt();
             m = module.getNumAtt();
+            break;
+        default:
             break;
     }
     return getPlayerByTeam(team).stream()
