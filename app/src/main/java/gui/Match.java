@@ -63,12 +63,10 @@ public class Match extends Base implements Serializable {
     private Match match;
     private int score1;
     private int score2;
-    private static final int HALF_REG_TIME = 45;
     private static final int IPADX_CENTER = 50;
     private static final int GRID_5 = 5;
     private static final int END_REG_TIME = 90;
     private static final int END_EXTRA_TIME = 120;
-    private static final int HALF_EXTRA_TIME = 105;
 
     /**
      * Creates a new instance of the {@code Match} class.
@@ -111,7 +109,7 @@ public class Match extends Base implements Serializable {
         progressBar.setStringPainted(true);
         progressBar.setString("Minuto 0°");
         changeResult = false;
-        fullTime = HALF_REG_TIME;
+        fullTime = END_REG_TIME;
         winner = null;
         report1 = new ArrayList<>();
         report2 = new ArrayList<>();
@@ -347,18 +345,6 @@ public class Match extends Base implements Serializable {
                             shootsoutGui.createAndShowGUI();
                         });
                     }
-                }
-
-                //Fine 1° tempo
-                if (progressBar.getValue() == HALF_REG_TIME) {
-                    fullTime = END_REG_TIME;
-                    JOptionPane.showMessageDialog(null, "Fine primo tempo");
-                }
-
-                //Fine 1° tempo suppl
-                if (progressBar.getValue() == HALF_EXTRA_TIME) {
-                    fullTime = END_EXTRA_TIME;
-                    JOptionPane.showMessageDialog(null, "Fine primo tempo supplementare");
                 }
 
                 SwingUtilities.invokeLater(new Runnable() {
