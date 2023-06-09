@@ -31,8 +31,8 @@ public class RunnableScrapingData implements Runnable {
     private static final int ASSISTS = 15;
     private static final int PASSES = 16;
     private static final int KEY_PASSES = 17;
-    private static final int YELLOW_CARDS = 20;
-    private static final int RED_CARDS = 21;
+    //private static final int YELLOW_CARDS = 20;
+    //private static final int RED_CARDS = 21;
     private static final int STEALS = 22;
     private static final int TACKLE = 23;
     private static final int CLEAN_SHEET = 24;
