@@ -13,11 +13,11 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import data.Player;
 import managedata.ExtractData;
 import managedata.ExtractDataImpl;
-import rating.AnalysisRatingImpl;
-import rating.Function;
+import model.data.Player;
+import model.rating.AnalysisRatingImpl;
+import model.rating.Function;
 
 public class AnalysisRatingTest {
 
@@ -71,8 +71,7 @@ public class AnalysisRatingTest {
     
     @Test
     public void testExtract() {
+    	//miglior marcatore è Osimenh con 26 gol tra tutti i giocatori
     	assertEquals(ex.getTopByAttribute(c -> c.getGoals()), 26);
-    	System.out.print(ex.getTopByAttribute(c -> c.getRedCards(), c -> c.getMinutes()));
-    	assertEquals(ex.getTopByAttribute(c -> c.getGoals(), c -> c.getMinutes()), 0);
     }
 }

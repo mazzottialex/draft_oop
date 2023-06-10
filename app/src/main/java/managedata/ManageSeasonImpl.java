@@ -1,8 +1,9 @@
 package managedata;
 import java.util.ArrayList;
 import java.util.List;
-import scraping.Scraping;
-import scraping.ScrapingImpl;
+
+import model.scraping.Scraping;
+import model.scraping.ScrapingImpl;
 
 /**
  * Implementation of the {@code ManageSeason} interface.

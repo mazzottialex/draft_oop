@@ -3,8 +3,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
-import data.Player;
-import data.Module;
+
+import model.data.Module;
+import model.data.Player;
 
 /**
  * This interface {@code ExtractData} provides methods for extracting data.

@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
-import data.Team;
+import model.data.Team;
 
 /**
  * The {@code CreateOpponentTeams} interface represents a contract for creating opposing teams.

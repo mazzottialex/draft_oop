@@ -9,8 +9,9 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import data.Player;
-import data.Team;
+
+import model.data.Player;
+import model.data.Team;
 
 /**
  * Implementation of the LogicsFile interface.

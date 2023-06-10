@@ -2,8 +2,8 @@ package managedata;
 
 import java.util.List;
 
-import data.Player;
-import data.Team;
+import model.data.Player;
+import model.data.Team;
 
 /**
  * Interface {@code LogicsFile} for logics of File.
