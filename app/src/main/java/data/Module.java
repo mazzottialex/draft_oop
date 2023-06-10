@@ -62,7 +62,7 @@ public enum Module {
      *
      * @return The number of defenders.
      */
-    public int getNumDif() {
+    public int getNumDef() {
         return dif;
     }
 
@@ -71,7 +71,7 @@ public enum Module {
      *
      * @return The number of midfielders.
      */
-    public int getNumCen() {
+    public int getNumMid() {
         return cen;
     }
 
@@ -80,7 +80,7 @@ public enum Module {
      *
      * @return The number of forwards.
      */
-    public int getNumAtt() {
+    public int getNumFor() {
         return att;
     }
 

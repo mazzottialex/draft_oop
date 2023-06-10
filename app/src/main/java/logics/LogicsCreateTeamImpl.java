@@ -113,7 +113,7 @@ public class LogicsCreateTeamImpl implements LogicsCreateTeam {
      * {@inheritDoc}
      */
     public int getNumDif() {
-        return this.moduloSelect.getNumDif();
+        return this.moduloSelect.getNumDef();
     }
 
     /**
@@ -121,7 +121,7 @@ public class LogicsCreateTeamImpl implements LogicsCreateTeam {
      */
     @Override
     public int getNumCen() {
-        return this.moduloSelect.getNumCen();
+        return this.moduloSelect.getNumMid();
     }
 
     /**
@@ -129,7 +129,7 @@ public class LogicsCreateTeamImpl implements LogicsCreateTeam {
      */
     @Override
     public int getNumAtt() {
-        return this.moduloSelect.getNumAtt();
+        return this.moduloSelect.getNumFor();
     }
 
     /**
