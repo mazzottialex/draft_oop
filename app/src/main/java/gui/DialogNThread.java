@@ -34,7 +34,7 @@ public class DialogNThread extends JDialog {
      * 
      * @param parent The parent frame of the dialog.
      */
-    public DialogNThread(Frame parent) {
+    public DialogNThread(final Frame parent) {
         super(parent, true);
         setBounds(PANEL_X, PANEL_Y, PANEL_WIDTH, PANEL_HEIGHT);
         getContentPane().setLayout(new BorderLayout());

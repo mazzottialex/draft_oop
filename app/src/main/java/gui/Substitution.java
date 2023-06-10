@@ -37,6 +37,10 @@ public class Substitution extends Base {
     private static final int GRID_5 = 5;
     private static final int GRID_6 = 6;
     private static final int GRID_7 = 7;
+    private static final double MIN_W = 0.45;
+    private static final double MIN_H = 0.1;
+    private static final double MAX_W = 0.4;
+    private static final double MAX_H = 0.8;
 
     /**
      * Creates a new instance of the {@code Substitution} class.
@@ -46,7 +50,7 @@ public class Substitution extends Base {
      * @param substitutionsMade The number of substitutions already made.
      */
     public Substitution(final Team team, final Match matchGui, final int substitutionsMade) {
-        setBounds(UtilsGUI.getWidth(0.45), UtilsGUI.getHeight(0.1), UtilsGUI.getWidth(0.4), UtilsGUI.getHeight(0.8));
+        setBounds(UtilsGUI.getWidth(MIN_W), UtilsGUI.getHeight(MIN_H), UtilsGUI.getWidth(MAX_W), UtilsGUI.getHeight(MAX_H));
         this.team = team;
         this.matchGui = matchGui;
         this.substitutes = SUBSTITUTES - substitutionsMade;

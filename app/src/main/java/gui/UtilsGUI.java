@@ -127,16 +127,28 @@ public final class UtilsGUI {
         btn.setForeground(Color.BLACK);
         return btn;
     }
-    
-    public static int getWidth(double perc){
-	    GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-	    int screenWidth = gd.getDisplayMode().getWidth();	    
-	    return (int) (screenWidth * perc);
+
+    /**
+     * Returns the width in pixels based on the given percentage of the screen width.
+     *
+     * @param percentage the percentage of the screen width
+     * @return the width in pixels
+     */
+    public static int getWidth(final double perc) {
+        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+        int screenWidth = gd.getDisplayMode().getWidth();
+        return (int) (screenWidth * perc);
     }
-    
-    public static int getHeight(double perc){
-	    GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-	    int screenHeight = gd.getDisplayMode().getHeight();
-	    return (int) (screenHeight * perc);
+
+    /**
+     * Returns the height in pixels based on the given percentage of the screen height.
+     *
+     * @param percentage the percentage of the screen height
+     * @return the height in pixels
+     */
+    public static int getHeight(final double perc) {
+        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+        int screenHeight = gd.getDisplayMode().getHeight();
+        return (int) (screenHeight * perc);
     }
 }

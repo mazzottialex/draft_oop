@@ -12,11 +12,11 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URL;
 
-import javax.swing.*;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -152,18 +152,18 @@ public class Home extends Base {
             public void actionPerformed(final ActionEvent e) {
                 JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(btnDownload);
                 DialogNThread dialog = new DialogNThread(parent);
-    			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-    			dialog.setVisible(true);
-    			int nThread = dialog.getNThread();
-    			if (nThread > 0) {
-	            	JOptionPane.showMessageDialog(null, "Wait a few seconds");
-	                log.setSeason(comboBoxDownload.getItemAt(comboBoxDownload.getSelectedIndex()));
-	                if (log.downloadSeason(log.getSeason(), nThread)) {
-	                    lblSeason.setText(log.getSeason());
-	                    JOptionPane.showMessageDialog(null, "Download completed");
-	                } else {
-	                    JOptionPane.showMessageDialog(null, "Error loading... decrease number of thread");
-	                }
+                dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+                dialog.setVisible(true);
+                int nThread = dialog.getNThread();
+                if (nThread > 0) {
+                    JOptionPane.showMessageDialog(null, "Wait a few seconds");
+                    log.setSeason(comboBoxDownload.getItemAt(comboBoxDownload.getSelectedIndex()));
+                    if (log.downloadSeason(log.getSeason(), nThread)) {
+                        lblSeason.setText(log.getSeason());
+                        JOptionPane.showMessageDialog(null, "Download completed");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error loading... decrease number of thread");
+                    }
     			}
             }
         });

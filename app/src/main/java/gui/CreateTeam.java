@@ -58,6 +58,12 @@ public class CreateTeam extends Base {
     private static final int GRAND2 = 200;
     private static final int GRAND3 = 300;
     private static final int GRAND35 = 350;
+    private static final double MO_W_H = 0.4;
+    private static final double FM_W = 0.52;
+    private static final double FC_W = 0.52;
+    private static final double FM_H = 0.1;
+    private static final double FC_H = 0.4;
+    private static final double FMC_W_H = 0.25;
     private final transient LogicsCreateTeam log;
     private final JFrame frameModulo;
     private final JFrame frameCalciatori;
@@ -184,8 +190,10 @@ public class CreateTeam extends Base {
         this.frameModulo = new JFrame("Seleziona modulo: ");
         this.frameCalciatori = new JFrame("Seleziona calciatori: ");
         // dimensione fissa
-        this.frameModulo.setBounds(UtilsGUI.getWidth(0.52), UtilsGUI.getHeight(0.10), UtilsGUI.getWidth(0.25), UtilsGUI.getHeight(0.25));
-        this.frameCalciatori.setBounds(UtilsGUI.getWidth(0.52), UtilsGUI.getHeight(0.40), UtilsGUI.getWidth(0.25), UtilsGUI.getHeight(0.25));
+        this.frameModulo.setBounds(UtilsGUI.getWidth(FM_W), UtilsGUI.getHeight(FM_H), UtilsGUI.getWidth(FMC_W_H),
+                UtilsGUI.getHeight(FMC_W_H));
+        this.frameCalciatori.setBounds(UtilsGUI.getWidth(FC_W), UtilsGUI.getHeight(FC_H), UtilsGUI.getWidth(FMC_W_H),
+                UtilsGUI.getHeight(FMC_W_H));
         // Mi occupo del frame Modulo
         final JPanel panelModulo = new JPanel(new BorderLayout());
         panelModulo.setBackground(this.panelColor);
@@ -613,7 +621,7 @@ public class CreateTeam extends Base {
         });
         moProva.add(label);
         moProva.add(buttonOk);
-        moProva.setBounds(UtilsGUI.getWidth(0.40), UtilsGUI.getHeight(0.40), DIALOG2_X, DIALOG_Y);
+        moProva.setBounds(UtilsGUI.getWidth(MO_W_H), UtilsGUI.getHeight(MO_W_H), DIALOG2_X, DIALOG_Y);
         moProva.setVisible(true);
     }
 }
