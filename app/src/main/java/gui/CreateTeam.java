@@ -52,7 +52,8 @@ public class CreateTeam extends Base {
     private static final int NUM_INSETS_2 = 30;
     private static final int LABEL_X = 5;
     private static final int BOUNDS = 300;
-    private static final int DIALOG_X = 250;
+    private static final int DIALOG_X = 200;
+    private static final int DIALOG2_X = 150;
     private static final int DIALOG_Y = 100;
     private static final int FRAME_X = 620;
     private static final int FRAME_M_Y = 100;
@@ -60,7 +61,6 @@ public class CreateTeam extends Base {
     private static final int GRAND2 = 200;
     private static final int GRAND3 = 300;
     private static final int GRAND35 = 350;
-    private static final int GRAND1 = 100;
     private final transient LogicsCreateTeam log;
     private final JFrame frameModulo;
     private final JFrame frameCalciatori;
@@ -152,12 +152,12 @@ public class CreateTeam extends Base {
                     frameCalciatori.setVisible(false);
                     frameModulo.setVisible(false);
                 } else {
-                    final JFrame err = new JFrame("ERRORE");
+                    final JFrame err = new JFrame("ERROR");
                     err.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                    final JDialog prova = new JDialog(err, "ERRORE");
+                    final JDialog prova = new JDialog(err, "ERROR");
                     prova.setLayout(new FlowLayout());
                     prova.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                    final JLabel label = new JLabel("NON HAI COMPLETATO LA SQUADRA");
+                    final JLabel label = new JLabel("INSERT ALL PLAYERS");
                     final JButton buttonOk = new JButton("OK");
                     buttonOk.addActionListener(new ActionListener() {
                         public void actionPerformed(final ActionEvent e) {
@@ -603,10 +603,10 @@ public class CreateTeam extends Base {
     private void createJDialog() {
         final JFrame mo = new JFrame("MODULO");
         mo.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        final JDialog moProva = new JDialog(mo, "ERRORE");
+        final JDialog moProva = new JDialog(mo, "ERROR");
         moProva.setLayout(new FlowLayout());
         moProva.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        final JLabel label = new JLabel("SELEZIONA UN MODULO");
+        final JLabel label = new JLabel("SELECT A MODULE");
         final JButton buttonOk = new JButton("OK");
         buttonOk.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent e) {
@@ -616,7 +616,7 @@ public class CreateTeam extends Base {
         });
         moProva.add(label);
         moProva.add(buttonOk);
-        moProva.setBounds(GRAND3, GRAND3, GRAND2, GRAND1);
+        moProva.setBounds(GRAND3, GRAND3, DIALOG2_X, DIALOG_Y);
         moProva.setVisible(true);
     }
 }
