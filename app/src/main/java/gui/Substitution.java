@@ -46,6 +46,7 @@ public class Substitution extends Base {
      * @param substitutionsMade The number of substitutions already made.
      */
     public Substitution(final Team team, final Match matchGui, final int substitutionsMade) {
+        setBounds(UtilsGUI.getWidth(0.45), UtilsGUI.getHeight(0.1), UtilsGUI.getWidth(0.4), UtilsGUI.getHeight(0.8));
         this.team = team;
         this.matchGui = matchGui;
         this.substitutes = SUBSTITUTES - substitutionsMade;

@@ -78,7 +78,8 @@ public class Match extends Base implements Serializable {
      * @throws IOException If an I/O error occurs.
      */
     public Match(final Team t1, final Team t2) throws FileNotFoundException, ClassNotFoundException, IOException {
-        this.t1 = t1;
+        setBounds(UtilsGUI.getWidth(0.2), UtilsGUI.getHeight(0.1), UtilsGUI.getWidth(0.2), UtilsGUI.getHeight(0.3));
+    	this.t1 = t1;
         this.t2 = t2;
         match = this;
 

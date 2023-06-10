@@ -62,6 +62,7 @@ public class Shootout extends Base implements Serializable {
      * @param match The {@code Match} instance.
      */
     public Shootout(final Team t1, final Team t2, final Match match) {
+        setBounds(UtilsGUI.getWidth(0.45), UtilsGUI.getHeight(0.1), UtilsGUI.getWidth(0.2), UtilsGUI.getHeight(0.3));
         this.t1 = t1;
         this.t2 = t2;
         this.match = match;
