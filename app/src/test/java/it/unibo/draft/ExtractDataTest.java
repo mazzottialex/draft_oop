@@ -8,10 +8,10 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import data.Player;
 import managedata.ExtractDataImpl;
 import managedata.ManageData;
 import managedata.ManageDataImpl;
+import model.data.Player;
 
 public class ExtractDataTest {
 
@@ -38,7 +38,7 @@ public class ExtractDataTest {
     @Test
     public void testGetStarting() {
         String team = "JUV";
-        data.Module module = data.Module.M433;
+        model.data.Module module = model.data.Module.M433;
 
         List<Player> starters = ed.getStarting(team, module);
 
@@ -49,7 +49,7 @@ public class ExtractDataTest {
     @Test
     public void testGetStartingByTeamByPos() {
         String team = "JUV";
-        data.Module module = data.Module.M433;
+        model.data.Module module = model.data.Module.M433;
 
         List<Player> def = ed.getStartingByTeamByPos(team, "D", module);
         List<Player> midf = ed.getStartingByTeamByPos(team, "C", module);

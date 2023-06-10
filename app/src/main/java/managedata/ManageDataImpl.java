@@ -1,9 +1,10 @@
 package managedata;
 import java.util.ArrayList;
 import java.util.List;
-import data.Player;
-import scraping.Scraping;
-import scraping.ScrapingImpl;
+
+import model.data.Player;
+import model.scraping.Scraping;
+import model.scraping.ScrapingImpl;
 
 /**
  * Implementation of the {@code ManageData} interface.

@@ -11,16 +11,16 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import data.Module;
-import data.Player;
-import data.Team;
 import managedata.CreateOpponentTeamsImpl;
 import managedata.ExtractData;
 import managedata.ExtractDataImpl;
 import managedata.ManageData;
 import managedata.ManageDataImpl;
-import rating.AnalysisRating;
-import rating.AnalysisRatingImpl;
+import model.data.Module;
+import model.data.Player;
+import model.data.Team;
+import model.rating.AnalysisRating;
+import model.rating.AnalysisRatingImpl;
 
 public class CreateOpponentTeamsTest {
     private CreateOpponentTeamsImpl createOpponentTeams;

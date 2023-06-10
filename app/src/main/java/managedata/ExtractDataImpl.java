@@ -9,8 +9,8 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import data.Player;
-import data.Module;
+import model.data.Module;
+import model.data.Player;
 
 /**
  * This class implements the {@code ExtractData} interface and provides methods to extract and manipulate player data.

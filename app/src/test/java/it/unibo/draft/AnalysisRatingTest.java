@@ -13,11 +13,11 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import data.Player;
 import managedata.ExtractData;
 import managedata.ExtractDataImpl;
-import rating.AnalysisRatingImpl;
-import rating.Function;
+import model.data.Player;
+import model.rating.AnalysisRatingImpl;
+import model.rating.Function;
 
 public class AnalysisRatingTest {
 

@@ -4,9 +4,6 @@
 package it.unibo.draft;
 
 import org.junit.Test;
-import data.Player;
-import logics.LogicsCreateTeam;
-import logics.LogicsCreateTeamImpl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -16,17 +13,15 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 import managedata.ManageData;
 import managedata.ManageDataImpl;
-import application.App;
+import model.data.Player;
+import controller.LogicsCreateTeam;
+import controller.LogicsCreateTeamImpl;
 
 /**
  * Test.
  *
  */
 public class AppTest {
-    @Test public void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull("app should have a greeting", classUnderTest.getGreeting());
-    }
     /**
      * Test the method addPlayerInTeam.
      * @throws Exception
