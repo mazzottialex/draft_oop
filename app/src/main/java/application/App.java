@@ -9,12 +9,12 @@ import view.Start;
  */
 public final class App {
 
-	/**
-     * Private constructor to prevent instantiation
+    /**
+     * Private constructor to prevent instantiation.
      */
     private App() {
     }
-    
+
     /**
      * The entry point of the application.
      *

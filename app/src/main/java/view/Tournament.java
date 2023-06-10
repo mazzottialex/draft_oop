@@ -90,8 +90,8 @@ public class Tournament extends Base {
      */
     public Tournament(final Team squadra, final List<Player> li)
             throws FileNotFoundException, ClassNotFoundException, IOException {
-    	initializePanel();
-    	this.logTor = new LogicsTournamentImpl(squadra, li);
+        initializePanel();
+        this.logTor = new LogicsTournamentImpl(squadra, li);
         this.listAvversarie = logTor.getListAvversari();
         getPanel().setLayout(new BorderLayout());
         // Aggiungo il bottone Simula nel panelSud
@@ -424,7 +424,7 @@ public class Tournament extends Base {
     public JPanel getPanel() {
         return panel;
     }
-    
+
     /* metodo che formatta la stringa dei nomi dei giocatori */
     private String textFormat(final int max, final String s) {
         if (s.length() > 1) {
