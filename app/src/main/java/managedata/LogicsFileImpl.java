@@ -1,7 +1,6 @@
 package managedata;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,8 +9,9 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import data.Player;
-import data.Team;
+
+import model.data.Player;
+import model.data.Team;
 
 /**
  * Implementation of the LogicsFile interface.
@@ -26,7 +26,7 @@ public final class LogicsFileImpl implements LogicsFile {
     @Override
     public List<Player> loadData(final String season) {
         List<Player> li = new ArrayList<>();
-        try (InputStream file = new FileInputStream("src/main/resources/backup" + season + ".txt");
+        try (InputStream file = ClassLoader.getSystemResourceAsStream("backup" + season + ".txt");
                 InputStream bstream = new BufferedInputStream(file);
                 ObjectInputStream ostream = new ObjectInputStream(file);) {
             li = (List<Player>) ostream.readObject();
@@ -53,7 +53,7 @@ public final class LogicsFileImpl implements LogicsFile {
     @Override
     public List<String> loadSeason() {
         List<String> ls = new ArrayList<>();
-        try (InputStream file = new FileInputStream("src/main/resources/backupSeasons.txt");
+        try (InputStream file = ClassLoader.getSystemResourceAsStream("backupSeasons.txt");
                 InputStream bstream = new BufferedInputStream(file);
                 ObjectInputStream ostream = new ObjectInputStream(file);) {
             String str;
@@ -90,7 +90,7 @@ public final class LogicsFileImpl implements LogicsFile {
     @Override
     public List<Team> loadHistory() {
         List<Team> li = new ArrayList<>();
-        try (InputStream file = new FileInputStream("src/main/resources/history.txt");
+        try (InputStream file = ClassLoader.getSystemResourceAsStream("history.txt");
                 InputStream bstream = new BufferedInputStream(file);
                 ObjectInputStream ostream = new ObjectInputStream(file);) {
             li = (List<Team>) ostream.readObject();

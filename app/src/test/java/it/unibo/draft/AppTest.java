@@ -4,29 +4,23 @@
 package it.unibo.draft;
 
 import org.junit.Test;
-import data.Player;
-import logics.LogicsCreateTeam;
-import logics.LogicsCreateTeamImpl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 import managedata.ManageData;
 import managedata.ManageDataImpl;
-import application.App;
+import model.data.Player;
+import controller.LogicsCreateTeam;
+import controller.LogicsCreateTeamImpl;
 
 /**
  * Test.
  *
  */
 public class AppTest {
-    @Test public void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull("app should have a greeting", classUnderTest.getGreeting());
-    }
     /**
      * Test the method addPlayerInTeam.
      * @throws Exception
@@ -38,7 +32,7 @@ public class AppTest {
         Player p1 = new Player(0, "n1", "P", "t", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         List<Player> list = md.getLi();
         System.out.println(list);
-        LogicsCreateTeam lc = new LogicsCreateTeamImpl("myTeam", "arms", list);
+        LogicsCreateTeam lc = new LogicsCreateTeamImpl("myTeam", ClassLoader.getSystemResource("stemmi/bianco.png"), list);
         lc.addPlayerInTeam(p1);
         assertFalse(lc.teamComplete());
     }
@@ -52,7 +46,7 @@ public class AppTest {
         final ManageData md = new ManageDataImpl("2022-2023");
         md.loadData();
         List<Player> list = md.getLi();
-        LogicsCreateTeam lc = new LogicsCreateTeamImpl("myTeam", "arms", list);
+        LogicsCreateTeam lc = new LogicsCreateTeamImpl("myTeam", ClassLoader.getSystemResource("stemmi/bianco.png"), list);
         assertEquals(dif, lc.getRandom("D", dif).size());
     }
     /**
@@ -65,7 +59,7 @@ public class AppTest {
         final ManageData md = new ManageDataImpl("2022-2023");
         md.loadData();
         List<Player> list = md.getLi();
-        LogicsCreateTeam lc = new LogicsCreateTeamImpl("myTeam", "arms", list);
+        LogicsCreateTeam lc = new LogicsCreateTeamImpl("myTeam", ClassLoader.getSystemResource("stemmi/bianco.png"), list);
         lc.addPlayerInTeam(new Player(i++, "n1", "P", "t", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
         lc.addPlayerInTeam(new Player(i++, "n2", "D", "t", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
         lc.addPlayerInTeam(new Player(i++, "n3", "D", "t", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));

@@ -1,8 +1,9 @@
 package managedata;
 import java.util.ArrayList;
 import java.util.List;
-import scraping.Scraping;
-import scraping.ScrapingImpl;
+
+import model.scraping.Scraping;
+import model.scraping.ScrapingImpl;
 
 /**
  * Implementation of the {@code ManageSeason} interface.
@@ -23,8 +24,8 @@ public final class ManageSeasonImpl extends Thread implements ManageSeason {
 
     @Override
     public List<String> getSeason() {
-        li = file.loadSeason();
-        return li;
+        List<String> li2 = file.loadSeason();
+        return li2;
     }
 
     @Override

@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import data.Player;
-import data.Module;
-import data.Team;
-import data.TeamOpponent;
+import model.data.Module;
+import model.data.Player;
+import model.data.Team;
+import model.data.TeamOpponent;
 
 /**
  * The {@code CreateOpponentTeamsImpl} class implements the {@code CreateOpponentTeams} interface

@@ -9,8 +9,8 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import data.Player;
-import data.Module;
+import model.data.Module;
+import model.data.Player;
 
 /**
  * This class implements the {@code ExtractData} interface and provides methods to extract and manipulate player data.
@@ -40,7 +40,7 @@ public final class ExtractDataImpl implements ExtractData {
 
     @Override
     public List<Player> getLi() {
-        return li;
+        return new ArrayList<>(li);
     }
 
     @Override
@@ -111,13 +111,13 @@ public final class ExtractDataImpl implements ExtractData {
         int n = 1;
         switch (pos) {
         case "D":
-            n = module.getNumDif();
+            n = module.getNumDef();
             break;
         case "C":
-            n = module.getNumCen();
+            n = module.getNumMid();
             break;
         case "A":
-            n = module.getNumAtt();
+            n = module.getNumFor();
             break;
         default:
             break;
@@ -139,16 +139,16 @@ public final class ExtractDataImpl implements ExtractData {
             n = 1;
             break;
         case "D":
-            n = module.getNumDif();
-            m = module.getNumDif();
+            n = module.getNumDef();
+            m = module.getNumDef();
             break;
         case "C":
-            n = module.getNumCen();
-            m = module.getNumCen();
+            n = module.getNumMid();
+            m = module.getNumMid();
             break;
         case "A":
-            n = module.getNumAtt();
-            m = module.getNumAtt();
+            n = module.getNumFor();
+            m = module.getNumFor();
             break;
         default:
             break;

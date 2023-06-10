@@ -1,7 +1,8 @@
 package managedata;
 
 import java.util.List;
-import data.Player;
+
+import model.data.Player;
 
 /**
  * Interface {@code ManageData} for managing player data.
