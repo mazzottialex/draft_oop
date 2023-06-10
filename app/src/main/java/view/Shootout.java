@@ -53,6 +53,10 @@ public class Shootout extends Base implements Serializable {
     private String string2;
     private Match match;
     private static final int IPADX_CENTER = 50;
+    private static final double MAX_W = 0.45;
+    private static final double MIN_H = 0.1;
+    private static final double MIN_W = 0.2;
+    private static final double MAX_H = 0.3;
 
     /**
      * Creates a new instance of the {@code Shootout} class.
@@ -62,7 +66,7 @@ public class Shootout extends Base implements Serializable {
      * @param match The {@code Match} instance.
      */
     public Shootout(final Team t1, final Team t2, final Match match) {
-        setBounds(UtilsGUI.getWidth(0.45), UtilsGUI.getHeight(0.1), UtilsGUI.getWidth(0.2), UtilsGUI.getHeight(0.3));
+        setBounds(UtilsGUI.getWidth(MAX_W), UtilsGUI.getHeight(MIN_H), UtilsGUI.getWidth(MIN_W), UtilsGUI.getHeight(MAX_H));
         this.t1 = t1;
         this.t2 = t2;
         this.match = match;

@@ -67,6 +67,9 @@ public class Match extends Base implements Serializable {
     private static final int GRID_5 = 5;
     private static final int END_REG_TIME = 90;
     private static final int END_EXTRA_TIME = 120;
+    private static final double MAX_MIN_W = 0.2;
+    private static final double MIN_H = 0.1;
+    private static final double MAX_H = 0.3;
 
     /**
      * Creates a new instance of the {@code Match} class.
@@ -78,8 +81,9 @@ public class Match extends Base implements Serializable {
      * @throws IOException If an I/O error occurs.
      */
     public Match(final Team t1, final Team t2) throws FileNotFoundException, ClassNotFoundException, IOException {
-        setBounds(UtilsGUI.getWidth(0.2), UtilsGUI.getHeight(0.1), UtilsGUI.getWidth(0.2), UtilsGUI.getHeight(0.3));
-    	this.t1 = t1;
+        setBounds(UtilsGUI.getWidth(MAX_MIN_W), UtilsGUI.getHeight(MIN_H), UtilsGUI.getWidth(MAX_MIN_W),
+                UtilsGUI.getHeight(MAX_H));
+        this.t1 = t1;
         this.t2 = t2;
         match = this;
 

@@ -47,6 +47,8 @@ public class Tournament extends Base {
     private static final int NUM_TEXT_SINGLE = 9;
     private static final int NUM_TEXT_DOUBLE = 20;
     private static final int ROUND = 20;
+    private static final double MIN_W_H = 0.1;
+    private static final double MAX_W_H = 0.8;
     private final transient LogicsTournament logTor;
     private final JPanel panelSud = new JPanel(new FlowLayout(FlowLayout.RIGHT));
     private final GridLayout gl = new GridLayout(6, 1);
@@ -211,7 +213,8 @@ public class Tournament extends Base {
     }
 
     private void createLevel() {
-        setBounds(UtilsGUI.getWidth(0.1), UtilsGUI.getHeight(0.1), UtilsGUI.getWidth(0.8), UtilsGUI.getHeight(0.8));
+        setBounds(UtilsGUI.getWidth(MIN_W_H), UtilsGUI.getHeight(MIN_W_H), UtilsGUI.getWidth(MAX_W_H),
+                UtilsGUI.getHeight(MAX_W_H));
         final int numSquadre = logTor.getNumSquadre();
         switch (numSquadre) {
         case 8:

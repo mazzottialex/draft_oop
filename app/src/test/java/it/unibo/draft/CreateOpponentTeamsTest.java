@@ -4,19 +4,14 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import managedata.CreateOpponentTeamsImpl;
-import managedata.ExtractData;
-import managedata.ExtractDataImpl;
 import managedata.ManageData;
 import managedata.ManageDataImpl;
-import model.data.Module;
 import model.data.Player;
 import model.data.Team;
 import model.rating.AnalysisRating;
