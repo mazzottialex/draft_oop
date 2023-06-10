@@ -63,7 +63,7 @@ public class Substitution extends Base {
         panelTeam.setBackground(getForeground());
 
         JLabel labelTeamName = new JLabel("Titolari");
-        labelTeamName.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
+        labelTeamName.setFont(new Font("Verdana", Font.ROMAN_BASELINE, 16));
         labelTeamName.setForeground(Color.white);
         panelTeam.add(labelTeamName);
 
@@ -98,7 +98,7 @@ public class Substitution extends Base {
 
         JLabel labelBench = new JLabel("Riserve");
         labelBench.setForeground(Color.white);
-        labelBench.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
+        labelBench.setFont(new Font("Verdana", Font.ROMAN_BASELINE, 16));
         gbc.insets = new Insets(10, 0, 0, 0);
         gbc.gridy = GRID_5;
         getPanel().add(labelBench, gbc);

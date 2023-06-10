@@ -110,10 +110,10 @@ public class Home extends Base {
         JPanel panelSelectioned = new JPanel();
         panelSelectioned.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         JLabel lblSeasonSelected = new JLabel("Season selected:");
-        lblSeasonSelected.setFont(new Font("DejaVu Sans", Font.PLAIN, FONT_SIZE));
+        lblSeasonSelected.setFont(new Font("Verdana", Font.ROMAN_BASELINE, FONT_SIZE));
         panelSelectioned.add(lblSeasonSelected);
         JLabel lblSeason = new JLabel(log.getSeason());
-        lblSeason.setFont(new Font("DejaVu Sans", Font.PLAIN, FONT_SIZE));
+        lblSeason.setFont(new Font("Verdana", Font.ROMAN_BASELINE, FONT_SIZE));
         panelSelectioned.add(lblSeason);
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -122,7 +122,7 @@ public class Home extends Base {
         JButton btnLoad = UtilsGUI.standardButton("Choose a season:");
         String[] array = log.getLiSeasons().toArray(new String[log.getLiSeasons().size()]);
         JComboBox<String> comboBoxLoad = new JComboBox<>(array);
-        comboBoxLoad.setFont(new Font("DejaVu Sans", Font.PLAIN, FONT_SIZE));
+        comboBoxLoad.setFont(new Font("Verdana", Font.ROMAN_BASELINE, FONT_SIZE));
         btnLoad.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
@@ -144,7 +144,7 @@ public class Home extends Base {
         gbc.gridx = 0;
         gbc.gridy = 3;
         getPanel().add(btnDownload, gbc);
-        comboBoxDownload.setFont(new Font("DejaVu Sans", Font.PLAIN, FONT_SIZE));
+        comboBoxDownload.setFont(new Font("Verdana", Font.ROMAN_BASELINE, FONT_SIZE));
         btnDownload.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {

@@ -48,7 +48,7 @@ public class Settings extends Base {
         getPanel().setLayout(layout);
         JLabel lblTeamName = new JLabel("Team name:");
         lblTeamName.setForeground(Color.white);
-        lblTeamName.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
+        lblTeamName.setFont(new Font("Verdana", Font.ROMAN_BASELINE, 16));
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 1;
@@ -56,13 +56,13 @@ public class Settings extends Base {
         getPanel().add(lblTeamName, gbc);
         textFieldTeamName = new JTextField();
         textFieldTeamName.setColumns(10);
-        textFieldTeamName.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
+        textFieldTeamName.setFont(new Font("Verdana", Font.ROMAN_BASELINE, 16));
         gbc.gridx = 1;
         gbc.gridy = 0;
         getPanel().add(textFieldTeamName, gbc);
         JLabel lblChooseLogo = new JLabel("Logo:");
         lblChooseLogo.setForeground(Color.white);
-        lblChooseLogo.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
+        lblChooseLogo.setFont(new Font("Verdana", Font.ROMAN_BASELINE, 16));
         JPanel panelLogo = new JPanel();
         panelLogo.setLayout(layout);
         List<JButton> liButton = new ArrayList<>();

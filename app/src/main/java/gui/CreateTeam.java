@@ -54,9 +54,6 @@ public class CreateTeam extends Base {
     private static final int BOUNDS = 300;
     private static final int DIALOG_X = 250;
     private static final int DIALOG_Y = 100;
-    private static final int FRAME_X = 620;
-    private static final int FRAME_M_Y = 100;
-    private static final int FRAME_C_Y = 400;
     private static final int GRAND2 = 200;
     private static final int GRAND3 = 300;
     private static final int GRAND35 = 350;
@@ -110,7 +107,7 @@ public class CreateTeam extends Base {
         gbc.insets = new Insets(NUM_INSETS_2, NUM_INSETS_1, NUM_INSETS_2, NUM_INSETS_1);
         gbc.gridx = LABEL_X;
         gbc.gridy = 0;
-        buttonIniziaTorneo = new JButton("Inizia Torneo");
+        buttonIniziaTorneo = UtilsGUI.standardButton("Inizia Torneo");
         buttonIniziaTorneo.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent e) {
                 if (log.teamComplete()) {
@@ -158,7 +155,7 @@ public class CreateTeam extends Base {
                     prova.setLayout(new FlowLayout());
                     prova.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                     final JLabel label = new JLabel("NON HAI COMPLETATO LA SQUADRA");
-                    final JButton buttonOk = new JButton("OK");
+                    final JButton buttonOk = UtilsGUI.standardButton("OK");
                     buttonOk.addActionListener(new ActionListener() {
                         public void actionPerformed(final ActionEvent e) {
                             WindowEvent close = new WindowEvent(prova, WindowEvent.WINDOW_CLOSING);
@@ -187,8 +184,8 @@ public class CreateTeam extends Base {
         this.frameModulo = new JFrame("Seleziona modulo: ");
         this.frameCalciatori = new JFrame("Seleziona calciatori: ");
         // dimensione fissa
-        this.frameModulo.setBounds(FRAME_X, FRAME_M_Y, GRAND2, GRAND3);
-        this.frameCalciatori.setBounds(FRAME_X, FRAME_C_Y, GRAND2, GRAND3);
+        this.frameModulo.setBounds(UtilsGUI.getWidth(0.52), UtilsGUI.getHeight(0.10), UtilsGUI.getWidth(0.25), UtilsGUI.getHeight(0.25));
+        this.frameCalciatori.setBounds(UtilsGUI.getWidth(0.52), UtilsGUI.getHeight(0.40), UtilsGUI.getWidth(0.25), UtilsGUI.getHeight(0.25));
         // Mi occupo del frame Modulo
         final JPanel panelModulo = new JPanel(new BorderLayout());
         panelModulo.setBackground(this.panelColor);
@@ -222,7 +219,7 @@ public class CreateTeam extends Base {
         }
         // quando premo il tasto OK salvo nella variabile log.moduloSelct il modulo
         // scelto
-        final JButton buttonOk = new JButton("OK");
+        final JButton buttonOk = UtilsGUI.standardButton("OK");
         buttonOk.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent e) {
                 if (!buttonSelect.isEmpty()) {
@@ -248,7 +245,7 @@ public class CreateTeam extends Base {
         final JPanel panelCalciatoriSouth = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         panelCalciatoriCenter.setBackground(this.panelColor);
         panelCalciatoriSouth.setBackground(this.panelColor);
-        final JButton buttonOkCalciatori = new JButton("OK");
+        final JButton buttonOkCalciatori = UtilsGUI.standardButton("OK");
         buttonOkCalciatori.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent e) {
                 if (log.getposSelect() != -1) {
@@ -616,7 +613,7 @@ public class CreateTeam extends Base {
         });
         moProva.add(label);
         moProva.add(buttonOk);
-        moProva.setBounds(GRAND3, GRAND3, GRAND2, GRAND1);
+        moProva.setBounds(UtilsGUI.getWidth(0.40), UtilsGUI.getHeight(0.40), GRAND2, GRAND1);
         moProva.setVisible(true);
     }
 }
