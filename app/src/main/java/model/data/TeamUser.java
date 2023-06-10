@@ -37,8 +37,8 @@ public final class TeamUser implements Team, Serializable {
         this.teamName = teamName;
         this.logo = logo;
         this.modulo = modulo;
-        this.liStarting = liStarting;
-        this.liSubstitution = liSubstitution;
+        this.liStarting = new ArrayList<>(liStarting);
+        this.liSubstitution = new ArrayList<>(liSubstitution);
         this.liPlayers = new ArrayList<>();
         liPlayers.addAll(liStarting);
         liPlayers.addAll(liSubstitution);

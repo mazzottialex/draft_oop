@@ -1,5 +1,6 @@
 package controller;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import model.data.Player;
@@ -56,7 +57,7 @@ public final class LogicsSettingsImpl implements LogicsSettings {
 
     @Override
     public List<Player> getLi() {
-        return li;
+        return new ArrayList<>(li);
     }
 
     @Override

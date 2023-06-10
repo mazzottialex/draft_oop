@@ -29,7 +29,7 @@ public final class ManageDataImpl implements ManageData {
 
     @Override
     public List<Player> getLi() {
-        return li;
+        return new ArrayList<>(li);
     }
 
     @Override

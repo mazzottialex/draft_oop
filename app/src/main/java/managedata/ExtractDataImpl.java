@@ -40,7 +40,7 @@ public final class ExtractDataImpl implements ExtractData {
 
     @Override
     public List<Player> getLi() {
-        return li;
+        return new ArrayList<>(li);
     }
 
     @Override

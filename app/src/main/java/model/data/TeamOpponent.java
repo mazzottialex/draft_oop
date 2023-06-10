@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -81,12 +82,12 @@ public final class TeamOpponent implements Team, Serializable {
 
     @Override
     public List<Player> getLiPlayers() {
-        return liPlayers;
+        return new ArrayList<>(liPlayers);
     }
 
     @Override
     public List<Player> getStarting() {
-        return liStarting;
+        return new ArrayList<>(liStarting);
     }
 
     @Override

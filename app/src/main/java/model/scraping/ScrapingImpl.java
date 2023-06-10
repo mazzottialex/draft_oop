@@ -39,12 +39,12 @@ public final class ScrapingImpl implements Scraping {
 
     @Override
     public List<Player> getLiPlayer() {
-        return li;
+        return new ArrayList<>(li);
     }
 
     @Override
     public List<String> getLiSeason() {
-        return stagioni;
+        return new ArrayList<>(stagioni);
     }
 
     @Override

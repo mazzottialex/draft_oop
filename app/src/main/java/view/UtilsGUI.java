@@ -131,7 +131,7 @@ public final class UtilsGUI {
     /**
      * Returns the width in pixels based on the given percentage of the screen width.
      *
-     * @param percentage the percentage of the screen width
+     * @param perc the percentage of the screen width
      * @return the width in pixels
      */
     public static int getWidth(final double perc) {
@@ -143,7 +143,7 @@ public final class UtilsGUI {
     /**
      * Returns the height in pixels based on the given percentage of the screen height.
      *
-     * @param percentage the percentage of the screen height
+     * @param perc the percentage of the screen height
      * @return the height in pixels
      */
     public static int getHeight(final double perc) {

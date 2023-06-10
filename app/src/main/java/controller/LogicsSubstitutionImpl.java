@@ -41,12 +41,12 @@ public final class LogicsSubstitutionImpl implements LogicsSubstitution {
 
     @Override
     public List<Player> getStarters() {
-        return starters;
+        return new ArrayList<>(starters);
     }
 
     @Override
     public List<Player> getSubstitutes() {
-        return substitutes;
+        return new ArrayList<>(substitutes);
     }
 
     @Override

@@ -43,14 +43,14 @@ public class Archive extends Base {
     private static final int BUTTON_HEIGHT = 28;
     private static final int LABEL_X = 262;
     private static final int LABEL_Y = 11;
-    private static final int LABEL_WIDTH = 77;
+    private static final int LABEL_WIDTH = 100;
     private static final int LABEL_HEIGHT = 17;
-    private static final int TABLE_WIDTH = 420;
-    private static final int TABLE_HEIGHT = 580;
     private static final int GAP = 5;
     private static final int PANEL_WIDTH2 = 400;
     private static final int PANEL_HEIGHT2 = 40;
     private static final int FONT_DIM = 14;
+    private static final double WIDTH_SCROLLPANEL = 0.35;
+    private static final double HEIGHT_SCROLLPANEL = 0.70;
 
     /**
      * Constructs a new Archive object.
@@ -90,7 +90,7 @@ public class Archive extends Base {
         panel.add(lblNewLabel);
         table = new JTable(tm);
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setPreferredSize(new Dimension(UtilsGUI.getWidth(0.35), UtilsGUI.getHeight(0.70)));
+        scrollPane.setPreferredSize(new Dimension(UtilsGUI.getWidth(WIDTH_SCROLLPANEL), UtilsGUI.getHeight(HEIGHT_SCROLLPANEL)));
         getPanel().add(scrollPane);
         TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tm);
         sorter.setComparator(0, new Comparator<Object>() {

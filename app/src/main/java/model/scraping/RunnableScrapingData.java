@@ -63,7 +63,7 @@ public class RunnableScrapingData implements Runnable {
      * @return The list of players.
      */
     public List<Player> getLi() {
-        return li;
+        return new ArrayList<>(li);
     }
 
     /**
