@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.Serializable;
+import java.net.URL;
 //import java.util.*;
 import java.util.List;
 
@@ -148,7 +149,7 @@ public interface LogicsCreateTeam extends Serializable {
      * 
      * @return the arms
      */
-    String getStemma();
+    URL getStemma();
 
     /**
      * 

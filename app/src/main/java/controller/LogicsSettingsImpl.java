@@ -1,4 +1,5 @@
 package controller;
+import java.net.URL;
 import java.util.List;
 
 import model.data.Player;
@@ -7,21 +8,21 @@ import model.data.Player;
  * The LogicsSettingsImpl class represents the implementation of settings logic operations in a team management system.
  */
 public final class LogicsSettingsImpl implements LogicsSettings {
-    private static final String DEFAULT_LOGO = "res/stemmi/bianco.png";
+    private static final URL DEFAULT_LOGO = ClassLoader.getSystemResource("bianco.png");
     private static final String DEFAULT_TEAM_NAME = "Squadra 1";
     private final List<Player> li;
     private final List<String> liLogo = List.of(
-            "src/main/resources/stemmi/bianco.png",
-            "src/main/resources/stemmi/blu.png",
-            "src/main/resources/stemmi/giallo.png",
-            "src/main/resources/stemmi/nero.png",
-            "src/main/resources/stemmi/verde.png",
-            "src/main/resources/stemmi/viola.png",
-            "src/main/resources/stemmi/rosso.png",
-            "src/main/resources/stemmi/azzurro.png",
-            "src/main/resources/stemmi/arancione.png"
+            "stemmi/bianco.png",
+            "stemmi/blu.png",
+            "stemmi/giallo.png",
+            "stemmi/nero.png",
+            "stemmi/verde.png",
+            "stemmi/viola.png",
+            "stemmi/rosso.png",
+            "stemmi/azzurro.png",
+            "stemmi/arancione.png"
     );
-    private String logo;
+    private URL logo;
     private String teamName;
 
     /**
@@ -35,11 +36,11 @@ public final class LogicsSettingsImpl implements LogicsSettings {
         this.teamName = DEFAULT_TEAM_NAME;
     }
     @Override
-    public String getLogo() {
+    public URL getLogo() {
         return logo;
     }
     @Override
-    public void setLogo(final String logo) {
+    public void setLogo(final URL logo) {
         this.logo = logo;
     }
 

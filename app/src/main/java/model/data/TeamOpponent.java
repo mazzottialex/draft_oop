@@ -3,6 +3,7 @@ package model.data;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
+import java.net.URL;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -21,7 +22,7 @@ public final class TeamOpponent implements Team, Serializable {
     private static final long serialVersionUID = 1L;
     private final int id;
     private final String teamName;
-    private final String logo;
+    private final URL logo;
     private final Module module;
     private final List<Player> liPlayers;
     private List<Player> liStarting;
@@ -56,11 +57,11 @@ public final class TeamOpponent implements Team, Serializable {
      *
      * @return The emblem filename.
      */
-    private String setStemma() {
+    private URL setStemma() {
         final List<String> liStemmi = List.of("arancione.png", "azzurro.png",
             "bianco.png", "blu.png", "giallo.png", "nero.png", "rosso.png",
             "verde.png", "viola.png");
-        return liStemmi.get(new Random().nextInt(liStemmi.size()));
+        return ClassLoader.getSystemResource(liStemmi.get(new Random().nextInt(liStemmi.size())));
     }
 
     @Override
@@ -69,7 +70,7 @@ public final class TeamOpponent implements Team, Serializable {
     }
 
     @Override
-    public String getLogo() {
+    public URL getLogo() {
         return logo;
     }
 

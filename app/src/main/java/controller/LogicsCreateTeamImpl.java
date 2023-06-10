@@ -2,6 +2,7 @@ package controller;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
@@ -37,7 +38,7 @@ public class LogicsCreateTeamImpl implements LogicsCreateTeam {
     private final List<Player> liSquadra;
     private final List<Player> riserve;
     private final String nomeSquadra;
-    private final String stemma;
+    private final URL stemma;
     // private Squadra squadra;
     private final List<Player> calcUsciti;
     private boolean clickModulo;
@@ -47,13 +48,13 @@ public class LogicsCreateTeamImpl implements LogicsCreateTeam {
      * Constructor of LogicsCreateTeamImpl.
      * 
      * @param nomeSquadra the name of the team
-     * @param stemma      the arms
+     * @param url      the arms
      * @param li          the list of all the players in Serie A
      * @throws FileNotFoundException if the file is not found
      * @throws ClassNotFoundException if the class is not found
      * @throws IOException an I/O error occurs
      */
-    public LogicsCreateTeamImpl(final String nomeSquadra, final String stemma, final List<Player> li)
+    public LogicsCreateTeamImpl(final String nomeSquadra, final URL url, final List<Player> li)
             throws FileNotFoundException, ClassNotFoundException, IOException {
         this.moduloSelect = Module.M343;
         // this.md = new ManageDataImpl(stagione);
@@ -66,7 +67,7 @@ public class LogicsCreateTeamImpl implements LogicsCreateTeam {
         this.liSquadra = new ArrayList<>();
         this.calcUsciti = new ArrayList<>();
         this.nomeSquadra = nomeSquadra;
-        this.stemma = stemma;
+        this.stemma = url;
         riserve = new ArrayList<>();
         riserve.addAll(this.getRandom("P", 1));
         riserve.addAll(this.getRandom("D", 2));
@@ -292,7 +293,7 @@ public class LogicsCreateTeamImpl implements LogicsCreateTeam {
      * {@inheritDoc}
      */
     @Override
-    public String getStemma() {
+    public URL getStemma() {
         return this.stemma;
     }
 

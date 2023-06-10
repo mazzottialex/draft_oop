@@ -1,6 +1,7 @@
 package model.data;
 
 import java.io.Serializable;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,7 +16,7 @@ public final class TeamUser implements Team, Serializable {
     private static final long serialVersionUID = 1L;
     private final int id;
     private final String teamName;
-    private final String logo;
+    private final URL logo;
     private final Module modulo;
     private final List<Player> liPlayers;
     private List<Player> liStarting;
@@ -30,7 +31,7 @@ public final class TeamUser implements Team, Serializable {
      * @param liStarting     the list of starting players
      * @param liSubstitution the list of substitution players
      */
-    public TeamUser(final String teamName, final String logo, final Module modulo,
+    public TeamUser(final String teamName, final URL logo, final Module modulo,
         final List<Player> liStarting, final List<Player> liSubstitution) {
         this.id = 0;
         this.teamName = teamName;
@@ -49,7 +50,7 @@ public final class TeamUser implements Team, Serializable {
     }
 
     @Override
-    public String getLogo() {
+    public URL getLogo() {
         return logo;
     }
 

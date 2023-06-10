@@ -1,5 +1,6 @@
 package controller;
 
+import java.net.URL;
 import java.util.List;
 
 import model.data.Player;
@@ -13,13 +14,13 @@ public interface LogicsSettings {
      * Retrieves the logo.
      * @return the logo
      */
-    String getLogo();
+    URL getLogo();
 
     /**
      * Sets the logo.
-     * @param logo the logo to set
+     * @param url the logo to set
      */
-    void setLogo(String logo);
+    void setLogo(URL url);
 
     /**
      * Retrieves the teamName.

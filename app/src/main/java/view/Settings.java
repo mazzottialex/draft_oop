@@ -9,6 +9,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
@@ -69,7 +70,7 @@ public class Settings extends Base {
         for (int i = 0; i < log.getLiLogo().size(); i++) {
             JButton btnLogo = new JButton();
             liButton.add(btnLogo);
-            String url = log.getLiLogo().get(i);
+            URL url = ClassLoader.getSystemResource(log.getLiLogo().get(i));
             ImageIcon img = new ImageIcon(url);
             Image image = img.getImage();
             Image newimg = image.getScaledInstance(SCALE_IMG_1, SCALE_IMG_1, java.awt.Image.SCALE_SMOOTH);

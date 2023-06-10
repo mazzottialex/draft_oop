@@ -1,6 +1,7 @@
 package model.data;
 
 import java.io.Serializable;
+import java.net.URL;
 import java.util.List;
 
 /**
@@ -34,7 +35,7 @@ public interface Team extends Serializable {
      *
      * @return a string representing the emblem of the team.
      */
-    String getLogo();
+    URL getLogo();
 
     /**
      * Returns the team's evaluation.

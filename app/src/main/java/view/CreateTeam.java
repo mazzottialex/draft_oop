@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
 //import java.util.*;
 import java.util.List;
 import java.util.Map;
@@ -79,15 +80,15 @@ public class CreateTeam extends Base {
      * Constructor of CreateTeam, add the necessary graphics components.
      * 
      * @param nomeSquadra the String that contains the name of the team
-     * @param stemma      the String that contains the arms of the team
+     * @param url      the String that contains the arms of the team
      * @param li          the list of all the players in Serie A
      * @throws FileNotFoundException if the file is not found
      * @throws ClassNotFoundException if the class is not found
      * @throws IOException an I/O error occurs
      */
-    public CreateTeam(final String nomeSquadra, final String stemma, final List<Player> li)
+    public CreateTeam(final String nomeSquadra, final URL url, final List<Player> li)
             throws FileNotFoundException, ClassNotFoundException, IOException {
-        this.log = new LogicsCreateTeamImpl(nomeSquadra, stemma, li);
+        this.log = new LogicsCreateTeamImpl(nomeSquadra, url, li);
         // inizializzo il bottone per i giocatori che seleziono
         // this.buttonSelect = new JButton();
         // Mi occupo del frame principale
