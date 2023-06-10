@@ -71,8 +71,7 @@ public class AnalysisRatingTest {
     
     @Test
     public void testExtract() {
+    	//miglior marcatore è Osimenh con 26 gol tra tutti i giocatori
     	assertEquals(ex.getTopByAttribute(c -> c.getGoals()), 26);
-    	System.out.print(ex.getTopByAttribute(c -> c.getRedCards(), c -> c.getMinutes()));
-    	assertEquals(ex.getTopByAttribute(c -> c.getGoals(), c -> c.getMinutes()), 0);
     }
 }

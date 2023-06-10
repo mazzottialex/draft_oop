@@ -19,26 +19,25 @@ import managedata.ExtractData;
 import managedata.ExtractDataImpl;
 import managedata.ManageData;
 import managedata.ManageDataImpl;
+import rating.AnalysisRating;
+import rating.AnalysisRatingImpl;
 
 public class CreateOpponentTeamsTest {
-
     private CreateOpponentTeamsImpl createOpponentTeams;
     private List<Player> li;
     private ManageData md;
-
     @Before
     public void setUp() throws Exception {
     	md = new ManageDataImpl("2022-2023");
         md.loadData();
         li = md.getLi();
-
+        AnalysisRating analysisRating = new AnalysisRatingImpl(li);
+        li = analysisRating.updateRating();
         createOpponentTeams = new CreateOpponentTeamsImpl(li, 5);
     }
-
     @Test
     public void testGetTeams() throws FileNotFoundException, ClassNotFoundException, IOException {
-        List<Team> result = createOpponentTeams.getTeams();
-
-        assertEquals(2, result.size());
+		List<Team> result = createOpponentTeams.getTeams();
+        assertEquals(5, result.size());
     }
 }
