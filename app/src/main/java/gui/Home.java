@@ -10,6 +10,8 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.net.URL;
+
 import javax.swing.*;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -37,7 +39,7 @@ public class Home extends Base {
     private static final int PANEL_WIDTH = 70;
     private static final int PANEL_HEIGHT = 30;
     private static final int FONT_SIZE = 14;
-    private static final String START_IMAGE_PATH = "src/main/resources/start.png";
+    private static final URL START_IMAGE_PATH = ClassLoader.getSystemResource("start.png");
     private static final Color BACKGROUND_COLOR = new Color(0, 64, 128);
     private static final Color BACKGROUND_COLOR_2 = Color.GREEN;
     private static final int GRID_Y = 5;

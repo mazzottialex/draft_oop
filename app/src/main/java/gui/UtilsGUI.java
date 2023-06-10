@@ -7,6 +7,7 @@ import java.awt.GraphicsEnvironment;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -39,15 +40,15 @@ public final class UtilsGUI {
      */
     public static JPanel getPanelCalciatore(final String name, final Integer rating, final String role,
             final Boolean icon) {
-        String file = "";
+        URL file = null;
         if (role.equals("P")) {
-            file = "src/main/resources/portiere.png";
+            file = ClassLoader.getSystemResource("portiere.png");
         } else if (role.equals("D")) {
-            file = "src/main/resources/difensore.png";
+            file = ClassLoader.getSystemResource("difensore.png");
         } else if (role.equals("C")) {
-            file = "src/main/resources/centrocampista.png";
+            file = ClassLoader.getSystemResource("centrocampista.png");
         } else if (role.equals("A")) {
-            file = "src/main/resources/attaccante.png";
+            file = ClassLoader.getSystemResource("attaccante.png");
         }
         GridBagConstraints gbc = new GridBagConstraints();
         GridBagLayout layout = new GridBagLayout();

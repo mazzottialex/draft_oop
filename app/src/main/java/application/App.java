@@ -43,7 +43,6 @@ public class App {
     @SuppressWarnings("unchecked")
 	public static void main(String[] args) throws Exception {
    
-/*
     	EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -55,7 +54,7 @@ public class App {
 			}
 
 		});
-    	*/
+    	
 /*
     	ManageData md = new ManageDataImpl("2022-2023");
 		md.LoadData();
@@ -65,7 +64,7 @@ public class App {
 		Squadra nap = new SquadraAvversaria(0, "NAP", Modulo.M442, li);	
     	Torneo t= new Torneo(nap, li);
     	t.setVisible(true);
-*/
+
     	
     	ManageData md = new ManageDataImpl("2022-2023");
 		md.loadData();
@@ -77,7 +76,7 @@ public class App {
 		Team laz = new TeamOpponent(0, "LAZ", Module.M442, li);
 		Team sam = new TeamOpponent(0, "SAM", Module.M442, li);
         System.out.println(new SimulatingMatchImpl(nap, laz).result(0));
-        /*
+        
 		SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -96,8 +95,8 @@ public class App {
 //					r.createAndShowGUI();
             }
 		});
-		*/
-    	/*
+		
+    	
     	LogicsArchive la = new LogicsArchiveImpl("2022-2023", true);
     	ManageData md = new ManageDataImpl("2022-2023");
 		md.loadData();
@@ -105,7 +104,9 @@ public class App {
 		AnalysisRating cr = new AnalysisRatingImpl(li);
 		li = cr.updateRating();
     	la.liOrdered(li);*/
-    	
+    	/*
+    	  * 
+    	  *   	
     	Team t1;
         Team t2;
         SimulatingMatch sm;
@@ -149,5 +150,6 @@ public class App {
         t2 = new TeamUser("t2", null, Module.M433, List.of(gk0, def01, def02, def03, def04, mid01, mid02, mid03, for01, for02, for03), List.of(gks0, defs01, defs02, mids01, mids02, fors01, fors02));
         sm = new SimulatingMatchImpl(t1, laz);
         System.out.println(sm.result(0));
+       */
     }
 }
