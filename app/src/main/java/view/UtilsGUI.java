@@ -20,7 +20,7 @@ import javax.swing.border.EmptyBorder;
  */
 public final class UtilsGUI {
     private static final int FONT_DIM = 14;
-    private static final int SCALE_IMG_1 = 70;
+    private static final int SCALE_IMG_1 = 30;
     private static final int SCALE_IMG_2 = 90;
     private static final int EMPTY_BORD = 5;
     private static final Color BACKGROUND = new Color(240, 240, 240);
