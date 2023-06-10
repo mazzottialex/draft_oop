@@ -43,7 +43,7 @@ public class History extends Base {
         getPanel().setLayout(new BorderLayout());
         JButton btnHome = UtilsGUI.standardButton("Home");
         JPanel panelBtn = new JPanel();
-        panelBtn.setBackground(getBackground());
+        panelBtn.setBackground(getForeground());
         panelBtn.setPreferredSize(new Dimension(PANEL_DIM, PANEL_DIM));
         btnHome.addActionListener(new ActionListener() {
             @Override
@@ -69,11 +69,11 @@ public class History extends Base {
             lblLogo.setIcon(img);
             lblLogo.setBorder(new EmptyBorder(INSETS_1));
             JLabel lblNomeSquadra = new JLabel(team.getTeamName());
-            lblNomeSquadra.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
+            lblNomeSquadra.setFont(new Font("Verdana", Font.ROMAN_BASELINE, 16));
             lblNomeSquadra.setForeground(Color.white);
             panelTeam.add(lblNomeSquadra);
             JLabel lblRating = new JLabel("Valutazione: " + team.getRating());
-            lblRating.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
+            lblRating.setFont(new Font("Verdana", Font.ROMAN_BASELINE, 16));
             lblRating.setForeground(Color.white);
             lblRating.setBorder(new EmptyBorder(INSETS_2));
             panelTeam.add(lblRating);

@@ -46,6 +46,7 @@ public class Substitution extends Base {
      * @param substitutionsMade The number of substitutions already made.
      */
     public Substitution(final Team team, final Match matchGui, final int substitutionsMade) {
+        setBounds(UtilsGUI.getWidth(0.45), UtilsGUI.getHeight(0.1), UtilsGUI.getWidth(0.4), UtilsGUI.getHeight(0.8));
         this.team = team;
         this.matchGui = matchGui;
         this.substitutes = SUBSTITUTES - substitutionsMade;
@@ -63,7 +64,7 @@ public class Substitution extends Base {
         panelTeam.setBackground(getForeground());
 
         JLabel labelTeamName = new JLabel("Titolari");
-        labelTeamName.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
+        labelTeamName.setFont(new Font("Verdana", Font.ROMAN_BASELINE, 16));
         labelTeamName.setForeground(Color.white);
         panelTeam.add(labelTeamName);
 
@@ -98,7 +99,7 @@ public class Substitution extends Base {
 
         JLabel labelBench = new JLabel("Riserve");
         labelBench.setForeground(Color.white);
-        labelBench.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
+        labelBench.setFont(new Font("Verdana", Font.ROMAN_BASELINE, 16));
         gbc.insets = new Insets(10, 0, 0, 0);
         gbc.gridy = GRID_5;
         getPanel().add(labelBench, gbc);

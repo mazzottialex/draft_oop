@@ -2,6 +2,8 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -53,9 +55,9 @@ public final class UtilsGUI {
         panelGiocatore.setLayout(layout);
         panelGiocatore.setBorder(new EmptyBorder(0, EMPTY_BORD, 0, EMPTY_BORD));
         JLabel lblNome = new JLabel(name);
-        lblNome.setFont(new Font("DejaVu Sans", Font.PLAIN, FONT_DIM));
+        lblNome.setFont(new Font("Verdana", Font.ROMAN_BASELINE, FONT_DIM));
         JLabel lblValutazione = new JLabel(rating.toString());
-        lblNome.setFont(new Font("DejaVu Sans", Font.PLAIN, FONT_DIM));
+        lblNome.setFont(new Font("Verdana", Font.ROMAN_BASELINE, FONT_DIM));
         JLabel lblIcona = new JLabel();
         ImageIcon img = new ImageIcon(file);
         Image image = img.getImage();
@@ -97,7 +99,7 @@ public final class UtilsGUI {
         buttonCalciatore.setLayout(layout);
         buttonCalciatore.setBackground(BACKGROUND);
         JLabel lblNome = new JLabel(name);
-        lblNome.setFont(new Font("DejaVu Sans", Font.PLAIN, FONT_DIM));
+        lblNome.setFont(new Font("Verdana", Font.ROMAN_BASELINE, FONT_DIM));
         JLabel lblIcona = new JLabel();
         ImageIcon img = new ImageIcon(file);
         Image image = img.getImage();
@@ -118,10 +120,22 @@ public final class UtilsGUI {
      * @return a standard JButton
      */
     public static JButton standardButton(final String s) {
-        JButton btn = new JButton(s);
-        btn.setFont(new Font("DejaVu Sans", Font.PLAIN, FONT_DIM));
-        btn.setBackground(Color.WHITE);
-        btn.setForeground(Color.BLUE);
+        JButton btn = new JButton(s.toUpperCase());
+        btn.setFont(new Font("Verdana", Font.ROMAN_BASELINE, FONT_DIM));
+        btn.setBackground(Color.LIGHT_GRAY);
+        btn.setForeground(Color.BLACK);
         return btn;
+    }
+    
+    public static int getWidth(double perc){
+	    GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+	    int screenWidth = gd.getDisplayMode().getWidth();	    
+	    return (int) (screenWidth * perc);
+    }
+    
+    public static int getHeight(double perc){
+	    GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+	    int screenHeight = gd.getDisplayMode().getHeight();
+	    return (int) (screenHeight * perc);
     }
 }

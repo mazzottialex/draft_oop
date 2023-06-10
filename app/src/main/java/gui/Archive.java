@@ -83,12 +83,12 @@ public class Archive extends Base {
         panel.add(btnHome);
         JLabel lblNewLabel = new JLabel(log.getSeason());
         lblNewLabel.setBounds(LABEL_X, LABEL_Y, LABEL_WIDTH, LABEL_HEIGHT);
-        lblNewLabel.setFont(new Font("DejaVu Sans", Font.PLAIN, FONT_DIM));
+        lblNewLabel.setFont(new Font("Verdana", Font.ROMAN_BASELINE, FONT_DIM));
         lblNewLabel.setForeground(Color.white);
         panel.add(lblNewLabel);
         table = new JTable(tm);
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setPreferredSize(new Dimension(TABLE_WIDTH, TABLE_HEIGHT));
+        scrollPane.setPreferredSize(new Dimension(UtilsGUI.getWidth(0.35), UtilsGUI.getHeight(0.70)));
         getPanel().add(scrollPane);
         TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tm);
         sorter.setComparator(0, new Comparator<Object>() {

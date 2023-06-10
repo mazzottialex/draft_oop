@@ -211,6 +211,7 @@ public class Tournament extends Base {
     }
 
     private void createLevel() {
+        setBounds(UtilsGUI.getWidth(0.1), UtilsGUI.getHeight(0.1), UtilsGUI.getWidth(0.8), UtilsGUI.getHeight(0.8));
         final int numSquadre = logTor.getNumSquadre();
         switch (numSquadre) {
         case 8:
