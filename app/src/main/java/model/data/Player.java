@@ -286,7 +286,7 @@ public final class Player implements Serializable {
      * @return a list containing the player's information
      */
     public List<String> toList() {
-        List<String> list = new ArrayList<>();
+        final List<String> list = new ArrayList<>();
         list.add(pos);
         list.add(name);
         list.add(rating.getX().toString());
@@ -313,21 +313,12 @@ public final class Player implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        Player other = (Player) obj;
+        final Player other = (Player) obj;
         return yellowCards == other.yellowCards && assists == other.assists && cleanSheets == other.cleanSheets
             && dribbles == other.dribbles && redCards == other.redCards && goals == other.goals && id == other.id
             && minutes == other.minutes && Objects.equals(name, other.name) && saves == other.saves
             && passes == other.passes && keyPasses == other.keyPasses && matchesPlayed == other.matchesPlayed
             && Objects.equals(rating, other.rating) && Objects.equals(cardRating, other.cardRating)
             && tacklesWon == other.tacklesWon && shots == other.shots && ballsRecovered == other.ballsRecovered;
-    }
-
-    @Override
-    public String toString() {
-        return "" + id + ", \"" + name + "\", \"" + pos + "\", \"" + team + "\", "
-                + matchesPlayed + ", " + minutes + ", " + goals + ", " + shots + ", "
-                + dribbles + ", " + assists + ", " + passes + ", " + keyPasses
-                + ", " + yellowCards + ", " + redCards + ", " + ballsRecovered
-                + ", " + tacklesWon + ", " + cleanSheets + ", " + saves;
     }
 }
