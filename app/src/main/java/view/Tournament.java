@@ -78,7 +78,7 @@ public class Tournament extends Base {
     // boolean eliminatedThisTurn = false;
     private final JButton buttonSimula;
     private final Color panelColor = new Color(0, 64, 128);
-    private JPanel panel;
+    //private JPanel panel;
     /**
      * Constructor of Tournament, add the necessary graphics components.
      * 
@@ -90,7 +90,7 @@ public class Tournament extends Base {
      */
     public Tournament(final Team squadra, final List<Player> li)
             throws FileNotFoundException, ClassNotFoundException, IOException {
-        initializePanel();
+        //initializePanel();
         this.logTor = new LogicsTournamentImpl(squadra, li);
         this.listAvversarie = logTor.getListAvversari();
         getPanel().setLayout(new BorderLayout());
@@ -407,24 +407,26 @@ public class Tournament extends Base {
         }
     }
 
-    /**
-     * Initializes the tournament panel after the object has been fully constructed.
-     * This method should be called after constructing a Tournament object to perform any necessary panel initialization.
-     */
-    private void initializePanel() {
-        panel = getPanel();
-    }
-
-    /**
-     * Retrieves the tournament panel.
-     * Subclasses should override this method to provide a specific tournament panel implementation.
-     *
-     * @return The tournament panel.
-     */
-    public JPanel getPanel() {
-        return panel;
-    }
-
+    
+    ///**
+     //* Initializes the tournament panel after the object has been fully constructed.
+     //* This method should be called after constructing a Tournament object to perform any necessary panel initialization.
+     //*/
+    //private void initializePanel() {
+      //  panel = getPanel();
+    //}
+    //
+    ///**
+     //* Retrieves the tournament panel.
+     //* Subclasses should override this method to provide a specific tournament panel implementation.
+     //*
+     //* @return The tournament panel.
+     //*/
+    //public JPanel getPanel() {
+        //return panel;
+    //}
+     
+     
     /* metodo che formatta la stringa dei nomi dei giocatori */
     private String textFormat(final int max, final String s) {
         if (s.length() > 1) {

@@ -33,7 +33,7 @@ public class Base extends JFrame {
      *
      * @return the JPanel content pane
      */
-    public JPanel getPanel() {
+    public final JPanel getPanel() {
         JPanel panel = new JPanel();
         panel.setBackground(COLOR_BG);
         panel.setLayout(new BorderLayout());
