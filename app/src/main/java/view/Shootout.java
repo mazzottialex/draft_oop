@@ -8,7 +8,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.Serializable;
-import java.lang.instrument.UnmodifiableClassException;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -22,6 +21,7 @@ import javax.swing.SwingConstants;
 
 import controller.LogicsShootout;
 import controller.LogicsShootoutImpl;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import model.data.Player;
 import model.data.Team;
 import model.data.TeamUser;
@@ -67,6 +67,7 @@ public class Shootout extends Base implements Serializable {
      * @param t2 The second team in the penalty shoot-out.
      * @param match The {@code Match} instance.
      */
+    @SuppressFBWarnings("EI2")
     public Shootout(final Team t1, final Team t2, final Match match) {
         setBounds(UtilsGUI.getWidth(MAX_W), UtilsGUI.getHeight(MIN_H), UtilsGUI.getWidth(MIN_W), UtilsGUI.getHeight(MAX_H));
         this.t1 = t1;
@@ -230,9 +231,9 @@ public class Shootout extends Base implements Serializable {
      */
     public void setWinner(final int gol1, final int gol2) {
         if (gol1 > gol2) {
-            winner = t1;
+            winner = new TeamUser(t1.getTeamName(), t1.getLogo(), t1.getModule(), t1.getStarting(), t1.getSubstitution());
         } else {
-            winner = t2;
+            winner =  new TeamUser(t2.getTeamName(), t2.getLogo(), t2.getModule(), t2.getStarting(), t2.getSubstitution());
         }
     }
 

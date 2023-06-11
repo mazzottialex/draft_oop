@@ -12,6 +12,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import model.data.Player;
 import utils.Pair;
 /**
@@ -131,6 +132,7 @@ public final class ScrapingImpl implements Scraping {
      * @param browser the browser to check (e.g., "google-chrome" or "firefox")
      * @return {@code true} if the browser is available, {@code false} otherwise
      */
+    @SuppressFBWarnings("DMI")
     private static boolean checkBrowser(final String browser) {
         String os = System.getProperty("os.name").toLowerCase(Locale.getDefault());
         if (os.contains("win")) {

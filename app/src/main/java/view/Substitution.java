@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 
 import controller.LogicsSubstitution;
 import controller.LogicsSubstitutionImpl;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import model.data.Player;
 import model.data.Team;
 
@@ -50,6 +51,7 @@ public class Substitution extends Base {
      * @param matchGui The {@code Match} instance.
      * @param substitutionsMade The number of substitutions already made.
      */
+    @SuppressFBWarnings("")
     public Substitution(final Team team, final Match matchGui, final int substitutionsMade) {
         setBounds(UtilsGUI.getWidth(MIN_W), UtilsGUI.getHeight(MIN_H), UtilsGUI.getWidth(MAX_W), UtilsGUI.getHeight(MAX_H));
         this.team = team;
@@ -166,18 +168,6 @@ public class Substitution extends Base {
             }
         });
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-    }
-
-    public Team getTeam() {
-    	return team;
-    }
-    
-    public Match getMatchGui() {
-    	return matchGui;
-    }
-    
-    public int getSubstitutionsMade() {
-    	return substitutes;
     }
 
     /**

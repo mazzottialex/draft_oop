@@ -16,6 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import org.apache.commons.exec.ExecuteException;
+
 import controller.LogicsHistory;
 import controller.LogicsHistoryImpl;
 import model.data.Player;
@@ -57,7 +59,12 @@ public class ViewTeam extends Base {
         btnArchive.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                changeJPanel(new History(log.getSeason(), log.getOnline()));
+                try {
+					changeJPanel(new History(log.getSeason(), log.getOnline()));
+				} catch (ExecuteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
             }
         });
 

@@ -13,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import org.apache.commons.exec.ExecuteException;
+
 import controller.LogicsHistory;
 import controller.LogicsHistoryImpl;
 import model.data.Team;
@@ -50,7 +52,12 @@ public class History extends Base {
         btnHome.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                changeJPanel(new Home(log.getSeason(), log.getOnline(), false));
+                try {
+					changeJPanel(new Home(log.getSeason(), log.getOnline(), false));
+				} catch (ExecuteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
             }
         });
         panelBtn.add(btnHome);
@@ -84,7 +91,12 @@ public class History extends Base {
             btnVedi.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(final ActionEvent e) {
-                    changeJPanel(new ViewTeam(team, log.getSeason(), log.getOnline()));
+                    try {
+						changeJPanel(new ViewTeam(team, log.getSeason(), log.getOnline()));
+					} catch (ExecuteException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
                 }
             });
             panelTeam.add(btnVedi);

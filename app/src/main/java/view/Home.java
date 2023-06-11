@@ -22,6 +22,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import org.apache.commons.exec.ExecuteException;
+
 import controller.LogicsHome;
 import controller.LogicsHomeImpl;
 
@@ -191,7 +193,12 @@ public class Home extends Base {
         btnHistory.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                changeJPanel(new History(log.getSeason(), log.getOnline()));
+                try {
+					changeJPanel(new History(log.getSeason(), log.getOnline()));
+				} catch (ExecuteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
             }
         });
         gbc.gridy = GRID_Y;

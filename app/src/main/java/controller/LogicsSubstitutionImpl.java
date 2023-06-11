@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import model.data.Player;
 import model.data.Team;
 import view.Substitution;
@@ -29,6 +30,7 @@ public final class LogicsSubstitutionImpl implements LogicsSubstitution {
      * @param t   the {@code Team} instance
      * @param gui the GUI instance for player substitutions
      */
+    @SuppressFBWarnings("EI2")
     public LogicsSubstitutionImpl(final Team t, final Substitution gui) {
         starters = new ArrayList<>(t.getStarting());
         substitutes = new ArrayList<>(t.getSubstitution());
@@ -50,11 +52,13 @@ public final class LogicsSubstitutionImpl implements LogicsSubstitution {
     }
 
     @Override
+    @SuppressFBWarnings("EI2")
     public void selectStarter(final Player p) {
         subOff = p;
     }
 
     @Override
+    @SuppressFBWarnings("EI2")
     public void selectSubstitute(final Player p) {
         subOn = p;
     }

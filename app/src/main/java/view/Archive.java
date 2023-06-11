@@ -17,6 +17,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+import org.apache.commons.exec.ExecuteException;
+
 import controller.LogicsArchive;
 import controller.LogicsArchiveImpl;
 import model.data.Player;
@@ -79,7 +81,12 @@ public class Archive extends Base {
         btnHome.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                changeJPanel(new Home(log.getSeason(), log.getOnline(), false));
+                try {
+					changeJPanel(new Home(log.getSeason(), log.getOnline(), false));
+				} catch (ExecuteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
             }
         });
         panel.add(btnHome);
