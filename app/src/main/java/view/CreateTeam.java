@@ -589,7 +589,7 @@ public class CreateTeam extends Base {
             sb.append(label);
             sb.append(s.charAt(i));
             if (i % max == 0 && i != 0) {
-                label.concat("<br>");
+                sb.append("<br>");
             }
         }
         sb.append(label + s.charAt(s.length() - 2) + s.charAt(s.length() - 1));
