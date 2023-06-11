@@ -1,5 +1,6 @@
 package model.scraping;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -15,6 +16,8 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import model.data.Player;
 import utils.Pair;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * Implementation of the Scraping interface for data scraping.
  */
@@ -32,6 +35,7 @@ public final class ScrapingImpl implements Scraping {
     private static final String CHROME2 = "C:\\Program Files\\Google\\Chrome\\Application\\Chrome.exe";
     private static final String FIREFOX1 = "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe";
     private static final String FIREFOX2 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
+    private static final Logger LOG = LoggerFactory.getLogger(ScrapingImpl.class);
     /**
      * Constructs a ScrapingImpl object with the specified number of threads.
      */
@@ -67,7 +71,7 @@ public final class ScrapingImpl implements Scraping {
                 try {
                     el.getY().join();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    LOG.error("Error", e);
                     return false;
                 }
                 if (!el.getX().check()) {
@@ -134,9 +138,9 @@ public final class ScrapingImpl implements Scraping {
     private static boolean checkBrowser(final String browser) {
     	final String os = System.getProperty("os.name").toLowerCase(Locale.getDefault());
         if (os.contains("win")) {
-            if (browser.equals(BROWSER_CHROME) && (new File(CHROME1).exists() || new File(CHROME2).exists())) {
+            if (BROWSER_CHROME.equals(browser) && (new File(CHROME1).exists() || new File(CHROME2).exists())) {
                 return true;
-            } else if (browser.equals(BROWSER_FIREFOX) && (new File(FIREFOX1).exists() || new File(FIREFOX2).exists())) {
+            } else if (BROWSER_FIREFOX.equals(browser) && (new File(FIREFOX1).exists() || new File(FIREFOX2).exists())) {
         	    return true;
             }
         } else if (os.contains("nix") || os.contains("nux") || os.contains("mac")) {
@@ -146,7 +150,7 @@ public final class ScrapingImpl implements Scraping {
             	final Process process = Runtime.getRuntime().exec(istruzione);
                 process.waitFor();
                 return process.exitValue() == 0;
-            } catch (final Exception e) {
+            } catch (final InterruptedException | IOException e) {
                 return false;
             }
         }

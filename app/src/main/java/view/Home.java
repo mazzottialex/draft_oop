@@ -26,7 +26,8 @@ import org.apache.commons.exec.ExecuteException;
 
 import controller.LogicsHome;
 import controller.LogicsHomeImpl;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * The Home class represents the home screen of the application.
  */
@@ -47,7 +48,7 @@ public class Home extends Base {
     private static final Color BACKGROUND_COLOR_2 = Color.GREEN;
     private static final int GRID_Y = 5;
     private static final String FONT = "Verdana";
-
+    private static final Logger LOG = LoggerFactory.getLogger(Home.class);
     /**
      * Constructs a new Home object.
      *
@@ -103,7 +104,7 @@ public class Home extends Base {
                 try {
                     changeJPanel(new Settings(log.getLi()));
                 } catch (ClassNotFoundException | IOException e1) {
-                    e1.printStackTrace();
+                	LOG.error("Error", e1);
                 }
             }
         });
@@ -183,7 +184,7 @@ public class Home extends Base {
                 try {
                     changeJPanel(new Archive(log.getLi(), log.getSeason(), log.getOnline()));
                 } catch (ClassNotFoundException | IOException e1) {
-                    e1.printStackTrace();
+                	LOG.error("Error", e1);
                 }
             }
         });
@@ -198,7 +199,7 @@ public class Home extends Base {
                 try {
                     changeJPanel(new History(log.getSeason(), log.getOnline()));
                 } catch (ExecuteException e1) {
-                    e1.printStackTrace();
+                	LOG.error("Error", e1);
                 }
             }
         });

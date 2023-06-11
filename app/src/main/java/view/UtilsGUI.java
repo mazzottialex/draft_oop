@@ -59,7 +59,7 @@ public final class UtilsGUI {
         final JLabel lblIcona = new JLabel();
         ImageIcon img = new ImageIcon(file);
         final Image image = img.getImage();
-        final Image newimg = image.getScaledInstance(SCALE_IMG_1, SCALE_IMG_1, java.awt.Image.SCALE_SMOOTH);
+        final Image newimg = image.getScaledInstance(SCALE_IMG_1, SCALE_IMG_1, Image.SCALE_SMOOTH);
         img = new ImageIcon(newimg);
         lblIcona.setIcon(img);
         gbc.gridy = 0;

@@ -12,12 +12,14 @@ import java.util.List;
 
 import model.data.Player;
 import model.data.Team;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * Implementation of the LogicsFile interface.
  */
 public final class LogicsFileImpl implements LogicsFile {
 
+	private static final Logger LOG = LoggerFactory.getLogger(LogicsFileImpl.class);
     /**
      * Constructs a new instance of LogicsFileImpl.
      */
@@ -26,58 +28,58 @@ public final class LogicsFileImpl implements LogicsFile {
     @Override
     public List<Player> loadData(final String season) {
         List<Player> li = new ArrayList<>();
-        try (final InputStream file = ClassLoader.getSystemResourceAsStream("backup" + season + ".txt");
-        		final InputStream bstream = new BufferedInputStream(file);
-        		final ObjectInputStream ostream = new ObjectInputStream(file);) {
+        try (InputStream file = ClassLoader.getSystemResourceAsStream("backup" + season + ".txt");
+        		InputStream bstream = new BufferedInputStream(file);
+        		ObjectInputStream ostream = new ObjectInputStream(file);) {
             li = (List<Player>) ostream.readObject();
             ostream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (ClassNotFoundException | IOException e) {
+        	LOG.error("Error", e);
+		} 
         return li;
     }
 
     @Override
     public Boolean saveData(final List<Player> li, final String season) {
-        try (final OutputStream file = new FileOutputStream("src/main/resources/backup" + season + ".txt");
-        		final OutputStream bstream = new BufferedOutputStream(file);
-        		final ObjectOutputStream ostream = new ObjectOutputStream(file);) {
+        try (OutputStream file = new FileOutputStream("src/main/resources/backup" + season + ".txt");
+        		OutputStream bstream = new BufferedOutputStream(file);
+        		ObjectOutputStream ostream = new ObjectOutputStream(file);) {
             ostream.writeObject(li);
             ostream.close();
-        } catch (final Exception e) {
-            return false;
-        }
+        } catch (IOException  e) {
+        	LOG.error("Error", e);
+		}
         return true;
     }
 
     @Override
     public List<String> loadSeason() {
         List<String> ls = new ArrayList<>();
-        try (final InputStream file = ClassLoader.getSystemResourceAsStream("backupSeasons.txt");
-        		final InputStream bstream = new BufferedInputStream(file);
-        		final ObjectInputStream ostream = new ObjectInputStream(file);) {
+        try (InputStream file = ClassLoader.getSystemResourceAsStream("backupSeasons.txt");
+        		InputStream bstream = new BufferedInputStream(file);
+        		ObjectInputStream ostream = new ObjectInputStream(file);) {
             String str;
             while ((str = ostream.readUTF()) != null) {
                 ls.add(str);
             }
             ostream.close();
-        } catch (final Exception e) {
-            //e.printStackTrace();
-        }
+        }  catch (IOException e) {
+        	LOG.error("Error", e);
+		}
         return ls;
     }
 
     @Override
     public Boolean saveSeason(final List<String> li) {
-        try (final OutputStream file = new FileOutputStream("src/main/resources/backupSeasons.txt");
-        		final OutputStream bstream = new BufferedOutputStream(file);
-        		final ObjectOutputStream ostream = new ObjectOutputStream(file);) {
+        try (OutputStream file = new FileOutputStream("src/main/resources/backupSeasons.txt");
+        		OutputStream bstream = new BufferedOutputStream(file);
+        		ObjectOutputStream ostream = new ObjectOutputStream(file);) {
             li.forEach(s -> {
-                try {
-                    ostream.writeUTF(s);
-                } catch (final IOException e) {
-                    e.printStackTrace();
-                }
+                    try {
+						ostream.writeUTF(s);
+					}  catch (IOException e) {
+			        	LOG.error("Error", e);
+					}
             });
             ostream.close();
         } catch (final Exception e) {
@@ -89,29 +91,29 @@ public final class LogicsFileImpl implements LogicsFile {
     @SuppressWarnings("unchecked")
     @Override
     public List<Team> loadHistory() {
-        try (final InputStream file = ClassLoader.getSystemResourceAsStream("history.txt");
-        		final InputStream bstream = new BufferedInputStream(file);
-        		final ObjectInputStream ostream = new ObjectInputStream(file);) {
+        try (InputStream file = ClassLoader.getSystemResourceAsStream("history.txt");
+        	    InputStream bstream = new BufferedInputStream(file);
+        		ObjectInputStream ostream = new ObjectInputStream(file);) {
             List<Team> li = (List<Team>) ostream.readObject();
             ostream.close();
             return li;
-        } catch (final Exception e) {
-            return new ArrayList<>();
-        }
+        } catch (IOException | ClassNotFoundException e) {
+        	return new ArrayList<>();
+		}
     }
 
     @Override
     public Boolean saveHistory(final Team s) {
         List<Team> li = loadHistory();
         li.add(s);
-        try (final OutputStream file = new FileOutputStream("src/main/resources/history.txt");
-        		final OutputStream bstream = new BufferedOutputStream(file);
-        		final ObjectOutputStream ostream = new ObjectOutputStream(file);) {
+        try (OutputStream file = new FileOutputStream("src/main/resources/history.txt");
+        		OutputStream bstream = new BufferedOutputStream(file);
+        		ObjectOutputStream ostream = new ObjectOutputStream(file);) {
             ostream.writeObject(li);
             ostream.close();
-        } catch (final Exception e) {
-            return false;
-        }
+        } catch (IOException e) {
+        	LOG.error("Error", e);
+		}
         return true;
     }
 }

@@ -19,7 +19,7 @@ public interface ManageData {
      * Loads the data of players.
      * @throws Exception 
      */
-    void loadData() throws Exception;
+    void loadData();
 
     /**
      * Downloads the data of players.
