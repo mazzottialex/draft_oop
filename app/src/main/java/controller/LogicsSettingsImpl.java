@@ -32,7 +32,7 @@ public final class LogicsSettingsImpl implements LogicsSettings {
      * @param li the list of players
      */
     public LogicsSettingsImpl(final List<Player> li) {
-        this.li = li;
+        this.li = new ArrayList<>(li);
         this.logo = DEFAULT_LOGO;
         this.teamName = DEFAULT_TEAM_NAME;
     }

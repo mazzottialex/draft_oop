@@ -25,6 +25,7 @@ import controller.LogicsMatch;
 import controller.LogicsMatchImpl;
 import model.data.Player;
 import model.data.Team;
+import model.data.TeamUser;
 
 /**
  * Represents a football match GUI.
@@ -83,8 +84,8 @@ public class Match extends Base implements Serializable {
     public Match(final Team t1, final Team t2) throws FileNotFoundException, ClassNotFoundException, IOException {
         setBounds(UtilsGUI.getWidth(MAX_MIN_W), UtilsGUI.getHeight(MIN_H), UtilsGUI.getWidth(MAX_MIN_W),
                 UtilsGUI.getHeight(MAX_H));
-        this.t1 = t1;
-        this.t2 = t2;
+        this.t1 = new TeamUser(t1.getTeamName(), t1.getLogo(), t1.getModule(), t1.getStarting(), t1.getSubstitution());
+        this.t2 = new TeamUser(t2.getTeamName(), t2.getLogo(), t2.getModule(), t2.getStarting(), t2.getSubstitution());
         match = this;
 
         // Define the panel to hold the components
@@ -373,7 +374,7 @@ public class Match extends Base implements Serializable {
      * @param goal2 the number of penalties scored by the second team.
      */
     public void setWinnerSh(final Team team, final int goal1, final int goal2) {
-        winner = team;
+        winner = new TeamUser(team.getTeamName(), team.getLogo(), team.getModule(), team.getStarting(), team.getSubstitution());
         labelScoreTeam1.setText(score1 + " (" + goal1 + ")");
         labelScoreTeam2.setText(score2 + " (" + goal2 + ")");
         startStopButton.setEnabled(false);
@@ -430,7 +431,8 @@ public class Match extends Base implements Serializable {
      * @return The winning team.
      */
     public Team getWinner() {
-        return winner;
+        Team copiaTeam=new TeamUser(winner.getTeamName(), winner.getLogo(), winner.getModule(), winner.getStarting(), winner.getStartingDesc());
+    	return copiaTeam;
     }
 
     /**

@@ -24,6 +24,7 @@ import controller.LogicsShootout;
 import controller.LogicsShootoutImpl;
 import model.data.Player;
 import model.data.Team;
+import model.data.TeamUser;
 import utils.Pair;
 
 /**
@@ -217,7 +218,8 @@ public class Shootout extends Base implements Serializable {
      * @return The winning team.
      */
     public Team getWinner() {
-        return winner;
+        Team copiaTeam=new TeamUser(winner.getTeamName(), winner.getLogo(), winner.getModule(), winner.getStarting(), winner.getStartingDesc());
+    	return copiaTeam;
     }
 
     /**

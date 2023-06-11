@@ -164,6 +164,18 @@ public class Substitution extends Base {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
+    public Team getTeam() {
+    	return team;
+    }
+    
+    public Match getMatchGui() {
+    	return matchGui;
+    }
+    
+    public int getSubstitutionsMade() {
+    	return substitutes;
+    }
+
     /**
      * Closes the {@code Substitution} window.
      */
