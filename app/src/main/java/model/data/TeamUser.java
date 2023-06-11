@@ -112,7 +112,7 @@ public final class TeamUser implements Team, Serializable {
     @Override
     public Player getPlayerById(final int id) {
         Player c = null;
-        for (Player player: liPlayers) {
+        for (final Player player: liPlayers) {
             if (player.getId() == id) {
                 c = player;
             }
@@ -123,8 +123,8 @@ public final class TeamUser implements Team, Serializable {
     @Override
     public Player getStartingKeeper() {
         Player keeper = null;
-        for (Player player: getStarting()) {
-            if (player.getPos().equals("P")) {
+        for (final Player player: getStarting()) {
+            if ("P".equals(player.getPos())) {
                 keeper = player;
             }
         }

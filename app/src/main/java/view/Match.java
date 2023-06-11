@@ -34,36 +34,34 @@ import model.data.Team;
  */
 public class Match extends Base implements Serializable {
     private static final long serialVersionUID = 3533149128342164934L;
-    final private JPanel contentPane = new JPanel();
-    final private JProgressBar progressBar;
-    final private JLabel labelNameTeam1;
-    final private JLabel labelScoreTeam1;
-    final private JLabel labelReportTeam1;
-    final private JLabel labelNameTeam2;
-    final private JLabel labelScoreTeam2;
-    final private JLabel labelReportTeam2;
-    final private JButton startStopButton;
-    final private JButton subsButton;
-    final private JButton goAheadButton;
-    final private JPanel panel;
+    private final JPanel contentPane = new JPanel();
+    private final JProgressBar progressBar;
+    private final JLabel labelScoreTeam1;
+    private final JLabel labelReportTeam1;
+    private final JLabel labelScoreTeam2;
+    private final JLabel labelReportTeam2;
+    private final JButton startStopButton;
+    private final JButton subsButton;
+    private final JButton goAheadButton;
+    private final JPanel panel;
     private transient LogicsMatch logics;
-    final private Team t1;
-    final private Team t2;
+    private final Team t1;
+    private final Team t2;
     private boolean isRunning;
     private boolean changeResult;
     private int fullTime;
     private Team winner;
-    final private List<Player> report1;
-    final private List<Player> report2;
+    private final List<Player> report1;
+    private final List<Player> report2;
     private boolean shootsout;
     private Shootout shootsoutGui;
     private String string1 = "";
     private String string2 = "";
-    final private String htmlOpen = "<html>";
-    final private String htmlClose = "</html>";
+    private static final String HTML_OPEN = "<html>";
+    private static final String HTML_CLOSE = "</html>";
     private int substitutions;
     private Substitution subGui;
-    final private Match matchGui;
+    private final Match matchGui;
     private int score1;
     private int score2;
     private static final int IPADX_CENTER = 50;
@@ -99,12 +97,12 @@ public class Match extends Base implements Serializable {
         //define components
         score1 = 0;
         score2 = 0;
-        labelNameTeam1 = new JLabel(t1.getTeamName(), SwingConstants.RIGHT);
+        final JLabel labelNameTeam1 = new JLabel(t1.getTeamName(), SwingConstants.RIGHT);
         labelScoreTeam1 = new JLabel(String.valueOf(score1), SwingConstants.RIGHT);
         labelScoreTeam1.setVerticalAlignment(SwingConstants.TOP);
         labelReportTeam1 = new JLabel("", SwingConstants.RIGHT);
         labelReportTeam1.setVerticalAlignment(SwingConstants.TOP);
-        labelNameTeam2 = new JLabel(t2.getTeamName(), SwingConstants.LEFT);
+        final JLabel labelNameTeam2 = new JLabel(t2.getTeamName(), SwingConstants.LEFT);
         labelScoreTeam2 = new JLabel(String.valueOf(score2), SwingConstants.LEFT);
         labelScoreTeam2.setVerticalAlignment(SwingConstants.TOP);
         labelReportTeam2 = new JLabel("", SwingConstants.LEFT);
@@ -404,7 +402,7 @@ public class Match extends Base implements Serializable {
             }
             string1 = string1 + Integer.toString(progressBar.getValue())
                     + "' Gol: " + player.getName() + owngoal + "<br>";
-            labelReportTeam1.setText(htmlOpen + string1 + htmlClose);
+            labelReportTeam1.setText(HTML_OPEN + string1 + HTML_CLOSE);
             score1++;
             labelScoreTeam1.setText(String.valueOf(score1));
         }
@@ -417,7 +415,7 @@ public class Match extends Base implements Serializable {
             }
             string2 = string2 + Integer.toString(progressBar.getValue())
                     + "' Gol: " + player.getName() + owngoal + "<br>";
-            labelReportTeam2.setText(htmlOpen + string2 + htmlClose);
+            labelReportTeam2.setText(HTML_OPEN + string2 + HTML_CLOSE);
             score2++;
             labelScoreTeam2.setText(String.valueOf(score2));
         }
