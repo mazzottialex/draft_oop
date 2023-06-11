@@ -49,7 +49,7 @@ public class Tournament extends Base {
     private static final int ROUND = 20;
     private static final double MIN_W_H = 0.1;
     private static final double MAX_W_H = 0.8;
-    private final transient LogicsTournament logTor;
+    private final LogicsTournament logTor;
     private final JPanel panelSud = new JPanel(new FlowLayout(FlowLayout.RIGHT));
     private final GridLayout gl = new GridLayout(6, 1);
     private final JPanel panelCenter = new JPanel(gl);
