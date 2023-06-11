@@ -24,6 +24,7 @@ import javax.swing.SwingUtilities;
 
 import controller.LogicsMatch;
 import controller.LogicsMatchImpl;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import model.data.Player;
 import model.data.Team;
 import model.data.TeamUser;
@@ -82,6 +83,7 @@ public class Match extends Base implements Serializable {
      * @throws ClassNotFoundException If a class is not found.
      * @throws IOException If an I/O error occurs.
      */
+    @SuppressFBWarnings("EI2")
     public Match(final Team t1, final Team t2) throws FileNotFoundException, ClassNotFoundException, IOException {
         setBounds(UtilsGUI.getWidth(MAX_MIN_W), UtilsGUI.getHeight(MIN_H), UtilsGUI.getWidth(MAX_MIN_W),
                 UtilsGUI.getHeight(MAX_H));
