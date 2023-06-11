@@ -145,12 +145,8 @@ public class CreateTeam extends Base {
                         topFrame.validate();
                         topFrame.repaint();
                         topFrame.pack();
-                    } catch (FileNotFoundException e1) {
-                        LOG.error("Error", e);
-                    } catch (ClassNotFoundException e1) {
-                        LOG.error("Error", e);
-                    } catch (IOException e1) {
-                        LOG.error("Error", e);
+                    } catch (ClassNotFoundException | IOException e1) {
+                        LOG.error("Error", e1);
                     }
                     frameCalciatori.setVisible(false);
                     frameModulo.setVisible(false);
