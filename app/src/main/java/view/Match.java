@@ -163,13 +163,11 @@ public class Match extends Base implements Serializable {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 3;
-        //        gbc.ipady = 200;
         panel.add(labelReportTeam1, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 2;
         gbc.gridy = 3;
-        //        gbc.ipady = 200;
         panel.add(labelReportTeam2, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
