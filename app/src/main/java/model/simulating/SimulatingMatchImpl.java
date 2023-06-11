@@ -16,29 +16,29 @@ import model.managedata.ExtractDataImpl;
  */
 public final class SimulatingMatchImpl implements SimulatingMatch, Serializable {
     private static final long serialVersionUID = -7975364128825077937L;
-    private SimulatingFunctions sf;
-    private Team t1;
-    private Team t2;
-    private Map<Player, Double> ratings1;
-    private Map<Player, Double> ratings2;
-    private int concededGoals1;
-    private int concededGoals2;
-    private int owngoals1;
-    private int owngoals2;
-    private int savedPenalties1;
-    private int savedPenalties2;
-    private double lockdownDefense1;
-    private double lockdownDefense2;
-    private Map<String, Double> modifiedRatings1;
-    private Map<String, Double> modifiedRatings2;
-    private double defensiveRatings1;
-    private double defensiveRatings2;
-    private double offensiveRatings1;
-    private double offensiveRatings2;
-    private int scoredGoals1;
-    private int scoredGoals2;
-    private int scoredPenalties1;
-    private int scoredPenalties2;
+    final private SimulatingFunctions sf;
+    final private Team t1;
+    final private Team t2;
+    final private Map<Player, Double> ratings1;
+    final private Map<Player, Double> ratings2;
+    final private int concededGoals1;
+    final private int concededGoals2;
+    final private int owngoals1;
+    final private int owngoals2;
+    final private int savedPenalties1;
+    final private int savedPenalties2;
+    final private double lockdownDefense1;
+    final private double lockdownDefense2;
+    final private Map<String, Double> modifiedRatings1;
+    final private Map<String, Double> modifiedRatings2;
+    final private double defensiveRatings1;
+    final private double defensiveRatings2;
+    final private double offensiveRatings1;
+    final private double offensiveRatings2;
+    final private int scoredGoals1;
+    final private int scoredGoals2;
+    final private int scoredPenalties1;
+    final private int scoredPenalties2;
     private static final double COST_SUB_DEF = 14; // da aumentare a 15
     private static final double COST_SUB_OFF = 5; // da aumentare a 7
     private static final double COST_DIV_DEF_OFF_CR = 5;
@@ -95,10 +95,10 @@ public final class SimulatingMatchImpl implements SimulatingMatch, Serializable 
     private double defensivePerformance(final Team team)
             throws FileNotFoundException, ClassNotFoundException, IOException {
         double dp = 0;
-        if (team == t1) {
+        if (team.equals(t1)) {
             dp = (defensiveRatings1 + new ExtractDataImpl(t1.getStarting()).getListByPos("D").size() + lockdownDefense1
                     - 2 * concededGoals1 - 2 * owngoals1 + 3 * savedPenalties1 - COST_SUB_DEF) / COST_DIV_DEF_OFF_CR;
-        } else if (team == t2) {
+        } else if (team.equals(t2)) {
             dp = (defensiveRatings2 + new ExtractDataImpl(t2.getStarting()).getListByPos("D").size() + lockdownDefense2
                     - 2 * concededGoals2 - 2 * owngoals2 + 3 * savedPenalties2 - COST_SUB_DEF) / COST_DIV_DEF_OFF_CR;
         }
@@ -117,9 +117,9 @@ public final class SimulatingMatchImpl implements SimulatingMatch, Serializable 
     private double scoringAbility(final Team team)
             throws FileNotFoundException, ClassNotFoundException, IOException {
         double sa = 0;
-        if (team == t1) {
+        if (team.equals(t1)) {
             sa = scoredGoals1 + owngoals2 + scoredPenalties1;
-        } else if (team == t2) {
+        } else if (team.equals(t2)) {
             sa = scoredGoals2 + owngoals1 + scoredPenalties2;
         }
         return sa;
@@ -137,9 +137,9 @@ public final class SimulatingMatchImpl implements SimulatingMatch, Serializable 
     private double offensivePerformance(final Team team)
             throws FileNotFoundException, ClassNotFoundException, IOException {
         double op = 0;
-        if (team == t1) {
+        if (team.equals(t1)) {
             op = (offensiveRatings1 + (scoringAbility(team) / 2) - COST_SUB_OFF) / COST_DIV_DEF_OFF_CR;
-        } else if (team == t2) {
+        } else if (team.equals(t2)) {
             op = (offensiveRatings2 + (scoringAbility(team) / 2) - COST_SUB_OFF) / COST_DIV_DEF_OFF_CR;
         }
         return op;
@@ -148,11 +148,11 @@ public final class SimulatingMatchImpl implements SimulatingMatch, Serializable 
     @Override
     public Map<Team, Integer> result(final int minute)
             throws FileNotFoundException, ClassNotFoundException, IOException {
-        int team1 = (int) Math.round(Math.min(scoringAbility(t1),
-            (offensivePerformance(t1) - defensivePerformance(t2))));
-        int team2 = (int) Math.round(Math.min(scoringAbility(t2),
-            (offensivePerformance(t2) - defensivePerformance(t1))));
-        Map<Team, Integer> map = new HashMap<>();
+        final int team1 = (int) Math.round(Math.min(scoringAbility(t1),
+            offensivePerformance(t1) - defensivePerformance(t2)));
+        final int team2 = (int) Math.round(Math.min(scoringAbility(t2),
+            offensivePerformance(t2) - defensivePerformance(t1)));
+        final Map<Team, Integer> map = new HashMap<>();
         if (minute == START) {
             map.put(this.t1, team1 >= 0 ? team1 : 0);
             map.put(this.t2, team2 >= 0 ? team2 : 0);

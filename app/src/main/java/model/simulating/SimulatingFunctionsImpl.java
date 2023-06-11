@@ -21,14 +21,14 @@ import model.managedata.ExtractDataImpl;
 public final class SimulatingFunctionsImpl implements SimulatingFunctions, Serializable {
 
     private static final long serialVersionUID = -1388612538618774091L;
-    private Random r = new Random();
-    private static final double OWNGOAL_RATE = 2.904040404040404; // percentuale di autogol su gol
+    final private Random r = new Random();
+    private static final double OWNGOAL_RATE = 2.904_040_404_040_404; // percentuale di autogol su gol
     private static final double PENALTY_RATE = 0.2875; // rigori per partita
-    private static final double MISSED_PENALTIES_RATE = 22.82608695652174; // percentuale rigori sbagliati
-    private static final double COST_VOTE_P = 0.0746835443037975; // costante calcolo voto portiere
-    private static final double COST_VOTE_D = 0.0721518987341772; // costante calcolo voto difensore
-    private static final double COST_VOTE_C = 0.0753086419753086; // costante calcolo voto centrocampista
-    private static final double COST_VOTE_A = 0.0729411764705882; // costante calcolo voto attaccante
+    private static final double MISSED_PENALTIES_RATE = 22.826_086_956_521_74; // percentuale rigori sbagliati
+    private static final double COST_VOTE_P = 0.0746_835_443_037_975; // costante calcolo voto portiere
+    private static final double COST_VOTE_D = 0.072_151_898_734_177_2; // costante calcolo voto difensore
+    private static final double COST_VOTE_C = 0.075_308_641_975_308_6; // costante calcolo voto centrocampista
+    private static final double COST_VOTE_A = 0.072_941_176_470_588_2; // costante calcolo voto attaccante
     private static final int THRESHOLD_GOAL_1 = 51;
     private static final int THRESHOLD_GOAL_2 = 77;
     private static final int THRESHOLD_GOAL_3 = 90;
@@ -63,7 +63,9 @@ public final class SimulatingFunctionsImpl implements SimulatingFunctions, Seria
     /**
      * Constructs a new instance of the {@code SimulatingFunctionsImpl} class.
      */
-    public SimulatingFunctionsImpl() { }
+    public SimulatingFunctionsImpl() {
+    	// This constructor is intentionally empty.
+    }
 
     /**
      * Generates a random number within the specified range.
@@ -83,14 +85,14 @@ public final class SimulatingFunctionsImpl implements SimulatingFunctions, Seria
      * @return The fantasy rating for the player.
      */
     public double getFantasyPlayerRating(final Player p) {
-        double k = ROLE_COEFFICIENT_MAP.getOrDefault(p.getPos(), 0.0);
+        final double k = ROLE_COEFFICIENT_MAP.getOrDefault(p.getPos(), 0.0);
         return k * p.getRating().getX() * prob(MOD_MIN, MOD_MAX);
     }
 
     @Override
     public Map<Player, Double> getFantasyRantings(final List<Player> starters) {
-        Map<Player, Double> map = new LinkedHashMap<>();
-        for (Player p: starters) {
+        final Map<Player, Double> map = new LinkedHashMap<>();
+        for (final Player p: starters) {
             map.put(p, getFantasyPlayerRating(p));
         }
         return map;
@@ -98,14 +100,14 @@ public final class SimulatingFunctionsImpl implements SimulatingFunctions, Seria
 
     @Override
     public int getFantasyConcededGoals(final Team t) throws FileNotFoundException, ClassNotFoundException, IOException {
-        ExtractData ed = new ExtractDataImpl(t.getStarting());
-        Player gk = ed.getListByPos("P").get(0);
-        double probCleanSheet = (double) gk.getCleanSheets() / (gk.getMatchesPlayed() == 0 ? 1 : gk.getMatchesPlayed());
+        final ExtractData ed = new ExtractDataImpl(t.getStarting());
+        final Player gk = ed.getListByPos("P").get(0);
+        final double probCleanSheet = (double) gk.getCleanSheets() / (gk.getMatchesPlayed() == 0 ? 1 : gk.getMatchesPlayed());
         if (prob(0, 1) <= probCleanSheet) {
             return 0;
         } else {
             int goals = 1;
-            int p = (int) (1 + (prob(0, 1) * 100));
+            final int p = (int) (1 + (prob(0, 1) * 100));
             if (p > THRESHOLD_GOAL_1 && p <= THRESHOLD_GOAL_2) {
                 goals = 2;
             } else if (p > THRESHOLD_GOAL_2 && p <= THRESHOLD_GOAL_3) {
@@ -135,11 +137,10 @@ public final class SimulatingFunctionsImpl implements SimulatingFunctions, Seria
     @Override
     public int getFantasySavedPenalties(final Team t)
     throws FileNotFoundException, ClassNotFoundException, IOException {
-        int penalties = getPenalties();
+        final int penalties = getPenalties();
         int savedPenalties = 0;
-        double prob = prob(0, 1);
+        final double prob = prob(0, 1);
         for (int i = 0; i < penalties; i++) {
-            prob = prob(0, 1);
             if (prob <= MISSED_PENALTIES_RATE) {
                 savedPenalties++;
             }
@@ -149,7 +150,7 @@ public final class SimulatingFunctionsImpl implements SimulatingFunctions, Seria
     
     private int getPenalties() {
         int penalties = 0;
-        double prob = prob(0, 1);
+        final double prob = prob(0, 1);
         if (prob <= Math.pow(PENALTY_RATE, 3)) {
             penalties = 3;
         } else if (prob > Math.pow(PENALTY_RATE, 3)
@@ -164,13 +165,13 @@ public final class SimulatingFunctionsImpl implements SimulatingFunctions, Seria
 
     @Override
     public double getLockdownDefenseRating(final Team t, final Map<Player, Double> defendersRatings) {
-        ExtractData ed = new ExtractDataImpl(t.getStarting());
+        final ExtractData ed = new ExtractDataImpl(t.getStarting());
         final List<Player> defenders = ed.getListByPos("D");
         double count = 0;
         double totRatings = 0;
         if (defenders.size() >= 3) {
-            double threshold = defenders.size() == 3 ? THRESHOLD_3_DIF : THRESHOLD_4_5_DIF;
-            for (Player c : defenders) {
+            final double threshold = defenders.size() == 3 ? THRESHOLD_3_DIF : THRESHOLD_4_5_DIF;
+            for (final Player c : defenders) {
                 if (defendersRatings.get(c) >= threshold) {
                     totRatings += defendersRatings.get(c);
                 } else {
@@ -193,14 +194,14 @@ public final class SimulatingFunctionsImpl implements SimulatingFunctions, Seria
 
     @Override
     public Map<String, Double> modifiedFantasyRatings(final Team t, final Map<Player, Double> mapRatings) {
-        Map<String, Double> mapModifiedRatings = new HashMap<>();
-        for (Player p : t.getStarting()) {
-            String role = p.getPos();
-            double rating = mapRatings.get(p) - SUB_VOTE;
+        final Map<String, Double> mapModifiedRatings = new HashMap<>();
+        for (final Player p : t.getStarting()) {
+            final String role = p.getPos();
+            final double rating = mapRatings.get(p) - SUB_VOTE;
             if (!mapModifiedRatings.containsKey(role)) {
                 mapModifiedRatings.put(role, rating);
             } else {
-                double old = mapModifiedRatings.get(role);
+                final double old = mapModifiedRatings.get(role);
                 mapModifiedRatings.put(role, old + rating);
             }
         }
@@ -211,22 +212,22 @@ public final class SimulatingFunctionsImpl implements SimulatingFunctions, Seria
     @Override
     public double getFantasyDefensiveRating(final Team t, final Map<String, Double> v)
     throws FileNotFoundException, ClassNotFoundException, IOException {
-        return (MOD_VOTE_DIF_D * (v.get("P") + v.get("D"))) + (MOD_VOTE_DIF_C * v.get("D"))
-            + (MOD_VOTE_DIF_A * v.get("A"));
+        return MOD_VOTE_DIF_D * (v.get("P") + v.get("D")) + MOD_VOTE_DIF_C * v.get("D")
+            + MOD_VOTE_DIF_A * v.get("A");
     }
 
     @Override
     public double getFantasyOffensiveRating(final Team t, final Map<String, Double> v)
     throws FileNotFoundException, ClassNotFoundException, IOException {
-        return (MOD_VOTE_OFF_D * (v.get("D"))) + (MOD_VOTE_OFF_C * v.get("D")) + (MOD_VOTE_OFF_A * v.get("A"));
+        return MOD_VOTE_OFF_D * v.get("D") + MOD_VOTE_OFF_C * v.get("D") + MOD_VOTE_OFF_A * v.get("A");
     }
 
     @Override
     public int getFantasyScoredGoals(final Team t) throws FileNotFoundException, ClassNotFoundException, IOException {
         int goal = 0;
-        for (Player p: t.getStarting()) {
-            double probGoal = p.getGoals() / (p.getMinutes() / MINUTES);
-            double prob = prob(0, 1);
+        for (final Player p: t.getStarting()) {
+            final double probGoal = p.getGoals() / (p.getMinutes() / MINUTES);
+            final double prob = prob(0, 1);
             if (prob <= Math.pow(probGoal, 3)) {
                 goal += 3;
             } else if (prob > Math.pow(probGoal, 3) && prob <= Math.pow(probGoal, 2) + Math.pow(probGoal, 3)) {
@@ -242,7 +243,7 @@ public final class SimulatingFunctionsImpl implements SimulatingFunctions, Seria
     @Override
     public int getDeltaScoredSavedPenalties(final Team t)
     throws FileNotFoundException, ClassNotFoundException, IOException {
-        int penalties = getPenalties();
+        final int penalties = getPenalties();
         int missedPenalties = 0;
         double prob = prob(0, 1);
         for (int i = 0; i < penalties; i++) {

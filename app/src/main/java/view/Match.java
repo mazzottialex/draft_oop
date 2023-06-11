@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -33,36 +34,36 @@ import model.data.Team;
  */
 public class Match extends Base implements Serializable {
     private static final long serialVersionUID = 3533149128342164934L;
-    private JPanel contentPane = new JPanel();
-    private JProgressBar progressBar;
-    private JLabel labelNameTeam1;
-    private JLabel labelScoreTeam1;
-    private JLabel labelReportTeam1;
-    private JLabel labelNameTeam2;
-    private JLabel labelScoreTeam2;
-    private JLabel labelReportTeam2;
-    private JButton startStopButton;
-    private JButton subsButton;
-    private JButton goAheadButton;
-    private JPanel panel;
+    final private JPanel contentPane = new JPanel();
+    final private JProgressBar progressBar;
+    final private JLabel labelNameTeam1;
+    final private JLabel labelScoreTeam1;
+    final private JLabel labelReportTeam1;
+    final private JLabel labelNameTeam2;
+    final private JLabel labelScoreTeam2;
+    final private JLabel labelReportTeam2;
+    final private JButton startStopButton;
+    final private JButton subsButton;
+    final private JButton goAheadButton;
+    final private JPanel panel;
     private transient LogicsMatch logics;
-    private Team t1;
-    private Team t2;
+    final private Team t1;
+    final private Team t2;
     private boolean isRunning;
     private boolean changeResult;
     private int fullTime;
     private Team winner;
-    private ArrayList<Player> report1;
-    private ArrayList<Player> report2;
+    final private List<Player> report1;
+    final private List<Player> report2;
     private boolean shootsout;
     private Shootout shootsoutGui;
     private String string1 = "";
     private String string2 = "";
-    private String htmlOpen = "<html>";
-    private String htmlClose = "</html>";
+    final private String htmlOpen = "<html>";
+    final private String htmlClose = "</html>";
     private int substitutions;
     private Substitution subGui;
-    private Match match;
+    final private Match matchGui;
     private int score1;
     private int score2;
     private static final int IPADX_CENTER = 50;
@@ -88,11 +89,11 @@ public class Match extends Base implements Serializable {
                 UtilsGUI.getHeight(MAX_H));
         this.t1 = t1;
         this.t2 = t2;
-        match = this;
+        matchGui = this;
 
         // Define the panel to hold the components
         panel = new JPanel(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
+        final GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
 
         //define components
@@ -176,7 +177,7 @@ public class Match extends Base implements Serializable {
         gbc.ipady = GRID_5;
         panel.add(progressBar, gbc);
 
-        JPanel southWest = new JPanel();
+        final JPanel southWest = new JPanel();
         southWest.add(subsButton);
         gbc.gridx = 0;
         gbc.gridy = GRID_5;
@@ -190,7 +191,7 @@ public class Match extends Base implements Serializable {
         gbc.ipady = GRID_5;
         panel.add(startStopButton, gbc);
 
-        JPanel southEast = new JPanel();
+        final JPanel southEast = new JPanel();
         southEast.add(goAheadButton);
         gbc.gridx = 2;
         gbc.gridy = GRID_5;
@@ -213,7 +214,7 @@ public class Match extends Base implements Serializable {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 stopProgress();
-                subGui = new Substitution(t1, match, substitutions);
+                subGui = new Substitution(t1, matchGui, substitutions);
                 subGui.setVisible(true);
             }
         });
@@ -243,15 +244,15 @@ public class Match extends Base implements Serializable {
      * @throws Exception 
      */
     public void addSub() throws Exception {
-        int s = t1.getSubstitution().size();
+        final int s = t1.getSubstitution().size();
         updateTeam();
         if (s == t1.getSubstitution().size()) {
             substitutions++;
         }
         if (substitutions == 3) {
-            Container cont = subsButton.getParent();
+            final Container cont = subsButton.getParent();
             if (cont instanceof JPanel) {
-                JPanel panel = (JPanel) cont;
+                final JPanel panel = (JPanel) cont;
                 subsButton.setEnabled(false);
                 panel.revalidate();
                 panel.repaint();
@@ -276,7 +277,7 @@ public class Match extends Base implements Serializable {
     private void startProgress() {
         startStopButton.setText("Stop");
         isRunning = true;
-        Thread thread = new Thread(new Runnable() {
+        final Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 if (!changeResult) {
@@ -295,7 +296,7 @@ public class Match extends Base implements Serializable {
                         public void run() {
                             //Make progress.
                             progressBar.setValue(value);
-                            progressBar.setString("Minuto " + String.valueOf(value) + "°");
+                            progressBar.setString("Minuto " + value + "°");
                             // chiama funzione per gol
                             try {
                                 changeScore();
@@ -350,7 +351,7 @@ public class Match extends Base implements Serializable {
                         JOptionPane.showMessageDialog(null, "Fine tempi supplementari. Si va ai calci di rigore");
                         startStopButton.setEnabled(false);
                         shootsout = true;
-                        shootsoutGui = new Shootout(t1, t2, match);
+                        shootsoutGui = new Shootout(t1, t2, matchGui);
                         SwingUtilities.invokeLater(() -> {
                             shootsoutGui.createAndShowGUI();
                         });
@@ -396,7 +397,7 @@ public class Match extends Base implements Serializable {
     private void changeScore() throws FileNotFoundException, ClassNotFoundException, IOException {
         if (logics.getGoalsMinutes(t1).contains(progressBar.getValue())) {
             report1.add(logics.addScorer(t1));
-            Player player = report1.get(report1.size() - 1);
+            final Player player = report1.get(report1.size() - 1);
             String owngoal = "";
             if (!t1.getStarting().contains(player)) {
                 owngoal = " (AG)";
@@ -409,7 +410,7 @@ public class Match extends Base implements Serializable {
         }
         if (logics.getGoalsMinutes(t2).contains(progressBar.getValue())) {
             report2.add(logics.addScorer(t2));
-            Player player = report2.get(report2.size() - 1);
+            final Player player = report2.get(report2.size() - 1);
             String owngoal = "";
             if (!t2.getStarting().contains(player)) {
                 owngoal = " (AG)";

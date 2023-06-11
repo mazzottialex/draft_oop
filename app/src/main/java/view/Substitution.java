@@ -27,13 +27,13 @@ import model.data.Team;
 public class Substitution extends Base {
     private static final long serialVersionUID = 5244133982320404420L;
     private final List<String> roles = List.of("P", "D", "C", "A");
-    private JPanel panelTeam = new JPanel();
+    final private JPanel panelTeam = new JPanel();
     private transient LogicsSubstitution logics;
-    private Team team;
-    private Match matchGui;
+    final private Team team;
+    final private Match matchGui;
     private JPanel panelStarters;
     private JPanel panelSubstitutes;
-    private int substitutes;
+    final private int substitutes;
     private static final int SUBSTITUTES = 7;
     private static final int INSETS_5 = 5;
     private static final int GRID_5 = 5;
@@ -64,13 +64,13 @@ public class Substitution extends Base {
         logics = new LogicsSubstitutionImpl(team, this);
         panelStarters = null;
         panelSubstitutes = null;
-        GridBagConstraints gbc = new GridBagConstraints();
+        final GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(INSETS_5, INSETS_5, 2, 2);
-        GridBagLayout layout = new GridBagLayout();
+        final GridBagLayout layout = new GridBagLayout();
         super.getPanel().setLayout(layout);
         panelTeam.setBackground(super.getForeground());
 
-        JLabel labelTeamName = new JLabel("Titolari");
+        final JLabel labelTeamName = new JLabel("Titolari");
         labelTeamName.setFont(new Font("Verdana", Font.ROMAN_BASELINE, 16));
         labelTeamName.setForeground(Color.white);
         panelTeam.add(labelTeamName);
@@ -84,8 +84,8 @@ public class Substitution extends Base {
         for (int i = 0; i < roles.size(); i++) {
             panelPosition = new JPanel();
             for (int j = 0; j < team.getModule().getPlayersNumberByRole(roles.get(i)); j++) {
-                Player p = team.getStarting().get(count);
-                JPanel panel = UtilsGUI.getPanelCalciatore(p.getName(), p.getRating().getX(), p.getPos(), true);
+                final Player p = team.getStarting().get(count);
+                final JPanel panel = UtilsGUI.getPanelCalciatore(p.getName(), p.getRating().getX(), p.getPos(), true);
                 panel.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(final MouseEvent e) {
@@ -104,7 +104,7 @@ public class Substitution extends Base {
             super.getPanel().add(panelPosition, gbc);
         }
 
-        JLabel labelBench = new JLabel("Riserve");
+        final JLabel labelBench = new JLabel("Riserve");
         labelBench.setForeground(Color.white);
         labelBench.setFont(new Font("Verdana", Font.ROMAN_BASELINE, 16));
         gbc.insets = new Insets(10, 0, 0, 0);
@@ -116,8 +116,8 @@ public class Substitution extends Base {
         panelPosition = new JPanel();
         panelPosition.setLayout(layout);
         for (int j = 0; j < substitutes; j++) {
-            Player p = team.getSubstitution().get(j);
-            JPanel panel = UtilsGUI.getPanelCalciatore(p.getName(), p.getRating().getX(), p.getPos(), true);
+            final Player p = team.getSubstitution().get(j);
+            final JPanel panel = UtilsGUI.getPanelCalciatore(p.getName(), p.getRating().getX(), p.getPos(), true);
             panel.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(final MouseEvent e) {
@@ -134,7 +134,7 @@ public class Substitution extends Base {
         gbc.gridy = GRID_6;
         super.getPanel().add(panelPosition, gbc);
 
-        JButton makeSubButton = new JButton("Sostitutisci");
+        final JButton makeSubButton = new JButton("Sostitutisci");
         makeSubButton.addActionListener(e -> {
             if (panelStarters == null || panelSubstitutes == null) {
                 JOptionPane.showMessageDialog(null, "Bisogna selezionare due giocatori: "
