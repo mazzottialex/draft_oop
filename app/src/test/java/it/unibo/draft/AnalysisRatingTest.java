@@ -73,7 +73,7 @@ public class AnalysisRatingTest {
     @Test
     public void testUpdateRating() {
         assertNull(li.get(0).getRating());
-        AnalysisRatingImpl analysisRating = new AnalysisRatingImpl(li);
+        final AnalysisRatingImpl analysisRating = new AnalysisRatingImpl(li);
         analysisRating.updateRating();
         assertNotNull(li.get(0).getRating());
         for (final Player p : li) {

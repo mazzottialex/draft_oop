@@ -60,13 +60,14 @@ public class Home extends Base {
         final JButton btnDownload = UtilsGUI.standardButton("Download season:");
         log = new LogicsHomeImpl(seasonDefault, online);
         if (!log.checkBrowser() && first) {
-            btnDownload.setEnabled(false);
             JOptionPane.showMessageDialog(null,
                     "Google Chrome or Firefox not installed, or not correctly installed (read README)");
         }
         if (!log.getOnline() && first) {
             JOptionPane.showMessageDialog(null,
                     "You are in offline mode, check your connection and restart the application for online mode");
+        }
+        if (!log.getOnline()) {
             btnDownload.setEnabled(false);
         }
         final GridBagConstraints gbc = new GridBagConstraints();
