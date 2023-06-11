@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.data.Player;
-import model.data.managedata.ManageData;
-import model.data.managedata.ManageDataImpl;
-import model.data.managedata.ManageSeason;
-import model.data.managedata.ManageSeasonImpl;
+import model.managedata.ManageData;
+import model.managedata.ManageDataImpl;
+import model.managedata.ManageSeason;
+import model.managedata.ManageSeasonImpl;
 import model.rating.AnalysisRating;
 import model.rating.AnalysisRatingImpl;
 import model.scraping.ScrapingImpl;

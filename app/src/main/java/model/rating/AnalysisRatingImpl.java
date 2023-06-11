@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.data.Player;
-import model.data.managedata.ExtractData;
-import model.data.managedata.ExtractDataImpl;
+import model.managedata.ExtractData;
+import model.managedata.ExtractDataImpl;
 import utils.Pair;
 import utils.Triple;
 

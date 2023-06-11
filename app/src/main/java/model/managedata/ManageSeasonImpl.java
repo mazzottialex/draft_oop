@@ -1,4 +1,4 @@
-package model.data.managedata;
+package model.managedata;
 import java.util.ArrayList;
 import java.util.List;
 

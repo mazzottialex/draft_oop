@@ -3,8 +3,8 @@ package controller;
 import java.util.List;
 
 import model.data.Team;
-import model.data.managedata.LogicsFile;
-import model.data.managedata.LogicsFileImpl;
+import model.managedata.LogicsFile;
+import model.managedata.LogicsFileImpl;
 
 /**
  * This class represents the implementation of historical logic operations on team data.

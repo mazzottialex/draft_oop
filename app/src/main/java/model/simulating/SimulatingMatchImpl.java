@@ -6,16 +6,17 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import model.data.Player;
 import model.data.Team;
-import model.data.managedata.ExtractDataImpl;
+import model.managedata.ExtractDataImpl;
 
 /**
  * Implementation of the {@code SimulatingMatch} interface that simulates a match between two teams.
  */
 public final class SimulatingMatchImpl implements SimulatingMatch, Serializable {
     private static final long serialVersionUID = -7975364128825077937L;
-	private SimulatingFunctions sf;
+    private SimulatingFunctions sf;
     private Team t1;
     private Team t2;
     private Map<Player, Double> ratings1;
@@ -54,6 +55,7 @@ public final class SimulatingMatchImpl implements SimulatingMatch, Serializable 
      * @throws ClassNotFoundException   if the class is not found during deserialization
      * @throws IOException              if an I/O error occurs during data extraction
      */
+    @SuppressFBWarnings("EI2")
     public SimulatingMatchImpl(final Team t1, final Team t2)
     throws FileNotFoundException, ClassNotFoundException, IOException {
         sf = new SimulatingFunctionsImpl();

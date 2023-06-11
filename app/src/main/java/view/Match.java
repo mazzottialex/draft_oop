@@ -249,13 +249,13 @@ public class Match extends Base implements Serializable {
             substitutions++;
         }
         if (substitutions == 3) {
-        	Container cont = subsButton.getParent();
-        	if (cont instanceof JPanel) {
-        	    JPanel panel = (JPanel) cont;
-        	    subsButton.setEnabled(false);
+            Container cont = subsButton.getParent();
+            if (cont instanceof JPanel) {
+                JPanel panel = (JPanel) cont;
+                subsButton.setEnabled(false);
                 panel.revalidate();
                 panel.repaint();
-        	} else {
+            } else {
                 throw new Exception();
             }
         }
@@ -377,6 +377,7 @@ public class Match extends Base implements Serializable {
      * @param goal1 the number of penalties scored by the first team.
      * @param goal2 the number of penalties scored by the second team.
      */
+    @SuppressFBWarnings("EI2")
     public void setWinnerSh(final Team team, final int goal1, final int goal2) {
         winner = team;
         labelScoreTeam1.setText(score1 + " (" + goal1 + ")");
@@ -434,8 +435,9 @@ public class Match extends Base implements Serializable {
      *
      * @return The winning team.
      */
+    @SuppressFBWarnings("EI")
     public Team getWinner() {
-    	return winner;
+        return winner;
     }
 
     /**

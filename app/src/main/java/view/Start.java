@@ -57,11 +57,10 @@ public class Start extends Base {
             @Override
             public void mouseClicked(final MouseEvent e) {
                 try {
-					changeJPanel(new Home(log.getFirstSeason(), log.getOnline(), true));
-				} catch (ExecuteException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+                    changeJPanel(new Home(log.getFirstSeason(), log.getOnline(), true));
+                } catch (ExecuteException e1) {
+                    e1.printStackTrace();
+                }
             }
         });
         super.getPanel().add(labelIcon);

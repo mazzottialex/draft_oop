@@ -135,11 +135,11 @@ public final class ScrapingImpl implements Scraping {
         String os = System.getProperty("os.name").toLowerCase(Locale.getDefault());
         if (os.contains("win")) {
             if (browser.equals(BROWSER_CHROME)) {
-            	if (new File(CHROME1).exists() || new File(CHROME2).exists()) {
+                if (new File(CHROME1).exists() || new File(CHROME2).exists()) {
                     return true;
                 }
             } else if (browser.equals(BROWSER_FIREFOX)) {
-            	if (new File(FIREFOX1).exists() || new File(FIREFOX2).exists()) {
+                if (new File(FIREFOX1).exists() || new File(FIREFOX2).exists()) {
                     return true;
                 }
             }
@@ -151,7 +151,7 @@ public final class ScrapingImpl implements Scraping {
                 process.waitFor();
                 return process.exitValue() == 0;
             } catch (RuntimeException e) {
-          	  throw e;
+                throw e;
             } catch (Exception e) {
                 return false;
             }

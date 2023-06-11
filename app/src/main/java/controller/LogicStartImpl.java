@@ -2,9 +2,9 @@ package controller;
 import java.net.URL;
 import java.net.URLConnection;
 
-import model.data.managedata.LogicsFile;
-import model.data.managedata.LogicsFileImpl;
-import model.data.managedata.ManageSeasonImpl;
+import model.managedata.LogicsFile;
+import model.managedata.LogicsFileImpl;
+import model.managedata.ManageSeasonImpl;
 
 /**
  * The LogicStartImpl class represents the implementation of starting logic operations.
@@ -42,7 +42,7 @@ public final class LogicStartImpl implements LogicStart {
             connection.connect();
             return true;
         } catch (RuntimeException e) {
-      	  throw e;
+            throw e;
         } catch (final Exception e) {
             return false;
         }

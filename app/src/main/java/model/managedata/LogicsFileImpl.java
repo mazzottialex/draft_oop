@@ -1,4 +1,4 @@
-package model.data.managedata;
+package model.managedata;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
@@ -32,7 +32,7 @@ public final class LogicsFileImpl implements LogicsFile {
             li = (List<Player>) ostream.readObject();
             ostream.close();
         } catch (RuntimeException e) {
-        	throw e;
+            throw e;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -47,7 +47,7 @@ public final class LogicsFileImpl implements LogicsFile {
             ostream.writeObject(li);
             ostream.close();
         } catch (RuntimeException e) {
-      	    throw e;
+            throw e;
         } catch (final Exception e) {
             return false;
         }
@@ -66,7 +66,7 @@ public final class LogicsFileImpl implements LogicsFile {
             }
             ostream.close();
         } catch (RuntimeException e) {
-      	    throw e;
+            throw e;
         } catch (final Exception e) {
             //e.printStackTrace();
         }
@@ -87,7 +87,7 @@ public final class LogicsFileImpl implements LogicsFile {
             });
             ostream.close();
         } catch (RuntimeException e) {
-      	    throw e;
+            throw e;
         } catch (final Exception e) {
             return false;
         }
@@ -100,11 +100,11 @@ public final class LogicsFileImpl implements LogicsFile {
         try (InputStream file = ClassLoader.getSystemResourceAsStream("history.txt");
                 InputStream bstream = new BufferedInputStream(file);
                 ObjectInputStream ostream = new ObjectInputStream(file);) {
-        	List<Team> li = (List<Team>) ostream.readObject();
+            List<Team> li = (List<Team>) ostream.readObject();
             ostream.close();
             return li;
         } catch (RuntimeException e) {
-      	    throw e;
+            throw e;
         } catch (final Exception e) {
             return new ArrayList<>();
         }
@@ -120,7 +120,7 @@ public final class LogicsFileImpl implements LogicsFile {
             ostream.writeObject(li);
             ostream.close();
         } catch (RuntimeException e) {
-      	    throw e;
+            throw e;
         } catch (final Exception e) {
             return false;
         }

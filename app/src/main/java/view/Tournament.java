@@ -20,6 +20,7 @@ import javax.swing.border.EmptyBorder;
 import controller.LogicsShootoutImpl;
 import controller.LogicsTournament;
 import controller.LogicsTournamentImpl;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import model.data.Player;
 import model.data.Team;
 import utils.RoundedBorder;
@@ -88,6 +89,7 @@ public class Tournament extends Base {
      * @throws ClassNotFoundException if the class is not found
      * @throws IOException an I/O error occurs
      */
+    @SuppressFBWarnings("MC")
     public Tournament(final Team squadra, final List<Player> li)
             throws FileNotFoundException, ClassNotFoundException, IOException {
         this.logTor = new LogicsTournamentImpl(squadra, li);
