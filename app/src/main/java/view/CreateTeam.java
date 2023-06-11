@@ -591,7 +591,8 @@ public class CreateTeam extends Base {
         for (int i = 0; i < s.length() - 2; i++) {
             label = label + s.charAt(i);
             if (i % max == 0 && i != 0) {
-                label = label + "<br>";
+                //label = label + "<br>";
+                label.concat("<br>");
             }
         }
         label = label + s.charAt(s.length() - 2) + s.charAt(s.length() - 1);

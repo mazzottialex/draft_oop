@@ -16,7 +16,6 @@ import model.managedata.ExtractDataImpl;
  */
 public final class SimulatingMatchImpl implements SimulatingMatch, Serializable {
     private static final long serialVersionUID = -7975364128825077937L;
-    final private SimulatingFunctions sf;
     final private Team t1;
     final private Team t2;
     final private int concededGoals1;
@@ -54,7 +53,7 @@ public final class SimulatingMatchImpl implements SimulatingMatch, Serializable 
     @SuppressFBWarnings("EI2")
     public SimulatingMatchImpl(final Team t1, final Team t2)
     throws FileNotFoundException, ClassNotFoundException, IOException {
-        sf = new SimulatingFunctionsImpl();
+    	final SimulatingFunctions sf = new SimulatingFunctionsImpl();
         this.t1 = t1;
         this.t2 = t2;
         final Map<Player, Double> ratings1 = sf.getFantasyRantings(this.t1.getStarting());
