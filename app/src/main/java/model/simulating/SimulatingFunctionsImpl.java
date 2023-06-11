@@ -135,8 +135,20 @@ public final class SimulatingFunctionsImpl implements SimulatingFunctions, Seria
     @Override
     public int getFantasySavedPenalties(final Team t)
     throws FileNotFoundException, ClassNotFoundException, IOException {
-        int penalties = 0;
+        int penalties = getPenalties();
         int savedPenalties = 0;
+        double prob = prob(0, 1);
+        for (int i = 0; i < penalties; i++) {
+            prob = prob(0, 1);
+            if (prob <= MISSED_PENALTIES_RATE) {
+                savedPenalties++;
+            }
+        }
+        return savedPenalties;
+    }
+    
+    private int getPenalties() {
+        int penalties = 0;
         double prob = prob(0, 1);
         if (prob <= Math.pow(PENALTY_RATE, 3)) {
             penalties = 3;
@@ -147,13 +159,7 @@ public final class SimulatingFunctionsImpl implements SimulatingFunctions, Seria
             && prob <= PENALTY_RATE + Math.pow(PENALTY_RATE, 2) + Math.pow(PENALTY_RATE, 3)) {
             penalties = 1;
         }
-        for (int i = 0; i < penalties; i++) {
-            prob = prob(0, 1);
-            if (prob <= MISSED_PENALTIES_RATE) {
-                savedPenalties++;
-            }
-        }
-        return savedPenalties;
+        return penalties;
     }
 
     @Override
@@ -236,18 +242,9 @@ public final class SimulatingFunctionsImpl implements SimulatingFunctions, Seria
     @Override
     public int getDeltaScoredSavedPenalties(final Team t)
     throws FileNotFoundException, ClassNotFoundException, IOException {
-        int penalties = 0;
+        int penalties = getPenalties();
         int missedPenalties = 0;
         double prob = prob(0, 1);
-        if (prob <= Math.pow(PENALTY_RATE, 3)) {
-            penalties = 3;
-        } else if (prob > Math.pow(PENALTY_RATE, 3)
-            && prob <= Math.pow(PENALTY_RATE, 2) + Math.pow(PENALTY_RATE, 3)) {
-            penalties = 2;
-        } else if (prob > Math.pow(PENALTY_RATE, 2) + Math.pow(PENALTY_RATE, 3)
-            && prob <= PENALTY_RATE + Math.pow(PENALTY_RATE, 2) + Math.pow(PENALTY_RATE, 3)) {
-            penalties = 1;
-        }
         for (int i = 0; i < penalties; i++) {
             prob = prob(0, 1);
             if (prob <= MISSED_PENALTIES_RATE) {
