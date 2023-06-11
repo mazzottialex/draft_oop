@@ -67,12 +67,12 @@ public class Archive extends Base {
         log = new LogicsArchiveImpl(season, online);
         List<Player> liOrdered = log.liOrdered(li);
         liOrdered.stream().forEach(c -> ((DefaultTableModel) tm).addRow(c.toVector()));
-        getPanel().setLayout(new FlowLayout(FlowLayout.CENTER, GAP, GAP));
-        getPanel().setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
+        super.getPanel().setLayout(new FlowLayout(FlowLayout.CENTER, GAP, GAP));
+        super.getPanel().setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         JPanel panel = new JPanel();
         panel.setPreferredSize(new Dimension(PANEL_WIDTH2, PANEL_HEIGHT2));
-        panel.setBackground(getForeground());
-        getPanel().add(panel);
+        panel.setBackground(super.getForeground());
+        super.getPanel().add(panel);
         panel.setLayout(null);
         JButton btnHome = UtilsGUI.standardButton("Home");
         btnHome.setBounds(10, 8, BUTTON_WIDTH, BUTTON_HEIGHT);
@@ -91,7 +91,7 @@ public class Archive extends Base {
         table = new JTable(tm);
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setPreferredSize(new Dimension(UtilsGUI.getWidth(WIDTH_SCROLLPANEL), UtilsGUI.getHeight(HEIGHT_SCROLLPANEL)));
-        getPanel().add(scrollPane);
+        super.getPanel().add(scrollPane);
         TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tm);
         sorter.setComparator(0, new Comparator<Object>() {
             @Override

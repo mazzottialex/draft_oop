@@ -2,6 +2,8 @@ package model.scraping;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -127,7 +129,7 @@ public final class ScrapingImpl implements Scraping {
      * @return {@code true} if the browser is available, {@code false} otherwise
      */
     private static boolean checkBrowser(final String browser) {
-        String os = System.getProperty("os.name").toLowerCase();
+        String os = System.getProperty("os.name").toLowerCase(Locale.getDefault());
         if (os.contains("win")) {
             String path1 = null;
             String path2 = null;

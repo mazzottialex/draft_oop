@@ -25,7 +25,7 @@ public class Start extends Base {
      */
     public Start() {
         GridBagLayout gridBagLayout = new GridBagLayout();
-        getPanel().setLayout(gridBagLayout);
+        super.getPanel().setLayout(gridBagLayout);
         ImageIcon img = new ImageIcon(ClassLoader.getSystemResource("icon.png"));
         Image image = img.getImage();
         Image newImg = image.getScaledInstance(SCALE_IMG_1, SCALE_IMG_1, java.awt.Image.SCALE_SMOOTH);
@@ -57,6 +57,6 @@ public class Start extends Base {
                 changeJPanel(new Home(log.getFirstSeason(), log.getOnline(), true));
             }
         });
-        getPanel().add(labelIcon);
+        super.getPanel().add(labelIcon);
     }
 }

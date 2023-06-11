@@ -65,8 +65,8 @@ public class Substitution extends Base {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(INSETS_5, INSETS_5, 2, 2);
         GridBagLayout layout = new GridBagLayout();
-        getPanel().setLayout(layout);
-        panelTeam.setBackground(getForeground());
+        super.getPanel().setLayout(layout);
+        panelTeam.setBackground(super.getForeground());
 
         JLabel labelTeamName = new JLabel("Titolari");
         labelTeamName.setFont(new Font("Verdana", Font.ROMAN_BASELINE, 16));
@@ -99,7 +99,7 @@ public class Substitution extends Base {
                 count++;
             }
             gbc.gridy = i + 1;
-            getPanel().add(panelPosition, gbc);
+            super.getPanel().add(panelPosition, gbc);
         }
 
         JLabel labelBench = new JLabel("Riserve");
@@ -107,7 +107,7 @@ public class Substitution extends Base {
         labelBench.setFont(new Font("Verdana", Font.ROMAN_BASELINE, 16));
         gbc.insets = new Insets(10, 0, 0, 0);
         gbc.gridy = GRID_5;
-        getPanel().add(labelBench, gbc);
+        super.getPanel().add(labelBench, gbc);
         gbc.insets = new Insets(INSETS_5, INSETS_5, INSETS_5, INSETS_5);
 
         // panchinari
@@ -130,7 +130,7 @@ public class Substitution extends Base {
             panelPosition.add(panel);
         }
         gbc.gridy = GRID_6;
-        getPanel().add(panelPosition, gbc);
+        super.getPanel().add(panelPosition, gbc);
 
         JButton makeSubButton = new JButton("Sostitutisci");
         makeSubButton.addActionListener(e -> {
@@ -153,7 +153,7 @@ public class Substitution extends Base {
             panelSubstitutes = null;
         });
         gbc.gridy = GRID_7;
-        getPanel().add(makeSubButton, gbc);
+        super.getPanel().add(makeSubButton, gbc);
 
         addWindowListener(new WindowAdapter() {
             @Override

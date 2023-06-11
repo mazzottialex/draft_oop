@@ -42,10 +42,10 @@ public class History extends Base {
         log = new LogicsHistoryImpl(season, online);
         GridBagConstraints gbc = new GridBagConstraints();
         GridBagLayout layout = new GridBagLayout();
-        getPanel().setLayout(new BorderLayout());
+        super.getPanel().setLayout(new BorderLayout());
         JButton btnHome = UtilsGUI.standardButton("Home");
         JPanel panelBtn = new JPanel();
-        panelBtn.setBackground(getForeground());
+        panelBtn.setBackground(super.getForeground());
         panelBtn.setPreferredSize(new Dimension(PANEL_DIM, PANEL_DIM));
         btnHome.addActionListener(new ActionListener() {
             @Override
@@ -54,14 +54,14 @@ public class History extends Base {
             }
         });
         panelBtn.add(btnHome);
-        getPanel().add(panelBtn, BorderLayout.NORTH);
+        super.getPanel().add(panelBtn, BorderLayout.NORTH);
         JPanel panelLi = new JPanel();
         panelLi.setLayout(layout);
         panelLi.setBackground(COLOR_PANEL);
         int count = 0;
         for (Team team : log.getLiTeam()) {
             JPanel panelTeam = new JPanel();
-            panelTeam.setBackground(getForeground());
+            panelTeam.setBackground(super.getForeground());
             JLabel lblLogo = new JLabel();
             ImageIcon img = new ImageIcon(team.getLogo());
             Image image = img.getImage();
@@ -93,6 +93,6 @@ public class History extends Base {
             count++;
         }
         JScrollPane scrollPane = new JScrollPane(panelLi);
-        getPanel().add(scrollPane, BorderLayout.CENTER);
+        super.getPanel().add(scrollPane, BorderLayout.CENTER);
     }
 }

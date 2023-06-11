@@ -46,7 +46,7 @@ public class Settings extends Base {
         log = new LogicsSettingsImpl(li);
         GridBagConstraints gbc = new GridBagConstraints();
         GridBagLayout layout = new GridBagLayout();
-        getPanel().setLayout(layout);
+        super.getPanel().setLayout(layout);
         JLabel lblTeamName = new JLabel("Team name:");
         lblTeamName.setForeground(Color.white);
         lblTeamName.setFont(new Font("Verdana", Font.ROMAN_BASELINE, 16));
@@ -54,13 +54,13 @@ public class Settings extends Base {
         gbc.gridy = 0;
         gbc.gridwidth = 1;
         gbc.insets = INSETS_1;
-        getPanel().add(lblTeamName, gbc);
+        super.getPanel().add(lblTeamName, gbc);
         textFieldTeamName = new JTextField();
         textFieldTeamName.setColumns(10);
         textFieldTeamName.setFont(new Font("Verdana", Font.ROMAN_BASELINE, 16));
         gbc.gridx = 1;
         gbc.gridy = 0;
-        getPanel().add(textFieldTeamName, gbc);
+        super.getPanel().add(textFieldTeamName, gbc);
         JLabel lblChooseLogo = new JLabel("Logo:");
         lblChooseLogo.setForeground(Color.white);
         lblChooseLogo.setFont(new Font("Verdana", Font.ROMAN_BASELINE, 16));
@@ -97,7 +97,7 @@ public class Settings extends Base {
         gbc.gridwidth = 0;
         gbc.gridx = 0;
         gbc.gridy = 1;
-        getPanel().add(lblChooseLogo, gbc);
+        super.getPanel().add(lblChooseLogo, gbc);
         gbc.insets = INSETS_4;
         gbc.gridx = 0;
         gbc.gridy = 2;
@@ -119,6 +119,6 @@ public class Settings extends Base {
         gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.insets = INSETS_5;
-        getPanel().add(btnContinue, gbc);
+        super.getPanel().add(btnContinue, gbc);
     }
 }

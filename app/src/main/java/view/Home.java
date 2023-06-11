@@ -67,7 +67,7 @@ public class Home extends Base {
         }
         GridBagConstraints gbc = new GridBagConstraints();
         GridBagLayout layout = new GridBagLayout();
-        getPanel().setLayout(layout);
+        super.getPanel().setLayout(layout);
         JButton btnStart = new JButton();
         ImageIcon img = new ImageIcon(START_IMAGE_PATH);
         Image image = img.getImage();
@@ -76,7 +76,7 @@ public class Home extends Base {
         btnStart.setBorderPainted(false);
         btnStart.setFocusPainted(false);
         btnStart.setIcon(img);
-        btnStart.setBackground(getForeground());
+        btnStart.setBackground(super.getForeground());
         btnStart.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         btnStart.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(final java.awt.event.MouseEvent evt) {
@@ -109,7 +109,7 @@ public class Home extends Base {
         gbc.gridwidth = 2;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = BUTTON_INSETS;
-        getPanel().add(btnStart, gbc);
+        super.getPanel().add(btnStart, gbc);
         JPanel panelSelectioned = new JPanel();
         panelSelectioned.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         JLabel lblSeasonSelected = new JLabel("Season selected:");
@@ -121,7 +121,7 @@ public class Home extends Base {
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.insets = PANEL_INSETS;
-        getPanel().add(panelSelectioned, gbc);
+        super.getPanel().add(panelSelectioned, gbc);
         JButton btnLoad = UtilsGUI.standardButton("Choose a season:");
         String[] array = log.getLiSeasons().toArray(new String[log.getLiSeasons().size()]);
         JComboBox<String> comboBoxLoad = new JComboBox<>(array);
@@ -141,12 +141,12 @@ public class Home extends Base {
         gbc.gridwidth = 1;
         gbc.gridx = 0;
         gbc.gridy = 2;
-        getPanel().add(btnLoad, gbc);
+        super.getPanel().add(btnLoad, gbc);
         gbc.gridx = 1;
-        getPanel().add(comboBoxLoad, gbc);
+        super.getPanel().add(comboBoxLoad, gbc);
         gbc.gridx = 0;
         gbc.gridy = 3;
-        getPanel().add(btnDownload, gbc);
+        super.getPanel().add(btnDownload, gbc);
         comboBoxDownload.setFont(new Font("Verdana", Font.ROMAN_BASELINE, FONT_SIZE));
         btnDownload.addActionListener(new ActionListener() {
             @Override
@@ -170,7 +170,7 @@ public class Home extends Base {
         });
         gbc.gridx = 1;
         gbc.gridy = 3;
-        getPanel().add(comboBoxDownload, gbc);
+        super.getPanel().add(comboBoxDownload, gbc);
         gbc.gridwidth = 2;
         JButton btnArchive = UtilsGUI.standardButton("Archive");
         btnArchive.addActionListener(new ActionListener() {
@@ -186,7 +186,7 @@ public class Home extends Base {
         gbc.fill = GridBagConstraints.NONE;
         gbc.gridx = 0;
         gbc.gridy = 4;
-        getPanel().add(btnArchive, gbc);
+        super.getPanel().add(btnArchive, gbc);
         JButton btnHistory = UtilsGUI.standardButton("History");
         btnHistory.addActionListener(new ActionListener() {
             @Override
@@ -195,6 +195,6 @@ public class Home extends Base {
             }
         });
         gbc.gridy = GRID_Y;
-        getPanel().add(btnHistory, gbc);
+        super.getPanel().add(btnHistory, gbc);
     }
 }

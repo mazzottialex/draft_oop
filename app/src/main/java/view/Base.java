@@ -1,6 +1,9 @@
 package view;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 
@@ -33,10 +36,9 @@ public class Base extends JFrame {
      *
      * @return the JPanel content pane
      */
-
+    @SuppressFBWarnings("EI")
     public JPanel getPanel() {
-        JPanel panel = contentPane;
-        return panel;
+        return contentPane;
     }
 
     /**

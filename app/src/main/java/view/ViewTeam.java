@@ -51,8 +51,8 @@ public class ViewTeam extends Base {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = INSETS_1;
         GridBagLayout layout = new GridBagLayout();
-        getPanel().setLayout(layout);
-        panelTeam.setBackground(getForeground());
+        super.getPanel().setLayout(layout);
+        panelTeam.setBackground(super.getForeground());
         JButton btnArchive = UtilsGUI.standardButton("Archive");
         btnArchive.addActionListener(new ActionListener() {
             @Override
@@ -81,7 +81,7 @@ public class ViewTeam extends Base {
         lblRating.setBorder(new EmptyBorder(INSETS_3));
         panelTeam.add(lblRating);
         gbc.gridy = 0;
-        getPanel().add(panelTeam, gbc);
+        super.getPanel().add(panelTeam, gbc);
         JPanel panelPosition = new JPanel();
         panelPosition.setLayout(layout);
         int count = 0;
@@ -94,14 +94,14 @@ public class ViewTeam extends Base {
                 panelPosition.add(panel);
             }
             gbc.gridy = i + 1;
-            getPanel().add(panelPosition, gbc);
+            super.getPanel().add(panelPosition, gbc);
         }
         JLabel lblPanchina = new JLabel("PANCHINA");
         lblPanchina.setForeground(Color.white);
         lblPanchina.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
         gbc.insets = INSETS_4;
         gbc.gridy = GRID_Y;
-        getPanel().add(lblPanchina, gbc);
+        super.getPanel().add(lblPanchina, gbc);
         gbc.insets = INSETS_5;
         // panchinari
         panelPosition = new JPanel();
@@ -116,6 +116,6 @@ public class ViewTeam extends Base {
             panelPosition.add(UtilsGUI.getPanelCalciatore(p.getName(), p.getRating().getX(), p.getPos(), false), gbc);
         }
         gbc.gridy = GRID_Y_2;
-        getPanel().add(panelPosition, gbc);
+        super.getPanel().add(panelPosition, gbc);
     }
 }

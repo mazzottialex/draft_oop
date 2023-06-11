@@ -78,7 +78,7 @@ public class Tournament extends Base {
     // boolean eliminatedThisTurn = false;
     private final JButton buttonSimula;
     private final Color panelColor = new Color(0, 64, 128);
-
+    private JPanel contentPanel;
     /**
      * Constructor of Tournament, add the necessary graphics components.
      * 
@@ -92,7 +92,9 @@ public class Tournament extends Base {
             throws FileNotFoundException, ClassNotFoundException, IOException {
         this.logTor = new LogicsTournamentImpl(squadra, li);
         this.listAvversarie = logTor.getListAvversari();
-        getPanel().setLayout(new BorderLayout());
+        contentPanel = new JPanel();
+        add(contentPanel);
+        contentPanel.setLayout(new BorderLayout());
         // Aggiungo il bottone Simula nel panelSud
         buttonSimula = new JButton("Simula");
         buttonSimula.addActionListener(new ActionListener() {
@@ -207,9 +209,9 @@ public class Tournament extends Base {
         this.panelCenter.setBackground(this.panelColor);
         this.panelNord.setBackground(Color.white);
         // this.panelNord.setBounds(200, 300, 200, 300);
-        this.getPanel().add(panelSud, BorderLayout.SOUTH);
-        this.getPanel().add(panelCenter, BorderLayout.CENTER);
-        this.getPanel().add(panelNord, BorderLayout.NORTH);
+        this.contentPanel.add(panelSud, BorderLayout.SOUTH);
+        this.contentPanel.add(panelCenter, BorderLayout.CENTER);
+        this.contentPanel.add(panelNord, BorderLayout.NORTH);
     }
 
     private void createLevel() {
@@ -394,7 +396,7 @@ public class Tournament extends Base {
             label.setOpaque(true);
             this.panelNord.add(label);
             buttonSimula.setVisible(false);
-            getPanel().validate();
+            contentPanel.validate();
             this.logTor.setNumSquadre(0);
             this.panelNord.validate();
             this.p0.validate();
@@ -421,7 +423,7 @@ public class Tournament extends Base {
         }
         return s;
     }
-
+    
     /**
      * The inner classe that extends JLabel.
      * 
