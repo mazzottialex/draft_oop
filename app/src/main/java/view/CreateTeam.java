@@ -582,17 +582,18 @@ public class CreateTeam extends Base {
 
     /* metodo che formatta la stringa dei nomi dei giocatori */
     private String textFormat(final String s) {
-        String label = "<html>";
+        final StringBuilder sb = new StringBuilder();
+        final String label = "<html>";
         final int max = 14;
         for (int i = 0; i < s.length() - 2; i++) {
-            label = label + s.charAt(i);
+            sb.append(label);
+            sb.append(s.charAt(i));
             if (i % max == 0 && i != 0) {
-                //label = label + "<br>";
                 label.concat("<br>");
             }
         }
-        label = label + s.charAt(s.length() - 2) + s.charAt(s.length() - 1);
-        return label;
+        sb.append(label + s.charAt(s.length() - 2) + s.charAt(s.length() - 1));
+        return sb.toString();
     }
 
     /* metodo per inizializzare la mappa all'inizio e quando si sceglie il modulo */
