@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import model.data.Module;
 import model.data.Player;
 import model.managedata.ExtractDataImpl;
 import model.managedata.ManageData;
@@ -23,6 +24,8 @@ public class ExtractDataTest {
     private ExtractDataImpl ed;
     private ManageData md;
     private List<Player> list;
+    private String team = "JUV";
+    private Module module = Module.M433;
     private static final int TEAM_SIZE = 20;
     private static final int STARTERSIZE = 11;
 
@@ -48,7 +51,7 @@ public class ExtractDataTest {
     public void testFindTeams() {
         List<String> teams = ed.findTeams();
         assertNotNull(teams);
-        assertEquals(TEAM_SIZE, teams.size(), 0);
+        assertEquals(TEAM_SIZE, teams.size());
     }
 
     /**
@@ -56,8 +59,6 @@ public class ExtractDataTest {
      */
     @Test
     public void testGetStarting() {
-        String team = "JUV";
-        model.data.Module module = model.data.Module.M433;
         List<Player> starters = ed.getStarting(team, module);
         assertNotNull(starters);
         assertEquals(starters.size(), STARTERSIZE);
@@ -68,8 +69,6 @@ public class ExtractDataTest {
      */
     @Test
     public void testGetStartingByTeamByPos() {
-        String team = "JUV";
-        model.data.Module module = model.data.Module.M433;
         List<Player> def = ed.getStartingByTeamByPos(team, "D", module);
         List<Player> midf = ed.getStartingByTeamByPos(team, "C", module);
         List<Player> forw = ed.getStartingByTeamByPos(team, "A", module);
