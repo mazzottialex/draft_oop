@@ -253,15 +253,11 @@ public class Match extends Base implements Serializable {
         }
         if (substitutions == 3) {
             final Container cont = subsButton.getParent();
-            try {
-                if (cont instanceof JPanel) {
-                    final JPanel panel = (JPanel) cont;
-                    subsButton.setEnabled(false);
-                    panel.revalidate();
-                    panel.repaint();
-                } 
-            } catch (Exception e) {
-                LOG.error("Error", e);
+            if (cont instanceof JPanel) {
+                final JPanel panel = (JPanel) cont;
+                subsButton.setEnabled(false);
+                panel.revalidate();
+                panel.repaint();
             }
         }
     }
@@ -290,7 +286,7 @@ public class Match extends Base implements Serializable {
                         logics.scorers(progressBar.getValue());
                         changeResult = true;
                     } catch (ClassNotFoundException | IOException e) {
-                    	LOG.error("Error", e);
+                        LOG.error("Error", e);
                     }
                 }
                 for (int i = progressBar.getValue(); i <= fullTime && isRunning; i++) {
@@ -305,7 +301,7 @@ public class Match extends Base implements Serializable {
                             try {
                                 changeScore();
                             } catch (ClassNotFoundException | IOException e) {
-                            	LOG.error("Error", e);
+                                LOG.error("Error", e);
                             }
                             //Abilita bottone sostituzioni
                             if (progressBar.getValue() > 0 && substitutions < 3) {
@@ -319,7 +315,7 @@ public class Match extends Base implements Serializable {
                     try {
                         Thread.sleep(100);
                     } catch (InterruptedException e) {
-                    	LOG.error("Error", e);
+                        LOG.error("Error", e);
                     }
                 }
 
