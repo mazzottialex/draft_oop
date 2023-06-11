@@ -19,15 +19,15 @@ import model.simulating.SimulatingMatchImpl;
  */
 public final class LogicsMatchImpl implements LogicsMatch, Serializable {
     private static final long serialVersionUID = -180921977203150416L;
-    private Team t1;
-    private Team t2;
+    private final Team t1;
+    private final Team t2;
     private List<Integer> list1;
     private List<Integer> list2;
-    private SimulatingMatch sim;
+    private final SimulatingMatch sim;
     private static final int END_REG = 90;
     private static final int END_EXTRA = 120;
     private static final double OWNGOAL_RATE = 2.904040404040404;
-    private Random random = new Random();
+    private final Random random = new Random();
 
     /**
      * Constructs a new instance of {@code LogicsMatchImpl} with the given teams.
@@ -89,7 +89,7 @@ public final class LogicsMatchImpl implements LogicsMatch, Serializable {
      * @return a list of goal minutes
      */
     private List<Integer> getGoalsNum(final int goal, final int time) {
-        List<Integer> list = new ArrayList<>();
+        final List<Integer> list = new ArrayList<>();
         int remainingTime = time < END_REG ? END_REG - time : END_EXTRA - time;
         for (int i = 0; i < goal; i++) {
             int min;
@@ -105,14 +105,14 @@ public final class LogicsMatchImpl implements LogicsMatch, Serializable {
     @Override
     public Player addScorer(final Team t) {
         double totGoals = 0;
-        List<Player> starters = t.getStarting();
-        List<Double> goalList = new ArrayList<>();
-        for (Player p: starters) {
+        final List<Player> starters = t.getStarting();
+        final List<Double> goalList = new ArrayList<>();
+        for (final Player p: starters) {
             double goals = p.getGoals();
             goalList.add(goals);
             totGoals += goals;
         }
-        double owngoals = (totGoals * OWNGOAL_RATE) / 100;
+        final double owngoals = (totGoals * OWNGOAL_RATE) / 100;
         double cumulativeProbability = 0.0;
         for (int i = 0; i < starters.size(); i++) {
             cumulativeProbability += goalList.get(i);
@@ -130,7 +130,7 @@ public final class LogicsMatchImpl implements LogicsMatch, Serializable {
      * @return the scorer
      */
     private Player getAutogol(final Team team) {
-        Team t;
+    	final Team t;
         if (team == t1) {
             t = t2;
         } else {

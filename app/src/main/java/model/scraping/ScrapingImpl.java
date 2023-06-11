@@ -94,7 +94,6 @@ public final class ScrapingImpl implements Scraping {
             if (flagChrome) {
                 final ChromeOptions options = new ChromeOptions();
                 options.addArguments("headless");
-                //Oggetto per creare il collegamento
                 driver = new ChromeDriver(options);
             } else {
                 final FirefoxOptions options = new FirefoxOptions();
@@ -102,7 +101,6 @@ public final class ScrapingImpl implements Scraping {
                 driver = new FirefoxDriver(options);
             }
             driver.get(URL);
-            //Oggetto per eseguire operazioni sulla pagina
             final JavascriptExecutor js = (JavascriptExecutor) driver;
             js.executeScript("document.querySelector('[data-id=\"selectPickerSeasons\"]').click()");
             driver.findElement(By.tagName("ul")).findElements(By.tagName("li"))

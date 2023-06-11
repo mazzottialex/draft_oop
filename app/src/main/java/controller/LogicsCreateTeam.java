@@ -185,7 +185,7 @@ public interface LogicsCreateTeam extends Serializable {
      * 
      * @return true if the module was selected
      */
-    boolean getClickModulo();
+    boolean isClickModulo();
 
     /**
      * 

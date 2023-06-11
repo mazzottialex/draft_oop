@@ -12,7 +12,7 @@ import model.managedata.LogicsFileImpl;
 public final class LogicsHistoryImpl implements LogicsHistory {
     private final String season;
     private final Boolean online;
-    private LogicsFile file = new LogicsFileImpl();
+    private final LogicsFile file = new LogicsFileImpl();
 
     /**
      * Constructs a new instance of LogicsHistoryImpl with the specified season and online status.

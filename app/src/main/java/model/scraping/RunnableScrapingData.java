@@ -39,7 +39,7 @@ public class RunnableScrapingData implements Runnable {
     private static final int CLEAN_SHEET = 24;
     private static final int SAVEDS = 25;
     private static final int COST_ID = 15;
-    private static final int SECONDS = 30;
+    private static final int SECONDS = 40;
 
     /**
      * Creates an instance of RunnableScrapingData.
@@ -83,7 +83,6 @@ public class RunnableScrapingData implements Runnable {
         if (flagChrome) {
             final ChromeOptions options = new ChromeOptions();
             options.addArguments("headless");
-            //Oggetto per creare il collegamento
             driver = new ChromeDriver(options);
         } else {
             final FirefoxOptions options = new FirefoxOptions();
@@ -91,10 +90,8 @@ public class RunnableScrapingData implements Runnable {
             driver = new FirefoxDriver(options);
         }
         driver.get(url);
-        //Oggetto per eseguire operazioni sulla pagina
         final JavascriptExecutor js = (JavascriptExecutor) driver;
-        //Attende che la pagina carichi la tabella
-        //aspetta 30 sec per caricare la tabella
+        //aspetta 40 sec per caricare la tabella
         final WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(SECONDS).getSeconds());
         try {
             wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("tr")));

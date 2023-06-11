@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import model.data.Player;
@@ -28,12 +27,11 @@ public class CreateOpponentTeamsTest {
     private static final int N_TEAM = 5;
 
     /**
-     * Sets up the test environment before each test method.
+     * Construct the test.
      *
      * @throws Exception if an error occurs during setup.
      */
-    @Before
-    public void setUp() throws Exception {
+    public CreateOpponentTeamsTest() throws Exception {
         md = new ManageDataImpl("2022-2023");
         md.loadData();
         li = md.getLi();

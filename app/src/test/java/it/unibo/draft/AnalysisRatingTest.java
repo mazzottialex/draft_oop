@@ -8,7 +8,6 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import model.data.Player;
@@ -62,10 +61,9 @@ public class AnalysisRatingTest {
     private final Player p13 = new Player(51, "A. Meret", "P", "NAP",
             34, 3060, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 69);
     /**
-     * Sets up the necessary objects and data for the tests.
+     * Construct the test.
      */
-    @Before
-    public void setUp() {
+    public  AnalysisRatingTest() {
         li = List.of(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13);
         ex = new ExtractDataImpl(li);
     }
