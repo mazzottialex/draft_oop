@@ -155,20 +155,20 @@ public class LogicsTournamentImpl implements LogicsTournament {
 
         switch (numSquadre) {
         case 16:
-            newList = simulateAll();         
+            newList = simulateAll();
             this.setListAvversari(newList);
             this.setNumSquadre(8);
             break;
         case 8:
             this.risultati.clear();
-            matchTeamAvv();       
+            matchTeamAvv();
             newList = simulateAll();
             this.setListAvversari(newList);
             this.setNumSquadre(4);
             break;
         case 4:
             this.risultati.clear();
-            matchTeamAvv();         
+            matchTeamAvv();
             newList = simulateSemi();
             this.setListAvversari(newList);
             this.setNumSquadre(2);
@@ -289,8 +289,6 @@ public class LogicsTournamentImpl implements LogicsTournament {
         String teamLose; // nome della squadra perdente
         Map<Team, Integer> map2;
         final List<Team> l = new ArrayList<>(); // appoggio
-        
-        
         for (int i = 1; i < numSquadre - 1; i = i + 2) {
             final SimulatingMatchImpl s = new SimulatingMatchImpl(this.getListAvversari().get(i),
                     this.getListAvversari().get(i + 1));
@@ -345,7 +343,6 @@ public class LogicsTournamentImpl implements LogicsTournament {
         }
         return newList;
     }
-    
     private void matchTeamAvv() throws FileNotFoundException, ClassNotFoundException, IOException {
         Map<Team, Integer> map2;
         final List<Team> l = new ArrayList<>(); // appoggio
@@ -371,7 +368,6 @@ public class LogicsTournamentImpl implements LogicsTournament {
             // this.risMatch = s.risultato2();
         }
     }
-    
     private List<Team> simulateSemi() throws FileNotFoundException, ClassNotFoundException, IOException {
         List<Team> newList = new ArrayList<>();
         final Map<String, Integer> map = new HashMap<>(); // map per il risultato
@@ -380,7 +376,6 @@ public class LogicsTournamentImpl implements LogicsTournament {
         String teamLose; // nome della squadra perdente
         Map<Team, Integer> map2;
         final List<Team> l = new ArrayList<>(); // appoggio
-        
         final SimulatingMatchImpl s = new SimulatingMatchImpl(this.getListAvversari().get(1),
                 this.getListAvversari().get(2));
         map.clear();
@@ -432,7 +427,7 @@ public class LogicsTournamentImpl implements LogicsTournament {
         this.risultati.putAll(map);
         return newList;
     }
-    
+ 
     private void simulateFinal() throws FileNotFoundException, ClassNotFoundException, IOException {
         Map<Team, Integer> map2;
         final List<Team> l = new ArrayList<>(); // appoggio
