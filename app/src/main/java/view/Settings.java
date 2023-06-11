@@ -21,7 +21,8 @@ import javax.swing.JTextField;
 import controller.LogicsSettings;
 import controller.LogicsSettingsImpl;
 import model.data.Player;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * Represents a GUI for Settings.
  */
@@ -36,7 +37,7 @@ public class Settings extends Base {
     private static final Insets INSETS_5 = new Insets(45, 2, 5, 2);
     private static final int SCALE_IMG_1 = 65;
     private static final Color COLOR_BG = new Color(0, 64, 128);
-
+    private static final Logger LOG = LoggerFactory.getLogger(Settings.class);
     /**
      * Constructs a new Settings object.
      * 
@@ -112,7 +113,7 @@ public class Settings extends Base {
                 try {
                     changeJPanel(new CreateTeam(log.getTeamName(), log.getLogo(), log.getLi()));
                 } catch (ClassNotFoundException | IOException e1) {
-                    e1.printStackTrace();
+                	LOG.error("Error", e1);
                 }
             }
         });

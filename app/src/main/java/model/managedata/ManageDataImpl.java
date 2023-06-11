@@ -33,7 +33,7 @@ public final class ManageDataImpl implements ManageData {
     }
 
     @Override
-    public void loadData() throws Exception {
+    public void loadData() {
         li = logFile.loadData(season);
     }
 

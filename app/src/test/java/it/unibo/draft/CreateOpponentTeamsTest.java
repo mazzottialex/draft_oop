@@ -29,8 +29,8 @@ public class CreateOpponentTeamsTest {
      *
      * @throws Exception if an error occurs during setup.
      */
-    public CreateOpponentTeamsTest() throws Exception {
-    	final ManageData md = new ManageDataImpl("2022-2023");
+    public CreateOpponentTeamsTest() {
+        final ManageData md = new ManageDataImpl("2022-2023");
         md.loadData();
         List<Player> li = md.getLi();
         final AnalysisRating analysisRating = new AnalysisRatingImpl(li);

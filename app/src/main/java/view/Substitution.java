@@ -27,13 +27,13 @@ import model.data.Team;
 public class Substitution extends Base {
     private static final long serialVersionUID = 5244133982320404420L;
     private final List<String> roles = List.of("P", "D", "C", "A");
-    final private JPanel panelTeam = new JPanel();
+    private final JPanel panelTeam = new JPanel();
     private transient LogicsSubstitution logics;
-    final private Team team;
-    final private Match matchGui;
+    private final Team team;
+    private final Match matchGui;
     private JPanel panelStarters;
     private JPanel panelSubstitutes;
-    final private int substitutes;
+    private final int substitutes;
     private static final int SUBSTITUTES = 7;
     private static final int INSETS_5 = 5;
     private static final int GRID_5 = 5;
@@ -148,11 +148,7 @@ public class Substitution extends Base {
             } else {
                 logics.sub(panelStarters.getParent(), panelSubstitutes.getParent(), panelStarters, panelSubstitutes);
                 if (logics.done()) {
-                    try {
-                        matchGui.addSub();
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
+                      matchGui.addSub();
                 }
             }
             panelStarters = null;

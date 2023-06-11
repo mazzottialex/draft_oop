@@ -1,4 +1,5 @@
 package controller;
+import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -40,7 +41,7 @@ public final class LogicStartImpl implements LogicStart {
             final URLConnection connection = url.openConnection();
             connection.connect();
             return true;
-        } catch (final Exception e) {
+        } catch (final IOException e) {
             return false;
         }
     }

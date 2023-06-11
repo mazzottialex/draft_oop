@@ -16,25 +16,24 @@ import model.managedata.ExtractDataImpl;
  */
 public final class SimulatingMatchImpl implements SimulatingMatch, Serializable {
     private static final long serialVersionUID = -7975364128825077937L;
-    final private SimulatingFunctions sf;
-    final private Team t1;
-    final private Team t2;
-    final private int concededGoals1;
-    final private int concededGoals2;
-    final private int owngoals1;
-    final private int owngoals2;
-    final private int savedPenalties1;
-    final private int savedPenalties2;
-    final private double lockdownDefense1;
-    final private double lockdownDefense2;
-    final private double defensiveRatings1;
-    final private double defensiveRatings2;
-    final private double offensiveRatings1;
-    final private double offensiveRatings2;
-    final private int scoredGoals1;
-    final private int scoredGoals2;
-    final private int scoredPenalties1;
-    final private int scoredPenalties2;
+    private final Team t1;
+    private final Team t2;
+    private final int concededGoals1;
+    private final int concededGoals2;
+    private final int owngoals1;
+    private final int owngoals2;
+    private final int savedPenalties1;
+    private final int savedPenalties2;
+    private final double lockdownDefense1;
+    private final double lockdownDefense2;
+    private final double defensiveRatings1;
+    private final double defensiveRatings2;
+    private final double offensiveRatings1;
+    private final double offensiveRatings2;
+    private final int scoredGoals1;
+    private final int scoredGoals2;
+    private final int scoredPenalties1;
+    private final int scoredPenalties2;
     private static final double COST_SUB_DEF = 14; // da aumentare a 15
     private static final double COST_SUB_OFF = 5; // da aumentare a 7
     private static final double COST_DIV_DEF_OFF_CR = 5;
@@ -54,7 +53,7 @@ public final class SimulatingMatchImpl implements SimulatingMatch, Serializable 
     @SuppressFBWarnings("EI2")
     public SimulatingMatchImpl(final Team t1, final Team t2)
     throws FileNotFoundException, ClassNotFoundException, IOException {
-        sf = new SimulatingFunctionsImpl();
+        final SimulatingFunctions sf = new SimulatingFunctionsImpl();
         this.t1 = t1;
         this.t2 = t2;
         final Map<Player, Double> ratings1 = sf.getFantasyRantings(this.t1.getStarting());

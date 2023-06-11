@@ -31,8 +31,8 @@ public class ExtractDataTest {
      *
      * @throws Exception if an error occurs during setup.
      */
-    public ExtractDataTest() throws Exception {
-    	final ManageData md = new ManageDataImpl("2022-2023");
+    public ExtractDataTest() {
+        final ManageData md = new ManageDataImpl("2022-2023");
         md.loadData();
         List<Player> list = md.getLi();
         final AnalysisRating analysisRating = new AnalysisRatingImpl(list);

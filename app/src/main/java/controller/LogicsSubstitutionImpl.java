@@ -66,8 +66,8 @@ public final class LogicsSubstitutionImpl implements LogicsSubstitution {
     @Override
     public void sub(final Container parent1, final Container parent2, final Component component1, final Component component2) {
         if (subOff.getPos().equals(subOn.getPos())) {
-        	final int index1 = getComponentIndex(parent1, component1);
-        	final int index2 = getComponentIndex(parent2, component2);
+            final int index1 = getComponentIndex(parent1, component1);
+            final int index2 = getComponentIndex(parent2, component2);
             if (index1 != -1 && index2 != -1) {
                 parent1.remove(component1);
                 parent2.remove(component2);

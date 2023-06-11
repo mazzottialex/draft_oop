@@ -23,7 +23,8 @@ import javax.swing.JScrollPane;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * Represents a GUI for History of teams created.
  */
@@ -35,6 +36,7 @@ public class History extends Base {
     private static final int SCALED_IMAGE = 55;
     private static final Insets INSETS_1 = new Insets(5, 0, 5, 25);
     private static final Insets INSETS_2 = new Insets(2, 25, 2, 25);
+    private static final Logger LOG = LoggerFactory.getLogger(History.class);
     /**
      * Constructs a new History object.
      * @param season the season selected
@@ -55,7 +57,7 @@ public class History extends Base {
                 try {
                     changeJPanel(new Home(log.getSeason(), log.getOnline(), false));
                 } catch (ExecuteException e1) {
-                    e1.printStackTrace();
+                	LOG.error("Error", e1);
                 }
             }
         });
@@ -71,7 +73,7 @@ public class History extends Base {
             final JLabel lblLogo = new JLabel();
             ImageIcon img = new ImageIcon(team.getLogo());
             final Image image = img.getImage();
-            final Image newImg = image.getScaledInstance(SCALED_IMAGE, SCALED_IMAGE,  java.awt.Image.SCALE_SMOOTH);
+            final Image newImg = image.getScaledInstance(SCALED_IMAGE, SCALED_IMAGE,  Image.SCALE_SMOOTH);
             img = new ImageIcon(newImg);
             lblLogo.setBackground(Color.white);
             lblLogo.setIcon(img);
@@ -93,7 +95,7 @@ public class History extends Base {
                     try {
                         changeJPanel(new ViewTeam(team, log.getSeason(), log.getOnline()));
                     } catch (ExecuteException e1) {
-                        e1.printStackTrace();
+                    	LOG.error("Error", e1);
                     }
                 }
             });

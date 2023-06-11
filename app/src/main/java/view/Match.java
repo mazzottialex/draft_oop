@@ -23,6 +23,9 @@ import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import controller.LogicsMatch;
 import controller.LogicsMatchImpl;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
@@ -71,6 +74,7 @@ public class Match extends Base implements Serializable {
     private static final double MAX_MIN_W = 0.2;
     private static final double MIN_H = 0.1;
     private static final double MAX_H = 0.3;
+    private static final Logger LOG = LoggerFactory.getLogger(Match.class);
 
     /**
      * Creates a new instance of the {@code Match} class.
@@ -241,7 +245,7 @@ public class Match extends Base implements Serializable {
      * Adds a substitution count disable substitutions button.
      * @throws Exception 
      */
-    public void addSub() throws Exception {
+    public void addSub() {
         final int s = t1.getSubstitution().size();
         updateTeam();
         if (s == t1.getSubstitution().size()) {
@@ -254,8 +258,6 @@ public class Match extends Base implements Serializable {
                 subsButton.setEnabled(false);
                 panel.revalidate();
                 panel.repaint();
-            } else {
-                throw new Exception();
             }
         }
     }
@@ -284,7 +286,7 @@ public class Match extends Base implements Serializable {
                         logics.scorers(progressBar.getValue());
                         changeResult = true;
                     } catch (ClassNotFoundException | IOException e) {
-                        e.printStackTrace();
+                        LOG.error("Error", e);
                     }
                 }
                 for (int i = progressBar.getValue(); i <= fullTime && isRunning; i++) {
@@ -299,7 +301,7 @@ public class Match extends Base implements Serializable {
                             try {
                                 changeScore();
                             } catch (ClassNotFoundException | IOException e) {
-                                e.printStackTrace();
+                                LOG.error("Error", e);
                             }
                             //Abilita bottone sostituzioni
                             if (progressBar.getValue() > 0 && substitutions < 3) {
@@ -313,7 +315,7 @@ public class Match extends Base implements Serializable {
                     try {
                         Thread.sleep(100);
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        LOG.error("Error", e);
                     }
                 }
 
