@@ -2,8 +2,6 @@ package view;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import org.apache.commons.exec.ExecuteException;
-
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import net.bytebuddy.implementation.bytecode.Throw;
 
@@ -39,7 +37,6 @@ public class Base extends JFrame {
      *
      * @return the JPanel content pane
      */
-    @SuppressFBWarnings("EI")
     public JPanel getPanel() {
         return contentPane;
 
@@ -49,19 +46,15 @@ public class Base extends JFrame {
      * Changes the current JPanel with a new JPanel.
      *
      * @param newPanel the new Base object containing the new JPanel
-     * @throws ExecuteException 
      */
-    @SuppressFBWarnings("BC")
-    protected void changeJPanel(final Base newPanel) throws ExecuteException {
+    @SuppressWarnings("unchecked")
+    protected void changeJPanel(final Base newPanel) {
         if (contentPane.getTopLevelAncestor() instanceof JFrame) {
             JFrame frame = (JFrame) contentPane.getTopLevelAncestor();
             frame.remove(contentPane);
             frame.add(newPanel.getPanel());
             frame.revalidate();
             frame.repaint();
-        }
-        else {
-        	throw new ExecuteException("Content panel not JFrame", ABORT);
         }
     }
 }
