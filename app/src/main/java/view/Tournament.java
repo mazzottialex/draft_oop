@@ -408,7 +408,7 @@ public class Tournament extends Base {
                 label = label + s.charAt(i);
                 if (i % max == 0 && i != 0) {
                     //label = label + "<br>";
-                    label.concat("<br>");
+                    label = label.concat("<br>");
                 }
             }
             label = label + s.charAt(s.length() - 2) + s.charAt(s.length() - 1);
