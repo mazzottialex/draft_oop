@@ -33,8 +33,8 @@ public class CreateOpponentTeamsTest {
      * @throws Exception if an error occurs during setup.
      */
     public CreateOpponentTeamsTest() {
-    	final ManageData md = new ManageDataImpl("2022-2023");
-    	try {
+        final ManageData md = new ManageDataImpl("2022-2023");
+        try {
             md.loadData();
         } catch (Exception e) {
             LOG.error("Error", e);

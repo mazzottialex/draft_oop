@@ -21,7 +21,7 @@ import model.managedata.ExtractDataImpl;
 public final class SimulatingFunctionsImpl implements SimulatingFunctions, Serializable {
 
     private static final long serialVersionUID = -1388612538618774091L;
-    final private Random r = new Random();
+    private final Random r = new Random();
     private static final double OWNGOAL_RATE = 2.904_040_404_040_404; // percentuale di autogol su gol
     private static final double PENALTY_RATE = 0.2875; // rigori per partita
     private static final double MISSED_PENALTIES_RATE = 22.826_086_956_521_74; // percentuale rigori sbagliati
@@ -140,7 +140,7 @@ public final class SimulatingFunctionsImpl implements SimulatingFunctions, Seria
         }
         return savedPenalties;
     }
-    
+
     private int getPenalties() {
         int penalties = 0;
         final double prob = prob(0, 1);

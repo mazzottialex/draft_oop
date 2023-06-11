@@ -61,7 +61,7 @@ public final class ExtractDataImpl implements ExtractData {
 
     @Override
     public List<Player> getRandomByPos(final String pos, final int n) {
-    	final List<Player> listRole = getListByPos(pos);
+        final List<Player> listRole = getListByPos(pos);
         final Random rnd = new Random();
         final Set<Integer> position = new HashSet<>();
         for (int i = 0; i < n; i++) {
@@ -266,7 +266,7 @@ public final class ExtractDataImpl implements ExtractData {
 
     @Override
     public Module selectModule() {
-    	final List<Module> module = new ArrayList<>(List.of(Module.values()));
+        final List<Module> module = new ArrayList<>(List.of(Module.values()));
         return module.get(random.nextInt(module.size()));
     }
 }

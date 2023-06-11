@@ -254,15 +254,15 @@ public class Match extends Base implements Serializable {
         if (substitutions == 3) {
             final Container cont = subsButton.getParent();
             try {
-				if (cont instanceof JPanel) {
-					final JPanel panel = (JPanel) cont;
-					subsButton.setEnabled(false);
-					panel.revalidate();
-					panel.repaint();
-				} 
-			} catch (Exception e) {
-	            LOG.error("Error", e);
-	        }
+                if (cont instanceof JPanel) {
+                    final JPanel panel = (JPanel) cont;
+                    subsButton.setEnabled(false);
+                    panel.revalidate();
+                    panel.repaint();
+                } 
+            } catch (Exception e) {
+                LOG.error("Error", e);
+            }
         }
     }
 

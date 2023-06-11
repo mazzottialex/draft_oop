@@ -35,7 +35,7 @@ public class ExtractDataTest {
      * @throws Exception if an error occurs during setup.
      */
     public ExtractDataTest() {
-    	final ManageData md = new ManageDataImpl("2022-2023");
+        final ManageData md = new ManageDataImpl("2022-2023");
         try {
             md.loadData();
         } catch (Exception e) {
