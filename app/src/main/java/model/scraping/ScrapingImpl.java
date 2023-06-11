@@ -129,18 +129,18 @@ public final class ScrapingImpl implements Scraping {
     private static boolean checkBrowser(final String browser) {
         String os = System.getProperty("os.name").toLowerCase();
         if (os.contains("win")) {
-            String path1 = null;
-            String path2 = null;
             if (browser.equals(BROWSER_CHROME)) {
-                path1 = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\Chrome.exe";
-                path2 = "C:\\Program Files\\Google\\Chrome\\Application\\Chrome.exe";
+            	String path1 = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\Chrome.exe";
+            	String path2 = "C:\\Program Files\\Google\\Chrome\\Application\\Chrome.exe";
+            	if (new File(path1).exists() || new File(path2).exists()) {
+                    return true;
+                }
             } else if (browser.equals(BROWSER_FIREFOX)) {
-                path1 = "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe";
-                path2 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
-            }
-
-            if (new File(path1).exists() || new File(path2).exists()) {
-                return true;
+            	String path1 = "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe";
+            	String path2 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
+            	if (new File(path1).exists() || new File(path2).exists()) {
+                    return true;
+                }
             }
         } else if (os.contains("nix") || os.contains("nux") || os.contains("mac")) {
             // Linux

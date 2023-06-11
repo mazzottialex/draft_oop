@@ -2,6 +2,7 @@ package model.simulating;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -17,9 +18,10 @@ import model.data.Team;
  * Implementation of the {@code SimulatingFunctions} interface that provides
  * simulation functions for fantasy football.
  */
-public final class SimulatingFunctionsImpl implements SimulatingFunctions {
+public final class SimulatingFunctionsImpl implements SimulatingFunctions, Serializable {
 
-    // Constants for simulation calculations
+    private static final long serialVersionUID = -1388612538618774091L;
+    private Random random = new Random();
     private static final double OWNGOAL_RATE = 2.904040404040404; // percentuale di autogol su gol
     private static final double PENALTY_RATE = 0.2875; // rigori per partita
     private static final double MISSED_PENALTIES_RATE = 22.82608695652174; // percentuale rigori sbagliati
@@ -71,7 +73,7 @@ public final class SimulatingFunctionsImpl implements SimulatingFunctions {
      * @return A random number between min and max.
      */
     public double prob(final double min, final double max) {
-        return min + (max - min) * new Random().nextDouble();
+        return min + (max - min) * random.nextDouble();
     }
 
     /**

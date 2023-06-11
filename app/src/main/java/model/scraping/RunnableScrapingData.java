@@ -103,7 +103,7 @@ public class RunnableScrapingData implements Runnable {
         }
         if (this.flag) {
             int last = Integer.parseInt(driver.findElement(By.className("paginationjs-last")).getText());
-            final int pagine = (int) Math.ceil((last) / nThread) + 1;
+            final int pagine = (int) Math.ceil(last / (double) nThread) + 1;
             if (pagine * (myId + 1) < last) {
                 last = pagine * (myId + 1);
             }
