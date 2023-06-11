@@ -46,14 +46,14 @@ public class Start extends Base {
             }
             @Override
             public void mouseExited(final MouseEvent e) {
-            	final Image newImg = image.getScaledInstance(SCALE_IMG_1, SCALE_IMG_1, Image.SCALE_SMOOTH);
-            	final ImageIcon img = new ImageIcon(newImg);
+                final Image newImg = image.getScaledInstance(SCALE_IMG_1, SCALE_IMG_1, Image.SCALE_SMOOTH);
+                final ImageIcon img = new ImageIcon(newImg);
                 labelIcon.setIcon(img);
             }
             @Override
             public void mouseEntered(final MouseEvent e) {
-            	final Image newImg = image.getScaledInstance(SCALE_IMG_2, SCALE_IMG_2, Image.SCALE_SMOOTH);
-            	final ImageIcon img = new ImageIcon(newImg);
+                final Image newImg = image.getScaledInstance(SCALE_IMG_2, SCALE_IMG_2, Image.SCALE_SMOOTH);
+                final ImageIcon img = new ImageIcon(newImg);
                 labelIcon.setIcon(img);
             }
             @Override
@@ -61,7 +61,7 @@ public class Start extends Base {
                 try {
                     changeJPanel(new Home(log.getFirstSeason(), log.getOnline(), true));
                 } catch (ExecuteException e1) {
-                	LOG.error("Error", e1);
+                    LOG.error("Error", e1);
                 }
             }
         });

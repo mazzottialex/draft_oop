@@ -85,7 +85,7 @@ public class Archive extends Base {
                 try {
                     changeJPanel(new Home(log.getSeason(), log.getOnline(), false));
                 } catch (ExecuteException e1) {
-                	LOG.error("Error", e1);
+                    LOG.error("Error", e1);
                 }
             }
         });

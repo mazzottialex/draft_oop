@@ -58,7 +58,7 @@ public class AppTest {
         int i = 1;
         final ManageData md = new ManageDataImpl("2022-2023");
         md.loadData();
-        List<Player> list = md.getLi();
+        final List<Player> list = md.getLi();
         final LogicsCreateTeam lc = new LogicsCreateTeamImpl("myTeam", ClassLoader.getSystemResource("stemmi/bianco.png"), list);
         lc.addPlayerInTeam(new Player(i++, "n1", "P", "t", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
         lc.addPlayerInTeam(new Player(i++, "n2", "D", "t", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));

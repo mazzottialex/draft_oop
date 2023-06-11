@@ -94,8 +94,8 @@ public final class UtilsGUI {
      * @return the width in pixels
      */
     public static int getWidth(final double perc) {
-    	final GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-    	final int screenWidth = gd.getDisplayMode().getWidth();
+        final GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+        final int screenWidth = gd.getDisplayMode().getWidth();
         return (int) (screenWidth * perc);
     }
 
@@ -106,7 +106,7 @@ public final class UtilsGUI {
      * @return the height in pixels
      */
     public static int getHeight(final double perc) {
-    	final GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+        final GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
         final int screenHeight = gd.getDisplayMode().getHeight();
         return (int) (screenHeight * perc);
     }

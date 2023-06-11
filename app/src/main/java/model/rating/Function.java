@@ -64,7 +64,7 @@ public class Function {
      * @return The computed logarithmic rating
      */
     public int logarithmic(final int x, final int top, final double a, final int min, final int max) {
-    	final int b = n * x / top;
+        final int b = n * x / top;
         return (int) Math.round((max - min) / Math.log(a * n + 1) * Math.log(a * b + 1) + min);
     }
 }
