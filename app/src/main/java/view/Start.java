@@ -30,9 +30,9 @@ public class Start extends Base {
         super.getPanel().setLayout(gridBagLayout);
         ImageIcon img = new ImageIcon(ClassLoader.getSystemResource("icon.png"));
         final Image image = img.getImage();
-        final Image newImg = image.getScaledInstance(SCALE_IMG_1, SCALE_IMG_1, java.awt.Image.SCALE_SMOOTH);
+        final Image newImg = image.getScaledInstance(SCALE_IMG_1, SCALE_IMG_1, Image.SCALE_SMOOTH);
         img = new ImageIcon(newImg);
-        JLabel labelIcon = new JLabel(img);
+        final JLabel labelIcon = new JLabel(img);
         labelIcon.addMouseListener(new MouseListener() {
             @Override
             public void mouseReleased(final MouseEvent e) {
@@ -44,13 +44,13 @@ public class Start extends Base {
             }
             @Override
             public void mouseExited(final MouseEvent e) {
-            	final Image newImg = image.getScaledInstance(SCALE_IMG_1, SCALE_IMG_1, java.awt.Image.SCALE_SMOOTH);
+            	final Image newImg = image.getScaledInstance(SCALE_IMG_1, SCALE_IMG_1, Image.SCALE_SMOOTH);
             	final ImageIcon img = new ImageIcon(newImg);
                 labelIcon.setIcon(img);
             }
             @Override
             public void mouseEntered(final MouseEvent e) {
-            	final Image newImg = image.getScaledInstance(SCALE_IMG_2, SCALE_IMG_2, java.awt.Image.SCALE_SMOOTH);
+            	final Image newImg = image.getScaledInstance(SCALE_IMG_2, SCALE_IMG_2, Image.SCALE_SMOOTH);
             	final ImageIcon img = new ImageIcon(newImg);
                 labelIcon.setIcon(img);
             }

@@ -63,7 +63,7 @@ public final class ScrapingImpl implements Scraping {
                 liThr.add(new Pair<>(runnable, thr));
                 thr.start();
             }
-            for (Pair<RunnableScrapingData, Thread> el: liThr) {
+            for (final Pair<RunnableScrapingData, Thread> el: liThr) {
                 try {
                     el.getY().join();
                 } catch (InterruptedException e) {
@@ -134,25 +134,19 @@ public final class ScrapingImpl implements Scraping {
     private static boolean checkBrowser(final String browser) {
     	final String os = System.getProperty("os.name").toLowerCase(Locale.getDefault());
         if (os.contains("win")) {
-            if (browser.equals(BROWSER_CHROME)) {
-                if (new File(CHROME1).exists() || new File(CHROME2).exists()) {
-                    return true;
-                }
-            } else if (browser.equals(BROWSER_FIREFOX)) {
-                if (new File(FIREFOX1).exists() || new File(FIREFOX2).exists()) {
-                    return true;
-                }
+            if (browser.equals(BROWSER_CHROME) && (new File(CHROME1).exists() || new File(CHROME2).exists())) {
+                return true;
+            } else if (browser.equals(BROWSER_FIREFOX) && (new File(FIREFOX1).exists() || new File(FIREFOX2).exists())) {
+        	    return true;
             }
         } else if (os.contains("nix") || os.contains("nux") || os.contains("mac")) {
             // Linux
         	final String[] istruzione = { "which", browser }; //cerca browser tra i programmi
             try {
-                Process process = Runtime.getRuntime().exec(istruzione);
+            	final Process process = Runtime.getRuntime().exec(istruzione);
                 process.waitFor();
                 return process.exitValue() == 0;
-            } catch (RuntimeException e) {
-                throw e;
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 return false;
             }
         }

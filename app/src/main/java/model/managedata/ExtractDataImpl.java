@@ -21,7 +21,7 @@ public final class ExtractDataImpl implements ExtractData {
     private final List<Player> li;
     private static final int PARAMETER = 10;
     private static final int TOP = 100;
-    private Random random = new Random();
+    private final Random random = new Random();
 
     /**
      * Constructs an {@code ExtractDataImpl} object with the given list of players.

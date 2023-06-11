@@ -46,6 +46,7 @@ public class Home extends Base {
     private static final Color BACKGROUND_COLOR = new Color(0, 64, 128);
     private static final Color BACKGROUND_COLOR_2 = Color.GREEN;
     private static final int GRID_Y = 5;
+    private static final String FONT = "Verdana";
 
     /**
      * Constructs a new Home object.
@@ -73,7 +74,7 @@ public class Home extends Base {
         final JButton btnStart = new JButton();
         ImageIcon img = new ImageIcon(START_IMAGE_PATH);
         final Image image = img.getImage();
-        final Image newimg = image.getScaledInstance(SCALED_IMAGE_2, SCALED_IMAGE_2, java.awt.Image.SCALE_SMOOTH);
+        final Image newimg = image.getScaledInstance(SCALED_IMAGE_2, SCALED_IMAGE_2, Image.SCALE_SMOOTH);
         img = new ImageIcon(newimg);
         btnStart.setBorderPainted(false);
         btnStart.setFocusPainted(false);
@@ -81,16 +82,17 @@ public class Home extends Base {
         btnStart.setBackground(super.getForeground());
         btnStart.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         btnStart.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(final java.awt.event.MouseEvent evt) {
+            @Override
+        	public void mouseEntered(final java.awt.event.MouseEvent evt) {
                 btnStart.setBackground(BACKGROUND_COLOR_2);
-                final Image newimg = image.getScaledInstance(SCALED_IMAGE_1, SCALED_IMAGE_1, java.awt.Image.SCALE_SMOOTH);
+                final Image newimg = image.getScaledInstance(SCALED_IMAGE_1, SCALED_IMAGE_1, Image.SCALE_SMOOTH);
                 final ImageIcon img = new ImageIcon(newimg);
                 btnStart.setIcon(img);
             }
-
+            @Override
             public void mouseExited(final java.awt.event.MouseEvent evt) {
                 btnStart.setBackground(BACKGROUND_COLOR);
-                final Image newimg = image.getScaledInstance(SCALED_IMAGE_2, SCALED_IMAGE_2, java.awt.Image.SCALE_SMOOTH);
+                final Image newimg = image.getScaledInstance(SCALED_IMAGE_2, SCALED_IMAGE_2, Image.SCALE_SMOOTH);
                 final ImageIcon img = new ImageIcon(newimg);
                 btnStart.setIcon(img);
             }
@@ -115,10 +117,10 @@ public class Home extends Base {
         final JPanel panelSelectioned = new JPanel();
         panelSelectioned.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         final JLabel lblSeasonSelected = new JLabel("Season selected:");
-        lblSeasonSelected.setFont(new Font("Verdana", Font.ROMAN_BASELINE, FONT_SIZE));
+        lblSeasonSelected.setFont(new Font(FONT, Font.ROMAN_BASELINE, FONT_SIZE));
         panelSelectioned.add(lblSeasonSelected);
         final JLabel lblSeason = new JLabel(log.getSeason());
-        lblSeason.setFont(new Font("Verdana", Font.ROMAN_BASELINE, FONT_SIZE));
+        lblSeason.setFont(new Font(FONT, Font.ROMAN_BASELINE, FONT_SIZE));
         panelSelectioned.add(lblSeason);
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -149,15 +151,15 @@ public class Home extends Base {
         gbc.gridx = 0;
         gbc.gridy = 3;
         super.getPanel().add(btnDownload, gbc);
-        comboBoxDownload.setFont(new Font("Verdana", Font.ROMAN_BASELINE, FONT_SIZE));
+        comboBoxDownload.setFont(new Font(FONT, Font.ROMAN_BASELINE, FONT_SIZE));
         btnDownload.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(btnDownload);
-                DialogNThread dialog = new DialogNThread(parent);
+                final JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(btnDownload);
+                final DialogNThread dialog = new DialogNThread(parent);
                 dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
                 dialog.setVisible(true);
-                int nThread = dialog.getNThread();
+                final int nThread = dialog.getNThread();
                 if (nThread > 0) {
                     JOptionPane.showMessageDialog(null, "Wait a few seconds");
                     log.setSeason(comboBoxDownload.getItemAt(comboBoxDownload.getSelectedIndex()));

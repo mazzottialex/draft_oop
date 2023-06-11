@@ -29,7 +29,6 @@ import java.awt.FlowLayout;
  */
 public class Archive extends Base {
     private static final long serialVersionUID = 1L;
-    private final JTable table;
     private final transient LogicsArchive log;
     private final TableModel tm = new DefaultTableModel(new String[] {
             "POSITION",
@@ -67,16 +66,16 @@ public class Archive extends Base {
     public Archive(final List<Player> li, final String season, final Boolean online)
             throws FileNotFoundException, ClassNotFoundException, IOException {
         log = new LogicsArchiveImpl(season, online);
-        List<Player> liOrdered = log.liOrdered(li);
+        final List<Player> liOrdered = log.liOrdered(li);
         liOrdered.stream().forEach(c -> ((DefaultTableModel) tm).addRow(c.toList().toArray()));
         super.getPanel().setLayout(new FlowLayout(FlowLayout.CENTER, GAP, GAP));
         super.getPanel().setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
-        JPanel panel = new JPanel();
+        final JPanel panel = new JPanel();
         panel.setPreferredSize(new Dimension(PANEL_WIDTH2, PANEL_HEIGHT2));
         panel.setBackground(super.getForeground());
         super.getPanel().add(panel);
         panel.setLayout(null);
-        JButton btnHome = UtilsGUI.standardButton("Home");
+        final JButton btnHome = UtilsGUI.standardButton("Home");
         btnHome.setBounds(10, 8, BUTTON_WIDTH, BUTTON_HEIGHT);
         btnHome.addActionListener(new ActionListener() {
             @Override
@@ -89,16 +88,16 @@ public class Archive extends Base {
             }
         });
         panel.add(btnHome);
-        JLabel lblNewLabel = new JLabel(log.getSeason());
+        final JLabel lblNewLabel = new JLabel(log.getSeason());
         lblNewLabel.setBounds(LABEL_X, LABEL_Y, LABEL_WIDTH, LABEL_HEIGHT);
         lblNewLabel.setFont(new Font("Verdana", Font.ROMAN_BASELINE, FONT_DIM));
         lblNewLabel.setForeground(Color.white);
         panel.add(lblNewLabel);
-        table = new JTable(tm);
-        JScrollPane scrollPane = new JScrollPane(table);
+        final JTable table = new JTable(tm);
+        final JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setPreferredSize(new Dimension(UtilsGUI.getWidth(WIDTH_SCROLLPANEL), UtilsGUI.getHeight(HEIGHT_SCROLLPANEL)));
         super.getPanel().add(scrollPane);
-        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tm);
+        final TableRowSorter<TableModel> sorter = new TableRowSorter<>(tm);
         sorter.setComparator(0, new Comparator<Object>() {
             @Override
             public int compare(final Object o1, final Object o2) {

@@ -23,7 +23,7 @@ public class RunnableScrapingData implements Runnable {
     private final List<Player> li = new ArrayList<>();
     private final String url;
     private Boolean flag = true;
-    private Boolean flagChrome;
+    private final Boolean flagChrome;
     private static final int PG = 7;
     private static final int MINUTES = 9;
     private static final int GOALS = 10;
@@ -78,6 +78,7 @@ public class RunnableScrapingData implements Runnable {
     /**
      * Executes the thread.
      */
+    @Override
     public void run() {
         final WebDriver driver;
         if (flagChrome) {
@@ -107,7 +108,6 @@ public class RunnableScrapingData implements Runnable {
             for (Integer i = 1; i < last + 1; i++) {
                 js.executeScript("document.querySelector('[data-num=\"" + i.toString() + "\"]').click()");
                 if (i > myId * pagine) {
-                    System.out.println(myId + "  i:" + i);
                     final WebElement table = driver.findElement(By.tagName("tbody"));
                     final int nRighe = table.findElements(By.tagName("tr")).size();
                     for (int j = 1; j < nRighe + 1; j++) {
@@ -115,7 +115,7 @@ public class RunnableScrapingData implements Runnable {
                             driver.findElements(By.tagName("tr")).get(j).findElements(By.tagName("td"));
                         final String ruolo = riga.get(2).getText().substring(0, 1); //ruolo
                         // a 0 i cartellini perchè non gestiti da partita
-                        if (ruolo.equals("P")) {
+                        if ("P".equals(ruolo)) {
                             li.add(new Player((i - 1) * COST_ID + (j - 1), //id
                                 riga.get(1).getText(), //nome
                                 ruolo, //ruolo

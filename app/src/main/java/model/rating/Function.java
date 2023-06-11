@@ -33,7 +33,7 @@ public class Function {
      * @return The computed linear rating
      */
     public int linear(final int x, final int top, final int min, final int max) {
-        int b = n * x / top;
+        final int b = n * x / top;
         return (max - min) / n * b + min;
     }
 
@@ -48,9 +48,9 @@ public class Function {
      */
     public int logarithmic(final int x, final int top, final int min, final int max) {
         //parametro a, velocit� funzione logaritmica, con a piccolo (es: 0.1) lenta, con a grande (es: 100) veloce
-        double a = SPEED_PARAMETER;
-        int b = n * x / top;
-        return (int) Math.round(((max - min) / Math.log(a * n + 1) * Math.log(a * b + 1) + min));
+        final double a = SPEED_PARAMETER;
+        final int b = n * x / top;
+        return (int) Math.round((max - min) / Math.log(a * n + 1) * Math.log(a * b + 1) + min);
     }
 
     /**
@@ -64,21 +64,7 @@ public class Function {
      * @return The computed logarithmic rating
      */
     public int logarithmic(final int x, final int top, final double a, final int min, final int max) {
-        int b = n * x / top;
-        return (int) Math.round(((max - min) / Math.log(a * n + 1) * Math.log(a * b + 1) + min));
-    }
-
-    /**
-     * Computes the exponential rating for the given value x.
-     *
-     * @param x   The input value
-     * @param top The maximum value for x
-     * @param min The minimum rating value
-     * @param max The maximum rating value
-     * @return The computed exponential rating
-     */
-    public int exponential(final int x, final int top, final int min, final int max) {
-        int b = n * x / top;
-        return (int) Math.round(Math.exp(Math.log(((max - min) + 1) * b) / n + (max - min) - 1));
+    	final int b = n * x / top;
+        return (int) Math.round((max - min) / Math.log(a * n + 1) * Math.log(a * b + 1) + min);
     }
 }

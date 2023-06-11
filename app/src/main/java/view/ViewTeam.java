@@ -71,13 +71,13 @@ public class ViewTeam extends Base {
         final JLabel lblLogo = new JLabel();
         ImageIcon img = new ImageIcon(team.getLogo());
         final Image image = img.getImage();
-        final Image newimg = image.getScaledInstance(SCALE_IMG_1, SCALE_IMG_1, java.awt.Image.SCALE_SMOOTH);
+        final Image newimg = image.getScaledInstance(SCALE_IMG_1, SCALE_IMG_1, Image.SCALE_SMOOTH);
         img = new ImageIcon(newimg);
         lblLogo.setBackground(Color.white);
         lblLogo.setIcon(img);
         lblLogo.setBorder(new EmptyBorder(INSETS_2));
         panelTeam.add(lblLogo);
-        JLabel lblTeamName = new JLabel(team.getTeamName());
+        final JLabel lblTeamName = new JLabel(team.getTeamName());
         lblTeamName.setFont(new Font("DejaVu Sans", Font.PLAIN, 16));
         lblTeamName.setForeground(Color.white);
         panelTeam.add(lblTeamName);
