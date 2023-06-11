@@ -53,7 +53,7 @@ public class Base extends JFrame {
     @SuppressFBWarnings("BC")
     protected void changeJPanel(final Base newPanel) throws ExecuteException {
         if (contentPane.getTopLevelAncestor() instanceof JFrame) {
-            JFrame frame = (JFrame) contentPane.getTopLevelAncestor();
+        	final JFrame frame = (JFrame) contentPane.getTopLevelAncestor();
             frame.remove(contentPane);
             frame.add(newPanel.getPanel());
             frame.revalidate();

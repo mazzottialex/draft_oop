@@ -61,9 +61,9 @@ public final class ExtractDataImpl implements ExtractData {
 
     @Override
     public List<Player> getRandomByPos(final String pos, final int n) {
-        List<Player> listRole = getListByPos(pos);
-        Random rnd = new Random();
-        Set<Integer> position = new HashSet<>();
+    	final List<Player> listRole = getListByPos(pos);
+        final Random rnd = new Random();
+        final Set<Integer> position = new HashSet<>();
         for (int i = 0; i < n; i++) {
             int num;
             do {
@@ -210,7 +210,7 @@ public final class ExtractDataImpl implements ExtractData {
     public List<?> getStartersRoleNameRating(final String team, final Module module) {
         return getStarting(team, module)
             .stream()
-            .map(p -> p.toVector())
+            .map(p -> p.toList())
             .collect(Collectors.toList());
     }
 
@@ -266,7 +266,7 @@ public final class ExtractDataImpl implements ExtractData {
 
     @Override
     public Module selectModule() {
-        List<Module> module = new ArrayList<>(List.of(Module.values()));
+    	final List<Module> module = new ArrayList<>(List.of(Module.values()));
         return module.get(random.nextInt(module.size()));
     }
 }

@@ -1,9 +1,9 @@
 package model.data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.Vector;
-
 import utils.Pair;
 import utils.Triple;
 
@@ -281,19 +281,19 @@ public final class Player implements Serializable {
     }
 
     /**
-     * Converts the player object to a vector representation.
+     * Converts the player object to list for table.
      *
-     * @return a vector containing the player's information
+     * @return a list containing the player's information
      */
-    public Vector<?> toVector() {
-        Vector<Object> v = new Vector<>();
-        v.add(pos);
-        v.add(name);
-        v.add(rating.getX());
-        v.add(rating.getY().getX());
-        v.add(rating.getY().getY());
-        v.add(rating.getY().getZ());
-        return v;
+    public List<String> toList() {
+        List<String> list = new ArrayList<>();
+        list.add(pos);
+        list.add(name);
+        list.add(rating.getX().toString());
+        list.add(rating.getY().getX().toString());
+        list.add(rating.getY().getY().toString());
+        list.add(rating.getY().getZ().toString());
+        return list;
     }
 
     @Override

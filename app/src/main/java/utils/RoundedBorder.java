@@ -34,7 +34,7 @@ public final class RoundedBorder extends AbstractBorder {
 
     @Override
     public void paintBorder(final Component c, final Graphics g, final int x, final int y, final int width, final int height) {
-        Graphics2D g2d = (Graphics2D) g.create();
+        final Graphics2D g2d = (Graphics2D) g.create();
         g2d.setColor(color);
         g2d.draw(new RoundRectangle2D.Double(x, y, width - 1, height - 1, gap, gap));
         g2d.dispose();

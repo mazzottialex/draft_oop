@@ -26,9 +26,9 @@ public final class LogicsFileImpl implements LogicsFile {
     @Override
     public List<Player> loadData(final String season) {
         List<Player> li = new ArrayList<>();
-        try (InputStream file = ClassLoader.getSystemResourceAsStream("backup" + season + ".txt");
-                InputStream bstream = new BufferedInputStream(file);
-                ObjectInputStream ostream = new ObjectInputStream(file);) {
+        try (final InputStream file = ClassLoader.getSystemResourceAsStream("backup" + season + ".txt");
+        		final InputStream bstream = new BufferedInputStream(file);
+        		final ObjectInputStream ostream = new ObjectInputStream(file);) {
             li = (List<Player>) ostream.readObject();
             ostream.close();
         } catch (RuntimeException e) {
@@ -41,9 +41,9 @@ public final class LogicsFileImpl implements LogicsFile {
 
     @Override
     public Boolean saveData(final List<Player> li, final String season) {
-        try (OutputStream file = new FileOutputStream("src/main/resources/backup" + season + ".txt");
-                OutputStream bstream = new BufferedOutputStream(file);
-                ObjectOutputStream ostream = new ObjectOutputStream(file);) {
+        try (final OutputStream file = new FileOutputStream("src/main/resources/backup" + season + ".txt");
+        		final OutputStream bstream = new BufferedOutputStream(file);
+        		final ObjectOutputStream ostream = new ObjectOutputStream(file);) {
             ostream.writeObject(li);
             ostream.close();
         } catch (RuntimeException e) {
@@ -57,9 +57,9 @@ public final class LogicsFileImpl implements LogicsFile {
     @Override
     public List<String> loadSeason() {
         List<String> ls = new ArrayList<>();
-        try (InputStream file = ClassLoader.getSystemResourceAsStream("backupSeasons.txt");
-                InputStream bstream = new BufferedInputStream(file);
-                ObjectInputStream ostream = new ObjectInputStream(file);) {
+        try (final InputStream file = ClassLoader.getSystemResourceAsStream("backupSeasons.txt");
+        		final InputStream bstream = new BufferedInputStream(file);
+        		final ObjectInputStream ostream = new ObjectInputStream(file);) {
             String str;
             while ((str = ostream.readUTF()) != null) {
                 ls.add(str);
@@ -75,9 +75,9 @@ public final class LogicsFileImpl implements LogicsFile {
 
     @Override
     public Boolean saveSeason(final List<String> li) {
-        try (OutputStream file = new FileOutputStream("src/main/resources/backupSeasons.txt");
-                OutputStream bstream = new BufferedOutputStream(file);
-                ObjectOutputStream ostream = new ObjectOutputStream(file);) {
+        try (final OutputStream file = new FileOutputStream("src/main/resources/backupSeasons.txt");
+        		final OutputStream bstream = new BufferedOutputStream(file);
+        		final ObjectOutputStream ostream = new ObjectOutputStream(file);) {
             li.forEach(s -> {
                 try {
                     ostream.writeUTF(s);
@@ -97,9 +97,9 @@ public final class LogicsFileImpl implements LogicsFile {
     @SuppressWarnings("unchecked")
     @Override
     public List<Team> loadHistory() {
-        try (InputStream file = ClassLoader.getSystemResourceAsStream("history.txt");
-                InputStream bstream = new BufferedInputStream(file);
-                ObjectInputStream ostream = new ObjectInputStream(file);) {
+        try (final InputStream file = ClassLoader.getSystemResourceAsStream("history.txt");
+        		final InputStream bstream = new BufferedInputStream(file);
+        		final ObjectInputStream ostream = new ObjectInputStream(file);) {
             List<Team> li = (List<Team>) ostream.readObject();
             ostream.close();
             return li;
@@ -114,9 +114,9 @@ public final class LogicsFileImpl implements LogicsFile {
     public Boolean saveHistory(final Team s) {
         List<Team> li = loadHistory();
         li.add(s);
-        try (OutputStream file = new FileOutputStream("src/main/resources/history.txt");
-                OutputStream bstream = new BufferedOutputStream(file);
-                ObjectOutputStream ostream = new ObjectOutputStream(file);) {
+        try (final OutputStream file = new FileOutputStream("src/main/resources/history.txt");
+        		final OutputStream bstream = new BufferedOutputStream(file);
+        		final ObjectOutputStream ostream = new ObjectOutputStream(file);) {
             ostream.writeObject(li);
             ostream.close();
         } catch (RuntimeException e) {

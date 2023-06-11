@@ -26,11 +26,11 @@ public class Start extends Base {
      * Sets up the GUI components and event listeners
      */
     public Start() {
-        GridBagLayout gridBagLayout = new GridBagLayout();
+    	final GridBagLayout gridBagLayout = new GridBagLayout();
         super.getPanel().setLayout(gridBagLayout);
         ImageIcon img = new ImageIcon(ClassLoader.getSystemResource("icon.png"));
-        Image image = img.getImage();
-        Image newImg = image.getScaledInstance(SCALE_IMG_1, SCALE_IMG_1, java.awt.Image.SCALE_SMOOTH);
+        final Image image = img.getImage();
+        final Image newImg = image.getScaledInstance(SCALE_IMG_1, SCALE_IMG_1, java.awt.Image.SCALE_SMOOTH);
         img = new ImageIcon(newImg);
         JLabel labelIcon = new JLabel(img);
         labelIcon.addMouseListener(new MouseListener() {
@@ -44,14 +44,14 @@ public class Start extends Base {
             }
             @Override
             public void mouseExited(final MouseEvent e) {
-                Image newImg = image.getScaledInstance(SCALE_IMG_1, SCALE_IMG_1, java.awt.Image.SCALE_SMOOTH);
-                ImageIcon img = new ImageIcon(newImg);
+            	final Image newImg = image.getScaledInstance(SCALE_IMG_1, SCALE_IMG_1, java.awt.Image.SCALE_SMOOTH);
+            	final ImageIcon img = new ImageIcon(newImg);
                 labelIcon.setIcon(img);
             }
             @Override
             public void mouseEntered(final MouseEvent e) {
-                Image newImg = image.getScaledInstance(SCALE_IMG_2, SCALE_IMG_2, java.awt.Image.SCALE_SMOOTH);
-                ImageIcon img = new ImageIcon(newImg);
+            	final Image newImg = image.getScaledInstance(SCALE_IMG_2, SCALE_IMG_2, java.awt.Image.SCALE_SMOOTH);
+            	final ImageIcon img = new ImageIcon(newImg);
                 labelIcon.setIcon(img);
             }
             @Override

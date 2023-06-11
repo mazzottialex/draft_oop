@@ -132,7 +132,7 @@ public final class ScrapingImpl implements Scraping {
      */
     @SuppressFBWarnings("DMI")
     private static boolean checkBrowser(final String browser) {
-        String os = System.getProperty("os.name").toLowerCase(Locale.getDefault());
+    	final String os = System.getProperty("os.name").toLowerCase(Locale.getDefault());
         if (os.contains("win")) {
             if (browser.equals(BROWSER_CHROME)) {
                 if (new File(CHROME1).exists() || new File(CHROME2).exists()) {
@@ -145,7 +145,7 @@ public final class ScrapingImpl implements Scraping {
             }
         } else if (os.contains("nix") || os.contains("nux") || os.contains("mac")) {
             // Linux
-            String[] istruzione = { "which", browser }; //cerca browser tra i programmi
+        	final String[] istruzione = { "which", browser }; //cerca browser tra i programmi
             try {
                 Process process = Runtime.getRuntime().exec(istruzione);
                 process.waitFor();
