@@ -57,7 +57,7 @@ public class History extends Base {
                 try {
                     changeJPanel(new Home(log.getSeason(), log.getOnline(), false));
                 } catch (ExecuteException e1) {
-                	LOG.error("Error", e1);
+                    LOG.error("Error", e1);
                 }
             }
         });
@@ -95,7 +95,7 @@ public class History extends Base {
                     try {
                         changeJPanel(new ViewTeam(team, log.getSeason(), log.getOnline()));
                     } catch (ExecuteException e1) {
-                    	LOG.error("Error", e1);
+                        LOG.error("Error", e1);
                     }
                 }
             });

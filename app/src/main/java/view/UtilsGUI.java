@@ -80,7 +80,7 @@ public final class UtilsGUI {
      * @return a standard JButton
      */
     public static JButton standardButton(final String s) {
-    	final JButton btn = new JButton(s.toUpperCase(Locale.getDefault()));
+        final JButton btn = new JButton(s.toUpperCase(Locale.getDefault()));
         btn.setFont(new Font(FONT, Font.ROMAN_BASELINE, FONT_DIM));
         btn.setBackground(Color.LIGHT_GRAY);
         btn.setForeground(Color.BLACK);

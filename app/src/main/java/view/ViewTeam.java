@@ -63,7 +63,7 @@ public class ViewTeam extends Base {
                 try {
                     changeJPanel(new History(log.getSeason(), log.getOnline()));
                 } catch (ExecuteException e1) {
-                	LOG.error("Error", e);
+                    LOG.error("Error", e1);
                 }
             }
         });

@@ -1,5 +1,6 @@
 package model.managedata;
 
+import java.io.IOException;
 import java.util.List;
 
 import model.data.Player;
@@ -15,8 +16,10 @@ public interface LogicsFile {
      *
      * @param season The season for which to load the player data
      * @return The list of Player objects loaded from the file
+     * @throws IOException 
+     * @throws ClassNotFoundException 
      */
-    List<Player> loadData(String season);
+    List<Player> loadData(String season) throws IOException, ClassNotFoundException;
 
     /**
      * Saves the player data to a file for the specified season.

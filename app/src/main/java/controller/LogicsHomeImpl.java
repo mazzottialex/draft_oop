@@ -57,7 +57,7 @@ public final class LogicsHomeImpl implements LogicsHome {
         this.season = season;
         try {
             md.loadData();
-        } catch (Exception e) {
+        } catch (IOException | ClassNotFoundException e) {
             return false;
         }
         this.li = md.getLi();
