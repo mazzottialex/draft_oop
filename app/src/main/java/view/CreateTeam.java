@@ -68,17 +68,17 @@ public class CreateTeam extends Base {
     private final JPanel panelSud = new JPanel(new GridBagLayout()); // panel Sud del frame principale
     private final JPanel panelCenter = new JPanel(new GridBagLayout()); // Panel Center del frame principale
     private final GridBagConstraints gbc = new GridBagConstraints();
-    private final JLabel lblmodSel;
+    //private final JLabel lblmodSel;
     private JLabel lblmoduloSelect;
-    private final JButton buttonIniziaTorneo;
+    //private final JButton buttonIniziaTorneo;
     private JButton[] buttonsAtt;
     private JButton[] buttonsCen;
     private JButton[] buttonsDif;
     private JButton buttonPor;
-    private JButton[] buttonsPlayer;
-    private JPanel panelCalciatoriCenter;
+    //private JButton[] buttonsPlayer;
+    private final JPanel panelCalciatoriCenter;
     // private JButton buttonSelect;
-    private Map<JButton, List<Player>> map; // serve per tenere in memoria i 5 calciatori disponibili
+    private final Map<JButton, List<Player>> map; // serve per tenere in memoria i 5 calciatori disponibili
     private final Color panelColor = new Color(0, 64, 128);
 
     /**
@@ -102,17 +102,18 @@ public class CreateTeam extends Base {
         gbc.insets = new Insets(8, 0, 8, 8);
         gbc.gridx = 0;
         gbc.gridy = 0;
-        lblmodSel = new JLabel("Modulo selezionato: ");
+        final JLabel lblmodSel = new JLabel("Modulo selezionato: ");
         panelSud.add(lblmodSel, gbc);
         gbc.gridx = 1;
         gbc.gridy = 0;
-        lblmoduloSelect = new JLabel("" + log.getModulo());
+        lblmoduloSelect = new JLabel(" " + log.getModulo());
         panelSud.add(lblmoduloSelect, gbc);
         gbc.insets = new Insets(NUM_INSETS_2, NUM_INSETS_1, NUM_INSETS_2, NUM_INSETS_1);
         gbc.gridx = LABEL_X;
         gbc.gridy = 0;
-        buttonIniziaTorneo = UtilsGUI.standardButton("Inizia Torneo");
+        final JButton buttonIniziaTorneo = UtilsGUI.standardButton("Inizia Torneo");
         buttonIniziaTorneo.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent e) {
                 if (log.teamComplete()) {
                     /*
@@ -121,16 +122,16 @@ public class CreateTeam extends Base {
                      * TorneoV2(log.getSquadra(), li));
                      */
                     try {
-                        Base tempTorneo = new Tournament(log.getSquadra(), li);
+                        final Base tempTorneo = new Tournament(log.getSquadra(), li);
                         log.saveTeam();
                         changeJPanel(tempTorneo);
-                        JFrame topFrame = (JFrame) SwingUtilities.getAncestorOfClass(JFrame.class,
+                        final JFrame topFrame = (JFrame) SwingUtilities.getAncestorOfClass(JFrame.class,
                                 tempTorneo.getPanel());
                         final int initialScreenPercentage = 70; // 75
-                        Toolkit tk = Toolkit.getDefaultToolkit();
-                        Dimension screenSize = tk.getScreenSize();
-                        int height = screenSize.height * initialScreenPercentage / 100;
-                        int width = screenSize.width * initialScreenPercentage / 100;
+                        final Toolkit tk = Toolkit.getDefaultToolkit();
+                        final Dimension screenSize = tk.getScreenSize();
+                        final int height = screenSize.height * initialScreenPercentage / 100;
+                        final int width = screenSize.width * initialScreenPercentage / 100;
                         topFrame.setPreferredSize(new Dimension(width, height));
                         // centrare?
                         /*
@@ -485,19 +486,19 @@ public class CreateTeam extends Base {
         this.panelCalciatoriCenter.removeAll();
         this.panelCalciatoriCenter.repaint();
         // creo i 5 bottoni nel frame calciatori
-        this.buttonsPlayer = new JButton[CreateTeam.NUM_PLAYER];
+        final JButton[] buttonsPlayer = new JButton[CreateTeam.NUM_PLAYER];
         // gbc.insets = new Insets(5,5,5,5);
         // gbc.ipadx = 30;
         // gbc.ipady = 40;
         gbc.gridx = 0;
         gbc.gridy = 0;
-        for (int i = 0; i < this.buttonsPlayer.length; i++) {
-            this.buttonsPlayer[i] = new JButton(
+        for (int i = 0; i < buttonsPlayer.length; i++) {
+            buttonsPlayer[i] = new JButton(
                     "" + list.get(i).getName() + " " + list.get(i).getRating().getX());
-            this.panelCalciatoriCenter.add(this.buttonsPlayer[i], gbc);
-            this.buttonsPlayer[i].setBackground(getColorByRuolo(ruolo));
+            this.panelCalciatoriCenter.add(buttonsPlayer[i], gbc);
+            buttonsPlayer[i].setBackground(getColorByRuolo(ruolo));
             final int ind = i;
-            this.buttonsPlayer[i].addActionListener(new ActionListener() {
+            buttonsPlayer[i].addActionListener(new ActionListener() {
                 public void actionPerformed(final ActionEvent e) {
                     log.setNameString(list.get(ind).getName());
                     log.setCalciatoreSelect(list.get(ind));

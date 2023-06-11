@@ -110,6 +110,7 @@ public class LogicsCreateTeamImpl implements LogicsCreateTeam {
     /**
      * {@inheritDoc}
      */
+    @Override
     public int getNumDif() {
         return this.moduloSelect.getNumDef();
     }
@@ -271,10 +272,7 @@ public class LogicsCreateTeamImpl implements LogicsCreateTeam {
      */
     @Override
     public boolean teamComplete() {
-        if (this.liSquadra.size() == LogicsCreateTeamImpl.NUM_PLAYER_IN_TEAM) {
-            return true;
-        }
-        return false;
+        return this.liSquadra.size() == LogicsCreateTeamImpl.NUM_PLAYER_IN_TEAM ? true : false;
     }
 
     /**
@@ -356,7 +354,7 @@ public class LogicsCreateTeamImpl implements LogicsCreateTeam {
      */
     @Override
     public void saveTeam() {
-        LogicsFile logFile = new LogicsFileImpl();
+        final LogicsFile logFile = new LogicsFileImpl();
         logFile.saveHistory(this.getSquadra());
     }
 }
