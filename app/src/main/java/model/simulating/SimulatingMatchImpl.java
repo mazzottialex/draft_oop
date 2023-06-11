@@ -6,9 +6,9 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import managedata.ExtractDataImpl;
 import model.data.Player;
 import model.data.Team;
+import model.data.managedata.ExtractDataImpl;
 
 /**
  * Implementation of the {@code SimulatingMatch} interface that simulates a match between two teams.

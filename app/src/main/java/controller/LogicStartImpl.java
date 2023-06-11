@@ -2,9 +2,9 @@ package controller;
 import java.net.URL;
 import java.net.URLConnection;
 
-import managedata.LogicsFile;
-import managedata.LogicsFileImpl;
-import managedata.ManageSeasonImpl;
+import model.data.managedata.LogicsFile;
+import model.data.managedata.LogicsFileImpl;
+import model.data.managedata.ManageSeasonImpl;
 
 /**
  * The LogicStartImpl class represents the implementation of starting logic operations.

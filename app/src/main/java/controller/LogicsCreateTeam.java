@@ -5,10 +5,10 @@ import java.net.URL;
 //import java.util.*;
 import java.util.List;
 
-import managedata.ExtractData;
 import model.data.Module;
 import model.data.Player;
 import model.data.Team;
+import model.data.managedata.ExtractData;
 
 /**
  * Models the logic of team creation.

@@ -1,4 +1,4 @@
-package managedata;
+package model.data.managedata;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;

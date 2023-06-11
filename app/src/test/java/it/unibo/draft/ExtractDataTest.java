@@ -8,10 +8,10 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import managedata.ExtractDataImpl;
-import managedata.ManageData;
-import managedata.ManageDataImpl;
 import model.data.Player;
+import model.data.managedata.ExtractDataImpl;
+import model.data.managedata.ManageData;
+import model.data.managedata.ManageDataImpl;
 
 /**
  * This class contains unit tests for the ExtractDataImpl class.

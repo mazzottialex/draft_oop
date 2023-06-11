@@ -2,9 +2,9 @@ package controller;
 
 import java.util.List;
 
-import managedata.LogicsFile;
-import managedata.LogicsFileImpl;
 import model.data.Team;
+import model.data.managedata.LogicsFile;
+import model.data.managedata.LogicsFileImpl;
 
 /**
  * This class represents the implementation of historical logic operations on team data.

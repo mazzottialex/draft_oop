@@ -9,11 +9,11 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import managedata.CreateOpponentTeamsImpl;
-import managedata.ManageData;
-import managedata.ManageDataImpl;
 import model.data.Player;
 import model.data.Team;
+import model.data.managedata.CreateOpponentTeamsImpl;
+import model.data.managedata.ManageData;
+import model.data.managedata.ManageDataImpl;
 import model.rating.AnalysisRating;
 import model.rating.AnalysisRatingImpl;
 

@@ -11,9 +11,9 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import managedata.ExtractData;
-import managedata.ExtractDataImpl;
 import model.data.Player;
+import model.data.managedata.ExtractData;
+import model.data.managedata.ExtractDataImpl;
 import model.rating.AnalysisRatingImpl;
 import model.rating.Function;
 /**

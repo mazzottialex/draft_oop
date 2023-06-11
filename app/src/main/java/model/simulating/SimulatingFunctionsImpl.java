@@ -9,10 +9,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import managedata.ExtractData;
-import managedata.ExtractDataImpl;
 import model.data.Player;
 import model.data.Team;
+import model.data.managedata.ExtractData;
+import model.data.managedata.ExtractDataImpl;
 
 /**
  * Implementation of the {@code SimulatingFunctions} interface that provides

@@ -8,11 +8,11 @@ import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import managedata.CreateOpponentTeamsImpl;
 import model.data.Module;
 import model.data.Player;
 import model.data.Team;
 import model.data.TeamOpponent;
+import model.data.managedata.CreateOpponentTeamsImpl;
 import model.simulating.SimulatingMatchImpl;
 
 /**

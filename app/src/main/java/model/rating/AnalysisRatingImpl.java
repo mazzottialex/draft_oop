@@ -5,9 +5,9 @@ import static java.util.stream.Collectors.toList;
 import java.util.ArrayList;
 import java.util.List;
 
-import managedata.ExtractData;
-import managedata.ExtractDataImpl;
 import model.data.Player;
+import model.data.managedata.ExtractData;
+import model.data.managedata.ExtractDataImpl;
 import utils.Pair;
 import utils.Triple;
 
