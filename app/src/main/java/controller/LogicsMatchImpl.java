@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import model.data.Player;
 import model.data.Team;
 import model.simulating.SimulatingMatch;
@@ -27,7 +28,7 @@ public final class LogicsMatchImpl implements LogicsMatch, Serializable {
     private static final int END_EXTRA = 120;
     private static final double OWNGOAL_RATE = 2.904040404040404;
     private Random random = new Random();
-    
+
     /**
      * Constructs a new instance of {@code LogicsMatchImpl} with the given teams.
      *
@@ -37,6 +38,7 @@ public final class LogicsMatchImpl implements LogicsMatch, Serializable {
      * @throws ClassNotFoundException if the class is not found
      * @throws IOException if an I/O error occurs
      */
+    @SuppressFBWarnings("EI2")
     public LogicsMatchImpl(final Team t1, final Team t2) throws FileNotFoundException, ClassNotFoundException, IOException {
         super();
         this.t1 = t1;

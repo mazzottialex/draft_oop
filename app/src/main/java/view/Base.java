@@ -23,7 +23,7 @@ public class Base extends JFrame {
      * Constructs a new Base object.
      */
     public Base() {
-    	super.setTitle("DRAFT");
+        super.setTitle("DRAFT");
         super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         super.setBounds(UtilsGUI.getWidth(POS), UtilsGUI.getHeight(POS), UtilsGUI.getWidth(WIDTH_PANEL),
                 UtilsGUI.getHeight(HEIGHT_PANEL));
@@ -58,9 +58,8 @@ public class Base extends JFrame {
             frame.add(newPanel.getPanel());
             frame.revalidate();
             frame.repaint();
-        }
-        else {
-        	throw new ExecuteException("Content panel not JFrame", ABORT);
+        } else {
+            throw new ExecuteException("Content panel not JFrame", ABORT);
         }
     }
 }

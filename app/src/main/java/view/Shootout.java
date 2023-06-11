@@ -217,8 +217,9 @@ public class Shootout extends Base implements Serializable {
      *
      * @return The winning team.
      */
+    @SuppressFBWarnings("EI")
     public Team getWinner() {
-    	return winner;
+        return winner;
     }
 
     /**
@@ -227,6 +228,7 @@ public class Shootout extends Base implements Serializable {
      * @param gol1 The number of goals scored by the first team.
      * @param gol2 The number of goals scored by the second team.
      */
+    @SuppressFBWarnings("EI2")
     public void setWinner(final int gol1, final int gol2) {
         if (gol1 > gol2) {
             winner = t1;

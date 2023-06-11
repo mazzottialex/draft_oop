@@ -42,7 +42,7 @@ public final class LogicStartImpl implements LogicStart {
             connection.connect();
             return true;
         } catch (RuntimeException e) {
-      	  throw e;
+            throw e;
         } catch (final Exception e) {
             return false;
         }

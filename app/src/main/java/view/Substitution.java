@@ -149,10 +149,10 @@ public class Substitution extends Base {
                 logics.sub(panelStarters.getParent(), panelSubstitutes.getParent(), panelStarters, panelSubstitutes);
                 if (logics.done()) {
                     try {
-						matchGui.addSub();
-					} catch (Exception e1) {
-						e1.printStackTrace();
-					}
+                        matchGui.addSub();
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
+                    }
                 }
             }
             panelStarters = null;

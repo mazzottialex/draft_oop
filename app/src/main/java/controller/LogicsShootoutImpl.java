@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import model.data.Player;
 import model.data.Team;
 import utils.Pair;
@@ -35,13 +36,14 @@ public final class LogicsShootoutImpl implements LogicsShootout, Serializable {
     private static final double CONVERSION_RATE_SHOOTOUT = 0.75; //costante rigori fatti nei shootout
     private static final int DEFAULT = 77;
     private Random r = new Random();
-    
+
     /**
      * Constructs a new {@code LogicsShootoutImpl} object with the specified teams.
      *
      * @param t1 the first team
      * @param t2 the second team
      */
+    @SuppressFBWarnings("EI2")
     public LogicsShootoutImpl(final Team t1, final Team t2) {
         super();
         this.t1 = t1;
@@ -132,8 +134,9 @@ public final class LogicsShootoutImpl implements LogicsShootout, Serializable {
     }
 
     @Override
+    @SuppressFBWarnings("EI")
     public Team getWinner() {
-    	if (goals1 > goals2) {
+        if (goals1 > goals2) {
             return t1;
         } else {
             return t2;

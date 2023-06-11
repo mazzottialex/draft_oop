@@ -12,6 +12,8 @@ import model.data.Player;
 import model.data.managedata.ExtractDataImpl;
 import model.data.managedata.ManageData;
 import model.data.managedata.ManageDataImpl;
+import model.rating.AnalysisRating;
+import model.rating.AnalysisRatingImpl;
 
 /**
  * This class contains unit tests for the ExtractDataImpl class.
@@ -34,6 +36,8 @@ public class ExtractDataTest {
         md = new ManageDataImpl("2022-2023");
         md.loadData();
         list = md.getLi();
+        AnalysisRating analysisRating = new AnalysisRatingImpl(list);
+        list = analysisRating.updateRating();
         ed = new ExtractDataImpl(list);
     }
 

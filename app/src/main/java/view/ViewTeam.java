@@ -60,11 +60,10 @@ public class ViewTeam extends Base {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 try {
-					changeJPanel(new History(log.getSeason(), log.getOnline()));
-				} catch (ExecuteException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+                    changeJPanel(new History(log.getSeason(), log.getOnline()));
+                } catch (ExecuteException e1) {
+                    e1.printStackTrace();
+                }
             }
         });
 

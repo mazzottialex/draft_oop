@@ -53,11 +53,10 @@ public class History extends Base {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 try {
-					changeJPanel(new Home(log.getSeason(), log.getOnline(), false));
-				} catch (ExecuteException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+                    changeJPanel(new Home(log.getSeason(), log.getOnline(), false));
+                } catch (ExecuteException e1) {
+                    e1.printStackTrace();
+                }
             }
         });
         panelBtn.add(btnHome);
@@ -92,11 +91,10 @@ public class History extends Base {
                 @Override
                 public void actionPerformed(final ActionEvent e) {
                     try {
-						changeJPanel(new ViewTeam(team, log.getSeason(), log.getOnline()));
-					} catch (ExecuteException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+                        changeJPanel(new ViewTeam(team, log.getSeason(), log.getOnline()));
+                    } catch (ExecuteException e1) {
+                        e1.printStackTrace();
+                    }
                 }
             });
             panelTeam.add(btnVedi);
