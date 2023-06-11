@@ -25,8 +25,11 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
+import org.slf4j.LoggerFactory;
+
 import controller.LogicsCreateTeam;
 import controller.LogicsCreateTeamImpl;
+//import controller.LogicsTournamentImpl;
 import model.data.Module;
 import model.data.Player;
 
@@ -45,6 +48,7 @@ import java.util.ArrayList;
 public class CreateTeam extends Base {
 
     private static final long serialVersionUID = 1L;
+    private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(CreateTeam.class);
     private static final int MAX_FOR_ROW = 2;
     private static final int NUM_PLAYER = 5;
     private static final int NUM_INSETS_1 = 5;
@@ -142,14 +146,11 @@ public class CreateTeam extends Base {
                         topFrame.repaint();
                         topFrame.pack();
                     } catch (FileNotFoundException e1) {
-                        // TODO Auto-generated catch block
-                        e1.printStackTrace();
+                        LOG.error("Error", e);
                     } catch (ClassNotFoundException e1) {
-                        // TODO Auto-generated catch block
-                        e1.printStackTrace();
+                        LOG.error("Error", e);
                     } catch (IOException e1) {
-                        // TODO Auto-generated catch block
-                        e1.printStackTrace();
+                        LOG.error("Error", e);
                     }
                     frameCalciatori.setVisible(false);
                     frameModulo.setVisible(false);
@@ -162,6 +163,7 @@ public class CreateTeam extends Base {
                     final JLabel label = new JLabel("INSERT ALL PLAYERS");
                     final JButton buttonOk = UtilsGUI.standardButton("OK");
                     buttonOk.addActionListener(new ActionListener() {
+                        @Override
                         public void actionPerformed(final ActionEvent e) {
                             final WindowEvent close = new WindowEvent(prova, WindowEvent.WINDOW_CLOSING);
                             prova.dispatchEvent(close);
@@ -313,7 +315,7 @@ public class CreateTeam extends Base {
             } else if (this.log.getNumDif() == NUM_PLAYER || this.log.getNumDif() == 3) {
                 return this.log.getNumDif() / 2;
             } else {
-                return (this.log.getNumDif() / 2) - 1;
+                return this.log.getNumDif() / 2 - 1;
             }
         default:
             return 0;
@@ -589,7 +591,8 @@ public class CreateTeam extends Base {
         for (int i = 0; i < s.length() - 2; i++) {
             label = label + s.charAt(i);
             if (i % max == 0 && i != 0) {
-                label = label + "<br>";
+                //label = label + "<br>";
+                label.concat("<br>");
             }
         }
         label = label + s.charAt(s.length() - 2) + s.charAt(s.length() - 1);

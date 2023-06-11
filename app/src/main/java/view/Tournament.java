@@ -17,10 +17,13 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import org.slf4j.LoggerFactory;
+
 import controller.LogicsShootoutImpl;
 import controller.LogicsTournament;
 import controller.LogicsTournamentImpl;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+//import io.opentelemetry.api.logs.Logger;
 import model.data.Player;
 import model.data.Team;
 import utils.RoundedBorder;
@@ -34,6 +37,7 @@ import utils.RoundedBorder;
 public class Tournament extends Base {
 
     private static final long serialVersionUID = 1L;
+    private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(Tournament.class);
     private static final int NUM_TURN_1 = 16;
     private static final int NUM_TURN_2 = 8;
     private static final int NUM_TURN_3 = 4;
@@ -74,8 +78,8 @@ public class Tournament extends Base {
     private MyJLabel labelp1 = new MyJLabel();
     private MyJLabel labelp0 = new MyJLabel();
     private List<Team> listAvversarie;
-    private int risSquadraUte = 0;
-    private int risSquadraAvv = 0;
+    private int risSquadraUte;
+    private int risSquadraAvv;
     // boolean eliminatedThisTurn = false;
     private final JButton buttonSimula;
     private final Color panelColor = new Color(0, 64, 128);
@@ -100,6 +104,7 @@ public class Tournament extends Base {
         // Aggiungo il bottone Simula nel panelSud
         buttonSimula = new JButton("Simula");
         buttonSimula.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent e) {
                 // eliminatedThisTurn = false;
                 logTor.setElimThisTurn(false);
@@ -110,6 +115,7 @@ public class Tournament extends Base {
                         buttonSimula.setVisible(false);
                         p.createAndShowGUI();
                         p.addWindowListener(new WindowAdapter() {
+                            @Override
                             public void windowClosed(final WindowEvent e) {
                                 buttonSimula.setVisible(true);
                                 if (p.getWinner().getId() != 0) {
@@ -124,40 +130,31 @@ public class Tournament extends Base {
                                     logTor.simulaMatch();
                                     createLevel();
                                 } catch (FileNotFoundException e1) {
-                                    // TODO Auto-generated catch block
-                                    e1.printStackTrace();
+                                    LOG.error("Error", e1);
                                 } catch (ClassNotFoundException e1) {
-                                    // TODO Auto-generated catch block
-                                    e1.printStackTrace();
+                                    LOG.error("Error", e1);
                                 } catch (IOException e1) {
-                                    // TODO Auto-generated catch block
-                                    e1.printStackTrace();
+                                    LOG.error("Error", e1);
                                 }
                             }
                         });
                     } catch (FileNotFoundException e1) {
-                        // TODO Auto-generated catch block
-                        e1.printStackTrace();
+                        LOG.error("Error", e1);
                     } catch (ClassNotFoundException e1) {
-                        // TODO Auto-generated catch block
-                        e1.printStackTrace();
+                        LOG.error("Error", e1);
                     } catch (IOException e1) {
-                        // TODO Auto-generated catch block
-                        e1.printStackTrace();
+                        LOG.error("Error", e1);
                     }
                 } else {
                     try {
                         logTor.simulaMatch();
                         createLevel();
                     } catch (FileNotFoundException e1) {
-                        // TODO Auto-generated catch block
-                        e1.printStackTrace();
+                        LOG.error("Error", e1);
                     } catch (ClassNotFoundException e1) {
-                        // TODO Auto-generated catch block
-                        e1.printStackTrace();
+                        LOG.error("Error", e1);
                     } catch (IOException e1) {
-                        // TODO Auto-generated catch block
-                        e1.printStackTrace();
+                        LOG.error("Error", e1);
                     }
                 }
                 // buttonSimula.setVisible(true);
@@ -233,10 +230,10 @@ public class Tournament extends Base {
             this.labelsp4[0].setText(textFormat(NUM_TEXT_DOUBLE, this.labelsp4[0].getText()));
             this.p4.add(this.labelsp4[0]);
             for (int i = 1; i < this.listAvversarie.size() - 1; i = i + 2, cont++) {
-                String squad1 = this.listAvversarie.get(i).getTeamName();
-                var ris1 = this.logTor.getRisultati().get(squad1);
-                String squad2 = this.listAvversarie.get(i + 1).getTeamName();
-                var ris2 = this.logTor.getRisultati().get(squad2);
+                final String squad1 = this.listAvversarie.get(i).getTeamName();
+                final var ris1 = this.logTor.getRisultati().get(squad1);
+                final String squad2 = this.listAvversarie.get(i + 1).getTeamName();
+                final var ris2 = this.logTor.getRisultati().get(squad2);
                 this.labelsp4[cont] = new MyJLabel(squad1 + " " + ris1 + " " + " - " + " " + ris2 + " " + squad2);
                 this.p4.add(this.labelsp4[cont]);
             }
@@ -272,8 +269,8 @@ public class Tournament extends Base {
                         + " " + " - " + " " + this.risSquadraAvv + " " + this.listAvversarie.get(0).getTeamName());
                 this.p3.add(this.labelsp3[0]);
             } else {
-                int ris1 = this.logTor.getRisMatch().get(this.logTor.getSquadraAvv().getTeamName());
-                int ris2 = this.logTor.getRisMatch().get(this.listAvversarie.get(0).getTeamName());
+                final int ris1 = this.logTor.getRisMatch().get(this.logTor.getSquadraAvv().getTeamName());
+                final int ris2 = this.logTor.getRisMatch().get(this.listAvversarie.get(0).getTeamName());
                 this.labelsp3[0] = new MyJLabel(this.logTor.getSquadraAvv().getTeamName() + " " + ris1 + " " + " - "
                         + " " + ris2 + " " + this.listAvversarie.get(0).getTeamName());
                 this.p3.add(this.labelsp3[0]);
@@ -283,10 +280,10 @@ public class Tournament extends Base {
             }
             int cont1 = 1;
             for (int i = 1; i < this.listAvversarie.size() - 1; i = i + 2, cont1++) {
-                String squad1 = this.listAvversarie.get(i).getTeamName();
-                var ris1 = this.logTor.getRisultati().get(squad1);
-                String squad2 = this.listAvversarie.get(i + 1).getTeamName();
-                var ris2 = this.logTor.getRisultati().get(squad2);
+                final String squad1 = this.listAvversarie.get(i).getTeamName();
+                final var ris1 = this.logTor.getRisultati().get(squad1);
+                final String squad2 = this.listAvversarie.get(i + 1).getTeamName();
+                final var ris2 = this.logTor.getRisultati().get(squad2);
                 this.labelsp3[cont1] = new MyJLabel(squad1 + " " + ris1 + " " + " - " + " " + ris2 + " " + squad2);
                 this.p3.add(this.labelsp3[cont1]);
             }
@@ -319,8 +316,8 @@ public class Tournament extends Base {
                         + " " + " - " + " " + this.risSquadraAvv + " " + this.listAvversarie.get(0).getTeamName());
                 this.p2.add(this.labelsp2[0]);
             } else {
-                int ris1 = this.logTor.getRisMatch().get(this.logTor.getSquadraAvv().getTeamName());
-                int ris2 = this.logTor.getRisMatch().get(this.listAvversarie.get(0).getTeamName());
+                final int ris1 = this.logTor.getRisMatch().get(this.logTor.getSquadraAvv().getTeamName());
+                final int ris2 = this.logTor.getRisMatch().get(this.listAvversarie.get(0).getTeamName());
                 this.labelsp2[0] = new MyJLabel(this.logTor.getSquadraAvv().getTeamName() + " " + ris1 + " " + " - "
                         + " " + ris2 + " " + this.listAvversarie.get(0).getTeamName());
                 this.p2.add(this.labelsp2[0]);
@@ -328,10 +325,10 @@ public class Tournament extends Base {
                 r2 = ris2;
                 setOppTeam();
             }
-            String squad1 = this.listAvversarie.get(1).getTeamName();
-            var ris1 = this.logTor.getRisultati().get(squad1);
-            String squad2 = this.listAvversarie.get(2).getTeamName();
-            var ris2 = this.logTor.getRisultati().get(squad2);
+            final String squad1 = this.listAvversarie.get(1).getTeamName();
+            final var ris1 = this.logTor.getRisultati().get(squad1);
+            final String squad2 = this.listAvversarie.get(2).getTeamName();
+            final var ris2 = this.logTor.getRisultati().get(squad2);
             this.labelsp2[1] = new MyJLabel(squad1 + " " + ris1 + " " + " - " + " " + ris2 + " " + squad2);
             this.p2.add(this.labelsp2[1]);
             // aggiungo la nuova partita ...
@@ -359,8 +356,8 @@ public class Tournament extends Base {
                         + " " + " - " + " " + this.risSquadraAvv + " " + this.listAvversarie.get(0).getTeamName());
                 this.p1.add(this.labelp1);
             } else {
-                int ris11 = this.logTor.getRisMatch().get(this.logTor.getSquadraAvv().getTeamName());
-                int ris21 = this.logTor.getRisMatch().get(this.listAvversarie.get(0).getTeamName());
+                final int ris11 = this.logTor.getRisMatch().get(this.logTor.getSquadraAvv().getTeamName());
+                final int ris21 = this.logTor.getRisMatch().get(this.listAvversarie.get(0).getTeamName());
                 this.labelp1 = new MyJLabel(this.logTor.getSquadraAvv().getTeamName() + " " + ris11 + " " + " - "
                         + " " + ris21 + " " + this.listAvversarie.get(0).getTeamName());
                 this.p1.add(this.labelp1);
@@ -420,8 +417,9 @@ public class Tournament extends Base {
             String label = "<html>";
             for (int i = 0; i < s.length() - 2; i++) {
                 label = label + s.charAt(i);
-                if ((i % max == 0) && (i != 0)) {
-                    label = label + "<br>";
+                if (i % max == 0 && i != 0) {
+                    //label = label + "<br>";
+                    label.concat("<br>");
                 }
             }
             label = label + s.charAt(s.length() - 2) + s.charAt(s.length() - 1);
@@ -435,7 +433,7 @@ public class Tournament extends Base {
             this.logTor.setSquadraAvv(this.listAvversarie.get(0));
         } else if (r1 == r2) {
             // rigori
-            Team vinc = new LogicsShootoutImpl(this.logTor.getSquadraAvv(), this.listAvversarie.get(0))
+            final Team vinc = new LogicsShootoutImpl(this.logTor.getSquadraAvv(), this.listAvversarie.get(0))
                     .getWinner();
             if (vinc.getTeamName().equals(this.listAvversarie.get(0).getTeamName())) {
                 this.logTor.setSquadraAvv(this.listAvversarie.get(0));
