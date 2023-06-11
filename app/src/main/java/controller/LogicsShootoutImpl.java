@@ -113,7 +113,8 @@ public final class LogicsShootoutImpl implements LogicsShootout, Serializable {
     private String rigore(final Player shooter, final Team oppositeTeam) {
         final double shooterRating = shooter.getRating().getY().getX()
                 * (MINIMUM_MODIFIER_RATING + r.nextDouble() * ADD_MODIFIER_RATING);
-        final double gkRating = (oppositeTeam.getStartingKeeper() != null ? oppositeTeam.getStartingKeeper().getRating().getY().getZ()
+        final double gkRating = (oppositeTeam.getStartingKeeper() != null
+                ? oppositeTeam.getStartingKeeper().getRating().getY().getZ()
                 : DEFAULT) * (MINIMUM_MODIFIER_RATING + r.nextDouble() * ADD_MODIFIER_RATING);
         final double modGkRating = gkRating * CONVERSION_RATE_SHOOTOUT;
         if (shooterRating > modGkRating) {

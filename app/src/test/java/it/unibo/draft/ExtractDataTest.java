@@ -6,8 +6,6 @@ import static org.junit.Assert.assertNotNull;
 import java.util.List;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import model.data.Module;
 import model.data.Player;
@@ -27,7 +25,6 @@ public class ExtractDataTest {
     private static final Module MODULE = Module.M433;
     private static final int TEAM_SIZE = 20;
     private static final int STARTERSIZE = 11;
-    private static final Logger LOG = LoggerFactory.getLogger(ExtractDataTest.class);
 
     /**
      * Construct the test.
@@ -35,12 +32,8 @@ public class ExtractDataTest {
      * @throws Exception if an error occurs during setup.
      */
     public ExtractDataTest() {
-    	final ManageData md = new ManageDataImpl("2022-2023");
-        try {
-            md.loadData();
-        } catch (Exception e) {
-            LOG.error("Error", e);
-        }
+        final ManageData md = new ManageDataImpl("2022-2023");
+        md.loadData();
         List<Player> list = md.getLi();
         final AnalysisRating analysisRating = new AnalysisRatingImpl(list);
         list = analysisRating.updateRating();

@@ -130,7 +130,7 @@ public final class LogicsMatchImpl implements LogicsMatch, Serializable {
      * @return the scorer
      */
     private Player getAutogol(final Team team) {
-    	final Team t;
+        final Team t;
         if (team.equals(t1)) {
             t = t2;
         } else {

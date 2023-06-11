@@ -15,9 +15,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import controller.LogicsSubstitution;
 import controller.LogicsSubstitutionImpl;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
@@ -30,13 +27,13 @@ import model.data.Team;
 public class Substitution extends Base {
     private static final long serialVersionUID = 5244133982320404420L;
     private final List<String> roles = List.of("P", "D", "C", "A");
-    final private JPanel panelTeam = new JPanel();
+    private final JPanel panelTeam = new JPanel();
     private transient LogicsSubstitution logics;
-    final private Team team;
-    final private Match matchGui;
+    private final Team team;
+    private final Match matchGui;
     private JPanel panelStarters;
     private JPanel panelSubstitutes;
-    final private int substitutes;
+    private final int substitutes;
     private static final int SUBSTITUTES = 7;
     private static final int INSETS_5 = 5;
     private static final int GRID_5 = 5;
@@ -46,7 +43,6 @@ public class Substitution extends Base {
     private static final double MIN_H = 0.1;
     private static final double MAX_W = 0.4;
     private static final double MAX_H = 0.8;
-    private static final Logger LOG = LoggerFactory.getLogger(Substitution.class);
 
     /**
      * Creates a new instance of the {@code Substitution} class.
@@ -152,11 +148,7 @@ public class Substitution extends Base {
             } else {
                 logics.sub(panelStarters.getParent(), panelSubstitutes.getParent(), panelStarters, panelSubstitutes);
                 if (logics.done()) {
-                    try {
-                        matchGui.addSub();
-                    } catch (Exception  e1) {
-                        LOG.error("Error", e1);
-                    }
+                      matchGui.addSub();
                 }
             }
             panelStarters = null;
