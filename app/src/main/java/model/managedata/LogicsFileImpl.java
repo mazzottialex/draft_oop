@@ -20,22 +20,24 @@ import org.slf4j.LoggerFactory;
 public final class LogicsFileImpl implements LogicsFile {
 
 	private static final Logger LOG = LoggerFactory.getLogger(LogicsFileImpl.class);
+	private static final String MESSAGGE_ERROR = "Generic error";
+
     /**
      * Constructs a new instance of LogicsFileImpl.
      */
     public LogicsFileImpl() { }
     @SuppressWarnings("unchecked")
     @Override
-    public List<Player> loadData(final String season) {
+    public List<Player> loadData(final String season) throws ClassNotFoundException {
         List<Player> li = new ArrayList<>();
-        try (InputStream file = ClassLoader.getSystemResourceAsStream("backup" + season + ".txt");
-        		InputStream bstream = new BufferedInputStream(file);
-        		ObjectInputStream ostream = new ObjectInputStream(file);) {
-            li = (List<Player>) ostream.readObject();
-            ostream.close();
-        } catch (ClassNotFoundException | IOException e) {
-        	LOG.error("Error", e);
-		} 
+        try(InputStream file = ClassLoader.getSystemResourceAsStream("backup" + season + ".txt");
+                InputStream bstream = new BufferedInputStream(file);
+                ObjectInputStream ostream = new ObjectInputStream(bstream);) {
+        	 li = (List<Player>) ostream.readObject();
+             ostream.close();
+        } catch (IOException e) {
+        	//LOG.error(MESSAGGE_ERROR, e);
+		}
         return li;
     }
 
@@ -47,24 +49,25 @@ public final class LogicsFileImpl implements LogicsFile {
             ostream.writeObject(li);
             ostream.close();
         } catch (IOException  e) {
-        	LOG.error("Error", e);
+        	LOG.error(MESSAGGE_ERROR, e);
 		}
         return true;
     }
 
     @Override
     public List<String> loadSeason() {
-        List<String> ls = new ArrayList<>();
+        final List<String> ls = new ArrayList<>();
         try (InputStream file = ClassLoader.getSystemResourceAsStream("backupSeasons.txt");
         		InputStream bstream = new BufferedInputStream(file);
-        		ObjectInputStream ostream = new ObjectInputStream(file);) {
-            String str;
-            while ((str = ostream.readUTF()) != null) {
+        		ObjectInputStream ostream = new ObjectInputStream(bstream);) {
+            String str = ostream.readUTF();
+            while (str != null) {
                 ls.add(str);
+                str = ostream.readUTF();
             }
             ostream.close();
-        }  catch (IOException e) {
-        	LOG.error("Error", e);
+        } catch (IOException e) {
+        	//LOG.error(MESSAGGE_ERROR, e);
 		}
         return ls;
     }
@@ -78,11 +81,11 @@ public final class LogicsFileImpl implements LogicsFile {
                     try {
 						ostream.writeUTF(s);
 					}  catch (IOException e) {
-			        	LOG.error("Error", e);
+			        	LOG.error(MESSAGGE_ERROR, e);
 					}
             });
             ostream.close();
-        } catch (final Exception e) {
+        } catch (final IOException e) {
             return false;
         }
         return true;
@@ -94,7 +97,7 @@ public final class LogicsFileImpl implements LogicsFile {
         try (InputStream file = ClassLoader.getSystemResourceAsStream("history.txt");
         	    InputStream bstream = new BufferedInputStream(file);
         		ObjectInputStream ostream = new ObjectInputStream(file);) {
-            List<Team> li = (List<Team>) ostream.readObject();
+        	final List<Team> li = (List<Team>) ostream.readObject();
             ostream.close();
             return li;
         } catch (IOException | ClassNotFoundException e) {
@@ -104,7 +107,7 @@ public final class LogicsFileImpl implements LogicsFile {
 
     @Override
     public Boolean saveHistory(final Team s) {
-        List<Team> li = loadHistory();
+        final List<Team> li = loadHistory();
         li.add(s);
         try (OutputStream file = new FileOutputStream("src/main/resources/history.txt");
         		OutputStream bstream = new BufferedOutputStream(file);
@@ -112,7 +115,7 @@ public final class LogicsFileImpl implements LogicsFile {
             ostream.writeObject(li);
             ostream.close();
         } catch (IOException e) {
-        	LOG.error("Error", e);
+        	LOG.error(MESSAGGE_ERROR, e);
 		}
         return true;
     }

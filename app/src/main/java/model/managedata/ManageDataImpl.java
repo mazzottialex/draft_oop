@@ -1,4 +1,5 @@
 package model.managedata;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public final class ManageDataImpl implements ManageData {
     }
 
     @Override
-    public void loadData() {
+    public void loadData() throws ClassNotFoundException, IOException {
         li = logFile.loadData(season);
     }
 

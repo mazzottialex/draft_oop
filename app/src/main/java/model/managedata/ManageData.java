@@ -1,5 +1,6 @@
 package model.managedata;
 
+import java.io.IOException;
 import java.util.List;
 
 import model.data.Player;
@@ -17,9 +18,11 @@ public interface ManageData {
 
     /**
      * Loads the data of players.
+     * @throws IOException 
+     * @throws ClassNotFoundException 
      * @throws Exception 
      */
-    void loadData();
+    void loadData() throws ClassNotFoundException, IOException;
 
     /**
      * Downloads the data of players.

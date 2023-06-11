@@ -28,7 +28,7 @@ public class Start extends Base {
      * Sets up the GUI components and event listeners
      */
     public Start() {
-    	final GridBagLayout gridBagLayout = new GridBagLayout();
+        final GridBagLayout gridBagLayout = new GridBagLayout();
         super.getPanel().setLayout(gridBagLayout);
         ImageIcon img = new ImageIcon(ClassLoader.getSystemResource("icon.png"));
         final Image image = img.getImage();

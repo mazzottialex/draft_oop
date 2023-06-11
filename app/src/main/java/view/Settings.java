@@ -69,7 +69,7 @@ public class Settings extends Base {
         panelLogo.setLayout(layout);
         final List<JButton> liButton = new ArrayList<>();
         for (int i = 0; i < log.getLiLogo().size(); i++) {
-        	final JButton btnLogo = new JButton();
+            final JButton btnLogo = new JButton();
             liButton.add(btnLogo);
             final URL url = ClassLoader.getSystemResource(log.getLiLogo().get(i));
             ImageIcon img = new ImageIcon(url);

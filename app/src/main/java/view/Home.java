@@ -57,7 +57,7 @@ public class Home extends Base {
      * @param first         true if home is called by Start, False otherwise
      */
     public Home(final String seasonDefault, final Boolean online, final Boolean first) {
-    	final JButton btnDownload = UtilsGUI.standardButton("Download season:");
+        final JButton btnDownload = UtilsGUI.standardButton("Download season:");
         log = new LogicsHomeImpl(seasonDefault, online);
         if (!log.checkBrowser() && first) {
             btnDownload.setEnabled(false);
