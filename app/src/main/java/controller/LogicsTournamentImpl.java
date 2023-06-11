@@ -133,9 +133,12 @@ public class LogicsTournamentImpl implements LogicsTournament {
 
     /**
      * {@inheritDoc}
+     * @throws IOException 
+     * @throws ClassNotFoundException 
+     * @throws FileNotFoundException 
      */
     @Override
-    public void simulaMatch() {
+    public void simulaMatch() throws FileNotFoundException, ClassNotFoundException, IOException {
         final List<Team> newList = new ArrayList<>();
         final int numSquadre = this.getNumSquadre();
         final Map<String, Integer> map = new HashMap<>(); // map per il risultato
@@ -148,202 +151,86 @@ public class LogicsTournamentImpl implements LogicsTournament {
         switch (numSquadre) {
         case 16:
             for (int i = 1; i < numSquadre - 1; i = i + 2) {
-                try {
-                    final SimulatingMatchImpl s = new SimulatingMatchImpl(this.getListAvversari().get(i),
-                            this.getListAvversari().get(i + 1));
+                final SimulatingMatchImpl s = new SimulatingMatchImpl(this.getListAvversari().get(i),
+                        this.getListAvversari().get(i + 1));
+                map.clear();
+                map2 = s.result(START_REG);
+                l.clear();
+                l.addAll(map2.keySet());
+                map.put(l.get(0).getTeamName(), map2.get(l.get(0)));
+                map.put(l.get(1).getTeamName(), map2.get(l.get(1)));
+                l.clear();
+                list.addAll(map.keySet());
+                if (map.get(list.get(0)).equals(map.get(list.get(1)))) { // == map.get(list.get(1))) {
                     map.clear();
-                    map2 = s.result(START_REG);
-                    l.clear();
+                    map2 = s.result(START_EXTRA);
                     l.addAll(map2.keySet());
                     map.put(l.get(0).getTeamName(), map2.get(l.get(0)));
                     map.put(l.get(1).getTeamName(), map2.get(l.get(1)));
                     l.clear();
-                    list.addAll(map.keySet());
-                    if (map.get(list.get(0)).equals(map.get(list.get(1)))) { // == map.get(list.get(1))) {
-                        map.clear();
-                        map2 = s.result(START_EXTRA);
-                        l.addAll(map2.keySet());
-                        map.put(l.get(0).getTeamName(), map2.get(l.get(0)));
-                        map.put(l.get(1).getTeamName(), map2.get(l.get(1)));
-                        l.clear();
-                        // map = s.risultatoSuppl2();
-                        list.clear();
-                    }
-                    list.addAll(map.keySet());
-                    if (map.get(list.get(0)) > map.get(list.get(1))) {
-                        teamWin = list.get(0);
-                    } else if (map.get(list.get(0)) < map.get(list.get(1))) {
-                        teamWin = list.get(1);
-                    } else {
-                        final LogicsShootoutImpl r = new LogicsShootoutImpl(this.getListAvversari().get(i),
-                                this.getListAvversari().get(i + 1));
-                        teamWin = r.getWinner().getTeamName();
-                        if (teamWin.equals(this.getListAvversari().get(i).getTeamName())) {
-                            teamLose = this.getListAvversari().get(i + 1).getTeamName();
-                        } else {
-                            teamLose = this.getListAvversari().get(i).getTeamName();
-                        }
-                        map.clear();
-                        if (r.getGoals1() > r.getGoals2()) {
-                            map.put(teamWin, r.getGoals1());
-                            map.put(teamLose, r.getGoals2());
-                        } else {
-                            map.put(teamWin, r.getGoals2());
-                            map.put(teamLose, r.getGoals1());
-                        }
-                    }
-                    if (this.getListAvversari().get(i).getTeamName().equals(teamWin)) {
-                        newList.add(this.getListAvversari().get(i));
-                    } else {
-                        newList.add(this.getListAvversari().get(i + 1));
-                    }
+                    // map = s.risultatoSuppl2();
                     list.clear();
-                    this.risultati.putAll(map);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
+                list.addAll(map.keySet());
+                if (map.get(list.get(0)) > map.get(list.get(1))) {
+                    teamWin = list.get(0);
+                } else if (map.get(list.get(0)) < map.get(list.get(1))) {
+                    teamWin = list.get(1);
+                } else {
+                    final LogicsShootoutImpl r = new LogicsShootoutImpl(this.getListAvversari().get(i),
+                            this.getListAvversari().get(i + 1));
+                    teamWin = r.getWinner().getTeamName();
+                    if (teamWin.equals(this.getListAvversari().get(i).getTeamName())) {
+                        teamLose = this.getListAvversari().get(i + 1).getTeamName();
+                    } else {
+                        teamLose = this.getListAvversari().get(i).getTeamName();
+                    }
+                    map.clear();
+                    if (r.getGoals1() > r.getGoals2()) {
+                        map.put(teamWin, r.getGoals1());
+                        map.put(teamLose, r.getGoals2());
+                    } else {
+                        map.put(teamWin, r.getGoals2());
+                        map.put(teamLose, r.getGoals1());
+                    }
+                }
+                if (this.getListAvversari().get(i).getTeamName().equals(teamWin)) {
+                    newList.add(this.getListAvversari().get(i));
+                } else {
+                    newList.add(this.getListAvversari().get(i + 1));
+                }
+                list.clear();
+                this.risultati.putAll(map); 
             }
             this.setListAvversari(newList);
             this.setNumSquadre(8);
             break;
         case 8:
             this.risultati.clear();
-            if (this.isEliminated() && !this.isElimThisTurn()) {
-                try {
-                    final SimulatingMatchImpl s = new SimulatingMatchImpl(this.squadraAvv, this.getListAvversari().get(0));
-                    map2 = s.result(START_REG);
+            if (this.isEliminated() && !this.isElimThisTurn()) { 
+                final SimulatingMatchImpl s = new SimulatingMatchImpl(this.squadraAvv, this.getListAvversari().get(0));
+                map2 = s.result(START_REG);
+                l.clear();
+                l.addAll(map2.keySet());
+                this.risMatch.put(l.get(0).getTeamName(), map2.get(l.get(0)));
+                this.risMatch.put(l.get(1).getTeamName(), map2.get(l.get(1)));
+                final int r1 = map2.get(l.get(0));
+                final int r2 = map2.get(l.get(1));
+                if (this.risMatch.get(l.get(0).getTeamName())
+                        .equals(this.risMatch.get(l.get(1).getTeamName()))) {
+                    map2 = s.result(START_EXTRA);
                     l.clear();
                     l.addAll(map2.keySet());
-                    this.risMatch.put(l.get(0).getTeamName(), map2.get(l.get(0)));
-                    this.risMatch.put(l.get(1).getTeamName(), map2.get(l.get(1)));
-                    final int r1 = map2.get(l.get(0));
-                    final int r2 = map2.get(l.get(1));
-                    if (this.risMatch.get(l.get(0).getTeamName())
-                            .equals(this.risMatch.get(l.get(1).getTeamName()))) {
-                        map2 = s.result(START_EXTRA);
-                        l.clear();
-                        l.addAll(map2.keySet());
-                        this.risMatch.clear();
-                        this.risMatch.put(l.get(0).getTeamName(), map2.get(l.get(0)) + r1);
-                        this.risMatch.put(l.get(1).getTeamName(), map2.get(l.get(1)) + r2);
-                        l.clear();
-                    }
-                    // this.risMatch = s.risultato2();
-                } catch (FileNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
-            for (int i = 1; i < numSquadre - 1; i = i + 2) {
-                try {
-                    final SimulatingMatchImpl s = new SimulatingMatchImpl(this.getListAvversari().get(i),
-                            this.getListAvversari().get(i + 1));
-                    map.clear();
-                    map2 = s.result(START_REG);
+                    this.risMatch.clear();
+                    this.risMatch.put(l.get(0).getTeamName(), map2.get(l.get(0)) + r1);
+                    this.risMatch.put(l.get(1).getTeamName(), map2.get(l.get(1)) + r2);
                     l.clear();
-                    l.addAll(map2.keySet());
-                    map.put(l.get(0).getTeamName(), map2.get(l.get(0)));
-                    map.put(l.get(1).getTeamName(), map2.get(l.get(1)));
-                    l.clear();
-                    list.addAll(map.keySet());
-                    if (map.get(list.get(0)).equals(map.get(list.get(1)))) {
-                        map.clear();
-                        map2 = s.result(START_EXTRA);
-                        l.addAll(map2.keySet());
-                        map.put(l.get(0).getTeamName(), map2.get(l.get(0)));
-                        map.put(l.get(1).getTeamName(), map2.get(l.get(1)));
-                        l.clear();
-                        list.clear();
-                    }
-                    list.addAll(map.keySet());
-                    if (map.get(list.get(0)) > map.get(list.get(1))) {
-                        teamWin = list.get(0);
-                    } else if (map.get(list.get(0)) < map.get(list.get(1))) {
-                        teamWin = list.get(1);
-                    } else {
-                        final LogicsShootoutImpl r = new LogicsShootoutImpl(this.getListAvversari().get(i),
-                                this.getListAvversari().get(i + 1));
-                        teamWin = r.getWinner().getTeamName();
-                        if (teamWin.equals(this.getListAvversari().get(i).getTeamName())) {
-                            teamLose = this.getListAvversari().get(i + 1).getTeamName();
-                        } else {
-                            teamLose = this.getListAvversari().get(i).getTeamName();
-                        }
-                        map.clear();
-                        if (r.getGoals1() > r.getGoals2()) {
-                            map.put(teamWin, r.getGoals1());
-                            map.put(teamLose, r.getGoals2());
-                        } else {
-                            map.put(teamWin, r.getGoals2());
-                            map.put(teamLose, r.getGoals1());
-                        }
-                    }
-                    if (this.getListAvversari().get(i).getTeamName().equals(teamWin)) {
-                        newList.add(this.getListAvversari().get(i));
-                    } else {
-                        newList.add(this.getListAvversari().get(i + 1));
-                    }
-                    list.clear();
-                    this.risultati.putAll(map);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
+                // this.risMatch = s.risultato2();
             }
-            this.setListAvversari(newList);
-            this.setNumSquadre(4);
-            break;
-        case 4:
-            this.risultati.clear();
-            if (this.isEliminated() && !this.isElimThisTurn()) {
-                try {
-                    final SimulatingMatchImpl s = new SimulatingMatchImpl(this.squadraAvv, this.getListAvversari().get(0));
-                    // this.risMatch = s.risultato2();
-                    map2 = s.result(START_REG);
-                    l.clear();
-                    l.addAll(map2.keySet());
-                    this.risMatch.put(l.get(0).getTeamName(), map2.get(l.get(0)));
-                    this.risMatch.put(l.get(1).getTeamName(), map2.get(l.get(1)));
-                    // l.clear();
-                    final int r1 = map2.get(l.get(0));
-                    final int r2 = map2.get(l.get(1));
-                    if (this.risMatch.get(l.get(0).getTeamName())
-                            .equals(this.risMatch.get(l.get(1).getTeamName()))) {
-                        map2 = s.result(START_EXTRA);
-                        l.clear();
-                        l.addAll(map2.keySet());
-                        this.risMatch.clear();
-                        this.risMatch.put(l.get(0).getTeamName(), map2.get(l.get(0)) + r1);
-                        this.risMatch.put(l.get(1).getTeamName(), map2.get(l.get(1)) + r2);
-                        l.clear();
-                    }
-                } catch (FileNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
-            try {
-                final SimulatingMatchImpl s = new SimulatingMatchImpl(this.getListAvversari().get(1),
-                        this.getListAvversari().get(2));
+            for (int i = 1; i < numSquadre - 1; i = i + 2) {           
+                final SimulatingMatchImpl s = new SimulatingMatchImpl(this.getListAvversari().get(i),
+                        this.getListAvversari().get(i + 1));
                 map.clear();
                 map2 = s.result(START_REG);
                 l.clear();
@@ -367,13 +254,13 @@ public class LogicsTournamentImpl implements LogicsTournament {
                 } else if (map.get(list.get(0)) < map.get(list.get(1))) {
                     teamWin = list.get(1);
                 } else {
-                    final LogicsShootoutImpl r = new LogicsShootoutImpl(this.getListAvversari().get(1),
-                            this.getListAvversari().get(2));
+                    final LogicsShootoutImpl r = new LogicsShootoutImpl(this.getListAvversari().get(i),
+                            this.getListAvversari().get(i + 1));
                     teamWin = r.getWinner().getTeamName();
-                    if (teamWin.equals(this.getListAvversari().get(1).getTeamName())) {
-                        teamLose = this.getListAvversari().get(2).getTeamName();
+                    if (teamWin.equals(this.getListAvversari().get(i).getTeamName())) {
+                        teamLose = this.getListAvversari().get(i + 1).getTeamName();
                     } else {
-                        teamLose = this.getListAvversari().get(1).getTeamName();
+                        teamLose = this.getListAvversari().get(i).getTeamName();
                     }
                     map.clear();
                     if (r.getGoals1() > r.getGoals2()) {
@@ -384,68 +271,128 @@ public class LogicsTournamentImpl implements LogicsTournament {
                         map.put(teamLose, r.getGoals1());
                     }
                 }
-                if (this.getListAvversari().get(1).getTeamName().equals(teamWin)) {
-                    newList.add(this.getListAvversari().get(1));
+                if (this.getListAvversari().get(i).getTeamName().equals(teamWin)) {
+                    newList.add(this.getListAvversari().get(i));
                 } else {
-                    newList.add(this.getListAvversari().get(2));
+                    newList.add(this.getListAvversari().get(i + 1));
                 }
                 list.clear();
                 this.risultati.putAll(map);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
             }
+            this.setListAvversari(newList);
+            this.setNumSquadre(4);
+            break;
+        case 4:
+            this.risultati.clear();
+            if (this.isEliminated() && !this.isElimThisTurn()) {               
+                final SimulatingMatchImpl s = new SimulatingMatchImpl(this.squadraAvv, this.getListAvversari().get(0));
+                // this.risMatch = s.risultato2();
+                map2 = s.result(START_REG);
+                l.clear();
+                l.addAll(map2.keySet());
+                this.risMatch.put(l.get(0).getTeamName(), map2.get(l.get(0)));
+                this.risMatch.put(l.get(1).getTeamName(), map2.get(l.get(1)));
+                // l.clear();
+                final int r1 = map2.get(l.get(0));
+                final int r2 = map2.get(l.get(1));
+                if (this.risMatch.get(l.get(0).getTeamName())
+                        .equals(this.risMatch.get(l.get(1).getTeamName()))) {
+                    map2 = s.result(START_EXTRA);
+                    l.clear();
+                    l.addAll(map2.keySet());
+                    this.risMatch.clear();
+                    this.risMatch.put(l.get(0).getTeamName(), map2.get(l.get(0)) + r1);
+                    this.risMatch.put(l.get(1).getTeamName(), map2.get(l.get(1)) + r2);
+                    l.clear();
+                }
+            }
+            final SimulatingMatchImpl s = new SimulatingMatchImpl(this.getListAvversari().get(1),
+                    this.getListAvversari().get(2));
+            map.clear();
+            map2 = s.result(START_REG);
+            l.clear();
+            l.addAll(map2.keySet());
+            map.put(l.get(0).getTeamName(), map2.get(l.get(0)));
+            map.put(l.get(1).getTeamName(), map2.get(l.get(1)));
+            l.clear();
+            list.addAll(map.keySet());
+            if (map.get(list.get(0)).equals(map.get(list.get(1)))) {
+                map.clear();
+                map2 = s.result(START_EXTRA);
+                l.addAll(map2.keySet());
+                map.put(l.get(0).getTeamName(), map2.get(l.get(0)));
+                map.put(l.get(1).getTeamName(), map2.get(l.get(1)));
+                l.clear();
+                list.clear();
+            }
+            list.addAll(map.keySet());
+            if (map.get(list.get(0)) > map.get(list.get(1))) {
+                teamWin = list.get(0);
+            } else if (map.get(list.get(0)) < map.get(list.get(1))) {
+                teamWin = list.get(1);
+            } else {
+                final LogicsShootoutImpl r = new LogicsShootoutImpl(this.getListAvversari().get(1),
+                        this.getListAvversari().get(2));
+                teamWin = r.getWinner().getTeamName();
+                if (teamWin.equals(this.getListAvversari().get(1).getTeamName())) {
+                    teamLose = this.getListAvversari().get(2).getTeamName();
+                } else {
+                    teamLose = this.getListAvversari().get(1).getTeamName();
+                }
+                map.clear();
+                if (r.getGoals1() > r.getGoals2()) {
+                    map.put(teamWin, r.getGoals1());
+                    map.put(teamLose, r.getGoals2());
+                } else {
+                    map.put(teamWin, r.getGoals2());
+                    map.put(teamLose, r.getGoals1());
+                }
+            }
+            if (this.getListAvversari().get(1).getTeamName().equals(teamWin)) {
+                newList.add(this.getListAvversari().get(1));
+            } else {
+                newList.add(this.getListAvversari().get(2));
+            }
+            list.clear();
+            this.risultati.putAll(map);
+
             this.setListAvversari(newList);
             this.setNumSquadre(2);
             break;
         case 2:
             this.risultati.clear();
             if (this.isEliminated() && !this.isElimThisTurn()) {
-                try {
-                    final SimulatingMatchImpl s = new SimulatingMatchImpl(this.squadraAvv, this.getListAvversari().get(0));
-                    map2 = s.result(START_REG);
+                final SimulatingMatchImpl s2 = new SimulatingMatchImpl(this.squadraAvv, this.getListAvversari().get(0));
+                map2 = s2.result(START_REG);
+                l.clear();
+                l.addAll(map2.keySet());
+                this.risMatch.put(l.get(0).getTeamName(), map2.get(l.get(0)));
+                this.risMatch.put(l.get(1).getTeamName(), map2.get(l.get(1)));
+                // l.clear();
+                final int r1 = map2.get(l.get(0));
+                final int r2 = map2.get(l.get(1));
+                if (r1 > r2) {
+                    this.winner = l.get(0).getTeamName();
+                } else if (r2 > r1) {
+                    this.winner = l.get(1).getTeamName();
+                } else {
+                    map2 = s2.result(START_EXTRA);
                     l.clear();
                     l.addAll(map2.keySet());
-                    this.risMatch.put(l.get(0).getTeamName(), map2.get(l.get(0)));
-                    this.risMatch.put(l.get(1).getTeamName(), map2.get(l.get(1)));
-                    // l.clear();
-                    final int r1 = map2.get(l.get(0));
-                    final int r2 = map2.get(l.get(1));
-                    if (r1 > r2) {
+                    this.risMatch.clear();
+                    this.risMatch.put(l.get(0).getTeamName(), map2.get(l.get(0)) + r1);
+                    this.risMatch.put(l.get(1).getTeamName(), map2.get(l.get(1)) + r2);
+                    final int p1 = map2.get(l.get(0));
+                    final int p2 = map2.get(l.get(1));
+                    if (p1 > p2) {
                         this.winner = l.get(0).getTeamName();
-                    } else if (r2 > r1) {
+                    } else if (p2 > p1) {
                         this.winner = l.get(1).getTeamName();
+                        // l.clear();
                     } else {
-                        map2 = s.result(START_EXTRA);
-                        l.clear();
-                        l.addAll(map2.keySet());
-                        this.risMatch.clear();
-                        this.risMatch.put(l.get(0).getTeamName(), map2.get(l.get(0)) + r1);
-                        this.risMatch.put(l.get(1).getTeamName(), map2.get(l.get(1)) + r2);
-                        final int p1 = map2.get(l.get(0));
-                        final int p2 = map2.get(l.get(1));
-                        if (p1 > p2) {
-                            this.winner = l.get(0).getTeamName();
-                        } else if (p2 > p1) {
-                            this.winner = l.get(1).getTeamName();
-                            // l.clear();
-                        } else {
-                            this.winner = new LogicsShootoutImpl(this.squadraAvv, this.getListAvversari().get(0))
-                                    .getWinner().getTeamName();
-                        }
+                        this.winner = new LogicsShootoutImpl(this.squadraAvv, this.getListAvversari().get(0))
+                                .getWinner().getTeamName();
                     }
-                } catch (FileNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
                 }
             }
             this.setNumSquadre(1);
@@ -482,6 +429,9 @@ public class LogicsTournamentImpl implements LogicsTournament {
 
     /**
      * {@inheritDoc}
+     * @throws IOException 
+     * @throws ClassNotFoundException 
+     * @throws FileNotFoundException 
      */
     @Override
     public Team getSquadraAvv() {
