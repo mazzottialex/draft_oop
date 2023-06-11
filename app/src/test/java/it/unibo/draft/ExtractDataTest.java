@@ -5,7 +5,6 @@ import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import model.data.Module;
@@ -30,12 +29,11 @@ public class ExtractDataTest {
     private static final int STARTERSIZE = 11;
 
     /**
-     * Sets up the test environment before each test method.
+     * Construct the test.
      *
      * @throws Exception if an error occurs during setup.
      */
-    @Before
-    public void setUp() throws Exception {
+    public ExtractDataTest() throws Exception {
         md = new ManageDataImpl("2022-2023");
         md.loadData();
         list = md.getLi();

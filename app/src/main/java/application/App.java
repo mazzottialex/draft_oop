@@ -21,15 +21,12 @@ public final class App {
      * @param args The command-line arguments.
      * @throws Exception if an error occurs during application execution.
      */
-    public static void main(final String[] args) throws Exception {
+    public static void main(final String[] args) {
         EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    Start frame = new Start();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+            @Override
+        	public void run() {
+                 final Start frame = new Start();
+                 frame.setVisible(true);
             }
         });
     }

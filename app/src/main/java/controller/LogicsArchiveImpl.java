@@ -29,7 +29,7 @@ public final class LogicsArchiveImpl implements LogicsArchive {
     @Override
     public List<Player> liOrdered(final List<Player> li)
             throws FileNotFoundException, ClassNotFoundException, IOException {
-        ExtractData ex = new ExtractDataImpl(li);
+        final ExtractData ex = new ExtractDataImpl(li);
         return ex.getListOrdered(c -> -c.getRating().getX());
     }
 

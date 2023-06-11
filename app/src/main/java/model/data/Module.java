@@ -109,6 +109,7 @@ public enum Module {
      *
      * @return The string representation of the formation.
      */
+    @Override
     public String toString() {
         return dif + "-" + cen + "-" + att;
     }

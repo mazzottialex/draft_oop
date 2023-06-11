@@ -16,12 +16,12 @@ import view.Substitution;
  * Implementation of the {@code LogicsSubstitution} interface for managing player substitutions.
  */
 public final class LogicsSubstitutionImpl implements LogicsSubstitution {
-    private List<Player> starters;
-    private List<Player> substitutes;
+    private final List<Player> starters;
+    private final List<Player> substitutes;
     private Player subOn;
     private Player subOff;
-    private Team t;
-    private Substitution gui;
+    private final Team t;
+    private final Substitution gui;
     private boolean done;
 
     /**
@@ -66,8 +66,8 @@ public final class LogicsSubstitutionImpl implements LogicsSubstitution {
     @Override
     public void sub(final Container parent1, final Container parent2, final Component component1, final Component component2) {
         if (subOff.getPos().equals(subOn.getPos())) {
-            int index1 = getComponentIndex(parent1, component1);
-            int index2 = getComponentIndex(parent2, component2);
+        	final int index1 = getComponentIndex(parent1, component1);
+        	final int index2 = getComponentIndex(parent2, component2);
             if (index1 != -1 && index2 != -1) {
                 parent1.remove(component1);
                 parent2.remove(component2);
@@ -79,7 +79,7 @@ public final class LogicsSubstitutionImpl implements LogicsSubstitution {
                 // Resetta la selezione dei pannelli
                 component1.setBackground(null);
                 component2.setBackground(null);
-                int indexEsce = starters.indexOf(subOff);
+                final int indexEsce = starters.indexOf(subOff);
                 starters.set(indexEsce, subOn);
                 substitutes.remove(subOn);
                 t.setStarting(starters);
@@ -104,7 +104,7 @@ public final class LogicsSubstitutionImpl implements LogicsSubstitution {
      */
     private static int getComponentIndex(final Container parent, final Component component) {
         for (int i = 0; i < parent.getComponentCount(); i++) {
-            if (parent.getComponent(i) == component) {
+            if (parent.getComponent(i).equals(component)) {
                 return i;
             }
         }

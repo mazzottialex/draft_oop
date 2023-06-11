@@ -18,24 +18,24 @@ import utils.Pair;
  */
 public final class LogicsShootoutImpl implements LogicsShootout, Serializable {
     private static final long serialVersionUID = -5675711964921406918L;
-    private Team t1;
-    private Team t2;
+    private final Team t1;
+    private final Team t2;
     private List<Player> starters1;
     private List<Player> starters2;
     private int goals1;
     private int goals2;
     private int shoots1;
     private int shoots2;
-    private int totShoots;
+    private final int totShoots;
     private boolean goAhead;
-    private Map<Integer, Pair<Player, String>> map1;
-    private Map<Integer, Pair<Player, String>> map2;
-    private ArrayList<Map<Integer, Pair<Player, String>>> list;
+    private final Map<Integer, Pair<Player, String>> map1;
+    private final Map<Integer, Pair<Player, String>> map2;
+    private final ArrayList<Map<Integer, Pair<Player, String>>> list;
     private static final double MINIMUM_MODIFIER_RATING = 0.8;
     private static final double ADD_MODIFIER_RATING = 0.4;
     private static final double CONVERSION_RATE_SHOOTOUT = 0.75; //costante rigori fatti nei shootout
     private static final int DEFAULT = 77;
-    private Random r = new Random();
+    private final Random r = new Random();
 
     /**
      * Constructs a new {@code LogicsShootoutImpl} object with the specified teams.
@@ -64,18 +64,18 @@ public final class LogicsShootoutImpl implements LogicsShootout, Serializable {
     @Override
     public ArrayList<Map<Integer, Pair<Player, String>>> compute() {
         while (goAhead) {
-            if ((((shoots1 + shoots2) >= totShoots) && shoots1 == shoots2 && goals1 != goals2)
-                        || ((shoots1 + shoots2) < totShoots && ((((totShoots / 2) - shoots1) + goals1) < goals2
-                        || (((totShoots / 2) - shoots2) + goals2) < goals1))) {
+            if (((shoots1 + shoots2) >= totShoots && shoots1 == shoots2 && goals1 != goals2)
+            	|| (shoots1 + shoots2 < totShoots && ((totShoots / 2 - shoots1) + goals1 < goals2
+            			|| (totShoots / 2 - shoots2) + goals2 < goals1))) {
                 goAhead = false;
             } else {
                 if ((shoots1 + shoots2) % 2 == 0) {
                     if (starters1.isEmpty()) {
                         starters1 = t1.getStarting();
                     }
-                    Player p = starters1.get(starters1.size() - 1);
+                    final Player p = starters1.get(starters1.size() - 1);
                     starters1.remove(p);
-                    String res = rigore(p, t2);
+                    final String res = rigore(p, t2);
                     map1.put(shoots1, new Pair<>(p, res));
                     if (res.equals("Gol")) {
                         goals1++;
@@ -85,9 +85,9 @@ public final class LogicsShootoutImpl implements LogicsShootout, Serializable {
                     if (starters2.isEmpty()) {
                         starters2 = t2.getStarting();
                     }
-                    Player p = starters2.get(starters2.size() - 1);
+                    final Player p = starters2.get(starters2.size() - 1);
                     starters2.remove(p);
-                    String res = rigore(p, t1);
+                    final String res = rigore(p, t1);
                     map2.put(shoots2, new Pair<>(p, res));
                     if (res.equals("Gol")) {
                         goals2++;
