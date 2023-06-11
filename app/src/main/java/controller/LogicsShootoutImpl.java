@@ -64,9 +64,9 @@ public final class LogicsShootoutImpl implements LogicsShootout, Serializable {
     @Override
     public ArrayList<Map<Integer, Pair<Player, String>>> compute() {
         while (goAhead) {
-            if ((shoots1 + shoots2 >= totShoots && shoots1 == shoots2 && goals1 != goals2)
-            	|| (shoots1 + shoots2 < totShoots && (totShoots / 2 - shoots1 + goals1 < goals2
-            			|| totShoots / 2 - shoots2 + goals2 < goals1))) {
+            if (shoots1 + shoots2 >= totShoots && shoots1 == shoots2 && goals1 != goals2
+                    || shoots1 + shoots2 < totShoots && totShoots / 2 - shoots1 + goals1 < goals2
+                    || totShoots / 2 - shoots2 + goals2 < goals1) {
                 goAhead = false;
             } else {
                 if ((shoots1 + shoots2) % 2 == 0) {

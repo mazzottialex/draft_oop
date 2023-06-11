@@ -143,7 +143,7 @@ public final class TeamOpponent implements Team, Serializable {
     public Player getStartingKeeper() {
         Player gk = null;
         for (final Player player: getStarting()) {
-            if (("P").equals(player.getPos())) {
+            if ("P".equals(player.getPos())) {
                 gk = player;
             }
         }

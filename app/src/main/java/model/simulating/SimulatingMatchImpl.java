@@ -19,8 +19,6 @@ public final class SimulatingMatchImpl implements SimulatingMatch, Serializable 
     final private SimulatingFunctions sf;
     final private Team t1;
     final private Team t2;
-    final private Map<Player, Double> ratings1;
-    final private Map<Player, Double> ratings2;
     final private int concededGoals1;
     final private int concededGoals2;
     final private int owngoals1;
@@ -29,8 +27,6 @@ public final class SimulatingMatchImpl implements SimulatingMatch, Serializable 
     final private int savedPenalties2;
     final private double lockdownDefense1;
     final private double lockdownDefense2;
-    final private Map<String, Double> modifiedRatings1;
-    final private Map<String, Double> modifiedRatings2;
     final private double defensiveRatings1;
     final private double defensiveRatings2;
     final private double offensiveRatings1;
@@ -61,8 +57,8 @@ public final class SimulatingMatchImpl implements SimulatingMatch, Serializable 
         sf = new SimulatingFunctionsImpl();
         this.t1 = t1;
         this.t2 = t2;
-        ratings1 = sf.getFantasyRantings(this.t1.getStarting());
-        ratings2 = sf.getFantasyRantings(this.t2.getStarting());
+        final Map<Player, Double> ratings1 = sf.getFantasyRantings(this.t1.getStarting());
+        final Map<Player, Double> ratings2 = sf.getFantasyRantings(this.t2.getStarting());
         concededGoals1 = sf.getFantasyConcededGoals(this.t1);
         concededGoals2 = sf.getFantasyConcededGoals(this.t2);
         owngoals1 = sf.getFantasyOwngoals(this.t1);
@@ -71,8 +67,8 @@ public final class SimulatingMatchImpl implements SimulatingMatch, Serializable 
         savedPenalties2 = sf.getFantasySavedPenalties(this.t2);
         lockdownDefense1 = sf.getLockdownDefenseRating(this.t1, ratings1);
         lockdownDefense2 = sf.getLockdownDefenseRating(this.t2, ratings2);
-        modifiedRatings1 = sf.modifiedFantasyRatings(this.t1, ratings1);
-        modifiedRatings2 = sf.modifiedFantasyRatings(this.t2, ratings2);
+        final Map<String, Double> modifiedRatings1 = sf.modifiedFantasyRatings(this.t1, ratings1);
+        final Map<String, Double> modifiedRatings2 = sf.modifiedFantasyRatings(this.t2, ratings2);
         defensiveRatings1 = sf.getFantasyDefensiveRating(t1, modifiedRatings1);
         defensiveRatings2 = sf.getFantasyDefensiveRating(t2, modifiedRatings2);
         offensiveRatings1 = sf.getFantasyOffensiveRating(t1, modifiedRatings1);

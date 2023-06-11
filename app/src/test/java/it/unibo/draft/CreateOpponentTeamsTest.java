@@ -22,8 +22,6 @@ import model.rating.AnalysisRatingImpl;
 public class CreateOpponentTeamsTest {
 
     private final CreateOpponentTeamsImpl createOpponentTeams;
-    private List<Player> li;
-    private final ManageData md;
     private static final int N_TEAM = 5;
 
     /**
@@ -32,9 +30,9 @@ public class CreateOpponentTeamsTest {
      * @throws Exception if an error occurs during setup.
      */
     public CreateOpponentTeamsTest() throws Exception {
-        md = new ManageDataImpl("2022-2023");
+    	final ManageData md = new ManageDataImpl("2022-2023");
         md.loadData();
-        li = md.getLi();
+        List<Player> li = md.getLi();
         final AnalysisRating analysisRating = new AnalysisRatingImpl(li);
         li = analysisRating.updateRating();
         createOpponentTeams = new CreateOpponentTeamsImpl(li, N_TEAM);
