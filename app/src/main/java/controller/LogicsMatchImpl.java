@@ -26,7 +26,7 @@ public final class LogicsMatchImpl implements LogicsMatch, Serializable {
     private static final int END_REG = 90;
     private static final int END_EXTRA = 120;
     private static final double OWNGOAL_RATE = 2.904040404040404;
-
+    private Random r = new Random();
     /**
      * Constructs a new instance of {@code LogicsMatchImpl} with the given teams.
      *
@@ -91,7 +91,7 @@ public final class LogicsMatchImpl implements LogicsMatch, Serializable {
         for (int i = 0; i < goal; i++) {
             int min;
             do {
-                min = new Random().nextInt(remainingTime) + 1 + time;
+                min = r.nextInt(remainingTime) + 1 + time;
             } while (list.contains(min));
             list.add(min);
         }
@@ -113,7 +113,7 @@ public final class LogicsMatchImpl implements LogicsMatch, Serializable {
         double cumulativeProbability = 0.0;
         for (int i = 0; i < starters.size(); i++) {
             cumulativeProbability += goalList.get(i);
-            if (new Random().nextDouble() * (totGoals + owngoals) <= cumulativeProbability) {
+            if (r.nextDouble() * (totGoals + owngoals) <= cumulativeProbability) {
                 return starters.get(i);
             }
         }
@@ -133,6 +133,6 @@ public final class LogicsMatchImpl implements LogicsMatch, Serializable {
         } else {
             t = t1;
         }
-        return t.getStarting().get(new Random().nextInt(t.getStarting().size()));
+        return t.getStarting().get(r.nextInt(t.getStarting().size()));
     }
 }

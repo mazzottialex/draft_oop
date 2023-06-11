@@ -50,6 +50,7 @@ public final class SimulatingFunctionsImpl implements SimulatingFunctions {
     private static final double MOD_MIN = 0.8;
     private static final double DEF_5 = 5;
     private static final Map<String, Double> ROLE_COEFFICIENT_MAP = new HashMap<>();
+    private Random r = new Random();
 
     static {
         ROLE_COEFFICIENT_MAP.put("P", COST_VOTE_P);
@@ -71,7 +72,7 @@ public final class SimulatingFunctionsImpl implements SimulatingFunctions {
      * @return A random number between min and max.
      */
     public double prob(final double min, final double max) {
-        return min + (max - min) * new Random().nextDouble();
+        return min + (max - min) * r.nextDouble();
     }
 
     /**
