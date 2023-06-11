@@ -11,9 +11,9 @@ import org.junit.Test;
 
 import model.data.Player;
 import model.data.Team;
-import model.data.managedata.CreateOpponentTeamsImpl;
-import model.data.managedata.ManageData;
-import model.data.managedata.ManageDataImpl;
+import model.managedata.CreateOpponentTeamsImpl;
+import model.managedata.ManageData;
+import model.managedata.ManageDataImpl;
 import model.rating.AnalysisRating;
 import model.rating.AnalysisRatingImpl;
 

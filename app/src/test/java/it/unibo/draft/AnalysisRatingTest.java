@@ -12,8 +12,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import model.data.Player;
-import model.data.managedata.ExtractData;
-import model.data.managedata.ExtractDataImpl;
+import model.managedata.ExtractData;
+import model.managedata.ExtractDataImpl;
 import model.rating.AnalysisRatingImpl;
 import model.rating.Function;
 /**

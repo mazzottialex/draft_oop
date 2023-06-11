@@ -13,10 +13,10 @@ import model.data.Module;
 import model.data.Player;
 import model.data.Team;
 import model.data.TeamUser;
-import model.data.managedata.ExtractData;
-import model.data.managedata.ExtractDataImpl;
-import model.data.managedata.LogicsFile;
-import model.data.managedata.LogicsFileImpl;
+import model.managedata.ExtractData;
+import model.managedata.ExtractDataImpl;
+import model.managedata.LogicsFile;
+import model.managedata.LogicsFileImpl;
 /**
  * The class that handles the team creation logic.
  * 

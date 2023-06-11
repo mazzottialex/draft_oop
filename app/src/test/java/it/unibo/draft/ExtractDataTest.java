@@ -9,9 +9,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import model.data.Player;
-import model.data.managedata.ExtractDataImpl;
-import model.data.managedata.ManageData;
-import model.data.managedata.ManageDataImpl;
+import model.managedata.ExtractDataImpl;
+import model.managedata.ManageData;
+import model.managedata.ManageDataImpl;
 import model.rating.AnalysisRating;
 import model.rating.AnalysisRatingImpl;
 

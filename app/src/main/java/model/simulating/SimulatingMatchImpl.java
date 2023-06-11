@@ -9,7 +9,7 @@ import java.util.Map;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import model.data.Player;
 import model.data.Team;
-import model.data.managedata.ExtractDataImpl;
+import model.managedata.ExtractDataImpl;
 
 /**
  * Implementation of the {@code SimulatingMatch} interface that simulates a match between two teams.

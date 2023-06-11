@@ -8,7 +8,7 @@ import java.util.List;
 import model.data.Module;
 import model.data.Player;
 import model.data.Team;
-import model.data.managedata.ExtractData;
+import model.managedata.ExtractData;
 
 /**
  * Models the logic of team creation.

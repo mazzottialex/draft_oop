@@ -11,8 +11,8 @@ import java.util.Random;
 
 import model.data.Player;
 import model.data.Team;
-import model.data.managedata.ExtractData;
-import model.data.managedata.ExtractDataImpl;
+import model.managedata.ExtractData;
+import model.managedata.ExtractDataImpl;
 
 /**
  * Implementation of the {@code SimulatingFunctions} interface that provides

@@ -12,8 +12,8 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 
 import model.data.Player;
-import model.data.managedata.ManageData;
-import model.data.managedata.ManageDataImpl;
+import model.managedata.ManageData;
+import model.managedata.ManageDataImpl;
 import controller.LogicsCreateTeam;
 import controller.LogicsCreateTeamImpl;
 

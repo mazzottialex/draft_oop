@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.util.List;
 
 import model.data.Player;
-import model.data.managedata.ExtractData;
-import model.data.managedata.ExtractDataImpl;
+import model.managedata.ExtractData;
+import model.managedata.ExtractDataImpl;
 
 /**
  * Implementation of the LogicsArchive interface.

@@ -13,7 +13,7 @@ import model.data.Player;
 import model.data.Team;
 import model.data.TeamOpponent;
 import model.data.TeamUser;
-import model.data.managedata.CreateOpponentTeamsImpl;
+import model.managedata.CreateOpponentTeamsImpl;
 import model.simulating.SimulatingMatchImpl;
 
 /**
