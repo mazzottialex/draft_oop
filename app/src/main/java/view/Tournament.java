@@ -17,10 +17,13 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import org.slf4j.LoggerFactory;
+
 import controller.LogicsShootoutImpl;
 import controller.LogicsTournament;
 import controller.LogicsTournamentImpl;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+//import io.opentelemetry.api.logs.Logger;
 import model.data.Player;
 import model.data.Team;
 import utils.RoundedBorder;
@@ -34,6 +37,7 @@ import utils.RoundedBorder;
 public class Tournament extends Base {
 
     private static final long serialVersionUID = 1L;
+    private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(Tournament.class);
     private static final int NUM_TURN_1 = 16;
     private static final int NUM_TURN_2 = 8;
     private static final int NUM_TURN_3 = 4;
@@ -126,40 +130,31 @@ public class Tournament extends Base {
                                     logTor.simulaMatch();
                                     createLevel();
                                 } catch (FileNotFoundException e1) {
-                                    // TODO Auto-generated catch block
-                                    e1.printStackTrace();
+                                    LOG.error("Error", e);
                                 } catch (ClassNotFoundException e1) {
-                                    // TODO Auto-generated catch block
-                                    e1.printStackTrace();
+                                    LOG.error("Error", e);
                                 } catch (IOException e1) {
-                                    // TODO Auto-generated catch block
-                                    e1.printStackTrace();
+                                    LOG.error("Error", e);
                                 }
                             }
                         });
                     } catch (FileNotFoundException e1) {
-                        // TODO Auto-generated catch block
-                        e1.printStackTrace();
+                        LOG.error("Error", e);
                     } catch (ClassNotFoundException e1) {
-                        // TODO Auto-generated catch block
-                        e1.printStackTrace();
+                        LOG.error("Error", e);
                     } catch (IOException e1) {
-                        // TODO Auto-generated catch block
-                        e1.printStackTrace();
+                        LOG.error("Error", e);
                     }
                 } else {
                     try {
                         logTor.simulaMatch();
                         createLevel();
                     } catch (FileNotFoundException e1) {
-                        // TODO Auto-generated catch block
-                        e1.printStackTrace();
+                        LOG.error("Error", e);
                     } catch (ClassNotFoundException e1) {
-                        // TODO Auto-generated catch block
-                        e1.printStackTrace();
+                        LOG.error("Error", e);
                     } catch (IOException e1) {
-                        // TODO Auto-generated catch block
-                        e1.printStackTrace();
+                        LOG.error("Error", e);
                     }
                 }
                 // buttonSimula.setVisible(true);

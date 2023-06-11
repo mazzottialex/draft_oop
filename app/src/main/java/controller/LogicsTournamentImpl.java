@@ -5,6 +5,9 @@ import java.io.IOException;
 //import java.util.*;
 import java.util.List;
 import java.util.Map;
+
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -15,6 +18,7 @@ import model.data.TeamOpponent;
 import model.data.TeamUser;
 import model.managedata.CreateOpponentTeamsImpl;
 import model.simulating.SimulatingMatchImpl;
+//import view.Tournament;
 
 /**
  * The class that manages the logic of the tournament.
@@ -25,6 +29,7 @@ import model.simulating.SimulatingMatchImpl;
 public class LogicsTournamentImpl implements LogicsTournament {
 
     private static final long serialVersionUID = 1L;
+    private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(LogicsTournamentImpl.class);
     private static final int NUM_AVVERSARI = 15;
     // private ManageData md;
     // private ExtractData ex;
@@ -228,7 +233,7 @@ public class LogicsTournamentImpl implements LogicsTournament {
                 }
                 // this.risMatch = s.risultato2();
             }
-            for (int i = 1; i < numSquadre - 1; i = i + 2) {           
+            for (int i = 1; i < numSquadre - 1; i = i + 2) {
                 final SimulatingMatchImpl s = new SimulatingMatchImpl(this.getListAvversari().get(i),
                         this.getListAvversari().get(i + 1));
                 map.clear();
@@ -284,7 +289,7 @@ public class LogicsTournamentImpl implements LogicsTournament {
             break;
         case 4:
             this.risultati.clear();
-            if (this.isEliminated() && !this.isElimThisTurn()) {               
+            if (this.isEliminated() && !this.isElimThisTurn()) {
                 final SimulatingMatchImpl s = new SimulatingMatchImpl(this.squadraAvv, this.getListAvversari().get(0));
                 // this.risMatch = s.risultato2();
                 map2 = s.result(START_REG);
@@ -440,7 +445,7 @@ public class LogicsTournamentImpl implements LogicsTournament {
             return new TeamOpponent(this.squadraAvv.getId(),
                     this.squadraAvv.getTeamName(), this.squadraAvv.getModule(), this.squadraAvv.getLiPlayers());
         } catch (ClassNotFoundException | IOException e) {
-            e.printStackTrace();
+            LOG.error("Error", e);
         }
         return null;
     }
