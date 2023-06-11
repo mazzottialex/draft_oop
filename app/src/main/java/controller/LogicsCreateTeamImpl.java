@@ -77,7 +77,6 @@ public class LogicsCreateTeamImpl implements LogicsCreateTeam {
         this.clickModulo = false;
     }
 
-<<<<<<< HEAD
     @Override
     public final Team getSquadra() {
         return new TeamUser(nomeSquadra, stemma, moduloSelect, liSquadra, riserve); // sistemare titolari e riserve
@@ -87,21 +86,6 @@ public class LogicsCreateTeamImpl implements LogicsCreateTeam {
     public final List<Module> getModuli() {
         final List<Module> list = new ArrayList<>();
         for (final Module m : Module.values()) {
-=======
-    /**
-     * {@inheritDoc}
-     */
-    public Team getSquadra() {
-        return new TeamUser(nomeSquadra, stemma, moduloSelect, liSquadra, riserve); // sistemare titolari e riserve
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public List<Module> getModuli() {
-        List<Module> list = new ArrayList<>();
-        for (Module m : Module.values()) {
->>>>>>> a884edc1eca4ae54b5cb5266876a63fff8431ee1
             list.add(m);
         }
         return list;
@@ -158,7 +142,6 @@ public class LogicsCreateTeamImpl implements LogicsCreateTeam {
      * {@inheritDoc}
      */
     @Override
-<<<<<<< HEAD
     public final List<Player> getRandom(final String ruolo, final int n) {
         final List<Player> list = this.ex.getListByPos(ruolo);
         final Set<Player> set = new HashSet<>();
@@ -170,19 +153,6 @@ public class LogicsCreateTeamImpl implements LogicsCreateTeam {
             final Player c = list.get(random);
             boolean test = false;
             for (final Player uscito : this.calcUsciti) {
-=======
-    public List<Player> getRandom(final String ruolo, final int n) {
-        List<Player> list = this.ex.getListByPos(ruolo);
-        Set<Player> set = new HashSet<>();
-        List<Player> randomList = new ArrayList<>();
-        boolean test = false;
-        // Random r = new Random();
-        while (set.size() != n) {
-            int random = r.nextInt(list.size());
-            Player c = list.get(random);
-            test = false;
-            for (Player uscito : this.calcUsciti) {
->>>>>>> a884edc1eca4ae54b5cb5266876a63fff8431ee1
                 if (c.equals(uscito)) {
                     test = true;
                 }
