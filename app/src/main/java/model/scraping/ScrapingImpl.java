@@ -149,6 +149,8 @@ public final class ScrapingImpl implements Scraping {
                 Process process = Runtime.getRuntime().exec(istruzione);
                 process.waitFor();
                 return process.exitValue() == 0;
+            } catch (RuntimeException e) {
+          	  throw e;
             } catch (Exception e) {
                 return false;
             }

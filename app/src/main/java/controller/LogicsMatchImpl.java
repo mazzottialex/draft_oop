@@ -10,6 +10,7 @@ import java.util.Random;
 
 import model.data.Player;
 import model.data.Team;
+import model.data.TeamUser;
 import model.simulating.SimulatingMatch;
 import model.simulating.SimulatingMatchImpl;
 
@@ -26,7 +27,8 @@ public final class LogicsMatchImpl implements LogicsMatch, Serializable {
     private static final int END_REG = 90;
     private static final int END_EXTRA = 120;
     private static final double OWNGOAL_RATE = 2.904040404040404;
-    private Random r = new Random();
+    private Random random = new Random();
+    
     /**
      * Constructs a new instance of {@code LogicsMatchImpl} with the given teams.
      *
@@ -38,8 +40,8 @@ public final class LogicsMatchImpl implements LogicsMatch, Serializable {
      */
     public LogicsMatchImpl(final Team t1, final Team t2) throws FileNotFoundException, ClassNotFoundException, IOException {
         super();
-        this.t1 = t1;
-        this.t2 = t2;
+        this.t1 = new TeamUser(t1.getTeamName(), t1.getLogo(), t1.getModule(), t1.getStarting(), t1.getSubstitution());
+        this.t2 = new TeamUser(t2.getTeamName(), t2.getLogo(), t2.getModule(), t2.getStarting(), t2.getSubstitution());
         sim = new SimulatingMatchImpl(t1, t2);
     }
 
@@ -91,7 +93,7 @@ public final class LogicsMatchImpl implements LogicsMatch, Serializable {
         for (int i = 0; i < goal; i++) {
             int min;
             do {
-                min = r.nextInt(remainingTime) + 1 + time;
+                min = random.nextInt(remainingTime) + 1 + time;
             } while (list.contains(min));
             list.add(min);
         }
@@ -113,7 +115,7 @@ public final class LogicsMatchImpl implements LogicsMatch, Serializable {
         double cumulativeProbability = 0.0;
         for (int i = 0; i < starters.size(); i++) {
             cumulativeProbability += goalList.get(i);
-            if (r.nextDouble() * (totGoals + owngoals) <= cumulativeProbability) {
+            if (random.nextDouble() * (totGoals + owngoals) <= cumulativeProbability) {
                 return starters.get(i);
             }
         }
@@ -133,6 +135,6 @@ public final class LogicsMatchImpl implements LogicsMatch, Serializable {
         } else {
             t = t1;
         }
-        return t.getStarting().get(r.nextInt(t.getStarting().size()));
+        return t.getStarting().get(random.nextInt(t.getStarting().size()));
     }
 }

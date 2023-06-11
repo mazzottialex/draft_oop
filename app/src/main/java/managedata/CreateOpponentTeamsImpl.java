@@ -30,7 +30,7 @@ public final class CreateOpponentTeamsImpl implements CreateOpponentTeams {
      */
     public CreateOpponentTeamsImpl(final List<Player> players, final int totTeams) {
         this.totTeams = totTeams;
-        this.li = players;
+        this.li = new ArrayList<>(players);
         ed = new ExtractDataImpl(players);
         teams = ed.findTeams();
     }

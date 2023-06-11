@@ -2,6 +2,7 @@ package model.rating;
 
 import static java.util.stream.Collectors.toList;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import managedata.ExtractData;
@@ -44,7 +45,7 @@ public final class AnalysisRatingImpl implements AnalysisRating {
      */
     public AnalysisRatingImpl(final List<Player> li) {
         ex = new ExtractDataImpl(li);
-        this.li = li;
+        this.li = new ArrayList<>(li);
     }
 
     @Override

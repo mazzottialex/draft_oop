@@ -46,7 +46,7 @@ public final class TeamOpponent implements Team, Serializable {
         this.id = id;
         this.teamName = teamName;
         this.module = module;
-        this.liPlayers = li;
+        this.liPlayers = new ArrayList<>(li);
         ExtractData ed = new ExtractDataImpl(li);
         this.liStarting = ed.getStarting(teamName, module);
         this.liSubstitution = ed.getSubstitution(teamName, module);
@@ -99,17 +99,17 @@ public final class TeamOpponent implements Team, Serializable {
 
     @Override
     public List<Player> getSubstitution() {
-        return this.liSubstitution;
+        return new ArrayList<>(liSubstitution);
     }
 
     @Override
     public void setStarting(final List<Player> liStarting) {
-        this.liStarting = liStarting;
+        this.liStarting = new ArrayList<>(liStarting);
     }
 
     @Override
     public void setSubstitution(final List<Player> liSubstitution) {
-        this.liSubstitution = liSubstitution;
+        this.liSubstitution = new ArrayList<>(liSubstitution);
     }
 
     @Override

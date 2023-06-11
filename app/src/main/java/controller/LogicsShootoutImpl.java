@@ -45,8 +45,8 @@ public final class LogicsShootoutImpl implements LogicsShootout, Serializable {
      */
     public LogicsShootoutImpl(final Team t1, final Team t2) {
         super();
-        this.t1 = t1;
-        this.t2 = t2;
+        this.t1 = new TeamUser(t1.getTeamName(), t1.getLogo(), t1.getModule(), t1.getStarting(), t1.getSubstitution());
+        this.t2 = new TeamUser(t2.getTeamName(), t2.getLogo(), t2.getModule(), t2.getStarting(), t2.getSubstitution());
         starters1 = t1.getStarting();
         starters2 = t2.getStarting();
         goals1 = 0;
@@ -99,7 +99,7 @@ public final class LogicsShootoutImpl implements LogicsShootout, Serializable {
         starters2 = t2.getStarting();
         list.add(map1);
         list.add(map2);
-        return list;
+        return new ArrayList<>(list);
     }
 
     /**

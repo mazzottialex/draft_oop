@@ -24,6 +24,7 @@ import controller.LogicsShootout;
 import controller.LogicsShootoutImpl;
 import model.data.Player;
 import model.data.Team;
+import model.data.TeamUser;
 import utils.Pair;
 
 /**
@@ -46,7 +47,7 @@ public class Shootout extends Base implements Serializable {
     private int totShoots;
     private Team winner;
     private JButton closeButton;
-    private final transient LogicsShootout logics;
+    private final LogicsShootout logics;
     private Map<Integer, Pair<Player, String>> shoootout1;
     private Map<Integer, Pair<Player, String>> shootout2;
     private JPanel panel;
@@ -217,7 +218,8 @@ public class Shootout extends Base implements Serializable {
      * @return The winning team.
      */
     public Team getWinner() {
-        return winner;
+        Team copiaTeam=new TeamUser(winner.getTeamName(), winner.getLogo(), winner.getModule(), winner.getStarting(), winner.getStartingDesc());
+    	return copiaTeam;
     }
 
     /**
