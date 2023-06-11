@@ -408,6 +408,24 @@ public class Tournament extends Base {
         }
     }
 
+    ///**
+     //* Initializes the tournament panel after the object has been fully constructed.
+     //* This method should be called after constructing a Tournament object to perform any necessary panel initialization.
+     //*/
+    //private void initializePanel() {
+      //  panel = getPanel();
+    //}
+    //
+    ///**
+     //* Retrieves the tournament panel.
+     //* Subclasses should override this method to provide a specific tournament panel implementation.
+     //*
+     //* @return The tournament panel.
+     //*/
+    //public JPanel getPanel() {
+        //return panel;
+    //}
+
     /* metodo che formatta la stringa dei nomi dei giocatori */
     private String textFormat(final int max, final String s) {
         if (s.length() > 1) {

@@ -2,6 +2,7 @@ package model.simulating;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,8 +14,9 @@ import model.data.TeamUser;
 /**
  * Implementation of the {@code SimulatingMatch} interface that simulates a match between two teams.
  */
-public final class SimulatingMatchImpl implements SimulatingMatch {
-    private SimulatingFunctions sf;
+public final class SimulatingMatchImpl implements SimulatingMatch, Serializable {
+    private static final long serialVersionUID = -7975364128825077937L;
+	private SimulatingFunctions sf;
     private Team t1;
     private Team t2;
     private Map<Player, Double> ratings1;

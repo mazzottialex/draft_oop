@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -238,21 +239,23 @@ public class Match extends Base implements Serializable {
 
     /**
      * Adds a substitution count disable substitutions button.
+     * @throws Exception 
      */
-    public void addSub() {
+    public void addSub() throws Exception {
         int s = t1.getSubstitution().size();
         updateTeam();
         if (s == t1.getSubstitution().size()) {
             substitutions++;
         }
         if (substitutions == 3) {
-            try {
-                JPanel panel = (JPanel) subsButton.getParent();
-                subsButton.setEnabled(false);
+        	Container cont = subsButton.getParent();
+        	if (cont instanceof JPanel) {
+        	    JPanel panel = (JPanel) cont;
+        	    subsButton.setEnabled(false);
                 panel.revalidate();
                 panel.repaint();
-            } catch (Exception e) {
-                e.printStackTrace();
+        	} else {
+                throw new Exception();
             }
         }
     }

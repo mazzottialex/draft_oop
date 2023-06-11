@@ -41,6 +41,8 @@ public final class LogicStartImpl implements LogicStart {
             URLConnection connection = url.openConnection();
             connection.connect();
             return true;
+        } catch (RuntimeException e) {
+      	  throw e;
         } catch (final Exception e) {
             return false;
         }

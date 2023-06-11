@@ -40,15 +40,13 @@ public final class UtilsGUI {
      */
     public static JPanel getPanelCalciatore(final String name, final Integer rating, final String role,
             final Boolean icon) {
-        URL file = null;
+        URL file = ClassLoader.getSystemResource("attaccante.png");
         if (role.equals("P")) {
             file = ClassLoader.getSystemResource("portiere.png");
         } else if (role.equals("D")) {
             file = ClassLoader.getSystemResource("difensore.png");
         } else if (role.equals("C")) {
             file = ClassLoader.getSystemResource("centrocampista.png");
-        } else if (role.equals("A")) {
-            file = ClassLoader.getSystemResource("attaccante.png");
         }
         GridBagConstraints gbc = new GridBagConstraints();
         GridBagLayout layout = new GridBagLayout();

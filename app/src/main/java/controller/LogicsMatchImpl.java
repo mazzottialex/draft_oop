@@ -28,7 +28,7 @@ public final class LogicsMatchImpl implements LogicsMatch, Serializable {
     private static final int END_EXTRA = 120;
     private static final double OWNGOAL_RATE = 2.904040404040404;
     private Random random = new Random();
-
+    
     /**
      * Constructs a new instance of {@code LogicsMatchImpl} with the given teams.
      *
