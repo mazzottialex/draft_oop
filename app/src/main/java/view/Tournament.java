@@ -72,7 +72,7 @@ public class Tournament extends Base {
     private final JPanel p3 = new JPanel(g3); // Panel a riga 3 --> 8 squadre ---> 4 partite
     private final JPanel p4 = new JPanel(g4); // Panel a riga 4 --> 16 squadre --> 8 partite
     private final JPanel p5 = new JPanel(g5); // Panel a riga 5 --> 16 squadre
-    private final MyJLabel[] labelsp5 = new MyJLabel[NUM_TURN_1];
+    //private final MyJLabel[] labelsp5 = new MyJLabel[NUM_TURN_1];
     private final MyJLabel[] labelsp4 = new MyJLabel[NUM_TURN_2];
     private final MyJLabel[] labelsp3 = new MyJLabel[NUM_TURN_3];
     private final MyJLabel[] labelsp2 = new MyJLabel[NUM_TURN_4];
@@ -162,13 +162,14 @@ public class Tournament extends Base {
         p1.setBorder(new EmptyBorder(BORDER_T, BORDER_R_P1, BORDER_T, BORDER_R_P1));
         p0.setBorder(new EmptyBorder(BORDER_T, BORDER_R_P1, BORDER_T, BORDER_R_P1));
         // Aggiungo le varie squadre nel panel5 (la prima è sempre quella dell'utente)
-        this.labelsp5[0] = new MyJLabel(this.logTor.getMiaSquadra().getTeamName());
-        this.labelsp5[0].setText(textFormat(NUM_TEXT_SINGLE, this.labelsp5[0].getText()));
-        this.p5.add(this.labelsp5[0]);
+        final MyJLabel[] labelsp5 = new MyJLabel[NUM_TURN_1];
+        labelsp5[0] = new MyJLabel(this.logTor.getMiaSquadra().getTeamName());
+        labelsp5[0].setText(textFormat(NUM_TEXT_SINGLE, labelsp5[0].getText()));
+        this.p5.add(labelsp5[0]);
         // Collections.shuffle(this.logTor.getListAvversari());
         for (int i = 0; i < this.logTor.getListAvversari().size(); i++) {
-            this.labelsp5[i + 1] = new MyJLabel(this.logTor.getListAvversari().get(i).getTeamName());
-            this.p5.add(this.labelsp5[i + 1]);
+            labelsp5[i + 1] = new MyJLabel(this.logTor.getListAvversari().get(i).getTeamName());
+            this.p5.add(labelsp5[i + 1]);
         }
         // System.out.println(this.logTor.getListAvversari().size());
         int cont = 1;
