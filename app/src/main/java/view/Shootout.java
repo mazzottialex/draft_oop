@@ -34,25 +34,24 @@ public class Shootout extends Base implements Serializable {
      * 
      */
     private static final long serialVersionUID = 5140476454072046580L;
-    final private Team t1;
-    final private Team t2;
-    final private JLabel results1;
-    final private JLabel results2;
-    final private JLabel finalScore;
+    private final Team t1;
+    private final Team t2;
+    private final JLabel results1;
+    private final JLabel results2;
+    private final JLabel finalScore;
     private int goal1;
     private int goal2;
     private int shoots1;
     private int shoots2;
     private int totShoots;
     private Team winner;
-    final private JButton closeButton;
-    private final LogicsShootout logics;
-    final private Map<Integer, Pair<Player, String>> shoootout1;
-    final private Map<Integer, Pair<Player, String>> shootout2;
-    final private JPanel panel;
+    private final JButton closeButton;
+    private final Map<Integer, Pair<Player, String>> shoootout1;
+    private final Map<Integer, Pair<Player, String>> shootout2;
+    private final JPanel panel;
     private String string1;
     private String string2;
-    final private Match match;
+    private final Match match;
     private static final int IPADX_CENTER = 50;
     private static final double MAX_W = 0.45;
     private static final double MIN_H = 0.1;
@@ -77,7 +76,7 @@ public class Shootout extends Base implements Serializable {
         shoots1 = 0;
         shoots2 = 0;
         totShoots = 0;
-        logics = new LogicsShootoutImpl(t1, t2);
+        final LogicsShootout logics = new LogicsShootoutImpl(t1, t2);
         shoootout1 = logics.compute().get(0);
         shootout2 = logics.compute().get(1);
         string1 = "";

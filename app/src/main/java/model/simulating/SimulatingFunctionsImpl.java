@@ -25,7 +25,7 @@ public final class SimulatingFunctionsImpl implements SimulatingFunctions, Seria
     private static final double OWNGOAL_RATE = 2.904_040_404_040_404; // percentuale di autogol su gol
     private static final double PENALTY_RATE = 0.2875; // rigori per partita
     private static final double MISSED_PENALTIES_RATE = 22.826_086_956_521_74; // percentuale rigori sbagliati
-    private static final double COST_VOTE_P = 0.0746_835_443_037_975; // costante calcolo voto portiere
+    private static final double COST_VOTE_P = 0.074_683_544_303_797_5; // costante calcolo voto portiere
     private static final double COST_VOTE_D = 0.072_151_898_734_177_2; // costante calcolo voto difensore
     private static final double COST_VOTE_C = 0.075_308_641_975_308_6; // costante calcolo voto centrocampista
     private static final double COST_VOTE_A = 0.072_941_176_470_588_2; // costante calcolo voto attaccante
@@ -245,9 +245,8 @@ public final class SimulatingFunctionsImpl implements SimulatingFunctions, Seria
     throws FileNotFoundException, ClassNotFoundException, IOException {
         final int penalties = getPenalties();
         int missedPenalties = 0;
-        double prob = prob(0, 1);
+        final double prob = prob(0, 1);
         for (int i = 0; i < penalties; i++) {
-            prob = prob(0, 1);
             if (prob <= MISSED_PENALTIES_RATE) {
                 missedPenalties++;
             }

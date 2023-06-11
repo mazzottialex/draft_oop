@@ -30,7 +30,7 @@ public final class LogicsShootoutImpl implements LogicsShootout, Serializable {
     private boolean goAhead;
     private final Map<Integer, Pair<Player, String>> map1;
     private final Map<Integer, Pair<Player, String>> map2;
-    private final ArrayList<Map<Integer, Pair<Player, String>>> list;
+    private final List<Map<Integer, Pair<Player, String>>> list;
     private static final double MINIMUM_MODIFIER_RATING = 0.8;
     private static final double ADD_MODIFIER_RATING = 0.4;
     private static final double CONVERSION_RATE_SHOOTOUT = 0.75; //costante rigori fatti nei shootout
@@ -64,9 +64,9 @@ public final class LogicsShootoutImpl implements LogicsShootout, Serializable {
     @Override
     public ArrayList<Map<Integer, Pair<Player, String>>> compute() {
         while (goAhead) {
-            if (((shoots1 + shoots2) >= totShoots && shoots1 == shoots2 && goals1 != goals2)
-            	|| (shoots1 + shoots2 < totShoots && ((totShoots / 2 - shoots1) + goals1 < goals2
-            			|| (totShoots / 2 - shoots2) + goals2 < goals1))) {
+            if (shoots1 + shoots2 >= totShoots && shoots1 == shoots2 && goals1 != goals2
+                    || shoots1 + shoots2 < totShoots && totShoots / 2 - shoots1 + goals1 < goals2
+                    || totShoots / 2 - shoots2 + goals2 < goals1) {
                 goAhead = false;
             } else {
                 if ((shoots1 + shoots2) % 2 == 0) {
@@ -77,7 +77,7 @@ public final class LogicsShootoutImpl implements LogicsShootout, Serializable {
                     starters1.remove(p);
                     final String res = rigore(p, t2);
                     map1.put(shoots1, new Pair<>(p, res));
-                    if (res.equals("Gol")) {
+                    if ("Gol".equals(res)) {
                         goals1++;
                     }
                     shoots1++;
@@ -89,7 +89,7 @@ public final class LogicsShootoutImpl implements LogicsShootout, Serializable {
                     starters2.remove(p);
                     final String res = rigore(p, t1);
                     map2.put(shoots2, new Pair<>(p, res));
-                    if (res.equals("Gol")) {
+                    if ("Gol".equals(res)) {
                         goals2++;
                     }
                     shoots2++;
@@ -111,11 +111,11 @@ public final class LogicsShootoutImpl implements LogicsShootout, Serializable {
      * @return the result of the penalty kick ("Gol" for a goal, "Sbagliato" for a miss)
      */
     private String rigore(final Player shooter, final Team oppositeTeam) {
-        double shooterRating = shooter.getRating().getY().getX()
+        final double shooterRating = shooter.getRating().getY().getX()
                 * (MINIMUM_MODIFIER_RATING + r.nextDouble() * ADD_MODIFIER_RATING);
-        double gkRating = (oppositeTeam.getStartingKeeper() != null ? oppositeTeam.getStartingKeeper().getRating().getY().getZ()
+        final double gkRating = (oppositeTeam.getStartingKeeper() != null ? oppositeTeam.getStartingKeeper().getRating().getY().getZ()
                 : DEFAULT) * (MINIMUM_MODIFIER_RATING + r.nextDouble() * ADD_MODIFIER_RATING);
-        double modGkRating = gkRating * CONVERSION_RATE_SHOOTOUT;
+        final double modGkRating = gkRating * CONVERSION_RATE_SHOOTOUT;
         if (shooterRating > modGkRating) {
             return "Gol";
         } else {

@@ -65,7 +65,7 @@ public interface LogicsTournament extends Serializable {
      * 
      * @return true if the user's team is eliminated
      */
-    boolean getEliminated();
+    boolean isEliminated();
 
     /**
      * 
@@ -107,7 +107,7 @@ public interface LogicsTournament extends Serializable {
      * 
      * @return true if the user's team was eliminated this round
      */
-    boolean getElimThisTurn();
+    boolean isElimThisTurn();
 
     /**
      * 

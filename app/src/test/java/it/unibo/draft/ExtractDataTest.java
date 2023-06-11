@@ -20,11 +20,9 @@ import model.rating.AnalysisRatingImpl;
  */
 public class ExtractDataTest {
 
-    private ExtractDataImpl ed;
-    private ManageData md;
-    private List<Player> list;
-    private String team = "JUV";
-    private Module module = Module.M433;
+    private final ExtractDataImpl ed;
+    private static final String TEAM = "JUV";
+    private static final Module MODULE = Module.M433;
     private static final int TEAM_SIZE = 20;
     private static final int STARTERSIZE = 11;
 
@@ -34,10 +32,10 @@ public class ExtractDataTest {
      * @throws Exception if an error occurs during setup.
      */
     public ExtractDataTest() throws Exception {
-        md = new ManageDataImpl("2022-2023");
+    	final ManageData md = new ManageDataImpl("2022-2023");
         md.loadData();
-        list = md.getLi();
-        AnalysisRating analysisRating = new AnalysisRatingImpl(list);
+        List<Player> list = md.getLi();
+        final AnalysisRating analysisRating = new AnalysisRatingImpl(list);
         list = analysisRating.updateRating();
         ed = new ExtractDataImpl(list);
     }
@@ -47,7 +45,7 @@ public class ExtractDataTest {
      */
     @Test
     public void testFindTeams() {
-        List<String> teams = ed.findTeams();
+        final List<String> teams = ed.findTeams();
         assertNotNull(teams);
         assertEquals(TEAM_SIZE, teams.size());
     }
@@ -57,7 +55,7 @@ public class ExtractDataTest {
      */
     @Test
     public void testGetStarting() {
-        List<Player> starters = ed.getStarting(team, module);
+        final List<Player> starters = ed.getStarting(TEAM, MODULE);
         assertNotNull(starters);
         assertEquals(starters.size(), STARTERSIZE);
     }
@@ -67,12 +65,12 @@ public class ExtractDataTest {
      */
     @Test
     public void testGetStartingByTeamByPos() {
-        List<Player> def = ed.getStartingByTeamByPos(team, "D", module);
-        List<Player> midf = ed.getStartingByTeamByPos(team, "C", module);
-        List<Player> forw = ed.getStartingByTeamByPos(team, "A", module);
+        final List<Player> def = ed.getStartingByTeamByPos(TEAM, "D", MODULE);
+        final List<Player> midf = ed.getStartingByTeamByPos(TEAM, "C", MODULE);
+        final List<Player> forw = ed.getStartingByTeamByPos(TEAM, "A", MODULE);
         assertNotNull(def);
-        assertEquals(def.size(), module.getNumDef());
-        assertEquals(midf.size(), module.getNumMid());
-        assertEquals(forw.size(), module.getNumFor());
+        assertEquals(def.size(), MODULE.getNumDef());
+        assertEquals(midf.size(), MODULE.getNumMid());
+        assertEquals(forw.size(), MODULE.getNumFor());
     }
 }

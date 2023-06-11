@@ -21,9 +21,7 @@ import model.rating.AnalysisRatingImpl;
  */
 public class CreateOpponentTeamsTest {
 
-    private CreateOpponentTeamsImpl createOpponentTeams;
-    private List<Player> li;
-    private ManageData md;
+    private final CreateOpponentTeamsImpl createOpponentTeams;
     private static final int N_TEAM = 5;
 
     /**
@@ -32,10 +30,10 @@ public class CreateOpponentTeamsTest {
      * @throws Exception if an error occurs during setup.
      */
     public CreateOpponentTeamsTest() throws Exception {
-        md = new ManageDataImpl("2022-2023");
+    	final ManageData md = new ManageDataImpl("2022-2023");
         md.loadData();
-        li = md.getLi();
-        AnalysisRating analysisRating = new AnalysisRatingImpl(li);
+        List<Player> li = md.getLi();
+        final AnalysisRating analysisRating = new AnalysisRatingImpl(li);
         li = analysisRating.updateRating();
         createOpponentTeams = new CreateOpponentTeamsImpl(li, N_TEAM);
     }
@@ -49,7 +47,7 @@ public class CreateOpponentTeamsTest {
      */
     @Test
     public void testGetTeams() throws FileNotFoundException, ClassNotFoundException, IOException {
-        List<Team> result = createOpponentTeams.getTeams();
+        final List<Team> result = createOpponentTeams.getTeams();
         assertEquals(N_TEAM, result.size());
     }
 }
