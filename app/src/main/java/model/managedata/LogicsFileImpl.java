@@ -1,4 +1,5 @@
 package model.managedata;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
@@ -14,43 +15,47 @@ import model.data.Player;
 import model.data.Team;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 /**
  * Implementation of the LogicsFile interface.
  */
 public final class LogicsFileImpl implements LogicsFile {
 
-	private static final Logger LOG = LoggerFactory.getLogger(LogicsFileImpl.class);
-	private static final String MESSAGGE_ERROR = "Generic error";
+    private static final Logger LOG = LoggerFactory.getLogger(LogicsFileImpl.class);
+    private static final String MESSAGGE_ERROR = "Generic error";
 
     /**
      * Constructs a new instance of LogicsFileImpl.
      */
-    public LogicsFileImpl() { }
+    @SuppressWarnings("all")
+    public LogicsFileImpl() {
+    }
+
     @SuppressWarnings("unchecked")
     @Override
     public List<Player> loadData(final String season) throws ClassNotFoundException {
         List<Player> li = new ArrayList<>();
-        try(InputStream file = ClassLoader.getSystemResourceAsStream("backup" + season + ".txt");
-                InputStream bstream = new BufferedInputStream(file);
-                ObjectInputStream ostream = new ObjectInputStream(bstream);) {
-        	 li = (List<Player>) ostream.readObject();
-             ostream.close();
+        try (InputStream file = ClassLoader.getSystemResourceAsStream("backup" + season + ".txt");
+             InputStream bstream = new BufferedInputStream(file);
+             ObjectInputStream ostream = new ObjectInputStream(bstream);) {
+            li = (List<Player>) ostream.readObject();
+            ostream.close();
         } catch (IOException e) {
-        	//LOG.error(MESSAGGE_ERROR, e);
-		}
+            return li;
+        }
         return li;
     }
 
     @Override
     public Boolean saveData(final List<Player> li, final String season) {
         try (OutputStream file = new FileOutputStream("src/main/resources/backup" + season + ".txt");
-        		OutputStream bstream = new BufferedOutputStream(file);
-        		ObjectOutputStream ostream = new ObjectOutputStream(file);) {
+             OutputStream bstream = new BufferedOutputStream(file);
+             ObjectOutputStream ostream = new ObjectOutputStream(file);) {
             ostream.writeObject(li);
             ostream.close();
-        } catch (IOException  e) {
-        	LOG.error(MESSAGGE_ERROR, e);
-		}
+        } catch (IOException e) {
+            LOG.error(MESSAGGE_ERROR, e);
+        }
         return true;
     }
 
@@ -58,31 +63,34 @@ public final class LogicsFileImpl implements LogicsFile {
     public List<String> loadSeason() {
         final List<String> ls = new ArrayList<>();
         try (InputStream file = ClassLoader.getSystemResourceAsStream("backupSeasons.txt");
-        		InputStream bstream = new BufferedInputStream(file);
-        		ObjectInputStream ostream = new ObjectInputStream(bstream);) {
-            String str = ostream.readUTF();
-            while (str != null) {
-                ls.add(str);
-                str = ostream.readUTF();
-            }
+             InputStream bstream = new BufferedInputStream(file);
+             ObjectInputStream ostream = new ObjectInputStream(bstream);) {
+        	String str = ostream.readUTF();
+        	while (true) {
+        	    ls.add(str);
+        	    str = ostream.readUTF();
+        	    if (str == null) {
+        	        break;
+        	    }
+        	}
             ostream.close();
         } catch (IOException e) {
-        	//LOG.error(MESSAGGE_ERROR, e);
-		}
+            return ls;
+        }
         return ls;
     }
 
     @Override
     public Boolean saveSeason(final List<String> li) {
         try (OutputStream file = new FileOutputStream("src/main/resources/backupSeasons.txt");
-        		OutputStream bstream = new BufferedOutputStream(file);
-        		ObjectOutputStream ostream = new ObjectOutputStream(file);) {
+             OutputStream bstream = new BufferedOutputStream(file);
+             ObjectOutputStream ostream = new ObjectOutputStream(file);) {
             li.forEach(s -> {
-                    try {
-						ostream.writeUTF(s);
-					}  catch (IOException e) {
-			        	LOG.error(MESSAGGE_ERROR, e);
-					}
+                try {
+                    ostream.writeUTF(s);
+                } catch (IOException e) {
+                    LOG.error(MESSAGGE_ERROR, e);
+                }
             });
             ostream.close();
         } catch (final IOException e) {
@@ -95,14 +103,14 @@ public final class LogicsFileImpl implements LogicsFile {
     @Override
     public List<Team> loadHistory() {
         try (InputStream file = ClassLoader.getSystemResourceAsStream("history.txt");
-        	    InputStream bstream = new BufferedInputStream(file);
-        		ObjectInputStream ostream = new ObjectInputStream(file);) {
-        	final List<Team> li = (List<Team>) ostream.readObject();
+             InputStream bstream = new BufferedInputStream(file);
+             ObjectInputStream ostream = new ObjectInputStream(file);) {
+            final List<Team> li = (List<Team>) ostream.readObject();
             ostream.close();
             return li;
         } catch (IOException | ClassNotFoundException e) {
-        	return new ArrayList<>();
-		}
+            return new ArrayList<>();
+        }
     }
 
     @Override
@@ -110,13 +118,13 @@ public final class LogicsFileImpl implements LogicsFile {
         final List<Team> li = loadHistory();
         li.add(s);
         try (OutputStream file = new FileOutputStream("src/main/resources/history.txt");
-        		OutputStream bstream = new BufferedOutputStream(file);
-        		ObjectOutputStream ostream = new ObjectOutputStream(file);) {
+             OutputStream bstream = new BufferedOutputStream(file);
+             ObjectOutputStream ostream = new ObjectOutputStream(file);) {
             ostream.writeObject(li);
             ostream.close();
         } catch (IOException e) {
-        	LOG.error(MESSAGGE_ERROR, e);
-		}
+            LOG.error(MESSAGGE_ERROR, e);
+        }
         return true;
     }
 }

@@ -68,7 +68,7 @@ public class History extends Base {
         panelLi.setBackground(COLOR_PANEL);
         int count = 0;
         for (final Team team : log.getLiTeam()) {
-        	final JPanel panelTeam = new JPanel();
+            final JPanel panelTeam = new JPanel();
             panelTeam.setBackground(super.getForeground());
             final JLabel lblLogo = new JLabel();
             ImageIcon img = new ImageIcon(team.getLogo());

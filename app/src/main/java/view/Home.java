@@ -84,7 +84,7 @@ public class Home extends Base {
         btnStart.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         btnStart.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
-        	public void mouseEntered(final java.awt.event.MouseEvent evt) {
+            public void mouseEntered(final java.awt.event.MouseEvent evt) {
                 btnStart.setBackground(BACKGROUND_COLOR_2);
                 final Image newimg = image.getScaledInstance(SCALED_IMAGE_1, SCALED_IMAGE_1, Image.SCALE_SMOOTH);
                 final ImageIcon img = new ImageIcon(newimg);
@@ -104,7 +104,7 @@ public class Home extends Base {
                 try {
                     changeJPanel(new Settings(log.getLi()));
                 } catch (ClassNotFoundException | IOException e1) {
-                	LOG.error("Error", e1);
+                    LOG.error("Error", e1);
                 }
             }
         });
@@ -184,7 +184,7 @@ public class Home extends Base {
                 try {
                     changeJPanel(new Archive(log.getLi(), log.getSeason(), log.getOnline()));
                 } catch (ClassNotFoundException | IOException e1) {
-                	LOG.error("Error", e1);
+                    LOG.error("Error", e1);
                 }
             }
         });
@@ -199,7 +199,7 @@ public class Home extends Base {
                 try {
                     changeJPanel(new History(log.getSeason(), log.getOnline()));
                 } catch (ExecuteException e1) {
-                	LOG.error("Error", e1);
+                    LOG.error("Error", e1);
                 }
             }
         });

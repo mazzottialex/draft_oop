@@ -29,10 +29,12 @@ public class CreateOpponentTeamsTest {
 
     /**
      * Construct the test.
+     * @throws IOException 
+     * @throws ClassNotFoundException 
      *
      * @throws Exception if an error occurs during setup.
      */
-    public CreateOpponentTeamsTest() {
+    public CreateOpponentTeamsTest() throws ClassNotFoundException, IOException {
         final ManageData md = new ManageDataImpl("2022-2023");
         try {
             md.loadData();

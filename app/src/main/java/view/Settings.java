@@ -113,7 +113,7 @@ public class Settings extends Base {
                 try {
                     changeJPanel(new CreateTeam(log.getTeamName(), log.getLogo(), log.getLi()));
                 } catch (ClassNotFoundException | IOException e1) {
-                	LOG.error("Error", e1);
+                    LOG.error("Error", e1);
                 }
             }
         });

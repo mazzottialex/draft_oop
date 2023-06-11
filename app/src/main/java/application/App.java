@@ -24,7 +24,7 @@ public final class App {
     public static void main(final String[] args) {
         EventQueue.invokeLater(new Runnable() {
             @Override
-        	public void run() {
+            public void run() {
                  final Start frame = new Start();
                  frame.setVisible(true);
             }
