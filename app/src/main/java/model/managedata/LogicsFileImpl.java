@@ -14,6 +14,7 @@ import model.data.Player;
 import model.data.Team;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 /**
  * Implementation of the LogicsFile interface.
  */
@@ -21,11 +22,12 @@ public final class LogicsFileImpl implements LogicsFile {
 
 	private static final Logger LOG = LoggerFactory.getLogger(LogicsFileImpl.class);
 	private static final String MESSAGGE_ERROR = "Generic error";
-
-    /**
+	/**
      * Constructs a new instance of LogicsFileImpl.
      */
-    public LogicsFileImpl() { }
+	@SuppressWarnings("PMD")
+    public LogicsFileImpl() { 
+    }
     @SuppressWarnings("unchecked")
     @Override
     public List<Player> loadData(final String season) throws ClassNotFoundException {
@@ -36,7 +38,7 @@ public final class LogicsFileImpl implements LogicsFile {
         	 li = (List<Player>) ostream.readObject();
              ostream.close();
         } catch (IOException e) {
-        	//LOG.error(MESSAGGE_ERROR, e);
+        	return li;
 		}
         return li;
     }
@@ -67,7 +69,7 @@ public final class LogicsFileImpl implements LogicsFile {
             }
             ostream.close();
         } catch (IOException e) {
-        	//LOG.error(MESSAGGE_ERROR, e);
+        	return ls;
 		}
         return ls;
     }

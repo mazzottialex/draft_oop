@@ -3,6 +3,7 @@ package it.unibo.draft;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.junit.Test;
@@ -28,10 +29,12 @@ public class ExtractDataTest {
 
     /**
      * Construct the test.
+     * @throws IOException 
+     * @throws ClassNotFoundException 
      *
      * @throws Exception if an error occurs during setup.
      */
-    public ExtractDataTest() {
+    public ExtractDataTest() throws ClassNotFoundException, IOException {
         final ManageData md = new ManageDataImpl("2022-2023");
         md.loadData();
         List<Player> list = md.getLi();
