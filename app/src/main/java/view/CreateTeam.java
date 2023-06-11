@@ -68,17 +68,17 @@ public class CreateTeam extends Base {
     private final JPanel panelSud = new JPanel(new GridBagLayout()); // panel Sud del frame principale
     private final JPanel panelCenter = new JPanel(new GridBagLayout()); // Panel Center del frame principale
     private final GridBagConstraints gbc = new GridBagConstraints();
-    private final JLabel lblmodSel;
+    //private final JLabel lblmodSel;
     private JLabel lblmoduloSelect;
-    private final JButton buttonIniziaTorneo;
+    //private final JButton buttonIniziaTorneo;
     private JButton[] buttonsAtt;
     private JButton[] buttonsCen;
     private JButton[] buttonsDif;
     private JButton buttonPor;
-    private JButton[] buttonsPlayer;
-    private JPanel panelCalciatoriCenter;
+    //private JButton[] buttonsPlayer;
+    private final JPanel panelCalciatoriCenter;
     // private JButton buttonSelect;
-    private Map<JButton, List<Player>> map; // serve per tenere in memoria i 5 calciatori disponibili
+    private final Map<JButton, List<Player>> map; // serve per tenere in memoria i 5 calciatori disponibili
     private final Color panelColor = new Color(0, 64, 128);
 
     /**
@@ -102,17 +102,18 @@ public class CreateTeam extends Base {
         gbc.insets = new Insets(8, 0, 8, 8);
         gbc.gridx = 0;
         gbc.gridy = 0;
-        lblmodSel = new JLabel("Modulo selezionato: ");
+        final JLabel lblmodSel = new JLabel("Modulo selezionato: ");
         panelSud.add(lblmodSel, gbc);
         gbc.gridx = 1;
         gbc.gridy = 0;
-        lblmoduloSelect = new JLabel("" + log.getModulo());
+        lblmoduloSelect = new JLabel(" " + log.getModulo());
         panelSud.add(lblmoduloSelect, gbc);
         gbc.insets = new Insets(NUM_INSETS_2, NUM_INSETS_1, NUM_INSETS_2, NUM_INSETS_1);
         gbc.gridx = LABEL_X;
         gbc.gridy = 0;
-        buttonIniziaTorneo = UtilsGUI.standardButton("Inizia Torneo");
+        final JButton buttonIniziaTorneo = UtilsGUI.standardButton("Inizia Torneo");
         buttonIniziaTorneo.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent e) {
                 if (log.teamComplete()) {
                     /*
@@ -121,16 +122,16 @@ public class CreateTeam extends Base {
                      * TorneoV2(log.getSquadra(), li));
                      */
                     try {
-                        Base tempTorneo = new Tournament(log.getSquadra(), li);
+                        final Base tempTorneo = new Tournament(log.getSquadra(), li);
                         log.saveTeam();
                         changeJPanel(tempTorneo);
-                        JFrame topFrame = (JFrame) SwingUtilities.getAncestorOfClass(JFrame.class,
+                        final JFrame topFrame = (JFrame) SwingUtilities.getAncestorOfClass(JFrame.class,
                                 tempTorneo.getPanel());
                         final int initialScreenPercentage = 70; // 75
-                        Toolkit tk = Toolkit.getDefaultToolkit();
-                        Dimension screenSize = tk.getScreenSize();
-                        int height = screenSize.height * initialScreenPercentage / 100;
-                        int width = screenSize.width * initialScreenPercentage / 100;
+                        final Toolkit tk = Toolkit.getDefaultToolkit();
+                        final Dimension screenSize = tk.getScreenSize();
+                        final int height = screenSize.height * initialScreenPercentage / 100;
+                        final int width = screenSize.width * initialScreenPercentage / 100;
                         topFrame.setPreferredSize(new Dimension(width, height));
                         // centrare?
                         /*
@@ -162,7 +163,7 @@ public class CreateTeam extends Base {
                     final JButton buttonOk = UtilsGUI.standardButton("OK");
                     buttonOk.addActionListener(new ActionListener() {
                         public void actionPerformed(final ActionEvent e) {
-                            WindowEvent close = new WindowEvent(prova, WindowEvent.WINDOW_CLOSING);
+                            final WindowEvent close = new WindowEvent(prova, WindowEvent.WINDOW_CLOSING);
                             prova.dispatchEvent(close);
                         }
                     });
@@ -204,14 +205,15 @@ public class CreateTeam extends Base {
         gbc.gridx = 0;
         gbc.gridy = 0;
         // creo tanti bottoni quanti sono i moduli disponibili
-        JButton[] buttons = new JButton[log.getModuli().size()];
+        final JButton[] buttons = new JButton[log.getModuli().size()];
         ArrayList<Module> buttonSelect = new ArrayList<>();
         for (int i = 0; i <= buttons.length - 1; i++) {
-            buttons[i] = new JButton("" + log.getModuli().get(i));
-            int ind = i;
+            buttons[i] = new JButton(" " + log.getModuli().get(i));
+            final int ind = i;
             // faccio in modo che alla pressione del bottono si salvi il modulo selezionato
             // nell'array buttonSelect
             buttons[i].addActionListener(new ActionListener() {
+                @Override
                 public void actionPerformed(final ActionEvent e) {
                     buttonSelect.add(log.getModuli().get(ind));
                 }
@@ -227,6 +229,7 @@ public class CreateTeam extends Base {
         // scelto
         final JButton buttonOk = UtilsGUI.standardButton("OK");
         buttonOk.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent e) {
                 if (!buttonSelect.isEmpty()) {
                     log.setModulo(buttonSelect.get(buttonSelect.size() - 1));
@@ -253,6 +256,7 @@ public class CreateTeam extends Base {
         panelCalciatoriSouth.setBackground(this.panelColor);
         final JButton buttonOkCalciatori = UtilsGUI.standardButton("OK");
         buttonOkCalciatori.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent e) {
                 if (log.getposSelect() != -1) {
                     log.addPlayerInTeam(log.getCalciatoreSelect());
@@ -281,7 +285,7 @@ public class CreateTeam extends Base {
         gbc.gridx = 1;
         gbc.gridy = 0;
         panelSud.remove(lblmoduloSelect);
-        lblmoduloSelect = new JLabel("" + log.getModulo());
+        lblmoduloSelect = new JLabel(" " + log.getModulo());
         panelSud.add(lblmoduloSelect, gbc);
         panelSud.validate();
     }
@@ -290,13 +294,12 @@ public class CreateTeam extends Base {
     private int getGbcX(final String s) {
         switch (s) {
         case "A":
-            if (this.log.getNumAtt() == 1) {
+            if (this.log.getNumAtt() == 1) 
                 return this.log.getNumCen() / 2;
-            } else if (this.log.getNumAtt() == 2) {
+             else if (this.log.getNumAtt() == 2) 
                 return 1;
-            } else {
-                return 0;
-            }
+             else 
+                return 0; 
         case "C":
             return (this.log.getNumCen() == 3 && this.log.getNumDif() == NUM_PLAYER) ? 1 : 0;
         case "D":
@@ -331,11 +334,12 @@ public class CreateTeam extends Base {
         gbc.ipady = 10;
         for (int i = 0; i <= log.getNumAtt() - 1; i++) {
             this.buttonsAtt[i] = new JButton("A");
-            Dimension d = this.buttonsAtt[i].getPreferredSize();
+            final Dimension d = this.buttonsAtt[i].getPreferredSize();
             this.buttonsAtt[i].setPreferredSize(new Dimension(d.width * 2, d.height * 2));
             this.buttonsAtt[i].setBackground(Color.ORANGE);
             final int ind = i;
             this.buttonsAtt[i].addActionListener(new ActionListener() {
+                @Override
                 public void actionPerformed(final ActionEvent e) {
                     if (log.isClickModulo()) {
                         if (map.get(buttonsAtt[ind]).isEmpty()) {
@@ -357,11 +361,12 @@ public class CreateTeam extends Base {
         gbc.ipady = 10;
         for (int i = 0; i <= log.getNumCen() - 1; i++) {
             this.buttonsCen[i] = new JButton("C");
-            Dimension d = this.buttonsCen[i].getPreferredSize();
+            final Dimension d = this.buttonsCen[i].getPreferredSize();
             this.buttonsCen[i].setPreferredSize(new Dimension(d.width * 2, d.height * 2));
             this.buttonsCen[i].setBackground(Color.GREEN);
             final int ind = i;
             this.buttonsCen[i].addActionListener(new ActionListener() {
+                @Override
                 public void actionPerformed(final ActionEvent e) {
                     if (log.isClickModulo()) {
                         if (map.get(buttonsCen[ind]).isEmpty()) {
@@ -383,11 +388,12 @@ public class CreateTeam extends Base {
         gbc.ipady = 10;
         for (int i = 0; i <= log.getNumDif() - 1; i++) {
             this.buttonsDif[i] = new JButton("D");
-            Dimension d = this.buttonsDif[i].getPreferredSize();
+            final Dimension d = this.buttonsDif[i].getPreferredSize();
             this.buttonsDif[i].setPreferredSize(new Dimension(d.width * 2, d.height * 2));
             this.buttonsDif[i].setBackground(Color.CYAN);
             final int ind = i;
             this.buttonsDif[i].addActionListener(new ActionListener() {
+                @Override
                 public void actionPerformed(final ActionEvent e) {
                     if (log.isClickModulo()) {
                         if (map.get(buttonsDif[ind]).isEmpty()) {
@@ -430,7 +436,7 @@ public class CreateTeam extends Base {
     /* metodo che crea la list e la mette dentro Map<JButton, List<Calciatore> */
     private void choosePlayerFirstTime(final String ruolo, final int pos) {
 
-        List<Player> list = this.log.getRandom(ruolo, NUM_PLAYER);
+        final List<Player> list = this.log.getRandom(ruolo, NUM_PLAYER);
         // aggiungo per poi controllare che non ci siano doppioni
         // this.log.getCalcUsciti().addAll(list);
         this.log.addCalcUsciti(list);
@@ -485,19 +491,20 @@ public class CreateTeam extends Base {
         this.panelCalciatoriCenter.removeAll();
         this.panelCalciatoriCenter.repaint();
         // creo i 5 bottoni nel frame calciatori
-        this.buttonsPlayer = new JButton[CreateTeam.NUM_PLAYER];
+        final JButton[] buttonsPlayer = new JButton[CreateTeam.NUM_PLAYER];
         // gbc.insets = new Insets(5,5,5,5);
         // gbc.ipadx = 30;
         // gbc.ipady = 40;
         gbc.gridx = 0;
         gbc.gridy = 0;
-        for (int i = 0; i < this.buttonsPlayer.length; i++) {
-            this.buttonsPlayer[i] = new JButton(
+        for (int i = 0; i < buttonsPlayer.length; i++) {
+            buttonsPlayer[i] = new JButton(
                     "" + list.get(i).getName() + " " + list.get(i).getRating().getX());
-            this.panelCalciatoriCenter.add(this.buttonsPlayer[i], gbc);
-            this.buttonsPlayer[i].setBackground(getColorByRuolo(ruolo));
+            this.panelCalciatoriCenter.add(buttonsPlayer[i], gbc);
+            buttonsPlayer[i].setBackground(getColorByRuolo(ruolo));
             final int ind = i;
-            this.buttonsPlayer[i].addActionListener(new ActionListener() {
+            buttonsPlayer[i].addActionListener(new ActionListener() {
+                @Override
                 public void actionPerformed(final ActionEvent e) {
                     log.setNameString(list.get(ind).getName());
                     log.setCalciatoreSelect(list.get(ind));
@@ -612,8 +619,9 @@ public class CreateTeam extends Base {
         final JLabel label = new JLabel("SELECT A MODULE");
         final JButton buttonOk = new JButton("OK");
         buttonOk.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent e) {
-                WindowEvent close = new WindowEvent(moProva, WindowEvent.WINDOW_CLOSING);
+                final WindowEvent close = new WindowEvent(moProva, WindowEvent.WINDOW_CLOSING);
                 moProva.dispatchEvent(close);
             }
         });
