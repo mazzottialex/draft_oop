@@ -42,7 +42,7 @@ public class LogicsCreateTeamImpl implements LogicsCreateTeam {
     // private Squadra squadra;
     private final List<Player> calcUsciti;
     private boolean clickModulo;
-    final private Random r = new Random();
+    private final Random r = new Random();
 
     /**
      * Constructor of LogicsCreateTeamImpl.
@@ -82,12 +82,12 @@ public class LogicsCreateTeamImpl implements LogicsCreateTeam {
     }
 
     @Override
-    public Team getSquadra() {
+    public final Team getSquadra() {
         return new TeamUser(nomeSquadra, stemma, moduloSelect, liSquadra, riserve); // sistemare titolari e riserve
     }
 
     @Override
-    public List<Module> getModuli() {
+    public final List<Module> getModuli() {
         final List<Module> list = new ArrayList<>();
         for (final Module m : Module.values()) {
             list.add(m);
@@ -147,16 +147,16 @@ public class LogicsCreateTeamImpl implements LogicsCreateTeam {
      * {@inheritDoc}
      */
     @Override
-    public List<Player> getRandom(final String ruolo, final int n) {
+    public final List<Player> getRandom(final String ruolo, final int n) {
         final List<Player> list = this.ex.getListByPos(ruolo);
         final Set<Player> set = new HashSet<>();
         final List<Player> randomList = new ArrayList<>();
-        boolean test = false;
+        //boolean test = false;
         // Random r = new Random();
         while (set.size() != n) {
             final int random = r.nextInt(list.size());
             final Player c = list.get(random);
-            test = false;
+            boolean test = false;
             for (final Player uscito : this.calcUsciti) {
                 if (c.equals(uscito)) {
                     test = true;
