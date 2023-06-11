@@ -12,6 +12,7 @@ import model.data.Module;
 import model.data.Player;
 import model.data.Team;
 import model.data.TeamOpponent;
+import model.data.TeamUser;
 import model.data.managedata.CreateOpponentTeamsImpl;
 import model.simulating.SimulatingMatchImpl;
 
@@ -56,7 +57,8 @@ public class LogicsTournamentImpl implements LogicsTournament {
         this.listSquadre = new ArrayList<>();
         // this.golFatti = new ArrayList<>();
         // Creo la squadra dell'utente
-        this.miasquadra = squadra;
+        this.miasquadra = new TeamUser(squadra.getTeamName(), squadra.getLogo(),
+                squadra.getModule(), squadra.getStarting(), squadra.getSubstitution());
         // this.miasquadra = squadra;
         // Creo le squadre avversarie (quelle esistenti in serie A)
         /*
@@ -101,7 +103,8 @@ public class LogicsTournamentImpl implements LogicsTournament {
      */
     @Override
     public Team getMiaSquadra() {
-        return miasquadra;
+        return new TeamUser(miasquadra.getTeamName(), miasquadra.getLogo(),
+                miasquadra.getModule(), miasquadra.getStarting(), miasquadra.getSubstitution());
     }
 
     /**
@@ -550,3 +553,4 @@ public class LogicsTournamentImpl implements LogicsTournament {
     }
 
 }
+
