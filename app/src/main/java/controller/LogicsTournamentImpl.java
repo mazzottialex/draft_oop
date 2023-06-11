@@ -144,14 +144,8 @@ public class LogicsTournamentImpl implements LogicsTournament {
      */
     @Override
     public void simulaMatch() throws FileNotFoundException, ClassNotFoundException, IOException {
-        List<Team> newList = new ArrayList<>();
+        List<Team> newList;
         final int numSquadre = this.getNumSquadre();
-        final Map<String, Integer> map = new HashMap<>(); // map per il risultato
-        final List<String> list = new ArrayList<>(); // lista per i nomi delle squadre che si sfidano
-        String teamWin; // nome della squadra vincente
-        String teamLose; // nome della squadra perdente
-        Map<Team, Integer> map2;
-        final List<Team> l = new ArrayList<>(); // appoggio
 
         switch (numSquadre) {
         case 16:
@@ -282,7 +276,7 @@ public class LogicsTournamentImpl implements LogicsTournament {
     }
 
     private List<Team> simulateAll() throws FileNotFoundException, ClassNotFoundException, IOException {
-        List<Team> newList = new ArrayList<>();
+        final List<Team> newList = new ArrayList<>();
         final Map<String, Integer> map = new HashMap<>(); // map per il risultato
         final List<String> list = new ArrayList<>(); // lista per i nomi delle squadre che si sfidano
         String teamWin; // nome della squadra vincente
@@ -369,7 +363,7 @@ public class LogicsTournamentImpl implements LogicsTournament {
         }
     }
     private List<Team> simulateSemi() throws FileNotFoundException, ClassNotFoundException, IOException {
-        List<Team> newList = new ArrayList<>();
+        final List<Team> newList = new ArrayList<>();
         final Map<String, Integer> map = new HashMap<>(); // map per il risultato
         final List<String> list = new ArrayList<>(); // lista per i nomi delle squadre che si sfidano
         String teamWin; // nome della squadra vincente
