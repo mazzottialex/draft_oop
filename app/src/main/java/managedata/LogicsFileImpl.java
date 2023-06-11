@@ -31,6 +31,8 @@ public final class LogicsFileImpl implements LogicsFile {
                 ObjectInputStream ostream = new ObjectInputStream(file);) {
             li = (List<Player>) ostream.readObject();
             ostream.close();
+        } catch (RuntimeException e) {
+        	  throw e;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -44,6 +46,8 @@ public final class LogicsFileImpl implements LogicsFile {
                 ObjectOutputStream ostream = new ObjectOutputStream(file);) {
             ostream.writeObject(li);
             ostream.close();
+        } catch (RuntimeException e) {
+      	  throw e;
         } catch (final Exception e) {
             return false;
         }
@@ -61,6 +65,8 @@ public final class LogicsFileImpl implements LogicsFile {
                 ls.add(str);
             }
             ostream.close();
+        } catch (RuntimeException e) {
+      	  throw e;
         } catch (final Exception e) {
             //e.printStackTrace();
         }
@@ -80,6 +86,8 @@ public final class LogicsFileImpl implements LogicsFile {
                 }
             });
             ostream.close();
+        } catch (RuntimeException e) {
+      	  throw e;
         } catch (final Exception e) {
             return false;
         }
@@ -95,6 +103,8 @@ public final class LogicsFileImpl implements LogicsFile {
                 ObjectInputStream ostream = new ObjectInputStream(file);) {
             li = (List<Team>) ostream.readObject();
             ostream.close();
+        } catch (RuntimeException e) {
+      	  throw e;
         } catch (final Exception e) {
             return new ArrayList<>();
         }
@@ -110,6 +120,8 @@ public final class LogicsFileImpl implements LogicsFile {
                 ObjectOutputStream ostream = new ObjectOutputStream(file);) {
             ostream.writeObject(li);
             ostream.close();
+        } catch (RuntimeException e) {
+      	  throw e;
         } catch (final Exception e) {
             return false;
         }
