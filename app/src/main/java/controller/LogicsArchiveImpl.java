@@ -4,9 +4,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
-import managedata.ExtractData;
-import managedata.ExtractDataImpl;
 import model.data.Player;
+import model.data.managedata.ExtractData;
+import model.data.managedata.ExtractDataImpl;
 
 /**
  * Implementation of the LogicsArchive interface.

@@ -10,9 +10,10 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
-import managedata.ManageData;
-import managedata.ManageDataImpl;
+
 import model.data.Player;
+import model.data.managedata.ManageData;
+import model.data.managedata.ManageDataImpl;
 import controller.LogicsCreateTeam;
 import controller.LogicsCreateTeamImpl;
 

@@ -10,7 +10,6 @@ import java.util.Random;
 
 import model.data.Player;
 import model.data.Team;
-import model.data.TeamUser;
 import model.simulating.SimulatingMatch;
 import model.simulating.SimulatingMatchImpl;
 
@@ -40,8 +39,8 @@ public final class LogicsMatchImpl implements LogicsMatch, Serializable {
      */
     public LogicsMatchImpl(final Team t1, final Team t2) throws FileNotFoundException, ClassNotFoundException, IOException {
         super();
-        this.t1 = new TeamUser(t1.getTeamName(), t1.getLogo(), t1.getModule(), t1.getStarting(), t1.getSubstitution());
-        this.t2 = new TeamUser(t2.getTeamName(), t2.getLogo(), t2.getModule(), t2.getStarting(), t2.getSubstitution());
+        this.t1 = t1;
+        this.t2 = t2;
         sim = new SimulatingMatchImpl(t1, t2);
     }
 

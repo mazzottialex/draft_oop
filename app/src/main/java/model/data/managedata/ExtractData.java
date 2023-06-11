@@ -1,4 +1,4 @@
-package managedata;
+package model.data.managedata;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;

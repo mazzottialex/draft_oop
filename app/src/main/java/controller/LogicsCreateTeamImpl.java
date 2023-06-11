@@ -9,14 +9,14 @@ import java.util.Random;
 import java.util.Set;
 import java.util.HashSet;
 
-import managedata.ExtractData;
-import managedata.ExtractDataImpl;
-import managedata.LogicsFile;
-import managedata.LogicsFileImpl;
 import model.data.Module;
 import model.data.Player;
 import model.data.Team;
 import model.data.TeamUser;
+import model.data.managedata.ExtractData;
+import model.data.managedata.ExtractDataImpl;
+import model.data.managedata.LogicsFile;
+import model.data.managedata.LogicsFileImpl;
 /**
  * The class that handles the team creation logic.
  * 

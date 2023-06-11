@@ -1,4 +1,4 @@
-package managedata;
+package model.data.managedata;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

@@ -4,11 +4,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import managedata.ManageData;
-import managedata.ManageDataImpl;
-import managedata.ManageSeason;
-import managedata.ManageSeasonImpl;
 import model.data.Player;
+import model.data.managedata.ManageData;
+import model.data.managedata.ManageDataImpl;
+import model.data.managedata.ManageSeason;
+import model.data.managedata.ManageSeasonImpl;
 import model.rating.AnalysisRating;
 import model.rating.AnalysisRatingImpl;
 import model.scraping.ScrapingImpl;

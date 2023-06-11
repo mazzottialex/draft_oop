@@ -5,7 +5,6 @@ import javax.swing.JPanel;
 import org.apache.commons.exec.ExecuteException;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import net.bytebuddy.implementation.bytecode.Throw;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
