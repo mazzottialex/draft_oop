@@ -47,6 +47,7 @@ public class Base extends JFrame {
      *
      * @param newPanel the new Base object containing the new JPanel
      */
+    @SuppressWarnings("unchecked")
     protected void changeJPanel(final Base newPanel) {
         JFrame frame = (JFrame) contentPane.getTopLevelAncestor();
         frame.remove(contentPane);
