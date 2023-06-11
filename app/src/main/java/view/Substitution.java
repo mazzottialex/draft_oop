@@ -15,6 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import controller.LogicsSubstitution;
 import controller.LogicsSubstitutionImpl;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
@@ -43,6 +46,7 @@ public class Substitution extends Base {
     private static final double MIN_H = 0.1;
     private static final double MAX_W = 0.4;
     private static final double MAX_H = 0.8;
+    private static final Logger LOG = LoggerFactory.getLogger(Substitution.class);
 
     /**
      * Creates a new instance of the {@code Substitution} class.
@@ -150,8 +154,8 @@ public class Substitution extends Base {
                 if (logics.done()) {
                     try {
                         matchGui.addSub();
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
+                    } catch (Exception  e1) {
+                        LOG.error("Error", e1);
                     }
                 }
             }

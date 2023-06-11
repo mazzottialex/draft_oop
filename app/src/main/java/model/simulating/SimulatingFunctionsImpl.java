@@ -61,13 +61,6 @@ public final class SimulatingFunctionsImpl implements SimulatingFunctions, Seria
     }
 
     /**
-     * Constructs a new instance of the {@code SimulatingFunctionsImpl} class.
-     */
-    public SimulatingFunctionsImpl() {
-    	// This constructor is intentionally empty.
-    }
-
-    /**
      * Generates a random number within the specified range.
      *
      * @param min The minimum value (inclusive).
