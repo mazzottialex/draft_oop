@@ -108,7 +108,7 @@ public class RunnableScrapingData implements Runnable {
                 js.executeScript("document.querySelector('[data-num=\"" + i.toString() + "\"]').click()");
                 if (i > myId * pagine) {
                     System.out.println(myId + "  i:" + i);
-                    WebElement table = driver.findElement(By.tagName("tbody"));
+                    final WebElement table = driver.findElement(By.tagName("tbody"));
                     final int nRighe = table.findElements(By.tagName("tr")).size();
                     for (int j = 1; j < nRighe + 1; j++) {
                         final List<WebElement> riga =

@@ -68,7 +68,7 @@ public class Archive extends Base {
             throws FileNotFoundException, ClassNotFoundException, IOException {
         log = new LogicsArchiveImpl(season, online);
         List<Player> liOrdered = log.liOrdered(li);
-        liOrdered.stream().forEach(c -> ((DefaultTableModel) tm).addRow(c.toVector()));
+        liOrdered.stream().forEach(c -> ((DefaultTableModel) tm).addRow(c.toList().toArray()));
         super.getPanel().setLayout(new FlowLayout(FlowLayout.CENTER, GAP, GAP));
         super.getPanel().setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         JPanel panel = new JPanel();

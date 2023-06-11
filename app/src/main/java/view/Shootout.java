@@ -34,25 +34,25 @@ public class Shootout extends Base implements Serializable {
      * 
      */
     private static final long serialVersionUID = 5140476454072046580L;
-    private Team t1;
-    private Team t2;
-    private JLabel results1;
-    private JLabel results2;
-    private JLabel finalScore;
+    final private Team t1;
+    final private Team t2;
+    final private JLabel results1;
+    final private JLabel results2;
+    final private JLabel finalScore;
     private int goal1;
     private int goal2;
     private int shoots1;
     private int shoots2;
     private int totShoots;
     private Team winner;
-    private JButton closeButton;
+    final private JButton closeButton;
     private final LogicsShootout logics;
-    private Map<Integer, Pair<Player, String>> shoootout1;
-    private Map<Integer, Pair<Player, String>> shootout2;
-    private JPanel panel;
+    final private Map<Integer, Pair<Player, String>> shoootout1;
+    final private Map<Integer, Pair<Player, String>> shootout2;
+    final private JPanel panel;
     private String string1;
     private String string2;
-    private Match match;
+    final private Match match;
     private static final int IPADX_CENTER = 50;
     private static final double MAX_W = 0.45;
     private static final double MIN_H = 0.1;
@@ -84,7 +84,7 @@ public class Shootout extends Base implements Serializable {
         string2 = "";
 
         this.panel = new JPanel(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
+        final GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -127,7 +127,7 @@ public class Shootout extends Base implements Serializable {
         gbc.gridwidth = 3;
         panel.add(finalScore, gbc);
 
-        JButton startButton = new JButton("inizia");
+        final JButton startButton = new JButton("inizia");
         startButton.addActionListener(e -> {
             startButton.setEnabled(false);
             start();
@@ -144,7 +144,7 @@ public class Shootout extends Base implements Serializable {
         add(closeButton, BorderLayout.SOUTH);
 
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        WindowListener windowListener = new WindowAdapter() {
+        final WindowListener windowListener = new WindowAdapter() {
             @Override
             public void windowClosing(final WindowEvent e) {
                 dispose();
@@ -158,8 +158,8 @@ public class Shootout extends Base implements Serializable {
      * Starts the penalty shoot-out.
      */
     private void start() {
-        Timer timer = new Timer();
-        TimerTask timerTask = new TimerTask() {
+        final Timer timer = new Timer();
+        final TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
                 if (!shoootout1.containsKey(shoots1) && !shootout2.containsKey(shoots2)) {
@@ -172,24 +172,24 @@ public class Shootout extends Base implements Serializable {
                 } else {
                     if (totShoots % 2 == 0) {
                         if (shoootout1.containsKey(shoots1)) {
-                            String res = shoootout1.get(shoots1).getY();
-                            String shooter = shoootout1.get(shoots1).getX().getName();
-                            String resultLabel = shooter + ": " + res;
+                            final String res = shoootout1.get(shoots1).getY();
+                            final String shooter = shoootout1.get(shoots1).getX().getName();
+                            final String resultLabel = shooter + ": " + res;
                             string1 = string1 + resultLabel + "<br>";
                             results1.setText("<html>" + string1 + "</html>");
-                            if (res.equals("Gol")) {
+                            if ("Gol".equals(res)) {
                                 goal1++;
                             }
                             shoots1++;
                         }
                     } else {
                         if (shootout2.containsKey(shoots2)) {
-                            String res = shootout2.get(shoots2).getY();
-                            String shooter = shootout2.get(shoots2).getX().getName();
-                            String resultLabel = shooter + ": " + res;
+                            final String res = shootout2.get(shoots2).getY();
+                            final String shooter = shootout2.get(shoots2).getX().getName();
+                            final String resultLabel = shooter + ": " + res;
                             string2 = string2 + resultLabel + "<br>";
                             results2.setText("<html>" + string2 + "</html>");
-                            if (res.equals("Gol")) {
+                            if ("Gol".equals(res)) {
                                 goal2++;
                             }
                             shoots2++;

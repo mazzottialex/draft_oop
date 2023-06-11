@@ -69,18 +69,15 @@ public class LogicsCreateTeamImpl implements LogicsCreateTeam {
         this.nomeSquadra = nomeSquadra;
         this.stemma = url;
         riserve = new ArrayList<>();
-        final List<Player> liP = this.getRandom("P", 1);
-        riserve.addAll(liP);
-        final List<Player> liD = this.getRandom("D", 2);
-        riserve.addAll(liD);
-        final List<Player> liC = this.getRandom("C", 2);
-        riserve.addAll(liC);
-        final List<Player> liA = this.getRandom("a", 2);
-        riserve.addAll(liA);
+        riserve.addAll(this.getRandom("P", 1));
+        riserve.addAll(this.getRandom("D", 2));
+        riserve.addAll(this.getRandom("C", 2));
+        riserve.addAll(this.getRandom("A", 2));
         this.calcUsciti.addAll(riserve);
         this.clickModulo = false;
     }
 
+<<<<<<< HEAD
     @Override
     public final Team getSquadra() {
         return new TeamUser(nomeSquadra, stemma, moduloSelect, liSquadra, riserve); // sistemare titolari e riserve
@@ -90,6 +87,21 @@ public class LogicsCreateTeamImpl implements LogicsCreateTeam {
     public final List<Module> getModuli() {
         final List<Module> list = new ArrayList<>();
         for (final Module m : Module.values()) {
+=======
+    /**
+     * {@inheritDoc}
+     */
+    public Team getSquadra() {
+        return new TeamUser(nomeSquadra, stemma, moduloSelect, liSquadra, riserve); // sistemare titolari e riserve
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public List<Module> getModuli() {
+        List<Module> list = new ArrayList<>();
+        for (Module m : Module.values()) {
+>>>>>>> a884edc1eca4ae54b5cb5266876a63fff8431ee1
             list.add(m);
         }
         return list;
@@ -114,7 +126,6 @@ public class LogicsCreateTeamImpl implements LogicsCreateTeam {
     /**
      * {@inheritDoc}
      */
-    @Override
     public int getNumDif() {
         return this.moduloSelect.getNumDef();
     }
@@ -147,6 +158,7 @@ public class LogicsCreateTeamImpl implements LogicsCreateTeam {
      * {@inheritDoc}
      */
     @Override
+<<<<<<< HEAD
     public final List<Player> getRandom(final String ruolo, final int n) {
         final List<Player> list = this.ex.getListByPos(ruolo);
         final Set<Player> set = new HashSet<>();
@@ -158,6 +170,19 @@ public class LogicsCreateTeamImpl implements LogicsCreateTeam {
             final Player c = list.get(random);
             boolean test = false;
             for (final Player uscito : this.calcUsciti) {
+=======
+    public List<Player> getRandom(final String ruolo, final int n) {
+        List<Player> list = this.ex.getListByPos(ruolo);
+        Set<Player> set = new HashSet<>();
+        List<Player> randomList = new ArrayList<>();
+        boolean test = false;
+        // Random r = new Random();
+        while (set.size() != n) {
+            int random = r.nextInt(list.size());
+            Player c = list.get(random);
+            test = false;
+            for (Player uscito : this.calcUsciti) {
+>>>>>>> a884edc1eca4ae54b5cb5266876a63fff8431ee1
                 if (c.equals(uscito)) {
                     test = true;
                 }
@@ -361,7 +386,7 @@ public class LogicsCreateTeamImpl implements LogicsCreateTeam {
      */
     @Override
     public void saveTeam() {
-        final LogicsFile logFile = new LogicsFileImpl();
+        LogicsFile logFile = new LogicsFileImpl();
         logFile.saveHistory(this.getSquadra());
     }
 }

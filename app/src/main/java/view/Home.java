@@ -55,7 +55,7 @@ public class Home extends Base {
      * @param first         true if home is called by Start, False otherwise
      */
     public Home(final String seasonDefault, final Boolean online, final Boolean first) {
-        JButton btnDownload = UtilsGUI.standardButton("Download season:");
+    	final JButton btnDownload = UtilsGUI.standardButton("Download season:");
         log = new LogicsHomeImpl(seasonDefault, online);
         if (!log.checkBrowser() && first) {
             btnDownload.setEnabled(false);
@@ -67,13 +67,13 @@ public class Home extends Base {
                     "You are in offline mode, check your connection and restart the application for online mode");
             btnDownload.setEnabled(false);
         }
-        GridBagConstraints gbc = new GridBagConstraints();
-        GridBagLayout layout = new GridBagLayout();
+        final GridBagConstraints gbc = new GridBagConstraints();
+        final GridBagLayout layout = new GridBagLayout();
         super.getPanel().setLayout(layout);
-        JButton btnStart = new JButton();
+        final JButton btnStart = new JButton();
         ImageIcon img = new ImageIcon(START_IMAGE_PATH);
-        Image image = img.getImage();
-        Image newimg = image.getScaledInstance(SCALED_IMAGE_2, SCALED_IMAGE_2, java.awt.Image.SCALE_SMOOTH);
+        final Image image = img.getImage();
+        final Image newimg = image.getScaledInstance(SCALED_IMAGE_2, SCALED_IMAGE_2, java.awt.Image.SCALE_SMOOTH);
         img = new ImageIcon(newimg);
         btnStart.setBorderPainted(false);
         btnStart.setFocusPainted(false);
@@ -83,15 +83,15 @@ public class Home extends Base {
         btnStart.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(final java.awt.event.MouseEvent evt) {
                 btnStart.setBackground(BACKGROUND_COLOR_2);
-                Image newimg = image.getScaledInstance(SCALED_IMAGE_1, SCALED_IMAGE_1, java.awt.Image.SCALE_SMOOTH);
-                ImageIcon img = new ImageIcon(newimg);
+                final Image newimg = image.getScaledInstance(SCALED_IMAGE_1, SCALED_IMAGE_1, java.awt.Image.SCALE_SMOOTH);
+                final ImageIcon img = new ImageIcon(newimg);
                 btnStart.setIcon(img);
             }
 
             public void mouseExited(final java.awt.event.MouseEvent evt) {
                 btnStart.setBackground(BACKGROUND_COLOR);
-                Image newimg = image.getScaledInstance(SCALED_IMAGE_2, SCALED_IMAGE_2, java.awt.Image.SCALE_SMOOTH);
-                ImageIcon img = new ImageIcon(newimg);
+                final Image newimg = image.getScaledInstance(SCALED_IMAGE_2, SCALED_IMAGE_2, java.awt.Image.SCALE_SMOOTH);
+                final ImageIcon img = new ImageIcon(newimg);
                 btnStart.setIcon(img);
             }
         });
@@ -112,21 +112,21 @@ public class Home extends Base {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = BUTTON_INSETS;
         super.getPanel().add(btnStart, gbc);
-        JPanel panelSelectioned = new JPanel();
+        final JPanel panelSelectioned = new JPanel();
         panelSelectioned.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
-        JLabel lblSeasonSelected = new JLabel("Season selected:");
+        final JLabel lblSeasonSelected = new JLabel("Season selected:");
         lblSeasonSelected.setFont(new Font("Verdana", Font.ROMAN_BASELINE, FONT_SIZE));
         panelSelectioned.add(lblSeasonSelected);
-        JLabel lblSeason = new JLabel(log.getSeason());
+        final JLabel lblSeason = new JLabel(log.getSeason());
         lblSeason.setFont(new Font("Verdana", Font.ROMAN_BASELINE, FONT_SIZE));
         panelSelectioned.add(lblSeason);
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.insets = PANEL_INSETS;
         super.getPanel().add(panelSelectioned, gbc);
-        JButton btnLoad = UtilsGUI.standardButton("Choose a season:");
-        String[] array = log.getLiSeasons().toArray(new String[log.getLiSeasons().size()]);
-        JComboBox<String> comboBoxLoad = new JComboBox<>(array);
+        final JButton btnLoad = UtilsGUI.standardButton("Choose a season:");
+        final String[] array = log.getLiSeasons().toArray(new String[log.getLiSeasons().size()]);
+        final JComboBox<String> comboBoxLoad = new JComboBox<>(array);
         comboBoxLoad.setFont(new Font("Verdana", Font.ROMAN_BASELINE, FONT_SIZE));
         btnLoad.addActionListener(new ActionListener() {
             @Override
@@ -139,7 +139,7 @@ public class Home extends Base {
                 }
             }
         });
-        JComboBox<String> comboBoxDownload = new JComboBox<>(array);
+        final JComboBox<String> comboBoxDownload = new JComboBox<>(array);
         gbc.gridwidth = 1;
         gbc.gridx = 0;
         gbc.gridy = 2;
@@ -174,7 +174,7 @@ public class Home extends Base {
         gbc.gridy = 3;
         super.getPanel().add(comboBoxDownload, gbc);
         gbc.gridwidth = 2;
-        JButton btnArchive = UtilsGUI.standardButton("Archive");
+        final JButton btnArchive = UtilsGUI.standardButton("Archive");
         btnArchive.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
@@ -189,7 +189,7 @@ public class Home extends Base {
         gbc.gridx = 0;
         gbc.gridy = 4;
         super.getPanel().add(btnArchive, gbc);
-        JButton btnHistory = UtilsGUI.standardButton("History");
+        final JButton btnHistory = UtilsGUI.standardButton("History");
         btnHistory.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
