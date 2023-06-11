@@ -9,6 +9,7 @@ import java.util.Random;
 
 import model.data.Player;
 import model.data.Team;
+import model.data.TeamUser;
 import utils.Pair;
 
 /**
@@ -132,10 +133,12 @@ public final class LogicsShootoutImpl implements LogicsShootout, Serializable {
 
     @Override
     public Team getWinner() {
-        if (goals1 > goals2) {
-            return t1;
+    	Team copiat1= new TeamUser(t1.getTeamName(), t1.getLogo(), t1.getModule(), t1.getStarting(), t1.getSubstitution());
+    	Team copiat2= new TeamUser(t2.getTeamName(), t2.getLogo(), t2.getModule(), t2.getStarting(), t2.getSubstitution());
+    	if (goals1 > goals2) {
+            return copiat1;
         } else {
-            return t2;
+            return copiat2;
         }
     }
 }

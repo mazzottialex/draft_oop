@@ -54,9 +54,9 @@ public final class LogicsMatchImpl implements LogicsMatch, Serializable {
     @Override
     public List<Integer> getGoalsMinutes(final Team t) {
         if (t == t1) {
-            return list1;
+            return new ArrayList<>(list1);
         } else if (t == t2) {
-            return list2;
+            return new ArrayList<>(list2);
         }
         return null;
     }

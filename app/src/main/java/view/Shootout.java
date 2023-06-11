@@ -8,6 +8,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.Serializable;
+import java.lang.instrument.UnmodifiableClassException;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;

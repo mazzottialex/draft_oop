@@ -61,7 +61,7 @@ public final class TeamUser implements Team, Serializable {
 
     @Override
     public List<Player> getLiPlayers() {
-        return liPlayers;
+        return new ArrayList<>(liPlayers);
     }
 
     @Override
@@ -80,7 +80,7 @@ public final class TeamUser implements Team, Serializable {
 
     @Override
     public List<Player> getSubstitution() {
-        return this.liSubstitution;
+        return new ArrayList<>(liSubstitution);
     }
 
     @Override
