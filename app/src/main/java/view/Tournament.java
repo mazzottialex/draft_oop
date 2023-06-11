@@ -130,31 +130,31 @@ public class Tournament extends Base {
                                     logTor.simulaMatch();
                                     createLevel();
                                 } catch (FileNotFoundException e1) {
-                                    LOG.error("Error", e);
+                                    LOG.error("Error", e1);
                                 } catch (ClassNotFoundException e1) {
-                                    LOG.error("Error", e);
+                                    LOG.error("Error", e1);
                                 } catch (IOException e1) {
-                                    LOG.error("Error", e);
+                                    LOG.error("Error", e1);
                                 }
                             }
                         });
                     } catch (FileNotFoundException e1) {
-                        LOG.error("Error", e);
+                        LOG.error("Error", e1);
                     } catch (ClassNotFoundException e1) {
-                        LOG.error("Error", e);
+                        LOG.error("Error", e1);
                     } catch (IOException e1) {
-                        LOG.error("Error", e);
+                        LOG.error("Error", e1);
                     }
                 } else {
                     try {
                         logTor.simulaMatch();
                         createLevel();
                     } catch (FileNotFoundException e1) {
-                        LOG.error("Error", e);
+                        LOG.error("Error", e1);
                     } catch (ClassNotFoundException e1) {
-                        LOG.error("Error", e);
+                        LOG.error("Error", e1);
                     } catch (IOException e1) {
-                        LOG.error("Error", e);
+                        LOG.error("Error", e1);
                     }
                 }
                 // buttonSimula.setVisible(true);
@@ -280,10 +280,10 @@ public class Tournament extends Base {
             }
             int cont1 = 1;
             for (int i = 1; i < this.listAvversarie.size() - 1; i = i + 2, cont1++) {
-                String squad1 = this.listAvversarie.get(i).getTeamName();
-                var ris1 = this.logTor.getRisultati().get(squad1);
-                String squad2 = this.listAvversarie.get(i + 1).getTeamName();
-                var ris2 = this.logTor.getRisultati().get(squad2);
+                final String squad1 = this.listAvversarie.get(i).getTeamName();
+                final var ris1 = this.logTor.getRisultati().get(squad1);
+                final String squad2 = this.listAvversarie.get(i + 1).getTeamName();
+                final var ris2 = this.logTor.getRisultati().get(squad2);
                 this.labelsp3[cont1] = new MyJLabel(squad1 + " " + ris1 + " " + " - " + " " + ris2 + " " + squad2);
                 this.p3.add(this.labelsp3[cont1]);
             }
@@ -326,9 +326,9 @@ public class Tournament extends Base {
                 setOppTeam();
             }
             final String squad1 = this.listAvversarie.get(1).getTeamName();
-            var ris1 = this.logTor.getRisultati().get(squad1);
+            final var ris1 = this.logTor.getRisultati().get(squad1);
             final String squad2 = this.listAvversarie.get(2).getTeamName();
-            var ris2 = this.logTor.getRisultati().get(squad2);
+            final var ris2 = this.logTor.getRisultati().get(squad2);
             this.labelsp2[1] = new MyJLabel(squad1 + " " + ris1 + " " + " - " + " " + ris2 + " " + squad2);
             this.p2.add(this.labelsp2[1]);
             // aggiungo la nuova partita ...
@@ -418,7 +418,8 @@ public class Tournament extends Base {
             for (int i = 0; i < s.length() - 2; i++) {
                 label = label + s.charAt(i);
                 if (i % max == 0 && i != 0) {
-                    label = label + "<br>";
+                    //label = label + "<br>";
+                    label.concat("<br>");
                 }
             }
             label = label + s.charAt(s.length() - 2) + s.charAt(s.length() - 1);

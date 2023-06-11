@@ -460,7 +460,7 @@ public class LogicsTournamentImpl implements LogicsTournament {
             this.squadraAvv = new TeamOpponent(squadra.getId(), squadra.getTeamName(), squadra.getModule(),
                     squadra.getLiPlayers());
         } catch (ClassNotFoundException | IOException e) {
-            System.err.println(e);
+            LOG.error("Error", e);
         }
     }
 
