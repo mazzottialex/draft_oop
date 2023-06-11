@@ -20,11 +20,11 @@ import model.rating.AnalysisRatingImpl;
  */
 public class ExtractDataTest {
 
-    private ExtractDataImpl ed;
-    private ManageData md;
+    private final ExtractDataImpl ed;
+    private final ManageData md;
     private List<Player> list;
-    private String team = "JUV";
-    private Module module = Module.M433;
+    private final String team = "JUV";
+    private final Module module = Module.M433;
     private static final int TEAM_SIZE = 20;
     private static final int STARTERSIZE = 11;
 
@@ -37,7 +37,7 @@ public class ExtractDataTest {
         md = new ManageDataImpl("2022-2023");
         md.loadData();
         list = md.getLi();
-        AnalysisRating analysisRating = new AnalysisRatingImpl(list);
+        final AnalysisRating analysisRating = new AnalysisRatingImpl(list);
         list = analysisRating.updateRating();
         ed = new ExtractDataImpl(list);
     }
@@ -47,7 +47,7 @@ public class ExtractDataTest {
      */
     @Test
     public void testFindTeams() {
-        List<String> teams = ed.findTeams();
+        final List<String> teams = ed.findTeams();
         assertNotNull(teams);
         assertEquals(TEAM_SIZE, teams.size());
     }
@@ -57,7 +57,7 @@ public class ExtractDataTest {
      */
     @Test
     public void testGetStarting() {
-        List<Player> starters = ed.getStarting(team, module);
+        final List<Player> starters = ed.getStarting(team, module);
         assertNotNull(starters);
         assertEquals(starters.size(), STARTERSIZE);
     }
@@ -67,9 +67,9 @@ public class ExtractDataTest {
      */
     @Test
     public void testGetStartingByTeamByPos() {
-        List<Player> def = ed.getStartingByTeamByPos(team, "D", module);
-        List<Player> midf = ed.getStartingByTeamByPos(team, "C", module);
-        List<Player> forw = ed.getStartingByTeamByPos(team, "A", module);
+        final List<Player> def = ed.getStartingByTeamByPos(team, "D", module);
+        final List<Player> midf = ed.getStartingByTeamByPos(team, "C", module);
+        final List<Player> forw = ed.getStartingByTeamByPos(team, "A", module);
         assertNotNull(def);
         assertEquals(def.size(), module.getNumDef());
         assertEquals(midf.size(), module.getNumMid());

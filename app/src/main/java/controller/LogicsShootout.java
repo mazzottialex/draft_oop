@@ -1,6 +1,6 @@
 package controller;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import model.data.Player;
@@ -17,7 +17,7 @@ public interface LogicsShootout {
      *
      * @return the list of penalty results
      */
-    ArrayList<Map<Integer, Pair<Player, String>>> compute();
+    List<Map<Integer, Pair<Player, String>>> compute();
 
     /**
      * Returns the number of goals scored by team 1 in the penalty shoot-out.

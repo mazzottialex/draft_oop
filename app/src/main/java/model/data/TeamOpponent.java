@@ -28,7 +28,7 @@ public final class TeamOpponent implements Team, Serializable {
     private final List<Player> listPlayers;
     private List<Player> listStarting;
     private List<Player> listSubstitution;
-    private Random r = new Random();
+    private final Random r = new Random();
 
     /**
      * Constructor for the {@code TeamOpponent} class.
@@ -47,10 +47,10 @@ public final class TeamOpponent implements Team, Serializable {
         this.teamName = teamName;
         this.module = module;
         this.listPlayers = new ArrayList<>(li);
-        ExtractData ed = new ExtractDataImpl(li);
+        final ExtractData ed = new ExtractDataImpl(li);
         this.listStarting = ed.getStarting(teamName, module);
         this.listSubstitution = ed.getSubstitution(teamName, module);
-        this.logo = this.setStemma();
+        this.logo = this.makeStemma();
     }
 
     /**
@@ -58,7 +58,7 @@ public final class TeamOpponent implements Team, Serializable {
      *
      * @return The emblem filename.
      */
-    private URL setStemma() {
+    private URL makeStemma() {
         final List<String> liStemmi = List.of("arancione.png", "azzurro.png",
             "bianco.png", "blu.png", "giallo.png", "nero.png", "rosso.png",
             "verde.png", "viola.png");
@@ -131,7 +131,7 @@ public final class TeamOpponent implements Team, Serializable {
     @Override
     public Player getPlayerById(final int id) {
         Player p = null;
-        for (Player player: listPlayers) {
+        for (final Player player: listPlayers) {
             if (player.getId() == id) {
                 p = player;
             }
@@ -142,8 +142,8 @@ public final class TeamOpponent implements Team, Serializable {
     @Override
     public Player getStartingKeeper() {
         Player gk = null;
-        for (Player player: getStarting()) {
-            if (player.getPos().equals("P")) {
+        for (final Player player: getStarting()) {
+            if (("P").equals(player.getPos())) {
                 gk = player;
             }
         }
