@@ -33,6 +33,7 @@ public class Base extends JFrame {
      *
      * @return the JPanel content pane
      */
+
     public JPanel getPanel() {
         JPanel panel = contentPane;
         return panel;

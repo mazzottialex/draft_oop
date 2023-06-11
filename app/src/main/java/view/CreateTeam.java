@@ -54,7 +54,6 @@ public class CreateTeam extends Base {
     private static final int DIALOG_X = 200;
     private static final int DIALOG2_X = 150;
     private static final int DIALOG_Y = 100;
-    private static final int GRAND2 = 200;
     private static final int GRAND3 = 300;
     private static final int GRAND35 = 350;
     private static final double MO_W_H = 0.4;
@@ -63,7 +62,7 @@ public class CreateTeam extends Base {
     private static final double FM_H = 0.1;
     private static final double FC_H = 0.4;
     private static final double FMC_W_H = 0.25;
-    private final transient LogicsCreateTeam log;
+    private final LogicsCreateTeam log;
     private final JFrame frameModulo;
     private final JFrame frameCalciatori;
     private final JPanel panelSud = new JPanel(new GridBagLayout()); // panel Sud del frame principale
