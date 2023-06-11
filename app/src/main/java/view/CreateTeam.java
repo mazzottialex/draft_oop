@@ -337,7 +337,7 @@ public class CreateTeam extends Base {
             final int ind = i;
             this.buttonsAtt[i].addActionListener(new ActionListener() {
                 public void actionPerformed(final ActionEvent e) {
-                    if (log.getClickModulo()) {
+                    if (log.isClickModulo()) {
                         if (map.get(buttonsAtt[ind]).isEmpty()) {
                             choosePlayerFirstTime("A", ind);
                         } else {
@@ -363,7 +363,7 @@ public class CreateTeam extends Base {
             final int ind = i;
             this.buttonsCen[i].addActionListener(new ActionListener() {
                 public void actionPerformed(final ActionEvent e) {
-                    if (log.getClickModulo()) {
+                    if (log.isClickModulo()) {
                         if (map.get(buttonsCen[ind]).isEmpty()) {
                             choosePlayerFirstTime("C", ind);
                         } else {
@@ -389,7 +389,7 @@ public class CreateTeam extends Base {
             final int ind = i;
             this.buttonsDif[i].addActionListener(new ActionListener() {
                 public void actionPerformed(final ActionEvent e) {
-                    if (log.getClickModulo()) {
+                    if (log.isClickModulo()) {
                         if (map.get(buttonsDif[ind]).isEmpty()) {
                             choosePlayerFirstTime("D", ind);
                         } else {
@@ -412,7 +412,7 @@ public class CreateTeam extends Base {
         this.buttonPor.setBackground(Color.YELLOW);
         this.buttonPor.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent e) {
-                if (log.getClickModulo()) {
+                if (log.isClickModulo()) {
                     if (map.get(buttonPor).isEmpty()) {
                         choosePlayerFirstTime("P", 0);
                     } else {

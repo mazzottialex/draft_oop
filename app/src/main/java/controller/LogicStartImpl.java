@@ -1,5 +1,4 @@
 package controller;
-import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -17,9 +16,8 @@ public final class LogicStartImpl implements LogicStart {
 
     /**
      * Constructs a new instance of LogicStartImpl.
-     * @throws IOException 
      */
-    public LogicStartImpl() throws IOException {
+    public LogicStartImpl() {
         this.online = checkConnection();
         manageSeason = new ManageSeasonImpl();
         manageSeason.updateSeason();
@@ -37,10 +35,16 @@ public final class LogicStartImpl implements LogicStart {
         return this.season;
     }
 
-    private Boolean checkConnection() throws IOException {
-        final URL url = new URL("http://www.google.com");
-        final URLConnection connection = url.openConnection();
-        connection.connect();
-        return true;
+    private Boolean checkConnection() {
+        try {
+            final URL url = new URL("http://www.google.com");
+            final URLConnection connection = url.openConnection();
+            connection.connect();
+            return true;
+        } catch (RuntimeException e) {
+            throw e;
+        } catch (final Exception e) {
+            return false;
+        }
     }
 }
