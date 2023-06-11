@@ -85,12 +85,12 @@ public final class TeamUser implements Team, Serializable {
 
     @Override
     public void setStarting(final List<Player> liStarting) {
-        this.liStarting = liStarting;
+        this.liStarting = new ArrayList<>(liStarting);
     }
 
     @Override
     public void setSubstitution(final List<Player> liSubstitution) {
-        this.liSubstitution = liSubstitution;
+        this.liSubstitution = new ArrayList<>(liSubstitution);
     }
 
     @Override

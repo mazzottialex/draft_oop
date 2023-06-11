@@ -30,7 +30,6 @@ public final class LogicsArchiveImpl implements LogicsArchive {
     public List<Player> liOrdered(final List<Player> li)
             throws FileNotFoundException, ClassNotFoundException, IOException {
         ExtractData ex = new ExtractDataImpl(li);
-        li.forEach(a -> System.out.println(a));
         return ex.getListOrdered(c -> -c.getRating().getX());
     }
 

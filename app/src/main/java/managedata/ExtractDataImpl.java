@@ -28,7 +28,7 @@ public final class ExtractDataImpl implements ExtractData {
      * @param li the list of players
      */
     public ExtractDataImpl(final List<Player> li) {
-        this.li = li;
+        this.li = new ArrayList<>(li);
     }
 
     @Override
