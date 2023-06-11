@@ -17,10 +17,10 @@ import model.data.TeamOpponent;
  */
 public final class CreateOpponentTeamsImpl implements CreateOpponentTeams {
 
-    private int totTeams;
-    private List<Player> li;
-    private List<String> teams;
-    private ExtractData ed;
+    private final int totTeams;
+    private final List<Player> li;
+    private final List<String> teams;
+    private final ExtractData ed;
 
     /**
      * Constructs a {@code CreateOpponentTeamsImpl} object with the specified list of players and team count.
@@ -50,8 +50,8 @@ public final class CreateOpponentTeamsImpl implements CreateOpponentTeams {
     throws FileNotFoundException, ClassNotFoundException, IOException {
         Collections.shuffle(teams); // Mescola l'ordine delle squadre
         int id = 1;
-        List<Team> teamsList = new ArrayList<>();
-        for (String t: teams) {
+        final List<Team> teamsList = new ArrayList<>();
+        for (final String t: teams) {
             teamsList.add(new TeamOpponent(id, t, module, li));
             id++;
         }

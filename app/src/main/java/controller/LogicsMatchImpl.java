@@ -26,7 +26,7 @@ public final class LogicsMatchImpl implements LogicsMatch, Serializable {
     private final SimulatingMatch sim;
     private static final int END_REG = 90;
     private static final int END_EXTRA = 120;
-    private static final double OWNGOAL_RATE = 2.904040404040404;
+    private static final double OWNGOAL_RATE = 2.904_040_404_040_404;
     private final Random random = new Random();
 
     /**
@@ -56,12 +56,12 @@ public final class LogicsMatchImpl implements LogicsMatch, Serializable {
 
     @Override
     public List<Integer> getGoalsMinutes(final Team t) {
-        if (t == t1) {
+        if (t.equals(t1)) {
             return new ArrayList<>(list1);
-        } else if (t == t2) {
+        } else if (t.equals(t2)) {
             return new ArrayList<>(list2);
         }
-        return null;
+        return new ArrayList<>();
     }
 
     /**
@@ -73,7 +73,7 @@ public final class LogicsMatchImpl implements LogicsMatch, Serializable {
      * @return {@code true} if any element from the first list is contained in the second list, {@code false} otherwise
      */
     private static <T> boolean containsAny(final List<T> l1, final List<T> l2) {
-        for (T elem: l1) {
+        for (final T elem: l1) {
             if (l2.contains(elem)) {
                 return true;
             }
@@ -90,7 +90,7 @@ public final class LogicsMatchImpl implements LogicsMatch, Serializable {
      */
     private List<Integer> getGoalsNum(final int goal, final int time) {
         final List<Integer> list = new ArrayList<>();
-        int remainingTime = time < END_REG ? END_REG - time : END_EXTRA - time;
+        final int remainingTime = time < END_REG ? END_REG - time : END_EXTRA - time;
         for (int i = 0; i < goal; i++) {
             int min;
             do {
@@ -108,7 +108,7 @@ public final class LogicsMatchImpl implements LogicsMatch, Serializable {
         final List<Player> starters = t.getStarting();
         final List<Double> goalList = new ArrayList<>();
         for (final Player p: starters) {
-            double goals = p.getGoals();
+            final double goals = p.getGoals();
             goalList.add(goals);
             totGoals += goals;
         }
@@ -131,7 +131,7 @@ public final class LogicsMatchImpl implements LogicsMatch, Serializable {
      */
     private Player getAutogol(final Team team) {
     	final Team t;
-        if (team == t1) {
+        if (team.equals(t1)) {
             t = t2;
         } else {
             t = t1;
