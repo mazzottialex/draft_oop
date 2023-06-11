@@ -294,12 +294,13 @@ public class CreateTeam extends Base {
     private int getGbcX(final String s) {
         switch (s) {
         case "A":
-            if (this.log.getNumAtt() == 1) 
+            if (this.log.getNumAtt() == 1) {
                 return this.log.getNumCen() / 2;
-             else if (this.log.getNumAtt() == 2) 
+            } else if (this.log.getNumAtt() == 2) { 
                 return 1;
-             else 
-                return 0; 
+            } else { 
+                return 0;
+            }
         case "C":
             return (this.log.getNumCen() == 3 && this.log.getNumDif() == NUM_PLAYER) ? 1 : 0;
         case "D":
@@ -413,10 +414,11 @@ public class CreateTeam extends Base {
         gbc.gridx = this.getGbcX("P");
         gbc.gridy = gbc.gridy + 3;
         this.buttonPor = new JButton("P");
-        Dimension d = this.buttonPor.getPreferredSize();
+        final Dimension d = this.buttonPor.getPreferredSize();
         this.buttonPor.setPreferredSize(new Dimension(d.width * 2, d.height * 2));
         this.buttonPor.setBackground(Color.YELLOW);
         this.buttonPor.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent e) {
                 if (log.isClickModulo()) {
                     if (map.get(buttonPor).isEmpty()) {
@@ -499,7 +501,7 @@ public class CreateTeam extends Base {
         gbc.gridy = 0;
         for (int i = 0; i < buttonsPlayer.length; i++) {
             buttonsPlayer[i] = new JButton(
-                    "" + list.get(i).getName() + " " + list.get(i).getRating().getX());
+                    " " + list.get(i).getName() + " " + list.get(i).getRating().getX());
             this.panelCalciatoriCenter.add(buttonsPlayer[i], gbc);
             buttonsPlayer[i].setBackground(getColorByRuolo(ruolo));
             final int ind = i;
@@ -586,7 +588,7 @@ public class CreateTeam extends Base {
         final int max = 14;
         for (int i = 0; i < s.length() - 2; i++) {
             label = label + s.charAt(i);
-            if ((i % max == 0) && (i != 0)) {
+            if (i % max == 0 && i != 0) {
                 label = label + "<br>";
             }
         }
