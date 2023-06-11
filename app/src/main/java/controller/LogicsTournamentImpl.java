@@ -429,6 +429,9 @@ public class LogicsTournamentImpl implements LogicsTournament {
 
     /**
      * {@inheritDoc}
+     * @throws IOException 
+     * @throws ClassNotFoundException 
+     * @throws FileNotFoundException 
      */
     @Override
     public Team getSquadraAvv() {

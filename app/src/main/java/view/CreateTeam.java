@@ -206,7 +206,7 @@ public class CreateTeam extends Base {
         gbc.gridy = 0;
         // creo tanti bottoni quanti sono i moduli disponibili
         final JButton[] buttons = new JButton[log.getModuli().size()];
-        ArrayList<Module> buttonSelect = new ArrayList<>();
+        final ArrayList<Module> buttonSelect = new ArrayList<>();
         for (int i = 0; i <= buttons.length - 1; i++) {
             buttons[i] = new JButton(" " + log.getModuli().get(i));
             final int ind = i;
@@ -302,9 +302,9 @@ public class CreateTeam extends Base {
                 return 0;
             }
         case "C":
-            return (this.log.getNumCen() == 3 && this.log.getNumDif() == NUM_PLAYER) ? 1 : 0;
+            return this.log.getNumCen() == 3 && this.log.getNumDif() == NUM_PLAYER ? 1 : 0;
         case "D":
-            return (this.log.getNumDif() == 3 && this.log.getNumCen() > 4) ? 1 : 0;
+            return this.log.getNumDif() == 3 && this.log.getNumCen() > 4 ? 1 : 0;
         case "P":
             if (this.log.getNumAtt() == 1) {
                 return this.log.getNumCen() / 2;
