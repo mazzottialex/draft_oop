@@ -24,7 +24,6 @@ import controller.LogicsShootoutImpl;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import model.data.Player;
 import model.data.Team;
-import model.data.TeamUser;
 import utils.Pair;
 
 /**
@@ -219,8 +218,7 @@ public class Shootout extends Base implements Serializable {
      * @return The winning team.
      */
     public Team getWinner() {
-        Team copiaTeam=new TeamUser(winner.getTeamName(), winner.getLogo(), winner.getModule(), winner.getStarting(), winner.getStartingDesc());
-    	return copiaTeam;
+    	return winner;
     }
 
     /**
@@ -231,9 +229,9 @@ public class Shootout extends Base implements Serializable {
      */
     public void setWinner(final int gol1, final int gol2) {
         if (gol1 > gol2) {
-            winner = new TeamUser(t1.getTeamName(), t1.getLogo(), t1.getModule(), t1.getStarting(), t1.getSubstitution());
+            winner = t1;
         } else {
-            winner =  new TeamUser(t2.getTeamName(), t2.getLogo(), t2.getModule(), t2.getStarting(), t2.getSubstitution());
+            winner = t2;
         }
     }
 
