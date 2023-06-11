@@ -42,11 +42,11 @@ public class History extends Base {
      */
     public History(final String season, final Boolean online) {
         log = new LogicsHistoryImpl(season, online);
-        GridBagConstraints gbc = new GridBagConstraints();
-        GridBagLayout layout = new GridBagLayout();
+        final GridBagConstraints gbc = new GridBagConstraints();
+        final GridBagLayout layout = new GridBagLayout();
         super.getPanel().setLayout(new BorderLayout());
-        JButton btnHome = UtilsGUI.standardButton("Home");
-        JPanel panelBtn = new JPanel();
+        final JButton btnHome = UtilsGUI.standardButton("Home");
+        final JPanel panelBtn = new JPanel();
         panelBtn.setBackground(super.getForeground());
         panelBtn.setPreferredSize(new Dimension(PANEL_DIM, PANEL_DIM));
         btnHome.addActionListener(new ActionListener() {
@@ -61,32 +61,32 @@ public class History extends Base {
         });
         panelBtn.add(btnHome);
         super.getPanel().add(panelBtn, BorderLayout.NORTH);
-        JPanel panelLi = new JPanel();
+        final JPanel panelLi = new JPanel();
         panelLi.setLayout(layout);
         panelLi.setBackground(COLOR_PANEL);
         int count = 0;
-        for (Team team : log.getLiTeam()) {
-            JPanel panelTeam = new JPanel();
+        for (final Team team : log.getLiTeam()) {
+        	final JPanel panelTeam = new JPanel();
             panelTeam.setBackground(super.getForeground());
-            JLabel lblLogo = new JLabel();
+            final JLabel lblLogo = new JLabel();
             ImageIcon img = new ImageIcon(team.getLogo());
-            Image image = img.getImage();
-            Image newImg = image.getScaledInstance(SCALED_IMAGE, SCALED_IMAGE,  java.awt.Image.SCALE_SMOOTH);
+            final Image image = img.getImage();
+            final Image newImg = image.getScaledInstance(SCALED_IMAGE, SCALED_IMAGE,  java.awt.Image.SCALE_SMOOTH);
             img = new ImageIcon(newImg);
             lblLogo.setBackground(Color.white);
             lblLogo.setIcon(img);
             lblLogo.setBorder(new EmptyBorder(INSETS_1));
-            JLabel lblNomeSquadra = new JLabel(team.getTeamName());
+            final JLabel lblNomeSquadra = new JLabel(team.getTeamName());
             lblNomeSquadra.setFont(new Font("Verdana", Font.ROMAN_BASELINE, 16));
             lblNomeSquadra.setForeground(Color.white);
             panelTeam.add(lblNomeSquadra);
-            JLabel lblRating = new JLabel("Valutazione: " + team.getRating());
+            final JLabel lblRating = new JLabel("Valutazione: " + team.getRating());
             lblRating.setFont(new Font("Verdana", Font.ROMAN_BASELINE, 16));
             lblRating.setForeground(Color.white);
             lblRating.setBorder(new EmptyBorder(INSETS_2));
             panelTeam.add(lblRating);
             panelTeam.add(lblRating);
-            JButton btnVedi = UtilsGUI.standardButton("Vedi");
+            final JButton btnVedi = UtilsGUI.standardButton("Vedi");
             btnVedi.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(final ActionEvent e) {
@@ -102,7 +102,7 @@ public class History extends Base {
             panelLi.add(panelTeam, gbc);
             count++;
         }
-        JScrollPane scrollPane = new JScrollPane(panelLi);
+        final JScrollPane scrollPane = new JScrollPane(panelLi);
         super.getPanel().add(scrollPane, BorderLayout.CENTER);
     }
 }

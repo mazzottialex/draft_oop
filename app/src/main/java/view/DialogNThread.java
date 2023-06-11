@@ -39,17 +39,17 @@ public class DialogNThread extends JDialog {
         setBounds(PANEL_X, PANEL_Y, PANEL_WIDTH, PANEL_HEIGHT);
         super.getContentPane().setLayout(new BorderLayout());
         contentPanel.setLayout(new FlowLayout());
-        JComboBox<Integer> comboBox = new JComboBox<>(ARRAY);
-        JLabel labelThread = new JLabel("Choose thread number for scraping: ");
+        final JComboBox<Integer> comboBox = new JComboBox<>(ARRAY);
+        final JLabel labelThread = new JLabel("Choose thread number for scraping: ");
         labelThread.setFont(new Font("DejaVu Sans", Font.PLAIN, FONT_DIM));
         comboBox.setFont(new Font("DejaVu Sans", Font.PLAIN, FONT_DIM));
         contentPanel.add(labelThread);
         contentPanel.add(comboBox);
         super.getContentPane().add(contentPanel, BorderLayout.CENTER);
-        JPanel buttonPane = new JPanel();
+        final JPanel buttonPane = new JPanel();
         buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
         super.getContentPane().add(buttonPane, BorderLayout.SOUTH);
-        JButton okButton = new JButton("OK");
+        final JButton okButton = new JButton("OK");
         okButton.setActionCommand("OK");
         okButton.addActionListener(new ActionListener() {
             @Override
@@ -60,7 +60,7 @@ public class DialogNThread extends JDialog {
         });
         buttonPane.add(okButton);
         super.getRootPane().setDefaultButton(okButton);
-        JButton cancelButton = new JButton("Cancel");
+        final JButton cancelButton = new JButton("Cancel");
         cancelButton.addActionListener(new ActionListener() {
            @Override
            public void actionPerformed(final ActionEvent e) {

@@ -44,10 +44,10 @@ public class Settings extends Base {
      */
     public Settings(final List<Player> li) {
         log = new LogicsSettingsImpl(li);
-        GridBagConstraints gbc = new GridBagConstraints();
-        GridBagLayout layout = new GridBagLayout();
+        final GridBagConstraints gbc = new GridBagConstraints();
+        final GridBagLayout layout = new GridBagLayout();
         super.getPanel().setLayout(layout);
-        JLabel lblTeamName = new JLabel("Team name:");
+        final JLabel lblTeamName = new JLabel("Team name:");
         lblTeamName.setForeground(Color.white);
         lblTeamName.setFont(new Font("Verdana", Font.ROMAN_BASELINE, 16));
         gbc.gridx = 0;
@@ -61,19 +61,19 @@ public class Settings extends Base {
         gbc.gridx = 1;
         gbc.gridy = 0;
         super.getPanel().add(textFieldTeamName, gbc);
-        JLabel lblChooseLogo = new JLabel("Logo:");
+        final JLabel lblChooseLogo = new JLabel("Logo:");
         lblChooseLogo.setForeground(Color.white);
         lblChooseLogo.setFont(new Font("Verdana", Font.ROMAN_BASELINE, 16));
-        JPanel panelLogo = new JPanel();
+        final JPanel panelLogo = new JPanel();
         panelLogo.setLayout(layout);
-        List<JButton> liButton = new ArrayList<>();
+        final List<JButton> liButton = new ArrayList<>();
         for (int i = 0; i < log.getLiLogo().size(); i++) {
-            JButton btnLogo = new JButton();
+        	final JButton btnLogo = new JButton();
             liButton.add(btnLogo);
-            URL url = ClassLoader.getSystemResource(log.getLiLogo().get(i));
+            final URL url = ClassLoader.getSystemResource(log.getLiLogo().get(i));
             ImageIcon img = new ImageIcon(url);
-            Image image = img.getImage();
-            Image newimg = image.getScaledInstance(SCALE_IMG_1, SCALE_IMG_1, java.awt.Image.SCALE_SMOOTH);
+            final Image image = img.getImage();
+            final Image newimg = image.getScaledInstance(SCALE_IMG_1, SCALE_IMG_1, java.awt.Image.SCALE_SMOOTH);
             img = new ImageIcon(newimg);
             btnLogo.setBackground(Color.white);
             btnLogo.setIcon(img);
@@ -102,7 +102,7 @@ public class Settings extends Base {
         gbc.gridx = 0;
         gbc.gridy = 2;
         super.getPanel().add(panelLogo, gbc);
-        JButton btnContinue = UtilsGUI.standardButton("Continue");
+        final JButton btnContinue = UtilsGUI.standardButton("Continue");
         btnContinue.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {

@@ -49,19 +49,19 @@ public final class UtilsGUI {
         } else if (role.equals("C")) {
             file = ClassLoader.getSystemResource("centrocampista.png");
         }
-        GridBagConstraints gbc = new GridBagConstraints();
-        GridBagLayout layout = new GridBagLayout();
-        JPanel panelGiocatore = new JPanel();
+        final GridBagConstraints gbc = new GridBagConstraints();
+        final GridBagLayout layout = new GridBagLayout();
+        final JPanel panelGiocatore = new JPanel();
         panelGiocatore.setLayout(layout);
         panelGiocatore.setBorder(new EmptyBorder(0, EMPTY_BORD, 0, EMPTY_BORD));
-        JLabel lblNome = new JLabel(name);
+        final JLabel lblNome = new JLabel(name);
         lblNome.setFont(new Font("Verdana", Font.ROMAN_BASELINE, FONT_DIM));
-        JLabel lblValutazione = new JLabel(rating.toString());
+        final JLabel lblValutazione = new JLabel(rating.toString());
         lblNome.setFont(new Font("Verdana", Font.ROMAN_BASELINE, FONT_DIM));
-        JLabel lblIcona = new JLabel();
+        final JLabel lblIcona = new JLabel();
         ImageIcon img = new ImageIcon(file);
-        Image image = img.getImage();
-        Image newimg = image.getScaledInstance(SCALE_IMG_1, SCALE_IMG_1, java.awt.Image.SCALE_SMOOTH);
+        final Image image = img.getImage();
+        final Image newimg = image.getScaledInstance(SCALE_IMG_1, SCALE_IMG_1, java.awt.Image.SCALE_SMOOTH);
         img = new ImageIcon(newimg);
         lblIcona.setIcon(img);
         gbc.gridy = 0;
@@ -93,17 +93,17 @@ public final class UtilsGUI {
         } else if (role.equals("A")) {
             file = "src/main/resources/attaccante.png";
         }
-        GridBagConstraints gbc = new GridBagConstraints();
-        GridBagLayout layout = new GridBagLayout();
-        JButton buttonCalciatore = new JButton();
+        final GridBagConstraints gbc = new GridBagConstraints();
+        final GridBagLayout layout = new GridBagLayout();
+        final JButton buttonCalciatore = new JButton();
         buttonCalciatore.setLayout(layout);
         buttonCalciatore.setBackground(BACKGROUND);
-        JLabel lblNome = new JLabel(name);
+        final JLabel lblNome = new JLabel(name);
         lblNome.setFont(new Font("Verdana", Font.ROMAN_BASELINE, FONT_DIM));
-        JLabel lblIcona = new JLabel();
+        final JLabel lblIcona = new JLabel();
         ImageIcon img = new ImageIcon(file);
-        Image image = img.getImage();
-        Image newimg = image.getScaledInstance(SCALE_IMG_2, SCALE_IMG_2, java.awt.Image.SCALE_SMOOTH);
+        final Image image = img.getImage();
+        final Image newimg = image.getScaledInstance(SCALE_IMG_2, SCALE_IMG_2, java.awt.Image.SCALE_SMOOTH);
         img = new ImageIcon(newimg);
         lblIcona.setIcon(img);
         gbc.gridy = 0;
@@ -120,7 +120,7 @@ public final class UtilsGUI {
      * @return a standard JButton
      */
     public static JButton standardButton(final String s) {
-        JButton btn = new JButton(s.toUpperCase(Locale.getDefault()));
+    	final JButton btn = new JButton(s.toUpperCase(Locale.getDefault()));
         btn.setFont(new Font("Verdana", Font.ROMAN_BASELINE, FONT_DIM));
         btn.setBackground(Color.LIGHT_GRAY);
         btn.setForeground(Color.BLACK);
@@ -134,8 +134,8 @@ public final class UtilsGUI {
      * @return the width in pixels
      */
     public static int getWidth(final double perc) {
-        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-        int screenWidth = gd.getDisplayMode().getWidth();
+    	final GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+    	final int screenWidth = gd.getDisplayMode().getWidth();
         return (int) (screenWidth * perc);
     }
 
@@ -146,8 +146,8 @@ public final class UtilsGUI {
      * @return the height in pixels
      */
     public static int getHeight(final double perc) {
-        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-        int screenHeight = gd.getDisplayMode().getHeight();
+    	final GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+        final int screenHeight = gd.getDisplayMode().getHeight();
         return (int) (screenHeight * perc);
     }
 }
