@@ -79,6 +79,8 @@ public class Tournament extends Base {
     // boolean eliminatedThisTurn = false;
     private final JButton buttonSimula;
     private final Color panelColor = new Color(0, 64, 128);
+    private int r1;
+    private int r2;
 
     /**
      * Constructor of Tournament, add the necessary graphics components.
@@ -275,16 +277,9 @@ public class Tournament extends Base {
                 this.labelsp3[0] = new MyJLabel(this.logTor.getSquadraAvv().getTeamName() + " " + ris1 + " " + " - "
                         + " " + ris2 + " " + this.listAvversarie.get(0).getTeamName());
                 this.p3.add(this.labelsp3[0]);
-                if (ris2 > ris1) {
-                    this.logTor.setSquadraAvv(this.listAvversarie.get(0));
-                } else if (ris1 == ris2) {
-                    // rigori
-                    Team vinc = new LogicsShootoutImpl(this.logTor.getSquadraAvv(), this.listAvversarie.get(0))
-                            .getWinner();
-                    if (vinc.getTeamName().equals(this.listAvversarie.get(0).getTeamName())) {
-                        this.logTor.setSquadraAvv(this.listAvversarie.get(0));
-                    }
-                }
+                r1 = ris1;
+                r2 = ris2;
+                setOppTeam();
             }
             int cont1 = 1;
             for (int i = 1; i < this.listAvversarie.size() - 1; i = i + 2, cont1++) {
@@ -329,16 +324,9 @@ public class Tournament extends Base {
                 this.labelsp2[0] = new MyJLabel(this.logTor.getSquadraAvv().getTeamName() + " " + ris1 + " " + " - "
                         + " " + ris2 + " " + this.listAvversarie.get(0).getTeamName());
                 this.p2.add(this.labelsp2[0]);
-                if (ris2 > ris1) {
-                    this.logTor.setSquadraAvv(this.listAvversarie.get(0));
-                } else if (ris1 == ris2) {
-                    // rigori
-                    Team vinc = new LogicsShootoutImpl(this.logTor.getSquadraAvv(), this.listAvversarie.get(0))
-                            .getWinner();
-                    if (vinc.getTeamName().equals(this.listAvversarie.get(0).getTeamName())) {
-                        this.logTor.setSquadraAvv(this.listAvversarie.get(0));
-                    }
-                }
+                r1 = ris1;
+                r2 = ris2;
+                setOppTeam();
             }
             String squad1 = this.listAvversarie.get(1).getTeamName();
             var ris1 = this.logTor.getRisultati().get(squad1);
@@ -440,6 +428,19 @@ public class Tournament extends Base {
             return label;
         }
         return s;
+    }
+
+    private void setOppTeam() {
+    	if (r2 > r1) {
+            this.logTor.setSquadraAvv(this.listAvversarie.get(0));
+        } else if (r1 == r2) {
+            // rigori
+            Team vinc = new LogicsShootoutImpl(this.logTor.getSquadraAvv(), this.listAvversarie.get(0))
+                    .getWinner();
+            if (vinc.getTeamName().equals(this.listAvversarie.get(0).getTeamName())) {
+                this.logTor.setSquadraAvv(this.listAvversarie.get(0));
+            }
+        }
     }
 
     /**

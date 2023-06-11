@@ -25,9 +25,9 @@ public final class TeamOpponent implements Team, Serializable {
     private final String teamName;
     private final URL logo;
     private final Module module;
-    private final List<Player> liPlayers;
-    private List<Player> liStarting;
-    private List<Player> liSubstitution;
+    private final List<Player> listPlayers;
+    private List<Player> listStarting;
+    private List<Player> listSubstitution;
     private Random r = new Random();
 
     /**
@@ -46,10 +46,10 @@ public final class TeamOpponent implements Team, Serializable {
         this.id = id;
         this.teamName = teamName;
         this.module = module;
-        this.liPlayers = new ArrayList<>(li);
+        this.listPlayers = new ArrayList<>(li);
         ExtractData ed = new ExtractDataImpl(li);
-        this.liStarting = ed.getStarting(teamName, module);
-        this.liSubstitution = ed.getSubstitution(teamName, module);
+        this.listStarting = ed.getStarting(teamName, module);
+        this.listSubstitution = ed.getSubstitution(teamName, module);
         this.logo = this.setStemma();
     }
 
@@ -82,40 +82,40 @@ public final class TeamOpponent implements Team, Serializable {
 
     @Override
     public List<Player> getLiPlayers() {
-        return new ArrayList<>(liPlayers);
+        return new ArrayList<>(listPlayers);
     }
 
     @Override
     public List<Player> getStarting() {
-        return new ArrayList<>(liStarting);
+        return new ArrayList<>(listStarting);
     }
 
     @Override
     public List<Player> getStartingDesc() {
-        return liStarting.stream()
+        return listStarting.stream()
             .sorted((p1, p2) -> p1.getPos().compareTo(p2.getPos()))
             .collect(Collectors.toList());
     }
 
     @Override
     public List<Player> getSubstitution() {
-        return new ArrayList<>(liSubstitution);
+        return new ArrayList<>(listSubstitution);
     }
 
     @Override
     public void setStarting(final List<Player> liStarting) {
-        this.liStarting = new ArrayList<>(liStarting);
+        this.listStarting = new ArrayList<>(liStarting);
     }
 
     @Override
     public void setSubstitution(final List<Player> liSubstitution) {
-        this.liSubstitution = new ArrayList<>(liSubstitution);
+        this.listSubstitution = new ArrayList<>(liSubstitution);
     }
 
     @Override
     public int getRating() {
         return (int) Math.floor(
-            liStarting.stream()
+            listStarting.stream()
             .map(p -> p.getRating()
                 .getX())
             .mapToDouble(p -> p)
@@ -131,7 +131,7 @@ public final class TeamOpponent implements Team, Serializable {
     @Override
     public Player getPlayerById(final int id) {
         Player p = null;
-        for (Player player: liPlayers) {
+        for (Player player: listPlayers) {
             if (player.getId() == id) {
                 p = player;
             }
