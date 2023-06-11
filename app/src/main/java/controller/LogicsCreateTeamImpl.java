@@ -273,8 +273,7 @@ public class LogicsCreateTeamImpl implements LogicsCreateTeam {
     @Override
     public boolean teamComplete() {
         return this.liSquadra.size() == LogicsCreateTeamImpl.NUM_PLAYER_IN_TEAM ? true : false;
-    }
-
+    } 
     /**
      * {@inheritDoc}
      */

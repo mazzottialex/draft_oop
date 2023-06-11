@@ -30,10 +30,9 @@ public class AppTest {
     public void testInsert() throws Exception {
         final ManageData md = new ManageDataImpl("2022-2023");
         md.loadData();
-        Player p1 = new Player(0, "n1", "P", "t", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        List<Player> list = md.getLi();
-        System.out.println(list);
-        LogicsCreateTeam lc = new LogicsCreateTeamImpl("myTeam", ClassLoader.getSystemResource("stemmi/bianco.png"), list);
+        final Player p1 = new Player(0, "n1", "P", "t", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        final List<Player> list = md.getLi();
+        final LogicsCreateTeam lc = new LogicsCreateTeamImpl("myTeam", ClassLoader.getSystemResource("stemmi/bianco.png"), list);
         lc.addPlayerInTeam(p1);
         assertFalse(lc.teamComplete());
     }
@@ -46,8 +45,8 @@ public class AppTest {
         final int dif = 4;
         final ManageData md = new ManageDataImpl("2022-2023");
         md.loadData();
-        List<Player> list = md.getLi();
-        LogicsCreateTeam lc = new LogicsCreateTeamImpl("myTeam", ClassLoader.getSystemResource("stemmi/bianco.png"), list);
+        final List<Player> list = md.getLi();
+        final LogicsCreateTeam lc = new LogicsCreateTeamImpl("myTeam", ClassLoader.getSystemResource("stemmi/bianco.png"), list);
         assertEquals(dif, lc.getRandom("D", dif).size());
     }
     /**
@@ -60,7 +59,7 @@ public class AppTest {
         final ManageData md = new ManageDataImpl("2022-2023");
         md.loadData();
         List<Player> list = md.getLi();
-        LogicsCreateTeam lc = new LogicsCreateTeamImpl("myTeam", ClassLoader.getSystemResource("stemmi/bianco.png"), list);
+        final LogicsCreateTeam lc = new LogicsCreateTeamImpl("myTeam", ClassLoader.getSystemResource("stemmi/bianco.png"), list);
         lc.addPlayerInTeam(new Player(i++, "n1", "P", "t", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
         lc.addPlayerInTeam(new Player(i++, "n2", "D", "t", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
         lc.addPlayerInTeam(new Player(i++, "n3", "D", "t", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
