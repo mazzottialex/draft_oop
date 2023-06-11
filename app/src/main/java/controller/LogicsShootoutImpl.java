@@ -35,7 +35,8 @@ public final class LogicsShootoutImpl implements LogicsShootout, Serializable {
     private static final double ADD_MODIFIER_RATING = 0.4;
     private static final double CONVERSION_RATE_SHOOTOUT = 0.75; //costante rigori fatti nei shootout
     private static final int DEFAULT = 77;
-
+    private Random r = new Random();
+    
     /**
      * Constructs a new {@code LogicsShootoutImpl} object with the specified teams.
      *
@@ -110,9 +111,9 @@ public final class LogicsShootoutImpl implements LogicsShootout, Serializable {
      */
     private String rigore(final Player shooter, final Team oppositeTeam) {
         double shooterRating = shooter.getRating().getY().getX()
-                * (MINIMUM_MODIFIER_RATING + new Random().nextDouble() * ADD_MODIFIER_RATING);
+                * (MINIMUM_MODIFIER_RATING + r.nextDouble() * ADD_MODIFIER_RATING);
         double gkRating = (oppositeTeam.getStartingKeeper() != null ? oppositeTeam.getStartingKeeper().getRating().getY().getZ()
-                : DEFAULT) * (MINIMUM_MODIFIER_RATING + new Random().nextDouble() * ADD_MODIFIER_RATING);
+                : DEFAULT) * (MINIMUM_MODIFIER_RATING + r.nextDouble() * ADD_MODIFIER_RATING);
         double modGkRating = gkRating * CONVERSION_RATE_SHOOTOUT;
         if (shooterRating > modGkRating) {
             return "Gol";

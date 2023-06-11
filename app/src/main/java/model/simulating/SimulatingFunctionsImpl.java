@@ -21,7 +21,7 @@ import model.data.Team;
 public final class SimulatingFunctionsImpl implements SimulatingFunctions, Serializable {
 
     private static final long serialVersionUID = -1388612538618774091L;
-    private Random random = new Random();
+    private Random r = new Random();
     private static final double OWNGOAL_RATE = 2.904040404040404; // percentuale di autogol su gol
     private static final double PENALTY_RATE = 0.2875; // rigori per partita
     private static final double MISSED_PENALTIES_RATE = 22.82608695652174; // percentuale rigori sbagliati
@@ -73,7 +73,7 @@ public final class SimulatingFunctionsImpl implements SimulatingFunctions, Seria
      * @return A random number between min and max.
      */
     public double prob(final double min, final double max) {
-        return min + (max - min) * random.nextDouble();
+        return min + (max - min) * r.nextDouble();
     }
 
     /**

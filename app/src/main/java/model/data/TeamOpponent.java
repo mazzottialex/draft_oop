@@ -28,7 +28,7 @@ public final class TeamOpponent implements Team, Serializable {
     private final List<Player> liPlayers;
     private List<Player> liStarting;
     private List<Player> liSubstitution;
-
+    private Random r = new Random();
 
     /**
      * Constructor for the {@code TeamOpponent} class.
@@ -62,7 +62,7 @@ public final class TeamOpponent implements Team, Serializable {
         final List<String> liStemmi = List.of("arancione.png", "azzurro.png",
             "bianco.png", "blu.png", "giallo.png", "nero.png", "rosso.png",
             "verde.png", "viola.png");
-        return ClassLoader.getSystemResource(liStemmi.get(new Random().nextInt(liStemmi.size())));
+        return ClassLoader.getSystemResource(liStemmi.get(r.nextInt(liStemmi.size())));
     }
 
     @Override
