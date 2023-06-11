@@ -129,31 +129,19 @@ public class Tournament extends Base {
                                 try {
                                     logTor.simulaMatch();
                                     createLevel();
-                                } catch (FileNotFoundException e1) {
-                                    LOG.error("Error", e1);
-                                } catch (ClassNotFoundException e1) {
-                                    LOG.error("Error", e1);
-                                } catch (IOException e1) {
+                                } catch (ClassNotFoundException | IOException e1) {
                                     LOG.error("Error", e1);
                                 }
                             }
                         });
-                    } catch (FileNotFoundException e1) {
-                        LOG.error("Error", e1);
-                    } catch (ClassNotFoundException e1) {
-                        LOG.error("Error", e1);
-                    } catch (IOException e1) {
+                    } catch (ClassNotFoundException | IOException e1) {
                         LOG.error("Error", e1);
                     }
                 } else {
                     try {
                         logTor.simulaMatch();
                         createLevel();
-                    } catch (FileNotFoundException e1) {
-                        LOG.error("Error", e1);
-                    } catch (ClassNotFoundException e1) {
-                        LOG.error("Error", e1);
-                    } catch (IOException e1) {
+                    } catch (ClassNotFoundException | IOException e1) {
                         LOG.error("Error", e1);
                     }
                 }
