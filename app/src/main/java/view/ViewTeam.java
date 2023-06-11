@@ -22,7 +22,8 @@ import controller.LogicsHistory;
 import controller.LogicsHistoryImpl;
 import model.data.Player;
 import model.data.Team;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * Represents a GUI for viewing a Team and its rating.
  */
@@ -40,7 +41,7 @@ public class ViewTeam extends Base {
     private static final int GRID_Y_2 = 6;
     private static final int N_SUB = 7;
     private final JPanel panelTeam = new JPanel();
-
+    private static final Logger LOG = LoggerFactory.getLogger(ViewTeam.class);
     /**
      * Constructs a new ViewTeam object.
      * 
@@ -62,7 +63,7 @@ public class ViewTeam extends Base {
                 try {
                     changeJPanel(new History(log.getSeason(), log.getOnline()));
                 } catch (ExecuteException e1) {
-                    e1.printStackTrace();
+                	LOG.error("Error", e);
                 }
             }
         });

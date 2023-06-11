@@ -11,7 +11,8 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * The Start class represents the starting point of the application.
  */
@@ -20,6 +21,7 @@ public class Start extends Base {
     private final transient LogicStart log = new LogicStartImpl();
     private static final int SCALE_IMG_1 = 120;
     private static final int SCALE_IMG_2 = 180;
+    private static final Logger LOG = LoggerFactory.getLogger(Start.class);
     /**
      * Constructs a new Start object.
      * Initializes the season and online status
@@ -59,7 +61,7 @@ public class Start extends Base {
                 try {
                     changeJPanel(new Home(log.getFirstSeason(), log.getOnline(), true));
                 } catch (ExecuteException e1) {
-                    e1.printStackTrace();
+                	LOG.error("Error", e1);
                 }
             }
         });

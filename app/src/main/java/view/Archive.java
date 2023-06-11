@@ -24,6 +24,8 @@ import controller.LogicsArchiveImpl;
 import model.data.Player;
 
 import java.awt.FlowLayout;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * Represents a GUI for Archive of players list.
  */
@@ -52,7 +54,7 @@ public class Archive extends Base {
     private static final int FONT_DIM = 14;
     private static final double WIDTH_SCROLLPANEL = 0.35;
     private static final double HEIGHT_SCROLLPANEL = 0.70;
-
+    private static final Logger LOG = LoggerFactory.getLogger(Archive.class);
     /**
      * Constructs a new Archive object.
      * 
@@ -83,7 +85,7 @@ public class Archive extends Base {
                 try {
                     changeJPanel(new Home(log.getSeason(), log.getOnline(), false));
                 } catch (ExecuteException e1) {
-                    e1.printStackTrace();
+                	LOG.error("Error", e1);
                 }
             }
         });
