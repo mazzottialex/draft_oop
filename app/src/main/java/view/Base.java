@@ -37,6 +37,7 @@ public class Base extends JFrame {
      *
      * @return the JPanel content pane
      */
+    @SuppressFBWarnings("EI")
     public JPanel getPanel() {
         return contentPane;
 
