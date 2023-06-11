@@ -146,7 +146,6 @@ public class LogicsTournamentImpl implements LogicsTournament {
     public void simulaMatch() throws FileNotFoundException, ClassNotFoundException, IOException {
         List<Team> newList;
         final int numSquadre = this.getNumSquadre();
-
         switch (numSquadre) {
         case 16:
             newList = simulateAll();
@@ -274,7 +273,7 @@ public class LogicsTournamentImpl implements LogicsTournament {
     public void clearRisMatch() {
         this.risMatch.clear();
     }
-
+    @SuppressWarnings("all")
     private List<Team> simulateAll() throws FileNotFoundException, ClassNotFoundException, IOException {
         final List<Team> newList = new ArrayList<>();
         final Map<String, Integer> map = new HashMap<>(); // map per il risultato
@@ -337,6 +336,7 @@ public class LogicsTournamentImpl implements LogicsTournament {
         }
         return newList;
     }
+    @SuppressWarnings("all")
     private void matchTeamAvv() throws FileNotFoundException, ClassNotFoundException, IOException {
         Map<Team, Integer> map2;
         final List<Team> l = new ArrayList<>(); // appoggio
@@ -362,6 +362,7 @@ public class LogicsTournamentImpl implements LogicsTournament {
             // this.risMatch = s.risultato2();
         }
     }
+    @SuppressWarnings("all")
     private List<Team> simulateSemi() throws FileNotFoundException, ClassNotFoundException, IOException {
         final List<Team> newList = new ArrayList<>();
         final Map<String, Integer> map = new HashMap<>(); // map per il risultato
