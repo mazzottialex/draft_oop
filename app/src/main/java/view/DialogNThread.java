@@ -37,7 +37,7 @@ public class DialogNThread extends JDialog {
     public DialogNThread(final Frame parent) {
         super(parent, true);
         setBounds(PANEL_X, PANEL_Y, PANEL_WIDTH, PANEL_HEIGHT);
-        getContentPane().setLayout(new BorderLayout());
+        super.getContentPane().setLayout(new BorderLayout());
         contentPanel.setLayout(new FlowLayout());
         JComboBox<Integer> comboBox = new JComboBox<>(ARRAY);
         JLabel labelThread = new JLabel("Choose thread number for scraping: ");
@@ -45,10 +45,10 @@ public class DialogNThread extends JDialog {
         comboBox.setFont(new Font("DejaVu Sans", Font.PLAIN, FONT_DIM));
         contentPanel.add(labelThread);
         contentPanel.add(comboBox);
-        getContentPane().add(contentPanel, BorderLayout.CENTER);
+        super.getContentPane().add(contentPanel, BorderLayout.CENTER);
         JPanel buttonPane = new JPanel();
         buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        getContentPane().add(buttonPane, BorderLayout.SOUTH);
+        super.getContentPane().add(buttonPane, BorderLayout.SOUTH);
         JButton okButton = new JButton("OK");
         okButton.setActionCommand("OK");
         okButton.addActionListener(new ActionListener() {
@@ -59,7 +59,7 @@ public class DialogNThread extends JDialog {
             }
         });
         buttonPane.add(okButton);
-        getRootPane().setDefaultButton(okButton);
+        super.getRootPane().setDefaultButton(okButton);
         JButton cancelButton = new JButton("Cancel");
         cancelButton.addActionListener(new ActionListener() {
            @Override

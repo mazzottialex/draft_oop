@@ -55,7 +55,7 @@ public class Substitution extends Base {
         this.team = team;
         this.matchGui = matchGui;
         this.substitutes = SUBSTITUTES - substitutionsMade;
-        initialize();
+        this.initialize();
     }
 
     private void initialize() {

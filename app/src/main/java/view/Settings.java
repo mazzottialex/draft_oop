@@ -101,7 +101,7 @@ public class Settings extends Base {
         gbc.insets = INSETS_4;
         gbc.gridx = 0;
         gbc.gridy = 2;
-        getPanel().add(panelLogo, gbc);
+        super.getPanel().add(panelLogo, gbc);
         JButton btnContinue = UtilsGUI.standardButton("Continue");
         btnContinue.addActionListener(new ActionListener() {
             @Override

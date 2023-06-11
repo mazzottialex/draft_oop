@@ -8,6 +8,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.net.URL;
+import java.util.Locale;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -119,7 +120,7 @@ public final class UtilsGUI {
      * @return a standard JButton
      */
     public static JButton standardButton(final String s) {
-        JButton btn = new JButton(s.toUpperCase());
+        JButton btn = new JButton(s.toUpperCase(Locale.getDefault()));
         btn.setFont(new Font("Verdana", Font.ROMAN_BASELINE, FONT_DIM));
         btn.setBackground(Color.LIGHT_GRAY);
         btn.setForeground(Color.BLACK);

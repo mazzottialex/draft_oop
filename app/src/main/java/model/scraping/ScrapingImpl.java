@@ -27,7 +27,10 @@ public final class ScrapingImpl implements Scraping {
     private static final String BROWSER_CHROME = "google-chrome";
     private static final String BROWSER_FIREFOX = "firefox";
     private static final String DEFAULT_STAGIONE = "2022-2023";
-
+    private static final String CHROME1 = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\Chrome.exe";
+    private static final String CHROME2 = "C:\\Program Files\\Google\\Chrome\\Application\\Chrome.exe";
+    private static final String FIREFOX1 = "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe";
+    private static final String FIREFOX2 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
     /**
      * Constructs a ScrapingImpl object with the specified number of threads.
      */
@@ -132,15 +135,11 @@ public final class ScrapingImpl implements Scraping {
         String os = System.getProperty("os.name").toLowerCase(Locale.getDefault());
         if (os.contains("win")) {
             if (browser.equals(BROWSER_CHROME)) {
-            	String path1 = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\Chrome.exe";
-            	String path2 = "C:\\Program Files\\Google\\Chrome\\Application\\Chrome.exe";
-            	if (new File(path1).exists() || new File(path2).exists()) {
+            	if (new File(CHROME1).exists() || new File(CHROME2).exists()) {
                     return true;
                 }
             } else if (browser.equals(BROWSER_FIREFOX)) {
-            	String path1 = "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe";
-            	String path2 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
-            	if (new File(path1).exists() || new File(path2).exists()) {
+            	if (new File(FIREFOX1).exists() || new File(FIREFOX2).exists()) {
                     return true;
                 }
             }

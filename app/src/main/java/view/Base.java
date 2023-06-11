@@ -3,6 +3,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import net.bytebuddy.implementation.bytecode.Throw;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -21,11 +22,11 @@ public class Base extends JFrame {
      * Constructs a new Base object.
      */
     public Base() {
-        setTitle("DRAFT");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(UtilsGUI.getWidth(POS), UtilsGUI.getHeight(POS), UtilsGUI.getWidth(WIDTH_PANEL),
+    	super.setTitle("DRAFT");
+        super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        super.setBounds(UtilsGUI.getWidth(POS), UtilsGUI.getHeight(POS), UtilsGUI.getWidth(WIDTH_PANEL),
                 UtilsGUI.getHeight(HEIGHT_PANEL));
-        setMinimumSize(getSize());
+        super.setMinimumSize(super.getSize());
         contentPane = new JPanel();
         contentPane.setBackground(COLOR_BG);
         contentPane.setLayout(new BorderLayout());
@@ -48,10 +49,12 @@ public class Base extends JFrame {
      * @param newPanel the new Base object containing the new JPanel
      */
     protected void changeJPanel(final Base newPanel) {
-        JFrame frame = (JFrame) contentPane.getTopLevelAncestor();
-        frame.remove(contentPane);
-        frame.add(newPanel.getPanel());
-        frame.revalidate();
-        frame.repaint();
+        if (contentPane.getTopLevelAncestor() instanceof JFrame) {
+            JFrame frame = (JFrame) contentPane.getTopLevelAncestor();
+            frame.remove(contentPane);
+            frame.add(newPanel.getPanel());
+            frame.revalidate();
+            frame.repaint();
+        }
     }
 }
