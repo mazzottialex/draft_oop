@@ -22,10 +22,8 @@ import javax.swing.border.EmptyBorder;
 public final class UtilsGUI {
     private static final int FONT_DIM = 14;
     private static final int SCALE_IMG_1 = 30;
-    private static final int SCALE_IMG_2 = 90;
     private static final int EMPTY_BORD = 5;
-    private static final Color BACKGROUND = new Color(240, 240, 240);
-
+    private static final String FONT = "Verdana";
     private UtilsGUI() {
         // non istanziabile
     }
@@ -42,11 +40,11 @@ public final class UtilsGUI {
     public static JPanel getPanelCalciatore(final String name, final Integer rating, final String role,
             final Boolean icon) {
         URL file = ClassLoader.getSystemResource("attaccante.png");
-        if (role.equals("P")) {
+        if ("P".equals(role)) {
             file = ClassLoader.getSystemResource("portiere.png");
-        } else if (role.equals("D")) {
+        } else if ("D".equals(role)) {
             file = ClassLoader.getSystemResource("difensore.png");
-        } else if (role.equals("C")) {
+        } else if ("C".equals(role)) {
             file = ClassLoader.getSystemResource("centrocampista.png");
         }
         final GridBagConstraints gbc = new GridBagConstraints();
@@ -55,9 +53,9 @@ public final class UtilsGUI {
         panelGiocatore.setLayout(layout);
         panelGiocatore.setBorder(new EmptyBorder(0, EMPTY_BORD, 0, EMPTY_BORD));
         final JLabel lblNome = new JLabel(name);
-        lblNome.setFont(new Font("Verdana", Font.ROMAN_BASELINE, FONT_DIM));
+        lblNome.setFont(new Font(FONT, Font.ROMAN_BASELINE, FONT_DIM));
         final JLabel lblValutazione = new JLabel(rating.toString());
-        lblNome.setFont(new Font("Verdana", Font.ROMAN_BASELINE, FONT_DIM));
+        lblNome.setFont(new Font(FONT, Font.ROMAN_BASELINE, FONT_DIM));
         final JLabel lblIcona = new JLabel();
         ImageIcon img = new ImageIcon(file);
         final Image image = img.getImage();
@@ -76,44 +74,6 @@ public final class UtilsGUI {
     }
 
     /**
-     * Returns a JButton for displaying a football player.
-     *
-     * @param name the name of the football player
-     * @param role the role of the player
-     * @return a JButton displaying the player
-     */
-    public static JButton getButtonCalciatore(final String name, final String role) {
-        String file = "";
-        if (role.equals("P")) {
-            file = "src/main/resources/portiere.png";
-        } else if (role.equals("D")) {
-            file = "src/main/resources/difensore.png";
-        } else if (role.equals("C")) {
-            file = "src/main/resources/centrocampista.png";
-        } else if (role.equals("A")) {
-            file = "src/main/resources/attaccante.png";
-        }
-        final GridBagConstraints gbc = new GridBagConstraints();
-        final GridBagLayout layout = new GridBagLayout();
-        final JButton buttonCalciatore = new JButton();
-        buttonCalciatore.setLayout(layout);
-        buttonCalciatore.setBackground(BACKGROUND);
-        final JLabel lblNome = new JLabel(name);
-        lblNome.setFont(new Font("Verdana", Font.ROMAN_BASELINE, FONT_DIM));
-        final JLabel lblIcona = new JLabel();
-        ImageIcon img = new ImageIcon(file);
-        final Image image = img.getImage();
-        final Image newimg = image.getScaledInstance(SCALE_IMG_2, SCALE_IMG_2, java.awt.Image.SCALE_SMOOTH);
-        img = new ImageIcon(newimg);
-        lblIcona.setIcon(img);
-        gbc.gridy = 0;
-        buttonCalciatore.add(lblIcona, gbc);
-        gbc.gridy = 1;
-        buttonCalciatore.add(lblNome, gbc);
-        return buttonCalciatore;
-    }
-
-    /**
      * Returns a standard JButton with the given label.
      *
      * @param s the text of the button
@@ -121,7 +81,7 @@ public final class UtilsGUI {
      */
     public static JButton standardButton(final String s) {
     	final JButton btn = new JButton(s.toUpperCase(Locale.getDefault()));
-        btn.setFont(new Font("Verdana", Font.ROMAN_BASELINE, FONT_DIM));
+        btn.setFont(new Font(FONT, Font.ROMAN_BASELINE, FONT_DIM));
         btn.setBackground(Color.LIGHT_GRAY);
         btn.setForeground(Color.BLACK);
         return btn;

@@ -73,7 +73,7 @@ public class Settings extends Base {
             final URL url = ClassLoader.getSystemResource(log.getLiLogo().get(i));
             ImageIcon img = new ImageIcon(url);
             final Image image = img.getImage();
-            final Image newimg = image.getScaledInstance(SCALE_IMG_1, SCALE_IMG_1, java.awt.Image.SCALE_SMOOTH);
+            final Image newimg = image.getScaledInstance(SCALE_IMG_1, SCALE_IMG_1, Image.SCALE_SMOOTH);
             img = new ImageIcon(newimg);
             btnLogo.setBackground(Color.white);
             btnLogo.setIcon(img);
@@ -86,7 +86,7 @@ public class Settings extends Base {
             btnLogo.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(final ActionEvent e) {
-                    JButton btn = (JButton) e.getSource();
+                    final JButton btn = (JButton) e.getSource();
                     liButton.forEach(b -> b.setBackground(Color.white));
                     btn.setBackground(COLOR_BG);
                     log.setLogo(url);
@@ -106,7 +106,7 @@ public class Settings extends Base {
         btnContinue.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                if (!textFieldTeamName.getText().equals("")) {
+                if (!"".equals(textFieldTeamName.getText())) {
                     log.setTeamName(textFieldTeamName.getText());
                 }
                 try {

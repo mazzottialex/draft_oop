@@ -94,14 +94,14 @@ public final class AnalysisRatingImpl implements AnalysisRating {
         //per rating totale
         int rat = MIN;
         //per specifico ruolo
-        if (ruolo.equals("A")) {
+        if ("A".equals(ruolo)) {
             rat = (int) Math.ceil(COST_MAX * ratA + COST_MIN * ratD);
-        } else if (ruolo.equals("C")) {
+        } else if ("C".equals(ruolo)) {
             ratC *= COST_MIDF;
             rat = (int) Math.ceil(COST_MED * ratA + COST_MED * ratD);
-        } else if (ruolo.equals("D")) {
+        } else if ("D".equals(ruolo)) {
             rat = (int) Math.ceil(COST_MIN * ratA + COST_MAX * ratD);
-        } else if (ruolo.equals("P")) {
+        } else if ("P".equals(ruolo)) {
             final int ratParate = fun.logarithmic(p.getSaves(),
                     ex.getTopByAttribute(c -> c.getSaves()), MIN, MAX_SAVED);
             ratD = (ratParate + ratCS) / 2;

@@ -27,7 +27,7 @@ public class DialogNThread extends JDialog {
     private static final int PANEL_HEIGHT = 150;
     private static final Integer[] ARRAY = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
 
-    private int nThread = 0;
+    private int nThread;
 
     /**
      * Creates the dialog.
@@ -36,6 +36,7 @@ public class DialogNThread extends JDialog {
      */
     public DialogNThread(final Frame parent) {
         super(parent, true);
+        nThread=0;
         setBounds(PANEL_X, PANEL_Y, PANEL_WIDTH, PANEL_HEIGHT);
         super.getContentPane().setLayout(new BorderLayout());
         contentPanel.setLayout(new FlowLayout());

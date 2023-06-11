@@ -19,7 +19,7 @@ import model.scraping.ScrapingImpl;
 public final class LogicsHomeImpl implements LogicsHome {
     private List<Player> li;
     private String season;
-    private Boolean online;
+    private final Boolean online;
     private final ManageSeason ms;
     /**
      * 

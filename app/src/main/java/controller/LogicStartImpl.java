@@ -10,7 +10,6 @@ import model.managedata.ManageSeasonImpl;
  * The LogicStartImpl class represents the implementation of starting logic operations.
  */
 public final class LogicStartImpl implements LogicStart {
-    private final ManageSeasonImpl manageSeason;
     private final Boolean online;
     private final String season;
 
@@ -19,7 +18,7 @@ public final class LogicStartImpl implements LogicStart {
      */
     public LogicStartImpl() {
         this.online = checkConnection();
-        manageSeason = new ManageSeasonImpl();
+        final ManageSeasonImpl manageSeason = new ManageSeasonImpl();
         manageSeason.updateSeason();
         final LogicsFile lf = new LogicsFileImpl();
         this.season = lf.loadSeason().get(0);
@@ -41,8 +40,6 @@ public final class LogicStartImpl implements LogicStart {
             final URLConnection connection = url.openConnection();
             connection.connect();
             return true;
-        } catch (RuntimeException e) {
-            throw e;
         } catch (final Exception e) {
             return false;
         }

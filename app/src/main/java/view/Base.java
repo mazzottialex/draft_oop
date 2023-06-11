@@ -14,7 +14,7 @@ import java.awt.Color;
  */
 public class Base extends JFrame {
     private static final long serialVersionUID = 1L;
-    private JPanel contentPane;
+    private final JPanel contentPane;
     private static final Color COLOR_BG = new Color(0, 64, 128);
     private static final double POS = 0.1;
     private static final double WIDTH_PANEL = 0.40;

@@ -24,8 +24,7 @@ public final class ManageSeasonImpl extends Thread implements ManageSeason {
 
     @Override
     public List<String> getSeason() {
-    	final List<String> li2 = file.loadSeason();
-        return li2;
+        return file.loadSeason();
     }
 
     @Override
